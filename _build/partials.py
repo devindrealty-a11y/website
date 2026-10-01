@@ -16,6 +16,8 @@ ICONS = {
 CALC = "https://devindrealty-a11y.github.io/mortgage-calculator/"
 CALC_FULL = "https://devindrealty-a11y.github.io/mortgage-calculator/full.html"
 EMAIL = "devin@axfordrealestate.ca"
+PHONE = "604-809-1032"
+TEL = "tel:+16048091032"
 SITE = "https://devindrealty-a11y.github.io/website/"  # update if repo name / custom domain changes
 
 def ph(text):
@@ -56,10 +58,12 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
         <span class="brand-sub">Real Estate Associate · <strong>Axford Real Estate</strong></span>
       </span>
     </a>
+    <a class="header-call" href="{TEL}" aria-label="Call Devin at {PHONE}">{ICONS["phone"]}</a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
     <nav class="nav" id="site-nav" aria-label="Main">
       {links}
       <a href="{CALC}" target="_blank" rel="noopener">Mortgage Calculator</a>
+      <a class="nav-phone" href="{TEL}">{ICONS["phone"]}<span>{PHONE}</span></a>
       <a class="btn btn-primary" href="index.html#contact">Contact</a>
       <span class="header-brokerage"><img src="assets/img/axford-logo.png" alt="Axford Real Estate (brokerage)" width="120" height="26"></span>
     </nav>
@@ -93,7 +97,7 @@ def foot():
         <h4>Contact</h4>
         <ul>
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
-          <li>Direct: {ph("Devin's phone")}</li>
+          <li>Direct: <a href="{TEL}">{PHONE}</a></li>
           <li>{ph("Instagram / Facebook / LinkedIn links")}</li>
           <li>Greater Vancouver · Tri-Cities, BC</li>
         </ul>
@@ -133,7 +137,14 @@ def consent(form_id):
 
 def status_box():
     return '''<div class="full">
-  <p class="ph-block" style="margin:0 0 12px">[PLACEHOLDER: This form is not connected yet. Choose a form service and paste its endpoint in assets/js/config.js — submissions currently go nowhere.]</p>
   <button type="submit" class="btn btn-primary">Send</button>
   <div class="form-status" role="status" aria-live="polite"></div>
 </div>'''
+
+def picture(base, sizes, w, h, alt, cls="", eager=False, sizes_attr="(max-width: 899px) 90vw, 380px"):
+    """base like 'assets/img/devin-headshot'; sizes like (480,800)"""
+    webp = ", ".join(f"{base}-{s}.webp {s}w" for s in sizes)
+    jpg = ", ".join(f"{base}-{s}.jpg {s}w" for s in sizes)
+    load = 'fetchpriority="high"' if eager is True else ('' if eager == "auto" else 'loading="lazy"')
+    return (f'<picture class="{cls}"><source type="image/webp" srcset="{webp}" sizes="{sizes_attr}">'
+            f'<img src="{base}-{sizes[-1]}.jpg" srcset="{jpg}" sizes="{sizes_attr}" width="{w}" height="{h}" alt="{alt}" {load} decoding="async"></picture>')

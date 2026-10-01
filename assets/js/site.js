@@ -16,26 +16,42 @@
   // Year
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
-  // Forms: wire to endpoint from config.js, or show placeholder notice (never sends anything)
+  // Forms: AJAX submit to the endpoint in config.js (FormSubmit), with on-page success message
   var cfg = (window.SITE_CONFIG && window.SITE_CONFIG.forms) || {};
   document.querySelectorAll('form[data-form-key]').forEach(function (form) {
-    var key = form.getAttribute('data-form-key');
-    var endpoint = (cfg[key] || '').trim();
+    var endpoint = (cfg[form.getAttribute('data-form-key')] || '').trim();
     var status = form.querySelector('.form-status');
-    if (endpoint) {
-      form.setAttribute('action', endpoint);
-      form.setAttribute('method', 'POST');
-      return; // normal submission to the configured service
+    var btn = form.querySelector('button[type="submit"]');
+    function show(cls, html) {
+      if (!status) return;
+      status.className = 'form-status show ' + cls;
+      status.innerHTML = html;
+      status.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.reportValidity()) return;
-      if (status) {
-        status.className = 'form-status show placeholder';
-        status.innerHTML = '[PLACEHOLDER] This draft form is not connected yet, so nothing was sent. ' +
-          'In the meantime, please email <a href="mailto:devin@axfordrealestate.ca">devin@axfordrealestate.ca</a>.';
-        status.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
+      var fallback = 'Please email <a href="mailto:devin@axfordrealestate.ca">devin@axfordrealestate.ca</a> or call <a href="tel:+16048091032">604-809-1032</a>.';
+      if (!endpoint) { show('error', 'This form is not connected right now, so nothing was sent. ' + fallback); return; }
+      var fd = new FormData(form);
+      if (fd.get('_honey')) { show('success', 'Thanks! Your message has been sent.'); form.reset(); return; } // bot trap
+      var data = {};
+      fd.forEach(function (v, k) { data[k] = data[k] ? data[k] + ', ' + v : v; });
+      if (data.email) data._replyto = data.email;
+      if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Sending…'; }
+      fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          var ok = res.ok && String(res.j.success) !== 'false';
+          if (ok) {
+            show('success', '<strong>Thanks — your request has been sent!</strong> Devin will be in touch soon. If it\'s urgent, call <a href="tel:+16048091032">604-809-1032</a>.');
+            form.reset();
+          } else {
+            show('error', 'Sorry, something went wrong and your request may not have been sent. ' + fallback);
+          }
+        })
+        .catch(function () { show('error', 'Sorry, we couldn\'t send your request (network error). ' + fallback); })
+        .then(function () { if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Send'; } });
     });
   });
 
