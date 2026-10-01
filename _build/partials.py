@@ -55,7 +55,7 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
       <img src="assets/img/devin-mark.png" alt="Devin Desaulniers logo" width="46" height="68">
       <span class="brand-text">
         <span class="brand-name"><span class="b">DEVIN</span> <span class="g">DESAULNIERS</span></span>
-        <span class="brand-sub">Real Estate Associate · <strong>Axford Real Estate</strong></span>
+        <span class="brand-sub"><span class="bs-title">Real Estate Associate · </span><strong>Axford Real Estate</strong></span>
       </span>
     </a>
     <a class="header-call" href="{TEL}" aria-label="Call Devin at {PHONE}">{ICONS["phone"]}</a>

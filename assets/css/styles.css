@@ -324,3 +324,13 @@ picture.bw-photo img{width:100%;height:auto;border-radius:12px;box-shadow:var(--
   .mini-steps.five li::before{flex:none;width:34px;height:34px}
 }
 .card.list-check{padding:26px}
+
+@media (max-width:520px){
+  .eb-more{display:none}
+  .lp-hero-inner{padding-top:26px}
+  .lp-hero h1{font-size:1.85rem}
+  .lp-hero .lead{font-size:1rem;margin-bottom:.8em}
+  .lp-hero .list-check li{font-size:.93rem;margin-bottom:.3em}
+  .price-pill{margin:0 0 12px}
+}
+@media (max-width:440px){.bs-title{display:none}.brand-sub{font-size:.76rem}}

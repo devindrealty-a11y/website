@@ -191,7 +191,7 @@ buyers += f'''
           {picture("assets/img/devin-bw",(420,720),720,951,"Devin Desaulniers","bw-photo",sizes_attr="(max-width: 639px) 40vw, 200px")}
           <div>
             <p class="lead">Buying is a big decision. My job is to keep you informed and represent your interests at every step.</p>
-            <p>Call or text <a href="{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+            <p>Call <a href="{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
           </div>
         </div>
         <p>{ph("Confirm or edit this list of buyer services")}</p>
@@ -304,7 +304,7 @@ tenants += f"""
 <section class="lp-hero">
   <div class="container lp-hero-inner">
     <div>
-      <span class="eyebrow">Tenant representation · Greater Vancouver rental guidance</span>
+      <span class="eyebrow">Tenant representation<span class="eb-more"> · Greater Vancouver rental guidance</span></span>
       <h1>Relocating to Vancouver? Line up your rental before you arrive.</h1>
       <p class="lead">Moving to Vancouver is a lot to manage from a distance. I'll search, attend showings (or walk you through on live video), and review and negotiate your lease — so you can rent with confidence.</p>
       <div class="price-pill"><b>$1,500</b><span>+ GST · paid in two parts</span></div>
@@ -427,7 +427,7 @@ tenants += f"""
 </section>
 
 <div class="sticky-cta" data-sticky-cta>
-  <div class="sc-text"><b>$1,500 + GST, paid in two parts</b>Relocation rental help · Greater Vancouver</div>
+  <div class="sc-text"><b>$1,500 + GST</b>Paid in two parts</div>
   <a class="sc-call" href="{TEL}" aria-label="Call Devin at {PHONE}">{I["phone"]}</a>
   <a class="btn btn-primary" href="#intake">Start search</a>
 </div>
