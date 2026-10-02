@@ -1,0 +1,10 @@
+# DRAFT site. Crawling is allowed on purpose so search engines can read the
+# per-page <meta name="robots" content="noindex, nofollow"> tags; blocking
+# crawling here would hide those tags. Pages stay out of search until noindex is removed.
+# Note: crawlers only read robots.txt at the domain root, so this file takes
+# effect once the site is on its own custom domain.
+User-agent: *
+Allow: /
+
+# Uncomment at launch (after removing noindex):
+# Sitemap: https://devindrealty-a11y.github.io/website/sitemap.xml

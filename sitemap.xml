@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  DRAFT: every page currently carries <meta name="robots" content="noindex, nofollow">.
+  Do NOT submit this sitemap to Google Search Console until noindex is removed (launch).
+  If the site moves to a custom domain, update these URLs.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://devindrealty-a11y.github.io/website/</loc></url>
+  <url><loc>https://devindrealty-a11y.github.io/website/tenants.html</loc></url>
+  <url><loc>https://devindrealty-a11y.github.io/website/relocating-to-coquitlam.html</loc></url>
+  <url><loc>https://devindrealty-a11y.github.io/website/buyers.html</loc></url>
+</urlset>

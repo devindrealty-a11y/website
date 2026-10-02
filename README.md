@@ -54,8 +54,19 @@ redirect to a github.io URL would fail that.
 and ad final URL show github.io, HTTPS on the bare forwarded domain depends on the registrar, and the
 domain earns no search value of its own.
 
+## SEO: schema, sitemap, robots
+- Every page carries `RealEstateAgent` JSON-LD (`agent_jsonld()` in `_build/partials.py`). The sameAs and footer
+  social links come from the `SOCIAL` list there (source: `/workspace/ai-seo/directory-claim-pack.md`).
+  Axford is listed as `parentOrganization` because schema.org only allows `worksFor` on `Person`.
+- `tenants.html` also carries `FAQPage` JSON-LD. It is generated from the same `FAQ_ITEMS` strings as the
+  visible FAQ, so edit the FAQ in `build.py` only and the schema stays identical to the page text.
+- `sitemap.xml` and `robots.txt` exist, but every page is still `noindex`. Google will not index anything until
+  the noindex line is removed. Don't submit the sitemap in Search Console before then.
+- robots.txt is only read at a domain root. On `devindrealty-a11y.github.io/website/` it's ignored. It starts
+  working once a custom domain is pointed at this repo. Then uncomment its `Sitemap:` line, update URLs/`SITE`.
+
 ## Launch checklist
-- Replace all placeholders (headshot, phone, brokerage address/phone, disclaimer, privacy policy, payment terms)
+- Replace all remaining placeholders (brokerage phone, disclaimer, privacy policy, refund terms, FAQ items marked [PLACEHOLDER])
 - Forms are connected to FormSubmit — Devin must click the activation email after the first real submission
-- Remove the `noindex` meta line and the draft banner in `_build/partials.py`, rebuild
+- Remove the `noindex` meta line and the draft banner in `_build/partials.py`, rebuild, then submit `sitemap.xml`
 - If using a custom domain, update `SITE` in `_build/partials.py` and add a `CNAME` file

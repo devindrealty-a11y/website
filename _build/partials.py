@@ -18,13 +18,45 @@ CALC_FULL = "https://devindrealty-a11y.github.io/mortgage-calculator/full.html"
 EMAIL = "devin@axfordrealestate.ca"
 PHONE = "604-809-1032"
 TEL = "tel:+16048091032"
-SITE = "https://devindrealty-a11y.github.io/website/"  # update if repo name / custom domain changes
+SITE = "https://devindrealty-a11y.github.io/website/"
+BROKERAGE = "Axford Real Estate"
+BROKERAGE_ADDR = "2326 Clarke St, Port Moody, BC V3H 1Y8"
+# Profile URLs found in /workspace/ai-seo/directory-claim-pack.md (also in buyer-bot/voice-guide.md, linkedin-bot templates)
+SOCIAL = [
+    ("REALTOR.ca", "https://www.realtor.ca/agent/2073520/devin-desaulniers-2326-clarke-street-port-moody-british-columbia-v3h1y8"),
+    ("LinkedIn", "https://www.linkedin.com/in/devin-desaulniers-7794b3184"),
+    ("YouTube", "https://www.youtube.com/@devindesaulniers"),
+    ("Instagram", "https://www.instagram.com/devindesaulniers/"),
+    ("Facebook", "https://www.facebook.com/DevinDesaulniersRealtor/"),
+    ("Rate-My-Agent", "https://www.rate-my-agent.com/devin-desaulniers-ratings-port-moody-123891"),
+]
+import json as _json
+def agent_jsonld():
+    addr = {"@type": "PostalAddress", "streetAddress": "2326 Clarke St", "addressLocality": "Port Moody",
+            "addressRegion": "BC", "postalCode": "V3H 1Y8", "addressCountry": "CA"}
+    data = {
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        "@id": SITE + "#devin-desaulniers",
+        "name": "Devin Desaulniers",
+        "description": "Devin Desaulniers, Real Estate Associate with Axford Real Estate, helping home buyers and relocating tenants in the Tri-Cities, BC and Greater Vancouver.",
+        "url": SITE,
+        "image": SITE + "assets/img/devin-headshot-800.jpg",
+        "telephone": "604-809-1032",
+        "email": "devin@axfordrealestate.ca",
+        "address": addr,
+        "parentOrganization": {"@type": "RealEstateAgent", "name": "Axford Real Estate", "address": addr},
+        "areaServed": [{"@type": "Place", "name": "Tri-Cities, BC"}, {"@type": "Place", "name": "Greater Vancouver"}],
+        "sameAs": [u for _, u in SOCIAL],
+    }
+    return '<script type="application/ld+json">\n' + _json.dumps(data, indent=2, ensure_ascii=False) + '\n</script>'
+  # update if repo name / custom domain changes
 
 def ph(text):
     return f'<span class="ph">[PLACEHOLDER: {text}]</span>'
 
-def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class=""):
-    nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("tenants.html","Tenants","tenants")]
+def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head=""):
+    nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("tenants.html","Tenants","tenants"),("relocating-to-coquitlam.html","Moving to Coquitlam","coquitlam")]
     CUR = ' aria-current="page"'
     links = "".join(f'<a href="{h}"{CUR if k==active else ""}>{t}</a>' for h,t,k in nav)
     return f'''<!doctype html>
@@ -46,6 +78,8 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/styles.css">
+{agent_jsonld()}
+{extra_head}
 </head>
 <body class="{body_class}">
 <div class="draft-banner" role="note">DRAFT — not final.<span class="db-more"> Content marked [PLACEHOLDER] still needs Devin's input.</span></div>
@@ -62,7 +96,7 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
     <nav class="nav" id="site-nav" aria-label="Main">
       {links}
-      <a href="{CALC}" target="_blank" rel="noopener">Mortgage Calculator</a>
+      <a href="{CALC}" target="_blank" rel="noopener">Calculator</a>
       <a class="nav-phone" href="{TEL}">{ICONS["phone"]}<span>{PHONE}</span></a>
       <a class="btn btn-primary" href="index.html#contact">Contact</a>
       <span class="header-brokerage"><img src="assets/img/axford-logo.png" alt="Axford Real Estate (brokerage)" width="120" height="26"></span>
@@ -81,7 +115,7 @@ def foot():
         <div class="footer-brokerage"><img src="assets/img/axford-logo.png" alt="Axford Real Estate" width="160" height="34"></div>
         <p style="margin-top:14px"><strong style="color:#fff">Devin Desaulniers</strong>, Real Estate Associate<br>
         Brokerage: <strong style="color:#fff">Axford Real Estate</strong><br>
-        {ph("Brokerage street address, City, BC postal code")}<br>
+        {BROKERAGE_ADDR}<br>
         Brokerage phone: {ph("brokerage office phone")}</p>
       </div>
       <div>
@@ -90,6 +124,7 @@ def foot():
           <li><a href="index.html">Home</a></li>
           <li><a href="buyers.html">Buyers &amp; neighbourhoods</a></li>
           <li><a href="tenants.html">Relocation rental service</a></li>
+          <li><a href="relocating-to-coquitlam.html">Relocating to Coquitlam guide</a></li>
           <li><a href="{CALC}" target="_blank" rel="noopener">Mortgage affordability calculator</a></li>
         </ul>
       </div>
@@ -98,7 +133,7 @@ def foot():
         <ul>
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
           <li>Direct: <a href="{TEL}">{PHONE}</a></li>
-          <li>{ph("Instagram / Facebook / LinkedIn links")}</li>
+          <li class="social-links">{" · ".join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n,u in SOCIAL)}</li>
           <li>Greater Vancouver · Tri-Cities, BC</li>
         </ul>
       </div>
