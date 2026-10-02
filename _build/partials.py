@@ -21,6 +21,8 @@ TEL = "tel:+16048091032"
 SITE = "https://devindrealty-a11y.github.io/website/"
 BROKERAGE = "Axford Real Estate"
 BROKERAGE_ADDR = "2326 Clarke St, Port Moody, BC V3H 1Y8"
+BROKERAGE_PHONE = "778-355-0116"  # Axford office (footer only; Devin's 604 number stays the main contact/schema telephone)
+BROKERAGE_TEL = "tel:+17783550116"
 # Profile URLs found in /workspace/ai-seo/directory-claim-pack.md (also in buyer-bot/voice-guide.md, linkedin-bot templates)
 SOCIAL = [
     ("REALTOR.ca", "https://www.realtor.ca/agent/2073520/devin-desaulniers-2326-clarke-street-port-moody-british-columbia-v3h1y8"),
@@ -116,7 +118,7 @@ def foot():
         <p style="margin-top:14px"><strong style="color:#fff">Devin Desaulniers</strong>, Real Estate Associate<br>
         Brokerage: <strong style="color:#fff">Axford Real Estate</strong><br>
         {BROKERAGE_ADDR}<br>
-        Brokerage phone: {ph("brokerage office phone")}</p>
+        Brokerage office: <a href="{BROKERAGE_TEL}">{BROKERAGE_PHONE}</a></p>
       </div>
       <div>
         <h4>Explore</h4>
@@ -132,7 +134,7 @@ def foot():
         <h4>Contact</h4>
         <ul>
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
-          <li>Direct: <a href="{TEL}">{PHONE}</a></li>
+          <li>Direct (call or text): <a href="{TEL}">{PHONE}</a></li>
           <li class="social-links">{" · ".join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n,u in SOCIAL)}</li>
           <li>Greater Vancouver · Tri-Cities, BC</li>
         </ul>

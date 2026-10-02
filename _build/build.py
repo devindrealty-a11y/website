@@ -99,7 +99,7 @@ home += f'''
     </div>
     <div class="contact-grid" style="margin-top:32px">
       <div class="contact-item"><div class="icon">{I["mail"]}</div><div><small>Email</small><a href="mailto:{EMAIL}">{EMAIL}</a></div></div>
-      <div class="contact-item"><div class="icon">{I["phone"]}</div><div><small>Phone</small><a href="{TEL}">{PHONE}</a></div></div>
+      <div class="contact-item"><div class="icon">{I["phone"]}</div><div><small>Call or text</small><a href="{TEL}">{PHONE}</a></div></div>
       <div class="contact-item"><div class="icon">{I["pin"]}</div><div><small>Service area</small><span>Greater Vancouver · Tri-Cities, BC</span></div></div>
       <div class="contact-item"><div class="icon">{I["building"]}</div><div><small>Brokerage</small><span>Axford Real Estate</span><br><span>{BROKERAGE_ADDR}</span></div></div>
     </div>
@@ -191,7 +191,7 @@ buyers += f'''
           {picture("assets/img/devin-bw",(420,720),720,951,"Devin Desaulniers","bw-photo",sizes_attr="(max-width: 639px) 40vw, 200px")}
           <div>
             <p class="lead">Buying is a big decision. My job is to keep you informed and represent your interests at every step.</p>
-            <p>Call <a href="{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+            <p>Call or text <a href="{TEL}">{PHONE}</a>, or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
           </div>
         </div>
         <p>{ph("Confirm or edit this list of buyer services")}</p>
@@ -286,7 +286,7 @@ FAQ_ITEMS = [
  ("Can you help with pets, parking or commute needs?",
   "<p>Yes. In our consultation we go over your budget, preferred areas, timing, commute, lifestyle and must-haves, and I focus the search on rentals that fit.</p>"),
  ("What if we don't find a place that works?",
-  f"<p>The second $750 is only due once you successfully secure a rental. {ph('whether any of the first $750 is refundable, and any time limit on the engagement')}</p>"),
+  "<p>The first $750 covers the consultation, search and showings, and is non-refundable. The second $750 is only due once you successfully secure a rental, so if no rental is secured, it isn't owed.</p>"),
  ("Do you work for the landlord?",
   f"<p>No — this is a tenant representation service. I represent you, and you pay my fee. {ph('disclosure wording when the rental is one of Axford’s own listings / managed by Axford property managers — confirm with managing broker')}</p>"),
  ("What's the difference between tenant-side rental help and a property management company?",
@@ -382,7 +382,7 @@ tenants += f"""
         <p>Paid by the tenant, in two parts.</p>
       </div>
       <ul class="fee-parts">
-        <li><b>$750</b><span>at the beginning of the engagement</span></li>
+        <li><b>$750</b><span>at the beginning of the engagement (non-refundable)</span></li>
         <li><b>$750</b><span>once you successfully secure a rental</span></li>
       </ul>
       <a class="btn btn-light" href="#intake">Start your search {I["arrow"]}</a>
@@ -478,7 +478,7 @@ COQ_FAQ = [
  ("Can you help me find a rental in Coquitlam before I move from another province?",
   '<p>Yes. That\'s a core part of my tenant-side relocation rental service: I search Coquitlam and the Tri-Cities, BC (and nearby areas we agree on), attend showings or do live video walkthroughs with floor plans, negotiate on your behalf and review the lease with you — so you\'re not wiring a deposit to a scam listing from out of province. The fee is <strong>$1,500 total + GST, paid by the tenant</strong>: $750 at the start and $750 once you successfully secure a rental. <a href="tenants.html">See how the relocation rental service works</a>.</p>'),
  ("How much does tenant-side relocation rental help cost?",
-  "<p><strong>$1,500 total + GST, paid by the tenant</strong>, in two parts: $750 at the beginning of the engagement and $750 once you successfully secure a rental. It covers a personalized consultation, the property search, showings (in person or virtual), and lease review &amp; negotiation.</p>"),
+  "<p><strong>$1,500 total + GST, paid by the tenant</strong>, in two parts: $750 at the beginning of the engagement (non-refundable) and $750 once you successfully secure a rental. It covers a personalized consultation, the property search, showings (in person or virtual), and lease review &amp; negotiation.</p>"),
  ("How far ahead should I contact an agent when relocating to the Tri-Cities, BC?",
   "<p>For <strong>buying</strong>, reach out as soon as your move date and budget are roughly known — often 2–4+ months out — so we can watch inventory and get you lender-ready. For <strong>renting</strong>, settle your preferences early, then expect the active search about <strong>4–6 weeks</strong> before move-in, because most listings appear close to availability.</p>"),
  ("Do you only work in Coquitlam, or across Greater Vancouver?",

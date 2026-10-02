@@ -66,7 +66,7 @@ domain earns no search value of its own.
   working once a custom domain is pointed at this repo. Then uncomment its `Sitemap:` line, update URLs/`SITE`.
 
 ## Launch checklist
-- Replace all remaining placeholders (brokerage phone, disclaimer, privacy policy, refund terms, FAQ items marked [PLACEHOLDER])
+- Replace all remaining placeholders (disclaimer, privacy policy, Axford-managed disclosure in the tenant FAQ, buyer services list, neighbourhood notes)
 - Forms are connected to FormSubmit — Devin must click the activation email after the first real submission
 - Remove the `noindex` meta line and the draft banner in `_build/partials.py`, rebuild, then submit `sitemap.xml`
 - If using a custom domain, update `SITE` in `_build/partials.py` and add a `CNAME` file
