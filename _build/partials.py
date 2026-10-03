@@ -69,6 +69,29 @@ def social_row(label="Find me online"):
         for n, u in SOCIAL)
     return f'<div class="social-row"><span class="sr-label">{label}</span><div class="sr-links">{items}</div></div>'
 
+# Axford Google reviews badge. Five-star count only (Devin's choice): 148 five-star reviews,
+# verified Oct 2, 2026 from the Google Maps rating histogram. Do NOT show the total or average.
+# Brokerage reviews, not Devin's: deliberately NO AggregateRating schema. Refresh periodically (see README).
+AXFORD_FIVE_STAR = "148"
+AXFORD_MAPS = "https://www.google.com/maps?cid=6001107873248015668"  # place 0x548678dbf3a30647:0x534837d0c3bf7534, 2326 Clarke St
+GOOGLE_G = ('<svg class="gb-g" viewBox="0 0 48 48" width="28" height="28" aria-hidden="true">'
+  '<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>'
+  '<path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>'
+  '<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>'
+  '<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>')
+_STAR = '<svg viewBox="0 0 24 24" width="16" height="16"><path fill="#FBBC05" d="M12 2.5l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.52l-5.88 3.09 1.12-6.55-4.76-4.64 6.58-.96z"/></svg>'
+def google_badge(compact=False):
+    cls = "g-badge g-badge--sm" if compact else "g-badge"
+    logo = ('<picture class="gb-logo"><source type="image/webp" srcset="assets/img/axford-badge-logo-160.webp 160w, assets/img/axford-badge-logo-320.webp 320w" sizes="(max-width: 479px) 110px, 130px">'
+            '<img src="assets/img/axford-badge-logo-320.jpg" srcset="assets/img/axford-badge-logo-160.jpg 160w, assets/img/axford-badge-logo-320.jpg 320w" sizes="(max-width: 479px) 110px, 130px" '
+            'width="320" height="55" alt="" loading="lazy" decoding="async"></picture>')
+    return (f'<a class="{cls}" href="{AXFORD_MAPS}" target="_blank" rel="noopener" '
+            f'aria-label="Axford Real Estate: {AXFORD_FIVE_STAR} five-star Google reviews (opens Google Maps in a new tab)">'
+            f'{GOOGLE_G}<span class="gb-text"><span class="gb-stars" aria-hidden="true">{_STAR * 5}</span>'
+            f'<span class="gb-count">{AXFORD_FIVE_STAR} five-star Google reviews</span>'
+            f'<span class="gb-name">Axford Real Estate</span></span>'
+            f'<span class="gb-sep" aria-hidden="true"></span>{logo}</a>')
+
 def ph(text):
     return f'<span class="ph">[PLACEHOLDER: {text}]</span>'
 
@@ -134,6 +157,7 @@ def foot():
         Brokerage: <strong style="color:#fff">Axford Real Estate</strong><br>
         {BROKERAGE_ADDR}<br>
         Brokerage office: <a href="{BROKERAGE_TEL}">{BROKERAGE_PHONE}</a></p>
+        <div class="footer-badge">{google_badge(compact=True)}</div>
       </div>
       <div>
         <h4>Explore</h4>

@@ -492,6 +492,14 @@ tenants += f"""
   </div>
 </section>
 
+<section class="section trust-badge-section" id="reviews">
+  <div class="container center">
+    <span class="eyebrow">My brokerage</span>
+    <p class="tb-intro">I work with Axford Real Estate, a brokerage based in Port Moody.</p>
+    {google_badge()}
+  </div>
+</section>
+
 <section class="section section--blue">
   <div class="container center narrow">
     <h2>Ready to find your next home?</h2>

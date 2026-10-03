@@ -76,3 +76,14 @@ domain earns no search value of its own.
 - `relocating-to-coquitlam.html` is a tiny redirect (meta refresh + JS + canonical to the new URL) so old links keep working.
   It is not in the sitemap and stays `noindex`.
 - Brochure PDFs live in `assets/docs/` (compressed with Ghostscript `/printer`); cover thumbnails are `assets/img/brochure-*`.
+
+## Axford Google reviews badge (count verified Oct 2, 2026; refresh periodically)
+- Shows **only the five-star count**: "148 five-star Google reviews · Axford Real Estate". It sits above the final call to action
+  on `tenants.html` (`#reviews`) and, in a compact form, in the footer on every page (`google_badge()` in `_build/partials.py`).
+- The count (148 five-star reviews) was **verified Oct 2, 2026** from the Google Maps rating histogram for Axford Real Estate,
+  2326 Clarke St, Port Moody. It goes stale as new reviews come in. Re-check the histogram every month or two, update
+  `AXFORD_FIVE_STAR` and rebuild. Devin's choice: don't show the total count or the average rating.
+- Link: `AXFORD_MAPS` = https://www.google.com/maps?cid=6001107873248015668 (place 0x548678dbf3a30647:0x534837d0c3bf7534).
+- Logo: `assets/img/axford-badge-logo-160/320` (.webp/.jpg), trimmed from `buyer-bot/branding/axford-logo.jpeg`.
+- No `AggregateRating` schema on purpose: the reviews belong to the brokerage, not Devin, and self-serving review markup
+  is against Google's guidelines.

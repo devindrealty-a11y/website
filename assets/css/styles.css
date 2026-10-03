@@ -399,3 +399,32 @@ picture.bw-photo img{width:100%;height:auto;border-radius:12px;box-shadow:var(--
 .brochure .btn{white-space:nowrap}
 @media (max-width:479px){.brochure{grid-template-columns:84px 1fr}.brochure .btn{padding:10px 14px;font-size:.86rem}.brochure ul{padding-left:16px}}
 .hero-res-link svg{width:18px;height:18px;flex-shrink:0}
+/* Axford Google reviews badge (five-star count only; no AggregateRating schema on purpose) */
+.g-badge{display:inline-flex;align-items:center;gap:14px;background:#fff;border:1px solid #dfe3e8;border-radius:16px;padding:14px 20px;text-decoration:none;color:var(--ink);box-shadow:0 4px 14px rgba(16,24,40,.08);text-align:left;max-width:100%}
+.g-badge:hover{border-color:#c4cad2;box-shadow:0 6px 18px rgba(16,24,40,.12)}
+.g-badge .gb-g{flex-shrink:0;width:32px;height:32px}
+.gb-text{display:flex;flex-direction:column;gap:3px;min-width:0}
+.gb-stars{display:inline-flex;gap:2px;line-height:0}
+.gb-stars svg{width:17px;height:17px}
+.gb-count{font-family:var(--font-head);font-weight:700;font-size:1rem;line-height:1.25;color:var(--ink)}
+.gb-name{font-size:.85rem;color:var(--muted);line-height:1.2}
+.gb-sep{align-self:stretch;width:1px;background:#e3e6ea;margin:2px 2px}
+.gb-logo{display:block;flex-shrink:0;line-height:0}
+.gb-logo img{display:block;width:130px;height:auto}
+@media (max-width:479px){
+  .g-badge{flex-wrap:wrap;justify-content:center;gap:10px 12px;padding:14px 16px}
+  .g-badge .gb-sep{display:none}
+  .g-badge .gb-logo{flex-basis:100%;display:flex;justify-content:center;padding-top:10px;border-top:1px solid #eef0f3}
+  .g-badge .gb-logo img{width:110px}
+}
+.g-badge--sm{gap:10px;padding:10px 14px;border-radius:12px;box-shadow:none}
+.g-badge--sm .gb-g{width:24px;height:24px}
+.g-badge--sm .gb-stars svg{width:13px;height:13px}
+.g-badge--sm .gb-count{font-size:.86rem}
+.g-badge--sm .gb-name{font-size:.76rem}
+.g-badge--sm .gb-logo img{width:92px}
+@media (max-width:479px){.g-badge--sm{flex-wrap:nowrap;justify-content:flex-start}.g-badge--sm .gb-sep{display:block}.g-badge--sm .gb-logo{flex-basis:auto;padding-top:0;border-top:0}.g-badge--sm .gb-logo img{width:78px}}
+.footer-badge{margin-top:14px}
+.site-footer .g-badge,.site-footer .g-badge:hover{color:var(--ink);text-decoration:none}
+.trust-badge-section{padding:44px 0}
+.trust-badge-section .tb-intro{margin:6px auto 16px;max-width:560px;color:var(--muted)}
