@@ -87,3 +87,12 @@ domain earns no search value of its own.
 - Logo: `assets/img/axford-badge-logo-160/320` (.webp/.jpg), trimmed from `buyer-bot/branding/axford-logo.jpeg`.
 - No `AggregateRating` schema on purpose: the reviews belong to the brokerage, not Devin, and self-serving review markup
   is against Google's guidelines.
+
+## Testimonials (Devin's Google Business Profile, added Oct 3, 2026)
+- Verbatim quotes from "Devin Desaulniers Realtor" on Google (`TESTIMONIALS` in `_build/partials.py`). Trim only with "…",
+  never change words or spelling. Attribute as first name + last initial. William Chen's review is excluded at Devin's request.
+- Placement: tenants (Susan featured, Hugo, Aline; after the services/fee section), home (Thurza, Jackie, Jordan, Florian),
+  buyers (Thurza, Florian, Tyson, Kyron). All use section id `#testimonials`.
+- Badge "5.0 ★ on Google · 15 reviews" links to `DEVIN_GBP` = https://www.google.com/maps?cid=14841401548246613434
+  (place 0x54867fa3745a1c7b:0xcdf74013342bfdba). Count as of Oct 3, 2026; update `DEVIN_GBP_COUNT` / `DEVIN_GBP_RATING` as reviews come in.
+- No Review / AggregateRating schema on purpose (self-serving review markup is against Google's guidelines).

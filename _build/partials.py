@@ -92,6 +92,52 @@ def google_badge(compact=False):
             f'<span class="gb-name">Axford Real Estate</span></span>'
             f'<span class="gb-sep" aria-hidden="true"></span>{logo}</a>')
 
+# ---- Testimonials: verbatim quotes from Devin's Google Business Profile ("Devin Desaulniers Realtor") ----
+# Rules: quote verbatim (trim only with "…", keep original spelling); attribute first name + last initial.
+# No Review / AggregateRating schema on purpose.
+DEVIN_GBP = "https://www.google.com/maps?cid=14841401548246613434"  # place 0x54867fa3745a1c7b:0xcdf74013342bfdba
+DEVIN_GBP_RATING = "5.0"
+DEVIN_GBP_COUNT = "15"   # as of Oct 3, 2026 (from Devin); refresh with the profile
+import html as _h
+TESTIMONIALS = {
+ "susan":  ("Susan M.", "Rental search", "We had an exceptional experience working with Devin during our search for a rental home in the Tri-Cities. From the beginning, he was responsive, proactive, knowledgeable and incredibly easy to work with. He listened carefully to what we were looking for, offered thoughtful insights, arranged viewings efficiently and made us feel that he was genuinely invested in helping us find the right home—not simply completing a transaction. … We wouldn't hesitate to work with Devin again and recommend him wholeheartedly to anyone looking for an attentive, smart and highly professional real estate agent."),
+ "hugo":   ("Hugo K.", "Rental search", "Devin was absolute pleasure to work with! He responded super quickly and went above and beyond to find properties that matched all our criteria, including pet-friendly options. Even though we ended up finding a place right before booking viewings, his helpfulness and professionalism truly stood out. I would definitely recommend him to my friends and family!"),
+ "aline":  ("Aline R.", "Renter", "He is kind, extremely professional and very responsive. I strongly recommend his services and professionalism. If you are looking for a place to call home, he will support you throughout the process."),
+ "thurza": ("Thurza A.", "Home buyer", "Working with Devin was such a positive experience from beginning to end. Buying a home can feel overwhelming, but he made the entire process feel calm, clear, and genuinely exciting. He was patient, knowledgeable, quick to respond, and always made me feel like my questions and concerns truly mattered. What stood out most was how much he cared about finding the right place for me — not just making a sale."),
+ "jackie": ("Jackie S.", "Seller", "Devin went above and beyond to help with my apartment sale! … He even showed up early for a last minute showing once to tidy my apartment when I couldn't be present. Devin was always honest, patient, and realistic with me. I would absolutely use him again in the future!"),
+ "jordan": ("Jordan E.", "Home buyer", "Devin was an exceptional realtor who guided us seamlessly through the entire home-buying process. … He was always available to answer our questions and address any concerns, making us feel at ease during this significant life transition."),
+ "florian":("Florian C.", "First-time buyer", "Devin was a fantastic realtor who made our first-time home buying experience a breeze. He was knowledgeable, patient, and truly understood our needs. Thanks to Devin, we found our perfect townhome! Highly recommended!"),
+ "tyson":  ("Tyson S.", "First-time buyer", "Devin had been nothing short of spectacular, in helping me through my first ever purchase!"),
+ "kyron":  ("Kyron Z.", "Buyer", "Great Realtor, helped me find a great investment property. Strongly recommend for first home buyers."),
+}
+_TSTAR = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#FBBC05" d="M12 2.5l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.52l-5.88 3.09 1.12-6.55-4.76-4.64 6.58-.96z"/></svg>'
+def _tcard(key, featured=False):
+    name, ctx, quote = TESTIMONIALS[key]
+    return (f'<figure class="t-card{" t-card--featured" if featured else ""}">'
+            f'<span class="t-stars" role="img" aria-label="5 out of 5 stars">{_TSTAR * 5}</span>'
+            f'<blockquote><p>{_h.escape(quote, quote=False)}</p></blockquote>'
+            f'<figcaption><strong>{name}</strong><span>{ctx} · Google review</span></figcaption></figure>')
+def gbp_badge():
+    g = GOOGLE_G.replace('class="gb-g"', 'class="tb-g"').replace('width="28" height="28"', 'width="20" height="20"')
+    return (f'<a class="t-badge" href="{DEVIN_GBP}" target="_blank" rel="noopener" '
+            f'aria-label="Devin Desaulniers: {DEVIN_GBP_RATING} stars on Google from {DEVIN_GBP_COUNT} reviews (opens Google Maps in a new tab)">'
+            f'{g}<span><b>{DEVIN_GBP_RATING} ★</b> on Google · {DEVIN_GBP_COUNT} reviews</span></a>')
+def testimonials_section(keys, heading, eyebrow="Google reviews", lead="", featured=None, sec_id="testimonials", bg="section--tint"):
+    feat = _tcard(featured, True) if featured else ""
+    grid = "".join(_tcard(k) for k in keys if k != featured)
+    lead_html = f'<p class="lead">{lead}</p>' if lead else ""
+    return f"""<section class="section {bg}" id="{sec_id}">
+  <div class="container">
+    <div class="center narrow">
+      <span class="eyebrow">{eyebrow}</span>
+      <h2>{heading}</h2>
+      {lead_html}
+      {gbp_badge()}
+    </div>
+    <div class="t-wrap">{feat}<div class="t-grid">{grid}</div></div>
+  </div>
+</section>"""
+
 def ph(text):
     return f'<span class="ph">[PLACEHOLDER: {text}]</span>'
 

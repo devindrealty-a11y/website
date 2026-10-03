@@ -87,7 +87,9 @@ home += f'''
   </div>
 </section>
 
-<section class="section">
+{testimonials_section(["thurza","jackie","jordan","florian"], "What clients say", lead="Buyers and sellers I've worked with, in their own words.", sec_id="testimonials", bg="")}
+
+<section class="section section--grey">
   <div class="container">{calc_cta()}</div>
 </section>
 
@@ -208,6 +210,8 @@ buyers += f'''
     </div>
   </div>
 </section>
+
+{testimonials_section(["thurza","florian","tyson","kyron"], "What buyers say", lead="Buyers I've helped, in their own words.", sec_id="testimonials", bg="section--tint")}
 
 <section class="section" id="neighbourhoods">
   <div class="container">
@@ -394,6 +398,8 @@ tenants += f"""
     <p class="form-note center" style="margin-top:14px">I help tenants find and lease a home. I do not provide property management services.</p>
   </div>
 </section>
+
+{testimonials_section(["susan","hugo","aline"], "What renters say", lead="Tenants I've helped find a home, in their own words.", featured="susan", sec_id="testimonials", bg="section--tint")}
 
 <section class="section section--grey" id="how">
   <div class="container">
