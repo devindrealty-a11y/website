@@ -362,8 +362,40 @@ picture.bw-photo img{width:100%;height:auto;border-radius:12px;box-shadow:var(--
 /* button icons: keep inline SVGs at icon size */
 .btn svg{width:18px;height:18px;flex-shrink:0}
 /* Header fit: the 5-item nav + phone + logo needs more than the 1160px content width */
-@media (min-width:1200px){.container.header-inner{max-width:1320px;padding:0 28px}}
-@media (min-width:1200px) and (max-width:1259px){.nav-phone span{display:none}}
+@media (min-width:1200px){.container.header-inner{max-width:1384px;padding:0 28px}}
+@media (min-width:1200px) and (max-width:1399px){.nav-phone span{display:none}}
 /* nav Contact button: .nav a colour was overriding the white button text (low contrast) */
 .nav a.btn-primary{color:#fff}
 .nav a.btn-primary:hover{background:var(--blue-dark);color:#fff}
+/* "Find me online" social row */
+.social-row{margin-top:18px}
+.social-row .sr-label{display:block;font-family:var(--font-head);font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.sr-links{display:flex;flex-wrap:wrap;gap:8px}
+.sr-links a{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border:1px solid #d6dae0;border-radius:999px;background:#fff;color:var(--blue-dark);text-decoration:none;font-weight:500;font-size:.9rem;line-height:1}
+.sr-links a:hover{background:var(--blue-light);border-color:var(--blue)}
+.sr-links svg{width:18px;height:18px;flex-shrink:0}
+/* Brochures / renter resources */
+.brochures{display:grid;gap:22px;margin-top:28px}
+@media (min-width:760px){.brochures{grid-template-columns:repeat(2,1fr)}}
+.brochure{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:start;background:#fff;border:1px solid #e6e8eb;border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+@media (min-width:1000px){.brochure{grid-template-columns:150px 1fr}}
+.brochure .cover{display:block;border-radius:8px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.14);border:1px solid #e6e8eb}
+.brochure .cover img{display:block;width:100%;height:auto}
+.brochure h3{margin:0 0 6px}
+.brochure p{margin:0 0 10px;font-size:.95rem}
+.brochure ul{margin:0 0 12px;padding-left:18px;font-size:.92rem;color:var(--muted)}
+.brochure .meta{font-size:.8rem;color:var(--muted);margin-bottom:12px}
+.brochure .btn{padding:10px 16px;font-size:.9rem}
+@media (max-width:479px){.brochure{grid-template-columns:96px 1fr;padding:16px;gap:14px}}
+.area-grid{display:grid;gap:16px;margin-top:20px}
+@media (min-width:700px){.area-grid{grid-template-columns:repeat(2,1fr)}}
+.area-card{background:#fff;border:1px solid #e6e8eb;border-radius:14px;padding:18px 20px}
+.area-card h3{margin:0 0 6px}
+.area-card p{margin:0;font-size:.95rem}
+.area-card .transit{margin-top:8px;font-size:.85rem;color:var(--muted)}
+.area-card.highlight{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset}
+.hero-res-link{display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:#fff;font-weight:600;font-size:.92rem}
+@media (min-width:1200px) and (max-width:1279px){.nav a{padding:8px 8px}.container.header-inner{padding:0 20px}}
+.brochure .btn{white-space:nowrap}
+@media (max-width:479px){.brochure{grid-template-columns:84px 1fr}.brochure .btn{padding:10px 14px;font-size:.86rem}.brochure ul{padding-left:16px}}
+.hero-res-link svg{width:18px;height:18px;flex-shrink:0}

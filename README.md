@@ -70,3 +70,9 @@ domain earns no search value of its own.
 - Forms are connected to FormSubmit — Devin must click the activation email after the first real submission
 - Remove the `noindex` meta line and the draft banner in `_build/partials.py`, rebuild, then submit `sitemap.xml`
 - If using a custom domain, update `SITE` in `_build/partials.py` and add a `CNAME` file
+
+## Renamed guide (Oct 2026)
+- The relocation guide is now `relocating-to-greater-vancouver.html` (built from `GV_*` in `_build/build.py`).
+- `relocating-to-coquitlam.html` is a tiny redirect (meta refresh + JS + canonical to the new URL) so old links keep working.
+  It is not in the sitemap and stays `noindex`.
+- Brochure PDFs live in `assets/docs/` (compressed with Ghostscript `/printer`); cover thumbnails are `assets/img/brochure-*`.

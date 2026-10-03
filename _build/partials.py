@@ -41,24 +41,39 @@ def agent_jsonld():
         "@type": "RealEstateAgent",
         "@id": SITE + "#devin-desaulniers",
         "name": "Devin Desaulniers",
-        "description": "Devin Desaulniers, Real Estate Associate with Axford Real Estate, helping home buyers and relocating tenants in the Tri-Cities, BC and Greater Vancouver.",
+        "description": "Devin Desaulniers, Real Estate Associate with Axford Real Estate, helping relocating tenants and home buyers across Greater Vancouver, including the Tri-Cities, BC.",
         "url": SITE,
         "image": SITE + "assets/img/devin-headshot-800.jpg",
         "telephone": "604-809-1032",
         "email": "devin@axfordrealestate.ca",
         "address": addr,
         "parentOrganization": {"@type": "RealEstateAgent", "name": "Axford Real Estate", "address": addr},
-        "areaServed": [{"@type": "Place", "name": "Tri-Cities, BC"}, {"@type": "Place", "name": "Greater Vancouver"}],
+        "areaServed": [{"@type": "Place", "name": "Greater Vancouver"}, {"@type": "Place", "name": "Tri-Cities, BC"}],
         "sameAs": [u for _, u in SOCIAL],
     }
     return '<script type="application/ld+json">\n' + _json.dumps(data, indent=2, ensure_ascii=False) + '\n</script>'
   # update if repo name / custom domain changes
 
+SOCIAL_ICONS = {
+ "REALTOR.ca": '<path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/>',
+ "LinkedIn": '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>',
+ "YouTube": '<path d="M2.5 17a24.1 24.1 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.6 49.6 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.1 24.1 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.6 49.6 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="M10 15l5-3-5-3z"/>',
+ "Instagram": '<rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
+ "Facebook": '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>',
+ "Rate-My-Agent": '<path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/>',
+}
+def social_row(label="Find me online"):
+    items = "".join(
+        f'<a href="{u}" target="_blank" rel="noopener" aria-label="Devin Desaulniers on {n} (opens in a new tab)">'
+        f'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{SOCIAL_ICONS[n]}</svg><span>{n}</span></a>'
+        for n, u in SOCIAL)
+    return f'<div class="social-row"><span class="sr-label">{label}</span><div class="sr-links">{items}</div></div>'
+
 def ph(text):
     return f'<span class="ph">[PLACEHOLDER: {text}]</span>'
 
 def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head=""):
-    nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("tenants.html","Tenants","tenants"),("relocating-to-coquitlam.html","Moving to Coquitlam","coquitlam")]
+    nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("tenants.html","Tenants","tenants"),("relocating-to-greater-vancouver.html","Moving to Greater Vancouver","guide")]
     CUR = ' aria-current="page"'
     links = "".join(f'<a href="{h}"{CUR if k==active else ""}>{t}</a>' for h,t,k in nav)
     return f'''<!doctype html>
@@ -126,7 +141,8 @@ def foot():
           <li><a href="index.html">Home</a></li>
           <li><a href="buyers.html">Buyers &amp; neighbourhoods</a></li>
           <li><a href="tenants.html">Relocation rental service</a></li>
-          <li><a href="relocating-to-coquitlam.html">Relocating to Coquitlam guide</a></li>
+          <li><a href="relocating-to-greater-vancouver.html">Relocating to Greater Vancouver guide</a></li>
+          <li><a href="tenants.html#resources">Free renter resources (PDF)</a></li>
           <li><a href="{CALC}" target="_blank" rel="noopener">Mortgage affordability calculator</a></li>
         </ul>
       </div>
