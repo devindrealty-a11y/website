@@ -60,9 +60,9 @@ domain earns no search value of its own.
   Axford is listed as `parentOrganization` because schema.org only allows `worksFor` on `Person`.
 - `tenants.html` also carries `FAQPage` JSON-LD. It is generated from the same `FAQ_ITEMS` strings as the
   visible FAQ, so edit the FAQ in `build.py` only and the schema stays identical to the page text.
-- `sitemap.xml` lists the live pages (home, tenants, buyers, relocating-to-greater-vancouver). The Coquitlam redirect is omitted.
-- `robots.txt` allows crawl and lists the Sitemap. Note: robots.txt is only read at a domain root, so on
-  `devindrealty-a11y.github.io/website/` it's ignored until a custom domain is pointed here. Per-page absence of noindex is what counts now.
+- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, tenants, buyers, relocating-to-greater-vancouver). The Coquitlam redirect is omitted.
+- `robots.txt` allows crawl and lists the Sitemap at https://devindesaulniers.ca/sitemap.xml (served at the domain root).
+- `SITE` in `_build/partials.py` is `https://devindesaulniers.ca/`. Rebuild after changing it.
 - Submit `sitemap.xml` in Google Search Console when ready.
 
 ## Launch checklist
