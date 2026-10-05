@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Live sitemap for https://devindrealty-a11y.github.io/website/
-     relocating-to-coquitlam.html is a redirect to relocating-to-greater-vancouver.html and is intentionally omitted.
-     If the site moves to a custom domain, update these URLs and SITE in _build/partials.py. -->
+<!-- Live sitemap for https://devindesaulniers.ca/
+     relocating-to-coquitlam.html is a redirect to relocating-to-greater-vancouver.html and is intentionally omitted. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://devindrealty-a11y.github.io/website/</loc></url>
-  <url><loc>https://devindrealty-a11y.github.io/website/tenants.html</loc></url>
-  <url><loc>https://devindrealty-a11y.github.io/website/buyers.html</loc></url>
-  <url><loc>https://devindrealty-a11y.github.io/website/relocating-to-greater-vancouver.html</loc></url>
+  <url><loc>https://devindesaulniers.ca/</loc></url>
+  <url><loc>https://devindesaulniers.ca/tenants.html</loc></url>
+  <url><loc>https://devindesaulniers.ca/buyers.html</loc></url>
+  <url><loc>https://devindesaulniers.ca/relocating-to-greater-vancouver.html</loc></url>
 </urlset>

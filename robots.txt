@@ -1,8 +1,5 @@
-# https://devindrealty-a11y.github.io/website/
-# Note: crawlers only read robots.txt at the domain root, so this file takes
-# effect once the site is on its own custom domain. Until then, per-page
-# robots meta (or the lack of noindex) is what counts.
+# https://devindesaulniers.ca/
 User-agent: *
 Allow: /
 
-Sitemap: https://devindrealty-a11y.github.io/website/sitemap.xml
+Sitemap: https://devindesaulniers.ca/sitemap.xml

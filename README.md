@@ -1,6 +1,6 @@
 # Devin Desaulniers — Real Estate Associate, Axford Real Estate
 
-Static site for GitHub Pages at https://devindrealty-a11y.github.io/website/
+Static site for GitHub Pages, custom domain **https://devindesaulniers.ca/** (CNAME in repo root).
 
 Pages:
 - `index.html` — home / profile
@@ -69,7 +69,7 @@ domain earns no search value of its own.
 - Replace all remaining placeholders (disclaimer, privacy policy, Axford-managed disclosure in the tenant FAQ, buyer services list, neighbourhood notes)
 - Forms are connected to FormSubmit — Devin must click the activation email after the first real submission
 - ~~Remove noindex and draft banner~~ Done (launched). Submit `sitemap.xml` in Search Console when ready.
-- If using a custom domain, update `SITE` in `_build/partials.py` and add a `CNAME` file
+- ~~Custom domain~~ Done: `devindesaulniers.ca` (CNAME + SITE). Enforce HTTPS once the cert is ready.
 
 ## Renamed guide (Oct 2026)
 - The relocation guide is now `relocating-to-greater-vancouver.html` (built from `GV_*` in `_build/build.py`).
