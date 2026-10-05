@@ -1,6 +1,6 @@
-# Devin Desaulniers — Real Estate Associate, Axford Real Estate (DRAFT)
+# Devin Desaulniers — Real Estate Associate, Axford Real Estate
 
-Static site for GitHub Pages. **Draft — not final.** Search engines are blocked via `<meta name="robots" content="noindex">` until launch.
+Static site for GitHub Pages at https://devindrealty-a11y.github.io/website/
 
 Pages:
 - `index.html` — home / profile
@@ -60,21 +60,21 @@ domain earns no search value of its own.
   Axford is listed as `parentOrganization` because schema.org only allows `worksFor` on `Person`.
 - `tenants.html` also carries `FAQPage` JSON-LD. It is generated from the same `FAQ_ITEMS` strings as the
   visible FAQ, so edit the FAQ in `build.py` only and the schema stays identical to the page text.
-- `sitemap.xml` and `robots.txt` exist, but every page is still `noindex`. Google will not index anything until
-  the noindex line is removed. Don't submit the sitemap in Search Console before then.
-- robots.txt is only read at a domain root. On `devindrealty-a11y.github.io/website/` it's ignored. It starts
-  working once a custom domain is pointed at this repo. Then uncomment its `Sitemap:` line, update URLs/`SITE`.
+- `sitemap.xml` lists the live pages (home, tenants, buyers, relocating-to-greater-vancouver). The Coquitlam redirect is omitted.
+- `robots.txt` allows crawl and lists the Sitemap. Note: robots.txt is only read at a domain root, so on
+  `devindrealty-a11y.github.io/website/` it's ignored until a custom domain is pointed here. Per-page absence of noindex is what counts now.
+- Submit `sitemap.xml` in Google Search Console when ready.
 
 ## Launch checklist
 - Replace all remaining placeholders (disclaimer, privacy policy, Axford-managed disclosure in the tenant FAQ, buyer services list, neighbourhood notes)
 - Forms are connected to FormSubmit — Devin must click the activation email after the first real submission
-- Remove the `noindex` meta line and the draft banner in `_build/partials.py`, rebuild, then submit `sitemap.xml`
+- ~~Remove noindex and draft banner~~ Done (launched). Submit `sitemap.xml` in Search Console when ready.
 - If using a custom domain, update `SITE` in `_build/partials.py` and add a `CNAME` file
 
 ## Renamed guide (Oct 2026)
 - The relocation guide is now `relocating-to-greater-vancouver.html` (built from `GV_*` in `_build/build.py`).
 - `relocating-to-coquitlam.html` is a tiny redirect (meta refresh + JS + canonical to the new URL) so old links keep working.
-  It is not in the sitemap and stays `noindex`.
+  It is not in the sitemap and stays `noindex` (correct for a redirect).
 - Brochure PDFs live in `assets/docs/` (compressed with Ghostscript `/printer`); cover thumbnails are `assets/img/brochure-*`.
 
 ## Axford Google reviews badge (count verified Oct 2, 2026; refresh periodically)

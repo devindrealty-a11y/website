@@ -166,7 +166,7 @@ for name,tag,desc,nbhd,transit,outdoors in hoods:
 </article>'''
 
 buyers = head("Buying a Home in the Tri-Cities, BC | Devin Desaulniers, Axford Real Estate",
-              "Neighbourhood guides for Coquitlam, Port Coquitlam, Port Moody and nearby areas, a free mortgage affordability calculator, and personalised listing alerts from Devin Desaulniers, Axford Real Estate.", "buyers")
+              "Neighbourhood guides for Coquitlam, Port Coquitlam, Port Moody and nearby areas, a free mortgage affordability calculator, and personalised listing alerts from Devin Desaulniers, Axford Real Estate.", "buyers", page_url="buyers.html")
 buyers += f'''
 <section class="page-hero">
   <div class="container">
@@ -684,7 +684,7 @@ redirect = f"""<!doctype html>
 <head>
 <meta charset="utf-8">
 <title>Moved: Relocating to Greater Vancouver guide | Devin Desaulniers</title>
-<meta name="robots" content="noindex"><!-- DRAFT: keep noindex on this redirect page even after launch -->
+<meta name="robots" content="noindex, nofollow"><!-- redirect page: keep noindex so the old URL stays out of search -->
 <link rel="canonical" href="{NEW_ABS}">
 <meta http-equiv="refresh" content="0; url={GV_URL}">
 <script>location.replace("{GV_URL}" + location.hash);</script>

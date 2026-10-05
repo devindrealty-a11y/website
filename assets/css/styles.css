@@ -1,4 +1,4 @@
-/* Devin Desaulniers — draft site styles. Colours sampled from Devin's logo. */
+/* Devin Desaulniers — site styles. Colours sampled from Devin's logo. */
 :root{
   --blue:#3474b6;          /* logo blue */
   --blue-dark:#24578c;
@@ -43,7 +43,6 @@ p{margin:0 0 1em}
 .ph-block{display:block;background:#fff8c9;color:#5c4400;border:2px dashed #c99a00;border-radius:10px;padding:14px 16px;font-weight:600;margin:1em 0}
 
 /* Draft banner */
-.draft-banner{background:#b42318;color:#fff;text-align:center;font-size:.85rem;font-weight:600;padding:6px 12px;letter-spacing:.02em}
 
 /* Header */
 .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid #e6e8eb}
@@ -279,7 +278,6 @@ body.has-sticky{padding-bottom:72px}
 .js [data-step2-wrap]{display:none}
 .js [data-step2-wrap].open{display:block}
 [id]{scroll-margin-top:84px}
-@media (max-width:520px){.db-more{display:none}}
 
 /* ===== Photos ===== */
 picture.headshot,picture.bw-photo{display:block}

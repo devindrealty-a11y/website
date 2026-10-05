@@ -152,13 +152,13 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<meta name="robots" content="noindex, nofollow"><!-- DRAFT: remove this line when the site is final -->
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:image" content="{SITE}{og_image}">
 <meta property="og:url" content="{SITE}{page_url}">
+<link rel="canonical" href="{SITE}{page_url}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -168,7 +168,6 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
 {extra_head}
 </head>
 <body class="{body_class}">
-<div class="draft-banner" role="note">DRAFT — not final.<span class="db-more"> Content marked [PLACEHOLDER] still needs Devin's input.</span></div>
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="index.html" aria-label="Devin Desaulniers, Real Estate Associate, Axford Real Estate — home">
@@ -230,7 +229,7 @@ def foot():
       <p>{ph("Standard disclaimer, e.g. “Not intended to solicit buyers or sellers currently under contract with a brokerage.” — confirm exact wording with managing broker")}</p>
       <p>{ph("Privacy policy link / statement on how form information is used")}</p>
       <p>Mortgage calculator results are estimates only and are not a mortgage approval or financial advice.</p>
-      <p>© <span data-year>2026</span> Devin Desaulniers · Axford Real Estate. <strong style="color:#ffb4ab">Draft website — not final.</strong></p>
+      <p>© <span data-year>2026</span> Devin Desaulniers · Axford Real Estate.</p>
     </div>
   </div>
 </footer>
