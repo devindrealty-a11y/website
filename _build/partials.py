@@ -152,6 +152,7 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
+<meta name="google-site-verification" content="nEyIbyduNXFpblfvqE7C0GnUMa9Z_zaJYWtKXlZIfOc" />
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{title}">
