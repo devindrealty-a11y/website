@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+  <title>Devin Desaulniers' Greater Vancouver Real Estate Blog</title>
+  <link>https://devindesaulniers.ca/blog/</link>
+  <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
+  <language>en-ca</language>
+  <lastBuildDate>Tue, 06 Oct 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>Metro Vancouver's September home sales: a condo slowdown, not a market-wide one</title>
+    <link>https://devindesaulniers.ca/blog/2026-10-06-metro-vancouver-september-2026-home-sales.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-10-06-metro-vancouver-september-2026-home-sales.html</guid>
+    <pubDate>Tue, 06 Oct 2026 08:00:00 -0700</pubDate>
+    <category>Market news</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>Greater Vancouver REALTORS® says September sales fell 8.4% from last year, but the drop was almost all apartments. Here's my plain-language read and what it means if you're buying, selling or renting.</description>
+  </item>
+</channel>
+</rss>

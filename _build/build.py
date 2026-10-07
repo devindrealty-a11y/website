@@ -1,5 +1,6 @@
 import os, json
 from partials import *
+import blog
 OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 I = ICONS
 
@@ -8,6 +9,9 @@ MOUNTAINS = '''<svg class="hero-mountains" viewBox="0 0 1440 220" preserveAspect
 <path d="M0 175 L150 125 L260 160 L380 105 L520 165 L640 120 L770 170 L900 115 L1030 168 L1170 120 L1300 165 L1440 140 L1440 220 L0 220Z" fill="#808082" opacity=".14"/>
 <path d="M0 200 C240 180 480 214 720 196 C960 178 1200 210 1440 192 L1440 220 L0 220Z" fill="#ffffff"/>
 </svg>'''
+
+# ---------------- BLOG POSTS (Markdown in _posts/, see _build/BLOG.md) ----------------
+POSTS = blog.load_posts()
 
 # ---------------- HOME ----------------
 # Home-page relocation video ad (web encode of video-bot/grand-tri-cities/grand-tri-cities-final.mp4)
@@ -28,7 +32,7 @@ VIDEO_JSONLD = '<script type="application/ld+json">\n' + json.dumps({
 
 home = head("Devin Desaulniers | Real Estate Associate, Axford Real Estate | Tri-Cities, BC",
             "Devin Desaulniers, Real Estate Associate with Axford Real Estate, helping buyers and relocating tenants in Coquitlam, Port Coquitlam, Port Moody and Greater Vancouver.", "home",
-            extra_head=VIDEO_JSONLD)
+            extra_head=VIDEO_JSONLD + "\n" + blog.rss_link(""))
 home += f'''
 <section class="hero">
   <div class="container hero-inner">
@@ -129,6 +133,8 @@ home += f'''
 <section class="section section--grey">
   <div class="container">{calc_cta()}</div>
 </section>
+
+{blog.home_strip(POSTS)}
 
 <section class="section section--blue" id="contact">
   <div class="container">
@@ -734,4 +740,9 @@ redirect = f"""<!doctype html>
 
 for fn, html in [("index.html",home),("buyers.html",buyers),("tenants.html",tenants),(GV_URL,gv),("relocating-to-coquitlam.html",redirect)]:
     open(os.path.join(OUT,fn),"w").write(html)
+
+# Blog pages, RSS feed and sitemap (sitemap lists the static pages + blog index + every post)
+blog.write_blog(POSTS)
+STATIC_PAGES = ["", "tenants.html", "buyers.html", GV_URL]
+open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS))
 print("built")

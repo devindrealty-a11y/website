@@ -80,10 +80,10 @@ GOOGLE_G = ('<svg class="gb-g" viewBox="0 0 48 48" width="28" height="28" aria-h
   '<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>'
   '<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>')
 _STAR = '<svg viewBox="0 0 24 24" width="16" height="16"><path fill="#FBBC05" d="M12 2.5l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.52l-5.88 3.09 1.12-6.55-4.76-4.64 6.58-.96z"/></svg>'
-def google_badge(compact=False):
+def google_badge(compact=False, root=""):
     cls = "g-badge g-badge--sm" if compact else "g-badge"
-    logo = ('<picture class="gb-logo"><source type="image/webp" srcset="assets/img/axford-badge-logo-160.webp 160w, assets/img/axford-badge-logo-320.webp 320w" sizes="(max-width: 479px) 110px, 130px">'
-            '<img src="assets/img/axford-badge-logo-320.jpg" srcset="assets/img/axford-badge-logo-160.jpg 160w, assets/img/axford-badge-logo-320.jpg 320w" sizes="(max-width: 479px) 110px, 130px" '
+    logo = (f'<picture class="gb-logo"><source type="image/webp" srcset="{root}assets/img/axford-badge-logo-160.webp 160w, {root}assets/img/axford-badge-logo-320.webp 320w" sizes="(max-width: 479px) 110px, 130px">'
+            f'<img src="{root}assets/img/axford-badge-logo-320.jpg" srcset="{root}assets/img/axford-badge-logo-160.jpg 160w, {root}assets/img/axford-badge-logo-320.jpg 320w" sizes="(max-width: 479px) 110px, 130px" '
             'width="320" height="55" alt="" loading="lazy" decoding="async"></picture>')
     return (f'<a class="{cls}" href="{AXFORD_MAPS}" target="_blank" rel="noopener" '
             f'aria-label="Axford Real Estate: {AXFORD_FIVE_STAR} five-star Google reviews (opens Google Maps in a new tab)">'
@@ -141,10 +141,11 @@ def testimonials_section(keys, heading, eyebrow="Google reviews", lead="", featu
 def ph(text):
     return f'<span class="ph">[PLACEHOLDER: {text}]</span>'
 
-def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head=""):
-    nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("tenants.html","Tenants","tenants"),("relocating-to-greater-vancouver.html","Moving to Greater Vancouver","guide")]
+def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head="", root="", og_type="website"):
+    """root: relative prefix back to the site root ("" for top-level pages, "../" for pages in blog/)."""
+    nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("tenants.html","Tenants","tenants"),("relocating-to-greater-vancouver.html","Moving to Greater Vancouver","guide"),("blog/","Blog","blog")]
     CUR = ' aria-current="page"'
-    links = "".join(f'<a href="{h}"{CUR if k==active else ""}>{t}</a>' for h,t,k in nav)
+    links = "".join(f'<a href="{root}{h}"{CUR if k==active else ""}>{t}</a>' for h,t,k in nav)
     return f'''<!doctype html>
 <html lang="en-CA">
 <head>
@@ -153,8 +154,8 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta name="google-site-verification" content="nEyIbyduNXFpblfvqE7C0GnUMa9Z_zaJYWtKXlZIfOc" />
-<link rel="icon" type="image/png" href="assets/img/favicon.png">
-<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="{root}assets/img/favicon.png">
+<meta property="og:type" content="{og_type}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:image" content="{SITE}{og_image}">
@@ -164,15 +165,15 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="{root}assets/css/styles.css">
 {agent_jsonld()}
 {extra_head}
 </head>
 <body class="{body_class}">
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="Devin Desaulniers, Real Estate Associate, Axford Real Estate — home">
-      <img src="assets/img/devin-mark.png" alt="Devin Desaulniers logo" width="46" height="68">
+    <a class="brand" href="{root}index.html" aria-label="Devin Desaulniers, Real Estate Associate, Axford Real Estate — home">
+      <img src="{root}assets/img/devin-mark.png" alt="Devin Desaulniers logo" width="46" height="68">
       <span class="brand-text">
         <span class="brand-name"><span class="b">DEVIN</span> <span class="g">DESAULNIERS</span></span>
         <span class="brand-sub"><span class="bs-title">Real Estate Associate · </span><strong>Axford Real Estate</strong></span>
@@ -184,35 +185,36 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
       {links}
       <a href="{CALC}" target="_blank" rel="noopener">Calculator</a>
       <a class="nav-phone" href="{TEL}">{ICONS["phone"]}<span>{PHONE}</span></a>
-      <a class="btn btn-primary" href="index.html#contact">Contact</a>
-      <span class="header-brokerage"><img src="assets/img/axford-logo.png" alt="Axford Real Estate (brokerage)" width="120" height="26"></span>
+      <a class="btn btn-primary" href="{root}index.html#contact">Contact</a>
+      <span class="header-brokerage"><img src="{root}assets/img/axford-logo.png" alt="Axford Real Estate (brokerage)" width="120" height="26"></span>
     </nav>
   </div>
 </header>
 <main>
 '''
 
-def foot():
+def foot(root=""):
     return f'''</main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="footer-brokerage"><img src="assets/img/axford-logo.png" alt="Axford Real Estate" width="160" height="34"></div>
+        <div class="footer-brokerage"><img src="{root}assets/img/axford-logo.png" alt="Axford Real Estate" width="160" height="34"></div>
         <p style="margin-top:14px"><strong style="color:#fff">Devin Desaulniers</strong>, Real Estate Associate<br>
         Brokerage: <strong style="color:#fff">Axford Real Estate</strong><br>
         {BROKERAGE_ADDR}<br>
         Brokerage office: <a href="{BROKERAGE_TEL}">{BROKERAGE_PHONE}</a></p>
-        <div class="footer-badge">{google_badge(compact=True)}</div>
+        <div class="footer-badge">{google_badge(compact=True, root=root)}</div>
       </div>
       <div>
         <h4>Explore</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="buyers.html">Buyers &amp; neighbourhoods</a></li>
-          <li><a href="tenants.html">Relocation rental service</a></li>
-          <li><a href="relocating-to-greater-vancouver.html">Relocating to Greater Vancouver guide</a></li>
-          <li><a href="tenants.html#resources">Free renter resources (PDF)</a></li>
+          <li><a href="{root}index.html">Home</a></li>
+          <li><a href="{root}buyers.html">Buyers &amp; neighbourhoods</a></li>
+          <li><a href="{root}tenants.html">Relocation rental service</a></li>
+          <li><a href="{root}relocating-to-greater-vancouver.html">Relocating to Greater Vancouver guide</a></li>
+          <li><a href="{root}blog/">Blog: Greater Vancouver real estate news</a></li>
+          <li><a href="{root}tenants.html#resources">Free renter resources (PDF)</a></li>
           <li><a href="{CALC}" target="_blank" rel="noopener">Mortgage affordability calculator</a></li>
         </ul>
       </div>
@@ -234,8 +236,8 @@ def foot():
     </div>
   </div>
 </footer>
-<script src="assets/js/config.js"></script>
-<script src="assets/js/site.js"></script>
+<script src="{root}assets/js/config.js"></script>
+<script src="{root}assets/js/site.js"></script>
 </body>
 </html>
 '''
