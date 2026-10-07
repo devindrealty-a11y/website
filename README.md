@@ -96,3 +96,10 @@ domain earns no search value of its own.
 - Badge "5.0 ★ on Google · 15 reviews" links to `DEVIN_GBP` = https://www.google.com/maps?cid=14841401548246613434
   (place 0x54867fa3745a1c7b:0xcdf74013342bfdba). Count as of Oct 3, 2026; update `DEVIN_GBP_COUNT` / `DEVIN_GBP_RATING` as reviews come in.
 - No Review / AggregateRating schema on purpose (self-serving review markup is against Google's guidelines).
+
+## Home-page relocation video (added Oct 6, 2026)
+- Section `#video` on `index.html`, right after the hero ("Moving to Greater Vancouver?" + button to `tenants.html`). Built from `VIDEO_*` in `_build/build.py`; styles `.video-section` / `.video-frame` in `styles.css`.
+- Files: `assets/video/greater-vancouver-relocation-ad.mp4` (1280x720 H.264 High, CRF 26, AAC 128k, `+faststart`, ~5.1 MB) and `-poster.jpg` (title frame at 4.0 s).
+  Source (not in repo): `/workspace/video-bot/grand-tri-cities/grand-tri-cities-final.mp4`. Re-encode:
+  `ffmpeg -i grand-tri-cities-final.mp4 -vf "scale=1280:720:flags=lanczos,format=yuv420p" -c:v libx264 -profile:v high -level 4.0 -preset veryslow -crf 26 -c:a aac -b:a 128k -ac 2 -movflags +faststart greater-vancouver-relocation-ad.mp4`
+- `<video controls playsinline preload="metadata">`, no autoplay. Home page also carries `VideoObject` JSON-LD (absolute URLs, uploadDate 2026-10-06, PT32S).

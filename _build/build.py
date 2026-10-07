@@ -1,4 +1,4 @@
-import os
+import os, json
 from partials import *
 OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 I = ICONS
@@ -10,8 +10,25 @@ MOUNTAINS = '''<svg class="hero-mountains" viewBox="0 0 1440 220" preserveAspect
 </svg>'''
 
 # ---------------- HOME ----------------
+# Home-page relocation video ad (web encode of video-bot/grand-tri-cities/grand-tri-cities-final.mp4)
+VIDEO_MP4 = "assets/video/greater-vancouver-relocation-ad.mp4"
+VIDEO_POSTER = "assets/video/greater-vancouver-relocation-ad-poster.jpg"
+VIDEO_NAME = "Moving to Greater Vancouver? | Devin Desaulniers"
+VIDEO_DESC = "A short relocation video for people moving to Greater Vancouver, BC (Coquitlam, Port Coquitlam and Port Moody), presented by Devin Desaulniers, Real Estate Associate with Axford Real Estate."
+VIDEO_JSONLD = '<script type="application/ld+json">\n' + json.dumps({
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": VIDEO_NAME,
+    "description": VIDEO_DESC,
+    "thumbnailUrl": SITE + VIDEO_POSTER,
+    "contentUrl": SITE + VIDEO_MP4,
+    "uploadDate": "2026-10-06",
+    "duration": "PT32S",
+}, indent=2, ensure_ascii=False) + '\n</script>'
+
 home = head("Devin Desaulniers | Real Estate Associate, Axford Real Estate | Tri-Cities, BC",
-            "Devin Desaulniers, Real Estate Associate with Axford Real Estate, helping buyers and relocating tenants in Coquitlam, Port Coquitlam, Port Moody and Greater Vancouver.", "home")
+            "Devin Desaulniers, Real Estate Associate with Axford Real Estate, helping buyers and relocating tenants in Coquitlam, Port Coquitlam, Port Moody and Greater Vancouver.", "home",
+            extra_head=VIDEO_JSONLD)
 home += f'''
 <section class="hero">
   <div class="container hero-inner">
@@ -35,6 +52,26 @@ home += f'''
     </div>
   </div>
   {MOUNTAINS}
+</section>
+
+<section class="section video-section" id="video">
+  <div class="container">
+    <div class="center narrow">
+      <span class="eyebrow">Relocation video</span>
+      <h2>Moving to Greater Vancouver?</h2>
+      <p class="lead">I help people relocating to Greater Vancouver find a rental, with in-person or virtual showings. Watch the video, then see how my relocation rental service works.</p>
+    </div>
+    <div class="video-frame">
+      <video controls playsinline preload="metadata" poster="{VIDEO_POSTER}" width="1280" height="720" aria-label="Moving to Greater Vancouver: relocation video presented by Devin Desaulniers, Real Estate Associate with Axford Real Estate" title="Moving to Greater Vancouver? Relocation video by Devin Desaulniers">
+        <source src="{VIDEO_MP4}" type="video/mp4">
+        <p>Your browser can't play this video. <a href="{VIDEO_MP4}">Download the relocation video (MP4)</a>.</p>
+      </video>
+    </div>
+    <div class="btn-row" style="justify-content:center;margin-top:28px">
+      <a class="btn btn-primary" href="tenants.html">See the relocation rental service {I["arrow"]}</a>
+      <a class="btn btn-outline" href="{TEL}">Call or text {PHONE}</a>
+    </div>
+  </div>
 </section>
 
 <section class="section" id="services">
