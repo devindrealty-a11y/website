@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh listings/data.json from the CREA REALTOR.ca DDF feed.
+"""Refresh listings/data.json and listings/rentals.json from the CREA DDF feed.
 
 Tries the current DDF Web API (OData) at https://ddfapi.realtor.ca first.
 The destination username and password are the OAuth client id and secret
@@ -7,10 +7,17 @@ The destination username and password are the OAuth client id and secret
 is not reachable, falls back to the legacy RETS feed at https://data.crea.ca.
 
 Reads DDF_USERNAME and DDF_PASSWORD. If either is missing, exits 0 and
-does not change the JSON file. A successful run replaces the file, so
-listings that left the feed disappear. Only active residential for-sale
-listings in Greater Vancouver and the Fraser Valley are kept. Sold fields
-are never written. Photos stay as remote https URLs.
+does not change either JSON file. A successful run replaces both files, so
+listings that left the feed disappear. One pull feeds both files:
+
+- listings/data.json: active residential for-sale listings
+- listings/rentals.json: active residential for-lease or for-rent listings
+
+Commercial listings are excluded from both. A listing is written to only one
+file. Rent is stored as dollars per month (LeaseAmount preferred over
+ListPrice, converted with the lease frequency). Sold and leased-completed
+records are dropped, and sold prices are never written. Photos stay as
+remote https URLs. Geography is Greater Vancouver and the Fraser Valley.
 
 No third-party packages: the GitHub Action runs this with the stdlib.
 """
@@ -18,6 +25,7 @@ from __future__ import annotations
 
 import base64
 import json
+import math
 import os
 import re
 import sys
@@ -31,6 +39,7 @@ from http.cookiejar import CookieJar
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_OUTPUT = os.path.join(ROOT, "listings", "data.json")
+DEFAULT_RENTALS = os.path.join(ROOT, "listings", "rentals.json")
 
 TOKEN_URL = "https://identity.crea.ca/connect/token"
 ODATA_ROOT = "https://ddfapi.realtor.ca/odata/v1"
@@ -62,11 +71,13 @@ AOR_HINTS = ("greater vancouver", "fraser valley", "rebgv", "fvreb", "gvrealtors
 BC_NAMES = {"bc", "b.c", "british columbia"}
 SOLD_WORDS = ("sold", "closed", "expired", "cancel", "withdraw", "terminated", "leased", "rented")
 # Short words use boundaries so "land" does not hide inside another token.
-EXCLUDE_PHRASES = (
+COMMERCIAL_PHRASES = (
     "commercial", "industrial", "business opportunity", "warehouse", "hotel", "motel",
-    "vacant land", "vacant", "for rent", "rental", "lease",
+    "vacant land", "vacant",
 )
+EXCLUDE_PHRASES = COMMERCIAL_PHRASES + ("for rent", "rental", "lease")
 EXCLUDE_WORDS = ("land", "office", "farm", "retail", "parking", "agricultural")
+OPTIONAL_SELECT = ("PropertyType", "LeaseAmountFrequency")
 TYPE_RULES = (
     (("half duplex", "half-duplex", "semi-detached", "semi detached", "duplex", "triplex", "fourplex"), "Half duplex / duplex"),
     (("townhouse", "townhome", "town house", "row house", "rowhouse"), "Townhouse"),
@@ -82,7 +93,8 @@ SELECT_FIELDS = [
     "BuildingAreaTotal", "BuildingAreaUnits", "AboveGradeFinishedArea", "YearBuilt",
     "ListOfficeKey", "ListAgentKey", "ListOfficeName", "ListAgentFullName",
     "ListAOR", "OriginatingSystemName", "ListingURL", "InternetEntireListingDisplayYN",
-    "InternetAddressDisplayYN", "ParkingTotal", "LeaseAmount", "ModificationTimestamp",
+    "InternetAddressDisplayYN", "ParkingTotal", "LeaseAmount", "LeaseAmountFrequency",
+    "ModificationTimestamp",
 ]
 
 
@@ -100,27 +112,44 @@ def main(argv=None):
     if not user or not password:
         print("DDF_USERNAME or DDF_PASSWORD is not set. Skipping listing refresh.")
         return 0
-    output = os.environ.get("DDF_OUTPUT", "").strip() or DEFAULT_OUTPUT
+    output, rentals_output = output_paths()
     try:
-        source, destination_id, records, stats = pull(user, password)
+        source, destination_id, sales, rentals, stats = pull(user, password)
     except FetchError as exc:
         print(f"Listing refresh failed: {exc}", file=sys.stderr)
         return 1
-    kept = dedupe(records)
+    sales = dedupe(sales)
+    rentals = dedupe(rentals)
     pulled = stats.get("pulled", 0)
-    if pulled > 0 and not kept:
+    if pulled > 0 and not sales and not rentals:
         print(
             f"Listing refresh failed: the feed returned {pulled} records but none were "
-            "active residential listings in Greater Vancouver or the Fraser Valley. "
-            "listings/data.json was not changed.",
+            "active residential for-sale listings or for-lease rentals in Greater Vancouver "
+            "or the Fraser Valley. listings/data.json and listings/rentals.json were not changed.",
             file=sys.stderr,
         )
         print("Summary: " + summary(stats), file=sys.stderr)
         return 1
-    write_feed(output, source, destination_id, kept)
-    print(f"Wrote {len(kept)} listings to {os.path.relpath(output, ROOT)} from {source}.")
+    write_feed(output, source, destination_id, sales)
+    write_feed(rentals_output, source, destination_id, rentals)
+    print(
+        f"Wrote {len(sales)} listings to {os.path.relpath(output, ROOT)} and "
+        f"{len(rentals)} rentals to {os.path.relpath(rentals_output, ROOT)} from {source}."
+    )
     print("Summary: " + summary(stats))
     return 0
+
+
+def output_paths():
+    """Sale file, then rentals file. An explicit DDF_OUTPUT keeps rentals beside it."""
+    output = os.environ.get("DDF_OUTPUT", "").strip() or DEFAULT_OUTPUT
+    rentals = os.environ.get("DDF_RENTALS_OUTPUT", "").strip()
+    if not rentals:
+        if os.environ.get("DDF_OUTPUT", "").strip():
+            rentals = os.path.join(os.path.dirname(os.path.abspath(output)), "rentals.json")
+        else:
+            rentals = DEFAULT_RENTALS
+    return output, rentals
 
 
 def summary(stats):
@@ -128,25 +157,25 @@ def summary(stats):
 
 
 def pull(user, password):
-    """Return (source, destination_id, compact records, stats)."""
+    """Return (source, destination_id, sale records, rental records, stats)."""
     stats = Counter()
     try:
         token, destination_id = fetch_token(user, password)
     except ApiUnavailable as exc:
         print(f"DDF Web API is not available ({exc}). Trying the RETS feed.")
-        records, destination_id = fetch_rets(user, password, stats)
-        return "ddf-rets", destination_id, records, stats
+        sales, rentals, destination_id = fetch_rets(user, password, stats)
+        return "ddf-rets", destination_id, sales, rentals, stats
     except FetchError as oauth_error:
         print(f"DDF Web API login failed ({oauth_error}). Trying the RETS feed.")
         try:
-            records, destination_id = fetch_rets(user, password, stats)
+            sales, rentals, destination_id = fetch_rets(user, password, stats)
         except FetchError as rets_error:
             raise FetchError(f"Web API: {oauth_error}. RETS: {rets_error}") from rets_error
-        return "ddf-rets", destination_id, records, stats
+        return "ddf-rets", destination_id, sales, rentals, stats
     print("Signed in to the DDF Web API.")
     offices, members = fetch_lookups(token)
-    records = fetch_odata(token, offices, members, stats)
-    return "ddf-web-api", destination_id, records, stats
+    sales, rentals = fetch_odata(token, offices, members, stats)
+    return "ddf-web-api", destination_id, sales, rentals, stats
 
 
 def fetch_token(user, password):
@@ -218,7 +247,8 @@ def fetch_lookups(token):
 
 
 def fetch_odata(token, offices, members, stats):
-    kept = []
+    sales = []
+    rentals = []
     select = list(SELECT_FIELDS)
     expand = True
     status_filter = True
@@ -231,14 +261,14 @@ def fetch_odata(token, offices, members, stats):
         try:
             status, payload = odata_request(token, url)
         except FetchError:
-            if not started and (expand or status_filter or "PropertyType" in select):
+            if not started and can_relax(expand, status_filter, select):
                 expand, status_filter, select = relax_query(expand, status_filter, select)
                 url = None
                 continue
             raise
         if status in (401, 403):
             raise FetchError(f"Property query returned {status}. The access token was not accepted.")
-        if status == 400 and not started and (expand or status_filter or "PropertyType" in select):
+        if status == 400 and not started and can_relax(expand, status_filter, select):
             expand, status_filter, select = relax_query(expand, status_filter, select)
             url = None
             continue
@@ -253,9 +283,11 @@ def fetch_odata(token, offices, members, stats):
         pages += 1
         for rec in rows:
             stats["pulled"] += 1
-            item = from_odata(rec, offices, members, stats)
-            if item:
-                kept.append(item)
+            channel, item = from_odata(rec, offices, members, stats, intent=None)
+            if item and channel == "sale":
+                sales.append(item)
+            elif item and channel == "rent":
+                rentals.append(item)
         nxt = data.get("@odata.nextLink") or data.get("odata.nextLink")
         if nxt:
             url = nxt
@@ -264,8 +296,14 @@ def fetch_odata(token, offices, members, stats):
         else:
             raise FetchError("Property query page was full but did not include @odata.nextLink, so the pull is incomplete.")
         if pages >= MAX_PAGES:
-            raise FetchError(f"Stopped after {MAX_PAGES} pages so a partial feed would not replace listings/data.json.")
-    return kept
+            raise FetchError(f"Stopped after {MAX_PAGES} pages so a partial feed would not replace the listing files.")
+    return sales, rentals
+
+
+def can_relax(expand, status_filter, select):
+    if expand or status_filter:
+        return True
+    return any(field in select for field in OPTIONAL_SELECT)
 
 
 def relax_query(expand, status_filter, select):
@@ -275,8 +313,11 @@ def relax_query(expand, status_filter, select):
     if status_filter:
         print("Property query rejected the status filter; filtering after download.")
         return expand, False, select
-    print("Property query rejected PropertyType; continuing without that field.")
-    return expand, status_filter, [field for field in select if field != "PropertyType"]
+    for field in OPTIONAL_SELECT:
+        if field in select:
+            print(f"Property query rejected {field}; continuing without that field.")
+            return expand, status_filter, [item for item in select if item != field]
+    return expand, status_filter, select
 
 
 def property_url(select, expand, status_filter, skip):
@@ -363,7 +404,8 @@ def fetch_rets(user, password, stats):
     destination_id = rets_value(text, "Broker") or rets_value(text, "User")
     if destination_id and "," in destination_id:
         destination_id = destination_id.split(",")[0].strip()
-    kept = []
+    sales = []
+    rentals = []
     offset = 1
     pages = 0
     fmt = "STANDARD-XML-Encoded"
@@ -395,20 +437,22 @@ def fetch_rets(user, password, stats):
             pages += 1
             for rec in details:
                 stats["pulled"] += 1
-                item = from_rets(rec, stats)
-                if item:
-                    kept.append(item)
+                channel, item = from_rets(rec, stats, intent=None)
+                if item and channel == "sale":
+                    sales.append(item)
+                elif item and channel == "rent":
+                    rentals.append(item)
             if code == "20201" or len(details) < PAGE_SIZE:
                 break
             offset += len(details)
             if pages >= MAX_PAGES:
-                raise FetchError(f"Stopped after {MAX_PAGES} RETS pages so a partial feed would not replace listings/data.json.")
+                raise FetchError(f"Stopped after {MAX_PAGES} RETS pages so a partial feed would not replace the listing files.")
     finally:
         try:
             open_url(logout)
         except FetchError:
             pass
-    return kept, destination_id or None
+    return sales, rentals, destination_id or None
 
 
 def capture_session(headers, session_id):
@@ -522,29 +566,62 @@ def elem_text(el):
     return "".join(el.itertext()).strip()
 
 
-def from_odata(rec, offices, members, stats):
+def from_odata(rec, offices, members, stats, intent="sale"):
+    """Normalize one OData property.
+
+    intent "sale" or "rent" returns that record or None.
+    intent None returns (channel, record) after a single pass.
+    """
+    channel, item = build_odata(rec, offices, members, stats)
+    return finish_intent(channel, item, intent, stats)
+
+
+def from_rets(rec, stats, intent="sale"):
+    """Normalize one RETS property. Same intent contract as from_odata."""
+    channel, item = build_rets(rec, stats)
+    return finish_intent(channel, item, intent, stats)
+
+
+def finish_intent(channel, item, intent, stats):
+    if intent is None:
+        return channel, item
+    if channel != intent:
+        if item:
+            stats["kept"] = max(0, stats["kept"] - 1)
+        return None
+    return item
+
+
+def build_odata(rec, offices, members, stats):
     if flag_false(rec.get("InternetEntireListingDisplayYN")):
         stats["opted_out"] += 1
-        return None
+        return None, None
     status = first(rec, "StandardStatus", "MlsStatus", "ListingStatus")
     if not is_active(status):
         stats["not_active"] += 1
-        return None
+        return None, None
     city = first(rec, "City")
     province = first(rec, "StateOrProvince", "Province")
     aor = " ".join(p for p in (first(rec, "ListAOR"), first(rec, "OriginatingSystemName")) if p)
     if not in_target_area(city, province, aor):
         stats["outside_area"] += 1
-        return None
+        return None, None
     type_parts = [textify(rec.get(key)) for key in ("PropertyType", "PropertySubType", "StructureType")]
-    transaction = textify(rec.get("LeaseAmount"))
-    # A lease amount with no list price is a rental. A list price keeps it a sale.
-    if rec.get("LeaseAmount") not in (None, "", 0, "0") and not rec.get("ListPrice"):
-        stats["not_residential"] += 1
-        return None
-    label = residential_label(type_parts, "", stats)
+    transaction = textify(rec.get("TransactionType"))
+    frequency = textify(rec.get("LeaseAmountFrequency"))
+    channel = listing_channel(transaction, type_parts, rec.get("LeaseAmount"), rec.get("ListPrice"), frequency)
+    if channel == "rent":
+        label = rental_label(type_parts, transaction, stats)
+        amount, freq = rent_source(rec.get("LeaseAmount"), rec.get("ListPrice"), frequency)
+        price = monthly_rent(amount, freq)
+        if label and price is None:
+            stats["rent_unusable"] += 1
+            return None, None
+    else:
+        label = residential_label(type_parts, transaction, stats)
+        price = parse_number(rec.get("ListPrice"))
     if not label:
-        return None
+        return None, None
     brokerage = first(rec, "ListOfficeName", "ListingOfficeName", "OfficeName")
     office = rec.get("ListOffice") or rec.get("Office")
     if not brokerage and isinstance(office, dict):
@@ -560,10 +637,10 @@ def from_odata(rec, offices, members, stats):
     photos = photo_urls(rec.get("Media"))
     show_address = not flag_false(rec.get("InternetAddressDisplayYN"))
     listing_id = first(rec, "ListingKey", "ListingId")
-    return compact(
+    item = compact(
         listing_id=listing_id,
         mls=first(rec, "ListingId", "ListingKey"),
-        price=parse_number(rec.get("ListPrice")),
+        price=price,
         address=street_line(rec) if show_address else "",
         city=city,
         area=first(rec, "CityRegion", "SubdivisionName"),
@@ -583,15 +660,15 @@ def from_odata(rec, offices, members, stats):
         updated=first(rec, "ModificationTimestamp"),
         analytics_id=listing_id if digits(listing_id) else "",
         stats=stats,
-        transaction_note=transaction,
     )
+    return channel, item
 
 
-def from_rets(rec, stats):
+def build_rets(rec, stats):
     status = first(rec, "StandardStatus", "MlsStatus", "ListingStatus", "Status")
     if not is_active(status):
         stats["not_active"] += 1
-        return None
+        return None, None
     address = rec.get("Address") if isinstance(rec.get("Address"), dict) else {}
     building = rec.get("Building") if isinstance(rec.get("Building"), dict) else {}
     city = first(address, "City") or first(rec, "City")
@@ -599,19 +676,29 @@ def from_rets(rec, stats):
     aor = first(rec, "Board", "ListAOR", "OriginatingSystemName")
     if not in_target_area(city, province, aor):
         stats["outside_area"] += 1
-        return None
+        return None, None
     transaction = first(rec, "TransactionType")
     type_parts = [
         first(rec, "PropertyType", "PropertySubType"),
         first(building, "Type", "ConstructionStyleAttachment"),
         first(rec, "StructureType", "BuildingType"),
     ]
-    if is_lease(transaction) and "sale" not in transaction.lower():
-        stats["not_residential"] += 1
-        return None
-    label = residential_label(type_parts, transaction, stats)
+    lease_amount = first(rec, "Lease", "LeaseAmount")
+    list_price = first(rec, "Price", "ListPrice")
+    frequency = first(rec, "LeasePerTime", "PricePerTime", "LeaseAmountFrequency", "LeaseTermRemainingFreq")
+    channel = listing_channel(transaction, type_parts, lease_amount, list_price, frequency)
+    if channel == "rent":
+        label = rental_label(type_parts, transaction, stats)
+        amount, freq = rent_source(lease_amount, list_price, frequency)
+        price = monthly_rent(amount, freq)
+        if label and price is None:
+            stats["rent_unusable"] += 1
+            return None, None
+    else:
+        label = residential_label(type_parts, transaction, stats)
+        price = parse_number(list_price)
     if not label:
-        return None
+        return None, None
     agents = rec.get("Agents") or []
     agent_name = ""
     brokerage = ""
@@ -623,7 +710,6 @@ def from_rets(rec, stats):
     photos = []
     if rec.get("Photos"):
         ordered = sorted(rec["Photos"], key=lambda p: parse_int(p.get("SequenceID")) or 0)
-        photos = []
         for photo in ordered:
             url = photo.get("LargePhotoURL") or photo.get("PhotoURL") or ""
             if str(url).startswith("https://") and url not in photos:
@@ -639,10 +725,10 @@ def from_rets(rec, stats):
     })
     street = street.replace("|", ", ")
     listing_id = first(rec, "_id", "ListingID", "ListingId", "ListingKey")
-    return compact(
+    item = compact(
         listing_id=listing_id,
         mls=first(rec, "ListingID", "ListingId", "ListingKey") or listing_id,
-        price=parse_number(first(rec, "Price", "ListPrice")),
+        price=price,
         address=street,
         city=city,
         area=first(address, "Neighbourhood", "CommunityName", "Subdivision") or first(rec, "CityRegion"),
@@ -661,8 +747,81 @@ def from_rets(rec, stats):
         updated=first(rec, "LastUpdated", "ModificationTimestamp"),
         analytics_id=listing_id if digits(listing_id) else "",
         stats=stats,
-        transaction_note=transaction,
     )
+    return channel, item
+
+
+def listing_channel(transaction, type_parts, lease_amount, list_price, frequency):
+    """Pick sale or rent. A listing is never both.
+
+    Explicit sale language with no lease language stays a sale, even if a
+    lease amount is also filled in. Lease/rent language, a lease amount with
+    no list price, or a lease amount plus a frequency goes to rentals.
+    """
+    trans = textify(transaction).lower()
+    blob = " ".join(p for p in (textify(p) for p in type_parts) if p).lower()
+    lease_words = is_lease(trans) or is_lease(blob)
+    sale_words = "sale" in trans
+    has_lease = positive_amount(lease_amount)
+    has_list = positive_amount(list_price)
+    has_freq = bool(textify(frequency))
+    if sale_words and not lease_words:
+        return "sale"
+    if lease_words:
+        return "rent"
+    if has_lease and (not has_list or has_freq):
+        return "rent"
+    return "sale"
+
+
+def rent_source(lease_amount, list_price, frequency):
+    """Prefer LeaseAmount. Fall back to ListPrice/Price when the row is a lease."""
+    if positive_amount(lease_amount):
+        return lease_amount, frequency
+    return list_price, frequency
+
+
+def monthly_rent(amount, frequency):
+    """Dollars per month. Blank frequency is treated as monthly.
+
+    RESO-style frequencies:
+    Weekly * 52/12, Bi-Weekly * 26/12, Semi-Monthly * 2,
+    Bi-Monthly (every two months) / 2, Annually / 12.
+    One Time and any unrecognized frequency return None.
+    """
+    number = parse_number(amount)
+    if number is None or number <= 0:
+        return None
+    freq = re.sub(r"[^a-z]", "", textify(frequency).lower())
+    factors = {
+        "": (1, 1),
+        "monthly": (1, 1),
+        "month": (1, 1),
+        "permonth": (1, 1),
+        "weekly": (52, 12),
+        "week": (52, 12),
+        "perweek": (52, 12),
+        "biweekly": (26, 12),
+        "semimonthly": (2, 1),
+        "bimonthly": (1, 2),
+        "annually": (1, 12),
+        "annual": (1, 12),
+        "yearly": (1, 12),
+        "year": (1, 12),
+        "peryear": (1, 12),
+        "daily": (365, 12),
+        "onetime": None,
+    }
+    if freq not in factors or factors[freq] is None:
+        return None
+    num, den = factors[freq]
+    monthly = number * num / den
+    return int(math.floor(monthly + 0.5))
+
+
+def positive_amount(value):
+    number = parse_number(value)
+    return number is not None and number > 0
 
 
 def compact(listing_id, mls, price, address, city, area, postal, beds, baths, type_label,
@@ -724,6 +883,27 @@ def residential_label(parts, transaction, stats):
         return None
     stats["type_unknown"] += 1
     return "Other residential"
+
+
+def rental_label(parts, transaction, stats):
+    """Residential for-lease label. Commercial types are excluded; lease words are not."""
+    texts = [p for p in (textify(p) for p in parts) if p]
+    blob = " ".join(texts).lower()
+    trans = textify(transaction).lower()
+    hay = f"{blob} {trans}".strip()
+    if any(phrase in hay for phrase in COMMERCIAL_PHRASES):
+        stats["not_residential"] += 1
+        return None
+    if any(has_word(hay, word) for word in EXCLUDE_WORDS):
+        stats["not_residential"] += 1
+        return None
+    for keys, label in TYPE_RULES:
+        if any(key in blob for key in keys):
+            return label
+    if "residential" in blob or is_lease(hay) or not blob:
+        return "Other residential"
+    stats["not_residential"] += 1
+    return None
 
 
 def is_lease(text):

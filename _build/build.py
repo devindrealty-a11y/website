@@ -739,17 +739,17 @@ redirect = f"""<!doctype html>
 </html>
 """
 
-for fn, html in [("index.html",home),("buyers.html",buyers),("tenants.html",tenants),(GV_URL,gv),("relocating-to-coquitlam.html",redirect),("listings.html",listings_page.render())]:
+for fn, html in [("index.html",home),("buyers.html",buyers),("tenants.html",tenants),(GV_URL,gv),("relocating-to-coquitlam.html",redirect),("listings.html",listings_page.render("sale")),("rentals.html",listings_page.render("rent"))]:
     open(os.path.join(OUT,fn),"w").write(html)
 
 # Blog pages, RSS feed and sitemap (sitemap lists the static pages + blog index + every post).
-# listings.html stays out of the sitemap until LISTINGS_LIVE is flipped on.
+# listings.html and rentals.html stay out of the sitemap until LISTINGS_LIVE is flipped on.
 blog.write_blog(POSTS)
 STATIC_PAGES = ["", "tenants.html", "buyers.html", GV_URL]
 sitemap_note = ""
 if LISTINGS_LIVE:
-    STATIC_PAGES.append("listings.html")
+    STATIC_PAGES.extend(["listings.html", "rentals.html"])
 else:
-    sitemap_note = "listings.html is hidden until the DDF feed is switched on (LISTINGS_LIVE in _build/partials.py) and is intentionally omitted."
+    sitemap_note = "listings.html and rentals.html are hidden until the DDF secrets are set and the feed is switched on (LISTINGS_LIVE in _build/partials.py) and are intentionally omitted."
 open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS, sitemap_note))
 print("built")

@@ -1,12 +1,14 @@
-# Refresh active Greater Vancouver and Fraser Valley residential listings from
-# the CREA REALTOR.ca DDF feed. Every 12 hours, and whenever someone runs it
-# from the Actions tab. DDF rules require a refresh at least every 24 hours;
-# this schedule is inside that window even if one run is delayed.
+# Refresh active Greater Vancouver and Fraser Valley residential listings
+# (for sale and for lease) from the CREA REALTOR.ca DDF feed. Every 12 hours,
+# and whenever someone runs it from the Actions tab. DDF rules require a
+# refresh at least every 24 hours; this schedule is inside that window even
+# if one run is delayed.
 #
 # Secrets (repository Settings → Secrets and variables → Actions):
 #   DDF_USERNAME  destination username (Web API client id)
 #   DDF_PASSWORD  destination password (Web API client secret)
-# If either secret is missing, the script exits 0 and leaves listings/data.json alone.
+# If either secret is missing, the script exits 0 and leaves
+# listings/data.json and listings/rentals.json alone.
 name: Refresh DDF listings
 
 on:
@@ -40,14 +42,14 @@ jobs:
           DDF_PASSWORD: ${{ secrets.DDF_PASSWORD }}
         run: python3 scripts/fetch_ddf_listings.py
 
-      - name: Commit listings/data.json when it changed
+      - name: Commit listing files when they changed
         run: |
-          if git diff --quiet -- listings/data.json; then
-            echo "No change in listings/data.json."
+          if git diff --quiet -- listings/data.json listings/rentals.json; then
+            echo "No change in listing files."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add listings/data.json
-          git commit -m "Refresh active listings from the DDF feed"
+          git add listings/data.json listings/rentals.json
+          git commit -m "Refresh active listings and rentals from the DDF feed"
           git push

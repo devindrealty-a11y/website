@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Homes for sale in Greater Vancouver and the Fraser Valley | Devin Desaulniers, Axford Real Estate</title>
-<meta name="description" content="Search active residential listings in Greater Vancouver and the Fraser Valley with Devin Desaulniers, Real Estate Associate at Axford Real Estate.">
+<title>Homes for rent in Greater Vancouver and the Fraser Valley | Devin Desaulniers, Axford Real Estate</title>
+<meta name="description" content="Search active residential rentals in Greater Vancouver and the Fraser Valley with Devin Desaulniers, Real Estate Associate at Axford Real Estate.">
 <meta name="google-site-verification" content="nEyIbyduNXFpblfvqE7C0GnUMa9Z_zaJYWtKXlZIfOc" />
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Homes for sale in Greater Vancouver and the Fraser Valley | Devin Desaulniers, Axford Real Estate">
-<meta property="og:description" content="Search active residential listings in Greater Vancouver and the Fraser Valley with Devin Desaulniers, Real Estate Associate at Axford Real Estate.">
+<meta property="og:title" content="Homes for rent in Greater Vancouver and the Fraser Valley | Devin Desaulniers, Axford Real Estate">
+<meta property="og:description" content="Search active residential rentals in Greater Vancouver and the Fraser Valley with Devin Desaulniers, Real Estate Associate at Axford Real Estate.">
 <meta property="og:image" content="https://devindesaulniers.ca/assets/img/og-default.png">
-<meta property="og:url" content="https://devindesaulniers.ca/listings.html">
-<link rel="canonical" href="https://devindesaulniers.ca/listings.html">
+<meta property="og:url" content="https://devindesaulniers.ca/rentals.html">
+<link rel="canonical" href="https://devindesaulniers.ca/rentals.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,8 +98,8 @@
 <section class="page-hero">
   <div class="container">
     <span class="eyebrow">Axford Real Estate</span>
-    <h1>Homes for sale</h1>
-    <p class="lead">Active residential listings in Greater Vancouver and the Fraser Valley, from the REALTOR.ca DDF® feed. This search is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</p>
+    <h1>Homes for rent</h1>
+    <p class="lead">Active residential rentals in Greater Vancouver and the Fraser Valley, from the REALTOR.ca DDF® feed. Rent is shown per month. This search is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</p>
     <div class="ls-axford">
       <span class="ls-axford-logo"><img src="assets/img/axford-logo.png" alt="Axford Real Estate" width="180" height="38"></span>
       <p><strong>Axford Real Estate</strong><br>Devin Desaulniers, Real Estate Associate<br>2326 Clarke St, Port Moody, BC V3H 1Y8<br><a href="tel:+16048091032">604-809-1032</a> · <a href="mailto:devin@axfordrealestate.ca">devin@axfordrealestate.ca</a></p>
@@ -118,17 +118,17 @@
     <div class="container">
       <form class="ls-filters" id="ls-filters" role="search">
         <div class="field ls-grow"><label for="ls-q">City or area</label><input id="ls-q" name="q" type="search" placeholder="Coquitlam, Surrey, Langley…" autocomplete="off"></div>
-        <div class="field"><label for="ls-min">Min price</label><input id="ls-min" name="min" type="number" inputmode="numeric" min="0" step="1000" placeholder="Any"></div>
-        <div class="field"><label for="ls-max">Max price</label><input id="ls-max" name="max" type="number" inputmode="numeric" min="0" step="1000" placeholder="Any"></div>
+        <div class="field"><label for="ls-min">Min rent</label><input id="ls-min" name="min" type="number" inputmode="numeric" min="0" step="50" placeholder="Any"></div>
+        <div class="field"><label for="ls-max">Max rent</label><input id="ls-max" name="max" type="number" inputmode="numeric" min="0" step="50" placeholder="Any"></div>
         <div class="field"><label for="ls-beds">Bedrooms</label><select id="ls-beds" name="beds"><option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option><option value="5">5+</option></select></div>
         <div class="field"><label for="ls-baths">Bathrooms</label><select id="ls-baths" name="baths"><option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
         <div class="field"><label for="ls-type">Property type</label><select id="ls-type" name="type"><option value="">Any</option><option>Detached house</option><option>Condo / apartment</option><option>Townhouse</option><option>Half duplex / duplex</option><option>Other residential</option></select></div>
-        <div class="field"><label for="ls-sort">Sort</label><select id="ls-sort" name="sort"><option value="updated">Recently updated</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="city">City A–Z</option></select></div>
+        <div class="field"><label for="ls-sort">Sort</label><select id="ls-sort" name="sort"><option value="updated">Recently updated</option><option value="price-asc">Rent: low to high</option><option value="price-desc">Rent: high to low</option><option value="city">City A–Z</option></select></div>
         <div class="ls-filter-actions"><button type="submit" class="btn btn-primary">Search</button><button type="button" class="btn btn-outline" id="ls-clear">Clear</button></div>
       </form>
       <p class="ls-count" id="ls-count" role="status" aria-live="polite">Loading listings…</p>
       <div class="ls-grid" id="ls-results"></div>
-      <div class="ls-more-wrap"><button type="button" class="btn btn-outline" id="ls-more" hidden>Show more homes</button></div>
+      <div class="ls-more-wrap"><button type="button" class="btn btn-outline" id="ls-more" hidden>Show more rentals</button></div>
     </div>
   </section>
 </div>
@@ -136,7 +136,7 @@
 <div id="ls-detail" hidden>
   <section class="section" style="padding-top:28px">
     <div class="container">
-      <p class="ls-back"><a href="listings.html" id="ls-back">← Back to search</a></p>
+      <p class="ls-back"><a href="rentals.html" id="ls-back">← Back to search</a></p>
       <div class="ls-detail-grid">
         <div>
           <div class="ls-frame" id="ls-photo"></div>
@@ -160,12 +160,12 @@
       <div class="ls-remarks" id="ls-remarks"></div>
 
       <div class="ls-inquiry">
-        <h2>Ask Devin about this home</h2>
+        <h2>Ask Devin about this rental</h2>
         <p class="lead">Send a note to Devin Desaulniers at Axford Real Estate. This message comes to Devin. It is not sent to the listing brokerage.</p>
-        <form class="form-card" data-form-key="listingInquiry" action="#" method="POST">
-          <input type="hidden" name="_subject" value="New listing inquiry">
+        <form class="form-card" data-form-key="rentalInquiry" action="#" method="POST">
+          <input type="hidden" name="_subject" value="New rental inquiry">
           <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="form" value="Listing inquiry">
+          <input type="hidden" name="form" value="Rental inquiry">
           <input type="hidden" name="listing_id" id="inq-id">
           <input type="hidden" name="listing_mls" id="inq-mls">
           <input type="hidden" name="listing_address" id="inq-address">
@@ -175,9 +175,9 @@
             <div class="field"><label for="inq-name">Full name <span class="req">*</span></label><input id="inq-name" name="name" autocomplete="name" required></div>
             <div class="field"><label for="inq-email">Email <span class="req">*</span></label><input id="inq-email" name="email" type="email" autocomplete="email" required></div>
             <div class="field"><label for="inq-phone">Phone</label><input id="inq-phone" name="phone" type="tel" autocomplete="tel"></div>
-            <div class="field full"><label for="inq-notes">Message</label><textarea id="inq-notes" name="message" placeholder="I would like to know more about this home."></textarea></div>
+            <div class="field full"><label for="inq-notes">Message</label><textarea id="inq-notes" name="message" placeholder="I would like to know more about this rental."></textarea></div>
             <div class="field full">
-              <div class="checks"><label style="background:none;border:0;padding:0;align-items:flex-start"><input type="checkbox" name="consent" value="yes" required style="margin-top:4px"> <span>I agree to be contacted by Devin Desaulniers (Axford Real Estate) by email or phone about this home. I can opt out at any time. <span class="req">*</span></span></label></div>
+              <div class="checks"><label style="background:none;border:0;padding:0;align-items:flex-start"><input type="checkbox" name="consent" value="yes" required style="margin-top:4px"> <span>I agree to be contacted by Devin Desaulniers (Axford Real Estate) by email or phone about this rental. I can opt out at any time. <span class="req">*</span></span></label></div>
             </div>
             <div class="full">
               <button type="submit" class="btn btn-primary">Send inquiry</button>
@@ -197,10 +197,10 @@
     <p>Trademarks are owned or controlled by The Canadian Real Estate Association (CREA) and identify real estate professionals who are members of CREA (REALTOR®) and/or the quality of services they provide (MLS®).</p>
     <p>The listing information is deemed reliable but is not guaranteed. The information contained on this site is based in whole or in part on information that is provided by members of The Canadian Real Estate Association (CREA), who are responsible for its accuracy. REALTOR.ca Canada Inc. reproduces and distributes this information as a service for its members and neither CREA nor REALTOR.ca Canada Inc. assumes responsibility for its accuracy.</p>
     <p>The listing content on this website is protected by copyright and other laws, and is intended solely for the private, non-commercial use by individuals. Any other reproduction, distribution or use of the content, in whole or in part, is specifically forbidden. The prohibited uses include commercial use, “screen scraping”, “database scraping”, and any other activity intended to collect, store, reorganize or manipulate data on the pages produced by or displayed on this website.</p>
-    <p>Each listing shows the listing brokerage and a “Powered by REALTOR.ca” mark that links to that listing on REALTOR.ca. Sold listings are not shown. Opening a listing sends a view event to the CREA DDF® Analytics Web Service. By using this search you accept these terms.</p>
+    <p>Each listing shows the listing brokerage and a “Powered by REALTOR.ca” mark that links to that listing on REALTOR.ca. Leased, rented, and sold listings are not shown. Opening a listing sends a view event to the CREA DDF® Analytics Web Service. By using this search you accept these terms.</p>
   </div>
 </section>
-<script src="assets/js/listings.js" data-mode="sale" data-feed="listings/data.json" data-sample="_fixtures/listings-sample.json"></script>
+<script src="assets/js/listings.js" data-mode="rent" data-feed="listings/rentals.json" data-sample="_fixtures/rentals-sample.json"></script>
 <noscript><div class="container"><p>This search needs JavaScript to filter the listing file in your browser.</p></div></noscript>
 </main>
 <footer class="site-footer">

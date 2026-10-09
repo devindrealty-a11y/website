@@ -531,7 +531,7 @@ picture.bw-photo img{width:100%;height:auto;border-radius:12px;box-shadow:var(--
 @media (min-width:640px){.author-brokerage{position:absolute;top:22px;right:24px;margin:0}}
 @media (max-width:479px){.author-box{grid-template-columns:64px 1fr;padding:18px}.author-box picture img{width:64px;height:64px}}
 
-/* ===== Homes for sale (listings.html, DDF feed) ===== */
+/* ===== Homes for sale and for rent (listings.html, rentals.html, DDF feed) ===== */
 .ls-axford{display:flex;gap:16px;align-items:center;margin-top:22px;background:#fff;color:var(--ink);border-radius:16px;padding:14px 16px;max-width:760px;box-shadow:0 10px 28px rgba(0,0,0,.16)}
 .ls-axford-logo{flex:0 0 auto;background:#fff;border-radius:10px}
 .ls-axford img{height:40px;width:auto}

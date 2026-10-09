@@ -116,15 +116,15 @@ domain earns no search value of its own.
   build.py calls it for posts missing an image). Used on the post, og/twitter image, BlogPosting JSON-LD and card thumbnails.
 - Each post page ends with a call to action, an author box and the disclaimer. Topic and SEO rules for the daily routine: `/workspace/blog-brief/seo-brief.md`.
 
-## For-sale listings search (DDF) — hidden until the feed is on
+## Listings search (DDF) — for sale and for rent, hidden until the secrets are set
 
-`listings.html` is a client-side search of active residential for-sale listings in Greater Vancouver and the Fraser Valley (the National Shared Pool). It is built with the rest of the site (`cd _build && python3 build.py`). While `LISTINGS_LIVE` is `False` in `_build/partials.py`:
+`listings.html` searches active residential for-sale listings. `rentals.html` searches active residential for-lease rentals. Both cover Greater Vancouver and the Fraser Valley (the National Shared Pool) and are built with the rest of the site (`cd _build && python3 build.py`). While `LISTINGS_LIVE` is `False` in `_build/partials.py`:
 
-- the page has `<meta name="robots" content="noindex, nofollow">`
-- it is not in the header, the footer, or `sitemap.xml`
-- `listings/data.json` is an empty feed, so the public page does not show homes
+- both pages have `<meta name="robots" content="noindex, nofollow">`
+- neither page is in the header, the footer, or `sitemap.xml`
+- `listings/data.json` and `listings/rentals.json` are empty feeds, so the public pages do not show homes
 
-Do not add a `.nojekyll` file. GitHub Pages runs Jekyll, which does not publish `_fixtures/`. That is what keeps the sample file off the live site.
+The static site cannot see GitHub Actions secrets at build time, so the flag stays `False` until the secrets exist and the switch-on steps below are followed. Do not add a `.nojekyll` file. GitHub Pages runs Jekyll, which does not publish `_fixtures/`. That is what keeps the sample files off the live site.
 
 ### Secrets to add
 
@@ -135,20 +135,23 @@ Repository **Settings → Secrets and variables → Actions**:
 | `DDF_USERNAME` | DDF destination username. On the Web API this is the OAuth client id. |
 | `DDF_PASSWORD` | DDF destination password. On the Web API this is the OAuth client secret. |
 
-No other secret names are read. The workflow also needs permission to push: **Settings → Actions → General → Workflow permissions → Read and write**.
+No other secret names are read. The same pair feeds both JSON files. The workflow also needs permission to push: **Settings → Actions → General → Workflow permissions → Read and write**.
 
 ### What the refresh does
 
 `.github/workflows/ddf-listings.yml` runs every 12 hours (`0 */12 * * *` UTC) and from **Actions → Refresh DDF listings → Run workflow**. DDF rules require a refresh at least every 24 hours; this schedule stays inside that even if one run is delayed.
 
-`scripts/fetch_ddf_listings.py`:
+`scripts/fetch_ddf_listings.py` does one pull and writes both files:
 
-1. If `DDF_USERNAME` or `DDF_PASSWORD` is missing, it prints a skip message and exits 0. It does not change `listings/data.json` and it does not fail the job.
+1. If `DDF_USERNAME` or `DDF_PASSWORD` is missing, it prints a skip message and exits 0. It does not change `listings/data.json` or `listings/rentals.json`, and it does not fail the job.
 2. It signs in to the DDF Web API (OData) at `https://ddfapi.realtor.ca/odata/v1`. The token request is `POST https://identity.crea.ca/connect/token` with `grant_type=client_credentials` and `scope=DDFApi_Read`.
 3. If that API cannot be reached, or the token request is rejected, it falls back to the RETS feed at `https://data.crea.ca` (digest login, session cookie, Standard-XML search).
-4. It keeps active residential for-sale listings whose city or board is in Greater Vancouver or the Fraser Valley. Sold, leased, commercial, and out-of-area records are dropped. Sold prices are never stored.
-5. Photos stay remote `https` URLs. The file is replaced in full, so a listing that leaves the feed disappears.
-6. If the feed returns records but none match, the script exits 1 and does not wipe `listings/data.json`.
+4. For-sale rows go to `listings/data.json`. Residential for-lease or for-rent rows go to `listings/rentals.json`. A listing is written to only one file. Commercial rows are dropped from both. Sold, leased-completed, and out-of-area records are dropped. Sold prices are never stored.
+5. Rent is stored as dollars per month. `LeaseAmount` is preferred over `ListPrice` / RETS `Price`. `LeaseAmountFrequency` (or RETS `PricePerTime` / `LeasePerTime`) converts the figure: weekly × 52/12, bi-weekly × 26/12, semi-monthly × 2, bi-monthly (every two months) ÷ 2, annually ÷ 12. A blank frequency is treated as monthly. One-time and unrecognized frequencies are left out rather than shown as a monthly rent.
+6. Photos stay remote `https` URLs. Each file is replaced in full, so a listing that leaves the feed disappears from that file. If one side has matches and the other does not, the empty side is still replaced.
+7. If the feed returns records but none are kept on either side, the script exits 1 and does not wipe either file.
+
+Opening a real listing (not the sample file) logs a view to the CREA DDF® Analytics Web Service at `https://analytics.crea.ca/LogEvents.svc/LogEvents` with `EventType=view`, the numeric listing id, the destination id from the feed login, and the page URL. That call is required by the June 2026 DDF rules. It runs on both pages and is skipped when the sample file is loaded or the destination id is missing.
 
 Check the logic without credentials: `python3 scripts/test_ddf_listings.py`.
 
@@ -158,17 +161,17 @@ Check the logic without credentials: `python3 scripts/test_ddf_listings.py`.
 python3 -m http.server 8765
 ```
 
-Open `http://127.0.0.1:8765/listings.html?preview=1`.
+Open `http://127.0.0.1:8765/listings.html?preview=1` and `http://127.0.0.1:8765/rentals.html?preview=1`.
 
-`_fixtures/listings-sample.json` is fictional (sample ids, sample brokerages, placeholder photos). On localhost the page loads it unless the URL has `?live=1`. On devindesaulniers.ca the page loads `listings/data.json` only. `?preview=1` on the public site asks for `_fixtures/…`, which Jekyll does not publish, so the sample never appears there.
+`_fixtures/listings-sample.json` and `_fixtures/rentals-sample.json` are fictional (sample ids, sample brokerages, placeholder photos). On localhost each page loads its sample unless the URL has `?live=1`. On devindesaulniers.ca the pages load `listings/data.json` and `listings/rentals.json` only. `?preview=1` on the public site asks for `_fixtures/…`, which Jekyll does not publish, so the samples never appear there.
 
 ### Switch on
 
 1. Add `DDF_USERNAME` and `DDF_PASSWORD`.
 2. Run **Refresh DDF listings** from the Actions tab.
-3. Confirm `listings/data.json` has `"sample": false`, a recent `updated` time, and real listings. Each one should have a listing brokerage and a `realtorUrl`.
+3. Confirm `listings/data.json` and `listings/rentals.json` have `"sample": false`, a recent `updated` time, and real rows. Each one should have a listing brokerage and a `realtorUrl`. Rental `price` values should be monthly dollars.
 4. In `_build/partials.py`, set `LISTINGS_LIVE = True`.
 5. `cd _build && python3 build.py`
-6. Commit and push. The rebuild adds the page to the nav, the footer, and `sitemap.xml`, and removes the noindex tag.
+6. Commit and push. The rebuild adds both pages to the nav, the footer, and `sitemap.xml`, and removes the noindex tags.
 
-The detail-page inquiry form posts to FormSubmit (`listingInquiry` in `assets/js/config.js`), the same way as the other forms. It has not been test-submitted. The first real submission still needs Devin to activate FormSubmit.
+The detail-page inquiry forms post to FormSubmit (`listingInquiry` and `rentalInquiry` in `assets/js/config.js`), the same way as the other forms. They have not been test-submitted. The first real submission still needs Devin to activate FormSubmit.

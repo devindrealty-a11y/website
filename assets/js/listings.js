@@ -1,6 +1,10 @@
 (function () {
   var PAGE = 24;
   var BADGE_SRC = "https://www.realtor.ca/images/en-ca/powered_by_realtor.svg";
+  var tag = document.currentScript || document.querySelector("script[data-feed]");
+  var mode = (tag && tag.getAttribute("data-mode")) || "sale";
+  var feedPath = (tag && tag.getAttribute("data-feed")) || "listings/data.json";
+  var samplePath = (tag && tag.getAttribute("data-sample")) || "_fixtures/listings-sample.json";
   var state = { listings: [], byId: {}, sample: false, destinationId: null, shown: PAGE, photo: 0, current: null };
   var baseTitle = document.title;
   var searchEl = document.getElementById("ls-search");
@@ -16,7 +20,7 @@
     var params = new URLSearchParams(location.search);
     var local = location.hostname === "localhost" || location.hostname === "127.0.0.1" || location.hostname === "::1";
     state.sample = params.get("preview") === "1" || (local && params.get("live") !== "1");
-    return state.sample ? "_fixtures/listings-sample.json" : "listings/data.json";
+    return state.sample ? samplePath : feedPath;
   }
 
   function load() {
@@ -94,11 +98,13 @@
     if (!state.listings.length) {
       countEl.textContent = state.sample
         ? "No sample listings in the preview file."
-        : "The listing feed is not connected yet. Homes will show here after it refreshes.";
+        : (mode === "rent"
+          ? "The rental feed is not connected yet. Homes for rent will show here after it refreshes."
+          : "The listing feed is not connected yet. Homes will show here after it refreshes.");
       moreEl.hidden = true;
       return;
     }
-    countEl.textContent = list.length === 1 ? "1 home" : list.length + " homes";
+    countEl.textContent = countLabel(list.length);
     var frag = document.createDocumentFragment();
     visible.forEach(function (item) { frag.appendChild(card(item)); });
     resultsEl.appendChild(frag);
@@ -190,9 +196,15 @@
     return num % 1 === 0 ? String(num) : String(num);
   }
 
+  function countLabel(n) {
+    if (mode === "rent") return n === 1 ? "1 rental" : n + " rentals";
+    return n === 1 ? "1 home" : n + " homes";
+  }
+
   function money(n) {
-    if (n == null || n === "") return "Price on request";
-    return "$" + Number(n).toLocaleString("en-CA");
+    if (n == null || n === "") return mode === "rent" ? "Rent on request" : "Price on request";
+    var text = "$" + Number(n).toLocaleString("en-CA");
+    return mode === "rent" ? text + "/month" : text;
   }
 
   function brokerageLine(item) {
@@ -358,6 +370,9 @@
     else showMissing();
   }
 
+  // CREA DDF Analytics Web Service (analytics.crea.ca), required on listing views
+  // by the June 2026 DDF rules. Sample rows and rows without a numeric ListingID
+  // are not logged. One view per listing per browser session.
   function track(item) {
     if (state.sample || !state.destinationId || !item.analyticsId) return;
     var key = "ddf-viewed-" + item.analyticsId;
@@ -370,10 +385,13 @@
         localStorage.setItem("ddf-uuid", uuid);
       }
     } catch (e) { uuid = "anon"; }
+    var referral = "";
+    try { referral = location.href || ""; } catch (e) { referral = ""; }
     var img = new Image();
     img.src = "https://analytics.crea.ca/LogEvents.svc/LogEvents?ListingID=" + encodeURIComponent(item.analyticsId)
       + "&DestinationID=" + encodeURIComponent(state.destinationId)
-      + "&EventType=view&UUID=" + encodeURIComponent(uuid + "-" + state.destinationId);
+      + "&EventType=view&UUID=" + encodeURIComponent(uuid + "-" + state.destinationId)
+      + (referral ? "&ReferralURL=" + encodeURIComponent(referral) : "");
   }
 
   var timer = null;
