@@ -19,6 +19,10 @@ EMAIL = "devin@axfordrealestate.ca"
 PHONE = "604-809-1032"
 TEL = "tel:+16048091032"
 SITE = "https://devindesaulniers.ca/"  # custom domain (Porkbun); CNAME at repo root
+# Homes-for-sale search (listings.html). Keep False until the DDF feed is writing
+# listings/data.json — the page stays noindex and out of the nav, footer, and sitemap.
+# Switch-on steps: README section "For-sale listings search".
+LISTINGS_LIVE = False
 BROKERAGE = "Axford Real Estate"
 BROKERAGE_ADDR = "2326 Clarke St, Port Moody, BC V3H 1Y8"
 BROKERAGE_PHONE = "778-355-0116"  # Axford office (footer only; Devin's 604 number stays the main contact/schema telephone)
@@ -144,6 +148,8 @@ def ph(text):
 def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head="", root="", og_type="website"):
     """root: relative prefix back to the site root ("" for top-level pages, "../" for pages in blog/)."""
     nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("tenants.html","Tenants","tenants"),("relocating-to-greater-vancouver.html","Moving to Greater Vancouver","guide"),("blog/","Blog","blog")]
+    if LISTINGS_LIVE:
+        nav.insert(2, ("listings.html", "Homes for sale", "listings"))
     CUR = ' aria-current="page"'
     links = "".join(f'<a href="{root}{h}"{CUR if k==active else ""}>{t}</a>' for h,t,k in nav)
     return f'''<!doctype html>
@@ -210,7 +216,7 @@ def foot(root=""):
         <h4>Explore</h4>
         <ul>
           <li><a href="{root}index.html">Home</a></li>
-          <li><a href="{root}buyers.html">Buyers &amp; neighbourhoods</a></li>
+          <li><a href="{root}buyers.html">Buyers &amp; neighbourhoods</a></li>{('\n          <li><a href="' + root + 'listings.html">Homes for sale</a></li>') if LISTINGS_LIVE else ''}
           <li><a href="{root}tenants.html">Relocation rental service</a></li>
           <li><a href="{root}relocating-to-greater-vancouver.html">Relocating to Greater Vancouver guide</a></li>
           <li><a href="{root}blog/">Blog: Greater Vancouver real estate news</a></li>
