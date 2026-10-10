@@ -12,13 +12,22 @@ ICONS = {
  "doc": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>',
  "arrow": '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
  "ext": '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7M10 14L21 3M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>',
+ "play": '<svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
 }
+# Every icon is decorative (the link or button around it carries the accessible name).
+ICONS = {k: v.replace("<svg ", '<svg aria-hidden="true" focusable="false" ', 1) for k, v in ICONS.items()}
 CALC = "https://devindrealty-a11y.github.io/mortgage-calculator/"
 CALC_FULL = "https://devindrealty-a11y.github.io/mortgage-calculator/full.html"
 EMAIL = "devin@axfordrealestate.ca"
 PHONE = "604-809-1032"
 TEL = "tel:+16048091032"
 SITE = "https://devindesaulniers.ca/"  # custom domain (Porkbun); CNAME at repo root
+# Homes for sale (listings.html) and homes for rent (rentals.html).
+# Keep False until DDF_USERNAME and DDF_PASSWORD are set and the feed is writing
+# listings/data.json and listings/rentals.json. Both pages stay noindex and out of
+# the nav, footer, and sitemap until the switch-on steps are followed.
+# Switch-on steps: README section "Listings search (DDF)".
+LISTINGS_LIVE = False
 BROKERAGE = "Axford Real Estate"
 BROKERAGE_ADDR = "2326 Clarke St, Port Moody, BC V3H 1Y8"
 BROKERAGE_PHONE = "778-355-0116"  # Axford office (footer only; Devin's 604 number stays the main contact/schema telephone)
@@ -128,24 +137,60 @@ def testimonials_section(keys, heading, eyebrow="Google reviews", lead="", featu
     lead_html = f'<p class="lead">{lead}</p>' if lead else ""
     return f"""<section class="section {bg}" id="{sec_id}">
   <div class="container">
-    <div class="center narrow">
-      <span class="eyebrow">{eyebrow}</span>
-      <h2>{heading}</h2>
-      {lead_html}
-      {gbp_badge()}
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">{eyebrow}</span>
+        <h2>{heading}</h2>
+      </div>
+      <div class="sec-head-aside">
+        {lead_html}
+        {gbp_badge()}
+      </div>
     </div>
     <div class="t-wrap">{feat}<div class="t-grid">{grid}</div></div>
   </div>
 </section>"""
+
+# ---- YouTube property tours (Devin's channel). Titles are the oEmbed titles, verbatim.
+# These are video walkthroughs, not listings: never caption them as listings, sold, for sale or for rent.
+# Facade only in the HTML (thumbnail button); site.js swaps in a youtube-nocookie iframe on click.
+YOUTUBE_CHANNEL = "https://www.youtube.com/@devindesaulniers"
+YT_TOURS = [
+    ("daQ3Q4ZCmf4", "Inside a Vancouver Mansion"),
+    ("mR_HYgiJClc", "Inside a $23,998,000 Vancouver Penthouse"),
+    ("INd7HTnfDLs", "Inside a $24,800,000 Vancouver Mansion"),
+    ("gyg2-U7o-6E", "Inside a $7,980,000 56th Floor Vancouver condo"),
+    ("TA6-pO-hDfQ", "What $13,500,000 gets you in the West End"),
+    ("TptjgpShZYM", "16308 91A Avenue"),
+]
+YT_TITLE = dict(YT_TOURS)
+YT_HOME = ["daQ3Q4ZCmf4", "gyg2-U7o-6E", "TA6-pO-hDfQ"]
+YT_NOTE = "These are video tours from my YouTube channel, not listings I'm offering."
+
+def tour_card(vid, heading="h3"):
+    t = _h.escape(YT_TITLE[vid])
+    return (f'<figure class="tour">'
+            f'<div class="yt-frame"><button type="button" class="yt" data-yt="{vid}" data-yt-title="{t}" aria-label="Play video: {t}">'
+            f'<img src="https://i.ytimg.com/vi/{vid}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">'
+            f'<span class="yt-play">{ICONS["play"]}</span></button></div>'
+            f'<figcaption><span class="tour-meta">Video tour</span><{heading} class="tour-title">{t}</{heading}></figcaption></figure>')
+
+def tours_grid(ids, heading="h3"):
+    return '<div class="tour-grid">' + "".join(tour_card(v, heading) for v in ids) + "</div>"
 
 def ph(text):
     return f'<span class="ph">[PLACEHOLDER: {text}]</span>'
 
 def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head="", root="", og_type="website"):
     """root: relative prefix back to the site root ("" for top-level pages, "../" for pages in blog/)."""
-    nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("tenants.html","Tenants","tenants"),("relocating-to-greater-vancouver.html","Moving to Greater Vancouver","guide"),("blog/","Blog","blog")]
+    nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("tenants.html","Tenants","tenants"),("relocating-to-greater-vancouver.html","Relocating","guide"),("blog/","Blog","blog"),("videos.html","Videos","videos")]
+    if LISTINGS_LIVE:
+        nav.insert(2, ("listings.html", "Homes for sale", "listings"))
+        nav.insert(3, ("rentals.html", "Homes for rent", "rentals"))
     CUR = ' aria-current="page"'
     links = "".join(f'<a href="{root}{h}"{CUR if k==active else ""}>{t}</a>' for h,t,k in nav)
+    # A longer nav needs a wider viewport before it fits on one row (see .nav-long in styles.css).
+    header_cls = "site-header nav-long" if len(nav) > 6 else "site-header"
     return f'''<!doctype html>
 <html lang="en-CA">
 <head>
@@ -164,67 +209,86 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/styles.css">
 {agent_jsonld()}
 {extra_head}
 </head>
 <body class="{body_class}">
-<header class="site-header">
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="{header_cls}">
+  <div class="brokerage-bar">
+    <div class="container bb-inner">
+      <p class="bb-lockup"><img src="{root}assets/img/axford-logo.png" alt="" width="600" height="106"><span class="bb-text"><span class="bb-label">Brokerage</span> Axford Real Estate<span class="bb-addr"> · Port Moody, BC</span></span></p>
+      <p class="bb-contact"><a href="{TEL}">Call or text {PHONE}</a><a class="bb-email" href="mailto:{EMAIL}">{EMAIL}</a></p>
+    </div>
+  </div>
   <div class="container header-inner">
     <a class="brand" href="{root}index.html" aria-label="Devin Desaulniers, Real Estate Associate, Axford Real Estate — home">
-      <img src="{root}assets/img/devin-mark.png" alt="Devin Desaulniers logo" width="46" height="68">
+      <img src="{root}assets/img/devin-mark.png" alt="" width="232" height="342">
       <span class="brand-text">
         <span class="brand-name"><span class="b">DEVIN</span> <span class="g">DESAULNIERS</span></span>
-        <span class="brand-sub"><span class="bs-title">Real Estate Associate · </span><strong>Axford Real Estate</strong></span>
+        <span class="brand-sub">Real Estate Associate</span>
       </span>
     </a>
-    <a class="header-call" href="{TEL}" aria-label="Call Devin at {PHONE}">{ICONS["phone"]}</a>
-    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
     <nav class="nav" id="site-nav" aria-label="Main">
-      {links}
-      <a href="{CALC}" target="_blank" rel="noopener">Calculator</a>
-      <a class="nav-phone" href="{TEL}">{ICONS["phone"]}<span>{PHONE}</span></a>
-      <a class="btn btn-primary" href="{root}index.html#contact">Contact</a>
-      <span class="header-brokerage"><img src="{root}assets/img/axford-logo.png" alt="Axford Real Estate (brokerage)" width="120" height="26"></span>
+      <div class="nav-links">{links}</div>
+      <a class="nav-phone" href="{TEL}">{ICONS["phone"]}<span>Call or text {PHONE}</span></a>
+      <a class="btn btn-primary nav-cta" href="{root}index.html#contact">Contact</a>
     </nav>
+    <a class="header-call" href="{TEL}" aria-label="Call or text Devin at {PHONE}">{ICONS["phone"]}</a>
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span class="nt-bars" aria-hidden="true"><span></span><span></span><span></span></span></button>
   </div>
 </header>
-<main>
+<main id="main" tabindex="-1">
 '''
+
+def listings_footer_links(root):
+    if not LISTINGS_LIVE:
+        return ""
+    return (
+        '\n          <li><a href="' + root + 'listings.html">Homes for sale</a></li>'
+        '\n          <li><a href="' + root + 'rentals.html">Homes for rent</a></li>'
+    )
+
 
 def foot(root=""):
     return f'''</main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
-      <div>
-        <div class="footer-brokerage"><img src="{root}assets/img/axford-logo.png" alt="Axford Real Estate" width="160" height="34"></div>
-        <p style="margin-top:14px"><strong style="color:#fff">Devin Desaulniers</strong>, Real Estate Associate<br>
-        Brokerage: <strong style="color:#fff">Axford Real Estate</strong><br>
+      <div class="footer-about">
+        <a class="footer-brand" href="{root}index.html" aria-label="Devin Desaulniers — home">
+          <img src="{root}assets/img/devin-mark.png" alt="" width="232" height="342" loading="lazy">
+          <span><span class="fb-name">Devin Desaulniers</span><span class="fb-sub">Real Estate Associate</span></span>
+        </a>
+        <div class="footer-brokerage"><img src="{root}assets/img/axford-logo.png" alt="Axford Real Estate" width="600" height="106" loading="lazy"></div>
+        <p class="footer-addr"><strong>Devin Desaulniers</strong>, Real Estate Associate<br>
+        Brokerage: <strong>Axford Real Estate</strong><br>
         {BROKERAGE_ADDR}<br>
         Brokerage office: <a href="{BROKERAGE_TEL}">{BROKERAGE_PHONE}</a></p>
         <div class="footer-badge">{google_badge(compact=True, root=root)}</div>
       </div>
       <div>
-        <h4>Explore</h4>
+        <h2 class="footer-h">Explore</h2>
         <ul>
           <li><a href="{root}index.html">Home</a></li>
-          <li><a href="{root}buyers.html">Buyers &amp; neighbourhoods</a></li>
+          <li><a href="{root}buyers.html">Buyers &amp; neighbourhoods</a></li>{listings_footer_links(root)}
           <li><a href="{root}tenants.html">Relocation rental service</a></li>
           <li><a href="{root}relocating-to-greater-vancouver.html">Relocating to Greater Vancouver guide</a></li>
+          <li><a href="{root}videos.html">Property video tours</a></li>
           <li><a href="{root}blog/">Blog: Greater Vancouver real estate news</a></li>
           <li><a href="{root}tenants.html#resources">Free renter resources (PDF)</a></li>
           <li><a href="{CALC}" target="_blank" rel="noopener">Mortgage affordability calculator</a></li>
         </ul>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h2 class="footer-h">Contact</h2>
         <ul>
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
           <li>Direct (call or text): <a href="{TEL}">{PHONE}</a></li>
-          <li class="social-links">{" · ".join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n,u in SOCIAL)}</li>
           <li>Greater Vancouver · Tri-Cities, BC</li>
+          <li class="social-links">{" ".join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n,u in SOCIAL)}</li>
         </ul>
       </div>
     </div>
@@ -247,8 +311,9 @@ def foot(root=""):
 
 def calc_cta(heading="How much home can you afford?", body="Try my free mortgage affordability calculator — get a quick estimate in a minute, or use the detailed version for a fuller picture."):
     return f'''<div class="calc-cta">
-  <div>
-    <span class="eyebrow" style="color:#cfe0f3">Free tool</span>
+  <div class="calc-icon">{ICONS["calc"]}</div>
+  <div class="calc-copy">
+    <span class="eyebrow">Free tool</span>
     <h2>{heading}</h2>
     <p>{body}</p>
   </div>
@@ -260,7 +325,7 @@ def calc_cta(heading="How much home can you afford?", body="Try my free mortgage
 
 def consent(form_id):
     return f'''<div class="field full">
-  <div class="checks"><label style="background:none;border:0;padding:0;align-items:flex-start"><input type="checkbox" name="consent" value="yes" required style="margin-top:4px"> <span>I agree to be contacted by Devin Desaulniers (Axford Real Estate) by email or phone about my request. I can opt out at any time. <span class="req">*</span></span></label></div>
+  <label class="consent"><input type="checkbox" name="consent" value="yes" required> <span>I agree to be contacted by Devin Desaulniers (Axford Real Estate) by email or phone about my request. I can opt out at any time. <span class="req">*</span></span></label>
 </div>'''
 
 def status_box():

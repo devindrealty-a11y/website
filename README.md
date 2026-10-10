@@ -6,6 +6,7 @@ Pages:
 - `index.html` — home / profile
 - `buyers.html` — buyer info, neighbourhood guides, "Send me listings" form
 - `tenants.html` — standalone landing page for the $1,500 tenant-paid relocation rental service (link this from ads/social)
+- `videos.html` — property video tours from Devin's YouTube channel (not listings)
 - `blog/` — blog index, posts, RSS feed, generated from Markdown in `_posts/` (see **`_build/BLOG.md`** for how to add a post)
 
 ## Editing
@@ -104,6 +105,13 @@ domain earns no search value of its own.
   Source (not in repo): `/workspace/video-bot/grand-tri-cities/grand-tri-cities-final.mp4`. Re-encode:
   `ffmpeg -i grand-tri-cities-final.mp4 -vf "scale=1280:720:flags=lanczos,format=yuv420p" -c:v libx264 -profile:v high -level 4.0 -preset veryslow -crf 26 -c:a aac -b:a 128k -ac 2 -movflags +faststart greater-vancouver-relocation-ad.mp4`
 - `<video controls playsinline preload="metadata">`, no autoplay. Home page also carries `VideoObject` JSON-LD (absolute URLs, uploadDate 2026-10-06, PT32S).
+
+## YouTube property tours
+- The six tours are listed once in `YT_TOURS` (`_build/partials.py`, id + title). `YT_HOME` picks the three on the home page (`#tours`);
+  `YT_BUYERS` in `_build/build.py` picks the three on `buyers.html#tours`; `videos.html` shows all six.
+- These are video tours, not Devin's listings — keep the `YT_NOTE` line next to them and never label them "for sale", "sold" or "my listings".
+- Each tour renders as a click-to-play button (`tour_card()`): only the `i.ytimg.com` thumbnail loads with the page. `assets/js/site.js`
+  swaps in a `youtube-nocookie.com` player for `[data-yt]` on click. No `VideoObject` JSON-LD for YouTube videos.
 
 ## Blog (added Oct 6, 2026)
 - Posts are Markdown files with front matter in `_posts/YYYY-MM-DD-slug.md`; `_build/blog.py` (called by `build.py`) generates

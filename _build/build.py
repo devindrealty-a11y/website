@@ -1,17 +1,22 @@
 import os, json
 from partials import *
+from partials import _TSTAR
 import blog
 OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 I = ICONS
 
-MOUNTAINS = '''<svg class="hero-mountains" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
-<path d="M0 150 L120 90 L210 130 L330 50 L450 120 L560 70 L680 135 L800 60 L930 125 L1040 80 L1160 140 L1290 75 L1440 125 L1440 220 L0 220Z" fill="#3474b6" opacity=".10"/>
-<path d="M0 175 L150 125 L260 160 L380 105 L520 165 L640 120 L770 170 L900 115 L1030 168 L1170 120 L1300 165 L1440 140 L1440 220 L0 220Z" fill="#808082" opacity=".14"/>
-<path d="M0 200 C240 180 480 214 720 196 C960 178 1200 210 1440 192 L1440 220 L0 220Z" fill="#ffffff"/>
-</svg>'''
-
 # ---------------- BLOG POSTS (Markdown in _posts/, see _build/BLOG.md) ----------------
 POSTS = blog.load_posts()
+
+def sec_head(eyebrow, heading, aside="", center=False):
+    """Section heading: eyebrow + H2 on the left, optional lead/links on the right (stacks on mobile)."""
+    aside_html = f'<div class="sec-head-aside">{aside}</div>' if aside else ""
+    return (f'<div class="sec-head{" sec-head--center" if center else ""}">'
+            f'<div><span class="eyebrow">{eyebrow}</span><h2>{heading}</h2></div>{aside_html}</div>')
+
+def page_nav(items):
+    links = "".join(f'<a href="#{a}">{t}</a>' for a, t in items)
+    return f'<nav class="page-nav" aria-label="On this page"><div class="container"><span class="pn-label">On this page</span>{links}</div></nav>'
 
 # ---------------- HOME ----------------
 # Home-page relocation video ad (web encode of video-bot/grand-tri-cities/grand-tri-cities-final.mp4)
@@ -30,40 +35,76 @@ VIDEO_JSONLD = '<script type="application/ld+json">\n' + json.dumps({
     "duration": "PT32S",
 }, indent=2, ensure_ascii=False) + '\n</script>'
 
+STARS5 = '<span class="stars" aria-hidden="true">' + _TSTAR * 5 + '</span>'
+TOURS_LINK = f'<a class="link-arrow" href="videos.html">See all six video tours {I["arrow"]}</a>'
+HOME_SERVICES_ASIDE = """<p class="lead">Whether you're buying your first place or moving to the Lower Mainland and need a rental, I'll make the process clear and manageable.</p>"""
+HOME_PROCESS_ASIDE = """<p class="lead">Buying or renting, my job is to keep you informed and represent your interests at every step.</p>"""
+HOME_TOURS_ASIDE = f"<p>{YT_NOTE} Press play to watch here.</p>{TOURS_LINK}"
+
 home = head("Devin Desaulniers | Real Estate Associate, Axford Real Estate | Tri-Cities, BC",
             "Devin Desaulniers, Real Estate Associate with Axford Real Estate, helping buyers and relocating tenants in Coquitlam, Port Coquitlam, Port Moody and Greater Vancouver.", "home",
             extra_head=VIDEO_JSONLD + "\n" + blog.rss_link(""))
 home += f'''
 <section class="hero">
   <div class="container hero-inner">
-    <div>
-      <span class="eyebrow">Coquitlam · Port Coquitlam · Port Moody</span>
-      <h1>Your Tri-Cities, BC real estate <span class="accent">neighbour</span>.</h1>
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="nw">Coquitlam ·</span> <span class="nw">Port Coquitlam ·</span> <span class="nw">Port Moody</span></span>
+      <h1>Your <span class="nw">Tri-Cities, BC</span> real estate <em>neighbour</em>.</h1>
       <p class="lead">I'm Devin Desaulniers, a Real Estate Associate with <strong>Axford Real Estate</strong>. I've lived in the Greater Vancouver area for 28 years, and I help home buyers and relocating tenants across Greater Vancouver — especially here in the Tri-Cities, BC.</p>
-      <ul class="chips">
-        <li>Licensed since 2020</li>
-        <li>28 years living in Greater Vancouver</li>
-        <li>Brokerage: Axford Real Estate</li>
-      </ul>
       <div class="btn-row">
         <a class="btn btn-primary" href="buyers.html">I'm buying {I["arrow"]}</a>
         <a class="btn btn-outline" href="tenants.html">I'm relocating &amp; renting</a>
       </div>
-    </div>
-    <div class="hero-card">
-      {picture("assets/img/devin-headshot",(480,800),800,1000,"Devin Desaulniers, Real Estate Associate with Axford Real Estate","headshot",eager=True)}
-      <div class="who"><strong>Devin Desaulniers</strong><span>Real Estate Associate · Axford Real Estate</span></div>
+      <p class="hero-call">{I["phone"]}<span>Prefer to talk? Call or text <a href="{TEL}">{PHONE}</a></span></p>
     </div>
   </div>
-  {MOUNTAINS}
+  <figure class="hero-photo">
+    {picture("assets/img/devin-headshot",(480,800),800,1000,"Devin Desaulniers, Real Estate Associate with Axford Real Estate","hero-img",eager=True,sizes_attr="(max-width: 959px) 100vw, 46vw")}
+    <figcaption><strong>Devin Desaulniers</strong><span>Real Estate Associate · Axford Real Estate</span></figcaption>
+  </figure>
 </section>
 
-<section class="section video-section" id="video">
+<section class="trust" aria-label="Devin at a glance">
   <div class="container">
-    <div class="center narrow">
+    <ul class="trust-list">
+      <li><span class="trust-k">28 years</span><span class="trust-v">living in Greater Vancouver</span></li>
+      <li><span class="trust-k">Since 2020</span><span class="trust-v">licensed in real estate</span></li>
+      <li><a href="{DEVIN_GBP}" target="_blank" rel="noopener" aria-label="Devin Desaulniers: {DEVIN_GBP_RATING} stars on Google from {DEVIN_GBP_COUNT} reviews (opens Google Maps in a new tab)"><span class="trust-k">{DEVIN_GBP_RATING} {STARS5}</span><span class="trust-v">on Google · {DEVIN_GBP_COUNT} reviews</span></a></li>
+      <li><a href="{AXFORD_MAPS}" target="_blank" rel="noopener" aria-label="Axford Real Estate: {AXFORD_FIVE_STAR} five-star Google reviews (opens Google Maps in a new tab)"><span class="trust-k">{AXFORD_FIVE_STAR}</span><span class="trust-v">five-star Google reviews for Axford Real Estate</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="container">
+    {sec_head("Services", "How I can help", HOME_SERVICES_ASIDE)}
+    <div class="paths">
+      <article class="path">
+        <div class="path-top"><span class="path-icon">{I["home"]}</span><span class="path-label">For buyers</span></div>
+        <h3>Buying a home</h3>
+        <p>Neighbourhood guidance, listing alerts tailored to you, showings, and support with offers and negotiation from search to completion.</p>
+        <a class="btn btn-primary" href="buyers.html">Buyer info &amp; neighbourhoods {I["arrow"]}</a>
+      </article>
+      <article class="path path--dark">
+        <div class="path-top"><span class="path-icon">{I["key"]}</span><span class="path-label">For relocating tenants</span></div>
+        <h3>Relocation rental service</h3>
+        <p>Moving to Greater Vancouver? I represent tenants through the whole search: consultation, property search, in-person or virtual showings, and lease review &amp; negotiation — <strong>$1,500 + GST, paid by the tenant in two parts</strong>.</p>
+        <a class="btn btn-light" href="tenants.html">See how it works {I["arrow"]}</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper video-section" id="video">
+  <div class="container video-grid">
+    <div class="video-copy">
       <span class="eyebrow">Relocation video</span>
       <h2>Moving to Greater Vancouver?</h2>
       <p class="lead">I help people relocating to Greater Vancouver find a rental, with in-person or virtual showings. Watch the video, then see how my relocation rental service works.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="tenants.html">See the relocation rental service {I["arrow"]}</a>
+        <a class="btn btn-outline" href="{TEL}">Call or text {PHONE}</a>
+      </div>
     </div>
     <div class="video-frame">
       <video controls playsinline preload="metadata" poster="{VIDEO_POSTER}" width="1280" height="720" aria-label="Moving to Greater Vancouver: relocation video presented by Devin Desaulniers, Real Estate Associate with Axford Real Estate" title="Moving to Greater Vancouver? Relocation video by Devin Desaulniers">
@@ -71,89 +112,89 @@ home += f'''
         <p>Your browser can't play this video. <a href="{VIDEO_MP4}">Download the relocation video (MP4)</a>.</p>
       </video>
     </div>
-    <div class="btn-row" style="justify-content:center;margin-top:28px">
-      <a class="btn btn-primary" href="tenants.html">See the relocation rental service {I["arrow"]}</a>
-      <a class="btn btn-outline" href="{TEL}">Call or text {PHONE}</a>
-    </div>
   </div>
 </section>
 
-<section class="section" id="services">
+<section class="section" id="process">
   <div class="container">
-    <div class="center narrow">
-      <span class="eyebrow">How I can help</span>
-      <h2>Services</h2>
-      <p class="lead">Whether you're buying your first place or moving to the Lower Mainland and need a rental, I'll make the process clear and manageable.</p>
-    </div>
-    <div class="grid grid-3" style="margin-top:32px">
-      <article class="card service-card">
-        <div class="icon">{I["home"]}</div>
-        <h3>Buying a home</h3>
-        <p>Neighbourhood guidance, listing alerts tailored to you, showings, and support with offers and negotiation from search to completion.</p>
-        <a class="btn btn-outline" href="buyers.html">Buyer info &amp; neighbourhoods</a>
-      </article>
-      <article class="card service-card">
-        <div class="icon">{I["key"]}</div>
-        <h3>Relocation rental service</h3>
-        <p>Moving to Greater Vancouver? I represent tenants through the whole search: consultation, property search, in-person or virtual showings, and lease review &amp; negotiation — <strong>$1,500 + GST, paid by the tenant in two parts</strong>.</p>
-        <a class="btn btn-outline" href="tenants.html">See how it works</a>
-      </article>
-      <article class="card service-card">
-        <div class="icon">{I["calc"]}</div>
-        <h3>Free mortgage calculator</h3>
-        <p>Get a quick estimate of what you might be able to afford before you start shopping — or dig into the details with the full version.</p>
-        <a class="btn btn-outline" href="{CALC}" target="_blank" rel="noopener">Open calculator {I["ext"]}</a>
-      </article>
-    </div>
+    {sec_head("How it works", "A clear process, whether you’re buying or renting", HOME_PROCESS_ASIDE)}
+    <ol class="process">
+      <li><span class="process-n" aria-hidden="true">01</span><h3>Consultation</h3><p>We talk through your budget, preferred areas, timing, commute and must-haves.</p></li>
+      <li><span class="process-n" aria-hidden="true">02</span><h3>Search</h3><p>Listing alerts for buyers, and a rental search across Facebook Marketplace, Craigslist and other sources for tenants. I help you screen what comes up.</p></li>
+      <li><span class="process-n" aria-hidden="true">03</span><h3>Showings</h3><p>I book and attend showings with you, or walk you through on live video when you can't be there.</p></li>
+      <li><span class="process-n" aria-hidden="true">04</span><h3>Offer or lease</h3><p>Buying: I review comparable sales and negotiate your offer. Renting: we review the lease together and I negotiate where appropriate.</p></li>
+    </ol>
   </div>
 </section>
 
-<section class="section section--grey" id="about">
+<section class="section section--night" id="tours">
+  <div class="container">
+    {sec_head("Video tours", "Property tours on my YouTube channel", HOME_TOURS_ASIDE)}
+    {tours_grid(YT_HOME)}
+  </div>
+</section>
+
+<section class="section section--paper" id="about">
   <div class="container about-grid">
-    <div>
+    <figure class="about-photo">
+      {picture("assets/img/devin-bw",(420,720),720,951,"Devin Desaulniers","bw-photo",sizes_attr="(max-width: 959px) 80vw, 440px")}
+    </figure>
+    <div class="about-copy">
       <span class="eyebrow">About Devin</span>
-      <h2>Local roots, Tri-Cities, BC focus</h2>
-      <p>I've lived in the Greater Vancouver area for 28 years, I work in Port Moody, and I play soccer on a Port Coquitlam team — so I know the Tri-Cities, BC especially well. I love this area, and I know it as a resident, not just from a map.</p>
+      <h2>Local roots, <span class="nw">Tri-Cities, BC</span> focus</h2>
+      <p class="about-lead">I've lived in the Greater Vancouver area for 28 years, I work in Port Moody, and I play soccer on a Port Coquitlam team — so I know the Tri-Cities, BC especially well. I love this area, and I know it as a resident, not just from a map.</p>
       <p>For the last seven years I've been helping people relocate to and from Vancouver, and I've been licensed in real estate since 2020. Today I'm a Real Estate Associate with Axford Real Estate, helping buyers and tenants across Greater Vancouver, with a particular focus on Coquitlam, Port Coquitlam and Port Moody.</p>
       <p>When I'm not working, you'll find me on the soccer pitch or a pickleball court somewhere around town.</p>
+      <ul class="facts">
+        <li><b>2020</b><span>Licensed in real estate</span></li>
+        <li><b>28 years</b><span>Living in the Greater Vancouver area</span></li>
+        <li><b>7 years</b><span>Helping people relocate to &amp; from Vancouver</span></li>
+        <li><b>Port Moody</b><span>Where I work · Tri-Cities, BC focus</span></li>
+        <li class="fact-wide"><b>Axford Real Estate</b><span>Brokerage · {BROKERAGE_ADDR}</span></li>
+      </ul>
       {social_row()}
-    </div>
-    <div class="facts">
-      <div class="fact"><b>2020</b><span>Licensed in real estate</span></div>
-      <div class="fact"><b>28 years</b><span>Living in the Greater Vancouver area</span></div>
-      <div class="fact"><b>7 years</b><span>Helping people relocate to &amp; from Vancouver</span></div>
-      <div class="fact"><b>Port Moody</b><span>Where I work · Tri-Cities, BC focus</span></div>
-      <div class="fact" style="grid-column:1/-1"><b>Axford Real Estate</b><span>Brokerage · {BROKERAGE_ADDR}</span></div>
     </div>
   </div>
 </section>
 
-{testimonials_section(["thurza","jackie","jordan","florian"], "What clients say", lead="Buyers and sellers I've worked with, in their own words.", sec_id="testimonials", bg="")}
-
-<section class="section section--grey">
-  <div class="container">{calc_cta()}</div>
-</section>
+{testimonials_section(["thurza","jackie","jordan","florian"], "What clients say", lead="Buyers and sellers I've worked with, in their own words.", featured="thurza", sec_id="testimonials", bg="")}
 
 {blog.home_strip(POSTS)}
 
-<section class="section section--blue" id="contact">
-  <div class="container">
-    <div class="narrow center">
+<section class="section section--calc">
+  <div class="container">{calc_cta()}</div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="container contact-grid">
+    <div class="contact-copy">
       <span class="eyebrow">Get in touch</span>
       <h2>Let's talk about your move</h2>
-      <p style="color:#dbe7f4">Buying, relocating, or just have a question about the Tri-Cities, BC? Reach out — I'm happy to help.</p>
+      <p class="lead">Buying, relocating, or just have a question about the Tri-Cities, BC? Reach out — I'm happy to help.</p>
+      <ul class="contact-list">
+        <li><span class="cl-icon">{I["phone"]}</span><div><small>Call or text</small><a href="{TEL}">{PHONE}</a></div></li>
+        <li><span class="cl-icon">{I["mail"]}</span><div><small>Email</small><a href="mailto:{EMAIL}">{EMAIL}</a></div></li>
+        <li><span class="cl-icon">{I["pin"]}</span><div><small>Service area</small><span>Greater Vancouver · Tri-Cities, BC</span></div></li>
+        <li><span class="cl-icon">{I["building"]}</span><div><small>Brokerage</small><span>Axford Real Estate<br>{BROKERAGE_ADDR}</span></div></li>
+      </ul>
     </div>
-    <div class="contact-grid" style="margin-top:32px">
-      <div class="contact-item"><div class="icon">{I["mail"]}</div><div><small>Email</small><a href="mailto:{EMAIL}">{EMAIL}</a></div></div>
-      <div class="contact-item"><div class="icon">{I["phone"]}</div><div><small>Call or text</small><a href="{TEL}">{PHONE}</a></div></div>
-      <div class="contact-item"><div class="icon">{I["pin"]}</div><div><small>Service area</small><span>Greater Vancouver · Tri-Cities, BC</span></div></div>
-      <div class="contact-item"><div class="icon">{I["building"]}</div><div><small>Brokerage</small><span>Axford Real Estate</span><br><span>{BROKERAGE_ADDR}</span></div></div>
-    </div>
-    <div class="btn-row" style="justify-content:center;margin-top:36px">
-      <a class="btn btn-light" href="{TEL}">Call {PHONE}</a>
-      <a class="btn btn-ghost-light" href="mailto:{EMAIL}">Email Devin</a>
-      <a class="btn btn-ghost-light" href="buyers.html#listings">Get listings sent to me</a>
-      <a class="btn btn-ghost-light" href="tenants.html#intake">Start a rental search</a>
+    <div class="contact-actions">
+      <div class="action-card action-card--dark">
+        <h3>Talk it through</h3>
+        <p>A quick call or text is usually the fastest way to sort out next steps.</p>
+        <div class="btn-row">
+          <a class="btn btn-light" href="{TEL}">{I["phone"]} Call {PHONE}</a>
+          <a class="btn btn-ghost-light" href="mailto:{EMAIL}">Email Devin</a>
+        </div>
+      </div>
+      <div class="action-card">
+        <h3>Prefer a form?</h3>
+        <p>Tell me what you're looking for and I'll follow up.</p>
+        <div class="btn-row">
+          <a class="btn btn-outline" href="buyers.html#listings">Get listings sent to me</a>
+          <a class="btn btn-outline" href="tenants.html#intake">Start a rental search</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -193,8 +234,8 @@ hoods = [
 ]
 hood_cards = ""
 for name,tag,desc,nbhd,transit,outdoors in hoods:
-    hood_cards += f'''<article class="card hood">
-  <div class="hood-head"><h3>{name}</h3><small>{tag}</small></div>
+    hood_cards += f'''<article class="hood">
+  <div class="hood-head"><h3>{name}</h3><p class="hood-tag">{tag}</p></div>
   <div class="hood-body">
     <p>{desc}</p>
     <h4>Neighbourhoods to know</h4>
@@ -208,64 +249,64 @@ for name,tag,desc,nbhd,transit,outdoors in hoods:
   </div>
 </article>'''
 
+YT_BUYERS = ["TptjgpShZYM", "mR_HYgiJClc", "INd7HTnfDLs"]
+BUYERS_HOODS_ASIDE = """<p class="lead">A quick introduction to the communities I know best. Every street is different — reach out and I'll help you compare areas based on your commute, lifestyle and budget.</p>"""
+BUYERS_TOURS_ASIDE = f"<p>{YT_NOTE} They're a handy way to compare layouts and finishes before you book showings.</p>{TOURS_LINK}"
+BUYERS_LISTINGS_ASIDE = """<p class="lead">Tell me what you're looking for and I'll send you homes that match — including new listings as they hit the market.</p>"""
+
 buyers = head("Buying a Home in the Tri-Cities, BC | Devin Desaulniers, Axford Real Estate",
               "Neighbourhood guides for Coquitlam, Port Coquitlam, Port Moody and nearby areas, a free mortgage affordability calculator, and personalised listing alerts from Devin Desaulniers, Axford Real Estate.", "buyers", page_url="buyers.html")
 buyers += f'''
 <section class="page-hero">
   <div class="container">
     <span class="eyebrow">For buyers</span>
-    <h1>Buying in the Tri-Cities, BC &amp; Greater Vancouver</h1>
+    <h1>Buying in the <span class="nw">Tri-Cities, BC</span> &amp; Greater Vancouver</h1>
     <p class="lead">Local neighbourhood knowledge, listings matched to what you actually want, and a clear plan from your first showing to getting the keys.</p>
-    <div class="btn-row" style="margin-top:22px">
+    <div class="btn-row">
       <a class="btn btn-light" href="#listings">Send me listings {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="{CALC}" target="_blank" rel="noopener">Mortgage calculator {I["ext"]}</a>
     </div>
   </div>
 </section>
+{page_nav([("help","How I help"),("testimonials","Reviews"),("neighbourhoods","Neighbourhoods"),("tours","Video tours"),("listings","Send me listings")])}
 
-<section class="section">
+<section class="section section--calc">
   <div class="container">{calc_cta("Start with your budget","Before you fall in love with a listing, get a feel for your price range with my free mortgage affordability calculator. Then talk to a lender about pre-approval.")}</div>
 </section>
 
-<section class="section section--grey" style="padding-top:56px">
-  <div class="container">
-    <div class="grid grid-2" style="align-items:start">
-      <div>
-        <span class="eyebrow">Working together</span>
-        <h2>How I help buyers</h2>
-        <div class="buyer-intro">
-          {picture("assets/img/devin-bw",(420,720),720,951,"Devin Desaulniers","bw-photo",sizes_attr="(max-width: 639px) 40vw, 200px")}
-          <div>
-            <p class="lead">Buying is a big decision. My job is to keep you informed and represent your interests at every step.</p>
-            <p>Call or text <a href="{TEL}">{PHONE}</a>, or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
-          </div>
+<section class="section section--paper" id="help">
+  <div class="container help-grid">
+    <div>
+      <span class="eyebrow">Working together</span>
+      <h2>How I help buyers</h2>
+      <div class="buyer-intro">
+        {picture("assets/img/devin-bw",(420,720),720,951,"Devin Desaulniers","bw-photo",sizes_attr="(max-width: 639px) 40vw, 200px")}
+        <div>
+          <p class="lead">Buying is a big decision. My job is to keep you informed and represent your interests at every step.</p>
+          <p>Call or text <a href="{TEL}">{PHONE}</a>, or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
         </div>
-        <p>{ph("Confirm or edit this list of buyer services")}</p>
       </div>
-      <ul class="list-check card" style="margin:0">
-        <li>Understand your goals, budget and must-haves</li>
-        <li>Set up listing alerts for the areas and homes you're interested in</li>
-        <li>Book and attend showings, and point out what to look for</li>
-        <li>Review comparable sales so you can make an informed offer</li>
-        <li>Prepare and negotiate your offer, including subjects like financing and inspection</li>
-        <li>Guide you through subject removal, deposits and completion</li>
-      </ul>
+      <p>{ph("Confirm or edit this list of buyer services")}</p>
     </div>
+    <ul class="list-check check-card">
+      <li>Understand your goals, budget and must-haves</li>
+      <li>Set up listing alerts for the areas and homes you're interested in</li>
+      <li>Book and attend showings, and point out what to look for</li>
+      <li>Review comparable sales so you can make an informed offer</li>
+      <li>Prepare and negotiate your offer, including subjects like financing and inspection</li>
+      <li>Guide you through subject removal, deposits and completion</li>
+    </ul>
   </div>
 </section>
 
-{testimonials_section(["thurza","florian","tyson","kyron"], "What buyers say", lead="Buyers I've helped, in their own words.", sec_id="testimonials", bg="section--tint")}
+{testimonials_section(["thurza","florian","tyson","kyron"], "What buyers say", lead="Buyers I've helped, in their own words.", featured="thurza", sec_id="testimonials", bg="")}
 
-<section class="section" id="neighbourhoods">
+<section class="section section--paper" id="neighbourhoods">
   <div class="container">
-    <div class="center narrow">
-      <span class="eyebrow">Neighbourhood guides</span>
-      <h2>Get to know the Tri-Cities, BC</h2>
-      <p class="lead">A quick introduction to the communities I know best. Every street is different — reach out and I'll help you compare areas based on your commute, lifestyle and budget.</p>
-    </div>
-    <div class="grid grid-2" style="margin-top:32px">{hood_cards}</div>
+    {sec_head("Neighbourhood guides", 'Get to know the <span class="nw">Tri-Cities, BC</span>', BUYERS_HOODS_ASIDE)}
+    <div class="hood-grid">{hood_cards}</div>
 
-    <div class="card" style="margin-top:22px">
+    <div class="other-areas">
       <h3>Other nearby areas</h3>
       <p>I also help buyers in neighbouring Greater Vancouver communities, including <strong>Burnaby</strong>, <strong>New Westminster</strong>, and <strong>Pitt Meadows &amp; Maple Ridge</strong>. School District 43 serves Coquitlam, Port Coquitlam, Port Moody, Anmore and Belcarra — always confirm school catchments with the district for a specific address.</p>
       <p>{ph("Any other areas Devin wants to feature, and his notes on them")}</p>
@@ -273,14 +314,17 @@ buyers += f'''
   </div>
 </section>
 
-<section class="section section--grey" id="listings">
+<section class="section section--night" id="tours">
   <div class="container">
-    <div class="center narrow">
-      <span class="eyebrow">Personalised listing alerts</span>
-      <h2>Send me listings</h2>
-      <p class="lead">Tell me what you're looking for and I'll send you homes that match — including new listings as they hit the market.</p>
-    </div>
-    <form class="form-card" style="margin-top:28px" data-form-key="buyerListings" action="#" method="POST">
+    {sec_head("Video tours", "Walk through a few homes first", BUYERS_TOURS_ASIDE)}
+    {tours_grid(YT_BUYERS)}
+  </div>
+</section>
+
+<section class="section section--paper" id="listings">
+  <div class="container">
+    {sec_head("Personalised listing alerts", "Send me listings", BUYERS_LISTINGS_ASIDE)}
+    <form class="form-card" data-form-key="buyerListings" action="#" method="POST">
       <input type="hidden" name="_subject" value="New buyer listings request">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="form" value="Buyer: Send me listings">
@@ -355,7 +399,7 @@ STEP1 = f"""<div class="form-grid">
   <div class="field"><label for="t-email">Email <span class="req">*</span></label><input id="t-email" name="email" type="email" autocomplete="email" required></div>
   <div class="field"><label for="t-phone">Phone <span class="hint">(incl. country code if outside Canada)</span></label><input id="t-phone" name="phone" type="tel" autocomplete="tel"></div>
   <div class="field"><label for="t-date">Target move-in date <span class="req">*</span></label><input id="t-date" name="move_date" type="date" required></div>
-  <button type="button" class="btn btn-primary js-only" data-next-step style="width:100%">Next: your rental needs {I["arrow"]}</button>
+  <button type="button" class="btn btn-primary btn-block js-only" data-next-step>Next: your rental needs {I["arrow"]}</button>
 </div>"""
 STEP2 = f"""<div class="form-grid" data-step2>
   <div class="field"><label for="t-contact">Best way to reach you</label><select id="t-contact" name="preferred_contact">{opts(["Email","Phone call","Text message","Video call"])}</select></div>
@@ -371,10 +415,14 @@ STEP2 = f"""<div class="form-grid" data-step2>
   {status_box()}
 </div>"""
 
+TEN_INCLUDED_ASIDE = '<p class="lead">Searching for a rental from out of town is stressful. I represent you, the tenant, so you can make an informed decision without flying in for every viewing.</p>'
+TEN_HOW_ASIDE = '<p class="lead">Five simple steps, built around your move date.</p>'
+TEN_RES_ASIDE = '<p class="lead">Two free PDFs: a practical guide to renting in Greater Vancouver, and a two-page overview of how my tenant representation service works.</p>'
+
 tenants += f"""
-<section class="lp-hero">
+<section class="lp-hero" data-sticky-hide>
   <div class="container lp-hero-inner">
-    <div>
+    <div class="lp-copy">
       <span class="eyebrow">Tenant representation<span class="eb-more"> · Greater Vancouver rental guidance</span></span>
       <h1>Relocating to Vancouver? Line up your rental before you arrive.</h1>
       <p class="lead">Moving to Vancouver is a lot to manage from a distance. I'll search, attend showings (or walk you through on live video), and review and negotiate your lease — so you can rent with confidence.</p>
@@ -405,8 +453,7 @@ tenants += f"""
       <p>Takes about 2 minutes. No obligation — I'll get back to you to talk next steps. Prefer to talk? <a href="{TEL}">{PHONE}</a></p>
       {STEP1}
       <div class="step2-wrap" data-step2-wrap>
-        <hr style="border:0;border-top:1px solid #e6eaef;margin:18px 0">
-        <h3 style="margin-bottom:12px">Your rental needs</h3>
+        <h3 class="step2-title">Your rental needs</h3>
         {STEP2}
       </div>
     </form>
@@ -415,20 +462,16 @@ tenants += f"""
 
 <section class="section" id="included">
   <div class="container">
-    <div class="center narrow">
-      <span class="eyebrow">My services</span>
-      <h2>Someone on your side, from first search to move-in</h2>
-      <p class="lead">Searching for a rental from out of town is stressful. I represent you, the tenant, so you can make an informed decision without flying in for every viewing.</p>
+    {sec_head("My services", "Someone on your side, from first search to move-in", TEN_INCLUDED_ASIDE)}
+    <div class="service-grid">
+      <div class="card"><div class="icon">{I["handshake"]}</div><h3>Personalized consultation</h3><p>I'll help you identify rentals that fit your budget, commute, lifestyle and priorities. I also point out potential green flags and red flags, so you can make a more informed decision and avoid unnecessary uncertainty.</p></div>
+      <div class="card"><div class="icon">{I["home"]}</div><h3>Property search &amp; early access</h3><p>I search Facebook Marketplace, Craigslist and other rental sources. Through Axford Real Estate, I also have access to our own rental opportunities and firsthand relationships with the property managers in our office.</p></div>
+      <div class="card"><div class="icon">{I["video"]}</div><h3>Showings — in person or virtual</h3><p>I book and coordinate showings and attend with you. When you can't make it, I do virtual showings with a live video walkthrough, plus floor plans for the homes you're seriously considering. When practical, I can also drive us between scheduled appointments.</p></div>
+      <div class="card"><div class="icon">{I["doc"]}</div><h3>Lease review &amp; negotiation</h3><p>We review the lease agreement together. I explain the important terms, talk through move-in and move-out expectations, and negotiate rent or other lease terms where appropriate.</p></div>
     </div>
-    <div class="grid grid-2" style="margin-top:28px">
-      <div class="card"><div class="icon">{I["handshake"]}</div><h3>Personalized consultation</h3><p style="margin:0">I'll help you identify rentals that fit your budget, commute, lifestyle and priorities. I also point out potential green flags and red flags, so you can make a more informed decision and avoid unnecessary uncertainty.</p></div>
-      <div class="card"><div class="icon">{I["home"]}</div><h3>Property search &amp; early access</h3><p style="margin:0">I search Facebook Marketplace, Craigslist and other rental sources. Through Axford Real Estate, I also have access to our own rental opportunities and firsthand relationships with the property managers in our office.</p></div>
-      <div class="card"><div class="icon">{I["video"]}</div><h3>Showings — in person or virtual</h3><p style="margin:0">I book and coordinate showings and attend with you. When you can't make it, I do virtual showings with a live video walkthrough, plus floor plans for the homes you're seriously considering. When practical, I can also drive us between scheduled appointments.</p></div>
-      <div class="card"><div class="icon">{I["doc"]}</div><h3>Lease review &amp; negotiation</h3><p style="margin:0">We review the lease agreement together. I explain the important terms, talk through move-in and move-out expectations, and negotiate rent or other lease terms where appropriate.</p></div>
-    </div>
-    <div class="fee-block" style="margin-top:28px">
+    <div class="fee-block">
       <div class="fee-main">
-        <span class="eyebrow" style="color:#cfe0f3">Service fee</span>
+        <span class="eyebrow">Service fee</span>
         <div class="fee-total">$1,500 <small>total + GST</small></div>
         <p>Paid by the tenant, in two parts.</p>
       </div>
@@ -438,38 +481,29 @@ tenants += f"""
       </ul>
       <a class="btn btn-light" href="#intake">Start your search {I["arrow"]}</a>
     </div>
-    <p class="form-note center" style="margin-top:14px">I help tenants find and lease a home. I do not provide property management services.</p>
+    <p class="form-note center fee-note">I help tenants find and lease a home. I do not provide property management services.</p>
   </div>
 </section>
 
-{testimonials_section(["susan","hugo","aline"], "What renters say", lead="Tenants I've helped find a home, in their own words.", featured="susan", sec_id="testimonials", bg="section--tint")}
+{testimonials_section(["susan","hugo","aline"], "What renters say", lead="Tenants I've helped find a home, in their own words.", featured="susan", sec_id="testimonials", bg="section--paper")}
 
-<section class="section section--grey" id="how">
+<section class="section" id="how">
   <div class="container">
-    <div class="center narrow">
-      <span class="eyebrow">How I can help</span>
-      <h2>How it works</h2>
-      <p class="lead">Five simple steps, built around your move date.</p>
-    </div>
-    <ol class="mini-steps five" style="margin-top:28px">
+    {sec_head("How I can help", "How it works", TEN_HOW_ASIDE)}
+    <ol class="mini-steps five">
       <li><div><h3>Initial consultation</h3><p>We discuss your budget, preferred areas, timing and must-haves.</p></div></li>
       <li><div><h3>Property search</h3><p>I identify suitable rentals and help you screen opportunities.</p></div></li>
       <li><div><h3>Showings</h3><p>I coordinate and attend showings with you, or provide virtual showings.</p></div></li>
       <li><div><h3>Lease review &amp; negotiation</h3><p>I explain the key terms and negotiate where possible.</p></div></li>
       <li><div><h3>Move in</h3><p>I help you understand the next steps and what to expect at move-in.</p></div></li>
     </ol>
-    <div class="center" style="margin-top:28px"><a class="btn btn-primary" href="#intake">Start your rental search {I["arrow"]}</a></div>
+    <div class="section-cta"><a class="btn btn-primary" href="#intake">Start your rental search {I["arrow"]}</a></div>
   </div>
 </section>
 
-
-<section class="section" id="resources">
+<section class="section section--paper" id="resources">
   <div class="container">
-    <div class="center narrow">
-      <span class="eyebrow">Free renter resources</span>
-      <h2>Download my renter brochures</h2>
-      <p class="lead">Two free PDFs: a practical guide to renting in Greater Vancouver, and a two-page overview of how my tenant representation service works.</p>
-    </div>
+    {sec_head("Free renter resources", "Download my renter brochures", TEN_RES_ASIDE)}
     <div class="brochures">
       <article class="brochure">
         <a class="cover" href="assets/docs/devin-desaulniers-renter-resources.pdf" target="_blank" rel="noopener" aria-label="Open the Greater Vancouver Renter's Guide (PDF)">{picture("assets/img/brochure-renter-resources",(320,640),640,853,"Cover of Devin Desaulniers' 2026 Greater Vancouver Renter's Guide","",sizes_attr="(max-width: 999px) 120px, 150px")}</a>
@@ -483,7 +517,7 @@ tenants += f"""
             <li>B.C. tenancy essentials and protecting yourself after move-in</li>
           </ul>
           <div class="meta">PDF · 4 pages · 0.8 MB</div>
-          <a class="btn btn-primary" href="assets/docs/devin-desaulniers-renter-resources.pdf" target="_blank" rel="noopener">View / download PDF {I["arrow"]}</a>
+          <a class="btn btn-primary btn-sm" href="assets/docs/devin-desaulniers-renter-resources.pdf" target="_blank" rel="noopener">View / download PDF {I["arrow"]}</a>
         </div>
       </article>
       <article class="brochure">
@@ -497,15 +531,10 @@ tenants += f"""
             <li>The service fee: $1,500 total + GST, in two parts</li>
           </ul>
           <div class="meta">PDF · 2 pages · 0.5 MB</div>
-          <a class="btn btn-primary" href="assets/docs/devin-desaulniers-tenant-representation.pdf" target="_blank" rel="noopener">View / download PDF {I["arrow"]}</a>
+          <a class="btn btn-primary btn-sm" href="assets/docs/devin-desaulniers-tenant-representation.pdf" target="_blank" rel="noopener">View / download PDF {I["arrow"]}</a>
         </div>
       </article>
     </div>
-  </div>
-</section>
-
-<section class="section" style="padding-top:0;padding-bottom:0">
-  <div class="container">
     <a class="guide-callout" href="relocating-to-greater-vancouver.html">
       <span class="gc-icon">{I["pin"]}</span>
       <span><b>Moving to Greater Vancouver?</b> Read my Relocating to Greater Vancouver guide — areas at a glance, commuting, renting basics in B.C., and whether to rent or buy first.</span>
@@ -514,29 +543,26 @@ tenants += f"""
   </div>
 </section>
 
-<section class="section">
-  <div class="container about-grid" style="align-items:center">
-    <div>
+<section class="section" id="about">
+  <div class="container about-grid about-grid--tenants">
+    <div class="about-copy">
       <span class="eyebrow">Your local on the ground</span>
       <h2>Hi, I'm Devin.</h2>
       <p>I've lived in the Greater Vancouver area for 28 years. I work in Port Moody, and I play soccer on a Port Coquitlam team and pickleball around the Tri-Cities, BC. I know this region as a local — so I can tell you what a neighbourhood is actually like, not just what the listing says.</p>
       <p>For the last seven years I've been helping people relocate to and from Vancouver. I've been licensed in real estate since 2020, and today I'm a Real Estate Associate with <strong>Axford Real Estate</strong>.</p>
-      <p><a href="{TEL}">{PHONE}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="index.html#about">More about me</a> · <a href="relocating-to-greater-vancouver.html">Moving to Greater Vancouver?</a></p>
+      <p class="inline-links"><a href="{TEL}">{PHONE}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="index.html#about">More about me</a> · <a href="relocating-to-greater-vancouver.html">Moving to Greater Vancouver?</a></p>
       {social_row("Look me up")}
     </div>
-    <div class="hero-card" style="max-width:320px">
-      {picture("assets/img/devin-headshot",(480,800),800,1000,"Devin Desaulniers, Real Estate Associate with Axford Real Estate","headshot",eager="auto",sizes_attr="(max-width: 899px) 80vw, 320px")}
-      <div class="who"><strong>Devin Desaulniers</strong><span>Real Estate Associate · Axford Real Estate</span></div>
-    </div>
+    <figure class="portrait">
+      {picture("assets/img/devin-headshot",(480,800),800,1000,"Devin Desaulniers, Real Estate Associate with Axford Real Estate","headshot",eager="auto",sizes_attr="(max-width: 899px) 80vw, 360px")}
+      <figcaption><strong>Devin Desaulniers</strong><span>Real Estate Associate · Axford Real Estate</span></figcaption>
+    </figure>
   </div>
 </section>
 
-<section class="section section--grey" id="faq">
+<section class="section section--paper" id="faq">
   <div class="container">
-    <div class="center narrow">
-      <span class="eyebrow">Questions</span>
-      <h2>Frequently asked questions</h2>
-    </div>
+    {sec_head("Questions", "Frequently asked questions", center=True)}
     <div class="faq-list">{faq_html}</div>
   </div>
 </section>
@@ -544,16 +570,16 @@ tenants += f"""
 <section class="section trust-badge-section" id="reviews">
   <div class="container center">
     <span class="eyebrow">My brokerage</span>
-    <p class="tb-intro">I work with Axford Real Estate, one of Greater Vancouver's top-rated brokerages, based in Port Moody.</p>
+    <p class="tb-intro">I work with Axford Real Estate, a brokerage based in Port Moody.</p>
     {google_badge()}
   </div>
 </section>
 
-<section class="section section--blue">
+<section class="section section--night cta-band">
   <div class="container center narrow">
     <h2>Ready to find your next home?</h2>
-    <p style="color:#dbe7f4">Please feel free to reach out at any time.</p>
-    <div class="btn-row" style="justify-content:center;margin-top:20px">
+    <p>Please feel free to reach out at any time.</p>
+    <div class="btn-row">
       <a class="btn btn-light" href="#intake">Start your rental search {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="{TEL}">Call {PHONE}</a>
       <a class="btn btn-ghost-light" href="mailto:{EMAIL}?subject=Relocation%20rental%20service">Email Devin</a>
@@ -610,39 +636,42 @@ gv += f"""
     <span class="eyebrow">Relocation guide · Greater Vancouver</span>
     <h1>Relocating to Greater Vancouver? Here's how a local agent can help</h1>
     <p class="lead">Areas at a glance, commuting, renting basics in B.C., and how I help relocating tenants and buyers line up the right home before they arrive.</p>
-    <div class="btn-row" style="margin-top:22px">
+    <div class="btn-row">
       <a class="btn btn-light" href="tenants.html#intake">Need a rental? Start here {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>
     </div>
   </div>
 </section>
+{page_nav([("areas","Areas at a glance"),("renting-basics","Renting in B.C."),("rentals","Rental help"),("buying","Buying"),("faq","FAQ")])}
 
 <article class="guide">
 <section class="section">
   <div class="container guide-intro">
     <div>
-      <p class="lead" style="color:var(--ink)">I'm Devin Desaulniers, a Real Estate Associate with Axford Real Estate in Port Moody. I've lived in the Greater Vancouver area for 28 years, and for the last seven years I've been helping people relocate to and from Vancouver — as tenants who need a rental lined up before they arrive, or as buyers.</p>
+      <p class="lead guide-lead">I'm Devin Desaulniers, a Real Estate Associate with Axford Real Estate in Port Moody. I've lived in the Greater Vancouver area for 28 years, and for the last seven years I've been helping people relocate to and from Vancouver — as tenants who need a rental lined up before they arrive, or as buyers.</p>
       <p>If you're moving from another province (or from elsewhere in BC), the hard part is usually the same: you need honest advice about areas, a realistic commute and a place that works before your furniture shows up. This page is a plain-language overview of Greater Vancouver, plus how I can help.</p>
     </div>
-    <div class="hero-card guide-photo">
+    <figure class="portrait guide-photo">
       {picture("assets/img/devin-headshot",(480,800),800,1000,"Devin Desaulniers, Real Estate Associate with Axford Real Estate","headshot",eager="auto",sizes_attr="(max-width: 899px) 70vw, 280px")}
-      <div class="who"><strong>Devin Desaulniers</strong><span>Real Estate Associate · Axford Real Estate</span></div>
-    </div>
+      <figcaption><strong>Devin Desaulniers</strong><span>Real Estate Associate · Axford Real Estate</span></figcaption>
+    </figure>
   </div>
 </section>
 
-<section class="section section--grey" id="areas">
+<section class="section section--paper" id="areas">
   <div class="container narrow-wide">
+    <span class="eyebrow">Where to live</span>
     <h2>Greater Vancouver at a glance</h2>
     <p>Greater Vancouver is a collection of cities, each with its own feel, rents and commute. Here's a quick snapshot to start your shortlist:</p>
     <div class="area-grid">{areas_gv_html}</div>
-    <h3 style="margin-top:28px">Getting around</h3>
+    <h3 class="sub-h">Getting around</h3>
     <p>TransLink runs SkyTrain, buses, the SeaBus and the West Coast Express commuter rail (weekday rush-hour service between Mission and Waterfront Station in downtown Vancouver). Driving times vary a lot by bridge and time of day, so tell me where you'll work or study and I'll factor the commute into every shortlist. Buying in the Tri-Cities, BC? See my <a href="buyers.html#neighbourhoods">neighbourhood guides</a>.</p>
   </div>
 </section>
 
 <section class="section" id="renting-basics">
   <div class="container narrow-wide">
+    <span class="eyebrow">Know your rights</span>
     <h2>Renting in B.C.: the basics</h2>
     <p>A few rules and habits that protect you, especially when you're renting from out of province:</p>
     <ul class="list-check">
@@ -652,35 +681,36 @@ gv += f"""
       <li><strong>Get it in writing:</strong> rent, term, utilities, parking, pets, occupants and any special terms.</li>
       <li><strong>Verify before you pay.</strong> Confirm the property and the person you're dealing with before sending money, and be cautious of wire transfers, gift cards, cryptocurrency or pressure to pay before a viewing.</li>
     </ul>
-    <h3 style="margin-top:24px">Have your application ready</h3>
+    <h3 class="sub-h">Have your application ready</h3>
     <p>Photo ID, proof of income (recent pay stubs, an employment or offer letter, or bank statements / a Notice of Assessment if you're self-employed), landlord and employer references, and a short renter profile. A credit report you get yourself can speed things up.</p>
     <p>The full checklist — budget, viewings, applications and move-in — is in my free <a href="tenants.html#resources">Greater Vancouver renter's guide (PDF)</a>.</p>
     <p class="form-note">General information only, not legal advice. Confirm current rules with the <a href="{RTB}" target="_blank" rel="noopener">B.C. Residential Tenancy Branch</a>.</p>
   </div>
 </section>
 
-<section class="section section--blue" id="rentals">
+<section class="section section--night" id="rentals">
   <div class="container narrow-wide">
     <span class="eyebrow">Tenant-side rental help</span>
     <h2>How I help relocating tenants</h2>
-    <p style="color:#dbe7f4">You don't have to wait until you land to secure a rental. My tenant-side relocation rental service is <strong style="color:#fff">$1,500 total + GST, paid by the tenant</strong> — $750 at the beginning of the engagement (non-refundable) and $750 once you successfully secure a rental. It includes:</p>
+    <p>You don't have to wait until you land to secure a rental. My tenant-side relocation rental service is <strong>$1,500 total + GST, paid by the tenant</strong> — $750 at the beginning of the engagement (non-refundable) and $750 once you successfully secure a rental. It includes:</p>
     <ul class="list-check">
       <li>A personalized consultation on your budget, commute, lifestyle and priorities, including green flags and red flags to watch for</li>
       <li>A rental search across Greater Vancouver, in the areas we agree on, with early access through Axford Real Estate's own rental opportunities</li>
       <li>Showings — I attend with you, or do live video walkthroughs with floor plans while you're still out of province</li>
       <li>Lease review &amp; negotiation before you sign</li>
     </ul>
-    <p style="color:#dbe7f4">I represent your search on the tenant side — not a landlord's inventory. (Axford also has a separate property management business; this service is different.)</p>
-    <p style="color:#dbe7f4">Most Greater Vancouver rentals list only a few weeks before they're available, so the active search usually starts about 4–6 weeks before move-in. Use the weeks before that to settle your budget, areas and documents.</p>
-    <div class="btn-row" style="margin-top:20px">
+    <p>I represent your search on the tenant side — not a landlord's inventory. (Axford also has a separate property management business; this service is different.)</p>
+    <p>Most Greater Vancouver rentals list only a few weeks before they're available, so the active search usually starts about 4–6 weeks before move-in. Use the weeks before that to settle your budget, areas and documents.</p>
+    <div class="btn-row">
       <a class="btn btn-light" href="tenants.html#intake">Start your rental search {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="tenants.html">See the relocation rental service</a>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="buying">
   <div class="container narrow-wide">
+    <span class="eyebrow">Buying</span>
     <h2>How I help relocating buyers</h2>
     <p>For buyers moving to Greater Vancouver:</p>
     <ol class="mini-steps guide-steps">
@@ -689,27 +719,24 @@ gv += f"""
       <li><div><h3>Offer strategy and negotiation</h3><p>Local market pace, subject clauses and timelines that fit a cross-province move.</p></div></li>
       <li><div><h3>Closing through move-in</h3><p>Coordination with your lawyer or notary, lender and movers so the handoff is calm.</p></div></li>
     </ol>
-    <p style="margin-top:18px">Start with your budget using my free <a href="{CALC}" target="_blank" rel="noopener">mortgage affordability calculator</a>, then <a href="buyers.html#listings">ask me to send you listings</a>.</p>
+    <p class="after-steps">Start with your budget using my free <a href="{CALC}" target="_blank" rel="noopener">mortgage affordability calculator</a>, then <a href="buyers.html#listings">ask me to send you listings</a>.</p>
     <p class="form-note">Office: Axford Real Estate, {BROKERAGE_ADDR}. Licensed since 2020.</p>
   </div>
 </section>
 
-<section class="section section--grey" id="faq">
+<section class="section section--paper" id="faq">
   <div class="container">
-    <div class="center narrow">
-      <span class="eyebrow">FAQ</span>
-      <h2>Relocating to Greater Vancouver: common questions</h2>
-    </div>
+    {sec_head("FAQ", "Relocating to Greater Vancouver: common questions", center=True)}
     <div class="faq-list">{gv_faq_html}</div>
   </div>
 </section>
 </article>
 
-<section class="section section--blue">
+<section class="section section--night cta-band">
   <div class="container center narrow">
     <h2>Relocating to Greater Vancouver?</h2>
-    <p style="color:#dbe7f4">I'm happy to help with a tenant-side rental search before you arrive, or as your buyer's agent.</p>
-    <div class="btn-row" style="justify-content:center;margin-top:20px">
+    <p>I'm happy to help with a tenant-side rental search before you arrive, or as your buyer's agent.</p>
+    <div class="btn-row">
       <a class="btn btn-light" href="tenants.html#intake">Start a rental search {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="buyers.html#listings">Get listings sent to me</a>
       <a class="btn btn-ghost-light" href="{TEL}">Call or text {PHONE}</a>
@@ -719,6 +746,49 @@ gv += f"""
 </section>
 """
 gv += foot()
+
+# ---------------- VIDEOS (YouTube property tours) ----------------
+VIDEOS_URL = "videos.html"
+videos = head("Property Video Tours | Devin Desaulniers, Real Estate Associate, Axford Real Estate",
+              "Property video tours with Devin Desaulniers, Real Estate Associate with Axford Real Estate: walkthroughs of homes and condos in Vancouver and Greater Vancouver from his YouTube channel.",
+              "videos", page_url=VIDEOS_URL)
+videos += f"""
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Video tours · YouTube</span>
+    <h1>Property video tours</h1>
+    <p class="lead">Video tours with Devin Desaulniers, Real Estate Associate with Axford Real Estate. Press play on any tour to watch it right here.</p>
+    <p class="hero-note">{YT_NOTE}</p>
+    <div class="btn-row">
+      <a class="btn btn-light" href="{YOUTUBE_CHANNEL}" target="_blank" rel="noopener">Visit my YouTube channel {I["ext"]}</a>
+      <a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tours">
+  <div class="container">
+    {tours_grid([v for v, _ in YT_TOURS], heading="h2")}
+  </div>
+</section>
+
+<section class="section section--paper">
+  <div class="container">
+    <div class="split-cta">
+      <div>
+        <span class="eyebrow">Buying in Greater Vancouver</span>
+        <h2>Looking for a home of your own?</h2>
+        <p class="lead">Tell me what you're looking for and I'll send you homes that match — including new listings as they hit the market.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="buyers.html#listings">Get listings sent to me {I["arrow"]}</a>
+        <a class="btn btn-outline" href="buyers.html">Buyer info &amp; neighbourhoods</a>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+videos += foot()
 
 # Old URL: tiny redirect so existing links keep working
 NEW_ABS = SITE + GV_URL
@@ -740,9 +810,10 @@ redirect = f"""<!doctype html>
 
 for fn, html in [("index.html",home),("buyers.html",buyers),("tenants.html",tenants),(GV_URL,gv),("relocating-to-coquitlam.html",redirect)]:
     open(os.path.join(OUT,fn),"w").write(html)
+open(os.path.join(OUT, VIDEOS_URL), "w").write(videos)
 
 # Blog pages, RSS feed and sitemap (sitemap lists the static pages + blog index + every post)
 blog.write_blog(POSTS)
-STATIC_PAGES = ["", "tenants.html", "buyers.html", GV_URL]
+STATIC_PAGES = ["", "tenants.html", "buyers.html", GV_URL, "videos.html"]
 open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS))
 print("built")
