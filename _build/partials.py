@@ -178,9 +178,6 @@ def tour_card(vid, heading="h3"):
 def tours_grid(ids, heading="h3"):
     return '<div class="tour-grid">' + "".join(tour_card(v, heading) for v in ids) + "</div>"
 
-def ph(text):
-    return f'<span class="ph">[PLACEHOLDER: {text}]</span>'
-
 def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head="", root="", og_type="website"):
     """root: relative prefix back to the site root ("" for top-level pages, "../" for pages in blog/)."""
     nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("tenants.html","Tenants","tenants"),("relocating-to-greater-vancouver.html","Relocating","guide"),("blog/","Blog","blog"),("videos.html","Videos","videos")]
@@ -280,6 +277,7 @@ def foot(root=""):
           <li><a href="{root}blog/">Blog: Greater Vancouver real estate news</a></li>
           <li><a href="{root}tenants.html#resources">Free renter resources (PDF)</a></li>
           <li><a href="{CALC}" target="_blank" rel="noopener">Mortgage affordability calculator</a></li>
+          <li><a href="{root}privacy.html">Privacy</a></li>
         </ul>
       </div>
       <div>
@@ -293,9 +291,9 @@ def foot(root=""):
       </div>
     </div>
     <div class="footer-legal">
-      <p>{ph("Standard disclaimer, e.g. “Not intended to solicit buyers or sellers currently under contract with a brokerage.” — confirm exact wording with managing broker")}</p>
-      <p>{ph("Privacy policy link / statement on how form information is used")}</p>
+      <p>Devin Desaulniers is a Real Estate Associate with Axford Real Estate, 2326 Clarke St, Port Moody, BC. Information on this site is general. It is not legal, tax, or financial advice, and it is not a mortgage approval. It is not intended to solicit buyers or sellers who are currently under contract with a brokerage.</p>
       <p>Mortgage calculator results are estimates only and are not a mortgage approval or financial advice.</p>
+      <p><a href="{root}privacy.html">Privacy</a>: how this site's contact forms and chat widget handle what you send.</p>
       <p>© <span data-year>2026</span> Devin Desaulniers · Axford Real Estate.</p>
     </div>
   </div>

@@ -652,6 +652,7 @@ body.has-sticky{padding-bottom:76px}
 .site-footer .g-badge,.site-footer .g-badge:hover{color:var(--ink);text-decoration:none}
 .footer-legal{margin-top:52px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:.82rem;color:#8fa1b3}
 .footer-legal p{margin:0 0 .6em}
+.site-footer .footer-legal a{text-decoration:underline}
 .site-footer .ph{font-size:.9em}
 @media (pointer:coarse){.site-footer li:not(.social-links) a{display:inline-flex;align-items:center;min-height:44px}.site-footer li{margin-bottom:0}.site-footer .social-links a{min-height:44px}}
 
