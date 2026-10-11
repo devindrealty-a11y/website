@@ -543,6 +543,11 @@ tenants += f"""
       <span><b>Moving to Greater Vancouver?</b> Read my Relocating to Greater Vancouver guide — areas at a glance, commuting, renting basics in B.C., and whether to rent or buy first.</span>
       <span class="gc-arrow">{I["arrow"]}</span>
     </a>
+    <a class="guide-callout" href="free-guide.html">
+      <span class="gc-icon">{I["pin"]}</span>
+      <span><b>Want the longer insider’s guides?</b> The free Greater Vancouver and Tri-Cities PDFs cover September 2026 rents and benchmark prices, transit, schools, MSP, and a first-30-days checklist.</span>
+      <span class="gc-arrow">{I["arrow"]}</span>
+    </a>
   </div>
 </section>
 
@@ -641,6 +646,7 @@ gv += f"""
     <p class="lead">Areas at a glance, commuting, renting basics in B.C., and how I help relocating tenants and buyers line up the right home before they arrive.</p>
     <div class="btn-row">
       <a class="btn btn-light" href="tenants.html#intake">Need a rental? Start here {I["arrow"]}</a>
+      <a class="btn btn-ghost-light" href="free-guide.html">Free moving guides {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>
     </div>
   </div>
@@ -814,14 +820,15 @@ privacy += f"""
       <p>This site is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate, {BROKERAGE_ADDR}. The sections below explain, in plain language, where the information you send me goes.</p>
 
       <h2 id="forms">Contact forms</h2>
-      <p>There are two forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a> and the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>There are three forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, and the free moving-guide sign-up on the <a href="free-guide.html">free guides page</a>. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
       <p>The forms ask for:</p>
       <ul>
         <li>your name and email, and your phone number if you add it;</li>
         <li>on the listings form: the areas you're interested in, property type, price range, bedrooms and bathrooms, your timeline, whether you're pre-approved for a mortgage, and any notes;</li>
-        <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, bedrooms, preferred areas, pets, your work or school location, and any notes.</li>
+        <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, bedrooms, preferred areas, pets, your work or school location, and any notes;</li>
+        <li>on the free-guide form: which guide you want (Greater Vancouver, the Tri-Cities, or both).</li>
       </ul>
-      <p>Both forms ask you to agree that I can contact you by email or phone about your request. You can opt out at any time.</p>
+      <p>Each form asks you to agree that I can contact you by email or phone about your request. You can opt out at any time.</p>
 
       <h2 id="chat">Chat widget</h2>
       <p>Pages on this site include a chat widget, “Devin's AI Assistant”, provided by Elfsight. What you type into that chat is handled by Elfsight.</p>
@@ -871,6 +878,6 @@ open(os.path.join(OUT, PRIVACY_URL), "w").write(privacy)
 
 # Blog pages, RSS feed and sitemap (sitemap lists the static pages + blog index + every post)
 blog.write_blog(POSTS)
-STATIC_PAGES = ["", "tenants.html", "buyers.html", GV_URL, "videos.html", PRIVACY_URL]
+STATIC_PAGES = ["", "tenants.html", "buyers.html", GV_URL, "free-guide.html", "videos.html", PRIVACY_URL]
 open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS))
 print("built")
