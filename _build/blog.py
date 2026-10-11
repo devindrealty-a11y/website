@@ -392,7 +392,7 @@ def index_page(posts):
                        for p in posts[:30]]}
     page = head("Blog: Greater Vancouver Real Estate News, Explained | Devin Desaulniers", esc(BLOG_DESC), "blog",
                 page_url="blog/", extra_head=rss_link(root) + "\n" + _jsonld(ld), root=root)
-    cards = "".join(post_card(p, p["out"], root="../") for p in posts) or '<p class="center">The first post is coming soon.</p>'
+    cards = "".join(post_card(p, p["out"], root="../") for p in posts) or '<p class="center">No posts yet.</p>'
     cats = " · ".join(CATEGORIES)
     page += f'''
 <section class="page-hero">

@@ -215,25 +215,29 @@ hoods = [
   "A big, varied city stretching from established neighbourhoods near the Fraser River up to newer hillside communities on Burke Mountain and Westwood Plateau. Coquitlam's City Centre has grown into a hub around Coquitlam Centre, Lafarge Lake and Town Centre Park, with SkyTrain's Millennium Line running through the city.",
   ["Burke Mountain","Westwood Plateau","City Centre","Burquitlam","Austin Heights","Maillardville","Ranch Park","Eagle Ridge"],
   "Millennium Line SkyTrain (Burquitlam, Lincoln, Coquitlam Central, Lafarge Lake–Douglas) and West Coast Express at Coquitlam Central; Lougheed Highway and Highway 1 nearby.",
-  "Mundy Park, Lafarge Lake & Town Centre Park, Como Lake, and trails on Westwood Plateau and Burke Mountain."),
+  "Mundy Park, Lafarge Lake & Town Centre Park, Como Lake, and trails on Westwood Plateau and Burke Mountain.",
+  "Coquitlam is the largest of the Tri-Cities, BC, and one of the three cities I focus on. Buyers here are often choosing between a hillside area like Burke Mountain or Westwood Plateau and City Centre, and the commute is usually the deciding piece. Tell me where you'll be heading each day and we'll compare them on that."),
  ("Port Coquitlam","Riverside community with a small-town feel",
   "“PoCo” sits between the Coquitlam and Pitt rivers, with a walkable downtown, family-friendly residential neighbourhoods and the Traboulay PoCo Trail looping around the city. It's also Terry Fox's hometown — and where I play soccer.",
   ["Downtown PoCo","Citadel Heights","Mary Hill","Oxford Heights","Lincoln Park","Riverwood","Birchland Manor","Glenwood"],
   "West Coast Express at Port Coquitlam station; Lougheed Highway and the Mary Hill Bypass connect to the rest of the region.",
-  "Traboulay PoCo Trail, Coquitlam River and Pitt River dikes, and plenty of community sports fields."),
+  "Traboulay PoCo Trail, Coquitlam River and Pitt River dikes, and plenty of community sports fields.",
+  "I play soccer on a Port Coquitlam team, so PoCo is part of my ordinary week, not just somewhere I come for showings. If a smaller downtown and the Traboulay PoCo Trail suit the way you live, put it on your list."),
  ("Port Moody","Waterfront “City of the Arts”",
   "Set at the eastern end of Burrard Inlet, Port Moody combines a waterfront lifestyle with forested hillsides. Rocky Point Park, the Shoreline Trail and the craft breweries along Murray Street's “Brewers Row” are local favourites.",
   ["Moody Centre","Inlet Centre / Suter Brook","Newport Village","Heritage Mountain","Heritage Woods","College Park","Glenayre","Ioco"],
   "Millennium Line SkyTrain (Moody Centre, Inlet Centre) and West Coast Express at Moody Centre.",
-  "Rocky Point Park, the Shoreline Trail, Old Orchard Park, and quick access to Belcarra and Buntzen Lake."),
+  "Rocky Point Park, the Shoreline Trail, Old Orchard Park, and quick access to Belcarra and Buntzen Lake.",
+  "Port Moody is where I work, at Axford Real Estate on Clarke Street. SkyTrain at Moody Centre and Inlet Centre, the parks along the inlet and the hillside neighbourhoods give you a few different ways to live here, so we'll start with how you plan to get around and what you want close by."),
  ("Anmore & Belcarra","Quiet villages north of Port Moody",
   "Two small, semi-rural villages tucked into the forest above Port Moody. Homes here tend to sit on larger, treed lots, and residents trade some convenience for privacy and nature on their doorstep.",
   ["Village of Anmore","Village of Belcarra"],
   "Mostly car-dependent; Port Moody's SkyTrain and West Coast Express stations are the nearest rapid transit.",
-  "Buntzen Lake, Belcarra Regional Park and Sasamat Lake (White Pine Beach)."),
+  "Buntzen Lake, Belcarra Regional Park and Sasamat Lake (White Pine Beach).",
+  "I don't treat Anmore and Belcarra as an extension of Port Moody: they're separate villages with their own trade-offs. Larger lots and more privacy usually come with a car for most trips, and the nearest rapid transit is in Port Moody, so it's worth mapping out your commute and errands before you get attached to a home."),
 ]
 hood_cards = ""
-for name,tag,desc,nbhd,transit,outdoors in hoods:
+for name,tag,desc,nbhd,transit,outdoors,take in hoods:
     hood_cards += f'''<article class="hood">
   <div class="hood-head"><h3>{name}</h3><p class="hood-tag">{tag}</p></div>
   <div class="hood-body">
@@ -245,12 +249,12 @@ for name,tag,desc,nbhd,transit,outdoors in hoods:
     <h4>Outdoors</h4>
     <p>{outdoors}</p>
     <h4>Devin's take</h4>
-    <p>{ph(f"Devin's personal insight on {name} — who it suits, favourite spots, what buyers should know")}</p>
+    <p>{take}</p>
   </div>
 </article>'''
 
 YT_BUYERS = ["TptjgpShZYM", "mR_HYgiJClc", "INd7HTnfDLs"]
-BUYERS_HOODS_ASIDE = """<p class="lead">A quick introduction to the communities I know best. Every street is different — reach out and I'll help you compare areas based on your commute, lifestyle and budget.</p>"""
+BUYERS_HOODS_ASIDE = """<p class="lead">A quick introduction to the communities I focus on. Every street is different — reach out and I'll help you compare areas based on your commute, lifestyle and budget.</p>"""
 BUYERS_TOURS_ASIDE = f"<p>{YT_NOTE} They're a handy way to compare layouts and finishes before you book showings.</p>{TOURS_LINK}"
 BUYERS_LISTINGS_ASIDE = """<p class="lead">Tell me what you're looking for and I'll send you homes that match — including new listings as they hit the market.</p>"""
 
@@ -286,7 +290,6 @@ buyers += f'''
           <p>Call or text <a href="{TEL}">{PHONE}</a>, or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
         </div>
       </div>
-      <p>{ph("Confirm or edit this list of buyer services")}</p>
     </div>
     <ul class="list-check check-card">
       <li>Understand your goals, budget and must-haves</li>
@@ -309,7 +312,7 @@ buyers += f'''
     <div class="other-areas">
       <h3>Other nearby areas</h3>
       <p>I also help buyers in neighbouring Greater Vancouver communities, including <strong>Burnaby</strong>, <strong>New Westminster</strong>, and <strong>Pitt Meadows &amp; Maple Ridge</strong>. School District 43 serves Coquitlam, Port Coquitlam, Port Moody, Anmore and Belcarra — always confirm school catchments with the district for a specific address.</p>
-      <p>{ph("Any other areas Devin wants to feature, and his notes on them")}</p>
+      <p>If you're looking somewhere else in Greater Vancouver, tell me on the <a href="#listings">listings form</a> below: choose “Other (add in notes)” and add the area in your notes.</p>
     </div>
   </div>
 </section>
@@ -382,7 +385,7 @@ FAQ_ITEMS = [
  ("What if we don't find a place that works?",
   "<p>The first $750 covers the consultation, search and showings, and is non-refundable. The second $750 is only due once you successfully secure a rental, so if no rental is secured, it isn't owed.</p>"),
  ("Do you work for the landlord?",
-  f"<p>No — this is a tenant representation service. I represent you, and you pay my fee. {ph('disclosure wording when the rental is one of Axford’s own listings / managed by Axford property managers — confirm with managing broker')}</p>"),
+  "<p>No — this is a tenant representation service. I represent you, and you pay my fee. If a rental is listed or managed by Axford Real Estate, my brokerage, I'll disclose that to you in writing before you commit, and you can decline it.</p>"),
  ("What's the difference between tenant-side rental help and a property management company?",
   "<p>Property managers usually represent the <strong>landlord</strong> and lease out the buildings they manage. I work on the <strong>tenant side</strong>: I represent your search, not a landlord's inventory. Axford also has a separate property management business; my service is different — it's tenant-paid relocation rental help, and I don't manage rental properties myself.</p>"),
 ]
@@ -790,6 +793,59 @@ videos += f"""
 """
 videos += foot()
 
+# ---------------- PRIVACY ----------------
+# Keep in step with the real forms (buyers.html, tenants.html), assets/js/config.js and the Elfsight snippet in foot().
+PRIVACY_URL = "privacy.html"
+privacy = head("Privacy | Devin Desaulniers, Real Estate Associate, Axford Real Estate",
+               "How the contact forms and chat widget on Devin Desaulniers' website handle what you send, where it may be processed, and how to make a privacy request.",
+               "privacy", page_url=PRIVACY_URL)
+privacy += f"""
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Privacy</span>
+    <h1>How this site handles your information</h1>
+    <p class="lead">What happens to the information you send through the contact forms and the chat widget, and who to contact with a privacy question or request.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow-wide">
+    <div class="post-body">
+      <p>This site is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate, {BROKERAGE_ADDR}. The sections below explain, in plain language, where the information you send me goes.</p>
+
+      <h2 id="forms">Contact forms</h2>
+      <p>There are two forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a> and the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>The forms ask for:</p>
+      <ul>
+        <li>your name and email, and your phone number if you add it;</li>
+        <li>on the listings form: the areas you're interested in, property type, price range, bedrooms and bathrooms, your timeline, whether you're pre-approved for a mortgage, and any notes;</li>
+        <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, bedrooms, preferred areas, pets, your work or school location, and any notes.</li>
+      </ul>
+      <p>Both forms ask you to agree that I can contact you by email or phone about your request. You can opt out at any time.</p>
+
+      <h2 id="chat">Chat widget</h2>
+      <p>Pages on this site include a chat widget, “Devin's AI Assistant”, provided by Elfsight. What you type into that chat is handled by Elfsight.</p>
+
+      <h2 id="outside-canada">Processing outside Canada</h2>
+      <p>Information you send through FormSubmit or the Elfsight chat widget may be processed outside Canada. If you'd rather not use the forms or the chat, you can call or text me at <a href="{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+
+      <h2 id="video-tours">Video tours</h2>
+      <p>The YouTube video tours on this site show a preview image from YouTube, and the YouTube player itself loads only after you press play.</p>
+
+      <h2 id="requests">Privacy questions and requests</h2>
+      <p>For a privacy question or request, contact me at my brokerage:</p>
+    </div>
+    <ul class="contact-list">
+      <li><span class="cl-icon">{I["building"]}</span><div><small>Mailing address</small><span>Devin Desaulniers<br>Axford Real Estate<br>2326 Clarke St<br>Port Moody, BC <span class="nw">V3H 1Y8</span></span></div></li>
+      <li><span class="cl-icon">{I["mail"]}</span><div><small>Email</small><a href="mailto:{EMAIL}">{EMAIL}</a></div></li>
+      <li><span class="cl-icon">{I["phone"]}</span><div><small>Brokerage office</small><a href="{BROKERAGE_TEL}">{BROKERAGE_PHONE}</a></div></li>
+      <li><span class="cl-icon">{I["phone"]}</span><div><small>Direct line (call or text)</small><a href="{TEL}">{PHONE}</a></div></li>
+    </ul>
+  </div>
+</section>
+"""
+privacy += foot()
+
 # Old URL: tiny redirect so existing links keep working
 NEW_ABS = SITE + GV_URL
 redirect = f"""<!doctype html>
@@ -811,9 +867,10 @@ redirect = f"""<!doctype html>
 for fn, html in [("index.html",home),("buyers.html",buyers),("tenants.html",tenants),(GV_URL,gv),("relocating-to-coquitlam.html",redirect)]:
     open(os.path.join(OUT,fn),"w").write(html)
 open(os.path.join(OUT, VIDEOS_URL), "w").write(videos)
+open(os.path.join(OUT, PRIVACY_URL), "w").write(privacy)
 
 # Blog pages, RSS feed and sitemap (sitemap lists the static pages + blog index + every post)
 blog.write_blog(POSTS)
-STATIC_PAGES = ["", "tenants.html", "buyers.html", GV_URL, "videos.html"]
+STATIC_PAGES = ["", "tenants.html", "buyers.html", GV_URL, "videos.html", PRIVACY_URL]
 open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS))
 print("built")

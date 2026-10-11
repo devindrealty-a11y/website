@@ -16,7 +16,7 @@ cd _build && python3 build.py
 ```
 (Or edit the HTML files directly if you prefer — just don't re-run the build afterwards.)
 
-Every item still needing Devin's input is marked **[PLACEHOLDER: …]** (yellow highlight). Search the files for `PLACEHOLDER`.
+No placeholders remain: the footer disclaimer, the privacy page (`privacy.html`, built from `PRIVACY_URL` / `privacy` in `_build/build.py`), the Axford disclosure in the tenant FAQ, the buyer services list and the neighbourhood notes are all written. If you add or change a form, the chat widget or another third-party service, update `privacy.html` to match.
 
 ## Forms (FormSubmit)
 Both forms (buyers.html "Send me listings", tenants.html relocation intake) post via AJAX to
@@ -68,7 +68,7 @@ domain earns no search value of its own.
 - Submit `sitemap.xml` in Google Search Console when ready.
 
 ## Launch checklist
-- Replace all remaining placeholders (disclaimer, privacy policy, Axford-managed disclosure in the tenant FAQ, buyer services list, neighbourhood notes)
+- ~~Replace all remaining placeholders~~ Done: disclaimer, privacy page (`privacy.html`), Axford-managed disclosure in the tenant FAQ, buyer services list, neighbourhood notes.
 - Forms are connected to FormSubmit — Devin must click the activation email after the first real submission
 - ~~Remove noindex and draft banner~~ Done (launched). Submit `sitemap.xml` in Search Console when ready.
 - ~~Custom domain~~ Done: `devindesaulniers.ca` (CNAME + SITE). Enforce HTTPS once the cert is ready.
