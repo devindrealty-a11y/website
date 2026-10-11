@@ -197,6 +197,46 @@ h4{font-family:Inter,sans-serif;font-weight:700;font-size:17px;letter-spacing:0;
 .profile .facts span b{font-family:Newsreader,Georgia,serif;font-weight:600;font-size:14px;margin-right:3px}
 .profile.photo-top{grid-template-columns:1fr;gap:14px}
 .profile.photo-top .photo{height:200px}
+.profile.tall{grid-template-columns:280px 1fr;gap:26px;padding-bottom:22px;margin-bottom:22px}
+.profile.tall .photo{min-height:280px}
+.profile.tall h3{font-size:28px}
+.profile.tall p{font-size:15px;line-height:1.44}
+.profile.tall .facts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.profile.tall .facts span{padding:6px 11px}
+.profile .names{font-size:13px;line-height:1.42;color:var(--muted);margin-top:8px}
+.profile .names b{font-weight:700;color:var(--ink)}
+
+/* Station cards (Evergreen Extension, in order) */
+.stations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.station{position:relative;background:var(--paper);border-radius:var(--radius);padding:16px 18px 14px;border-top:5px solid var(--blue-darker)}
+.station .no{font:800 10px/1 Montserrat,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.station h4{font-size:18px;margin:8px 0 5px;letter-spacing:-.01em}
+.station p{font-size:13.5px;line-height:1.42;color:var(--text)}
+.station .pill{display:inline-block;margin-top:10px;font:700 10px/1 Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-dark);background:#fff;border:1px solid var(--line-strong);border-radius:999px;padding:5px 9px}
+.station .pill.wce{color:#7a2e4a;border-color:#d9c1cb}
+
+/* Mini charts: label and value above a thin bar, for side-by-side use */
+.chart.mini .row{display:block;padding:7px 0}
+.chart.mini .k{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;font-size:13.5px}
+.chart.mini .k b{font:600 17px/1 Newsreader,Georgia,serif;color:var(--ink);font-variant-numeric:lining-nums}
+.chart.mini .k b small{font:600 10px/1 Inter,sans-serif;color:var(--muted);margin-left:5px;letter-spacing:.02em}
+.chart.mini .track{height:12px;border-radius:4px}
+.chart.mini .bar{border-radius:4px}
+.chart.cmhc.roomy .row{padding:12px 0}
+.chart.cmhc.roomy .dual{gap:5px}
+.chart.cmhc.roomy .dual .track{height:20px}
+.chart.cmhc.roomy .dual .val{line-height:20px;font-size:13px}
+.chart.cmhc.roomy .v{font-size:21px}
+.areas.c2{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.areas.c2 .area{padding:14px 20px 8px}
+.areas.c2 .area .t{margin-bottom:10px}
+.areas.c2 .area .n{font-size:36px}
+.areas.c2 .area .n small{font-size:12px;margin-left:8px}
+.areas.c2 .area .sub{margin-top:12px;padding-top:4px}
+.areas.c2 .area .sub div{padding:4px 0}
+.areas.c2 .area .sub b{font-size:16px}
+.areas.c2 .area .sub span{font-size:10.5px}
+.areas.c2 .area .sub i{font-size:10.5px}
 
 /* Lists */
 .check{list-style:none}
@@ -213,6 +253,8 @@ h4{font-family:Inter,sans-serif;font-weight:700;font-size:17px;letter-spacing:0;
 .locals{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px}
 .locals p{font-size:15px;line-height:1.42;padding:12px 0 12px 18px;border-left:3px solid var(--blue-light);margin:0}
 .locals p strong{display:block;color:var(--ink);font-size:16px;margin-bottom:2px}
+.locals.tight{gap:10px 24px}
+.locals.tight p{padding:10px 0 10px 18px}
 .sources{counter-reset:src}
 .sources li{list-style:none;position:relative;padding-left:40px;margin:0 0 11px;font-size:14px;line-height:1.45;color:var(--text)}
 .sources li::before{counter-increment:src;content:counter(src,decimal-leading-zero);position:absolute;left:0;top:1px;font:800 11px/1.6 Montserrat,sans-serif;color:var(--blue);letter-spacing:.05em}
