@@ -653,6 +653,7 @@ body.has-sticky{padding-bottom:76px}
 .footer-legal{margin-top:52px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:.82rem;color:#8fa1b3}
 .footer-legal p{margin:0 0 .6em}
 .site-footer .footer-legal a{text-decoration:underline}
+.footer-legal .fine-print,.site-footer .footer-legal .fine-print a{font-size:12px;line-height:1.45;font-weight:400;color:#8fa1b3}
 .site-footer .ph{font-size:.9em}
 @media (pointer:coarse){.site-footer li:not(.social-links) a{display:inline-flex;align-items:center;min-height:44px}.site-footer li{margin-bottom:0}.site-footer .social-links a{min-height:44px}}
 

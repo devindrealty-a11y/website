@@ -291,9 +291,9 @@ def foot(root=""):
       </div>
     </div>
     <div class="footer-legal">
-      <p>Devin Desaulniers is a Real Estate Associate with Axford Real Estate, 2326 Clarke St, Port Moody, BC. Information on this site is general. It is not legal, tax, or financial advice, and it is not a mortgage approval. It is not intended to solicit buyers or sellers who are currently under contract with a brokerage.</p>
+      <p class="fine-print">Devin Desaulniers is a Real Estate Associate with Axford Real Estate, 2326 Clarke St, Port Moody, BC. Information on this site is general. It is not legal, tax, or financial advice, and it is not a mortgage approval. It is not intended to solicit buyers or sellers who are currently under contract with a brokerage.</p>
       <p>Mortgage calculator results are estimates only and are not a mortgage approval or financial advice.</p>
-      <p><a href="{root}privacy.html">Privacy</a>: how this site's contact forms and chat widget handle what you send.</p>
+      <p class="fine-print"><a href="{root}privacy.html">Privacy</a>: how this site's contact forms and chat widget handle what you send.</p>
       <p>© <span data-year>2026</span> Devin Desaulniers · Axford Real Estate.</p>
     </div>
   </div>
