@@ -276,6 +276,7 @@ def foot(root=""):
           <li><a href="{root}videos.html">Property video tours</a></li>
           <li><a href="{root}blog/">Blog: Greater Vancouver real estate news</a></li>
           <li><a href="{root}tenants.html#resources">Free renter resources (PDF)</a></li>
+          <li><a href="{root}free-guide.html">Free moving guides</a></li>
           <li><a href="{CALC}" target="_blank" rel="noopener">Mortgage affordability calculator</a></li>
           <li><a href="{root}privacy.html">Privacy</a></li>
         </ul>

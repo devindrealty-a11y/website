@@ -1,5 +1,16 @@
 # https://devindesaulniers.ca/
 User-agent: *
 Allow: /
+# Full guides and PDFs stay out of search until Devin approves them.
+# The public sign-up is /free-guide.html.
+Disallow: /guides/greater-vancouver.html
+Disallow: /guides/tri-cities.html
+Disallow: /guides/moving-to-greater-vancouver.pdf
+Disallow: /guides/moving-to-the-tri-cities.pdf
+Disallow: /guides/print/
+Disallow: /guides/_main
+Disallow: /free-guide-thanks.html
+Disallow: /_promo/
+Disallow: /_research/
 
 Sitemap: https://devindesaulniers.ca/sitemap.xml

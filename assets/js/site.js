@@ -102,6 +102,13 @@
         .then(function (res) {
           var ok = res.ok && String(res.j.success) !== 'false';
           if (ok) {
+            var redirect = (form.getAttribute('data-redirect') || '').trim();
+            if (redirect) {
+              var guide = fd.get('guide') || '';
+              var join = redirect.indexOf('?') >= 0 ? '&' : '?';
+              window.location.assign(redirect + (guide ? join + 'guide=' + encodeURIComponent(String(guide)) : ''));
+              return;
+            }
             show('success', '<strong>Thanks — your request has been sent!</strong> Devin will be in touch soon. If it\'s urgent, call <a href="tel:+16048091032">604-809-1032</a>.');
             form.reset();
           } else {
