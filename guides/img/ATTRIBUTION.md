@@ -1,6 +1,6 @@
 # Photo attribution — relocation guides
 
-Photos used in the two relocation guides (PDF and web editions) and the matching ad creatives. All are free to use under the licence listed; Creative Commons photos are credited in the guides. Files were resized for print (300 dpi at their printed size) and re-encoded as JPEG; no other changes were made except cropping by CSS `object-fit` at layout time.
+Photos used in the two relocation guides (PDF and web editions) and the matching ad creatives in `_promo/creatives/`. All are free to use under the licence listed; Creative Commons photos are credited in the guides and on the ads. Files were resized for print (300 dpi at their printed size) and re-encoded as JPEG; no other changes were made except cropping by CSS `object-fit` at layout time.
 
 | File | Subject | Photographer | Source | Licence |
 |---|---|---|---|---|
@@ -20,6 +20,8 @@ Photos used in the two relocation guides (PDF and web editions) and the matching
 | `metrotown-station.jpg` | Metrotown station, Burnaby | Northwest | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Metrotown_station_(2026).jpg) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
 | `stanley-park-seawall.jpg` | Seawall path, Stanley Park | Uzay Yildirim | [Pexels](https://www.pexels.com/photo/scenic-seawall-path-in-stanley-park-vancouver-38429764/) | [Pexels License](https://www.pexels.com/license/) |
 | `vancouver-rain.jpg` | A rainy day in Gastown | Kobe - | [Pexels](https://www.pexels.com/photo/rainy-day-at-steam-clock-in-vancouver-street-31221340/) | [Pexels License](https://www.pexels.com/license/) |
+| `vancouver-panorama.jpg` | Downtown Vancouver and the North Shore mountains, from the water | Brendan Chen | [Pexels](https://www.pexels.com/photo/breathtaking-vancouver-skyline-and-waterfront-view-33870397/) | [Pexels License](https://www.pexels.com/license/) |
+| `north-vancouver-shipyards.jpg` | The Shipyards District, North Vancouver, from the air | Aaron Lee | [Pexels](https://www.pexels.com/photo/aerial-view-of-the-shipyards-district-in-north-vancouver-26180108/) | [Pexels License](https://www.pexels.com/license/) |
 | `buntzen-lake-dock.jpg` | Buntzen Lake, Anmore | Ben Waardenburg benwubbleyou | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Buntzen_Lake_Recreation_Area,_Anmore,_Canada_(Unsplash_qKmtE3L5-X4).jpg) | [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en) |
 | `tc-cover.jpg` | An island off Belcarra in autumn | Adam Brown | [Pexels](https://www.pexels.com/photo/view-of-a-lake-in-autumn-11456704/) | [Pexels License](https://www.pexels.com/license/) |
 | `port-moody-aerial.jpg` | Port Moody and the head of Burrard Inlet from the air | Northwest | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Port_Moody.jpg) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
@@ -39,6 +41,8 @@ Photos used in the two relocation guides (PDF and web editions) and the matching
 | `coquitlam-centre.jpg` | Coquitlam Centre atrium | Canmenwalker | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Coquitlam_Centre_Atrium_2025.jpg) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
 | `burrard-inlet-sailboats.jpg` | Sailing dinghies on Burrard Inlet, Port Moody | Kalamazadkhan | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Burrard_Inlet,_Port_Moody,_British_Columbia.jpg) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
 | `minnekhada.jpg` | Minnekhada Regional Park, Coquitlam | Jennifer C. | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Minnekhada_High_Knoll_Hike_(52213848403).jpg) | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) |
+
+The ad creatives use only Pexels, CC0 and CC BY photos (`buntzen-lake-dock.jpg`, `gv-cover.jpg`, `lafarge-lake-lights.jpg`, `skytrain-sunset.jpg`, `tc-cover.jpg`, `vancouver-sunset.jpg`), so the advertising composites raise no share-alike question.
 
 Brand assets (`assets/img/devin-headshot-*.jpg`, `assets/img/devin-bw-*.jpg`, `assets/img/axford-logo.png`) belong to Devin Desaulniers and Axford Real Estate.
 
