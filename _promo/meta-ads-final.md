@@ -90,6 +90,8 @@ Coquitlam, Port Coquitlam, Port Moody, plus Anmore and Belcarra.
 
 ## Creative notes
 
-- Photographs are the same Wikimedia Commons files used in the guides, with a credit line on each image. Logos and the headshot are site assets.
+- Creatives are rendered from `_promo/creatives/build_creatives.py` (HTML/CSS → Playwright Chromium) in the website’s design: Newsreader headlines, Montserrat kickers, Inter body, the site’s navy and blue. Three layouts: a photo over a navy panel (v1), a split photo and checklist (v2), and a portrait of Devin with the photo (v3).
+- Photographs are from the guide photo set (`guides/img/`, credits in `guides/img/ATTRIBUTION.md`), with a credit line on each image. Only Pexels, CC0 and CC BY photos are used on the ads so there is no share-alike question on an advertising composite.
+- Devin appears on every creative: his colour headshot in the identity bar, or his black-and-white portrait on v3. The “Devin” logo is not used. Every creative shows the words **Axford Real Estate** in the identity bar next to the Axford logo.
 - Square and story versions of a variant use the same message so the placement can swap sizes without a copy change.
 - “Axford” in the 30-character description is the short form. The image itself spells out Axford Real Estate, which is what has to be readable in the ad.
