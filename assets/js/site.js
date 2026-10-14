@@ -86,13 +86,23 @@
       status.innerHTML = html;
       status.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+    function revealThanks() {
+      var fields = form.querySelector('[data-offer-fields]');
+      var thanks = form.querySelector('[data-offer-thanks]');
+      if (!fields || !thanks) return false;
+      fields.hidden = true;
+      thanks.hidden = false;
+      thanks.focus({ preventScroll: true });
+      thanks.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return true;
+    }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.reportValidity()) return;
       var fallback = 'Please email <a href="mailto:devin@axfordrealestate.ca">devin@axfordrealestate.ca</a> or call <a href="tel:+16048091032">604-809-1032</a>.';
       if (!endpoint) { show('error', 'This form is not connected right now, so nothing was sent. ' + fallback); return; }
       var fd = new FormData(form);
-      if (fd.get('_honey')) { show('success', 'Thanks! Your message has been sent.'); form.reset(); return; } // bot trap
+      if (fd.get('_honey')) { form.reset(); if (!revealThanks()) show('success', 'Thanks! Your message has been sent.'); return; } // bot trap
       var data = {};
       fd.forEach(function (v, k) { data[k] = data[k] ? data[k] + ', ' + v : v; });
       if (data.email) data._replyto = data.email;
@@ -102,8 +112,8 @@
         .then(function (res) {
           var ok = res.ok && String(res.j.success) !== 'false';
           if (ok) {
-            show('success', '<strong>Thanks — your request has been sent!</strong> Devin will be in touch soon. If it\'s urgent, call <a href="tel:+16048091032">604-809-1032</a>.');
             form.reset();
+            if (!revealThanks()) show('success', '<strong>Thanks — your request has been sent!</strong> Devin will be in touch soon. If it\'s urgent, call <a href="tel:+16048091032">604-809-1032</a>.');
           } else {
             show('error', 'Sorry, something went wrong and your request may not have been sent. ' + fallback);
           }

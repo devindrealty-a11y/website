@@ -856,3 +856,55 @@ body.is-lightbox{overflow:hidden}
   .ls-search-go{display:none}
   .ls-searchbar .ls-filter-toggle{flex:1 1 auto}
 }
+
+/* ===== Offer pages: free home evaluation + expert opinion ===== */
+.offer{background:
+  radial-gradient(680px 280px at 100% -8%, rgba(52,116,182,.14), transparent 62%),
+  var(--paper)}
+.offer-grid{display:grid;gap:28px;padding-top:28px;padding-bottom:48px;align-items:start}
+.offer-intro{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;align-items:center}
+.offer-photo{grid-column:1;grid-row:1;margin:0;width:64px;height:64px;border-radius:50%;overflow:hidden;background:#c8c9cb;box-shadow:0 0 0 3px #fff,0 0 0 4px var(--line)}
+.offer-photo picture{display:block;width:100%;height:100%}
+.offer-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 16%}
+.offer-intro > .eyebrow{grid-column:2;grid-row:1;margin:0}
+.offer-copy{grid-column:1 / -1;margin-top:16px}
+.offer h1{max-width:20ch;margin-bottom:.35em;font-size:clamp(1.85rem,1.2rem + 2vw,2.65rem)}
+.offer .lead{max-width:38rem;margin-bottom:0;font-size:1.05rem}
+.offer-points{grid-column:1 / -1;list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px}
+.offer-points li{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);font-size:.95rem;line-height:1.4;color:var(--ink)}
+.offer-points svg{flex:0 0 18px;width:18px;height:18px;margin-top:1px;color:var(--blue-dark)}
+.offer-form{position:relative;padding:22px 18px 18px;background:#fff;border:1px solid var(--line);border-top:3px solid var(--blue);border-radius:var(--radius);box-shadow:var(--shadow)}
+.offer-form h2{margin-bottom:.45em;font-size:1.45rem}
+.offer-form .form-grid{gap:14px}
+.offer-form .btn[type="submit"]{width:100%;min-width:0}
+.offer-form .field .consent{font-size:.86rem}
+.offer-note{margin:14px 0 0;font-size:.82rem;line-height:1.5;color:var(--muted)}
+.offer-thanks{display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-height:220px;padding:18px 4px 8px}
+.offer-thanks[hidden]{display:none !important}
+.offer-thanks:focus{outline:none}
+.offer-thanks:focus-visible{outline:3px solid var(--blue);outline-offset:4px;border-radius:8px}
+.offer-thanks-mark{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:#e7f6ec;color:#145c32}
+.offer-thanks-mark svg{width:26px;height:26px}
+.offer-thanks h2{margin:0;font-size:clamp(1.6rem,1.3rem + .8vw,2rem)}
+.offer-thanks p{margin:0;max-width:36rem;color:var(--text)}
+@media (min-width:720px){
+  .offer-intro{grid-template-columns:180px minmax(0,1fr);column-gap:28px;align-items:center}
+  .offer-photo{grid-row:1 / span 2;width:180px;height:226px;border-radius:var(--radius);box-shadow:var(--shadow);align-self:center}
+  .offer-intro > .eyebrow{align-self:end;margin-bottom:8px}
+  .offer-copy{grid-column:2;grid-row:2;margin-top:0;align-self:start}
+  .offer-points{margin-top:22px}
+  .offer-points li{padding:0;background:none;border:0}
+}
+@media (min-width:960px){
+  .offer-grid{grid-template-columns:minmax(0,1.15fr) minmax(300px,400px);gap:56px;padding-top:56px;padding-bottom:80px;align-items:center}
+  .offer-form{padding:28px 26px 22px}
+}
+
+/* Home: short paths into the two offer pages */
+.offer-links{display:grid;gap:12px;margin-top:20px}
+.offer-link{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);color:inherit;text-decoration:none}
+.offer-link:hover{border-color:var(--blue-dark);color:inherit}
+.offer-link-k{font-family:var(--font-head);font-weight:600;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-dark)}
+.offer-link-t{font-family:var(--font-display);font-weight:500;font-size:1.35rem;line-height:1.2;color:var(--ink)}
+.offer-link-d{font-size:.92rem;line-height:1.45;color:var(--muted)}
+@media (min-width:820px){.offer-links{grid-template-columns:1fr 1fr;gap:24px}}
