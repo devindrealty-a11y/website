@@ -768,7 +768,7 @@ def build_rets(rec, stats):
     if rec.get("Photos"):
         ordered = sorted(rec["Photos"], key=lambda p: parse_int(p.get("SequenceID")) or 0)
         for photo in ordered:
-            url = photo.get("LargePhotoURL") or photo.get("PhotoURL") or ""
+            url = photo.get("LargePhotoURL") or photo.get("PhotoURL") or photo.get("ThumbnailURL") or ""
             if str(url).startswith("https://") and url not in photos:
                 photos.append(url)
             if len(photos) >= MAX_PHOTOS:
@@ -1057,6 +1057,35 @@ def street_line(rec):
     return line or unit
 
 
+# Smaller path tokens lose to a larger copy of the same file.
+_PHOTO_SIZE_TOKENS = (
+    ("/highres/", 0),
+    ("/large/", 1),
+    ("/medres/", 2),
+    ("/medium/", 3),
+    ("/lowres/", 4),
+    ("/small/", 5),
+    ("/thumbnail/", 6),
+    ("/thumb/", 7),
+)
+
+
+def photo_size_rank(url):
+    low = str(url).lower()
+    for token, rank in _PHOTO_SIZE_TOKENS:
+        if token in low:
+            return rank
+    return 2
+
+
+def photo_identity(url):
+    """Same photo at two sizes shares an identity, so the gallery keeps one."""
+    path = urllib.parse.urlsplit(str(url)).path.lower()
+    for token, _rank in _PHOTO_SIZE_TOKENS:
+        path = path.replace(token, "/")
+    return path
+
+
 def photo_urls(media):
     rows = media or []
     if isinstance(rows, dict):
@@ -1068,7 +1097,7 @@ def photo_urls(media):
         category = textify(media_row.get("MediaCategory")).lower()
         if category and "photo" not in category and "image" not in category:
             continue
-        url = media_row.get("MediaURL") or media_row.get("LargePhotoURL") or media_row.get("PhotoURL") or ""
+        url = media_row.get("MediaURL") or media_row.get("LargePhotoURL") or media_row.get("PhotoURL") or media_row.get("ThumbnailURL") or ""
         if not str(url).startswith("https://"):
             continue
         try:
@@ -1077,9 +1106,17 @@ def photo_urls(media):
             order = 999
         preferred = 0 if media_row.get("PreferredPhotoYN") else 1
         picked.append((preferred, order, str(url)))
-    picked.sort()
+    groups = {}
+    for preferred, order, url in picked:
+        ident = photo_identity(url)
+        rank = photo_size_rank(url)
+        current = groups.get(ident)
+        # Lower rank is a larger file. Prefer that, then the preferred flag, then order.
+        if current is None or (rank, preferred, order) < (current[0], current[1], current[2]):
+            groups[ident] = (rank, preferred, order, url)
+    ordered = sorted(groups.values(), key=lambda item: (item[1], item[2], item[0]))
     out = []
-    for _preferred, _order, url in picked:
+    for _rank, _preferred, _order, url in ordered:
         if url not in out:
             out.append(url)
         if len(out) >= MAX_PHOTOS:

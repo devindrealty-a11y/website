@@ -775,7 +775,7 @@ body.has-sticky{padding-bottom:76px}
 .ls-grid{display:grid;gap:18px;margin-top:16px}
 .ls-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
 .ls-media{position:relative;display:block;background:var(--grey-bg);aspect-ratio:3/2;overflow:hidden}
-.ls-media img,.ls-frame img,.ls-thumb img{width:100%;height:100%;object-fit:cover}
+.ls-media img,.ls-thumb img{width:100%;height:100%;object-fit:cover}
 .ls-photocount{position:absolute;right:10px;bottom:10px;padding:4px 9px;border-radius:999px;background:rgba(13,27,42,.78);color:#fff;font-family:var(--font-head);font-weight:600;font-size:.75rem;line-height:1.3}
 .ls-nophoto{display:flex;align-items:center;justify-content:center;height:100%;min-height:140px;color:var(--muted);font-weight:600;background:var(--grey-bg);text-align:center;padding:12px}
 .ls-card-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
@@ -794,9 +794,16 @@ body.has-sticky{padding-bottom:76px}
 .ls-more-wrap{margin-top:22px}
 .ls-back{margin:0 0 16px}
 .ls-back a{font-family:var(--font-head);font-weight:600;text-decoration:none}
-.ls-detail-grid{display:grid;gap:28px}
+.ls-detail-grid{display:grid;gap:12px 28px;min-width:0;max-width:100%;grid-template-columns:1fr;grid-template-areas:"lead" "gallery" "summary"}
+.ls-lead{grid-area:lead;min-width:0;max-width:100%}
+.ls-gallery{grid-area:gallery;min-width:0;max-width:100%}
+.ls-summary{grid-area:summary;min-width:0;max-width:100%}
 .ls-address{margin:0 0 .35em;font-size:clamp(1.7rem,1.25rem + 1.5vw,2.5rem)}
-.ls-frame{position:relative;background:var(--grey-bg);border-radius:var(--radius);overflow:hidden;aspect-ratio:3/2;touch-action:pan-y}
+.ls-frame{position:relative;width:100%;max-width:100%;background:var(--grey-bg);border-radius:var(--radius);overflow:hidden;aspect-ratio:3/2;touch-action:pan-y;cursor:zoom-in}
+.ls-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;background:var(--grey-bg)}
+.ls-frame img.is-native{width:auto;height:auto;max-width:100%;max-height:100%;margin:auto}
+.ls-frame .ls-nophoto{position:absolute;inset:0;min-height:0}
+.ls-frame:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .ls-photo-count{margin:8px 0 0;font-family:var(--font-head);font-size:.82rem;color:var(--muted)}
 .ls-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding-bottom:4px}
 .ls-thumb{flex:0 0 auto;width:84px;height:64px;padding:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:var(--grey-bg);cursor:pointer}
@@ -826,8 +833,23 @@ body.has-sticky{padding-bottom:76px}
 @media (min-width:1100px){
   .ls-more-filters,.ls-more-filters.is-collapsed{grid-template-columns:repeat(5,minmax(0,1fr))}
   .ls-grid{grid-template-columns:repeat(3,1fr)}
-  .ls-detail-grid{grid-template-columns:1.15fr .85fr;align-items:start}
+  .ls-detail-grid{grid-template-columns:1.15fr .85fr;grid-template-areas:"gallery lead" "gallery summary";align-items:start}
 }
+@media (max-width:1099px){
+  body.is-listing-open .page-hero--search{display:none}
+  .ls-address{font-size:1.35rem;line-height:1.25;margin-bottom:.2em}
+  .ls-price{font-size:1.45rem}
+  .ls-frame{max-height:42vh}
+  .ls-photo-nav .btn{flex:1 1 0;min-height:40px;padding:0 10px}
+  .ls-facts{margin-top:10px}
+}
+.ls-lightbox{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:16px;padding-top:calc(16px + env(safe-area-inset-top));background:rgba(8,14,22,.94)}
+.ls-lightbox[hidden]{display:none}
+body.is-lightbox{overflow:hidden}
+.ls-lightbox-stage{display:flex;align-items:center;justify-content:center;width:100%;height:calc(100dvh - 120px);max-height:calc(100vh - 120px);min-height:0;touch-action:pan-y}
+.ls-lightbox-stage img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.ls-lightbox-count{margin:0;color:#fff;font-family:var(--font-head);font-size:.9rem}
+.ls-lightbox-close{position:absolute;top:calc(10px + env(safe-area-inset-top));right:10px;min-height:44px;padding:0 16px;border:0;border-radius:999px;background:#fff;color:var(--ink);font-family:var(--font-head);font-weight:600;cursor:pointer}
 @media (max-width:699px){
   .ls-operator{align-items:flex-start}
   .ls-filters{padding:12px}

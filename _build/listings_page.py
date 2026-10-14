@@ -150,8 +150,8 @@ def render(mode="sale"):
     <div class="container">
       <p class="ls-back"><a href="{spec["file"]}" id="ls-back">← Back to search</a></p>
       <div class="ls-detail-grid">
-        <div>
-          <div class="ls-frame" id="ls-photo"></div>
+        <div class="ls-gallery">
+          <div class="ls-frame" id="ls-photo" role="button" tabindex="0" aria-label="Enlarge photo"></div>
           <p class="ls-photo-count" id="ls-photo-count" aria-live="polite"></p>
           <div class="ls-thumbs" id="ls-thumbs"></div>
           <div class="ls-photo-nav">
@@ -159,10 +159,12 @@ def render(mode="sale"):
             <button type="button" class="btn btn-outline" id="ls-next">Next photo</button>
           </div>
         </div>
-        <div>
+        <div class="ls-lead">
           <p class="ls-price" id="ls-price"></p>
           <h2 class="ls-address" id="ls-heading" tabindex="-1"></h2>
           <p class="ls-meta" id="ls-meta"></p>
+        </div>
+        <div class="ls-summary">
           <p class="ls-broker" id="ls-broker"></p>
           <p class="ls-agent" id="ls-agent"></p>
           <p id="ls-realtor-link"></p>
