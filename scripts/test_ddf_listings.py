@@ -239,6 +239,18 @@ def test_listings_are_published():
     assert "ReferralURL" in js
     assert 'listings/" + (mode === "rent" ? "rent" : "sale")' in js
     assert "photoCount" in js
+    assert "ls-lightbox" in js
+    assert "is-listing-open" in js
+    css = open(os.path.join(ROOT, "assets", "css", "styles.css"), encoding="utf-8").read()
+    assert ".ls-frame img{position:absolute" in css
+    assert "object-fit:contain" in css
+    assert "min-width:0" in css
+    for name in ("listings.html", "rentals.html"):
+        page = open(os.path.join(ROOT, name), encoding="utf-8").read()
+        assert "ls-gallery" in page
+        assert "ls-lead" in page
+        assert "ls-summary" in page
+        assert 'aria-label="Enlarge photo"' in page
     sitemap = open(os.path.join(ROOT, "sitemap.xml"), encoding="utf-8").read()
     assert "<loc>https://devindesaulniers.ca/listings.html</loc>" in sitemap
     assert "<loc>https://devindesaulniers.ca/rentals.html</loc>" in sitemap
@@ -255,6 +267,20 @@ def test_listings_are_published():
         low = html.lower()
         assert "best " not in low
         assert "top " not in low
+
+
+def test_photo_urls_keep_the_highres_copy():
+    media = [
+        {"MediaURL": "https://cdn.example/listing/thumb/1/R1_1.jpg", "Order": 0, "MediaCategory": "Photo", "PreferredPhotoYN": True},
+        {"MediaURL": "https://cdn.example/listing/highres/1/R1_1.jpg", "Order": 1, "MediaCategory": "Photo"},
+        {"MediaURL": "https://cdn.example/listing/lowres/1/R1_2.jpg", "Order": 2, "MediaCategory": "Photo"},
+        {"MediaURL": "https://cdn.example/listing/highres/1/R1_2.jpg", "Order": 2, "MediaCategory": "Photo"},
+        {"MediaURL": "https://cdn.example/listing/doc.pdf", "Order": 3, "MediaCategory": "Document"},
+    ]
+    assert ddf.photo_urls(media) == [
+        "https://cdn.example/listing/highres/1/R1_1.jpg",
+        "https://cdn.example/listing/highres/1/R1_2.jpg",
+    ]
 
 
 def test_builds_realtor_url_when_feed_omits_it():

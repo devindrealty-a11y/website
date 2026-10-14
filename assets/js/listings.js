@@ -7,7 +7,7 @@
   var mode = (tag && tag.getAttribute("data-mode")) || "sale";
   var feedPath = (tag && tag.getAttribute("data-feed")) || "listings/data.json";
   var samplePath = (tag && tag.getAttribute("data-sample")) || "_fixtures/listings-sample.json";
-  var state = { listings: [], byId: {}, cities: {}, sample: false, destinationId: null, shown: PAGE_WIDE, photo: 0, current: null };
+  var state = { listings: [], byId: {}, cities: {}, sample: false, destinationId: null, shown: PAGE_WIDE, photo: 0, current: null, lightbox: false };
   var shardCache = {};
   var shardWait = {};
   var baseTitle = document.title;
@@ -255,6 +255,12 @@
     if (lazy) img.loading = "lazy";
     else if (index === 0) img.setAttribute("fetchpriority", "high");
     img.decoding = "async";
+    img.addEventListener("load", function () {
+      var box = img.parentElement;
+      if (!box || !img.naturalWidth || !box.clientWidth) return;
+      var dpr = window.devicePixelRatio || 1;
+      if (img.naturalWidth < box.clientWidth * dpr && img.naturalHeight < box.clientHeight * dpr) img.classList.add("is-native");
+    });
     img.addEventListener("error", function () {
       var missing = document.createElement("div");
       missing.className = "ls-nophoto";
@@ -345,6 +351,8 @@
   }
 
   function showSearch() {
+    closeLightbox();
+    document.body.classList.remove("is-listing-open");
     detailEl.hidden = true;
     searchEl.hidden = false;
     document.title = baseTitle;
@@ -354,6 +362,7 @@
   function showDetail(item) {
     state.current = item;
     state.photo = 0;
+    document.body.classList.add("is-listing-open");
     searchEl.hidden = true;
     detailEl.hidden = false;
     var inquiry = document.querySelector(".ls-inquiry");
@@ -414,6 +423,8 @@
   }
 
   function showMissing() {
+    closeLightbox();
+    document.body.classList.add("is-listing-open");
     searchEl.hidden = true;
     detailEl.hidden = false;
     document.getElementById("ls-price").textContent = "";
@@ -521,6 +532,81 @@
     if (photos.length < 2) return;
     state.photo = (state.photo + delta + photos.length) % photos.length;
     paintDetail();
+    paintLightbox();
+  }
+
+  function ensureLightbox() {
+    var root = document.getElementById("ls-lightbox");
+    if (root) return root;
+    root = document.createElement("div");
+    root.id = "ls-lightbox";
+    root.className = "ls-lightbox";
+    root.hidden = true;
+    root.setAttribute("role", "dialog");
+    root.setAttribute("aria-modal", "true");
+    root.setAttribute("aria-label", "Listing photo");
+    var close = document.createElement("button");
+    close.type = "button";
+    close.className = "ls-lightbox-close";
+    close.textContent = "Close";
+    close.addEventListener("click", closeLightbox);
+    var stage = document.createElement("div");
+    stage.className = "ls-lightbox-stage";
+    stage.id = "ls-lightbox-stage";
+    var count = document.createElement("p");
+    count.className = "ls-lightbox-count";
+    count.id = "ls-lightbox-count";
+    root.appendChild(close);
+    root.appendChild(stage);
+    root.appendChild(count);
+    root.addEventListener("click", function (e) {
+      if (e.target === root) closeLightbox();
+    });
+    var startX = null;
+    stage.addEventListener("touchstart", function (e) {
+      startX = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : null;
+    }, { passive: true });
+    stage.addEventListener("touchend", function (e) {
+      if (startX == null || !e.changedTouches || !e.changedTouches[0]) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      startX = null;
+      if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+    }, { passive: true });
+    document.body.appendChild(root);
+    return root;
+  }
+
+  function openLightbox() {
+    var photos = state.current ? httpsPhotos(state.current) : [];
+    if (!photos.length || !detailEl || detailEl.hidden) return;
+    state.lightbox = true;
+    var root = ensureLightbox();
+    root.hidden = false;
+    document.body.classList.add("is-lightbox");
+    paintLightbox();
+    var close = root.querySelector(".ls-lightbox-close");
+    if (close) close.focus();
+  }
+
+  function closeLightbox() {
+    if (!state.lightbox && !document.getElementById("ls-lightbox")) return;
+    state.lightbox = false;
+    var root = document.getElementById("ls-lightbox");
+    if (root) root.hidden = true;
+    document.body.classList.remove("is-lightbox");
+  }
+
+  function paintLightbox() {
+    if (!state.lightbox) return;
+    var stage = document.getElementById("ls-lightbox-stage");
+    var count = document.getElementById("ls-lightbox-count");
+    var item = state.current;
+    if (!stage || !item) return;
+    var photos = httpsPhotos(item);
+    stage.replaceChildren(photoEl(item, state.photo, false));
+    var img = stage.querySelector("img");
+    if (img) img.alt = photos.length > 1 ? "Photo " + (state.photo + 1) + " of " + photos.length : "Listing photo";
+    if (count) count.textContent = photos.length > 1 ? "Photo " + (state.photo + 1) + " of " + photos.length : "";
   }
 
   function currentId() {
@@ -628,18 +714,38 @@
   document.getElementById("ls-next").addEventListener("click", function () { step(1); });
   var frame = document.getElementById("ls-photo");
   var touchX = null;
+  var gesture = "";
   if (frame) {
     frame.addEventListener("touchstart", function (e) {
+      gesture = "";
       touchX = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : null;
     }, { passive: true });
     frame.addEventListener("touchend", function (e) {
       if (touchX == null || !e.changedTouches || !e.changedTouches[0]) return;
       var dx = e.changedTouches[0].clientX - touchX;
       touchX = null;
-      if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+      if (Math.abs(dx) > 40) {
+        gesture = "swipe";
+        step(dx < 0 ? 1 : -1);
+      }
     }, { passive: true });
+    frame.addEventListener("click", function () {
+      if (gesture === "swipe") { gesture = ""; return; }
+      openLightbox();
+    });
+    frame.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openLightbox();
+      }
+    });
   }
   document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && state.lightbox) {
+      closeLightbox();
+      if (frame) frame.focus();
+      return;
+    }
     if (!detailEl || detailEl.hidden) return;
     var name = e.target && e.target.tagName;
     if (name === "INPUT" || name === "TEXTAREA" || name === "SELECT") return;
