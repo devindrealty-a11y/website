@@ -216,6 +216,13 @@ def test_listings_are_published():
         assert "top " not in low
 
 
+def test_builds_realtor_url_when_feed_omits_it():
+    item = odata(ListingURL=None, ListingKey="12345678")
+    assert item["realtorUrl"] == "https://www.realtor.ca/real-estate/12345678"
+    kept = odata()
+    assert kept["realtorUrl"].startswith("https://www.realtor.ca/")
+
+
 def test_property_select_uses_live_schema():
     url = ddf.property_url(ddf.SELECT_FIELDS, False, True, 0)
     assert "ListOfficeName" not in url

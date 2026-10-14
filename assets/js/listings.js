@@ -99,8 +99,8 @@
       countEl.textContent = state.sample
         ? "No sample listings in the preview file."
         : (mode === "rent"
-          ? "The rental feed is not connected yet. Homes for rent will show here after it refreshes."
-          : "The listing feed is not connected yet. Homes will show here after it refreshes.");
+          ? "No homes for rent are in the current feed."
+          : "No homes for sale are in the current feed.");
       moreEl.hidden = true;
       return;
     }

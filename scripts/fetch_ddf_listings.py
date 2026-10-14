@@ -252,6 +252,9 @@ def fetch_lookups(token):
 def fetch_odata(token, offices, members, stats):
     sales = []
     rentals = []
+    subtypes = Counter()
+    structures = Counter()
+    statuses = Counter()
     select = list(SELECT_FIELDS)
     # Media is nested on Property. $expand was rejected by this feed.
     expand = False
@@ -294,6 +297,14 @@ def fetch_odata(token, offices, members, stats):
         pages += 1
         for rec in rows:
             stats["pulled"] += 1
+            subtype = textify(rec.get("PropertySubType")) or "(blank)"
+            structure = textify(rec.get("StructureType")) or "(blank)"
+            status_text = textify(first(rec, "StandardStatus", "MlsStatus")) or "(blank)"
+            subtypes[subtype] += 1
+            structures[structure] += 1
+            statuses[status_text] += 1
+            if positive_amount(rec.get("LeaseAmount")):
+                stats["lease_amount_set"] += 1
             channel, item = from_odata(rec, offices, members, stats, intent=None)
             if item and channel == "sale":
                 sales.append(item)
@@ -308,7 +319,14 @@ def fetch_odata(token, offices, members, stats):
             raise FetchError("Property query page was full but did not include @odata.nextLink, so the pull is incomplete.")
         if pages >= MAX_PAGES:
             raise FetchError(f"Stopped after {MAX_PAGES} pages so a partial feed would not replace the listing files.")
+    print("Property subtypes: " + tally(subtypes, 25))
+    print("Structure types: " + tally(structures, 15))
+    print("Statuses: " + tally(statuses, 15))
     return sales, rentals
+
+
+def tally(counter, limit):
+    return ", ".join(f"{name}={count}" for name, count in counter.most_common(limit)) or "(none)"
 
 
 def rejected_field(payload):
@@ -680,7 +698,7 @@ def build_odata(rec, offices, members, stats):
         brokerage=brokerage or "",
         agent=agent or "",
         photos=photos,
-        realtor_url=clean_url(first(rec, "ListingURL", "MoreInformationLink")),
+        realtor_url=realtor_fallback(clean_url(first(rec, "ListingURL", "MoreInformationLink")), listing_id),
         updated=first(rec, "ModificationTimestamp"),
         analytics_id=listing_id if digits(listing_id) else "",
         stats=stats,
@@ -767,7 +785,7 @@ def build_rets(rec, stats):
         brokerage=brokerage,
         agent=agent_name or first(rec, "ListAgentFullName"),
         photos=photos,
-        realtor_url=clean_url(first(rec, "MoreInformationLink", "ListingURL")),
+        realtor_url=realtor_fallback(clean_url(first(rec, "MoreInformationLink", "ListingURL")), listing_id),
         updated=first(rec, "LastUpdated", "ModificationTimestamp"),
         analytics_id=listing_id if digits(listing_id) else "",
         stats=stats,
@@ -1043,6 +1061,15 @@ def photo_urls(media):
         if len(out) >= MAX_PHOTOS:
             break
     return out
+
+
+def realtor_fallback(url, listing_id):
+    """Use the feed URL. When it is empty, link to the listing on REALTOR.ca by its numeric id."""
+    if url:
+        return url
+    if digits(listing_id):
+        return f"https://www.realtor.ca/real-estate/{listing_id}"
+    return ""
 
 
 def clean_url(url):
