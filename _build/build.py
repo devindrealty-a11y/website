@@ -38,7 +38,7 @@ VIDEO_JSONLD = '<script type="application/ld+json">\n' + json.dumps({
 
 STARS5 = '<span class="stars" aria-hidden="true">' + _TSTAR * 5 + '</span>'
 TOURS_LINK = f'<a class="link-arrow" href="videos.html">See all six video tours {I["arrow"]}</a>'
-HOME_SERVICES_ASIDE = """<p class="lead">Whether you're buying your first place or moving to the Lower Mainland and need a rental, I'll make the process clear and manageable.</p>"""
+HOME_SERVICES_ASIDE = """<p class="lead">Whether you're buying, curious what your home would sell for, or moving to the Lower Mainland and need a rental, I'll make the process clear and manageable.</p>"""
 HOME_PROCESS_ASIDE = """<p class="lead">Buying or renting, my job is to keep you informed and represent your interests at every step.</p>"""
 HOME_TOURS_ASIDE = f"<p>{YT_NOTE} Press play to watch here.</p>{TOURS_LINK}"
 
@@ -92,6 +92,18 @@ home += f'''
         <p>Moving to Greater Vancouver? I represent tenants through the whole search: consultation, property search, in-person or virtual showings, and lease review &amp; negotiation — <strong>$1,500 + GST, paid by the tenant in two parts</strong>.</p>
         <a class="btn btn-light" href="tenants.html">See how it works {I["arrow"]}</a>
       </article>
+    </div>
+    <div class="offer-links">
+      <a class="offer-link" href="home-evaluation.html">
+        <span class="offer-link-k">Selling, or just curious</span>
+        <span class="offer-link-t">Free home evaluation</span>
+        <span class="offer-link-d">Send me your address and I'll email you a market evaluation.</span>
+      </a>
+      <a class="offer-link" href="buyer-opinion.html">
+        <span class="offer-link-k">Looking at a property</span>
+        <span class="offer-link-t">Get an expert opinion</span>
+        <span class="offer-link-d">Send me the address and I'll email you my take on its value.</span>
+      </a>
     </div>
   </div>
 </section>
@@ -193,6 +205,8 @@ home += f'''
         <p>Tell me what you're looking for and I'll follow up.</p>
         <div class="btn-row">
           <a class="btn btn-outline" href="buyers.html#listings">Get listings sent to me</a>
+          <a class="btn btn-outline" href="home-evaluation.html">Free home evaluation</a>
+          <a class="btn btn-outline" href="buyer-opinion.html">Get an expert opinion</a>
           <a class="btn btn-outline" href="tenants.html#intake">Start a rental search</a>
         </div>
       </div>
@@ -257,7 +271,7 @@ for name,tag,desc,nbhd,transit,outdoors,take in hoods:
 YT_BUYERS = ["TptjgpShZYM", "mR_HYgiJClc", "INd7HTnfDLs"]
 BUYERS_HOODS_ASIDE = """<p class="lead">A quick introduction to the communities I focus on. Every street is different — reach out and I'll help you compare areas based on your commute, lifestyle and budget.</p>"""
 BUYERS_TOURS_ASIDE = f"<p>{YT_NOTE} They're a handy way to compare layouts and finishes before you book showings.</p>{TOURS_LINK}"
-BUYERS_LISTINGS_ASIDE = """<p class="lead">Tell me what you're looking for and I'll send you homes that match — including new listings as they hit the market.</p>"""
+BUYERS_LISTINGS_ASIDE = """<p class="lead">Tell me what you're looking for and I'll send you homes that match — including new listings as they hit the market.</p><p>Already looking at a specific property? <a href="buyer-opinion.html">Get an expert opinion</a> on its value.</p>"""
 
 buyers = head("Buying a Home in the Tri-Cities, BC | Devin Desaulniers, Axford Real Estate",
               "Neighbourhood guides for Coquitlam, Port Coquitlam, Port Moody and nearby areas, a free mortgage affordability calculator, and personalised listing alerts from Devin Desaulniers, Axford Real Estate.", "buyers", page_url="buyers.html")
@@ -795,7 +809,7 @@ videos += f"""
 videos += foot()
 
 # ---------------- PRIVACY ----------------
-# Keep in step with the real forms (buyers, tenants, listing and rental inquiries), assets/js/config.js and the Elfsight snippet in foot().
+# Keep in step with the real forms (buyers, tenants, home evaluation, expert opinion, listing and rental inquiries), assets/js/config.js and the Elfsight snippet in foot().
 PRIVACY_URL = "privacy.html"
 privacy = head("Privacy | Devin Desaulniers, Real Estate Associate, Axford Real Estate",
                "How the contact forms, listing inquiries, and chat widget on Devin Desaulniers' website handle what you send, where it may be processed, and how to make a privacy request.",
@@ -815,10 +829,11 @@ privacy += f"""
       <p>This site is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate, {BROKERAGE_ADDR}. The sections below explain, in plain language, where the information you send me goes.</p>
 
       <h2 id="forms">Contact forms</h2>
-      <p>There are four forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, and the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>There are six forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, and the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
       <p>The forms ask for:</p>
       <ul>
         <li>your name and email, and your phone number if you add it;</li>
+        <li>on the home evaluation and the expert opinion forms: your email, the property address, and your name if you add it;</li>
         <li>on the listings form: the areas you're interested in, property type, price range, bedrooms and bathrooms, your timeline, whether you're pre-approved for a mortgage, and any notes;</li>
         <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, bedrooms, preferred areas, pets, your work or school location, and any notes;</li>
         <li>on a listing or rental inquiry: the listing id, MLS® number, address and REALTOR.ca link for the home you opened, and your message.</li>
@@ -851,6 +866,105 @@ privacy += f"""
 """
 privacy += foot()
 
+# ---------------- OFFER PAGES (home evaluation + buyer opinion) ----------------
+# Compact landing pages. Same FormSubmit AJAX path as the other forms (config.js). Not test-submitted.
+_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg>'
+
+def offer_page(filename, title, desc, eyebrow, h1, lead, points, form_key, subject, form_name, form_h, button, thanks_h, thanks_p, note, id_prefix):
+    photo = picture("assets/img/devin-headshot", (480, 800), 800, 1000,
+                    "Devin Desaulniers, Real Estate Associate with Axford Real Estate",
+                    "", eager=True, sizes_attr="(max-width: 719px) 64px, 180px")
+    points_html = "".join(f"<li>{icon}<span>{text}</span></li>" for icon, text in points)
+    page = head(title, desc, "offer", og_image="assets/img/devin-headshot-800.jpg", page_url=filename)
+    page += f"""
+<section class="offer">
+  <div class="container offer-grid">
+    <div class="offer-intro">
+      <figure class="offer-photo">{photo}</figure>
+      <span class="eyebrow">{eyebrow}</span>
+      <div class="offer-copy">
+        <h1>{h1}</h1>
+        <p class="lead">{lead}</p>
+      </div>
+      <ul class="offer-points">{points_html}</ul>
+    </div>
+    <form class="offer-form" id="request" data-form-key="{form_key}" action="#" method="POST">
+      <input type="hidden" name="_subject" value="{subject}">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="form" value="{form_name}">
+      <div class="hp" aria-hidden="true"><label>Leave this field empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
+      <div data-offer-fields>
+        <h2>{form_h}</h2>
+        <div class="form-grid">
+          <div class="field"><label for="{id_prefix}-email">Your email <span class="req">*</span></label><input id="{id_prefix}-email" name="email" type="email" inputmode="email" autocomplete="email" required></div>
+          <div class="field"><label for="{id_prefix}-address">Property address <span class="req">*</span></label><input id="{id_prefix}-address" name="Property address" autocomplete="street-address" required></div>
+          <div class="field"><label for="{id_prefix}-name">Your name <span class="hint">(optional)</span></label><input id="{id_prefix}-name" name="name" autocomplete="name"></div>
+          {consent(id_prefix)}
+          <div class="full">
+            <button type="submit" class="btn btn-primary btn-block">{button}</button>
+            <div class="form-status" role="status" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+      <div class="offer-thanks" data-offer-thanks hidden role="status" tabindex="-1">
+        <span class="offer-thanks-mark">{_CHECK}</span>
+        <h2>{thanks_h}</h2>
+        <p>{thanks_p}</p>
+        <a class="btn btn-outline" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>
+      </div>
+      <p class="offer-note">{note}</p>
+    </form>
+  </div>
+</section>
+"""
+    page += foot()
+    return page
+
+home_evaluation = offer_page(
+    "home-evaluation.html",
+    "Free Home Evaluation | Devin Desaulniers, Axford Real Estate",
+    "Send Devin Desaulniers an address and he'll email you a free market evaluation of your home. Real Estate Associate with Axford Real Estate in Greater Vancouver.",
+    "Free home evaluation",
+    "Curious what your home would sell for?",
+    "Send me the address and I'll email you a free market evaluation — recent sales nearby, and what I'd expect your home to bring. There's no cost, and asking doesn't mean you have to list.",
+    [
+        (I["home"], "Free, and no commitment to list"),
+        (I["doc"], "Recent sales nearby, in plain language"),
+        (I["mail"], "I write it and email it to you"),
+    ],
+    "homeEvaluation",
+    "New free home evaluation",
+    "Free home evaluation",
+    "Request your evaluation",
+    "Request my evaluation",
+    "Thanks — I'll take a look.",
+    "Your request is in. I'll email a market evaluation of that address to you. If you'd rather talk it through, call or text me.",
+    "This is my opinion of market value from recent sales. It isn't an appraisal, and it isn't a promise of a sale price.",
+    "he",
+)
+buyer_opinion = offer_page(
+    "buyer-opinion.html",
+    "Get an Expert Opinion | Devin Desaulniers, Axford Real Estate",
+    "Looking at a property? Send Devin Desaulniers the address and he'll email you his take on its value. Real Estate Associate with Axford Real Estate.",
+    "Get an expert opinion",
+    "Looking at a property?",
+    "Send me the address and I'll email you my take on its value: what similar homes have sold for, and whether the asking price lines up. Useful before you book another showing or write an offer.",
+    [
+        (I["pin"], "For a home you're considering"),
+        (I["doc"], "Set beside recent sales"),
+        (I["mail"], "I email you my take"),
+    ],
+    "buyerOpinion",
+    "New expert opinion request",
+    "Expert opinion",
+    "Ask for my take",
+    "Get my take",
+    "Thanks — I'll look at this one.",
+    "Your request is in. I'll email you my take on the value. If you're on a deadline, call or text me.",
+    "This is my opinion of value from recent sales. It isn't an appraisal, and it isn't a promise of what the property will sell for.",
+    "bo",
+)
+
 # Old URL: tiny redirect so existing links keep working
 NEW_ABS = SITE + GV_URL
 redirect = f"""<!doctype html>
@@ -869,7 +983,7 @@ redirect = f"""<!doctype html>
 </html>
 """
 
-for fn, html in [("index.html",home),("buyers.html",buyers),("tenants.html",tenants),(GV_URL,gv),("relocating-to-coquitlam.html",redirect)]:
+for fn, html in [("index.html",home),("buyers.html",buyers),("tenants.html",tenants),(GV_URL,gv),("relocating-to-coquitlam.html",redirect),("home-evaluation.html",home_evaluation),("buyer-opinion.html",buyer_opinion)]:
     open(os.path.join(OUT,fn),"w").write(html)
 open(os.path.join(OUT, VIDEOS_URL), "w").write(videos)
 open(os.path.join(OUT, PRIVACY_URL), "w").write(privacy)
@@ -878,7 +992,7 @@ open(os.path.join(OUT, "rentals.html"), "w").write(listings_page.render("rent"))
 
 # Blog pages, RSS feed and sitemap (sitemap lists the static pages + blog index + every post)
 blog.write_blog(POSTS)
-STATIC_PAGES = ["", "tenants.html", "buyers.html", GV_URL, "videos.html", PRIVACY_URL]
+STATIC_PAGES = ["", "tenants.html", "buyers.html", "home-evaluation.html", "buyer-opinion.html", GV_URL, "videos.html", PRIVACY_URL]
 if LISTINGS_LIVE:
     STATIC_PAGES[1:1] = ["listings.html", "rentals.html"]
 open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS))

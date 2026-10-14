@@ -5,6 +5,8 @@ Static site for GitHub Pages, custom domain **https://devindesaulniers.ca/** (CN
 Pages:
 - `index.html` — home / profile
 - `buyers.html` — buyer info, neighbourhood guides, "Send me listings" form
+- `home-evaluation.html` — free market evaluation: email and property address
+- `buyer-opinion.html` — his take on a property you're considering
 - `tenants.html` — standalone landing page for the $1,500 tenant-paid relocation rental service (link this from ads/social)
 - `listings.html` — active residential homes for sale in Greater Vancouver and the Fraser Valley (REALTOR.ca DDF®)
 - `rentals.html` — active residential homes for rent in the same area, with rent shown per month
@@ -21,9 +23,10 @@ cd _build && python3 build.py
 No placeholders remain: the footer disclaimer, the privacy page (`privacy.html`, built from `PRIVACY_URL` / `privacy` in `_build/build.py`), the Axford disclosure in the tenant FAQ, the buyer services list and the neighbourhood notes are all written. If you add or change a form, the chat widget or another third-party service, update `privacy.html` to match.
 
 ## Forms (FormSubmit)
-Both forms (buyers.html "Send me listings", tenants.html relocation intake) post via AJAX to
+The forms (buyers.html "Send me listings", tenants.html relocation intake, home-evaluation.html, buyer-opinion.html, and the listing and rental inquiries) post via AJAX to
 `https://formsubmit.co/ajax/devin@axfordrealestate.ca` — configured in one spot: `assets/js/config.js`.
-- Email subjects: "New buyer listings request" / "New relocation rental intake" (table template, Reply-To = visitor's email).
+- Email subjects include "New buyer listings request", "New relocation rental intake", "New free home evaluation" and "New expert opinion request" (table template, Reply-To = visitor's email).
+- `homeEvaluation` and `buyerOpinion` were not test-submitted.
 - Spam: hidden honeypot field `_honey`. reCAPTCHA is not used by FormSubmit's AJAX flow, so nothing was disabled.
 - Visitors see an on-page success (or error + call/email fallback) message.
 
@@ -64,7 +67,7 @@ domain earns no search value of its own.
   Axford is listed as `parentOrganization` because schema.org only allows `worksFor` on `Person`.
 - `tenants.html` also carries `FAQPage` JSON-LD. It is generated from the same `FAQ_ITEMS` strings as the
   visible FAQ, so edit the FAQ in `build.py` only and the schema stays identical to the page text.
-- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, listings, rentals, tenants, buyers, relocating-to-greater-vancouver, videos, privacy, and the blog). The Coquitlam redirect is omitted.
+- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, listings, rentals, tenants, buyers, home-evaluation, buyer-opinion, relocating-to-greater-vancouver, videos, privacy, and the blog). The Coquitlam redirect is omitted.
 - `robots.txt` allows crawl and lists the Sitemap at https://devindesaulniers.ca/sitemap.xml (served at the domain root).
 - `SITE` in `_build/partials.py` is `https://devindesaulniers.ca/`. Rebuild after changing it.
 - Submit `sitemap.xml` in Google Search Console when ready.

@@ -270,6 +270,8 @@ def foot(root=""):
         <ul>
           <li><a href="{root}index.html">Home</a></li>
           <li><a href="{root}buyers.html">Buyers &amp; neighbourhoods</a></li>{listings_footer_links(root)}
+          <li><a href="{root}home-evaluation.html">Free home evaluation</a></li>
+          <li><a href="{root}buyer-opinion.html">Get an expert opinion</a></li>
           <li><a href="{root}tenants.html">Relocation rental service</a></li>
           <li><a href="{root}relocating-to-greater-vancouver.html">Relocating to Greater Vancouver guide</a></li>
           <li><a href="{root}videos.html">Property video tours</a></li>
