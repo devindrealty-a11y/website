@@ -585,6 +585,15 @@ body.has-sticky{padding-bottom:76px}
 @media (min-width:900px){.guide-intro{grid-template-columns:minmax(0,1fr) 300px;gap:80px}}
 .guide-lead{font-family:var(--font-display);font-size:clamp(1.25rem,1.05rem + .7vw,1.55rem);line-height:1.45;color:var(--ink)}
 .guide .list-check li{margin-bottom:.9em}
+.guide-list{margin:0 0 1.2em;padding-left:1.25em}
+.guide-list li{margin:0 0 .55em}
+.guide-list li:last-child{margin-bottom:0}
+.table-wrap{max-width:100%;overflow-x:auto;margin:0 0 1.4em;-webkit-overflow-scrolling:touch}
+.price-table{width:100%;min-width:520px;border-collapse:collapse;font-size:.98rem}
+.price-table caption{caption-side:bottom;padding-top:10px;text-align:left;font-size:.86rem;color:var(--muted)}
+.price-table th,.price-table td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.price-table th{font-family:var(--font-head);font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.price-table td:first-child,.price-table th:first-child{padding-left:0}
 .sub-h{margin-top:44px}
 .after-steps{margin-top:24px}
 .area-grid{display:grid;gap:16px;margin:28px 0 8px}
