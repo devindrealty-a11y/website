@@ -1,0 +1,150 @@
+{
+  "updated": "2026-10-09T12:00:00Z",
+  "source": "sample",
+  "sample": true,
+  "destinationId": null,
+  "area": "Greater Vancouver and Fraser Valley",
+  "notice": "FICTIONAL sample for local preview only. Not real listings, rents, photos, or brokerages. This file is under _fixtures so GitHub Pages (Jekyll) does not publish it.",
+  "count": 6,
+  "listings": [
+    {
+      "id": "SAMPLE-R2001",
+      "mls": "SAMPLE-R2001",
+      "price": 2800,
+      "address": "12 Sample Crescent",
+      "city": "Coquitlam",
+      "area": "Maillardville",
+      "postal": "V3K 0A1",
+      "beds": 3,
+      "baths": 2,
+      "type": "Townhouse",
+      "sqft": 1320,
+      "year": 2016,
+      "parking": 1,
+      "remarks": "FICTIONAL SAMPLE. Not a real listing. This townhouse text exists only so the rental search can be reviewed before the DDF feed is connected. The amount is already a monthly rent.",
+      "brokerage": "Sample Harbour Realty",
+      "agent": "Alex Sample",
+      "photos": [
+        "https://placehold.co/960x640/e8f0f9/173a5e.jpg?text=Sample+rental+1",
+        "https://placehold.co/960x640/d0d0d0/173a5e.jpg?text=Sample+rental+2"
+      ],
+      "realtorUrl": "https://www.realtor.ca/#sample-not-a-real-listing-SAMPLE-R2001",
+      "updated": "2026-10-09T15:00:00Z"
+    },
+    {
+      "id": "SAMPLE-R2002",
+      "mls": "SAMPLE-R2002",
+      "price": 4200,
+      "address": "80 Preview Street",
+      "city": "Surrey",
+      "area": "Cloverdale",
+      "postal": "V3S 0A1",
+      "beds": 4,
+      "baths": 3,
+      "type": "Detached house",
+      "sqft": 2100,
+      "year": 2004,
+      "parking": 2,
+      "remarks": "FICTIONAL SAMPLE. Not a real listing. A detached house used to try the rent and bedroom filters.",
+      "brokerage": "Preview Valley Realty",
+      "agent": "Riley Preview",
+      "photos": [
+        "https://placehold.co/960x640/1f6b5c/ffffff.jpg?text=Sample+rental+house"
+      ],
+      "realtorUrl": "https://www.realtor.ca/#sample-not-a-real-listing-SAMPLE-R2002",
+      "updated": "2026-10-08T18:00:00Z"
+    },
+    {
+      "id": "SAMPLE-R2003",
+      "mls": "SAMPLE-R2003",
+      "price": 2400,
+      "address": "410 Fictional Avenue",
+      "city": "Vancouver",
+      "area": "Fairview",
+      "postal": "V6H 0A1",
+      "beds": 1,
+      "baths": 1,
+      "type": "Condo / apartment",
+      "sqft": 640,
+      "year": 2019,
+      "parking": 1,
+      "remarks": "FICTIONAL SAMPLE. Not a real listing. A condo used to try the property-type filter.",
+      "brokerage": "Not A Real Brokerage",
+      "agent": "Casey Fiction",
+      "photos": [
+        "https://placehold.co/960x640/5b3f86/ffffff.jpg?text=Sample+rental+condo"
+      ],
+      "realtorUrl": "https://www.realtor.ca/#sample-not-a-real-listing-SAMPLE-R2003",
+      "updated": "2026-10-07T12:00:00Z"
+    },
+    {
+      "id": "SAMPLE-R2004",
+      "mls": "SAMPLE-R2004",
+      "price": 3100,
+      "address": "9 Imaginary Lane",
+      "city": "Langley",
+      "area": "Willoughby",
+      "postal": "V2Y 0A1",
+      "beds": 3,
+      "baths": 2.5,
+      "type": "Half duplex / duplex",
+      "sqft": 1540,
+      "year": 2011,
+      "parking": 2,
+      "remarks": "FICTIONAL SAMPLE. Not a real listing. A half duplex used to try the bathroom filter.",
+      "brokerage": "Fictional Home Sales",
+      "agent": "Jordan Preview",
+      "photos": [
+        "https://placehold.co/960x640/24578c/ffffff.jpg?text=Sample+rental+duplex"
+      ],
+      "realtorUrl": "https://www.realtor.ca/#sample-not-a-real-listing-SAMPLE-R2004",
+      "updated": "2026-10-06T09:00:00Z"
+    },
+    {
+      "id": "SAMPLE-R2005",
+      "mls": "SAMPLE-R2005",
+      "price": 1950,
+      "address": "55 Example Road",
+      "city": "Abbotsford",
+      "area": "Clearbrook",
+      "postal": "V2T 0A1",
+      "beds": 2,
+      "baths": 1,
+      "type": "Condo / apartment",
+      "sqft": 780,
+      "year": 1996,
+      "parking": 1,
+      "remarks": "FICTIONAL SAMPLE. Not a real listing. A lower monthly rent used to try the minimum and maximum rent filters.",
+      "brokerage": "Sample Harbour Realty",
+      "agent": "Alex Sample",
+      "photos": [
+        "https://placehold.co/960x640/c99a00/ffffff.jpg?text=Sample+rental+abbotsford"
+      ],
+      "realtorUrl": "https://www.realtor.ca/#sample-not-a-real-listing-SAMPLE-R2005",
+      "updated": "2026-10-05T16:00:00Z"
+    },
+    {
+      "id": "SAMPLE-R2006",
+      "mls": "SAMPLE-R2006",
+      "price": 3600,
+      "address": null,
+      "city": "Port Moody",
+      "area": "Moody Centre",
+      "postal": "",
+      "beds": 2,
+      "baths": 2,
+      "type": "Townhouse",
+      "sqft": 1180,
+      "year": 2020,
+      "parking": 1,
+      "remarks": "FICTIONAL SAMPLE. Not a real listing. The street address is hidden the way the feed hides it when the landlord opts out.",
+      "brokerage": "Preview Valley Realty",
+      "agent": "Riley Preview",
+      "photos": [
+        "https://placehold.co/960x640/173a5e/ffffff.jpg?text=Address+hidden"
+      ],
+      "realtorUrl": "https://www.realtor.ca/#sample-not-a-real-listing-SAMPLE-R2006",
+      "updated": "2026-10-04T11:00:00Z"
+    }
+  ]
+}

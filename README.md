@@ -6,6 +6,8 @@ Pages:
 - `index.html` — home / profile
 - `buyers.html` — buyer info, neighbourhood guides, "Send me listings" form
 - `tenants.html` — standalone landing page for the $1,500 tenant-paid relocation rental service (link this from ads/social)
+- `listings.html` — active residential homes for sale in Greater Vancouver and the Fraser Valley (REALTOR.ca DDF®)
+- `rentals.html` — active residential homes for rent in the same area, with rent shown per month
 - `videos.html` — property video tours from Devin's YouTube channel (not listings)
 - `blog/` — blog index, posts, RSS feed, generated from Markdown in `_posts/` (see **`_build/BLOG.md`** for how to add a post)
 
@@ -62,7 +64,7 @@ domain earns no search value of its own.
   Axford is listed as `parentOrganization` because schema.org only allows `worksFor` on `Person`.
 - `tenants.html` also carries `FAQPage` JSON-LD. It is generated from the same `FAQ_ITEMS` strings as the
   visible FAQ, so edit the FAQ in `build.py` only and the schema stays identical to the page text.
-- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, tenants, buyers, relocating-to-greater-vancouver). The Coquitlam redirect is omitted.
+- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, listings, rentals, tenants, buyers, relocating-to-greater-vancouver, videos, privacy, and the blog). The Coquitlam redirect is omitted.
 - `robots.txt` allows crawl and lists the Sitemap at https://devindesaulniers.ca/sitemap.xml (served at the domain root).
 - `SITE` in `_build/partials.py` is `https://devindesaulniers.ca/`. Rebuild after changing it.
 - Submit `sitemap.xml` in Google Search Console when ready.
@@ -123,3 +125,54 @@ domain earns no search value of its own.
 - Featured images: `_build/make_image.py` renders a branded 1200x630 JPG + WebP per post into `assets/img/blog/` (headless Chrome + ffmpeg;
   build.py calls it for posts missing an image). Used on the post, og/twitter image, BlogPosting JSON-LD and card thumbnails.
 - Each post page ends with a call to action, an author box and the disclaimer. Topic and SEO rules for the daily routine: `/workspace/blog-brief/seo-brief.md`.
+
+## Listings search (DDF) — for sale and for rent
+
+`listings.html` and `rentals.html` are live. `LISTINGS_LIVE` in `_build/partials.py` is `True`, so both pages are in the header, the footer, and `sitemap.xml`, and neither is `noindex`. They are built with the rest of the site (`cd _build && python3 build.py`).
+
+Both cover Greater Vancouver and the Fraser Valley from the CREA REALTOR.ca DDF® National Shared Pool. For-sale rows are active residential listings. For-rent rows are active residential leases (commercial excluded). A listing is written to only one file. Sold and leased-completed listings are not stored.
+
+Do not add a `.nojekyll` file. GitHub Pages runs Jekyll, which does not publish `_fixtures/`. That is what keeps the sample files off the live site.
+
+### Secrets
+
+Repository **Settings → Secrets and variables → Actions**:
+
+| Secret | What it is |
+| --- | --- |
+| `DDF_USERNAME` | DDF destination username. On the Web API this is the OAuth client id. |
+| `DDF_PASSWORD` | DDF destination password. On the Web API this is the OAuth client secret. |
+
+No other secret names are read. The same pair feeds both JSON files. The workflow needs permission to push: **Settings → Actions → General → Workflow permissions → Read and write**.
+
+### What the refresh does
+
+`.github/workflows/ddf-listings.yml` runs every 12 hours (`0 */12 * * *` UTC) and from **Actions → Refresh DDF listings → Run workflow**. DDF rules require a refresh at least every 24 hours; this schedule stays inside that even if one run is delayed.
+
+`scripts/fetch_ddf_listings.py` does one pull and writes both files:
+
+1. If `DDF_USERNAME` or `DDF_PASSWORD` is missing, it prints a skip message and exits 0. It does not change `listings/data.json` or `listings/rentals.json`, and it does not fail the job.
+2. It signs in to the DDF Web API (OData) at `https://ddfapi.realtor.ca/odata/v1`. The token request is `POST https://identity.crea.ca/connect/token` with `grant_type=client_credentials` and `scope=DDFApi_Read`.
+3. If that API cannot be reached, or the token request is rejected, it falls back to the RETS feed at `https://data.crea.ca` (digest login, session cookie, Standard-XML search).
+4. For-sale rows go to `listings/data.json`. Residential for-lease or for-rent rows go to `listings/rentals.json`. Commercial rows are dropped from both. Sold, leased-completed, and out-of-area records are dropped. Sold prices are never stored.
+5. Rent is stored as dollars per month. `LeaseAmount` is preferred over `ListPrice` / RETS `Price`. `LeaseAmountFrequency` (or RETS `PricePerTime` / `LeasePerTime`) converts the figure: weekly × 52/12, bi-weekly × 26/12, semi-monthly × 2, bi-monthly (every two months) ÷ 2, annually ÷ 12. A blank frequency is treated as monthly. One-time and unrecognized frequencies are left out rather than shown as a monthly rent.
+6. Photos stay remote `https` URLs. Each file is replaced in full, so a listing that leaves the feed disappears from that file. If one side has matches and the other does not, the empty side is still replaced.
+7. If the feed returns records but none are kept on either side, the script exits 1 and does not wipe either file.
+
+Opening a real listing (not the sample file) logs a view to the CREA DDF® Analytics Web Service at `https://analytics.crea.ca/LogEvents.svc/LogEvents` with `EventType=view`, the numeric listing id, the destination id from the feed login, and the page URL. That call is required by the June 2026 DDF rules. It runs on both pages and is skipped when the sample file is loaded or the destination id is missing.
+
+Each card shows the listing brokerage, a link to that listing on REALTOR.ca, and a Powered by REALTOR.ca mark. Both pages name Axford Real Estate and include the CREA trademark line and the DDF disclaimer.
+
+Check the logic without credentials: `python3 scripts/test_ddf_listings.py`.
+
+### Local preview (sample data, never published)
+
+```
+python3 -m http.server 8765
+```
+
+Open `http://127.0.0.1:8765/listings.html?preview=1` and `http://127.0.0.1:8765/rentals.html?preview=1`.
+
+`_fixtures/listings-sample.json` and `_fixtures/rentals-sample.json` are fictional (sample ids, sample brokerages, placeholder photos). On localhost each page loads its sample unless the URL has `?live=1`. On devindesaulniers.ca the pages load `listings/data.json` and `listings/rentals.json` only. `?preview=1` on the public site asks for `_fixtures/…`, which Jekyll does not publish, so the samples never appear there.
+
+The detail-page inquiry forms post to FormSubmit (`listingInquiry` and `rentalInquiry` in `assets/js/config.js`), the same way as the other forms. They have not been test-submitted. The first real submission still needs Devin to activate FormSubmit. `privacy.html` describes those forms and the listing-view call to analytics.crea.ca.

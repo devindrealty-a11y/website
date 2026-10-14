@@ -22,12 +22,11 @@ EMAIL = "devin@axfordrealestate.ca"
 PHONE = "604-809-1032"
 TEL = "tel:+16048091032"
 SITE = "https://devindesaulniers.ca/"  # custom domain (Porkbun); CNAME at repo root
-# Homes for sale (listings.html) and homes for rent (rentals.html).
-# Keep False until DDF_USERNAME and DDF_PASSWORD are set and the feed is writing
-# listings/data.json and listings/rentals.json. Both pages stay noindex and out of
-# the nav, footer, and sitemap until the switch-on steps are followed.
-# Switch-on steps: README section "Listings search (DDF)".
-LISTINGS_LIVE = False
+# Homes for sale (listings.html) and homes for rent (rentals.html), from the
+# CREA REALTOR.ca DDF National Shared Pool (Greater Vancouver and Fraser Valley).
+# True puts both pages in the nav, footer, and sitemap, and drops their noindex.
+# The 12-hour refresh is .github/workflows/ddf-listings.yml. See README.
+LISTINGS_LIVE = True
 BROKERAGE = "Axford Real Estate"
 BROKERAGE_ADDR = "2326 Clarke St, Port Moody, BC V3H 1Y8"
 BROKERAGE_PHONE = "778-355-0116"  # Axford office (footer only; Devin's 604 number stays the main contact/schema telephone)
