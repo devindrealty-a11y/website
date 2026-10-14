@@ -216,6 +216,19 @@ def test_listings_are_published():
         assert "top " not in low
 
 
+def test_property_select_uses_live_schema():
+    url = ddf.property_url(ddf.SELECT_FIELDS, False, True, 0)
+    assert "ListOfficeName" not in url
+    assert "ListAgentFullName" not in url
+    assert "PropertyType=" not in url and "PropertyType%2C" not in url and "PropertyType," not in url
+    assert "TransactionType" not in url
+    assert "PropertySubType" in url
+    assert "LeaseAmount" in url
+    assert "Media" in url
+    assert "StandardStatus" in url
+    assert ddf.rejected_field(b'{"error":{"details":"Could not find a property named \'ListOfficeName\' on type \'DDF.Core.Entities.Property\'."}}') == "ListOfficeName"
+
+
 def test_monthly_rent_conversions():
     assert ddf.monthly_rent(500, "Weekly") == 2167
     assert ddf.monthly_rent(24000, "Annually") == 2000

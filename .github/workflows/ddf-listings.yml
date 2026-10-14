@@ -24,6 +24,7 @@ on:
       - cursor/ddf-listings-search-c985
     paths:
       - .github/workflows/ddf-listings.yml
+      - scripts/fetch_ddf_listings.py
 
 permissions:
   contents: write

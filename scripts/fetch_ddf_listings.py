@@ -77,24 +77,27 @@ COMMERCIAL_PHRASES = (
 )
 EXCLUDE_PHRASES = COMMERCIAL_PHRASES + ("for rent", "rental", "lease")
 EXCLUDE_WORDS = ("land", "office", "farm", "retail", "parking", "agricultural")
-OPTIONAL_SELECT = ("TransactionType", "PropertyType", "LeaseAmountFrequency")
+# Fields the live Property entity may reject. Dropped one at a time on HTTP 400.
+OPTIONAL_SELECT = ("Media", "LeaseAmountFrequency", "PropertySubType", "StructureType")
 TYPE_RULES = (
     (("half duplex", "half-duplex", "semi-detached", "semi detached", "duplex", "triplex", "fourplex"), "Half duplex / duplex"),
     (("townhouse", "townhome", "town house", "row house", "rowhouse"), "Townhouse"),
     (("condo", "condominium", "apartment", "high rise", "highrise", "loft"), "Condo / apartment"),
     (("detached", "single family", "single-family", "cottage", "house"), "Detached house"),
 )
+# Names that exist on DDF.Core.Entities.Property. Office and member names come
+# from the Office and Member lookups (ListOfficeName / ListAgentFullName are not
+# on Property). Media is a nested collection, selected rather than $expand.
 SELECT_FIELDS = [
-    "ListingKey", "ListingId", "StandardStatus", "TransactionType", "PropertyType", "PropertySubType",
+    "ListingKey", "ListingId", "StandardStatus", "PropertySubType",
     "StructureType", "ListPrice", "PublicRemarks", "UnparsedAddress", "City",
     "CityRegion", "StateOrProvince", "PostalCode", "StreetNumber", "StreetName",
     "StreetSuffix", "StreetDirPrefix", "UnitNumber", "BedroomsTotal",
     "BathroomsTotalInteger", "BathroomsPartial", "LivingArea", "LivingAreaUnits",
     "BuildingAreaTotal", "BuildingAreaUnits", "AboveGradeFinishedArea", "YearBuilt",
-    "ListOfficeKey", "ListAgentKey", "ListOfficeName", "ListAgentFullName",
-    "ListAOR", "OriginatingSystemName", "ListingURL", "InternetEntireListingDisplayYN",
-    "InternetAddressDisplayYN", "ParkingTotal", "LeaseAmount", "LeaseAmountFrequency",
-    "ModificationTimestamp",
+    "ListOfficeKey", "ListAgentKey", "ListAOR", "OriginatingSystemName", "ListingURL",
+    "InternetEntireListingDisplayYN", "InternetAddressDisplayYN", "ParkingTotal",
+    "LeaseAmount", "LeaseAmountFrequency", "ModificationTimestamp", "Media",
 ]
 
 
@@ -234,7 +237,7 @@ def fetch_lookups(token):
     except FetchError as exc:
         print(f"Office lookup skipped: {exc}")
     try:
-        for rec in odata_values(token, "Member", "MemberKey,MemberFullName,MemberFirstName,MemberLastName"):
+        for rec in odata_values(token, "Member", "MemberKey,MemberFirstName,MemberLastName,MemberMlsId"):
             key = first(rec, "MemberKey", "MemberMlsId")
             name = first(rec, "MemberFullName", "MemberName")
             if not name:
@@ -250,7 +253,8 @@ def fetch_odata(token, offices, members, stats):
     sales = []
     rentals = []
     select = list(SELECT_FIELDS)
-    expand = True
+    # Media is nested on Property. $expand was rejected by this feed.
+    expand = False
     status_filter = True
     url = None
     pages = 0
@@ -268,10 +272,17 @@ def fetch_odata(token, offices, members, stats):
             raise
         if status in (401, 403):
             raise FetchError(f"Property query returned {status}. The access token was not accepted.")
-        if status == 400 and not started and can_relax(expand, status_filter, select):
-            expand, status_filter, select = relax_query(expand, status_filter, select)
-            url = None
-            continue
+        if status == 400 and not started:
+            missing = rejected_field(payload)
+            if missing and missing in select:
+                print(f"Property query rejected {missing}; continuing without that field.")
+                select = [item for item in select if item != missing]
+                url = None
+                continue
+            if can_relax(expand, status_filter, select):
+                expand, status_filter, select = relax_query(expand, status_filter, select)
+                url = None
+                continue
         if status != 200:
             raise FetchError(f"Property query returned {status}: {snip(payload)}")
         try:
@@ -298,6 +309,19 @@ def fetch_odata(token, offices, members, stats):
         if pages >= MAX_PAGES:
             raise FetchError(f"Stopped after {MAX_PAGES} pages so a partial feed would not replace the listing files.")
     return sales, rentals
+
+
+def rejected_field(payload):
+    """Pull the property name out of a DDF 400, if the message names one."""
+    if isinstance(payload, bytes):
+        text = payload.decode("utf-8", "replace")
+    else:
+        text = str(payload)
+    match = re.search(r"Could not find a property named '([^']+)'", text)
+    if match:
+        return match.group(1)
+    match = re.search(r"[Pp]roperty '([^']+)'", text)
+    return match.group(1) if match else None
 
 
 def can_relax(expand, status_filter, select):
@@ -856,6 +880,12 @@ def compact(listing_id, mls, price, address, city, area, postal, beds, baths, ty
         item["analyticsId"] = str(analytics_id)
     if not item["brokerage"]:
         stats["missing_brokerage"] += 1
+    if not item["realtorUrl"]:
+        stats["missing_realtor_url"] += 1
+    if not item.get("analyticsId"):
+        stats["missing_analytics_id"] += 1
+    if item["photos"]:
+        stats["with_photos"] += 1
     stats["kept"] += 1
     return item
 
