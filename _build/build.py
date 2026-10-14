@@ -3,6 +3,7 @@ from partials import *
 from partials import _TSTAR
 import blog
 import listings_page
+import seo_pages
 OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 I = ICONS
 
@@ -231,19 +232,19 @@ hoods = [
   ["Burke Mountain","Westwood Plateau","City Centre","Burquitlam","Austin Heights","Maillardville","Ranch Park","Eagle Ridge"],
   "Millennium Line SkyTrain (Burquitlam, Lincoln, Coquitlam Central, Lafarge Lake–Douglas) and West Coast Express at Coquitlam Central; Lougheed Highway and Highway 1 nearby.",
   "Mundy Park, Lafarge Lake & Town Centre Park, Como Lake, and trails on Westwood Plateau and Burke Mountain.",
-  "Coquitlam is the largest of the Tri-Cities, BC, and one of the three cities I focus on. Buyers here are often choosing between a hillside area like Burke Mountain or Westwood Plateau and City Centre, and the commute is usually the deciding piece. Tell me where you'll be heading each day and we'll compare them on that."),
+  "Coquitlam is the largest of the Tri-Cities, BC, and one of the three cities I focus on. Buyers here are often choosing between a hillside area like Burke Mountain or Westwood Plateau and City Centre, and the commute is usually the deciding piece. Tell me where you'll be heading each day and we'll compare them on that. For the SkyTrain neighbourhood on the Burnaby border, read my <a href=\"burquitlam-neighbourhood-guide.html\">Burquitlam neighbourhood guide</a>."),
  ("Port Coquitlam","Riverside community with a small-town feel",
   "“PoCo” sits between the Coquitlam and Pitt rivers, with a walkable downtown, family-friendly residential neighbourhoods and the Traboulay PoCo Trail looping around the city. It's also Terry Fox's hometown — and where I play soccer.",
   ["Downtown PoCo","Citadel Heights","Mary Hill","Oxford Heights","Lincoln Park","Riverwood","Birchland Manor","Glenwood"],
   "West Coast Express at Port Coquitlam station; Lougheed Highway and the Mary Hill Bypass connect to the rest of the region.",
   "Traboulay PoCo Trail, Coquitlam River and Pitt River dikes, and plenty of community sports fields.",
-  "I play soccer on a Port Coquitlam team, so PoCo is part of my ordinary week, not just somewhere I come for showings. If a smaller downtown and the Traboulay PoCo Trail suit the way you live, put it on your list."),
+  'I play soccer on a Port Coquitlam team, so PoCo is part of my ordinary week, not just somewhere I come for showings. If a smaller downtown and the Traboulay PoCo Trail suit the way you live, put it on your list. The longer version is my <a href="port-coquitlam.html">Port Coquitlam guide</a>.'),
  ("Port Moody","Waterfront “City of the Arts”",
   "Set at the eastern end of Burrard Inlet, Port Moody combines a waterfront lifestyle with forested hillsides. Rocky Point Park, the Shoreline Trail and the craft breweries along Murray Street's “Brewers Row” are local favourites.",
   ["Moody Centre","Inlet Centre / Suter Brook","Newport Village","Heritage Mountain","Heritage Woods","College Park","Glenayre","Ioco"],
   "Millennium Line SkyTrain (Moody Centre, Inlet Centre) and West Coast Express at Moody Centre.",
   "Rocky Point Park, the Shoreline Trail, Old Orchard Park, and quick access to Belcarra and Buntzen Lake.",
-  "Port Moody is where I work, at Axford Real Estate on Clarke Street. SkyTrain at Moody Centre and Inlet Centre, the parks along the inlet and the hillside neighbourhoods give you a few different ways to live here, so we'll start with how you plan to get around and what you want close by."),
+  'Port Moody is where I work, at Axford Real Estate on Clarke Street. SkyTrain at Moody Centre and Inlet Centre, the parks along the inlet and the hillside neighbourhoods give you a few different ways to live here, so we\'ll start with how you plan to get around and what you want close by. More detail is in my <a href="port-moody.html">Port Moody guide</a>.'),
  ("Anmore & Belcarra","Quiet villages north of Port Moody",
   "Two small, semi-rural villages tucked into the forest above Port Moody. Homes here tend to sit on larger, treed lots, and residents trade some convenience for privacy and nature on their doorstep.",
   ["Village of Anmore","Village of Belcarra"],
@@ -327,6 +328,7 @@ buyers += f'''
     <div class="other-areas">
       <h3>Other nearby areas</h3>
       <p>I also help buyers in neighbouring Greater Vancouver communities, including <strong>Burnaby</strong>, <strong>New Westminster</strong>, and <strong>Pitt Meadows &amp; Maple Ridge</strong>. School District 43 serves Coquitlam, Port Coquitlam, Port Moody, Anmore and Belcarra — always confirm school catchments with the district for a specific address.</p>
+      <p>Longer guides: <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a>. Buying a first home in the Tri-Cities, BC? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>.</p>
       <p>If you're looking somewhere else in Greater Vancouver, tell me on the <a href="#listings">listings form</a> below: choose “Other (add in notes)” and add the area in your notes.</p>
     </div>
   </div>
@@ -371,10 +373,10 @@ buyers += foot()
 
 # ---------------- TENANTS (standalone landing page) ----------------
 import html as _html, re as _re, json as _json
-TEN_TITLE = "Relocating to Vancouver? Rental Help for Tenants | Devin Desaulniers"
+TEN_TITLE = "Relocation Rental Agent for Greater Vancouver | Devin Desaulniers, Axford Real Estate"
 TEN_DESC = "Moving to Vancouver or the Tri-Cities, BC? Get local rental help: consultation, property search with early access, in-person or virtual showings, and lease review & negotiation. $1,500 + GST, paid in two parts."
 
-FAQ_ITEMS = [
+FAQ_ITEMS = seo_pages.TENANT_FAQ_PREPEND + [
  ("Who can help me find a rental in Vancouver if I'm moving from out of province?",
   "<p>I can. I'm Devin Desaulniers, a Real Estate Associate with Axford Real Estate in Port Moody. I help people relocating to Greater Vancouver line up a rental on the <strong>tenant side</strong> before they arrive — in Vancouver, Burnaby, New Westminster and the Tri-Cities, BC (Coquitlam, Port Coquitlam and Port Moody). I search for rentals that fit your budget and commute, arrange and attend showings, do live video walkthroughs and share floor plans when you're not here yet, negotiate on your behalf, and review the lease with you before you sign.</p>"),
  ("Can you help me find a rental before I move?",
@@ -411,7 +413,20 @@ FAQ_JSONLD = '<script type="application/ld+json">\n' + _json.dumps({
     "@context": "https://schema.org", "@type": "FAQPage",
     "mainEntity": [{"@type": "Question", "name": _plain(q), "acceptedAnswer": {"@type": "Answer", "text": _plain(a)}} for q, a in FAQ_ITEMS]
 }, indent=2, ensure_ascii=False) + '\n</script>'
-tenants = head(TEN_TITLE, TEN_DESC, "tenants", og_image="assets/img/og-tenants.png", page_url="tenants.html", body_class="has-sticky", extra_head=FAQ_JSONLD)
+SERVICE_JSONLD = '<script type="application/ld+json">\n' + _json.dumps({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Relocation rental search (tenant representation)",
+    "provider": {"@id": SITE + "#devin-desaulniers"},
+    "areaServed": {"@type": "Place", "name": "Greater Vancouver"},
+    "offers": {
+        "@type": "Offer",
+        "price": "1500",
+        "priceCurrency": "CAD",
+        "description": "$1,500 + GST, paid by the tenant",
+    },
+}, indent=2, ensure_ascii=False) + '\n</script>'
+tenants = head(TEN_TITLE, TEN_DESC, "tenants", og_image="assets/img/og-tenants.png", page_url="tenants.html", body_class="has-sticky", extra_head=FAQ_JSONLD + "\n" + SERVICE_JSONLD)
 STEP1 = f"""<div class="form-grid">
   <div class="field"><label for="t-name">Full name <span class="req">*</span></label><input id="t-name" name="name" autocomplete="name" required></div>
   <div class="field"><label for="t-email">Email <span class="req">*</span></label><input id="t-email" name="email" type="email" autocomplete="email" required></div>
@@ -558,6 +573,11 @@ tenants += f"""
       <span><b>Moving to Greater Vancouver?</b> Read my Relocating to Greater Vancouver guide — areas at a glance, commuting, renting basics in B.C., and whether to rent or buy first.</span>
       <span class="gc-arrow">{I["arrow"]}</span>
     </a>
+    <a class="guide-callout" href="newcomer-rental-faqs.html">
+      <span class="gc-icon">{I["doc"]}</span>
+      <span><b>New to Canada?</b> Rental questions for newcomers: deposits, credit history, scams, and lining up a home before you land.</span>
+      <span class="gc-arrow">{I["arrow"]}</span>
+    </a>
   </div>
 </section>
 
@@ -568,7 +588,7 @@ tenants += f"""
       <h2>Hi, I'm Devin.</h2>
       <p>I've lived in the Greater Vancouver area for 28 years. I work in Port Moody, and I play soccer on a Port Coquitlam team and pickleball around the Tri-Cities, BC. I know this region as a local — so I can tell you what a neighbourhood is actually like, not just what the listing says.</p>
       <p>For the last seven years I've been helping people relocate to and from Vancouver. I've been licensed in real estate since 2020, and today I'm a Real Estate Associate with <strong>Axford Real Estate</strong>.</p>
-      <p class="inline-links"><a href="{TEL}">{PHONE}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="index.html#about">More about me</a> · <a href="relocating-to-greater-vancouver.html">Moving to Greater Vancouver?</a></p>
+      <p class="inline-links"><a href="{TEL}">{PHONE}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="index.html#about">More about me</a> · <a href="relocating-to-greater-vancouver.html">Moving to Greater Vancouver?</a> · <a href="newcomer-rental-faqs.html">New to Canada?</a></p>
       {social_row("Look me up")}
     </div>
     <figure class="portrait">
@@ -683,7 +703,7 @@ gv += f"""
     <p>Greater Vancouver is a collection of cities, each with its own feel, rents and commute. Here's a quick snapshot to start your shortlist:</p>
     <div class="area-grid">{areas_gv_html}</div>
     <h3 class="sub-h">Getting around</h3>
-    <p>TransLink runs SkyTrain, buses, the SeaBus and the West Coast Express commuter rail (weekday rush-hour service between Mission and Waterfront Station in downtown Vancouver). Driving times vary a lot by bridge and time of day, so tell me where you'll work or study and I'll factor the commute into every shortlist. Buying in the Tri-Cities, BC? See my <a href="buyers.html#neighbourhoods">neighbourhood guides</a>.</p>
+    <p>TransLink runs SkyTrain, buses, the SeaBus and the West Coast Express commuter rail (weekday rush-hour service between Mission and Waterfront Station in downtown Vancouver). Driving times vary a lot by bridge and time of day, so tell me where you'll work or study and I'll factor the commute into every shortlist. Buying in the Tri-Cities, BC? See my <a href="buyers.html#neighbourhoods">neighbourhood guides</a>, the <a href="burquitlam-neighbourhood-guide.html">Burquitlam neighbourhood guide</a>, the <a href="port-moody.html">Port Moody guide</a> and the <a href="port-coquitlam.html">Port Coquitlam guide</a>. Buying a first home? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions for the Tri-Cities, BC</a>. New to Canada and renting first? See the <a href="newcomer-rental-faqs.html">newcomer rental FAQs</a>.</p>
   </div>
 </section>
 
@@ -992,8 +1012,13 @@ open(os.path.join(OUT, "rentals.html"), "w").write(listings_page.render("rent"))
 
 # Blog pages, RSS feed and sitemap (sitemap lists the static pages + blog index + every post)
 blog.write_blog(POSTS)
+SEO_PAGES = seo_pages.write_pages()
+for fn, html in SEO_PAGES:
+    open(os.path.join(OUT, fn), "w").write(html)
 STATIC_PAGES = ["", "tenants.html", "buyers.html", "home-evaluation.html", "buyer-opinion.html", GV_URL, "videos.html", PRIVACY_URL]
 if LISTINGS_LIVE:
     STATIC_PAGES[1:1] = ["listings.html", "rentals.html"]
+guide_at = STATIC_PAGES.index(GV_URL) + 1
+STATIC_PAGES[guide_at:guide_at] = [fn for fn, _ in SEO_PAGES]
 open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS))
 print("built")
