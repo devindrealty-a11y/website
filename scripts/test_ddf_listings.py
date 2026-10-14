@@ -263,6 +263,7 @@ def test_property_select_uses_live_schema():
     assert "TransactionType" not in url
     assert "PropertySubType" in url
     assert "LeaseAmount" in url
+    assert "TotalActualRent" in url
     assert "Media" in url
     assert "StandardStatus" in url
     assert ddf.rejected_field(b'{"error":{"details":"Could not find a property named \'ListOfficeName\' on type \'DDF.Core.Entities.Property\'."}}') == "ListOfficeName"
@@ -305,6 +306,20 @@ def test_lease_goes_to_rentals_and_sales_stay_sales():
     assert odata(intent="rent", LeaseAmount=9000, LeaseAmountFrequency="One Time", PropertyType="Residential Lease", ListPrice=None) is None
     channel, item = odata(intent=None)
     assert channel == "sale" and item["price"] == 899000
+    # Asking rent on this feed: blank list price, empty LeaseAmount, monthly TotalActualRent.
+    assert odata(ListPrice=None, LeaseAmount=None, LeaseAmountFrequency="Monthly", TotalActualRent=2850) is None
+    rented = odata(
+        intent="rent", ListPrice=None, LeaseAmount=None,
+        LeaseAmountFrequency="Monthly", TotalActualRent=2850,
+        PropertySubType="Apartment",
+    )
+    assert rented["price"] == 2850
+    assert rented["type"] == "Condo / apartment"
+    held = odata(ListPrice=None, LeaseAmount=None, TotalActualRent=2850, LeaseAmountFrequency=None)
+    assert held["price"] is None
+    income = odata(ListPrice=1250000, TotalActualRent=3200, LeaseAmountFrequency="Monthly")
+    assert income["price"] == 1250000
+    assert odata(intent="rent", ListPrice=1250000, TotalActualRent=3200, LeaseAmountFrequency="Monthly") is None
 
 
 def test_rets_lease_is_monthly_and_not_a_sale():

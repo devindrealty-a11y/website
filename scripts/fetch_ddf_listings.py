@@ -15,7 +15,8 @@ listings that left the feed disappear. One pull feeds both files:
 
 Commercial listings are excluded from both. A listing is written to only one
 file. Rent is stored as dollars per month (LeaseAmount preferred over
-ListPrice, converted with the lease frequency). Sold and leased-completed
+ListPrice, then TotalActualRent when the list price is blank, converted
+with the lease frequency). Sold and leased-completed
 records are dropped, and sold prices are never written. Photos stay as
 remote https URLs. Geography is Greater Vancouver and the Fraser Valley.
 
@@ -105,7 +106,7 @@ SELECT_FIELDS = [
     "BuildingAreaTotal", "BuildingAreaUnits", "AboveGradeFinishedArea", "YearBuilt",
     "ListOfficeKey", "ListAgentKey", "ListAOR", "OriginatingSystemName", "ListingURL",
     "InternetEntireListingDisplayYN", "InternetAddressDisplayYN", "ParkingTotal",
-    "LeaseAmount", "LeaseAmountFrequency", "ModificationTimestamp", "Media",
+    "LeaseAmount", "LeaseAmountFrequency", "TotalActualRent", "ModificationTimestamp", "Media",
 ]
 
 
@@ -313,6 +314,8 @@ def fetch_odata(token, offices, members, stats):
             statuses[status_text] += 1
             if positive_amount(rec.get("LeaseAmount")):
                 stats["lease_amount_set"] += 1
+            if positive_amount(rec.get("TotalActualRent")):
+                stats["total_actual_rent_set"] += 1
             channel, item = from_odata(rec, offices, members, stats, intent=None)
             if item and channel == "sale":
                 sales.append(item)
@@ -659,10 +662,13 @@ def build_odata(rec, offices, members, stats):
     type_parts = [textify(rec.get(key)) for key in ("PropertyType", "PropertySubType", "StructureType")]
     transaction = textify(rec.get("TransactionType"))
     frequency = textify(rec.get("LeaseAmountFrequency"))
-    channel = listing_channel(transaction, type_parts, rec.get("LeaseAmount"), rec.get("ListPrice"), frequency)
+    total_rent = rec.get("TotalActualRent")
+    channel = listing_channel(
+        transaction, type_parts, rec.get("LeaseAmount"), rec.get("ListPrice"), frequency, total_rent,
+    )
     if channel == "rent":
         label = rental_label(type_parts, transaction, stats)
-        amount, freq = rent_source(rec.get("LeaseAmount"), rec.get("ListPrice"), frequency)
+        amount, freq = rent_source(rec.get("LeaseAmount"), rec.get("ListPrice"), frequency, total_rent)
         price = monthly_rent(amount, freq)
         if label and price is None:
             stats["rent_unusable"] += 1
@@ -736,10 +742,11 @@ def build_rets(rec, stats):
     lease_amount = first(rec, "Lease", "LeaseAmount")
     list_price = first(rec, "Price", "ListPrice")
     frequency = first(rec, "LeasePerTime", "PricePerTime", "LeaseAmountFrequency", "LeaseTermRemainingFreq")
-    channel = listing_channel(transaction, type_parts, lease_amount, list_price, frequency)
+    total_rent = first(rec, "TotalActualRent")
+    channel = listing_channel(transaction, type_parts, lease_amount, list_price, frequency, total_rent)
     if channel == "rent":
         label = rental_label(type_parts, transaction, stats)
-        amount, freq = rent_source(lease_amount, list_price, frequency)
+        amount, freq = rent_source(lease_amount, list_price, frequency, total_rent)
         price = monthly_rent(amount, freq)
         if label and price is None:
             stats["rent_unusable"] += 1
@@ -801,12 +808,17 @@ def build_rets(rec, stats):
     return channel, item
 
 
-def listing_channel(transaction, type_parts, lease_amount, list_price, frequency):
+def listing_channel(transaction, type_parts, lease_amount, list_price, frequency, total_actual_rent=None):
     """Pick sale or rent. A listing is never both.
 
     Explicit sale language with no lease language stays a sale, even if a
     lease amount is also filled in. Lease/rent language, a lease amount with
     no list price, or a lease amount plus a frequency goes to rentals.
+
+    On this National Shared Pool feed, LeaseAmount stays empty. Asking rent
+    arrives as TotalActualRent with LeaseAmountFrequency set and ListPrice
+    blank. A priced sale that also has TotalActualRent stays a sale: that
+    figure is rent collected on an income property, not an asking rent.
     """
     trans = textify(transaction).lower()
     blob = " ".join(p for p in (textify(p) for p in type_parts) if p).lower()
@@ -821,14 +833,18 @@ def listing_channel(transaction, type_parts, lease_amount, list_price, frequency
         return "rent"
     if has_lease and (not has_list or has_freq):
         return "rent"
+    if not has_list and not has_lease and positive_amount(total_actual_rent) and has_freq:
+        return "rent"
     return "sale"
 
 
-def rent_source(lease_amount, list_price, frequency):
-    """Prefer LeaseAmount. Fall back to ListPrice/Price when the row is a lease."""
+def rent_source(lease_amount, list_price, frequency, total_actual_rent=None):
+    """Prefer LeaseAmount, then ListPrice, then TotalActualRent."""
     if positive_amount(lease_amount):
         return lease_amount, frequency
-    return list_price, frequency
+    if positive_amount(list_price):
+        return list_price, frequency
+    return total_actual_rent, frequency
 
 
 def monthly_rent(amount, frequency):

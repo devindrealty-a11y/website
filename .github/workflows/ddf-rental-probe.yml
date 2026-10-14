@@ -1,14 +1,9 @@
-# One-off read of the DDF catalog and lease-related counts. It does not
-# change listing files. Remove this workflow once the rental question is settled.
+# Manual read of the DDF catalog and lease-related counts. It does not
+# change listing files. The rental question is settled: asking rent is
+# TotalActualRent with a monthly frequency and a blank list price.
 name: Probe DDF rental fields
 
 on:
-  push:
-    branches:
-      - cursor/ddf-rental-feed-2053
-    paths:
-      - scripts/probe_ddf_rentals.py
-      - .github/workflows/ddf-rental-probe.yml
   workflow_dispatch:
 
 permissions:

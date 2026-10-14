@@ -15,6 +15,15 @@ on:
   schedule:
     - cron: "0 */12 * * *"
   workflow_dispatch:
+  # Temporary: this branch cannot dispatch workflows with the app token.
+  # A push that changes the fetcher runs one refresh. Remove this trigger
+  # once that refresh has committed the rental rows.
+  push:
+    branches:
+      - cursor/ddf-rental-feed-2053
+    paths:
+      - scripts/fetch_ddf_listings.py
+      - .github/workflows/ddf-listings.yml
 
 permissions:
   contents: write
