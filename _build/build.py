@@ -2,6 +2,7 @@ import os, json
 from partials import *
 from partials import _TSTAR
 import blog
+import listings_page
 OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 I = ICONS
 
@@ -794,17 +795,17 @@ videos += f"""
 videos += foot()
 
 # ---------------- PRIVACY ----------------
-# Keep in step with the real forms (buyers.html, tenants.html), assets/js/config.js and the Elfsight snippet in foot().
+# Keep in step with the real forms (buyers, tenants, listing and rental inquiries), assets/js/config.js and the Elfsight snippet in foot().
 PRIVACY_URL = "privacy.html"
 privacy = head("Privacy | Devin Desaulniers, Real Estate Associate, Axford Real Estate",
-               "How the contact forms and chat widget on Devin Desaulniers' website handle what you send, where it may be processed, and how to make a privacy request.",
+               "How the contact forms, listing inquiries, and chat widget on Devin Desaulniers' website handle what you send, where it may be processed, and how to make a privacy request.",
                "privacy", page_url=PRIVACY_URL)
 privacy += f"""
 <section class="page-hero">
   <div class="container">
     <span class="eyebrow">Privacy</span>
     <h1>How this site handles your information</h1>
-    <p class="lead">What happens to the information you send through the contact forms and the chat widget, and who to contact with a privacy question or request.</p>
+    <p class="lead">What happens to the information you send through the contact forms, a listing inquiry, and the chat widget, and who to contact with a privacy question or request.</p>
   </div>
 </section>
 
@@ -814,14 +815,18 @@ privacy += f"""
       <p>This site is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate, {BROKERAGE_ADDR}. The sections below explain, in plain language, where the information you send me goes.</p>
 
       <h2 id="forms">Contact forms</h2>
-      <p>There are two forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a> and the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>There are four forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, and the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
       <p>The forms ask for:</p>
       <ul>
         <li>your name and email, and your phone number if you add it;</li>
         <li>on the listings form: the areas you're interested in, property type, price range, bedrooms and bathrooms, your timeline, whether you're pre-approved for a mortgage, and any notes;</li>
-        <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, bedrooms, preferred areas, pets, your work or school location, and any notes.</li>
+        <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, bedrooms, preferred areas, pets, your work or school location, and any notes;</li>
+        <li>on a listing or rental inquiry: the listing id, MLS® number, address and REALTOR.ca link for the home you opened, and your message.</li>
       </ul>
-      <p>Both forms ask you to agree that I can contact you by email or phone about your request. You can opt out at any time.</p>
+      <p>Each form asks you to agree that I can contact you by email or phone about your request. You can opt out at any time.</p>
+
+      <h2 id="listing-search">Homes for sale and homes for rent</h2>
+      <p>The homes on <a href="listings.html">homes for sale</a> and <a href="rentals.html">homes for rent</a> come from the REALTOR.ca DDF® feed. Opening a listing sends a view to the CREA DDF® Analytics Web Service at analytics.crea.ca. That view includes the listing id, this site's DDF destination id, and the page address. The DDF rules require it. Listing photos load from the photo addresses in the feed.</p>
 
       <h2 id="chat">Chat widget</h2>
       <p>Pages on this site include a chat widget, “Devin's AI Assistant”, provided by Elfsight. What you type into that chat is handled by Elfsight.</p>
@@ -868,9 +873,13 @@ for fn, html in [("index.html",home),("buyers.html",buyers),("tenants.html",tena
     open(os.path.join(OUT,fn),"w").write(html)
 open(os.path.join(OUT, VIDEOS_URL), "w").write(videos)
 open(os.path.join(OUT, PRIVACY_URL), "w").write(privacy)
+open(os.path.join(OUT, "listings.html"), "w").write(listings_page.render("sale"))
+open(os.path.join(OUT, "rentals.html"), "w").write(listings_page.render("rent"))
 
 # Blog pages, RSS feed and sitemap (sitemap lists the static pages + blog index + every post)
 blog.write_blog(POSTS)
 STATIC_PAGES = ["", "tenants.html", "buyers.html", GV_URL, "videos.html", PRIVACY_URL]
+if LISTINGS_LIVE:
+    STATIC_PAGES[1:1] = ["listings.html", "rentals.html"]
 open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS))
 print("built")

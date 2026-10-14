@@ -1,6 +1,6 @@
 /*
  * ===================== FORM CONFIGURATION (one spot) =====================
- * Both forms post via AJAX to FormSubmit (https://formsubmit.co), which emails
+ * The contact forms post via AJAX to FormSubmit (https://formsubmit.co), which emails
  * each submission to the address in the URL. No account needed.
  *
  * IMPORTANT: the very first real submission triggers a one-time activation
@@ -16,6 +16,8 @@
 window.SITE_CONFIG = {
   forms: {
     buyerListings: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // buyers.html "Send me listings"
-    tenantIntake:  "https://formsubmit.co/ajax/devin@axfordrealestate.ca"  // tenants.html relocation intake
+    tenantIntake:  "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // tenants.html relocation intake
+    listingInquiry: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // listings.html detail inquiry (not test-submitted)
+    rentalInquiry: "https://formsubmit.co/ajax/devin@axfordrealestate.ca" // rentals.html detail inquiry (not test-submitted)
   }
 };
