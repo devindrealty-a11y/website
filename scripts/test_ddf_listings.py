@@ -351,6 +351,42 @@ def test_rets_lease_is_monthly_and_not_a_sale():
     assert ddf.from_rets(commercial, STATS()) is None
 
 
+def test_rental_probe_reads_metadata_and_compact_rows():
+    import probe_ddf_rentals as probe
+    xml = """<?xml version="1.0"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+  <edmx:DataServices>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="DDF.Core.Entities">
+      <EntityType Name="Property">
+        <Property Name="ListingKey" Type="Edm.String"/>
+        <Property Name="LeaseAmount" Type="Edm.Double"/>
+      </EntityType>
+      <EnumType Name="PropertySubType">
+        <Member Name="Single Family"/>
+        <Member Name="Residential Lease"/>
+      </EnumType>
+    </Schema>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Default">
+      <EntityContainer Name="Container">
+        <EntitySet Name="Property" EntityType="DDF.Core.Entities.Property"/>
+        <EntitySet Name="Destination" EntityType="DDF.Core.Entities.Destination"/>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
+""".encode()
+    sets, fields, enums = probe.parse_metadata(xml)
+    assert sets == ["Property", "Destination"]
+    assert [name for name, _typ in fields["Property"]] == ["ListingKey", "LeaseAmount"]
+    assert enums["PropertySubType"] == ["Single Family", "Residential Lease"]
+    names, rows = probe.compact_rows(
+        "<COLUMNS>\tTransactionType\tPropertyType\t</COLUMNS>\n"
+        "<DATA>\tFor lease\tResidential Lease\t</DATA>\n"
+    )
+    assert names == ["TransactionType", "PropertyType"]
+    assert rows == [{"TransactionType": "For lease", "PropertyType": "Residential Lease"}]
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

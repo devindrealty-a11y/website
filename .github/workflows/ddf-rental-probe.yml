@@ -1,0 +1,34 @@
+# One-off read of the DDF catalog and lease-related counts. It does not
+# change listing files. Remove this workflow once the rental question is settled.
+name: Probe DDF rental fields
+
+on:
+  push:
+    branches:
+      - cursor/ddf-rental-feed-2053
+    paths:
+      - scripts/probe_ddf_rentals.py
+      - .github/workflows/ddf-rental-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Read rental-related fields
+        env:
+          DDF_USERNAME: ${{ secrets.DDF_USERNAME }}
+          DDF_PASSWORD: ${{ secrets.DDF_PASSWORD }}
+        run: python3 scripts/probe_ddf_rentals.py
