@@ -1,0 +1,29 @@
+# Manual read of the DDF catalog and lease-related counts. It does not
+# change listing files. The rental question is settled: asking rent is
+# TotalActualRent with a monthly frequency and a blank list price.
+name: Probe DDF rental fields
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Read rental-related fields
+        env:
+          DDF_USERNAME: ${{ secrets.DDF_USERNAME }}
+          DDF_PASSWORD: ${{ secrets.DDF_PASSWORD }}
+        run: python3 scripts/probe_ddf_rentals.py

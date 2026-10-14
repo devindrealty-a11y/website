@@ -224,6 +224,15 @@ def test_listings_are_published():
     assert "FICTIONAL" in rent_sample["listings"][0]["remarks"]
     assert all("remarks" not in row and "photos" not in row for row in rent_live["listings"])
     assert all(row["price"] < 20000 for row in rent_sample["listings"])
+    assert rent_live["count"] == len(rent_live["listings"])
+    assert rent_live["count"] > 0
+    rent_row = next(row for row in rent_live["listings"] if row.get("photo") and str(row.get("id", "")).isdigit())
+    rent_shard_no = int(rent_row["id"]) % ddf.SHARD_COUNT
+    rent_shard = json.loads(open(os.path.join(ROOT, "listings", "rent", f"{rent_shard_no}.json"), encoding="utf-8").read())
+    assert rent_shard[rent_row["id"]]["photos"][0] == rent_row["photo"]
+    assert all(isinstance(row.get("price"), int) and row["price"] > 0 for row in rent_live["listings"])
+    sale_ids = {row["id"] for row in live["listings"]}
+    assert not sale_ids.intersection(row["id"] for row in rent_live["listings"])
     js = open(os.path.join(ROOT, "assets", "js", "listings.js"), encoding="utf-8").read()
     assert "https://analytics.crea.ca/LogEvents.svc/LogEvents" in js
     assert "EventType=view" in js
@@ -263,6 +272,7 @@ def test_property_select_uses_live_schema():
     assert "TransactionType" not in url
     assert "PropertySubType" in url
     assert "LeaseAmount" in url
+    assert "TotalActualRent" in url
     assert "Media" in url
     assert "StandardStatus" in url
     assert ddf.rejected_field(b'{"error":{"details":"Could not find a property named \'ListOfficeName\' on type \'DDF.Core.Entities.Property\'."}}') == "ListOfficeName"
@@ -305,6 +315,20 @@ def test_lease_goes_to_rentals_and_sales_stay_sales():
     assert odata(intent="rent", LeaseAmount=9000, LeaseAmountFrequency="One Time", PropertyType="Residential Lease", ListPrice=None) is None
     channel, item = odata(intent=None)
     assert channel == "sale" and item["price"] == 899000
+    # Asking rent on this feed: blank list price, empty LeaseAmount, monthly TotalActualRent.
+    assert odata(ListPrice=None, LeaseAmount=None, LeaseAmountFrequency="Monthly", TotalActualRent=2850) is None
+    rented = odata(
+        intent="rent", ListPrice=None, LeaseAmount=None,
+        LeaseAmountFrequency="Monthly", TotalActualRent=2850,
+        PropertySubType="Apartment",
+    )
+    assert rented["price"] == 2850
+    assert rented["type"] == "Condo / apartment"
+    held = odata(ListPrice=None, LeaseAmount=None, TotalActualRent=2850, LeaseAmountFrequency=None)
+    assert held["price"] is None
+    income = odata(ListPrice=1250000, TotalActualRent=3200, LeaseAmountFrequency="Monthly")
+    assert income["price"] == 1250000
+    assert odata(intent="rent", ListPrice=1250000, TotalActualRent=3200, LeaseAmountFrequency="Monthly") is None
 
 
 def test_rets_lease_is_monthly_and_not_a_sale():
@@ -349,6 +373,54 @@ def test_rets_lease_is_monthly_and_not_a_sale():
     commercial["TransactionType"] = "For lease"
     assert ddf.from_rets(commercial, STATS(), intent="rent") is None
     assert ddf.from_rets(commercial, STATS()) is None
+
+
+def test_rental_probe_reads_metadata_and_compact_rows():
+    import probe_ddf_rentals as probe
+    xml = """<?xml version="1.0"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+  <edmx:DataServices>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="DDF.Core.Entities">
+      <EntityType Name="Property">
+        <Property Name="ListingKey" Type="Edm.String"/>
+        <Property Name="LeaseAmount" Type="Edm.Double"/>
+      </EntityType>
+      <EnumType Name="PropertySubType">
+        <Member Name="Single Family"/>
+        <Member Name="Residential Lease"/>
+      </EnumType>
+    </Schema>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Default">
+      <EntityContainer Name="Container">
+        <EntitySet Name="Property" EntityType="DDF.Core.Entities.Property"/>
+        <EntitySet Name="Destination" EntityType="DDF.Core.Entities.Destination"/>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
+""".encode()
+    sets, fields, enums = probe.parse_metadata(xml)
+    assert sets == ["Property", "Destination"]
+    assert [name for name, _typ in fields["Property"]] == ["ListingKey", "LeaseAmount"]
+    assert enums["PropertySubType"] == ["Single Family", "Residential Lease"]
+    names, rows = probe.compact_rows(
+        "<COLUMNS>\tTransactionType\tPropertyType\t</COLUMNS>\n"
+        "<DATA>\tFor lease\tResidential Lease\t</DATA>\n"
+    )
+    assert names == ["TransactionType", "PropertyType"]
+    assert rows == [{"TransactionType": "For lease", "PropertyType": "Residential Lease"}]
+    packed = (
+        "<RETS><COLUMNS>\tTransactionType\tPrice\t</COLUMNS>"
+        "<DATA>\tFor rent\t2500\t</DATA><DATA>\tFor sale\t900000\t</DATA></RETS>"
+    )
+    names, rows = probe.compact_rows(packed)
+    assert names == ["TransactionType", "Price"]
+    assert rows[0]["TransactionType"] == "For rent"
+    assert rows[1]["Price"] == "900000"
+    assert probe.amount_bucket(2400) == "1500_3000"
+    assert probe.amount_bucket(2400000) == "100000_plus"
+    assert "for_rent_or_lease" in probe.remark_flags("Bright condo for rent.")
+    assert probe.remark_flags(2400) == ("empty",)
 
 
 if __name__ == "__main__":
