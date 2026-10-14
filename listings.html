@@ -99,15 +99,11 @@
 </header>
 <main id="main" tabindex="-1">
 
-<section class="page-hero">
+<section class="page-hero page-hero--search">
   <div class="container">
     <span class="eyebrow">Axford Real Estate</span>
     <h1>Homes for sale</h1>
-    <p class="lead">Active residential listings in Greater Vancouver and the Fraser Valley, from the REALTOR.ca DDF® feed. This search is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</p>
-    <div class="ls-axford">
-      <span class="ls-axford-logo"><img src="assets/img/axford-logo.png" alt="Axford Real Estate" width="180" height="38"></span>
-      <p><strong>Axford Real Estate</strong><br>Devin Desaulniers, Real Estate Associate<br>2326 Clarke St, Port Moody, BC V3H 1Y8<br><a href="tel:+16048091032">604-809-1032</a> · <a href="mailto:devin@axfordrealestate.ca">devin@axfordrealestate.ca</a></p>
-    </div>
+    <p class="lead">Active homes in Greater Vancouver and the Fraser Valley.</p>
   </div>
 </section>
 
@@ -120,17 +116,30 @@
 <div id="ls-search">
   <section class="section section--listings">
     <div class="container">
+      <p class="ls-operator"><img src="assets/img/axford-logo.png" alt="" width="108" height="23"><span><strong>Devin Desaulniers</strong>, Real Estate Associate, Axford Real Estate. <a href="tel:+16048091032">604-809-1032</a></span></p>
       <form class="ls-filters" id="ls-filters" role="search">
-        <div class="field ls-grow"><label for="ls-q">City or area</label><input id="ls-q" name="q" type="search" placeholder="Coquitlam, Surrey, Langley…" autocomplete="off"></div>
-        <div class="field"><label for="ls-min">Min price</label><input id="ls-min" name="min" type="number" inputmode="numeric" min="0" step="1000" placeholder="Any"></div>
-        <div class="field"><label for="ls-max">Max price</label><input id="ls-max" name="max" type="number" inputmode="numeric" min="0" step="1000" placeholder="Any"></div>
-        <div class="field"><label for="ls-beds">Bedrooms</label><select id="ls-beds" name="beds"><option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option><option value="5">5+</option></select></div>
-        <div class="field"><label for="ls-baths">Bathrooms</label><select id="ls-baths" name="baths"><option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
-        <div class="field"><label for="ls-type">Property type</label><select id="ls-type" name="type"><option value="">Any</option><option>Detached house</option><option>Condo / apartment</option><option>Townhouse</option><option>Half duplex / duplex</option><option>Other residential</option></select></div>
-        <div class="field"><label for="ls-sort">Sort</label><select id="ls-sort" name="sort"><option value="updated">Recently updated</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="city">City A–Z</option></select></div>
-        <div class="ls-filter-actions"><button type="submit" class="btn btn-primary">Search</button><button type="button" class="btn btn-outline" id="ls-clear">Clear</button></div>
+        <div class="ls-searchbar">
+          <div class="field ls-grow"><label for="ls-q">City or neighbourhood</label><input id="ls-q" name="q" type="search" list="ls-cities" placeholder="Vancouver, Surrey, Coquitlam…" autocomplete="off" enterkeyhint="search"><datalist id="ls-cities"></datalist></div>
+          <button type="submit" class="btn btn-primary ls-search-go">Search</button>
+          <button type="button" class="btn btn-outline ls-filter-toggle" id="ls-filter-toggle" aria-expanded="false" aria-controls="ls-more-filters">Filters</button>
+        </div>
+        <div class="ls-chips" id="ls-chips" role="group" aria-label="Price"><button type="button" class="ls-chip is-on" data-min="" data-max="" aria-pressed="true">Any price</button><button type="button" class="ls-chip" data-min="" data-max="800000" aria-pressed="false">Under $800k</button><button type="button" class="ls-chip" data-min="" data-max="1200000" aria-pressed="false">Under $1.2M</button><button type="button" class="ls-chip" data-min="" data-max="2000000" aria-pressed="false">Under $2M</button><button type="button" class="ls-chip" data-min="2000000" data-max="" aria-pressed="false">$2M+</button></div>
+        <div class="ls-more-filters is-collapsed" id="ls-more-filters">
+          <div class="field"><label for="ls-min">Min price</label><input id="ls-min" name="min" type="number" inputmode="numeric" min="0" step="1000" placeholder="Any"></div>
+          <div class="field"><label for="ls-max">Max price</label><input id="ls-max" name="max" type="number" inputmode="numeric" min="0" step="1000" placeholder="Any"></div>
+          <div class="field"><label for="ls-beds">Bedrooms</label><select id="ls-beds" name="beds"><option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option><option value="5">5+</option></select></div>
+          <div class="field"><label for="ls-baths">Bathrooms</label><select id="ls-baths" name="baths"><option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
+          <div class="field"><label for="ls-type">Property type</label><select id="ls-type" name="type"><option value="">Any</option><option>Detached house</option><option>Condo / apartment</option><option>Townhouse</option><option>Half duplex / duplex</option><option>Other residential</option></select></div>
+        </div>
+        <div class="ls-toolbar">
+          <p class="ls-count" id="ls-count" role="status" aria-live="polite">Loading listings…</p>
+          <div class="ls-toolbar-tools">
+            <div class="field ls-sort"><label for="ls-sort">Sort</label><select id="ls-sort" name="sort"><option value="updated">Recently updated</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="city">City A–Z</option></select></div>
+            <button type="button" class="btn btn-outline" id="ls-clear">Clear</button>
+          </div>
+        </div>
       </form>
-      <p class="ls-count" id="ls-count" role="status" aria-live="polite">Loading listings…</p>
+      <div id="ls-empty" hidden></div>
       <div class="ls-grid" id="ls-results"></div>
       <div class="ls-more-wrap"><button type="button" class="btn btn-outline" id="ls-more" hidden>Show more homes</button></div>
     </div>
@@ -144,6 +153,7 @@
       <div class="ls-detail-grid">
         <div>
           <div class="ls-frame" id="ls-photo"></div>
+          <p class="ls-photo-count" id="ls-photo-count" aria-live="polite"></p>
           <div class="ls-thumbs" id="ls-thumbs"></div>
           <div class="ls-photo-nav">
             <button type="button" class="btn btn-outline" id="ls-prev">Previous photo</button>

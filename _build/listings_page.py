@@ -1,5 +1,20 @@
-"""For-sale and for-rent search pages. Hidden until LISTINGS_LIVE."""
+"""For-sale and for-rent search pages. Published when LISTINGS_LIVE is true."""
 from partials import BROKERAGE, BROKERAGE_ADDR, EMAIL, LISTINGS_LIVE, PHONE, TEL, foot, head
+
+SALE_CHIPS = (
+    ("Any price", "", ""),
+    ("Under $800k", "", "800000"),
+    ("Under $1.2M", "", "1200000"),
+    ("Under $2M", "", "2000000"),
+    ("$2M+", "2000000", ""),
+)
+RENT_CHIPS = (
+    ("Any rent", "", ""),
+    ("Under $2,500", "", "2500"),
+    ("Under $3,500", "", "3500"),
+    ("Under $5,000", "", "5000"),
+    ("$5,000+", "5000", ""),
+)
 
 MODES = {
     "sale": {
@@ -11,10 +26,9 @@ MODES = {
             "with Devin Desaulniers, Real Estate Associate at Axford Real Estate."
         ),
         "h1": "Homes for sale",
-        "lead": (
-            "Active residential listings in Greater Vancouver and the Fraser Valley, from the REALTOR.ca DDF® feed. "
-            "This search is operated by Devin Desaulniers, Real Estate Associate with {brokerage}."
-        ),
+        "lead": "Active homes in Greater Vancouver and the Fraser Valley.",
+        "chips": SALE_CHIPS,
+        "chip_label": "Price",
         "min_label": "Min price",
         "max_label": "Max price",
         "step": "1000",
@@ -41,10 +55,9 @@ MODES = {
             "with Devin Desaulniers, Real Estate Associate at Axford Real Estate."
         ),
         "h1": "Homes for rent",
-        "lead": (
-            "Active residential rentals in Greater Vancouver and the Fraser Valley, from the REALTOR.ca DDF® feed. "
-            "Rent is shown per month. This search is operated by Devin Desaulniers, Real Estate Associate with {brokerage}."
-        ),
+        "lead": "Active rentals in Greater Vancouver and the Fraser Valley. Rent is per month.",
+        "chips": RENT_CHIPS,
+        "chip_label": "Monthly rent",
         "min_label": "Min rent",
         "max_label": "Max rent",
         "step": "50",
@@ -65,6 +78,17 @@ MODES = {
 }
 
 
+def chips_html(chips, label):
+    buttons = []
+    for index, (text, low, high) in enumerate(chips):
+        pressed = "true" if index == 0 else "false"
+        extra = " is-on" if index == 0 else ""
+        buttons.append(
+            f'<button type="button" class="ls-chip{extra}" data-min="{low}" data-max="{high}" aria-pressed="{pressed}">{text}</button>'
+        )
+    return f'<div class="ls-chips" id="ls-chips" role="group" aria-label="{label}">' + "".join(buttons) + "</div>"
+
+
 def render(mode="sale"):
     spec = MODES[mode]
     robots = "" if LISTINGS_LIVE else '<meta name="robots" content="noindex, nofollow">\n'
@@ -72,16 +96,13 @@ def render(mode="sale"):
     html = head(spec["title"], spec["desc"], active, page_url=spec["file"], extra_head=robots)
     lead = spec["lead"].format(brokerage=BROKERAGE)
     ask_lead = spec["ask_lead"].format(brokerage=BROKERAGE)
+    chips = chips_html(spec["chips"], spec["chip_label"])
     html += f"""
-<section class="page-hero">
+<section class="page-hero page-hero--search">
   <div class="container">
     <span class="eyebrow">{BROKERAGE}</span>
     <h1>{spec["h1"]}</h1>
     <p class="lead">{lead}</p>
-    <div class="ls-axford">
-      <span class="ls-axford-logo"><img src="assets/img/axford-logo.png" alt="{BROKERAGE}" width="180" height="38"></span>
-      <p><strong>{BROKERAGE}</strong><br>Devin Desaulniers, Real Estate Associate<br>{BROKERAGE_ADDR}<br><a href="{TEL}">{PHONE}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></p>
-    </div>
   </div>
 </section>
 
@@ -94,17 +115,30 @@ def render(mode="sale"):
 <div id="ls-search">
   <section class="section section--listings">
     <div class="container">
+      <p class="ls-operator"><img src="assets/img/axford-logo.png" alt="" width="108" height="23"><span><strong>Devin Desaulniers</strong>, Real Estate Associate, {BROKERAGE}. <a href="{TEL}">{PHONE}</a></span></p>
       <form class="ls-filters" id="ls-filters" role="search">
-        <div class="field ls-grow"><label for="ls-q">City or area</label><input id="ls-q" name="q" type="search" placeholder="Coquitlam, Surrey, Langley…" autocomplete="off"></div>
-        <div class="field"><label for="ls-min">{spec["min_label"]}</label><input id="ls-min" name="min" type="number" inputmode="numeric" min="0" step="{spec["step"]}" placeholder="Any"></div>
-        <div class="field"><label for="ls-max">{spec["max_label"]}</label><input id="ls-max" name="max" type="number" inputmode="numeric" min="0" step="{spec["step"]}" placeholder="Any"></div>
-        <div class="field"><label for="ls-beds">Bedrooms</label><select id="ls-beds" name="beds"><option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option><option value="5">5+</option></select></div>
-        <div class="field"><label for="ls-baths">Bathrooms</label><select id="ls-baths" name="baths"><option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
-        <div class="field"><label for="ls-type">Property type</label><select id="ls-type" name="type"><option value="">Any</option><option>Detached house</option><option>Condo / apartment</option><option>Townhouse</option><option>Half duplex / duplex</option><option>Other residential</option></select></div>
-        <div class="field"><label for="ls-sort">Sort</label><select id="ls-sort" name="sort"><option value="updated">Recently updated</option><option value="price-asc">{spec["sort_asc"]}</option><option value="price-desc">{spec["sort_desc"]}</option><option value="city">City A–Z</option></select></div>
-        <div class="ls-filter-actions"><button type="submit" class="btn btn-primary">Search</button><button type="button" class="btn btn-outline" id="ls-clear">Clear</button></div>
+        <div class="ls-searchbar">
+          <div class="field ls-grow"><label for="ls-q">City or neighbourhood</label><input id="ls-q" name="q" type="search" list="ls-cities" placeholder="Vancouver, Surrey, Coquitlam…" autocomplete="off" enterkeyhint="search"><datalist id="ls-cities"></datalist></div>
+          <button type="submit" class="btn btn-primary ls-search-go">Search</button>
+          <button type="button" class="btn btn-outline ls-filter-toggle" id="ls-filter-toggle" aria-expanded="false" aria-controls="ls-more-filters">Filters</button>
+        </div>
+        {chips}
+        <div class="ls-more-filters is-collapsed" id="ls-more-filters">
+          <div class="field"><label for="ls-min">{spec["min_label"]}</label><input id="ls-min" name="min" type="number" inputmode="numeric" min="0" step="{spec["step"]}" placeholder="Any"></div>
+          <div class="field"><label for="ls-max">{spec["max_label"]}</label><input id="ls-max" name="max" type="number" inputmode="numeric" min="0" step="{spec["step"]}" placeholder="Any"></div>
+          <div class="field"><label for="ls-beds">Bedrooms</label><select id="ls-beds" name="beds"><option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option><option value="5">5+</option></select></div>
+          <div class="field"><label for="ls-baths">Bathrooms</label><select id="ls-baths" name="baths"><option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
+          <div class="field"><label for="ls-type">Property type</label><select id="ls-type" name="type"><option value="">Any</option><option>Detached house</option><option>Condo / apartment</option><option>Townhouse</option><option>Half duplex / duplex</option><option>Other residential</option></select></div>
+        </div>
+        <div class="ls-toolbar">
+          <p class="ls-count" id="ls-count" role="status" aria-live="polite">Loading listings…</p>
+          <div class="ls-toolbar-tools">
+            <div class="field ls-sort"><label for="ls-sort">Sort</label><select id="ls-sort" name="sort"><option value="updated">Recently updated</option><option value="price-asc">{spec["sort_asc"]}</option><option value="price-desc">{spec["sort_desc"]}</option><option value="city">City A–Z</option></select></div>
+            <button type="button" class="btn btn-outline" id="ls-clear">Clear</button>
+          </div>
+        </div>
       </form>
-      <p class="ls-count" id="ls-count" role="status" aria-live="polite">Loading listings…</p>
+      <div id="ls-empty" hidden></div>
       <div class="ls-grid" id="ls-results"></div>
       <div class="ls-more-wrap"><button type="button" class="btn btn-outline" id="ls-more" hidden>{spec["more"]}</button></div>
     </div>
@@ -118,6 +152,7 @@ def render(mode="sale"):
       <div class="ls-detail-grid">
         <div>
           <div class="ls-frame" id="ls-photo"></div>
+          <p class="ls-photo-count" id="ls-photo-count" aria-live="polite"></p>
           <div class="ls-thumbs" id="ls-thumbs"></div>
           <div class="ls-photo-nav">
             <button type="button" class="btn btn-outline" id="ls-prev">Previous photo</button>

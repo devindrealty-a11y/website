@@ -150,6 +150,30 @@ def test_replace_drops_removed_ids():
         assert "ClosePrice" not in open(path, encoding="utf-8").read()
 
 
+def test_write_feed_keeps_search_cards_light():
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "data.json")
+        ddf.write_feed(path, "ddf-web-api", "9", [{
+            "id": "55",
+            "city": "Surrey",
+            "price": 900000,
+            "brokerage": "Sample Harbour Realty",
+            "photos": ["https://cdn.example/a.jpg", "https://cdn.example/b.jpg"],
+            "remarks": "A bright home.",
+        }])
+        card = json.loads(open(path, encoding="utf-8").read())["listings"][0]
+        assert card["photo"] == "https://cdn.example/a.jpg"
+        assert card["photoCount"] == 2
+        assert "remarks" not in card
+        assert "photos" not in card
+        shard = json.loads(open(os.path.join(tmp, "sale", f"{55 % ddf.SHARD_COUNT}.json"), encoding="utf-8").read())
+        assert shard["55"]["remarks"] == "A bright home."
+        assert shard["55"]["photos"] == ["https://cdn.example/a.jpg", "https://cdn.example/b.jpg"]
+        rentals = os.path.join(tmp, "rentals.json")
+        ddf.write_feed(rentals, "ddf-web-api", "9", [{"id": "10", "city": "Delta", "price": 2400, "remarks": "Monthly."}])
+        assert os.path.isdir(os.path.join(tmp, "rent"))
+
+
 def test_missing_secrets_exit_clean():
     env = os.environ.copy()
     env.pop("DDF_USERNAME", None)
@@ -188,16 +212,24 @@ def test_listings_are_published():
     assert sample["sample"] is True
     assert live["sample"] is False
     assert "FICTIONAL" in sample["listings"][0]["remarks"]
-    assert all("FICTIONAL" not in (row.get("remarks") or "") for row in live["listings"])
+    assert all("remarks" not in row and "photos" not in row for row in live["listings"])
+    assert live["count"] == len(live["listings"])
+    pictured = next(row for row in live["listings"] if row.get("photo") and str(row.get("id", "")).isdigit())
+    shard_no = int(pictured["id"]) % ddf.SHARD_COUNT
+    shard = json.loads(open(os.path.join(ROOT, "listings", "sale", f"{shard_no}.json"), encoding="utf-8").read())
+    assert shard[pictured["id"]]["photos"][0] == pictured["photo"]
+    assert "FICTIONAL" not in (shard[pictured["id"]].get("remarks") or "")
     assert rent_sample["sample"] is True
     assert rent_live["sample"] is False
     assert "FICTIONAL" in rent_sample["listings"][0]["remarks"]
-    assert all("FICTIONAL" not in (row.get("remarks") or "") for row in rent_live["listings"])
+    assert all("remarks" not in row and "photos" not in row for row in rent_live["listings"])
     assert all(row["price"] < 20000 for row in rent_sample["listings"])
     js = open(os.path.join(ROOT, "assets", "js", "listings.js"), encoding="utf-8").read()
     assert "https://analytics.crea.ca/LogEvents.svc/LogEvents" in js
     assert "EventType=view" in js
     assert "ReferralURL" in js
+    assert 'listings/" + (mode === "rent" ? "rent" : "sale")' in js
+    assert "photoCount" in js
     sitemap = open(os.path.join(ROOT, "sitemap.xml"), encoding="utf-8").read()
     assert "<loc>https://devindesaulniers.ca/listings.html</loc>" in sitemap
     assert "<loc>https://devindesaulniers.ca/rentals.html</loc>" in sitemap

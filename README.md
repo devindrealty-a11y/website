@@ -132,6 +132,8 @@ domain earns no search value of its own.
 
 Both cover Greater Vancouver and the Fraser Valley from the CREA REALTOR.ca DDF® National Shared Pool. For-sale rows are active residential listings. For-rent rows are active residential leases (commercial excluded). A listing is written to only one file. Sold and leased-completed listings are not stored.
 
+The first live refresh (October 14, 2026) kept 22,168 active residential listings. Every property subtype was Single Family or Multi-family, every status was Active, and no row had a lease amount, so `listings/rentals.json` was empty. The rentals page stays published and will show homes when a later refresh writes lease rows.
+
 Do not add a `.nojekyll` file. GitHub Pages runs Jekyll, which does not publish `_fixtures/`. That is what keeps the sample files off the live site.
 
 ### Secrets
@@ -154,7 +156,7 @@ No other secret names are read. The same pair feeds both JSON files. The workflo
 1. If `DDF_USERNAME` or `DDF_PASSWORD` is missing, it prints a skip message and exits 0. It does not change `listings/data.json` or `listings/rentals.json`, and it does not fail the job.
 2. It signs in to the DDF Web API (OData) at `https://ddfapi.realtor.ca/odata/v1`. The token request is `POST https://identity.crea.ca/connect/token` with `grant_type=client_credentials` and `scope=DDFApi_Read`.
 3. If that API cannot be reached, or the token request is rejected, it falls back to the RETS feed at `https://data.crea.ca` (digest login, session cookie, Standard-XML search).
-4. For-sale rows go to `listings/data.json`. Residential for-lease or for-rent rows go to `listings/rentals.json`. Commercial rows are dropped from both. Sold, leased-completed, and out-of-area records are dropped. Sold prices are never stored.
+4. For-sale rows go to `listings/data.json`. Residential for-lease or for-rent rows go to `listings/rentals.json`. Commercial rows are dropped from both. Sold, leased-completed, and out-of-area records are dropped. Sold prices are never stored. Each search file keeps a light card (price, address, beds, baths, brokerage, first photo). Galleries and public remarks go in `listings/sale/{n}.json` and `listings/rent/{n}.json`, where `n` is the numeric listing id modulo 48. The page fetches a shard only when a home is opened. Sample fixtures keep photos and remarks inline and are not sharded. The workflow commits the whole `listings/` directory, including those shards and any deletions.
 5. Rent is stored as dollars per month. `LeaseAmount` is preferred over `ListPrice` / RETS `Price`. `LeaseAmountFrequency` (or RETS `PricePerTime` / `LeasePerTime`) converts the figure: weekly × 52/12, bi-weekly × 26/12, semi-monthly × 2, bi-monthly (every two months) ÷ 2, annually ÷ 12. A blank frequency is treated as monthly. One-time and unrecognized frequencies are left out rather than shown as a monthly rent.
 6. Photos stay remote `https` URLs. Each file is replaced in full, so a listing that leaves the feed disappears from that file. If one side has matches and the other does not, the empty side is still replaced.
 7. If the feed returns records but none are kept on either side, the script exits 1 and does not wipe either file.

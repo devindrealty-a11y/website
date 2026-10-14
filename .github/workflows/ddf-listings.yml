@@ -15,16 +15,6 @@ on:
   schedule:
     - cron: "0 */12 * * *"
   workflow_dispatch:
-  # One push of this file starts the first refresh on the listings branch.
-  # The JSON commit does not match this path, so it does not run again.
-  # Remove this trigger once that refresh has landed; schedule and
-  # workflow_dispatch stay.
-  push:
-    branches:
-      - cursor/ddf-listings-search-c985
-    paths:
-      - .github/workflows/ddf-listings.yml
-      - scripts/fetch_ddf_listings.py
 
 permissions:
   contents: write
@@ -54,12 +44,12 @@ jobs:
 
       - name: Commit listing files when they changed
         run: |
-          if git diff --quiet -- listings/data.json listings/rentals.json; then
+          git add -A listings
+          if git diff --cached --quiet; then
             echo "No change in listing files."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add listings/data.json listings/rentals.json
           git commit -m "Refresh active listings and rentals from the DDF feed"
           git push

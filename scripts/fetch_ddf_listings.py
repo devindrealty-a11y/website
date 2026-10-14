@@ -49,6 +49,14 @@ RETS_LOGOUT = "https://data.crea.ca/Logout.svc/Logout"
 SCOPE = "DDFApi_Read"
 PAGE_SIZE = 100
 MAX_PHOTOS = 12
+# Detail photos and remarks are split out of the search file so the first
+# page can load. 48 shards keeps each one small enough to fetch on open.
+SHARD_COUNT = 48
+CARD_FIELDS = (
+    "id", "mls", "price", "address", "city", "area", "postal", "beds", "baths",
+    "type", "sqft", "year", "parking", "brokerage", "agent", "realtorUrl",
+    "updated", "analyticsId",
+)
 MAX_PAGES = 5000
 UA = "DevinDesaulniersDDF/1.0"
 
@@ -1136,6 +1144,60 @@ def dedupe(records):
     return [by_id[key] for key in sorted(by_id)]
 
 
+def card_record(item):
+    """Search card. The first photo stays here; the gallery and remarks go in a shard."""
+    card = {}
+    for key in CARD_FIELDS:
+        value = item.get(key)
+        if value is None or value == "" or value == []:
+            continue
+        card[key] = value
+    photos = item.get("photos") or []
+    if photos:
+        card["photo"] = photos[0]
+        if len(photos) > 1:
+            card["photoCount"] = len(photos)
+    return card
+
+
+def shard_directory(path):
+    kind = "rent" if os.path.basename(path) == "rentals.json" else "sale"
+    return os.path.join(os.path.dirname(os.path.abspath(path)), kind)
+
+
+def shard_index(listing_id):
+    text = str(listing_id or "")
+    if text.isdigit():
+        return int(text) % SHARD_COUNT
+    return 0
+
+
+def write_shards(directory, listings):
+    os.makedirs(directory, exist_ok=True)
+    for name in os.listdir(directory):
+        if name.endswith(".json"):
+            os.remove(os.path.join(directory, name))
+    groups = {}
+    for item in listings:
+        detail = {}
+        photos = item.get("photos") or []
+        remarks = item.get("remarks") or ""
+        if photos:
+            detail["photos"] = photos
+        if remarks:
+            detail["remarks"] = remarks
+        if not detail or not item.get("id"):
+            continue
+        groups.setdefault(shard_index(item["id"]), {})[str(item["id"])] = detail
+    for number, payload in groups.items():
+        dest = os.path.join(directory, f"{number}.json")
+        tmp = dest + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as fh:
+            json.dump(payload, fh, ensure_ascii=False, separators=(",", ":"))
+            fh.write("\n")
+        os.replace(tmp, dest)
+
+
 def write_feed(path, source, destination_id, listings):
     payload = {
         "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -1144,14 +1206,15 @@ def write_feed(path, source, destination_id, listings):
         "destinationId": destination_id,
         "area": "Greater Vancouver and Fraser Valley",
         "count": len(listings),
-        "listings": listings,
+        "listings": [card_record(item) for item in listings],
     }
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+    os.makedirs(os.path.dirname(os.path.abspath(path)) or ".", exist_ok=True)
     tmp = path + ".tmp"
     with open(tmp, "w", encoding="utf-8") as fh:
         json.dump(payload, fh, ensure_ascii=False, separators=(",", ":"))
         fh.write("\n")
     os.replace(tmp, path)
+    write_shards(shard_directory(path), listings)
 
 
 def read_response(req):
