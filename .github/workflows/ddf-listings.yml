@@ -15,6 +15,15 @@ on:
   schedule:
     - cron: "0 */12 * * *"
   workflow_dispatch:
+  # One push of this file starts the first refresh on the listings branch.
+  # The JSON commit does not match this path, so it does not run again.
+  # Remove this trigger once that refresh has landed; schedule and
+  # workflow_dispatch stay.
+  push:
+    branches:
+      - cursor/ddf-listings-search-c985
+    paths:
+      - .github/workflows/ddf-listings.yml
 
 permissions:
   contents: write
