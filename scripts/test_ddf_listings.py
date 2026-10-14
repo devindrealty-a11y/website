@@ -224,6 +224,15 @@ def test_listings_are_published():
     assert "FICTIONAL" in rent_sample["listings"][0]["remarks"]
     assert all("remarks" not in row and "photos" not in row for row in rent_live["listings"])
     assert all(row["price"] < 20000 for row in rent_sample["listings"])
+    assert rent_live["count"] == len(rent_live["listings"])
+    assert rent_live["count"] > 0
+    rent_row = next(row for row in rent_live["listings"] if row.get("photo") and str(row.get("id", "")).isdigit())
+    rent_shard_no = int(rent_row["id"]) % ddf.SHARD_COUNT
+    rent_shard = json.loads(open(os.path.join(ROOT, "listings", "rent", f"{rent_shard_no}.json"), encoding="utf-8").read())
+    assert rent_shard[rent_row["id"]]["photos"][0] == rent_row["photo"]
+    assert all(isinstance(row.get("price"), int) and row["price"] > 0 for row in rent_live["listings"])
+    sale_ids = {row["id"] for row in live["listings"]}
+    assert not sale_ids.intersection(row["id"] for row in rent_live["listings"])
     js = open(os.path.join(ROOT, "assets", "js", "listings.js"), encoding="utf-8").read()
     assert "https://analytics.crea.ca/LogEvents.svc/LogEvents" in js
     assert "EventType=view" in js
