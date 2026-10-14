@@ -304,11 +304,13 @@ def foot(root=""):
     </div>
   </div>
 </footer>
+<!-- Chat switch: assets/js/config.js → chat.
+     "lead" (default) shows the free chat box.
+     "elfsight" shows the Elfsight AI Chatbot, app a317cda7-7d35-4984-bea6-2d5efb757691. -->
+<div id="lead-chat-root" data-privacy="{root}privacy.html" data-photo="{root}assets/img/devin-headshot-480.webp"></div>
 <script src="{root}assets/js/config.js"></script>
 <script src="{root}assets/js/site.js"></script>
-<!-- Elfsight AI Chatbot | Devin's AI Assistant -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-a317cda7-7d35-4984-bea6-2d5efb757691" data-elfsight-app-lazy></div>
+<script src="{root}assets/js/lead-chat.js"></script>
 </body>
 </html>
 '''
