@@ -385,6 +385,18 @@ def test_rental_probe_reads_metadata_and_compact_rows():
     )
     assert names == ["TransactionType", "PropertyType"]
     assert rows == [{"TransactionType": "For lease", "PropertyType": "Residential Lease"}]
+    packed = (
+        "<RETS><COLUMNS>\tTransactionType\tPrice\t</COLUMNS>"
+        "<DATA>\tFor rent\t2500\t</DATA><DATA>\tFor sale\t900000\t</DATA></RETS>"
+    )
+    names, rows = probe.compact_rows(packed)
+    assert names == ["TransactionType", "Price"]
+    assert rows[0]["TransactionType"] == "For rent"
+    assert rows[1]["Price"] == "900000"
+    assert probe.amount_bucket(2400) == "1500_3000"
+    assert probe.amount_bucket(2400000) == "100000_plus"
+    assert "for_rent_or_lease" in probe.remark_flags("Bright condo for rent.")
+    assert probe.remark_flags(2400) == ("empty",)
 
 
 if __name__ == "__main__":

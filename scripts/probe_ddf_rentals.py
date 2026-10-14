@@ -92,10 +92,55 @@ def price_bucket(value):
     return "100k_plus"
 
 
+def amount_bucket(value):
+    """Coarse buckets only. Individual rents and prices are not printed."""
+    number = ddf.parse_number(value)
+    if number is None or number <= 0:
+        return None
+    edges = (
+        (500, "under_500"),
+        (1500, "500_1500"),
+        (3000, "1500_3000"),
+        (6000, "3000_6000"),
+        (12000, "6000_12000"),
+        (25000, "12000_25000"),
+        (100000, "25000_100000"),
+    )
+    for limit, name in edges:
+        if number < limit:
+            return name
+    return "100000_plus"
+
+
+def remark_flags(text):
+    low = ddf.textify(text).lower()
+    if not low:
+        return ("empty",)
+    flags = []
+    if "for rent" in low or "for lease" in low:
+        flags.append("for_rent_or_lease")
+    if "rent" in low:
+        flags.append("rent_word")
+    if "lease" in low:
+        flags.append("lease_word")
+    if "/month" in low or "per month" in low or "/mo" in low:
+        flags.append("per_month")
+    if "furnished" in low:
+        flags.append("furnished")
+    if "tenant" in low:
+        flags.append("tenant")
+    if "open house" in low:
+        flags.append("open_house")
+    if not flags:
+        flags.append("no_rent_language")
+    return tuple(flags)
+
+
 def scan_property(token):
     select = [
         "ListingKey", "PropertySubType", "StructureType", "StandardStatus",
-        "ListPrice", "LeaseAmount", "LeaseAmountFrequency",
+        "ListPrice", "LeaseAmount", "LeaseAmountFrequency", "YearBuilt",
+        "PublicRemarks",
     ] + [field for field in EXTRA_FIELDS]
     subtypes = ddf.Counter()
     structures = ddf.Counter()
@@ -104,6 +149,12 @@ def scan_property(token):
     extras = {field: ddf.Counter() for field in ("LeaseAmountFrequency",) + EXTRA_FIELDS}
     lease_amount_set = 0
     total_actual_rent_set = 0
+    rent_buckets = ddf.Counter()
+    overlap = ddf.Counter()
+    cohort_subtypes = ddf.Counter()
+    cohort_structures = ddf.Counter()
+    cohort_remarks = ddf.Counter()
+    cohort_year = ddf.Counter()
     pulled = 0
     pages = 0
     url = None
@@ -131,10 +182,27 @@ def scan_property(token):
             structures[ddf.textify(rec.get("StructureType")) or "(blank)"] += 1
             statuses[ddf.textify(rec.get("StandardStatus")) or "(blank)"] += 1
             prices[price_bucket(rec.get("ListPrice"))] += 1
-            if ddf.positive_amount(rec.get("LeaseAmount")):
+            has_lease = ddf.positive_amount(rec.get("LeaseAmount"))
+            has_list = ddf.positive_amount(rec.get("ListPrice"))
+            has_rent = ddf.positive_amount(rec.get("TotalActualRent"))
+            if has_lease:
                 lease_amount_set += 1
-            if ddf.positive_amount(rec.get("TotalActualRent")):
+            if has_rent:
                 total_actual_rent_set += 1
+                bucket = amount_bucket(rec.get("TotalActualRent"))
+                if bucket:
+                    rent_buckets[bucket] += 1
+            if has_rent and not has_list:
+                overlap["rent_blank_price"] += 1
+                cohort_subtypes[ddf.textify(rec.get("PropertySubType")) or "(blank)"] += 1
+                cohort_structures[ddf.textify(rec.get("StructureType")) or "(blank)"] += 1
+                cohort_year["year_set" if ddf.textify(rec.get("YearBuilt")) else "year_blank"] += 1
+                for flag in remark_flags(rec.get("PublicRemarks")):
+                    cohort_remarks[flag] += 1
+            elif has_rent and has_list:
+                overlap["rent_and_list_price"] += 1
+            elif not has_list:
+                overlap["blank_price_no_rent"] += 1
             for field in extras:
                 text = ddf.textify(rec.get(field))
                 if text:
@@ -154,6 +222,12 @@ def scan_property(token):
     print("structure_types: " + tally_line(structures))
     print("statuses: " + tally_line(statuses))
     print("list_price_buckets: " + tally_line(prices))
+    print("total_actual_rent_buckets: " + tally_line(rent_buckets))
+    print("price_rent_overlap: " + tally_line(overlap))
+    print("unpriced_rent_subtypes: " + tally_line(cohort_subtypes))
+    print("unpriced_rent_structures: " + tally_line(cohort_structures))
+    print("unpriced_rent_year: " + tally_line(cohort_year))
+    print("unpriced_rent_remarks: " + tally_line(cohort_remarks))
     for field, counter in extras.items():
         print(f"field {field}: " + tally_line(counter))
 
@@ -270,20 +344,23 @@ def scan_rets(user, password):
 
 
 def compact_rows(page):
+    """Parse RETS compact rows even when COLUMNS and DATA share one line."""
     names = []
     records = []
-    for line in page.splitlines():
-        if "COLUMNS" in line and "<" in line:
-            inner = ddf.re.sub(r"</?COLUMNS>", "", line)
-            names = [part.strip() for part in inner.split("\t") if part.strip()]
-        elif "<DATA>" in line:
-            inner = ddf.re.sub(r"</?DATA>", "", line)
-            parts = inner.split("\t")
-            # Compact rows are tab-wrapped, so the first cell is often empty.
-            if parts and parts[0] == "":
-                parts = parts[1:]
-            if names:
-                records.append({names[i]: parts[i].strip() for i in range(min(len(names), len(parts)))})
+    col_match = ddf.re.search(r"<COLUMNS>(.*?)</COLUMNS>", page, ddf.re.I | ddf.re.S)
+    if col_match:
+        names = [part.strip() for part in col_match.group(1).split("\t") if part.strip()]
+    for inner in ddf.re.findall(r"<DATA>(.*?)</DATA>", page, ddf.re.I | ddf.re.S):
+        parts = inner.split("\t")
+        if parts and parts[0] == "":
+            parts = parts[1:]
+        if parts and parts[-1] == "":
+            parts = parts[:-1]
+        if names:
+            records.append({
+                names[i]: (parts[i].strip() if i < len(parts) else "")
+                for i in range(len(names))
+            })
     return names, records
 
 
