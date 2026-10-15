@@ -472,8 +472,15 @@ def write_blog(posts):
     open(os.path.join(BLOG_DIR, "feed.xml"), "w", encoding="utf-8").write(feed_xml(posts))
     print(f"  blog: {len(posts)} post(s) -> blog/ (index, feed.xml)" + (f"; newest: blog/{posts[0]['out']}" if posts else ""))
 
-def sitemap_xml(static_pages, posts):
-    urls = [f"  <url><loc>{SITE}{u}</loc></url>" for u in static_pages]
+def sitemap_xml(static_pages, posts, extra_lastmod=None):
+    extra_lastmod = extra_lastmod or {}
+    urls = []
+    for u in static_pages:
+        lm = extra_lastmod.get(u)
+        if lm:
+            urls.append(f"  <url><loc>{SITE}{u}</loc><lastmod>{lm}</lastmod></url>")
+        else:
+            urls.append(f"  <url><loc>{SITE}{u}</loc></url>")
     if posts:
         urls.append(f"  <url><loc>{SITE}blog/</loc><lastmod>{posts[0]['date'].isoformat()}</lastmod></url>")
         urls += [f"  <url><loc>{p['url']}</loc><lastmod>{p['updated']}</lastmod></url>" for p in posts]

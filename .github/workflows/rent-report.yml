@@ -1,0 +1,48 @@
+# Rebuild the Greater Vancouver weekly rent report from listings/rentals.json.
+# Monday 15:00 UTC is 8:00am Pacific during daylight time and 7:00am during
+# standard time. The run also stays available from the Actions tab.
+# It does not call the DDF feed. The 12-hour listing refresh is ddf-listings.yml.
+name: Weekly rent report
+
+on:
+  schedule:
+    - cron: "0 15 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rent-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check the rent report logic
+        run: python3 scripts/test_rent_report.py
+
+      - name: Build the weekly rent report
+        run: python3 scripts/build_rent_report.py
+
+      - name: Commit the report when it changed
+        run: |
+          git add rent-report.html rent-report sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No change in the rent report."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update the weekly Greater Vancouver rent report"
+          git push
