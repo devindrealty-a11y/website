@@ -22,6 +22,17 @@ cd _build && python3 build.py
 
 No placeholders remain: the footer disclaimer, the privacy page (`privacy.html`, built from `PRIVACY_URL` / `privacy` in `_build/build.py`), the Axford disclosure in the tenant FAQ, the buyer services list and the neighbourhood notes are all written. If you add or change a form, the chat widget or another third-party service, update `privacy.html` to match.
 
+## Chat box
+Every page has a free step-by-step chat box (`assets/js/lead-chat.js`). It asks buy / sell / rent, area, budget, timeline, name, and phone or email. Tap buttons where a short list is enough.
+
+The switch is one line in `assets/js/config.js`:
+- `chat: "lead"` (default) shows this chat box. Elfsight does not load.
+- `chat: "elfsight"` shows the Elfsight widget (app `a317cda7-7d35-4984-bea6-2d5efb757691`) and hides the chat box.
+
+On Send, the chat does two things. It calls the Supabase function `submit_website_chat_lead` (public anon key, insert only). It also emails a copy through FormSubmit (`forms.leadChat`). That FormSubmit path has not been test-submitted. A hidden `_honey` field drops spam before either send. The privacy note links to `privacy.html`.
+
+The SQL for the Supabase function is `crm/migrations/20261014210000_website_chat_leads.sql`. It has not been applied. Run it by hand in the Supabase SQL editor for project `gwmfrxnoxoknzfuzktqi`. Publishing this site does not run it.
+
 ## Forms (FormSubmit)
 The forms (buyers.html "Send me listings", tenants.html relocation intake, home-evaluation.html, buyer-opinion.html, and the listing and rental inquiries) post via AJAX to
 `https://formsubmit.co/ajax/devin@axfordrealestate.ca` — configured in one spot: `assets/js/config.js`.

@@ -829,7 +829,7 @@ videos += f"""
 videos += foot()
 
 # ---------------- PRIVACY ----------------
-# Keep in step with the real forms (buyers, tenants, home evaluation, expert opinion, listing and rental inquiries), assets/js/config.js and the Elfsight snippet in foot().
+# Keep in step with the real forms (buyers, tenants, home evaluation, expert opinion, listing and rental inquiries), assets/js/config.js, and the chat switch in foot() / lead-chat.js.
 PRIVACY_URL = "privacy.html"
 privacy = head("Privacy | Devin Desaulniers, Real Estate Associate, Axford Real Estate",
                "How the contact forms, listing inquiries, and chat widget on Devin Desaulniers' website handle what you send, where it may be processed, and how to make a privacy request.",
@@ -863,11 +863,14 @@ privacy += f"""
       <h2 id="listing-search">Homes for sale and homes for rent</h2>
       <p>The homes on <a href="listings.html">homes for sale</a> and <a href="rentals.html">homes for rent</a> come from the REALTOR.ca DDF® feed. Opening a listing sends a view to the CREA DDF® Analytics Web Service at analytics.crea.ca. That view includes the listing id, this site's DDF destination id, and the page address. The DDF rules require it. Listing photos load from the photo addresses in the feed.</p>
 
-      <h2 id="chat">Chat widget</h2>
-      <p>Pages on this site include a chat widget, “Devin's AI Assistant”, provided by Elfsight. What you type into that chat is handled by Elfsight.</p>
+      <h2 id="chat">Chat box</h2>
+      <p>Pages on this site include a chat box. It asks whether you want to buy, sell, or rent, which area, your budget, your timeline, your name, and a phone number or an email (or both). You also agree that I can contact you about what you sent. You can opt out at any time.</p>
+      <p>When you press Send, two things happen. Your answers are saved in my client records so I can follow up. A copy is also emailed to me through FormSubmit (formsubmit.co) at <a href="mailto:{EMAIL}">{EMAIL}</a>. The chat box cannot look up other people's information. It can only add your note.</p>
+      <p>The chat box includes a field people are not meant to fill in. If that field is filled in, the note is dropped as spam.</p>
+      <p>An older chat widget, “Devin's AI Assistant”, from Elfsight, is turned off. If I switch that widget back on, the chat box is hidden, and what you type into the Elfsight chat is handled by Elfsight.</p>
 
       <h2 id="outside-canada">Processing outside Canada</h2>
-      <p>Information you send through FormSubmit or the Elfsight chat widget may be processed outside Canada. If you'd rather not use the forms or the chat, you can call or text me at <a href="{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>Information you send through FormSubmit, or that the chat box saves, may be processed outside Canada. The saved copy is stored with Supabase. If the Elfsight chat is switched on, what you type there may also be processed outside Canada. If you'd rather not use the forms or the chat, you can call or text me at <a href="{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 
       <h2 id="video-tours">Video tours</h2>
       <p>The YouTube video tours on this site show a preview image from YouTube, and the YouTube player itself loads only after you press play.</p>
