@@ -10,6 +10,7 @@ Pages:
 - `tenants.html` — standalone landing page for the $1,500 tenant-paid relocation rental service (link this from ads/social)
 - `listings.html` — active residential homes for sale in Greater Vancouver and the Fraser Valley (REALTOR.ca DDF®)
 - `rentals.html` — active residential homes for rent in the same area, with rent shown per month
+- `rent-report.html` — weekly asking-rent report for people moving to Greater Vancouver (medians by city and bedroom, week-over-week change, new listings, best-value homes)
 - `videos.html` — property video tours from Devin's YouTube channel (not listings)
 - `blog/` — blog index, posts, RSS feed, generated from Markdown in `_posts/` (see **`_build/BLOG.md`** for how to add a post)
 
@@ -67,7 +68,7 @@ domain earns no search value of its own.
   Axford is listed as `parentOrganization` because schema.org only allows `worksFor` on `Person`.
 - `tenants.html` also carries `FAQPage` JSON-LD. It is generated from the same `FAQ_ITEMS` strings as the
   visible FAQ, so edit the FAQ in `build.py` only and the schema stays identical to the page text.
-- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, listings, rentals, tenants, buyers, home-evaluation, buyer-opinion, relocating-to-greater-vancouver, videos, privacy, and the blog). The Coquitlam redirect is omitted.
+- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, listings, rentals, rent-report, tenants, buyers, home-evaluation, buyer-opinion, relocating-to-greater-vancouver, videos, privacy, and the blog). The Coquitlam redirect is omitted. The rent report URL gets a `lastmod` from the latest Monday snapshot.
 - `robots.txt` allows crawl and lists the Sitemap at https://devindesaulniers.ca/sitemap.xml (served at the domain root).
 - `SITE` in `_build/partials.py` is `https://devindesaulniers.ca/`. Rebuild after changing it.
 - Submit `sitemap.xml` in Google Search Console when ready.
@@ -181,3 +182,13 @@ Open `http://127.0.0.1:8765/listings.html?preview=1` and `http://127.0.0.1:8765/
 `_fixtures/listings-sample.json` and `_fixtures/rentals-sample.json` are fictional (sample ids, sample brokerages, placeholder photos). On localhost each page loads its sample unless the URL has `?live=1`. On devindesaulniers.ca the pages load `listings/data.json` and `listings/rentals.json` only. `?preview=1` on the public site asks for `_fixtures/…`, which Jekyll does not publish, so the samples never appear there.
 
 The detail-page inquiry forms post to FormSubmit (`listingInquiry` and `rentalInquiry` in `assets/js/config.js`), the same way as the other forms. They have not been test-submitted. The first real submission still needs Devin to activate FormSubmit. `privacy.html` describes those forms and the listing-view call to analytics.crea.ca.
+
+## Weekly rent report
+
+`rent-report.html` is the public page. `rent-report/newsletter.html` (Verdana, inline styles, noindex) and `rent-report/newsletter.txt` are the same week's summary, ready to paste into an email. `rent-report/history/YYYY-MM-DD.json` is the Monday snapshot (medians plus listing ids). `rent-report/history/series.json` is the chart series without the ids.
+
+The page counts active residential asking rents from `listings/rentals.json`. It keeps a city, a bedroom count, and a rent from $800 to $40,000, and leaves out a missing city, a garage, or a size under 200 square feet. Medians and averages are rounded to the nearest dollar. Week-over-week change needs two snapshots and at least five homes in both weeks for that row. On the first run, "new" means the REALTOR.ca record was updated on or after Monday. After that, new means the listing id was not in the previous snapshot. Best value is asking rent per square foot at least 12% under the median for the same city and bedroom count (at most two homes per city).
+
+`.github/workflows/rent-report.yml` runs every Monday at 15:00 UTC and from **Actions → Weekly rent report → Run workflow**. It does not call DDF. It reads whatever `listings/rentals.json` is already in the repo, so the 12-hour listing refresh should have run first. Check the logic without rewriting the page: `python3 scripts/test_rent_report.py`. Rebuild the page locally with `python3 scripts/build_rent_report.py`.
+
+Every page has the same offer under the header: "Want me to find yours? Tenant Relocation Service $1,500 + GST", linking to `tenants.html#intake`. Page visits are already counted with GoatCounter (`https://devindesaulniers.goatcounter.com/count`, no cookies). Those offer links also send an event named `cta-tenant-relocation`. `privacy.html` says so.

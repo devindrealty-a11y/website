@@ -832,14 +832,14 @@ videos += foot()
 # Keep in step with the real forms (buyers, tenants, home evaluation, expert opinion, listing and rental inquiries), assets/js/config.js, the GoatCounter tag in head(), and the Elfsight snippet in foot().
 PRIVACY_URL = "privacy.html"
 privacy = head("Privacy | Devin Desaulniers, Real Estate Associate, Axford Real Estate",
-               "How the contact forms, listing inquiries, and chat widget on Devin Desaulniers' website handle what you send, where it may be processed, and how to make a privacy request.",
+               "How the contact forms, listing inquiries, chat widget, and page-visit counter on Devin Desaulniers' website handle what you send, where it may be processed, and how to make a privacy request.",
                "privacy", page_url=PRIVACY_URL)
 privacy += f"""
 <section class="page-hero">
   <div class="container">
     <span class="eyebrow">Privacy</span>
     <h1>How this site handles your information</h1>
-    <p class="lead">What happens to the information you send through the contact forms, a listing inquiry, and the chat widget, and who to contact with a privacy question or request.</p>
+    <p class="lead">What happens to the information you send through the contact forms, a listing inquiry, and the chat widget, how page visits are counted, and who to contact with a privacy question or request.</p>
   </div>
 </section>
 
@@ -847,7 +847,7 @@ privacy += f"""
   <div class="container narrow-wide">
     <div class="post-body">
       <p>This site is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate, {BROKERAGE_ADDR}. The sections below explain, in plain language, where the information you send me goes.</p>
-      <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking.</p>
+      <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form.</p>
 
       <h2 id="forms">Contact forms</h2>
       <p>There are six forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, and the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
@@ -868,7 +868,7 @@ privacy += f"""
       <p>Pages on this site include a chat widget, “Devin's AI Assistant”, provided by Elfsight. What you type into that chat is handled by Elfsight.</p>
 
       <h2 id="outside-canada">Processing outside Canada</h2>
-      <p>Information you send through FormSubmit or the Elfsight chat widget may be processed outside Canada. If you'd rather not use the forms or the chat, you can call or text me at <a href="{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>Information you send through FormSubmit or the Elfsight chat widget may be processed outside Canada. A GoatCounter page visit may also be processed outside Canada. If you'd rather not use the forms or the chat, you can call or text me at <a href="{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 
       <h2 id="video-tours">Video tours</h2>
       <p>The YouTube video tours on this site show a preview image from YouTube, and the YouTube player itself loads only after you press play.</p>
@@ -1021,8 +1021,11 @@ for fn, html in SEO_PAGES:
     open(os.path.join(OUT, fn), "w").write(html)
 STATIC_PAGES = ["", "tenants.html", "buyers.html", "home-evaluation.html", "buyer-opinion.html", GV_URL, "videos.html", PRIVACY_URL]
 if LISTINGS_LIVE:
-    STATIC_PAGES[1:1] = ["listings.html", "rentals.html"]
+    STATIC_PAGES[1:1] = ["listings.html", "rentals.html", "rent-report.html"]
 guide_at = STATIC_PAGES.index(GV_URL) + 1
 STATIC_PAGES[guide_at:guide_at] = [fn for fn, _ in SEO_PAGES]
-open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS))
+import rent_report
+_report_lastmod = rent_report.published_lastmod(OUT)
+_sitemap_lastmod = {"rent-report.html": _report_lastmod} if _report_lastmod else {}
+open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS, _sitemap_lastmod))
 print("built")

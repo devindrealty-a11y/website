@@ -22,6 +22,10 @@ EMAIL = "devin@axfordrealestate.ca"
 PHONE = "604-809-1032"
 TEL = "tel:+16048091032"
 SITE = "https://devindesaulniers.ca/"  # custom domain (Porkbun); CNAME at repo root
+# CTA clicks use data-goatcounter-click. The visit counter itself is the GOATCOUNTER script in head().
+CTA_TEXT = "Want me to find yours? Tenant Relocation Service $1,500 + GST"
+CTA_EVENT = "cta-tenant-relocation"
+CTA_PAGE = "tenants.html#intake"
 # Homes for sale (listings.html) and homes for rent (rentals.html), from the
 # CREA REALTOR.ca DDF National Shared Pool (Greater Vancouver and Fraser Valley).
 # True puts both pages in the nav, footer, and sitemap, and drops their noindex.
@@ -180,12 +184,36 @@ def tour_card(vid, heading="h3"):
 def tours_grid(ids, heading="h3"):
     return '<div class="tour-grid">' + "".join(tour_card(v, heading) for v in ids) + "</div>"
 
+def tenant_cta_href(root=""):
+    return root + CTA_PAGE
+
+def tenant_cta_attrs(referrer=""):
+    """GoatCounter event attributes. The event path must not start with a slash."""
+    attrs = (
+        'data-goatcounter-click="' + CTA_EVENT + '" '
+        'data-goatcounter-title="' + _h.escape(CTA_TEXT, quote=True) + '"'
+    )
+    if referrer:
+        attrs += ' data-goatcounter-referrer="' + _h.escape(referrer, quote=True) + '"'
+    return attrs
+
+def tenant_cta_bar(root="", referrer=""):
+    """One-line offer under the header on every page. Links to the rental intake form."""
+    return f'''<aside class="tenant-cta-bar" aria-label="Tenant relocation service">
+  <div class="container tenant-cta-inner">
+    <p><strong>Want me to find yours?</strong> Tenant Relocation Service $1,500 + GST</p>
+    <a class="btn btn-light" href="{tenant_cta_href(root)}" {tenant_cta_attrs(referrer)}>Start a rental search {ICONS["arrow"]}</a>
+  </div>
+</aside>
+'''
+
 def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head="", root="", og_type="website"):
     """root: relative prefix back to the site root ("" for top-level pages, "../" for pages in blog/)."""
     nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("tenants.html","Tenants","tenants"),("relocating-to-greater-vancouver.html","Relocating","guide"),("blog/","Blog","blog"),("videos.html","Videos","videos")]
     if LISTINGS_LIVE:
         nav.insert(2, ("listings.html", "Homes for sale", "listings"))
         nav.insert(3, ("rentals.html", "Homes for rent", "rentals"))
+        nav.insert(4, ("rent-report.html", "Rent report", "rent-report"))
     CUR = ' aria-current="page"'
     links = "".join(f'<a href="{root}{h}"{CUR if k==active else ""}>{t}</a>' for h,t,k in nav)
     # A longer nav needs a wider viewport before it fits on one row (see .nav-long in styles.css).
@@ -240,6 +268,7 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
     <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span class="nt-bars" aria-hidden="true"><span></span><span></span><span></span></span></button>
   </div>
 </header>
+{tenant_cta_bar(root, page_url or ("index.html" if active == "home" else ""))}
 <main id="main" tabindex="-1">
 '''
 
@@ -249,6 +278,7 @@ def listings_footer_links(root):
     return (
         '\n          <li><a href="' + root + 'listings.html">Homes for sale</a></li>'
         '\n          <li><a href="' + root + 'rentals.html">Homes for rent</a></li>'
+        '\n          <li><a href="' + root + 'rent-report.html">Weekly rent report</a></li>'
     )
 
 
@@ -303,7 +333,7 @@ def foot(root=""):
     <div class="footer-legal">
       <p class="fine-print">Devin Desaulniers is a Real Estate Associate with Axford Real Estate, 2326 Clarke St, Port Moody, BC. Information on this site is general. It is not legal, tax, or financial advice, and it is not a mortgage approval. It is not intended to solicit buyers or sellers who are currently under contract with a brokerage.</p>
       <p>Mortgage calculator results are estimates only and are not a mortgage approval or financial advice.</p>
-      <p class="fine-print"><a href="{root}privacy.html">Privacy</a>: how this site's contact forms and chat widget handle what you send.</p>
+      <p class="fine-print"><a href="{root}privacy.html">Privacy</a>: how this site's contact forms, chat widget, and page-visit counter handle what you send.</p>
       <p>© <span data-year>2026</span> Devin Desaulniers · Axford Real Estate.</p>
     </div>
   </div>
