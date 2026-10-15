@@ -107,6 +107,12 @@
       fd.forEach(function (v, k) { data[k] = data[k] ? data[k] + ', ' + v : v; });
       if (data.email) data._replyto = data.email;
       if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Sending…'; }
+      // Count the submit as a GoatCounter event, then post. count() does not return a
+      // promise and a missing or blocked counter must not stop the FormSubmit request.
+      var eventName = form.getAttribute('data-goat-event') || '';
+      if (eventName && window.goatcounter && typeof window.goatcounter.count === 'function') {
+        try { window.goatcounter.count({ path: eventName, title: eventName, event: true }); } catch (err) {}
+      }
       fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
         .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
         .then(function (res) {

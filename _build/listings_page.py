@@ -38,6 +38,7 @@ MODES = {
         "ask": "Ask Devin about this home",
         "ask_lead": "Send a note to Devin Desaulniers at {brokerage}. This message comes to Devin. It is not sent to the listing brokerage.",
         "form_key": "listingInquiry",
+        "goat_event": "form-contact",
         "subject": "New listing inquiry",
         "form_name": "Listing inquiry",
         "placeholder": "I would like to know more about this home.",
@@ -67,6 +68,7 @@ MODES = {
         "ask": "Ask Devin about this rental",
         "ask_lead": "Send a note to Devin Desaulniers at {brokerage}. This message comes to Devin. It is not sent to the listing brokerage.",
         "form_key": "rentalInquiry",
+        "goat_event": "form-contact",
         "subject": "New rental inquiry",
         "form_name": "Rental inquiry",
         "placeholder": "I would like to know more about this rental.",
@@ -177,7 +179,7 @@ def render(mode="sale"):
       <div class="ls-inquiry">
         <h2>{spec["ask"]}</h2>
         <p class="lead">{ask_lead}</p>
-        <form class="form-card" data-form-key="{spec["form_key"]}" action="#" method="POST">
+        <form class="form-card" data-form-key="{spec["form_key"]}" data-goat-event="{spec["goat_event"]}" action="#" method="POST">
           <input type="hidden" name="_subject" value="{spec["subject"]}">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="form" value="{spec["form_name"]}">

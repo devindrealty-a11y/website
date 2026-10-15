@@ -166,6 +166,9 @@ YT_TITLE = dict(YT_TOURS)
 YT_HOME = ["daQ3Q4ZCmf4", "gyg2-U7o-6E", "TA6-pO-hDfQ"]
 YT_NOTE = "These are video tours from my YouTube channel, not listings I'm offering."
 
+# Visit counts only. No cookies. The same tag is on the old-URL redirect, which does not use head().
+GOATCOUNTER = '<script data-goatcounter="https://devindesaulniers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'
+
 def tour_card(vid, heading="h3"):
     t = _h.escape(YT_TITLE[vid])
     return (f'<figure class="tour">'
@@ -209,6 +212,7 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
 <link rel="stylesheet" href="{root}assets/css/styles.css">
 {agent_jsonld()}
 {extra_head}
+{GOATCOUNTER}
 </head>
 <body class="{body_class}">
 <a class="skip-link" href="#main">Skip to main content</a>

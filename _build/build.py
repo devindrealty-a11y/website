@@ -344,7 +344,7 @@ buyers += f'''
 <section class="section section--paper" id="listings">
   <div class="container">
     {sec_head("Personalised listing alerts", "Send me listings", BUYERS_LISTINGS_ASIDE)}
-    <form class="form-card" data-form-key="buyerListings" action="#" method="POST">
+    <form class="form-card" data-form-key="buyerListings" data-goat-event="form-listings-signup" action="#" method="POST">
       <input type="hidden" name="_subject" value="New buyer listings request">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="form" value="Buyer: Send me listings">
@@ -477,7 +477,7 @@ tenants += f"""
         <span>{I["building"]} Axford Real Estate</span>
       </div>
     </div>
-    <form class="lp-quick" id="intake" data-form-key="tenantIntake" action="#" method="POST">
+    <form class="lp-quick" id="intake" data-form-key="tenantIntake" data-goat-event="form-tenant" action="#" method="POST">
       <input type="hidden" name="_subject" value="New relocation rental intake">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="form" value="Tenant: Relocation rental intake">
@@ -829,7 +829,7 @@ videos += f"""
 videos += foot()
 
 # ---------------- PRIVACY ----------------
-# Keep in step with the real forms (buyers, tenants, home evaluation, expert opinion, listing and rental inquiries), assets/js/config.js and the Elfsight snippet in foot().
+# Keep in step with the real forms (buyers, tenants, home evaluation, expert opinion, listing and rental inquiries), assets/js/config.js, the GoatCounter tag in head(), and the Elfsight snippet in foot().
 PRIVACY_URL = "privacy.html"
 privacy = head("Privacy | Devin Desaulniers, Real Estate Associate, Axford Real Estate",
                "How the contact forms, listing inquiries, and chat widget on Devin Desaulniers' website handle what you send, where it may be processed, and how to make a privacy request.",
@@ -847,6 +847,7 @@ privacy += f"""
   <div class="container narrow-wide">
     <div class="post-body">
       <p>This site is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate, {BROKERAGE_ADDR}. The sections below explain, in plain language, where the information you send me goes.</p>
+      <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking.</p>
 
       <h2 id="forms">Contact forms</h2>
       <p>There are six forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, and the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
@@ -890,7 +891,7 @@ privacy += foot()
 # Compact landing pages. Same FormSubmit AJAX path as the other forms (config.js). Not test-submitted.
 _CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg>'
 
-def offer_page(filename, title, desc, eyebrow, h1, lead, points, form_key, subject, form_name, form_h, button, thanks_h, thanks_p, note, id_prefix):
+def offer_page(filename, title, desc, eyebrow, h1, lead, points, form_key, goat_event, subject, form_name, form_h, button, thanks_h, thanks_p, note, id_prefix):
     photo = picture("assets/img/devin-headshot", (480, 800), 800, 1000,
                     "Devin Desaulniers, Real Estate Associate with Axford Real Estate",
                     "", eager=True, sizes_attr="(max-width: 719px) 64px, 180px")
@@ -908,7 +909,7 @@ def offer_page(filename, title, desc, eyebrow, h1, lead, points, form_key, subje
       </div>
       <ul class="offer-points">{points_html}</ul>
     </div>
-    <form class="offer-form" id="request" data-form-key="{form_key}" action="#" method="POST">
+    <form class="offer-form" id="request" data-form-key="{form_key}" data-goat-event="{goat_event}" action="#" method="POST">
       <input type="hidden" name="_subject" value="{subject}">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="form" value="{form_name}">
@@ -953,6 +954,7 @@ home_evaluation = offer_page(
         (I["mail"], "I write it and email it to you"),
     ],
     "homeEvaluation",
+    "form-home-evaluation",
     "New free home evaluation",
     "Free home evaluation",
     "Request your evaluation",
@@ -975,6 +977,7 @@ buyer_opinion = offer_page(
         (I["mail"], "I email you my take"),
     ],
     "buyerOpinion",
+    "form-buyer-opinion",
     "New expert opinion request",
     "Expert opinion",
     "Ask for my take",
@@ -995,6 +998,7 @@ redirect = f"""<!doctype html>
 <meta name="robots" content="noindex, nofollow"><!-- redirect page: keep noindex so the old URL stays out of search -->
 <link rel="canonical" href="{NEW_ABS}">
 <meta http-equiv="refresh" content="0; url={GV_URL}">
+{GOATCOUNTER}
 <script>location.replace("{GV_URL}" + location.hash);</script>
 </head>
 <body>
