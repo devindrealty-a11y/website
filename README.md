@@ -7,12 +7,14 @@ Pages:
 - `buyers.html` — buyer info, neighbourhood guides, "Send me listings" form
 - `home-evaluation.html` — free market evaluation: email and property address
 - `buyer-opinion.html` — his take on a property you're considering
-- `tenants.html` — standalone landing page for the $1,500 tenant-paid relocation rental service (link this from ads/social)
+- `tenants.html` — standalone landing page for the $1,500 tenant-paid relocation rental service (the relocating guide links here for the intake form)
 - `listings.html` — active residential homes for sale in Greater Vancouver and the Fraser Valley (REALTOR.ca DDF®)
 - `rentals.html` — active residential homes for rent in the same area, with rent shown per month
 - `rent-report.html` — weekly asking-rent report for people moving to Greater Vancouver (medians by city and bedroom, week-over-week change, new listings, best-value homes)
 - `videos.html` — property video tours from Devin's YouTube channel (not listings)
 - `blog/` — blog index, posts, RSS feed, generated from Markdown in `_posts/` (see **`_build/BLOG.md`** for how to add a post)
+
+Paid ads for 1 November 2026 are documented in `ads/` (start at `ads/README.md`). That folder is the launch plan only. It does not install a Meta Pixel or GA4, and it does not change the live pages.
 
 ## Editing
 HTML is generated from `_build/build.py` + `_build/partials.py` (header/footer shared). Edit those, then run:
