@@ -850,11 +850,12 @@ privacy += f"""
       <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form.</p>
 
       <h2 id="forms">Contact forms</h2>
-      <p>There are six forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, and the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>There are seven forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, the <a href="landlords/rent-estimate.html">landlord rent estimate</a>, and the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
       <p>The forms ask for:</p>
       <ul>
         <li>your name and email, and your phone number if you add it;</li>
         <li>on the home evaluation and the expert opinion forms: your email, the property address, and your name if you add it;</li>
+        <li>on the landlord rent estimate: your name, email, phone, property address, property type, bedrooms, when the home is available, and anything else you add;</li>
         <li>on the listings form: the areas you're interested in, property type, price range, bedrooms and bathrooms, your timeline, whether you're pre-approved for a mortgage, and any notes;</li>
         <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, bedrooms, preferred areas, pets, your work or school location, and any notes;</li>
         <li>on a listing or rental inquiry: the listing id, MLS® number, address and REALTOR.ca link for the home you opened, and your message.</li>
@@ -1024,8 +1025,13 @@ if LISTINGS_LIVE:
     STATIC_PAGES[1:1] = ["listings.html", "rentals.html", "rent-report.html"]
 guide_at = STATIC_PAGES.index(GV_URL) + 1
 STATIC_PAGES[guide_at:guide_at] = [fn for fn, _ in SEO_PAGES]
+# Hand-written landlords/ section: not generated here, only listed in the sitemap.
+LANDLORD_PAGES = ["landlords/", "landlords/rent-estimate.html", "landlords/how-to-rent-out-your-home-in-coquitlam.html", "landlords/how-to-rent-out-your-home-in-port-moody.html", "landlords/how-to-rent-out-your-home-in-port-coquitlam.html", "landlords/bc-landlord-basics.html"]
+LANDLORD_LASTMOD = "2026-10-19"
+STATIC_PAGES += LANDLORD_PAGES
 import rent_report
 _report_lastmod = rent_report.published_lastmod(OUT)
 _sitemap_lastmod = {"rent-report.html": _report_lastmod} if _report_lastmod else {}
+_sitemap_lastmod.update({u: LANDLORD_LASTMOD for u in LANDLORD_PAGES})
 open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS, _sitemap_lastmod))
 print("built")

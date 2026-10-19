@@ -20,6 +20,7 @@ window.SITE_CONFIG = {
     listingInquiry: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // listings.html detail inquiry (not test-submitted)
     rentalInquiry: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // rentals.html detail inquiry (not test-submitted)
     homeEvaluation: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // home-evaluation.html (not test-submitted)
-    buyerOpinion: "https://formsubmit.co/ajax/devin@axfordrealestate.ca" // buyer-opinion.html (not test-submitted)
+    buyerOpinion: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // buyer-opinion.html (not test-submitted)
+    landlordRentEstimate: "https://formsubmit.co/ajax/devin@axfordrealestate.ca" // landlords/rent-estimate.html (not test-submitted)
   }
 };
