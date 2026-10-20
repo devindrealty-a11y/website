@@ -1,5 +1,7 @@
 /* Self-hosted chat widget. Guided answers stay in the browser.
-   The message form posts to SITE_CONFIG.forms.chatLead (same FormSubmit URL as the other forms). */
+   The message form posts to SITE_CONFIG.forms.chatLead (same FormSubmit URL as the other forms).
+   GoatCounter events use fixed names only. chat-message-sent is counted only after
+   FormSubmit accepts the message. A missing or broken counter is ignored. */
 (function () {
   if (document.querySelector(".dd-chat")) return;
 
@@ -27,6 +29,7 @@
   var PATHS = [
     {
       id: "buy",
+      event: "chat-buying",
       label: "Buying a home",
       answers: [
         {
@@ -50,6 +53,7 @@
     },
     {
       id: "rent",
+      event: "chat-renting",
       label: "Renting — tenant relocation service, $1,500 + GST, paid by the tenant",
       answers: [
         {
@@ -68,6 +72,7 @@
     },
     {
       id: "move",
+      event: "chat-relocating",
       label: "Relocating to Greater Vancouver",
       answers: [
         {
@@ -93,6 +98,7 @@
     },
     {
       id: "sell",
+      event: "chat-selling",
       label: "Selling a home",
       answers: [
         {
@@ -172,6 +178,13 @@
   root.appendChild(launch);
   document.body.appendChild(scrim);
   document.body.appendChild(root);
+
+  function countEvent(name) {
+    if (!name || !window.goatcounter || typeof window.goatcounter.count !== "function") return;
+    try {
+      window.goatcounter.count({ path: name, title: name, event: true });
+    } catch (err) {}
+  }
 
   function pageElts() {
     return Array.prototype.filter.call(document.body.children, function (el) {
@@ -281,6 +294,7 @@
     topic = path;
     step = "answers";
     leadNoted = false;
+    countEvent(path.event);
     addMessage("user", path.label);
     path.answers.forEach(function (ans) {
       addMessage("bot", ans.text, ans.links);
@@ -331,6 +345,7 @@
 
   function showLead() {
     step = "lead";
+    countEvent("chat-lead-shown");
     if (!leadNoted) {
       addMessage("bot", "Leave your name and email, and a short message. Phone is optional.");
       leadNoted = true;
@@ -481,9 +496,6 @@
     btn.disabled = true;
     var label = btn.textContent;
     btn.textContent = "Sending…";
-    if (window.goatcounter && typeof window.goatcounter.count === "function") {
-      try { window.goatcounter.count({ path: "form-chat", title: "form-chat", event: true }); } catch (err) {}
-    }
     fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
@@ -492,8 +504,10 @@
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
       .then(function (res) {
         var ok = res.ok && String(res.j.success) !== "false";
-        if (ok) showThanks();
-        else showStatus(status, "error", "Sorry, something went wrong and your message may not have been sent. " + fallback);
+        if (ok) {
+          countEvent("chat-message-sent");
+          showThanks();
+        } else showStatus(status, "error", "Sorry, something went wrong and your message may not have been sent. " + fallback);
       })
       .catch(function () {
         showStatus(status, "error", "Sorry, we couldn't send your message (network error). " + fallback);
@@ -522,6 +536,7 @@
     panel.hidden = false;
     scrim.hidden = false;
     root.classList.add("is-open");
+    countEvent("chat-opened");
     launch.setAttribute("aria-expanded", "true");
     setInert(true);
     var nodes = actions.querySelectorAll("button, input, textarea, a[href]");
