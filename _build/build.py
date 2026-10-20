@@ -829,7 +829,7 @@ videos += f"""
 videos += foot()
 
 # ---------------- PRIVACY ----------------
-# Keep in step with the real forms (buyers, tenants, home evaluation, expert opinion, listing and rental inquiries), assets/js/config.js, the GoatCounter tag in head(), and the Elfsight snippet in foot().
+# Keep in step with the real forms (buyers, tenants, home evaluation, expert opinion, listing and rental inquiries, chat widget), assets/js/config.js, the GoatCounter tag in head(), and the chat script in foot().
 PRIVACY_URL = "privacy.html"
 privacy = head("Privacy | Devin Desaulniers, Real Estate Associate, Axford Real Estate",
                "How the contact forms, listing inquiries, chat widget, and page-visit counter on Devin Desaulniers' website handle what you send, where it may be processed, and how to make a privacy request.",
@@ -850,14 +850,15 @@ privacy += f"""
       <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form.</p>
 
       <h2 id="forms">Contact forms</h2>
-      <p>There are six forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, and the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>There are seven forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>, and the message form in the chat widget. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
       <p>The forms ask for:</p>
       <ul>
         <li>your name and email, and your phone number if you add it;</li>
         <li>on the home evaluation and the expert opinion forms: your email, the property address, and your name if you add it;</li>
         <li>on the listings form: the areas you're interested in, property type, price range, bedrooms and bathrooms, your timeline, whether you're pre-approved for a mortgage, and any notes;</li>
         <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, bedrooms, preferred areas, pets, your work or school location, and any notes;</li>
-        <li>on a listing or rental inquiry: the listing id, MLS® number, address and REALTOR.ca link for the home you opened, and your message.</li>
+        <li>on a listing or rental inquiry: the listing id, MLS® number, address and REALTOR.ca link for the home you opened, and your message;</li>
+        <li>on the chat widget: the topic you chose (buying, renting, relocating to Greater Vancouver, or selling), your message, and the address of the page you were on.</li>
       </ul>
       <p>Each form asks you to agree that I can contact you by email or phone about your request. You can opt out at any time.</p>
 
@@ -865,10 +866,11 @@ privacy += f"""
       <p>The homes on <a href="listings.html">homes for sale</a> and <a href="rentals.html">homes for rent</a> come from the REALTOR.ca DDF® feed. Opening a listing sends a view to the CREA DDF® Analytics Web Service at analytics.crea.ca. That view includes the listing id, this site's DDF destination id, and the page address. The DDF rules require it. Listing photos load from the photo addresses in the feed.</p>
 
       <h2 id="chat">Chat widget</h2>
-      <p>Pages on this site include a chat widget, “Devin's AI Assistant”, provided by Elfsight. What you type into that chat is handled by Elfsight.</p>
+      <p>Pages on this site include a chat widget that runs in your browser. It is part of this site, not a separate chat service. It asks whether you are buying, renting, relocating to Greater Vancouver, or selling, then shows short answers with links to pages on this site. What you click in that conversation stays in your browser until you send a message.</p>
+      <p>If you send a message, the form asks for your name, email, phone number if you add it, and a message. It also sends the topic you chose and the address of the page you were on. When you press Send, that form goes through FormSubmit (formsubmit.co), which emails it to <a href="mailto:{EMAIL}">{EMAIL}</a>. The form asks you to agree that I can contact you by email or phone about your request. You can opt out at any time.</p>
 
       <h2 id="outside-canada">Processing outside Canada</h2>
-      <p>Information you send through FormSubmit or the Elfsight chat widget may be processed outside Canada. A GoatCounter page visit may also be processed outside Canada. If you'd rather not use the forms or the chat, you can call or text me at <a href="{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>Information you send through FormSubmit, including a message from the chat widget, may be processed outside Canada. A GoatCounter page visit may also be processed outside Canada. If you'd rather not use the forms or the chat, you can call or text me at <a href="{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 
       <h2 id="video-tours">Video tours</h2>
       <p>The YouTube video tours on this site show a preview image from YouTube, and the YouTube player itself loads only after you press play.</p>
