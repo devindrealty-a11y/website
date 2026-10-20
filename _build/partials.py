@@ -262,7 +262,7 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
     <nav class="nav" id="site-nav" aria-label="Main">
       <div class="nav-links">{links}</div>
       <a class="nav-phone" href="{TEL}">{ICONS["phone"]}<span>Call or text {PHONE}</span></a>
-      <a class="btn btn-primary nav-cta" href="{root}index.html#contact">Contact</a>
+      <a class="btn btn-primary nav-cta" href="{root}contact.html"{' aria-current="page"' if page_url == "contact.html" else ""}>Contact</a>
     </nav>
     <a class="header-call" href="{TEL}" aria-label="Call or text Devin at {PHONE}">{ICONS["phone"]}</a>
     <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span class="nt-bars" aria-hidden="true"><span></span><span></span><span></span></span></button>
@@ -323,6 +323,7 @@ def foot(root=""):
       <div>
         <h2 class="footer-h">Contact</h2>
         <ul>
+          <li><a href="{root}contact.html">Contact form</a></li>
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
           <li>Direct (call or text): <a href="{TEL}">{PHONE}</a></li>
           <li>Greater Vancouver · Tri-Cities, BC</li>
@@ -369,6 +370,128 @@ def status_box():
   <button type="submit" class="btn btn-primary">Send</button>
   <div class="form-status" role="status" aria-live="polite"></div>
 </div>'''
+
+# Qualifying lead form. One copy on the home page and one on contact.html.
+# Same consent checkbox as the other forms. Not test-submitted.
+_LEAD_INTENTS = ["Buying", "Selling", "Renting"]
+_LEAD_AREAS = [
+    "Coquitlam", "Port Coquitlam", "Port Moody", "Other Tri-Cities, BC",
+    "Vancouver", "Burnaby", "Langley", "Other",
+]
+_LEAD_TIMELINES = ["0-3 months", "3-6 months", "6-12 months", "Just looking"]
+_LEAD_PURCHASE = [
+    "Under $500,000", "$500,000 to $750,000", "$750,000 to $1,000,000",
+    "$1,000,000 to $1,500,000", "$1,500,000 to $2,000,000",
+    "$2,000,000 to $3,000,000", "$3,000,000 or more", "Not sure yet",
+]
+_LEAD_RENT = [
+    "Under $2,000 a month", "$2,000 to $2,500 a month", "$2,500 to $3,000 a month",
+    "$3,000 to $4,000 a month", "$4,000 to $5,000 a month", "$5,000 or more a month",
+    "Not sure yet",
+]
+_LEAD_ORIGINS = [
+    "Already in Greater Vancouver", "Elsewhere in BC", "Alberta",
+    "Ontario", "Other Canada", "Outside Canada",
+]
+
+def _lead_choices(uid, name, options):
+    rows = []
+    for i, opt in enumerate(options):
+        fid = f"{uid}-{name}-{i}"
+        safe = _h.escape(opt, quote=True)
+        rows.append(
+            f'<label class="lead-choice" for="{fid}">'
+            f'<input id="{fid}" type="radio" name="{name}" value="{safe}" required>'
+            f'<span>{safe}</span></label>'
+        )
+    return "".join(rows)
+
+def _lead_copy_ok(fragment, label):
+    import re
+    bare = re.search(r"Tri-Cities(?!\s*,\s*BC)", fragment)
+    if bare:
+        raise SystemExit(f"{label}: bare Tri-Cities")
+    hit = re.search(r"\b(?:best|top)\b", fragment, re.I)
+    if hit:
+        raise SystemExit(f"{label}: do not use {hit.group(0)!r}")
+
+def lead_form(uid, heading="h2"):
+    """Multi-step qualifier. uid keeps field ids unique. The form id is qualify (one per page)."""
+    if heading not in ("h2", "h3"):
+        heading = "h2"
+    h = heading
+    intents = _lead_choices(uid, "intent", _LEAD_INTENTS)
+    areas = _lead_choices(uid, "area", _LEAD_AREAS)
+    timelines = _lead_choices(uid, "timeline", _LEAD_TIMELINES)
+    purchase = _lead_choices(uid, "budget_purchase", _LEAD_PURCHASE)
+    rent = _lead_choices(uid, "budget_rent", _LEAD_RENT)
+    origins = _lead_choices(uid, "moving_from", _LEAD_ORIGINS)
+    html = f'''<form class="lead-form" id="qualify" data-lead-form data-form-key="qualifiedLead" action="#" method="post" novalidate aria-labelledby="{uid}-title">
+  <input type="hidden" name="_subject" value="New qualified lead">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="form" value="Qualified lead">
+  <input type="hidden" name="budget" value="">
+  <input type="hidden" name="budget_question" value="">
+  <input type="hidden" name="page" value="">
+  <div class="hp" aria-hidden="true"><label>Leave this field empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
+  <div class="lead-form-head">
+    <{h} id="{uid}-title">A few questions</{h}>
+    <p>Six short questions about buying, selling, or renting in Greater Vancouver, including the Tri-Cities, BC. I'll follow up by email or phone.</p>
+    <p class="lead-brokerage">Devin Desaulniers, Real Estate Associate · Axford Real Estate</p>
+  </div>
+  <div data-lead-body>
+    <div class="lead-progress">
+      <div class="lead-progress-track" data-lead-progress role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-valuetext="Step 1 of 6"><span class="lead-progress-fill" data-lead-fill></span></div>
+      <p class="lead-step-label">Step <span data-lead-step-num>1</span> of 6</p>
+    </div>
+    <fieldset class="lead-step" data-lead-step="1">
+      <legend tabindex="-1" id="{uid}-q1">Are you buying, selling, or renting?</legend>
+      <div class="lead-choices">{intents}</div>
+    </fieldset>
+    <fieldset class="lead-step" data-lead-step="2" hidden>
+      <legend tabindex="-1" id="{uid}-q2">Which area?</legend>
+      <div class="lead-choices">{areas}</div>
+    </fieldset>
+    <fieldset class="lead-step" data-lead-step="3" hidden>
+      <legend tabindex="-1" id="{uid}-q3">What's your timeline?</legend>
+      <div class="lead-choices">{timelines}</div>
+    </fieldset>
+    <fieldset class="lead-step" data-lead-step="4" hidden>
+      <legend tabindex="-1" id="{uid}-q4" data-lead-budget-legend>What's your budget?</legend>
+      <div class="lead-budget" data-budget-for="purchase"><div class="lead-choices">{purchase}</div></div>
+      <div class="lead-budget" data-budget-for="rent" hidden><div class="lead-choices">{rent}</div></div>
+    </fieldset>
+    <fieldset class="lead-step" data-lead-step="5" hidden aria-describedby="{uid}-q5-hint">
+      <legend tabindex="-1" id="{uid}-q5">Where are you moving from?</legend>
+      <p class="lead-hint" id="{uid}-q5-hint">If you already live here, choose Already in Greater Vancouver.</p>
+      <div class="lead-choices">{origins}</div>
+    </fieldset>
+    <fieldset class="lead-step" data-lead-step="6" hidden aria-describedby="{uid}-q6-hint">
+      <legend tabindex="-1" id="{uid}-q6">How should I reach you?</legend>
+      <p class="lead-hint" id="{uid}-q6-hint">Name and email are required. Phone and message are optional.</p>
+      <div class="form-grid">
+        <div class="field"><label for="{uid}-name">Full name <span class="req">*</span></label><input id="{uid}-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="{uid}-email">Email <span class="req">*</span></label><input id="{uid}-email" name="email" type="email" inputmode="email" autocomplete="email" required></div>
+        <div class="field"><label for="{uid}-phone">Phone <span class="hint">(optional)</span></label><input id="{uid}-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"></div>
+        <div class="field"><label for="{uid}-message">Message <span class="hint">(optional)</span></label><textarea id="{uid}-message" name="message" autocomplete="off"></textarea></div>
+        {consent(uid)}
+      </div>
+    </fieldset>
+    <div class="lead-nav">
+      <button type="button" class="btn btn-outline" data-lead-back hidden>Back</button>
+      <button type="button" class="btn btn-primary" data-lead-next>Continue</button>
+      <button type="submit" class="btn btn-primary" data-lead-submit hidden disabled>Send</button>
+    </div>
+    <div class="form-status" role="status" aria-live="polite"></div>
+  </div>
+  <div class="lead-thanks" data-lead-thanks hidden tabindex="-1">
+    <{h}>Thanks — I'll be in touch.</{h}>
+    <p>Your note is on its way. If it's urgent, call or text <a href="{TEL}">{PHONE}</a>.</p>
+  </div>
+  <noscript><p class="lead-noscript">This form needs JavaScript. Email <a href="mailto:{EMAIL}">{EMAIL}</a> or call <a href="{TEL}">{PHONE}</a>.</p></noscript>
+</form>'''
+    _lead_copy_ok(html, "lead form")
+    return html
 
 def picture(base, sizes, w, h, alt, cls="", eager=False, sizes_attr="(max-width: 899px) 90vw, 380px"):
     """base like 'assets/img/devin-headshot'; sizes like (480,800)"""

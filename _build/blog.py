@@ -282,13 +282,13 @@ CTAS = {
             [("buyers.html#listings", "Get listings sent to me", "light"), ("buyers.html", "Buyer info &amp; neighbourhoods", "ghost")]),
  "selling": ("Thinking about selling?",
             "Every home and street is different. I'm happy to walk you through recent sales near you and what selling could look like for you.",
-            [("index.html#contact", "Talk to me about selling", "light"), ("mailto:" + EMAIL + "?subject=Selling%20my%20home", "Email Devin", "ghost")]),
+            [("contact.html?intent=selling#qualify", "Talk to me about selling", "light"), ("mailto:" + EMAIL + "?subject=Selling%20my%20home", "Email Devin", "ghost")]),
  "renting": ("Moving to Greater Vancouver and need a rental?",
             "My relocation rental service is $1,500 + GST, paid by the tenant ($750 non-refundable at the start, $750 once you secure a rental). Reach out 4–6 weeks before your move.",
             [("tenants.html", "See the relocation rental service", "light"), ("tenants.html#intake", "Start a rental search", "ghost")]),
  "general": ("Buying, selling or renting in Greater Vancouver?",
             "If you'd like to talk through what this means for your plans, I'm happy to help, whether you're buying, selling, or relocating and need a rental.",
-            [("buyers.html", "Buying help", "light"), ("index.html#contact", "Selling help", "ghost"), ("tenants.html", "Renting help", "ghost")]),
+            [("buyers.html", "Buying help", "light"), ("contact.html?intent=selling#qualify", "Selling help", "ghost"), ("tenants.html", "Renting help", "ghost")]),
 }
 
 def cta_block(kind, root):
