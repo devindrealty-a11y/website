@@ -24,18 +24,21 @@ cd _build && python3 build.py
 No placeholders remain: the footer disclaimer, the privacy page (`privacy.html`, built from `PRIVACY_URL` / `privacy` in `_build/build.py`), the Axford disclosure in the tenant FAQ, the buyer services list and the neighbourhood notes are all written. If you add or change a form, the chat widget or another third-party service, update `privacy.html` to match.
 
 ## Forms (FormSubmit)
-The forms (buyers.html "Send me listings", tenants.html relocation intake, home-evaluation.html, buyer-opinion.html, and the listing and rental inquiries) post via AJAX to
+The forms (buyers.html "Send me listings", tenants.html relocation intake, home-evaluation.html, buyer-opinion.html, the listing and rental inquiries, and the chat widget message) post via AJAX to
 `https://formsubmit.co/ajax/devin@axfordrealestate.ca` — configured in one spot: `assets/js/config.js`.
-- Email subjects include "New buyer listings request", "New relocation rental intake", "New free home evaluation" and "New expert opinion request" (table template, Reply-To = visitor's email).
-- `homeEvaluation` and `buyerOpinion` were not test-submitted.
+- Email subjects include "New buyer listings request", "New relocation rental intake", "New free home evaluation", "New expert opinion request", and "New chat widget message" (table template, Reply-To = visitor's email).
+- `homeEvaluation`, `buyerOpinion`, and `chatLead` were not test-submitted.
 - Spam: hidden honeypot field `_honey`. reCAPTCHA is not used by FormSubmit's AJAX flow, so nothing was disabled.
 - Visitors see an on-page success (or error + call/email fallback) message.
 
 **Activation (one-time):** the FIRST real submission makes FormSubmit send an activation email to
 devin@axfordrealestate.ca. Devin must click "Activate Form" — submissions are not delivered until then
 (the first one is held until activation). No test submission has been sent.
-Tip: the activation email includes a random alias; replace the email address in both URLs in
+Tip: the activation email includes a random alias; replace the email address in the URLs in
 `config.js` with `https://formsubmit.co/ajax/<alias>` to keep the address out of the page source.
+
+## Chat widget
+Every page loads a self-hosted chat widget (`assets/js/chat.js`, styles at the end of `assets/css/styles.css`) from `foot()` in `_build/partials.py`. It replaces the Elfsight chatbot. The guided answers run in the browser and are not sent anywhere. The message form posts to the same FormSubmit URL as the other forms (`chatLead` in `assets/js/config.js`). It has not been test-submitted. The widget header reads “Devin Desaulniers, REALTOR®, Axford Real Estate”.
 
 ## Pointing relocatingtovancouver.ca at the Tenants page (later — not bought yet)
 A GitHub Pages repo can only have ONE custom domain, and this repo should keep Devin's main site.
