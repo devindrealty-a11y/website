@@ -991,6 +991,18 @@ def json_script(data):
     return '<script type="application/ld+json">\n' + json.dumps(data, indent=2, ensure_ascii=False) + "\n</script>"
 
 
+# Google's Dataset rich result accepts creator only as Person or Organization.
+# The sitewide RealEstateAgent node is a different type, so the creator is inlined.
+DATASET_CREATOR = {
+    "@type": "Person",
+    "name": "Devin Desaulniers",
+    "url": "https://devindesaulniers.ca",
+    "worksFor": {"@type": "Organization", "name": "Axford Real Estate"},
+}
+TERMS_PAGE = "terms.html"
+DATASET_LICENSE = SITE + TERMS_PAGE
+
+
 def schema_blocks(report, title, description):
     url = SITE + PAGE
     graph = {
@@ -1014,7 +1026,8 @@ def schema_blocks(report, title, description):
                 "name": "Moving to Greater Vancouver: Weekly Rent Report",
                 "description": description,
                 "url": url,
-                "creator": {"@id": SITE + "#devin-desaulniers"},
+                "creator": DATASET_CREATOR,
+                "license": DATASET_LICENSE,
                 "dateModified": report["prepared"],
                 "temporalCoverage": report["week"] + "/" + report["week_end"],
                 "spatialCoverage": {"@type": "Place", "name": "Greater Vancouver, British Columbia, Canada"},
@@ -1144,6 +1157,10 @@ def render_page(report, series):
         "Each best-value and new-listing card shows the listing brokerage and a “Powered by REALTOR.ca” mark that links to that listing on REALTOR.ca. Leased, rented, and sold listings are not shown. Opening a listing on the homes for rent page sends a view event to the CREA DDF® Analytics Web Service.",
     ]
     legal_html = "".join(f"<p>{e(paragraph)}</p>" for paragraph in legal)
+    legal_html += (
+        '<p>How this report may be used is set out in the <a href="' + TERMS_PAGE + '">terms of use</a>. '
+        "Listing data is provided through the CREA DDF® and is owned by the respective real estate boards.</p>"
+    )
     cta_attrs = tenant_cta_attrs(PAGE)
     cta_href = tenant_cta_href()
     nav = (

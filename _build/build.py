@@ -1011,6 +1011,8 @@ for fn, html in [("index.html",home),("buyers.html",buyers),("tenants.html",tena
     open(os.path.join(OUT,fn),"w").write(html)
 open(os.path.join(OUT, VIDEOS_URL), "w").write(videos)
 open(os.path.join(OUT, PRIVACY_URL), "w").write(privacy)
+import terms_page
+open(os.path.join(OUT, terms_page.PAGE), "w").write(terms_page.render())
 open(os.path.join(OUT, "listings.html"), "w").write(listings_page.render("sale"))
 open(os.path.join(OUT, "rentals.html"), "w").write(listings_page.render("rent"))
 
@@ -1019,7 +1021,7 @@ blog.write_blog(POSTS)
 SEO_PAGES = seo_pages.write_pages()
 for fn, html in SEO_PAGES:
     open(os.path.join(OUT, fn), "w").write(html)
-STATIC_PAGES = ["", "tenants.html", "buyers.html", "home-evaluation.html", "buyer-opinion.html", GV_URL, "videos.html", PRIVACY_URL]
+STATIC_PAGES = ["", "tenants.html", "buyers.html", "home-evaluation.html", "buyer-opinion.html", GV_URL, "videos.html", PRIVACY_URL, terms_page.PAGE]
 if LISTINGS_LIVE:
     STATIC_PAGES[1:1] = ["listings.html", "rentals.html", "rent-report.html"]
 guide_at = STATIC_PAGES.index(GV_URL) + 1

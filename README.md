@@ -68,7 +68,7 @@ domain earns no search value of its own.
   Axford is listed as `parentOrganization` because schema.org only allows `worksFor` on `Person`.
 - `tenants.html` also carries `FAQPage` JSON-LD. It is generated from the same `FAQ_ITEMS` strings as the
   visible FAQ, so edit the FAQ in `build.py` only and the schema stays identical to the page text.
-- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, listings, rentals, rent-report, tenants, buyers, home-evaluation, buyer-opinion, relocating-to-greater-vancouver, videos, privacy, and the blog). The Coquitlam redirect is omitted. The rent report URL gets a `lastmod` from the latest Monday snapshot.
+- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, listings, rentals, rent-report, tenants, buyers, home-evaluation, buyer-opinion, relocating-to-greater-vancouver, videos, privacy, terms, and the blog). The Coquitlam redirect is omitted. The rent report URL gets a `lastmod` from the latest Monday snapshot.
 - `robots.txt` allows crawl and lists the Sitemap at https://devindesaulniers.ca/sitemap.xml (served at the domain root).
 - `SITE` in `_build/partials.py` is `https://devindesaulniers.ca/`. Rebuild after changing it.
 - Submit `sitemap.xml` in Google Search Console when ready.
@@ -190,5 +190,7 @@ The detail-page inquiry forms post to FormSubmit (`listingInquiry` and `rentalIn
 The page counts active residential asking rents from `listings/rentals.json`. It keeps a city, a bedroom count, and a rent from $800 to $40,000, and leaves out a missing city, a garage, or a size under 200 square feet. Medians and averages are rounded to the nearest dollar. Week-over-week change needs two snapshots and at least five homes in both weeks for that row. On the first run, "new" means the REALTOR.ca record was updated on or after Monday. After that, new means the listing id was not in the previous snapshot. Best value is asking rent per square foot at least 12% under the median for the same city and bedroom count (at most two homes per city).
 
 `.github/workflows/rent-report.yml` runs every Monday at 15:00 UTC and from **Actions → Weekly rent report → Run workflow**. It does not call DDF. It reads whatever `listings/rentals.json` is already in the repo, so the 12-hour listing refresh should have run first. Check the logic without rewriting the page: `python3 scripts/test_rent_report.py`. Rebuild the page locally with `python3 scripts/build_rent_report.py`.
+
+The rent report page (not the listing search) carries `Dataset` JSON-LD. `creator` is a `Person` (Devin Desaulniers, `worksFor` Axford Real Estate). `license` is `https://devindesaulniers.ca/terms.html`, which states that the listing data is provided through the CREA DDF® and is owned by the respective boards. It is not a Creative Commons license. `terms.html` is built by `_build/terms_page.py`.
 
 Every page has the same offer under the header: "Want me to find yours? Tenant Relocation Service $1,500 + GST", linking to `tenants.html#intake`. Page visits are already counted with GoatCounter (`https://devindesaulniers.goatcounter.com/count`, no cookies). Those offer links also send an event named `cta-tenant-relocation`. `privacy.html` says so.

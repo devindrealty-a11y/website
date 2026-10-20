@@ -2,6 +2,7 @@
 """Offline checks for the weekly rent report. No network."""
 import json
 import os
+import re
 import shutil
 import sys
 import tempfile
@@ -11,6 +12,7 @@ from datetime import datetime
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "_build"))
 import rent_report as rr
+import terms_page
 
 NOW = datetime(2026, 10, 15, 9, 0, tzinfo=rr.TZ)
 LATER = datetime(2026, 10, 15, 10, 0, tzinfo=rr.TZ)
@@ -110,6 +112,9 @@ class RentReportTests(unittest.TestCase):
             self.assertIn(rr.CTA_TEXT, page)
             self.assertIn('data-goatcounter-click="cta-tenant-relocation"', page)
             self.assertIn('"@type": "Dataset"', page)
+            self.assertIn('"@type": "Person"', page)
+            self.assertIn('"license": "https://devindesaulniers.ca/terms.html"', page)
+            self.assertIn('href="terms.html"', page)
             self.assertIn('aria-current="page"', page)
             self.assertIn("First saved week", page)
             self.assertIn("left out 0", page)
@@ -147,6 +152,45 @@ class RentReportTests(unittest.TestCase):
             self.assertEqual([item["week"] for item in series["weeks"]], ["2026-10-12", "2026-10-19"])
         finally:
             shutil.rmtree(directory)
+
+    def test_dataset_creator_and_license(self):
+        description = (
+            "Median asking rent on the Greater Vancouver feed is $2,800/month "
+            "for the week of October 19–25, 2026, with city and bedroom breakdowns."
+        )
+        page = rr.schema_blocks(
+            {"prepared": "2026-10-19", "week": "2026-10-19", "week_end": "2026-10-25"},
+            "Moving to Greater Vancouver: Weekly Rent Report",
+            description,
+        )
+        blocks = re.findall(
+            r'<script type="application/ld\+json">\s*(.*?)\s*</script>',
+            page,
+            re.S,
+        )
+        datasets = []
+        for block in blocks:
+            data = json.loads(block)
+            nodes = data["@graph"] if isinstance(data, dict) and "@graph" in data else [data]
+            datasets.extend(node for node in nodes if node.get("@type") == "Dataset")
+        self.assertEqual(len(datasets), 1)
+        dataset = datasets[0]
+        self.assertGreaterEqual(len(dataset["description"]), 50)
+        self.assertLessEqual(len(dataset["description"]), 5000)
+        self.assertEqual(dataset["name"], "Moving to Greater Vancouver: Weekly Rent Report")
+        creator = dataset["creator"]
+        self.assertEqual(creator["@type"], "Person")
+        self.assertEqual(creator["name"], "Devin Desaulniers")
+        self.assertEqual(creator["url"], "https://devindesaulniers.ca")
+        self.assertEqual(creator["worksFor"], {"@type": "Organization", "name": "Axford Real Estate"})
+        self.assertNotIn("@id", creator)
+        self.assertEqual(dataset["license"], "https://devindesaulniers.ca/terms.html")
+        self.assertNotIn("creativecommons.org", page.lower())
+        terms = terms_page.render()
+        self.assertIn("CREA DDF", terms)
+        self.assertIn("owned by the respective real estate boards", terms)
+        self.assertNotIn("creativecommons.org", terms.lower())
+        self.assertIn('href="rent-report.html"', terms)
 
     def test_best_value_caps_each_city(self):
         listings = []
