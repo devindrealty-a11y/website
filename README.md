@@ -3,7 +3,8 @@
 Static site for GitHub Pages, custom domain **https://devindesaulniers.ca/** (CNAME in repo root).
 
 Pages:
-- `index.html` — home / profile
+- `index.html` — home / profile, with the qualifying form in the contact section
+- `contact.html` — the same qualifying form, plus phone, email, and brokerage details
 - `buyers.html` — buyer info, neighbourhood guides, "Send me listings" form
 - `home-evaluation.html` — free market evaluation: email and property address
 - `buyer-opinion.html` — his take on a property you're considering
@@ -24,10 +25,11 @@ cd _build && python3 build.py
 No placeholders remain: the footer disclaimer, the privacy page (`privacy.html`, built from `PRIVACY_URL` / `privacy` in `_build/build.py`), the Axford disclosure in the tenant FAQ, the buyer services list and the neighbourhood notes are all written. If you add or change a form, the chat widget or another third-party service, update `privacy.html` to match.
 
 ## Forms (FormSubmit)
-The forms (buyers.html "Send me listings", tenants.html relocation intake, home-evaluation.html, buyer-opinion.html, the listing and rental inquiries, and the chat widget message) post via AJAX to
+The forms (the qualifying form on `index.html#qualify` and `contact.html`, buyers.html "Send me listings", tenants.html relocation intake, home-evaluation.html, buyer-opinion.html, the listing and rental inquiries, and the chat widget message) post via AJAX to
 `https://formsubmit.co/ajax/devin@axfordrealestate.ca` — configured in one spot: `assets/js/config.js`.
-- Email subjects include "New buyer listings request", "New relocation rental intake", "New free home evaluation", "New expert opinion request", and "New chat widget message" (table template, Reply-To = visitor's email).
-- `homeEvaluation`, `buyerOpinion`, and `chatLead` were not test-submitted.
+- Email subjects include "New qualified lead: Buying, Coquitlam, 0-3 months", "New buyer listings request", "New relocation rental intake", "New free home evaluation", "New expert opinion request", and "New chat widget message" (table template, Reply-To = visitor's email).
+- The qualifying form (`qualifiedLead`) asks buying / selling / renting, area, timeline, budget or home value or monthly rent, where they're moving from, then name, email, optional phone, optional message, and the same contact-consent checkbox as the other forms. GoatCounter events, sent with `window.goatcounter.count` and `event: true`, are `lead-form-start`, `lead-form-step-1` through `lead-form-step-6` when that step is first shown, and `lead-form-sent` only after FormSubmit accepts the message. Those names do not include the visitor's answers, name, email, phone, or message.
+- `qualifiedLead`, `homeEvaluation`, `buyerOpinion`, and `chatLead` were not test-submitted.
 - Spam: hidden honeypot field `_honey`. reCAPTCHA is not used by FormSubmit's AJAX flow, so nothing was disabled.
 - Visitors see an on-page success (or error + call/email fallback) message.
 

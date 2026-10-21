@@ -58,6 +58,7 @@ home += f'''
         <a class="btn btn-outline" href="tenants.html">I'm relocating &amp; renting</a>
       </div>
       <p class="hero-call">{I["phone"]}<span>Prefer to talk? Call or text <a href="{TEL}">{PHONE}</a></span></p>
+      <p class="hero-next"><a class="link-arrow" href="#qualify">Answer a few questions {I["arrow"]}</a></p>
     </div>
   </div>
   <figure class="hero-photo">
@@ -179,36 +180,32 @@ home += f'''
   <div class="container">{calc_cta()}</div>
 </section>
 
-<section class="section contact" id="contact">
-  <div class="container contact-grid">
-    <div class="contact-copy">
+<section class="section section--paper contact" id="contact">
+  <div class="container">
+    <div class="contact-intro">
       <span class="eyebrow">Get in touch</span>
       <h2>Let's talk about your move</h2>
-      <p class="lead">Buying, relocating, or just have a question about the Tri-Cities, BC? Reach out — I'm happy to help.</p>
-      <ul class="contact-list">
-        <li><span class="cl-icon">{I["phone"]}</span><div><small>Call or text</small><a href="{TEL}">{PHONE}</a></div></li>
-        <li><span class="cl-icon">{I["mail"]}</span><div><small>Email</small><a href="mailto:{EMAIL}">{EMAIL}</a></div></li>
-        <li><span class="cl-icon">{I["pin"]}</span><div><small>Service area</small><span>Greater Vancouver · Tri-Cities, BC</span></div></li>
-        <li><span class="cl-icon">{I["building"]}</span><div><small>Brokerage</small><span>Axford Real Estate<br>{BROKERAGE_ADDR}</span></div></li>
-      </ul>
+      <p class="lead">Buying, selling, or renting in Greater Vancouver, including the Tri-Cities, BC? Answer a few questions and I'll follow up.</p>
     </div>
-    <div class="contact-actions">
-      <div class="action-card action-card--dark">
-        <h3>Talk it through</h3>
-        <p>A quick call or text is usually the fastest way to sort out next steps.</p>
-        <div class="btn-row">
-          <a class="btn btn-light" href="{TEL}">{I["phone"]} Call {PHONE}</a>
-          <a class="btn btn-ghost-light" href="mailto:{EMAIL}">Email Devin</a>
-        </div>
+    <div class="contact-lead">
+      <div class="contact-form-col">
+        {lead_form("home", "h3")}
+        <p class="lead-also">For a specific request: <a href="buyers.html#listings">send me listings</a>, <a href="home-evaluation.html">a free home evaluation</a>, <a href="buyer-opinion.html">an expert opinion on a property</a>, or <a href="tenants.html#intake">a rental search</a>.</p>
       </div>
-      <div class="action-card">
-        <h3>Prefer a form?</h3>
-        <p>Tell me what you're looking for and I'll follow up.</p>
-        <div class="btn-row">
-          <a class="btn btn-outline" href="buyers.html#listings">Get listings sent to me</a>
-          <a class="btn btn-outline" href="home-evaluation.html">Free home evaluation</a>
-          <a class="btn btn-outline" href="buyer-opinion.html">Get an expert opinion</a>
-          <a class="btn btn-outline" href="tenants.html#intake">Start a rental search</a>
+      <div class="contact-aside">
+        <ul class="contact-list">
+          <li><span class="cl-icon">{I["phone"]}</span><div><small>Call or text</small><a href="{TEL}">{PHONE}</a></div></li>
+          <li><span class="cl-icon">{I["mail"]}</span><div><small>Email</small><a href="mailto:{EMAIL}">{EMAIL}</a></div></li>
+          <li><span class="cl-icon">{I["pin"]}</span><div><small>Service area</small><span>Greater Vancouver · Tri-Cities, BC</span></div></li>
+          <li><span class="cl-icon">{I["building"]}</span><div><small>Brokerage</small><span>Axford Real Estate<br>{BROKERAGE_ADDR}</span></div></li>
+        </ul>
+        <div class="action-card action-card--dark">
+          <h3>Talk it through</h3>
+          <p>A quick call or text is usually the fastest way to sort out next steps.</p>
+          <div class="btn-row">
+            <a class="btn btn-light" href="{TEL}">{I["phone"]} Call {PHONE}</a>
+            <a class="btn btn-ghost-light" href="mailto:{EMAIL}">Email Devin</a>
+          </div>
         </div>
       </div>
     </div>
@@ -286,6 +283,7 @@ buyers += f'''
       <a class="btn btn-light" href="#listings">Send me listings {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="{CALC}" target="_blank" rel="noopener">Mortgage calculator {I["ext"]}</a>
     </div>
+    <p class="hero-note"><a href="contact.html?intent=buying#qualify">Answer a few questions</a> if you're not ready for listing alerts.</p>
   </div>
 </section>
 {page_nav([("help","How I help"),("testimonials","Reviews"),("neighbourhoods","Neighbourhoods"),("tours","Video tours"),("listings","Send me listings")])}
@@ -484,6 +482,7 @@ tenants += f"""
       <div class="hp" aria-hidden="true"><label>Leave this field empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
       <h2>Start your rental search</h2>
       <p>Takes about 2 minutes. No obligation — I'll get back to you to talk next steps. Prefer to talk? <a href="{TEL}">{PHONE}</a></p>
+      <p class="lp-alt">Prefer to start with a few questions? <a href="contact.html?intent=renting#qualify">Tell me about your move</a>.</p>
       {STEP1}
       <div class="step2-wrap" data-step2-wrap>
         <h3 class="step2-title">Your rental needs</h3>
@@ -678,6 +677,7 @@ gv += f"""
       <a class="btn btn-light" href="tenants.html#intake">Need a rental? Start here {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>
     </div>
+    <p class="hero-note">Buying, selling, or renting? <a href="contact.html#qualify">Answer a few questions</a>.</p>
   </div>
 </section>
 {page_nav([("areas","Areas at a glance"),("renting-basics","Renting in B.C."),("rentals","Rental help"),("buying","Buying"),("faq","FAQ")])}
@@ -847,13 +847,14 @@ privacy += f"""
   <div class="container narrow-wide">
     <div class="post-body">
       <p>This site is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate, {BROKERAGE_ADDR}. The sections below explain, in plain language, where the information you send me goes.</p>
-      <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form. The chat widget sends the events named in the chat section below. Those events do not include what you type into a form.</p>
+      <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form. The qualifying form sends <span class="nw">lead-form-start</span> when you begin it, <span class="nw">lead-form-step-1</span> through <span class="nw">lead-form-step-6</span> when you reach that step, and <span class="nw">lead-form-sent</span> only after the message is accepted. Those names are the step only. They do not include your name, email, phone, message, or the answers you choose. The chat widget sends the events named in the chat section below. Those events do not include what you type into a form.</p>
 
       <h2 id="forms">Contact forms</h2>
-      <p>There are seven forms on this site: the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>, and the message form in the chat widget. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>There are eight forms on this site: the qualifying form on the <a href="index.html#qualify">home page</a> and the <a href="contact.html#qualify">contact page</a> (the same questions on both), the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>, and the message form in the chat widget. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
       <p>The forms ask for:</p>
       <ul>
         <li>your name and email, and your phone number if you add it;</li>
+        <li>on the qualifying form: whether you are buying, selling, or renting; the area; your timeline; your budget, monthly rent budget, or approximate home value; where you are moving from; and a message if you add one;</li>
         <li>on the home evaluation and the expert opinion forms: your email, the property address, and your name if you add it;</li>
         <li>on the listings form: the areas you're interested in, property type, price range, bedrooms and bathrooms, your timeline, whether you're pre-approved for a mortgage, and any notes;</li>
         <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, bedrooms, preferred areas, pets, your work or school location, and any notes;</li>
@@ -888,6 +889,39 @@ privacy += f"""
 </section>
 """
 privacy += foot()
+
+# ---------------- CONTACT (qualifying lead form) ----------------
+contact = head("Contact | Devin Desaulniers, Real Estate Associate, Axford Real Estate",
+               "Tell Devin Desaulniers whether you are buying, selling, or renting in Greater Vancouver, including the Tri-Cities, BC. Real Estate Associate with Axford Real Estate.",
+               "contact", page_url="contact.html")
+contact += f'''
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Contact</span>
+    <h1>Tell me about your move</h1>
+    <p class="lead">Buying, selling, or renting in Greater Vancouver, including the Tri-Cities, BC. Answer a few questions and I'll follow up.</p>
+    <p class="hero-note">Devin Desaulniers, Real Estate Associate · Axford Real Estate</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container contact-lead">
+    <div class="contact-form-col">
+      {lead_form("contact", "h2")}
+      <p class="lead-also">For a specific request: <a href="buyers.html#listings">send me listings</a>, <a href="home-evaluation.html">a free home evaluation</a>, <a href="buyer-opinion.html">an expert opinion on a property</a>, or <a href="tenants.html#intake">a rental search</a>.</p>
+    </div>
+    <div class="contact-aside">
+      <h2>Call, text, or email</h2>
+      <ul class="contact-list">
+        <li><span class="cl-icon">{I["phone"]}</span><div><small>Call or text</small><a href="{TEL}">{PHONE}</a></div></li>
+        <li><span class="cl-icon">{I["mail"]}</span><div><small>Email</small><a href="mailto:{EMAIL}">{EMAIL}</a></div></li>
+        <li><span class="cl-icon">{I["pin"]}</span><div><small>Service area</small><span>Greater Vancouver · Tri-Cities, BC</span></div></li>
+        <li><span class="cl-icon">{I["building"]}</span><div><small>Brokerage</small><span>Axford Real Estate<br>{BROKERAGE_ADDR}</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+'''
+contact += foot()
 
 # ---------------- OFFER PAGES (home evaluation + buyer opinion) ----------------
 # Compact landing pages. Same FormSubmit AJAX path as the other forms (config.js). Not test-submitted.
@@ -1009,7 +1043,7 @@ redirect = f"""<!doctype html>
 </html>
 """
 
-for fn, html in [("index.html",home),("buyers.html",buyers),("tenants.html",tenants),(GV_URL,gv),("relocating-to-coquitlam.html",redirect),("home-evaluation.html",home_evaluation),("buyer-opinion.html",buyer_opinion)]:
+for fn, html in [("index.html",home),("contact.html",contact),("buyers.html",buyers),("tenants.html",tenants),(GV_URL,gv),("relocating-to-coquitlam.html",redirect),("home-evaluation.html",home_evaluation),("buyer-opinion.html",buyer_opinion)]:
     open(os.path.join(OUT,fn),"w").write(html)
 open(os.path.join(OUT, VIDEOS_URL), "w").write(videos)
 open(os.path.join(OUT, PRIVACY_URL), "w").write(privacy)
@@ -1023,7 +1057,7 @@ blog.write_blog(POSTS)
 SEO_PAGES = seo_pages.write_pages()
 for fn, html in SEO_PAGES:
     open(os.path.join(OUT, fn), "w").write(html)
-STATIC_PAGES = ["", "tenants.html", "buyers.html", "home-evaluation.html", "buyer-opinion.html", GV_URL, "videos.html", PRIVACY_URL, terms_page.PAGE]
+STATIC_PAGES = ["", "contact.html", "tenants.html", "buyers.html", "home-evaluation.html", "buyer-opinion.html", GV_URL, "videos.html", PRIVACY_URL, terms_page.PAGE]
 if LISTINGS_LIVE:
     STATIC_PAGES[1:1] = ["listings.html", "rentals.html", "rent-report.html"]
 guide_at = STATIC_PAGES.index(GV_URL) + 1

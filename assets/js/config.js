@@ -21,6 +21,7 @@ window.SITE_CONFIG = {
     rentalInquiry: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // rentals.html detail inquiry (not test-submitted)
     homeEvaluation: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // home-evaluation.html (not test-submitted)
     buyerOpinion: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // buyer-opinion.html (not test-submitted)
-    chatLead: "https://formsubmit.co/ajax/devin@axfordrealestate.ca" // chat widget message (not test-submitted)
+    chatLead: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // chat widget message (not test-submitted)
+    qualifiedLead: "https://formsubmit.co/ajax/devin@axfordrealestate.ca" // home + contact qualifying form (not test-submitted)
   }
 };
