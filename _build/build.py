@@ -326,7 +326,7 @@ buyers += f'''
     <div class="other-areas">
       <h3>Other nearby areas</h3>
       <p>I also help buyers in neighbouring Greater Vancouver communities, including <strong>Burnaby</strong>, <strong>New Westminster</strong>, and <strong>Pitt Meadows &amp; Maple Ridge</strong>. School District 43 serves Coquitlam, Port Coquitlam, Port Moody, Anmore and Belcarra — always confirm school catchments with the district for a specific address.</p>
-      <p>Longer guides: <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a>. Buying a first home in the Tri-Cities, BC? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>.</p>
+      <p>Longer guides: <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a>. Buying a first home in the Tri-Cities, BC? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a> and <a href="bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a>.</p>
       <p>If you're looking somewhere else in Greater Vancouver, tell me on the <a href="#listings">listings form</a> below: choose “Other (add in notes)” and add the area in your notes.</p>
     </div>
   </div>
@@ -1062,6 +1062,9 @@ if LISTINGS_LIVE:
     STATIC_PAGES[1:1] = ["listings.html", "rentals.html", "rent-report.html"]
 guide_at = STATIC_PAGES.index(GV_URL) + 1
 STATIC_PAGES[guide_at:guide_at] = [fn for fn, _ in SEO_PAGES]
+if "first-time-buyers-tri-cities-bc.html" in STATIC_PAGES:
+    i = STATIC_PAGES.index("first-time-buyers-tri-cities-bc.html") + 1
+    STATIC_PAGES[i:i] = ["bc-property-transfer-tax.html"]
 import rent_report
 _report_lastmod = rent_report.published_lastmod(OUT)
 _sitemap_lastmod = {"rent-report.html": _report_lastmod} if _report_lastmod else {}
