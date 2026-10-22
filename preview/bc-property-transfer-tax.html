@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BC Property Transfer Tax &amp; First-Time Buyer Exemption 2026</title>
+<meta name="description" content="How BC property transfer tax works in 2026, who qualifies for the first-time buyer and newly built home exemptions, and worked examples for Tri-Cities, BC homes.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BC Property Transfer Tax &amp; First-Time Buyer Exemption 2026">
+<meta property="og:description" content="How BC property transfer tax works in 2026, who qualifies for the first-time buyer and newly built home exemptions, and worked examples for Tri-Cities, BC homes.">
+<meta property="og:image" content="https://devindesaulniers.ca/assets/img/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<style>
+  .ptt-page .page-hero h1{max-width:16em}
+  .preview-banner{margin:0;padding:9px var(--gutter);background:var(--blue-darker);color:#fff;text-align:center;font-family:var(--font-head);font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+  .ptt-note{font-size:.95rem;color:var(--muted);font-style:italic}
+  .ptt-note a{font-style:normal}
+  .hero-figures{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:34rem;margin:8px 0 0}
+  .hero-figures div{padding:16px 18px;border:1px solid rgba(255,255,255,.18);border-radius:var(--radius-sm);background:rgba(255,255,255,.04)}
+  .hero-figures b{display:block;font-family:var(--font-display);font-weight:500;font-size:clamp(1.8rem,1.3rem + 1.4vw,2.5rem);line-height:1;color:#fff}
+  .hero-figures span{display:block;margin-top:6px;font-size:.82rem;line-height:1.4;color:var(--on-night-muted)}
+  .rate-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 22px}
+  @media (min-width:800px){.rate-tiles{grid-template-columns:repeat(4,1fr)}}
+  .rate-tile{padding:18px 16px 16px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);border-bottom:3px solid var(--blue)}
+  .rate-tile b{display:block;font-family:var(--font-display);font-weight:500;font-size:clamp(1.7rem,1.3rem + 1vw,2.2rem);line-height:1;color:var(--ink)}
+  .rate-tile span{display:block;margin-top:8px;font-size:.88rem;line-height:1.4;color:var(--muted)}
+  .ptt-calc{display:grid;gap:22px}
+  @media (min-width:980px){.ptt-calc{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);align-items:start}}
+  .ptt-presets{display:flex;flex-wrap:wrap;gap:8px}
+  .ptt-presets button,.share-picks button{min-height:44px;padding:0 14px;border:1px solid var(--line-strong);border-radius:999px;background:#fff;color:var(--ink);font:inherit;font-family:var(--font-head);font-size:.78rem;font-weight:600;letter-spacing:.01em;cursor:pointer}
+  .ptt-presets button:hover,.share-picks button:hover{border-color:var(--blue-dark);color:var(--blue-dark)}
+  .ptt-presets button[aria-pressed="true"],.share-picks button[aria-pressed="true"]{background:var(--blue-light);border-color:var(--blue-dark);color:var(--blue-darker)}
+  .money-input{display:flex;align-items:center;min-height:50px;padding:0 14px;background:#fff;border:1px solid #c3ccd6;border-radius:var(--radius-sm)}
+  .money-input:focus-within{border-color:var(--blue-dark);box-shadow:0 0 0 3px rgba(52,116,182,.28)}
+  .money-input span{font-weight:600;color:var(--muted)}
+  .money-input input{flex:1;min-width:0;min-height:48px;padding:0 0 0 6px;border:0;background:transparent;font:inherit;font-size:1.15rem;font-weight:600;color:var(--ink)}
+  .money-input input:focus{outline:none}
+  .share-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+  .share-row input[type="range"]{flex:1 1 160px;accent-color:var(--blue-dark);min-height:44px}
+  .share-row output{min-width:3.2em;font-family:var(--font-display);font-size:1.35rem;color:var(--ink)}
+  .ptt-out{padding:clamp(18px,2.5vw,28px);background:var(--paper);border:1px solid var(--line);border-radius:var(--radius)}
+  .ptt-stats{display:grid;gap:10px}
+  @media (min-width:700px){.ptt-calc .ptt-stats{grid-template-columns:1fr}}
+  .ptt-stat{padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm)}
+  .ptt-stat h3{margin:0 0 4px;font-family:var(--font-head);font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .ptt-stat p{margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(1.8rem,1.3rem + 1vw,2.35rem);line-height:1.05;color:var(--ink)}
+  .ptt-stat--ex{background:var(--blue-light);border-color:#c5d8ee}
+  .ptt-stat--due{background:var(--night);border-color:var(--night)}
+  .ptt-stat--due h3{color:var(--sky)}
+  .ptt-stat--due p{color:#fff}
+  .ptt-meter{margin:14px 0 8px}
+  .ptt-meter-track{display:flex;height:16px;overflow:hidden;border-radius:999px;background:#d5dbe2}
+  .ptt-meter-ex{background:var(--blue);height:100%}
+  .ptt-meter-legend{display:flex;justify-content:space-between;gap:12px;margin:6px 0 0;font-size:.78rem;color:var(--muted)}
+  .ptt-meter-legend span{display:inline-flex;align-items:center;gap:6px}
+  .swatch{width:10px;height:10px;border-radius:2px;background:var(--blue)}
+  .swatch--pay{background:#d5dbe2}
+  .ptt-formula,.ptt-match{margin:10px 0 0;font-size:.92rem;color:var(--text)}
+  .ptt-match{color:var(--blue-darker);font-weight:600}
+  .ptt-error{margin:0;padding:12px 14px;background:#fdecea;border:1px solid #f0c2be;border-radius:var(--radius-sm);color:#7a1c1c;font-weight:600}
+  .ptt-chart-wrap{margin-top:8px;padding:8px 8px 0;background:#fff;border:1px solid var(--line);border-radius:var(--radius)}
+  .ptt-chart-wrap figcaption{padding:10px 12px 0;font-family:var(--font-head);font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .ptt-chart-wrap svg{display:block;width:100%;height:auto}
+  .ptt-chart-note{margin:0;padding:0 12px 12px;font-size:.82rem;color:var(--muted)}
+  .save-chart{margin:0 0 28px;padding:clamp(18px,3vw,28px);background:#fff;border:1px solid var(--line);border-radius:var(--radius)}
+  .save-chart figcaption{margin-bottom:16px;font-family:var(--font-display);font-size:1.35rem;font-weight:500;color:var(--ink)}
+  .save-chart ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  .save-row{display:grid;grid-template-columns:minmax(9rem,1.15fr) minmax(0,2fr) auto;gap:10px 12px;align-items:center}
+  .save-name{font-size:.9rem;line-height:1.35;color:var(--text)}
+  .save-track{height:14px;border-radius:999px;background:var(--blue-50);overflow:hidden}
+  .save-fill{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--blue-dark),var(--blue))}
+  .save-amt{font-family:var(--font-display);font-size:1.15rem;font-weight:500;color:var(--ink);text-align:right;white-space:nowrap}
+  .save-amt.is-none{font-family:var(--font-body);font-size:.95rem;font-weight:600;color:var(--muted)}
+  @media (max-width:599px){
+    .save-row{grid-template-columns:1fr auto}
+    .save-track{grid-column:1 / -1;grid-row:2}
+  }
+  .ex-grid{display:grid;gap:16px}
+  @media (min-width:760px){.ex-grid{grid-template-columns:1fr 1fr}}
+  @media (min-width:1100px){.ex-grid{grid-template-columns:1fr 1fr 1fr}}
+  .ex-card{display:flex;flex-direction:column;gap:12px;padding:22px 22px 18px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .ex-card h3{margin:0;font-size:1.28rem}
+  .ex-place{margin:0;font-family:var(--font-head);font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-dark)}
+  .ex-price{margin:0;font-family:var(--font-display);font-size:2rem;font-weight:500;line-height:1;color:var(--ink)}
+  .ex-card dl{display:grid;gap:8px;margin:0}
+  .ex-card dl div{display:flex;justify-content:space-between;gap:12px;padding-top:8px;border-top:1px solid var(--line);font-size:.92rem}
+  .ex-card dt{color:var(--muted)}
+  .ex-card dd{margin:0;font-weight:600;color:var(--ink);text-align:right}
+  .ex-card dd.due{font-family:var(--font-display);font-size:1.35rem;font-weight:500}
+  .ex-card .try{margin-top:auto}
+  .cmp{display:grid;gap:16px}
+  @media (min-width:800px){.cmp{grid-template-columns:1fr 1fr}}
+  .cmp article{padding:clamp(20px,3vw,32px);background:#fff;border:1px solid var(--line);border-radius:var(--radius)}
+  .cmp h3{margin-top:0}
+  .cmp dl{margin:0;display:grid;gap:14px}
+  .cmp dt{font-family:var(--font-head);font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .cmp dd{margin:.25em 0 0}
+  .ptt-acc{max-width:880px;margin:0 auto;border-top:1px solid var(--line-strong)}
+  .ptt-acc details{border-bottom:1px solid var(--line-strong)}
+  .ptt-acc summary{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 0;cursor:pointer;list-style:none;font-family:var(--font-display);font-weight:500;font-size:clamp(1.2rem,1.08rem + .4vw,1.45rem);line-height:1.25;color:var(--ink)}
+  .ptt-acc summary::-webkit-details-marker{display:none}
+  .ptt-acc summary::after{content:"";flex:0 0 12px;width:12px;height:12px;border-right:2px solid var(--blue-dark);border-bottom:2px solid var(--blue-dark);transform:translateY(-3px) rotate(45deg)}
+  .ptt-acc details[open] summary::after{transform:translateY(3px) rotate(225deg)}
+  .ptt-acc details .ans{padding:0 0 22px;max-width:68ch}
+  .ptt-acc details .ans p{margin:0}
+  .ptt-contact .btn-row{margin-top:8px}
+  .ptt-page .guide-intro{align-items:center}
+</style>
+</head>
+<body class="ptt-page">
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header nav-long">
+  <p class="preview-banner">Preview for review. This page is not published.</p>
+  <div class="brokerage-bar">
+    <div class="container bb-inner">
+      <p class="bb-lockup"><img src="../assets/img/axford-logo.png" alt="" width="600" height="106"><span class="bb-text"><span class="bb-label">Brokerage</span> Axford Real Estate<span class="bb-addr"> · Port Moody, BC</span></span></p>
+      <p class="bb-contact"><a href="tel:+16048091032">Call or text 604-809-1032</a><a class="bb-email" href="mailto:devin@axfordrealestate.ca">devin@axfordrealestate.ca</a></p>
+    </div>
+  </div>
+  <div class="container header-inner">
+    <a class="brand" href="../index.html" aria-label="Devin Desaulniers, Real Estate Associate, Axford Real Estate — home">
+      <img src="../assets/img/devin-mark.png" alt="" width="232" height="342">
+      <span class="brand-text">
+        <span class="brand-name"><span class="b">DEVIN</span> <span class="g">DESAULNIERS</span></span>
+        <span class="brand-sub">Real Estate Associate</span>
+      </span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <div class="nav-links"><a href="../index.html">Home</a><a href="../buyers.html">Buyers</a><a href="../listings.html">Homes for sale</a><a href="../rentals.html">Homes for rent</a><a href="../rent-report.html">Rent report</a><a href="../tenants.html">Tenants</a><a href="../relocating-to-greater-vancouver.html">Relocating</a><a href="../blog/">Blog</a><a href="../videos.html">Videos</a></div>
+      <a class="nav-phone" href="tel:+16048091032"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span>Call or text 604-809-1032</span></a>
+      <a class="btn btn-primary nav-cta" href="../contact.html">Contact</a>
+    </nav>
+    <a class="header-call" href="tel:+16048091032" aria-label="Call or text Devin at 604-809-1032"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></a>
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span class="nt-bars" aria-hidden="true"><span></span><span></span><span></span></span></button>
+  </div>
+</header>
+<aside class="tenant-cta-bar" aria-label="Tenant relocation service">
+  <div class="container tenant-cta-inner">
+    <p><strong>Want me to find yours?</strong> Tenant Relocation Service $1,500 + GST</p>
+    <a class="btn btn-light" href="../tenants.html#intake">Start a rental search <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</aside>
+
+<main id="main" tabindex="-1">
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Property transfer tax · Tri-Cities, BC</span>
+    <h1>BC Property Transfer Tax and the First-Time Buyer Exemption: Tri-Cities, BC Examples</h1>
+    <p class="lead">In B.C., property transfer tax is 1% of the fair market value up to $200,000, 2% from $200,000 to $2,000,000, and 3% above $2,000,000, with a further 2% on residential value over $3,000,000. Qualifying first-time buyers pay no tax on the first $500,000 when the home is worth $835,000 or less (a saving of up to $8,000), and get a smaller exemption between $835,000 and $860,000. Qualifying buyers of a newly built home can be fully exempt up to $1,100,000, with a partial exemption up to $1,150,000. On a $600,000 condo in Tri-Cities, BC, that's $2,000 in PTT for an eligible first-time buyer instead of $10,000.</p>
+    <div class="hero-figures">
+      <div><b>$10,000</b><span>Regular PTT on that $600,000 condo</span></div>
+      <div><b>$2,000</b><span>Amount payable for an eligible first-time buyer</span></div>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-light" href="#calculator">Open the calculator <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-ghost-light" href="#examples">Worked examples</a>
+    </div>
+  </div>
+</section>
+<nav class="page-nav" aria-label="On this page"><div class="container"><span class="pn-label">On this page</span><a href="#calculator">Calculator</a><a href="#what">What PTT is</a><a href="#rates">Rates</a><a href="#first-time">First-time buyers</a><a href="#newly-built">Newly built</a><a href="#examples">Examples</a><a href="#compare">Which exemption</a><a href="#closing">Closing costs</a><a href="#faq">FAQ</a></div></nav>
+
+<article class="guide">
+<section class="section" id="intro">
+  <div class="container narrow-wide">
+    <p class="ptt-note">General information only. Confirm your eligibility with your lawyer, notary or the B.C. Ministry of Finance.</p>
+  </div>
+</section>
+
+<section class="section section--paper" id="calculator">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Calculator</span>
+        <h2>First-time buyer PTT calculator</h2>
+      </div>
+      <div class="sec-head-aside">
+        <p class="lead">Enter a fair market value. The result is regular PTT, the first-time buyer exemption, and the amount payable, using only the rates and thresholds on this page.</p>
+      </div>
+    </div>
+    <div class="ptt-calc">
+      <form id="ptt-form" class="form-card" action="#calculator">
+        <div class="field">
+          <label for="ptt-price">Fair market value</label>
+          <div class="money-input">
+            <span aria-hidden="true">$</span>
+            <input id="ptt-price" name="price" type="text" inputmode="decimal" autocomplete="off" value="600,000" aria-describedby="ptt-price-hint">
+          </div>
+          <p class="hint" id="ptt-price-hint">On any price up to $2,000,000, PTT is $2,000 plus 2% of the amount over $200,000.</p>
+        </div>
+        <div class="ptt-presets" role="group" aria-label="Prices from the worked examples">
+          <button type="button" data-price="600000" data-share="100">A · $600,000</button>
+          <button type="button" data-price="835000" data-share="100">B · $835,000</button>
+          <button type="button" data-price="850000" data-share="100">C · $850,000</button>
+          <button type="button" data-price="850000" data-share="50">D · 50% of $850,000</button>
+          <button type="button" data-price="1050000" data-share="100">E · $1,050,000</button>
+          <button type="button" data-price="1300000" data-share="100">F · $1,300,000</button>
+          <button type="button" data-price="700000" data-share="100">$700,000</button>
+        </div>
+        <div class="field" style="margin-top:18px">
+          <label for="ptt-share">Percentage owned by eligible buyers</label>
+          <div class="share-row">
+            <input id="ptt-share" name="share" type="range" min="0" max="100" step="1" value="100">
+            <output id="ptt-share-out" for="ptt-share">100%</output>
+            <div class="share-picks" role="group" aria-label="Eligible share">
+              <button type="button" data-share-only="100">100%</button>
+              <button type="button" data-share-only="50">50%</button>
+            </div>
+          </div>
+          <p class="hint">Only the share of the home owned by eligible buyers counts. If you buy 50/50 with a partner who has owned a home before, you get 50% of the exemption.</p>
+        </div>
+        <p class="form-note">Includes the further 2% on residential value above $3,000,000. Foreign buyers also pay an additional property transfer tax. That's a separate rule. You can find the details on the <a href="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax">Province's PTT page</a>. This calculator does not apply the newly built home exemption.</p>
+      </form>
+      <div>
+        <div class="ptt-out" id="ptt-results" aria-live="polite">
+          <p class="ptt-error" id="ptt-error" hidden></p>
+          <div id="ptt-figures">
+            <div class="ptt-stats">
+              <div class="ptt-stat"><h3>Regular PTT</h3><p id="ptt-regular">$10,000</p></div>
+              <div class="ptt-stat ptt-stat--ex"><h3>First-time buyer exemption</h3><p id="ptt-exemption">$8,000</p></div>
+              <div class="ptt-stat ptt-stat--due"><h3>Amount payable</h3><p id="ptt-payable">$2,000</p></div>
+            </div>
+            <div class="ptt-meter" id="ptt-meter">
+              <div class="ptt-meter-track" aria-hidden="true"><div class="ptt-meter-ex" id="ptt-meter-ex" style="width:80%"></div></div>
+              <p class="ptt-meter-legend"><span><i class="swatch" aria-hidden="true"></i> First-time buyer exemption</span><span><i class="swatch swatch--pay" aria-hidden="true"></i> Amount payable</span></p>
+            </div>
+            <p class="ptt-formula" id="ptt-formula"></p>
+            <p class="ptt-match" id="ptt-match"></p>
+          </div>
+        </div>
+        <figure class="ptt-chart-wrap">
+          <figcaption>First-time buyer exemption by price</figcaption>
+          <svg id="ptt-chart" viewBox="0 0 720 280" role="img" aria-labelledby="ptt-chart-title ptt-chart-desc">
+            <title id="ptt-chart-title">First-time buyer exemption by fair market value</title>
+            <desc id="ptt-chart-desc">The exemption rises to $8,000 at $500,000, stays at $8,000 through $835,000, then falls to $0 at $860,000.</desc>
+          </svg>
+          <p class="ptt-chart-note" id="ptt-chart-note">No tax on the first $500,000 when the home is worth $835,000 or less, a saving of up to $8,000. Between $835,000 and $860,000 the exemption gets smaller. The line is the full exemption, before a partial ownership share.</p>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="what">
+  <div class="container narrow-wide">
+    <span class="eyebrow">The tax</span>
+    <h2>What is BC property transfer tax?</h2>
+    <p>Property transfer tax (PTT) is a one-time tax you pay when your purchase is registered at the Land Title Office. It's based on the property's fair market value on the day it's registered. It's not the same as the property tax your city bills you every year. Most of the time, your lawyer or notary files the PTT return and pays the tax for you as part of closing. (<a href="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax">Province of B.C.: Property transfer tax</a>)</p>
+  </div>
+</section>
+
+<section class="section section--tint" id="rates">
+  <div class="container narrow-wide">
+    <span class="eyebrow">2026 rates</span>
+    <h2>2026 property transfer tax rates</h2>
+    <div class="rate-tiles">
+      <div class="rate-tile"><b>1%</b><span>First $200,000</span></div>
+      <div class="rate-tile"><b>2%</b><span>$200,000 to $2,000,000</span></div>
+      <div class="rate-tile"><b>3%</b><span>Above $2,000,000</span></div>
+      <div class="rate-tile"><b>a further 2%</b><span>Residential value above $3,000,000</span></div>
+    </div>
+    <div class="table-wrap">
+      <table class="price-table">
+        <caption>Portion of fair market value and the rate that applies.</caption>
+        <thead>
+          <tr><th scope="col">Portion of fair market value</th><th scope="col">Rate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>First $200,000</td><td>1%</td></tr>
+          <tr><td>$200,000 to $2,000,000</td><td>2%</td></tr>
+          <tr><td>Above $2,000,000</td><td>3%</td></tr>
+          <tr><td>Residential value above $3,000,000</td><td>a further 2%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Foreign buyers also pay an additional property transfer tax. That's a separate rule. You can find the details on the <a href="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax">Province's PTT page</a>.</p>
+  </div>
+</section>
+
+<section class="section" id="first-time">
+  <div class="container narrow-wide">
+    <span class="eyebrow">Exemption</span>
+    <h2>The first-time home buyers' exemption</h2>
+    <h3>Who may qualify</h3>
+    <p>You may qualify if all of these are true (<a href="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax/exemptions/first-time-home-buyers">first time home buyers' program</a>):</p>
+    <ul class="guide-list">
+      <li>You're a Canadian citizen or permanent resident.</li>
+      <li>You've lived in B.C. for the 12 months right before the home is registered, or you've filed two B.C. income tax returns in the last six years.</li>
+      <li>You've never owned a principal residence anywhere in the world.</li>
+      <li>You've never received this exemption or a first-time buyer refund before.</li>
+    </ul>
+    <h3>Which homes qualify</h3>
+    <ul class="guide-list">
+      <li>It has to be your principal residence.</li>
+      <li>The fair market value is $835,000 or less for the full exemption.</li>
+      <li>The property is 0.5 hectares or smaller (larger lots get a reduced exemption).</li>
+      <li>Only residential improvements count.</li>
+    </ul>
+    <h3>How much you could save</h3>
+    <p>If the home is worth $835,000 or less, there's no tax on the first $500,000, which works out to a saving of up to $8,000. Between $835,000 and $860,000 the exemption gets smaller. It's $8,000 × ($860,000 − fair market value) ÷ $25,000. At $860,000 and above there's no first-time buyer exemption. (<a href="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax/exemptions/first-time-home-buyers/current-amount">exemption amounts table</a>)</p>
+    <h3>Buying with someone who doesn't qualify</h3>
+    <p>Only the share of the home owned by eligible buyers counts. If you buy 50/50 with a partner who has owned a home before, you get 50% of the exemption.</p>
+    <h3>After you close</h3>
+    <p>You need to move in within 92 days of registration and keep living there until the first anniversary. If you don't, you may have to pay back part of the exemption. There are also penalties for false declarations.</p>
+    <h3>Forgot to claim it?</h3>
+    <p>You can ask for a refund with form FIN 265, starting at the first anniversary of registration and up to 18 months after it, as long as you met all the conditions.</p>
+  </div>
+</section>
+
+<section class="section section--paper" id="newly-built">
+  <div class="container narrow-wide">
+    <span class="eyebrow">New homes</span>
+    <h2>The newly built home exemption</h2>
+    <p>You don't have to be a first-time buyer for this one. A newly built home can be fully exempt if its fair market value is $1,100,000 or less, with a partial exemption from $1,100,000 to $1,150,000. You need to be a citizen or permanent resident. It has to be the first registration of the home with a completed improvement, it has to be your principal residence, and the lot has to be 0.5 hectares or smaller. The same 92-day move-in and one-year occupancy rules apply, and the exemption code on the return is 49. For how the partial exemption is worked out, see the <a href="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax/exemptions/newly-built-home-exemption">Province's newly built home exemption page</a>.</p>
+  </div>
+</section>
+
+<section class="section" id="examples">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Tri-Cities, BC</span>
+        <h2>Worked examples at Tri-Cities, BC price points</h2>
+      </div>
+      <div class="sec-head-aside">
+        <p class="ptt-note">Prices below are illustrative only. They aren't average or benchmark prices for Coquitlam, Port Coquitlam or Port Moody. Each example assumes the buyer meets every condition.</p>
+      </div>
+    </div>
+    <figure class="save-chart">
+      <figcaption>Savings chart: exemption in each worked example</figcaption>
+      <ul>
+        <li class="save-row"><span class="save-name">A. Resale condo, Port Coquitlam, first-time buyer</span><span class="save-track"><span class="save-fill" style="width:42.105263%"></span></span><span class="save-amt">$8,000</span></li>
+        <li class="save-row"><span class="save-name">B. Resale townhouse, Coquitlam, first-time buyer</span><span class="save-track"><span class="save-fill" style="width:42.105263%"></span></span><span class="save-amt">$8,000</span></li>
+        <li class="save-row"><span class="save-name">C. Resale townhouse, Port Moody, first-time buyer (partial zone)</span><span class="save-track"><span class="save-fill" style="width:16.842105%"></span></span><span class="save-amt">$3,200</span></li>
+        <li class="save-row"><span class="save-name">D. Same $850,000 home, 50% owned by a partner who has owned before</span><span class="save-track"><span class="save-fill" style="width:8.421053%"></span></span><span class="save-amt">$1,600</span></li>
+        <li class="save-row"><span class="save-name">E. Brand-new condo, Port Moody, newly built home exemption</span><span class="save-track"><span class="save-fill" style="width:100%"></span></span><span class="save-amt">$19,000</span></li>
+        <li class="save-row"><span class="save-name">F. Resale house, Coquitlam, no exemption</span><span class="save-track"><span class="save-fill" style="width:0%"></span></span><span class="save-amt is-none">none</span></li>
+      </ul>
+    </figure>
+    <div class="ex-grid">
+      <article class="ex-card">
+        <p class="ex-place">Example A · Port Coquitlam</p>
+        <h3>Resale condo, first-time buyer</h3>
+        <p class="ex-price">$600,000</p>
+        <dl>
+          <div><dt>PTT before exemption</dt><dd>$10,000</dd></div>
+          <div><dt>Exemption</dt><dd>$8,000</dd></div>
+          <div><dt>PTT payable</dt><dd class="due">$2,000</dd></div>
+        </dl>
+        <button class="btn btn-outline btn-sm try" type="button" data-price="600000" data-share="100">Use this price</button>
+      </article>
+      <article class="ex-card">
+        <p class="ex-place">Example B · Coquitlam</p>
+        <h3>Resale townhouse, first-time buyer</h3>
+        <p class="ex-price">$835,000</p>
+        <dl>
+          <div><dt>PTT before exemption</dt><dd>$14,700</dd></div>
+          <div><dt>Exemption</dt><dd>$8,000</dd></div>
+          <div><dt>PTT payable</dt><dd class="due">$6,700</dd></div>
+        </dl>
+        <button class="btn btn-outline btn-sm try" type="button" data-price="835000" data-share="100">Use this price</button>
+      </article>
+      <article class="ex-card">
+        <p class="ex-place">Example C · Port Moody</p>
+        <h3>Resale townhouse, first-time buyer (partial zone)</h3>
+        <p class="ex-price">$850,000</p>
+        <dl>
+          <div><dt>PTT before exemption</dt><dd>$15,000</dd></div>
+          <div><dt>Exemption</dt><dd>$3,200</dd></div>
+          <div><dt>PTT payable</dt><dd class="due">$11,800</dd></div>
+        </dl>
+        <button class="btn btn-outline btn-sm try" type="button" data-price="850000" data-share="100">Use this price</button>
+      </article>
+      <article class="ex-card">
+        <p class="ex-place">Example D · 50% eligible</p>
+        <h3>Same $850,000 home, 50% owned by a partner who has owned before</h3>
+        <p class="ex-price">$850,000</p>
+        <dl>
+          <div><dt>PTT before exemption</dt><dd>$15,000</dd></div>
+          <div><dt>Exemption</dt><dd>$1,600</dd></div>
+          <div><dt>PTT payable</dt><dd class="due">$13,400</dd></div>
+        </dl>
+        <button class="btn btn-outline btn-sm try" type="button" data-price="850000" data-share="50">Use this price at 50%</button>
+      </article>
+      <article class="ex-card">
+        <p class="ex-place">Example E · Port Moody</p>
+        <h3>Brand-new condo, newly built home exemption</h3>
+        <p class="ex-price">$1,050,000</p>
+        <dl>
+          <div><dt>PTT before exemption</dt><dd>$19,000</dd></div>
+          <div><dt>Exemption</dt><dd>$19,000</dd></div>
+          <div><dt>PTT payable</dt><dd class="due">$0</dd></div>
+        </dl>
+        <button class="btn btn-outline btn-sm try" type="button" data-price="1050000" data-share="100">Use this price</button>
+      </article>
+      <article class="ex-card">
+        <p class="ex-place">Example F · Coquitlam</p>
+        <h3>Resale house, no exemption</h3>
+        <p class="ex-price">$1,300,000</p>
+        <dl>
+          <div><dt>PTT before exemption</dt><dd>$24,000</dd></div>
+          <div><dt>Exemption</dt><dd>none</dd></div>
+          <div><dt>PTT payable</dt><dd class="due">$24,000</dd></div>
+        </dl>
+        <button class="btn btn-outline btn-sm try" type="button" data-price="1300000" data-share="100">Use this price</button>
+      </article>
+    </div>
+    <p class="after-steps">How the numbers work: on any price up to $2,000,000, PTT is $2,000 plus 2% of the amount over $200,000. For example C, the partial exemption is $8,000 × ($860,000 − $850,000) ÷ $25,000 = $3,200. Examples A and C match the Province's own exemption table.</p>
+  </div>
+</section>
+
+<section class="section section--paper" id="compare">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Side by side</span>
+        <h2>Which exemption fits your situation?</h2>
+      </div>
+    </div>
+    <div class="cmp">
+      <article>
+        <h3>First-time home buyers' exemption</h3>
+        <dl>
+          <div><dt>Who</dt><dd>Citizens or PRs who've never owned a principal residence, with 12 months in B.C. (or 2 B.C. tax returns)</dd></div>
+          <div><dt>Full exemption up to</dt><dd>$835,000</dd></div>
+          <div><dt>Partial exemption up to</dt><dd>$860,000</dd></div>
+          <div><dt>Most you could save</dt><dd>$8,000</dd></div>
+        </dl>
+      </article>
+      <article>
+        <h3>Newly built home exemption</h3>
+        <dl>
+          <div><dt>Who</dt><dd>Citizens or PRs buying a newly built home as a principal residence, first-time buyer or not</dd></div>
+          <div><dt>Full exemption up to</dt><dd>$1,100,000</dd></div>
+          <div><dt>Partial exemption up to</dt><dd>$1,150,000</dd></div>
+          <div><dt>Most you could save</dt><dd>the full PTT on the home, if all conditions are met</dd></div>
+        </dl>
+      </article>
+    </div>
+    <p class="after-steps">Your lawyer or notary can confirm which one you're eligible for before you file.</p>
+  </div>
+</section>
+
+<section class="section" id="closing">
+  <div class="container narrow-wide">
+    <span class="eyebrow">Budget</span>
+    <h2>Budgeting PTT into your closing costs</h2>
+    <p>PTT is due when your purchase is registered, so plan for it with your other closing costs, not your down payment. The GST on new homes and the federal FHSA and RRSP Home Buyers' Plan are separate programs with their own rules. For the bigger picture, check out my guide to <a href="https://devindesaulniers.ca/buyers.html">buying a home in Tri-Cities, BC</a> and my <a href="https://devindesaulniers.ca/first-time-buyers-tri-cities-bc.html">first-time buyer guide for Tri-Cities, BC</a>. If you're moving here from another province or country, the residency rules above really matter, so have a read of my <a href="https://devindesaulniers.ca/relocating-to-greater-vancouver.html">relocating to Greater Vancouver guide</a> too.</p>
+  </div>
+</section>
+
+<section class="section section--paper" id="faq">
+  <div class="container">
+    <div class="sec-head sec-head--center"><div><span class="eyebrow">FAQ</span><h2>FAQ</h2></div></div>
+    <div class="ptt-acc">
+      <details>
+        <summary>How much is property transfer tax on a $700,000 home in BC?</summary>
+        <div class="ans"><p>$12,000 before any exemption. An eligible first-time buyer would pay $4,000.</p></div>
+      </details>
+      <details>
+        <summary>What is the first-time buyer exemption limit in BC in 2026?</summary>
+        <div class="ans"><p>The full exemption applies to homes worth $835,000 or less. A partial exemption applies above $835,000 and under $860,000. (The older $500,000 and $525,000 limits applied before April 1, 2024.)</p></div>
+      </details>
+      <details>
+        <summary>Do I pay PTT on a new condo in Coquitlam?</summary>
+        <div class="ans"><p>Possibly not. If the condo is newly built, worth $1,100,000 or less, and you meet the other conditions, the newly built home exemption may cover the full tax.</p></div>
+      </details>
+      <details>
+        <summary>Can I use both exemptions?</summary>
+        <div class="ans"><p>You claim one exemption on the PTT return. If you applied under the first-time buyers' program and think the newly built home exemption fits better, you can contact the Ministry of Finance about switching.</p></div>
+      </details>
+      <details>
+        <summary>My spouse owned a home before. Do I still qualify?</summary>
+        <div class="ans"><p>Your share can still qualify. The exemption is reduced to the percentage owned by eligible buyers.</p></div>
+      </details>
+      <details>
+        <summary>I just moved to B.C. Can I claim it?</summary>
+        <div class="ans"><p>Only if you've lived in B.C. for the 12 months before registration (or filed two B.C. tax returns in the last six years) and you're a citizen or permanent resident. If you become a permanent resident within a year of registering, you may be able to apply for a refund.</p></div>
+      </details>
+      <details>
+        <summary>When is PTT paid, and who handles it?</summary>
+        <div class="ans"><p>It's paid when the home is registered at the Land Title Office, and your lawyer or notary usually handles it.</p></div>
+      </details>
+      <details>
+        <summary>What if I move out within the first year?</summary>
+        <div class="ans"><p>You may have to repay part of the exemption.</p></div>
+      </details>
+      <details>
+        <summary>I forgot to claim it. Can I get a refund?</summary>
+        <div class="ans"><p>Yes, if you met the conditions. Apply with form FIN 265 between the first anniversary of registration and 18 months after it.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+</article>
+
+<section class="section" id="talk">
+  <div class="container guide-intro ptt-contact">
+    <figure class="portrait">
+      <picture class="headshot">
+        <source type="image/webp" srcset="../assets/img/devin-headshot-480.webp 480w, ../assets/img/devin-headshot-800.webp 800w" sizes="(max-width: 899px) 70vw, 280px">
+        <img src="../assets/img/devin-headshot-800.jpg" srcset="../assets/img/devin-headshot-480.jpg 480w, ../assets/img/devin-headshot-800.jpg 800w" sizes="(max-width: 899px) 70vw, 280px" width="800" height="1000" alt="Devin Desaulniers, Real Estate Associate with Axford Real Estate" decoding="async">
+      </picture>
+      <figcaption><strong>Devin Desaulniers</strong><span>REALTOR® · Axford Real Estate</span></figcaption>
+    </figure>
+    <div>
+      <span class="eyebrow">Coquitlam, Port Coquitlam, Port Moody</span>
+      <h2>Thinking about buying in Coquitlam, Port Coquitlam or Port Moody?</h2>
+      <p>I'm Devin Desaulniers, a REALTOR® with Axford Real Estate in Port Moody. Book a buyer consult and I'm happy to help you budget your closing costs and connect you with a lawyer or notary who can confirm your exemption. Call or text <a href="tel:+16048091032">604-809-1032</a> or email <a href="mailto:devin@axfordrealestate.ca">devin@axfordrealestate.ca</a>.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="../contact.html#qualify">Book a buyer consult <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-outline" href="tel:+16048091032">Call or text 604-809-1032</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper" id="sources">
+  <div class="container narrow-wide">
+    <p class="ptt-note">General information only; confirm eligibility with your lawyer, notary or the B.C. Ministry of Finance. Sources: Province of B.C. <a href="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax">property transfer tax</a>, <a href="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax/exemptions/first-time-home-buyers">first time home buyers' program</a>, <a href="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax/exemptions/first-time-home-buyers/current-amount">exemption amounts</a>, <a href="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax/exemptions/newly-built-home-exemption">newly built home exemption</a>, <a href="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax/calculation-examples">calculation examples</a>.</p>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a class="footer-brand" href="../index.html" aria-label="Devin Desaulniers — home">
+          <img src="../assets/img/devin-mark.png" alt="" width="232" height="342" loading="lazy">
+          <span><span class="fb-name">Devin Desaulniers</span><span class="fb-sub">Real Estate Associate</span></span>
+        </a>
+        <div class="footer-brokerage"><img src="../assets/img/axford-logo.png" alt="Axford Real Estate" width="600" height="106" loading="lazy"></div>
+        <p class="footer-addr"><strong>Devin Desaulniers</strong>, Real Estate Associate<br>
+        Brokerage: <strong>Axford Real Estate</strong><br>
+        2326 Clarke St, Port Moody, BC V3H 1Y8<br>
+        Brokerage office: <a href="tel:+17783550116">778-355-0116</a></p>
+        <div class="footer-badge"><a class="g-badge g-badge--sm" href="https://www.google.com/maps?cid=6001107873248015668" target="_blank" rel="noopener" aria-label="Axford Real Estate: 148 five-star Google reviews (opens Google Maps in a new tab)"><svg class="gb-g" viewBox="0 0 48 48" width="28" height="28" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="gb-text"><span class="gb-stars" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="#FBBC05" d="M12 2.5l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.52l-5.88 3.09 1.12-6.55-4.76-4.64 6.58-.96z"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><path fill="#FBBC05" d="M12 2.5l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.52l-5.88 3.09 1.12-6.55-4.76-4.64 6.58-.96z"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><path fill="#FBBC05" d="M12 2.5l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.52l-5.88 3.09 1.12-6.55-4.76-4.64 6.58-.96z"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><path fill="#FBBC05" d="M12 2.5l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.52l-5.88 3.09 1.12-6.55-4.76-4.64 6.58-.96z"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><path fill="#FBBC05" d="M12 2.5l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.52l-5.88 3.09 1.12-6.55-4.76-4.64 6.58-.96z"/></svg></span><span class="gb-count">148 five-star Google reviews</span><span class="gb-name">Axford Real Estate</span></span><span class="gb-sep" aria-hidden="true"></span><picture class="gb-logo"><source type="image/webp" srcset="../assets/img/axford-badge-logo-160.webp 160w, ../assets/img/axford-badge-logo-320.webp 320w" sizes="(max-width: 479px) 110px, 130px"><img src="../assets/img/axford-badge-logo-320.jpg" srcset="../assets/img/axford-badge-logo-160.jpg 160w, ../assets/img/axford-badge-logo-320.jpg 320w" sizes="(max-width: 479px) 110px, 130px" width="320" height="55" alt="" loading="lazy" decoding="async"></picture></a></div>
+      </div>
+      <div>
+        <h2 class="footer-h">Explore</h2>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../buyers.html">Buyers &amp; neighbourhoods</a></li>
+          <li><a href="../listings.html">Homes for sale</a></li>
+          <li><a href="../rentals.html">Homes for rent</a></li>
+          <li><a href="../rent-report.html">Weekly rent report</a></li>
+          <li><a href="../home-evaluation.html">Free home evaluation</a></li>
+          <li><a href="../buyer-opinion.html">Get an expert opinion</a></li>
+          <li><a href="../tenants.html">Relocation rental service</a></li>
+          <li><a href="../relocating-to-greater-vancouver.html">Relocating to Greater Vancouver guide</a></li>
+          <li><a href="../burquitlam-neighbourhood-guide.html">Burquitlam neighbourhood guide</a></li>
+          <li><a href="../port-moody.html">Port Moody guide</a></li>
+          <li><a href="../port-coquitlam.html">Port Coquitlam guide</a></li>
+          <li><a href="../first-time-buyers-tri-cities-bc.html">First-time home buyers, Tri-Cities, BC</a></li>
+          <li><a href="../newcomer-rental-faqs.html">Newcomer rental FAQs</a></li>
+          <li><a href="../videos.html">Property video tours</a></li>
+          <li><a href="../blog/">Blog: Greater Vancouver real estate news</a></li>
+          <li><a href="../tenants.html#resources">Free renter resources (PDF)</a></li>
+          <li><a href="https://devindrealty-a11y.github.io/mortgage-calculator/" target="_blank" rel="noopener">Mortgage affordability calculator</a></li>
+          <li><a href="../privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-h">Contact</h2>
+        <ul>
+          <li><a href="../contact.html">Contact form</a></li>
+          <li><a href="mailto:devin@axfordrealestate.ca">devin@axfordrealestate.ca</a></li>
+          <li>Direct (call or text): <a href="tel:+16048091032">604-809-1032</a></li>
+          <li>Greater Vancouver · Tri-Cities, BC</li>
+          <li class="social-links"><a href="https://www.realtor.ca/agent/2073520/devin-desaulniers-2326-clarke-street-port-moody-british-columbia-v3h1y8" target="_blank" rel="noopener">REALTOR.ca</a> <a href="https://www.linkedin.com/in/devin-desaulniers-7794b3184" target="_blank" rel="noopener">LinkedIn</a> <a href="https://www.youtube.com/@devindesaulniers" target="_blank" rel="noopener">YouTube</a> <a href="https://www.instagram.com/devindesaulniers/" target="_blank" rel="noopener">Instagram</a> <a href="https://www.facebook.com/DevinDesaulniersRealtor/" target="_blank" rel="noopener">Facebook</a> <a href="https://www.rate-my-agent.com/devin-desaulniers-ratings-port-moody-123891" target="_blank" rel="noopener">Rate-My-Agent</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p class="fine-print">Devin Desaulniers is a Real Estate Associate with Axford Real Estate, 2326 Clarke St, Port Moody, BC. Information on this site is general. It is not legal, tax, or financial advice, and it is not a mortgage approval. It is not intended to solicit buyers or sellers who are currently under contract with a brokerage.</p>
+      <p class="fine-print"><a href="../privacy.html">Privacy</a>: how this site's contact forms, chat widget, and page-visit counter handle what you send.</p>
+      <p>© <span data-year>2026</span> Devin Desaulniers · Axford Real Estate.</p>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/site.js"></script>
+<script>
+(function () {
+  var C835 = 83500000;
+  var C860 = 86000000;
+  var C25 = 2500000;
+  var C8000 = 800000;
+  var T200 = 20000000;
+  var T2M = 200000000;
+  var T3M = 300000000;
+
+  function toCents(dollars) {
+    return Math.round(Number(dollars) * 100);
+  }
+  function band(portionCents, percent) {
+    return Math.round(portionCents * percent / 100);
+  }
+  function regularPttCents(priceCents) {
+    var tax = band(Math.min(priceCents, T200), 1);
+    if (priceCents > T200) tax += band(Math.min(priceCents, T2M) - T200, 2);
+    if (priceCents > T2M) tax += band(priceCents - T2M, 3);
+    if (priceCents > T3M) tax += band(priceCents - T3M, 2);
+    return tax;
+  }
+  function fullExemptionCents(priceCents, pttCents) {
+    if (priceCents >= C860) return 0;
+    if (priceCents > C835) return Math.round(C8000 * (C860 - priceCents) / C25);
+    return Math.min(pttCents, C8000);
+  }
+  function quote(priceDollars, sharePercent) {
+    var priceCents = toCents(priceDollars);
+    var share = Number(sharePercent);
+    var regular = regularPttCents(priceCents);
+    var full = fullExemptionCents(priceCents, regular);
+    var exemption = Math.round(full * share / 100);
+    if (exemption > regular) exemption = regular;
+    if (exemption < 0) exemption = 0;
+    return {
+      priceCents: priceCents,
+      share: share,
+      regular: regular,
+      full: full,
+      exemption: exemption,
+      payable: regular - exemption
+    };
+  }
+  function formatCad(cents) {
+    var sign = cents < 0 ? '-' : '';
+    var abs = Math.abs(Math.round(cents));
+    var dollars = Math.floor(abs / 100);
+    var rem = abs % 100;
+    var body = String(dollars).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    if (rem) body += '.' + String(rem).padStart(2, '0');
+    return sign + '$' + body;
+  }
+  function formatInput(cents) {
+    return formatCad(cents).replace('$', '');
+  }
+  function parsePrice(raw) {
+    if (raw == null) return null;
+    var s = String(raw).trim().replace(/[$,\s]/g, '');
+    if (s === '') return null;
+    if (!/^\d+(\.\d+)?$/.test(s)) return NaN;
+    return Number(s);
+  }
+
+  var priceEl = document.getElementById('ptt-price');
+  var shareEl = document.getElementById('ptt-share');
+  var shareOut = document.getElementById('ptt-share-out');
+  var regularEl = document.getElementById('ptt-regular');
+  var exemptionEl = document.getElementById('ptt-exemption');
+  var payableEl = document.getElementById('ptt-payable');
+  var formulaEl = document.getElementById('ptt-formula');
+  var matchEl = document.getElementById('ptt-match');
+  var errorEl = document.getElementById('ptt-error');
+  var figuresEl = document.getElementById('ptt-figures');
+  var meterEx = document.getElementById('ptt-meter-ex');
+  var meter = document.getElementById('ptt-meter');
+  var chart = document.getElementById('ptt-chart');
+  var chartTitle = document.getElementById('ptt-chart-title');
+  var chartDesc = document.getElementById('ptt-chart-desc');
+
+  function exemptionDollarsAt(priceDollars) {
+    var q = quote(priceDollars, 100);
+    return q.full / 100;
+  }
+
+  function drawChart(priceDollars) {
+    var w = 720, h = 280, padL = 72, padR = 20, padT = 28, padB = 48;
+    var xMax = 1000000, yMax = 8000;
+    var innerW = w - padL - padR, innerH = h - padT - padB;
+    function x(p) { return padL + (Math.max(0, Math.min(p, xMax)) / xMax) * innerW; }
+    function y(v) { return padT + (1 - Math.max(0, Math.min(v, yMax)) / yMax) * innerH; }
+    var knots = [0, 200000, 500000, 835000, 860000, 1000000];
+    var pts = knots.map(function (p) { return [x(p), y(exemptionDollarsAt(p))]; });
+    var line = pts.map(function (p, i) {
+      return (i ? 'L' : 'M') + p[0].toFixed(1) + ',' + p[1].toFixed(1);
+    }).join(' ');
+    var area = line + ' L' + x(1000000).toFixed(1) + ',' + y(0).toFixed(1) + ' L' + x(0).toFixed(1) + ',' + y(0).toFixed(1) + ' Z';
+    var full = exemptionDollarsAt(Math.min(Math.max(priceDollars, 0), 10000000));
+    var mx = x(priceDollars);
+    var my = y(priceDollars > 1000000 ? 0 : full);
+    var label = formatCad(Math.round((priceDollars > 1000000 ? 0 : full) * 100));
+    var anchor = mx > 520 ? 'end' : 'start';
+    var lx = anchor === 'end' ? mx - 10 : mx + 10;
+    var ly = my < 70 ? my + 22 : my - 12;
+    var guides = [
+      [0, '$0'],
+      [200000, '$200,000'],
+      [500000, '$500,000'],
+      [1000000, '$1,000,000']
+    ];
+    var xLabels = guides.map(function (g) {
+      var anchorX = g[0] === 0 ? 'start' : (g[0] === 1000000 ? 'end' : 'middle');
+      return '<text x="' + x(g[0]).toFixed(1) + '" y="' + (h - 16) + '" text-anchor="' + anchorX + '" fill="#56616d" font-size="12" font-family="Inter, sans-serif">' + g[1] + '</text>';
+    }).join('');
+    var yLabels = [0, 8000].map(function (v) {
+      return '<text x="' + (padL - 10) + '" y="' + (y(v) + 4).toFixed(1) + '" text-anchor="end" fill="#56616d" font-size="12" font-family="Inter, sans-serif">' + formatCad(v * 100) + '</text>';
+    }).join('');
+    var grid = [0, 8000].map(function (v) {
+      return '<line x1="' + padL + '" y1="' + y(v).toFixed(1) + '" x2="' + (w - padR) + '" y2="' + y(v).toFixed(1) + '" stroke="#e1e6eb" stroke-width="1"/>';
+    }).join('');
+    chart.innerHTML =
+      '<title id="ptt-chart-title">First-time buyer exemption by fair market value</title>' +
+      '<desc id="ptt-chart-desc">At ' + formatCad(toCents(priceDollars)) + ' the full first-time buyer exemption is ' + label + '. The exemption is $8,000 from $500,000 through $835,000 and $0 at $860,000 and above.</desc>' +
+      grid +
+      '<path d="' + area + '" fill="#e8f0f9"></path>' +
+      '<path d="' + line + '" fill="none" stroke="#24578c" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path>' +
+      '<line x1="' + x(835000).toFixed(1) + '" y1="' + padT + '" x2="' + x(835000).toFixed(1) + '" y2="' + y(0).toFixed(1) + '" stroke="#93bde6" stroke-dasharray="3 3"/>' +
+      '<line x1="' + x(860000).toFixed(1) + '" y1="' + padT + '" x2="' + x(860000).toFixed(1) + '" y2="' + y(0).toFixed(1) + '" stroke="#93bde6" stroke-dasharray="3 3"/>' +
+      '<text x="' + x(847500).toFixed(1) + '" y="16" text-anchor="middle" fill="#24578c" font-size="11" font-family="Inter, sans-serif">$835,000 to $860,000</text>' +
+      yLabels + xLabels +
+      '<line x1="' + mx.toFixed(1) + '" y1="' + y(0).toFixed(1) + '" x2="' + mx.toFixed(1) + '" y2="' + my.toFixed(1) + '" stroke="#173a5e" stroke-width="1.25"/>' +
+      '<circle cx="' + mx.toFixed(1) + '" cy="' + my.toFixed(1) + '" r="5.5" fill="#24578c" stroke="#fff" stroke-width="2"></circle>' +
+      '<text x="' + lx.toFixed(1) + '" y="' + ly.toFixed(1) + '" text-anchor="' + anchor + '" fill="#132639" font-size="13" font-weight="600" font-family="Inter, sans-serif">' + label + '</text>';
+    if (chartTitle) chartTitle.id = 'ptt-chart-title';
+    chartDesc = document.getElementById('ptt-chart-desc');
+    chartTitle = document.getElementById('ptt-chart-title');
+  }
+
+  function matchNote(q) {
+    var key = q.priceCents + ':' + q.share;
+    var notes = {
+      '60000000:100': 'Matches worked example A: PTT before exemption $10,000, exemption $8,000, PTT payable $2,000.',
+      '83500000:100': 'Matches worked example B: PTT before exemption $14,700, exemption $8,000, PTT payable $6,700.',
+      '85000000:100': 'Matches worked example C: partial exemption $8,000 × ($860,000 − $850,000) ÷ $25,000 = $3,200. PTT payable $11,800.',
+      '85000000:50': 'Matches worked example D: 50% of the $3,200 exemption is $1,600. PTT payable $13,400.',
+      '105000000:100': 'Regular PTT matches worked example E ($19,000). The first-time buyer exemption is $0 at $860,000 and above. Example E\'s $0 payable is the newly built home exemption, a full exemption up to $1,100,000, which this calculator does not apply.',
+      '130000000:100': 'Matches worked example F: PTT before exemption $24,000, exemption none, PTT payable $24,000.',
+      '70000000:100': 'Matches the FAQ: $12,000 before any exemption. An eligible first-time buyer would pay $4,000.'
+    };
+    return notes[key] || '';
+  }
+
+  function formulaText(q) {
+    var price = q.priceCents / 100;
+    var parts = [];
+    if (q.priceCents <= T200) {
+      parts.push('1% of ' + formatCad(q.priceCents) + ' = ' + formatCad(q.regular) + '.');
+    } else if (q.priceCents <= T2M) {
+      var over = q.priceCents - T200;
+      parts.push('On any price up to $2,000,000, PTT is $2,000 plus 2% of the amount over $200,000: $2,000 + 2% of ' + formatCad(over) + ' = ' + formatCad(q.regular) + '.');
+    } else {
+      parts.push('1% on the first $200,000, 2% from $200,000 to $2,000,000, and 3% above $2,000,000' + (q.priceCents > T3M ? ', with a further 2% on residential value over $3,000,000' : '') + ' = ' + formatCad(q.regular) + '.');
+    }
+    if (q.priceCents >= C860) {
+      parts.push('At $860,000 and above there\'s no first-time buyer exemption.');
+    } else if (q.priceCents > C835) {
+      parts.push('Partial exemption: $8,000 × ($860,000 − ' + formatCad(q.priceCents) + ') ÷ $25,000 = ' + formatCad(q.full) + '.');
+    } else {
+      parts.push('No tax on the first $500,000, a saving of up to $8,000. Exemption: ' + formatCad(q.full) + '.');
+    }
+    if (q.share !== 100) {
+      parts.push(q.share + '% of the exemption = ' + formatCad(q.exemption) + '.');
+    }
+    return parts.join(' ');
+  }
+
+  function render(q) {
+    errorEl.hidden = true;
+    figuresEl.hidden = false;
+    regularEl.textContent = formatCad(q.regular);
+    exemptionEl.textContent = formatCad(q.exemption);
+    payableEl.textContent = formatCad(q.payable);
+    var pct = q.regular === 0 ? 0 : (q.exemption / q.regular) * 100;
+    meter.hidden = q.regular === 0;
+    meterEx.style.width = Math.max(0, Math.min(100, pct)) + '%';
+    formulaEl.textContent = formulaText(q);
+    matchEl.textContent = matchNote(q);
+    drawChart(q.priceCents / 100);
+    var share = String(q.share);
+    document.querySelectorAll('[data-share-only]').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-share-only') === share ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-price]').forEach(function (btn) {
+      var on = Number(btn.getAttribute('data-price')) === q.priceCents / 100 && Number(btn.getAttribute('data-share')) === q.share;
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+
+  function showError(msg) {
+    errorEl.hidden = false;
+    errorEl.textContent = msg;
+    figuresEl.hidden = true;
+    matchEl.textContent = '';
+    formulaEl.textContent = '';
+  }
+
+  function calculate() {
+    shareOut.textContent = shareEl.value + '%';
+    var price = parsePrice(priceEl.value);
+    var share = Number(shareEl.value);
+    if (price === null) {
+      showError('Enter a fair market value.');
+      return;
+    }
+    if (Number.isNaN(price) || price < 0) {
+      showError('Enter a price of $0 or more.');
+      return;
+    }
+    if (price > 1000000000) {
+      showError('Enter a fair market value up to $1,000,000,000.');
+      return;
+    }
+    render(quote(price, share));
+  }
+
+  function applyPrice(price, share) {
+    priceEl.value = formatInput(toCents(price));
+    shareEl.value = String(share);
+    calculate();
+    var calc = document.getElementById('calculator');
+    if (calc) calc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  priceEl.addEventListener('input', calculate);
+  priceEl.addEventListener('change', function () {
+    var price = parsePrice(priceEl.value);
+    if (price !== null && !Number.isNaN(price) && price >= 0 && price <= 1000000000) {
+      priceEl.value = formatInput(toCents(price));
+    }
+    calculate();
+  });
+  shareEl.addEventListener('input', calculate);
+  document.getElementById('ptt-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    calculate();
+  });
+  document.querySelectorAll('[data-price]').forEach(function (btn) {
+    btn.setAttribute('aria-pressed', 'false');
+    btn.addEventListener('click', function () {
+      applyPrice(Number(btn.getAttribute('data-price')), Number(btn.getAttribute('data-share')));
+    });
+  });
+  document.querySelectorAll('[data-share-only]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      shareEl.value = btn.getAttribute('data-share-only');
+      calculate();
+    });
+  });
+
+  window.PTTCalc = {
+    quote: quote,
+    formatCad: formatCad,
+    toCents: toCents
+  };
+  calculate();
+})();
+</script>
+</body>
+</html>
