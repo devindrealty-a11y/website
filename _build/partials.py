@@ -312,6 +312,7 @@ def foot(root=""):
           <li><a href="{root}port-moody.html">Port Moody guide</a></li>
           <li><a href="{root}port-coquitlam.html">Port Coquitlam guide</a></li>
           <li><a href="{root}first-time-buyers-tri-cities-bc.html">First-time home buyers, Tri-Cities, BC</a></li>
+          <li><a href="{root}bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a></li>
           <li><a href="{root}newcomer-rental-faqs.html">Newcomer rental FAQs</a></li>
           <li><a href="{root}videos.html">Property video tours</a></li>
           <li><a href="{root}blog/">Blog: Greater Vancouver real estate news</a></li>
