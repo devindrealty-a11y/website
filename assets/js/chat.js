@@ -1,7 +1,9 @@
 /* Self-hosted chat widget. Guided answers stay in the browser.
    The message form posts to SITE_CONFIG.forms.chatLead (same FormSubmit URL as the other forms).
    GoatCounter events use fixed names only. chat-message-sent is counted only after
-   FormSubmit accepts the message. A missing or broken counter is ignored. */
+   FormSubmit accepts the message. count.js is async, so an event that happens before
+   window.goatcounter.count exists is queued and sent when the script loads.
+   A counter that never loads or throws is ignored. */
 (function () {
   if (document.querySelector(".dd-chat")) return;
 
@@ -179,11 +181,41 @@
   document.body.appendChild(scrim);
   document.body.appendChild(root);
 
+  var pendingCounts = [];
+  var countWatching = false;
+
+  function goatcountReady() {
+    return !!(window.goatcounter && typeof window.goatcounter.count === "function");
+  }
+
+  function flushCounts() {
+    if (!goatcountReady() || !pendingCounts.length) return;
+    var batch = pendingCounts.splice(0, pendingCounts.length);
+    batch.forEach(function (payload) {
+      try { window.goatcounter.count(payload); } catch (err) {}
+    });
+  }
+
+  function watchGoatcounter() {
+    if (countWatching) return;
+    countWatching = true;
+    var script = document.querySelector("script[data-goatcounter]");
+    if (script) script.addEventListener("load", flushCounts);
+    window.addEventListener("load", flushCounts);
+    var tries = 0;
+    var timer = setInterval(function () {
+      tries += 1;
+      flushCounts();
+      if (!pendingCounts.length || tries >= 50) clearInterval(timer);
+    }, 200);
+  }
+
   function countEvent(name) {
-    if (!name || !window.goatcounter || typeof window.goatcounter.count !== "function") return;
-    try {
-      window.goatcounter.count({ path: name, title: name, event: true });
-    } catch (err) {}
+    if (!name) return;
+    // event must be boolean true. The path is the event name and does not start with "/".
+    pendingCounts.push({ path: name, title: name, event: true });
+    if (goatcountReady()) flushCounts();
+    else watchGoatcounter();
   }
 
   function pageElts() {

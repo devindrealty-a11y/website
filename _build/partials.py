@@ -303,7 +303,8 @@ def foot(root=""):
         <h2 class="footer-h">Explore</h2>
         <ul>
           <li><a href="{root}index.html">Home</a></li>
-          <li><a href="{root}buyers.html">Buyers &amp; neighbourhoods</a></li>{listings_footer_links(root)}
+          <li><a href="{root}buyers.html">Buyers &amp; neighbourhoods</a></li>
+          <li><a href="{root}market-report/">Tri-Cities, BC market report</a></li>{listings_footer_links(root)}
           <li><a href="{root}home-evaluation.html">Free home evaluation</a></li>
           <li><a href="{root}buyer-opinion.html">Get an expert opinion</a></li>
           <li><a href="{root}tenants.html">Relocation rental service</a></li>

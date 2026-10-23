@@ -1115,3 +1115,46 @@ html.dd-chat-open{overflow:hidden}
   .contact-lead{grid-template-columns:minmax(0,.9fr) minmax(0,1.15fr);gap:64px}
   .contact-aside{order:-1}
 }
+
+/* ===== Monthly Tri-Cities, BC market report ===== */
+.byline-inline{font-family:var(--font-head);font-weight:600;font-size:.95rem;color:var(--sky);margin:0 0 6px}
+.mr-cards{display:grid;gap:16px}
+.mr-card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:var(--radius);padding:22px 20px 18px;box-shadow:var(--shadow)}
+.mr-card h3{margin:0 0 .35em;font-family:var(--font-head);font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-dark)}
+.mr-price{font-family:var(--font-display);font-size:clamp(2rem,1.5rem + 1.4vw,2.7rem);line-height:1;color:var(--blue-darker);margin:0}
+.mr-price-label{margin:.4em 0 .85em;color:var(--muted);font-size:.92rem}
+.mr-changes{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 .9em}
+.mr-changes span{font-family:var(--font-head);font-weight:600;font-size:.75rem;letter-spacing:.03em;background:var(--blue-light);color:var(--blue-darker);border-radius:999px;padding:5px 10px}
+.mr-sub{margin:0 0 .3em;font-size:.95rem}
+.mr-region-call{margin:22px 0 0;padding:16px 18px;background:var(--blue-50);border-left:4px solid var(--blue);border-radius:0 var(--radius-sm) var(--radius-sm) 0}
+.mr-city{margin-top:40px}
+.mr-city h3{margin-bottom:.35em}
+.mr-scope{color:var(--muted);margin-top:0}
+.mr-table-wrap{overflow-x:auto;margin:0 0 8px;-webkit-overflow-scrolling:touch}
+.mr-table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:880px}
+.mr-table caption{caption-side:bottom;text-align:left;color:var(--muted);font-size:.82rem;line-height:1.45;padding:8px 0 16px}
+.mr-table th,.mr-table td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.mr-table th[scope="row"],.mr-table thead th:first-child{text-align:left}
+.mr-table thead th{font-family:var(--font-head);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--blue-darker);border-bottom:2px solid var(--blue);background:var(--blue-50)}
+.mr-notes{margin:8px 0 0;padding-left:1.15em;color:var(--muted);font-size:.92rem}
+.mr-notes li{margin:0 0 .55em}
+.mr-fit{display:grid;gap:18px}
+.mr-fit-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(18px,3vw,28px)}
+.mr-fit-card h3{margin-top:0}
+.mr-faq{border-bottom:1px solid var(--line)}
+.mr-faq summary{cursor:pointer;font-weight:600;color:var(--ink);padding:16px 0;font-size:1.05rem}
+.mr-faq summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.mr-faq-a{padding:0 0 8px}
+.mr-sources{padding-left:1.2em}
+.mr-sources li{margin:0 0 .7em}
+.mr-disclaimer{color:var(--muted);font-size:.92rem;margin-top:8px}
+.mr-gate{display:grid;gap:28px;align-items:start}
+.mr-gate-note{color:var(--muted)}
+.mr-gate [hidden]{display:none !important}
+.mr-index{display:grid;gap:18px}
+.mr-index-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,3vw,32px)}
+.mr-index-card h2{font-size:clamp(1.6rem,1.3rem + .8vw,2.1rem)}
+.mr-index-meta{color:var(--muted);font-size:.92rem}
+@media (min-width:800px){.mr-cards{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:860px){.mr-fit{grid-template-columns:1fr 1fr;align-items:start}}
+@media (min-width:900px){.mr-gate{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px}}

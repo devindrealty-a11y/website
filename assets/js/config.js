@@ -25,6 +25,7 @@ window.SITE_CONFIG = {
     qualifiedLead: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // home + contact qualifying form (not test-submitted)
     // True-cost guide sign-up. Emails Devin only. Not test-submitted.
     // Subject is set in assets/js/true-cost.js: "True cost guide sign-up: <name>".
-    trueCostSignup: "https://formsubmit.co/ajax/devin@axfordrealestate.ca"
+    trueCostSignup: "https://formsubmit.co/ajax/devin@axfordrealestate.ca",
+    marketReport: "https://formsubmit.co/ajax/devin@axfordrealestate.ca" // market-report PDF gate (not test-submitted)
   }
 };

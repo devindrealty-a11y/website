@@ -12,6 +12,7 @@ Pages:
 - `listings.html` — active residential homes for sale in Greater Vancouver and the Fraser Valley (REALTOR.ca DDF®)
 - `rentals.html` — active residential homes for rent in the same area, with rent shown per month
 - `rent-report.html` — weekly asking-rent report for people moving to Greater Vancouver (medians by city and bedroom, week-over-week change, new listings, best-value homes)
+- `market-report/` — monthly Tri-Cities, BC sales report (benchmark, sales, listings) built from `_build/market_data/*.json`. See `_build/MARKET_REPORT.md`.
 - `videos.html` — property video tours from Devin's YouTube channel (not listings)
 - `blog/` — blog index, posts, RSS feed, generated from Markdown in `_posts/` (see **`_build/BLOG.md`** for how to add a post)
 - `true-cost-of-owning-a-home-bc.html` — lead-magnet guide to monthly costs besides the mortgage in the Tri-Cities, BC (property tax, strata, insurance, maintenance, utilities), with an estimator. Built from `_build/true_cost_page.py`.
@@ -30,7 +31,7 @@ The forms (the qualifying form on `index.html#qualify` and `contact.html`, buyer
 `https://formsubmit.co/ajax/devin@axfordrealestate.ca` — configured in one spot: `assets/js/config.js`.
 - Email subjects include "New qualified lead: Buying, Coquitlam, 0-3 months", "New buyer listings request", "New relocation rental intake", "New free home evaluation", "New expert opinion request", and "New chat widget message" (table template, Reply-To = visitor's email).
 - The qualifying form (`qualifiedLead`) asks buying / selling / renting, area, timeline, budget or home value or monthly rent, where they're moving from, then name, email, optional phone, optional message, and the same contact-consent checkbox as the other forms. GoatCounter events, sent with `window.goatcounter.count` and `event: true`, are `lead-form-start`, `lead-form-step-1` through `lead-form-step-6` when that step is first shown, and `lead-form-sent` only after FormSubmit accepts the message. Those names do not include the visitor's answers, name, email, phone, or message.
-- `qualifiedLead`, `homeEvaluation`, `buyerOpinion`, and `chatLead` were not test-submitted.
+- `qualifiedLead`, `homeEvaluation`, `buyerOpinion`, `chatLead`, and `marketReport` were not test-submitted. The market-report form asks for a name, an email, and consent, then reveals that month's PDF. Its subject is `Market report download: <name>`. GoatCounter event `report-download` fires only after FormSubmit accepts it, and does not include the name or email.
 - Spam: hidden honeypot field `_honey`. reCAPTCHA is not used by FormSubmit's AJAX flow, so nothing was disabled.
 - Visitors see an on-page success (or error + call/email fallback) message.
 
@@ -45,7 +46,7 @@ Tip: the activation email includes a random alias; replace the email address in 
 `config.js` with `https://formsubmit.co/ajax/<alias>` to keep the address out of the page source.
 
 ## Chat widget
-Every page loads a self-hosted chat widget (`assets/js/chat.js`, styles at the end of `assets/css/styles.css`) from `foot()` in `_build/partials.py`. It replaces the Elfsight chatbot. The guided answers run in the browser. GoatCounter events, sent with `window.goatcounter.count` and `event: true`, use fixed names: `chat-opened` when the chat opens, `chat-buying`, `chat-renting`, `chat-relocating`, or `chat-selling` when a topic is chosen, `chat-lead-shown` when the message form opens, and `chat-message-sent` only after FormSubmit accepts the message. Those names do not include the visitor's name, email, phone, or message. If GoatCounter is not loaded, the count is skipped. The message form posts to the same FormSubmit URL as the other forms (`chatLead` in `assets/js/config.js`). It has not been test-submitted. The widget header reads “Devin Desaulniers, REALTOR®, Axford Real Estate”.
+Every page loads a self-hosted chat widget (`assets/js/chat.js`, styles at the end of `assets/css/styles.css`) from `foot()` in `_build/partials.py`. It replaces the Elfsight chatbot. The guided answers run in the browser. GoatCounter events, sent with `window.goatcounter.count` and `event: true`, use fixed names: `chat-opened` when the chat opens, `chat-buying`, `chat-renting`, `chat-relocating`, or `chat-selling` when a topic is chosen, `chat-lead-shown` when the message form opens, and `chat-message-sent` only after FormSubmit accepts the message. Those names do not include the visitor's name, email, phone, or message. count.js loads asynchronously, so an event that happens before `window.goatcounter.count` exists is queued and sent when the script loads. If the counter never loads, the count is skipped. The message form posts to the same FormSubmit URL as the other forms (`chatLead` in `assets/js/config.js`). It has not been test-submitted. The widget header reads “Devin Desaulniers, REALTOR®, Axford Real Estate”.
 
 ## Pointing relocatingtovancouver.ca at the Tenants page (later — not bought yet)
 A GitHub Pages repo can only have ONE custom domain, and this repo should keep Devin's main site.
@@ -78,7 +79,7 @@ domain earns no search value of its own.
   Axford is listed as `parentOrganization` because schema.org only allows `worksFor` on `Person`.
 - `tenants.html` also carries `FAQPage` JSON-LD. It is generated from the same `FAQ_ITEMS` strings as the
   visible FAQ, so edit the FAQ in `build.py` only and the schema stays identical to the page text.
-- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, listings, rentals, rent-report, tenants, buyers, home-evaluation, buyer-opinion, relocating-to-greater-vancouver, videos, privacy, terms, and the blog). The Coquitlam redirect is omitted. The rent report URL gets a `lastmod` from the latest Monday snapshot.
+- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, listings, rentals, rent-report, the Tri-Cities, BC market report index and each edition, tenants, buyers, home-evaluation, buyer-opinion, relocating-to-greater-vancouver, videos, privacy, terms, and the blog). The Coquitlam redirect is omitted. The rent report URL gets a `lastmod` from the latest Monday snapshot. Each market-report URL gets a `lastmod` from the edition's published date.
 - `robots.txt` allows crawl and lists the Sitemap at https://devindesaulniers.ca/sitemap.xml (served at the domain root).
 - `SITE` in `_build/partials.py` is `https://devindesaulniers.ca/`. Rebuild after changing it.
 - Submit `sitemap.xml` in Google Search Console when ready.
