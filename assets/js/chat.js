@@ -212,8 +212,7 @@
 
   function countEvent(name) {
     if (!name) return;
-    // Boolean true, and a path that does not start with "/". GoatCounter treats a
-    // leading slash as a pageview name and will not list it as an event.
+    // event must be boolean true. The path is the event name and does not start with "/".
     pendingCounts.push({ path: name, title: name, event: true });
     if (goatcountReady()) flushCounts();
     else watchGoatcounter();
