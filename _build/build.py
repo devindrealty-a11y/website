@@ -283,7 +283,7 @@ buyers += f'''
       <a class="btn btn-light" href="#listings">Send me listings {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="{CALC}" target="_blank" rel="noopener">Mortgage calculator {I["ext"]}</a>
     </div>
-    <p class="hero-note"><a href="contact.html?intent=buying#qualify">Answer a few questions</a> if you're not ready for listing alerts.</p>
+    <p class="hero-note"><a href="market-report/">Tri-Cities, BC market report</a> — monthly benchmark prices, sales, and listings. <a href="contact.html?intent=buying#qualify">Answer a few questions</a> if you're not ready for listing alerts.</p>
   </div>
 </section>
 {page_nav([("help","How I help"),("testimonials","Reviews"),("neighbourhoods","Neighbourhoods"),("tours","Video tours"),("listings","Send me listings")])}
@@ -847,10 +847,10 @@ privacy += f"""
   <div class="container narrow-wide">
     <div class="post-body">
       <p>This site is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate, {BROKERAGE_ADDR}. The sections below explain, in plain language, where the information you send me goes.</p>
-      <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form. The qualifying form sends <span class="nw">lead-form-start</span> when you begin it, <span class="nw">lead-form-step-1</span> through <span class="nw">lead-form-step-6</span> when you reach that step, and <span class="nw">lead-form-sent</span> only after the message is accepted. Those names are the step only. They do not include your name, email, phone, message, or the answers you choose. The chat widget sends the events named in the chat section below. Those events do not include what you type into a form.</p>
+      <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form. The qualifying form sends <span class="nw">lead-form-start</span> when you begin it, <span class="nw">lead-form-step-1</span> through <span class="nw">lead-form-step-6</span> when you reach that step, and <span class="nw">lead-form-sent</span> only after the message is accepted. Those names are the step only. They do not include your name, email, phone, message, or the answers you choose. The market-report download sends <span class="nw">report-download</span> only after the request is accepted. That name does not include your name or email. The chat widget sends the events named in the chat section below. Those events do not include what you type into a form.</p>
 
       <h2 id="forms">Contact forms</h2>
-      <p>There are eight forms on this site: the qualifying form on the <a href="index.html#qualify">home page</a> and the <a href="contact.html#qualify">contact page</a> (the same questions on both), the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>, and the message form in the chat widget. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>There are nine forms on this site: the qualifying form on the <a href="index.html#qualify">home page</a> and the <a href="contact.html#qualify">contact page</a> (the same questions on both), the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>, the PDF download on the <a href="market-report/">Tri-Cities, BC market report</a>, and the message form in the chat widget. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
       <p>The forms ask for:</p>
       <ul>
         <li>your name and email, and your phone number if you add it;</li>
@@ -859,7 +859,8 @@ privacy += f"""
         <li>on the listings form: the areas you're interested in, property type, price range, bedrooms and bathrooms, your timeline, whether you're pre-approved for a mortgage, and any notes;</li>
         <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, bedrooms, preferred areas, pets, your work or school location, and any notes;</li>
         <li>on a listing or rental inquiry: the listing id, MLS® number, address and REALTOR.ca link for the home you opened, and your message;</li>
-        <li>on the chat widget: the topic you chose (buying, renting, relocating to Greater Vancouver, or selling), your message, and the address of the page you were on.</li>
+        <li>on the chat widget: the topic you chose (buying, renting, relocating to Greater Vancouver, or selling), your message, and the address of the page you were on;</li>
+        <li>on the market-report download: your name, your email, and which edition you requested.</li>
       </ul>
       <p>Each form asks you to agree that I can contact you by email or phone about your request. You can opt out at any time.</p>
 
@@ -1066,7 +1067,14 @@ if "first-time-buyers-tri-cities-bc.html" in STATIC_PAGES:
     i = STATIC_PAGES.index("first-time-buyers-tri-cities-bc.html") + 1
     STATIC_PAGES[i:i] = ["bc-property-transfer-tax.html"]
 import rent_report
+import market_report
 _report_lastmod = rent_report.published_lastmod(OUT)
 _sitemap_lastmod = {"rent-report.html": _report_lastmod} if _report_lastmod else {}
+_mr_entries = market_report.write_reports(OUT)
+_mr_at = STATIC_PAGES.index("rent-report.html") + 1 if "rent-report.html" in STATIC_PAGES else STATIC_PAGES.index("buyers.html") + 1
+for _offset, (_path, _lm) in enumerate(_mr_entries):
+    STATIC_PAGES.insert(_mr_at + _offset, _path)
+    if _lm:
+        _sitemap_lastmod[_path] = _lm
 open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS, _sitemap_lastmod))
 print("built")
