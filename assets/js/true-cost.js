@@ -1,7 +1,7 @@
 /*
  * True-cost estimator. Rates are the published 2026 figures cited on
  * true-cost-of-owning-a-home-bc.html. Dollars are integer cents.
- * This file does not call FormSubmit or MailerLite by itself; the sign-up
+ * This file does not call FormSubmit by itself; the sign-up
  * handler is boot() and only runs in the browser after the visitor submits.
  */
 (function () {
@@ -286,53 +286,6 @@
       try { window.goatcounter.count({ path: "true-cost-signup", title: "true-cost-signup", event: true }); } catch (err) {}
     }
 
-    function mailerliteAction() {
-      var url = String(cfg.mailerliteTrueCost || "").trim();
-      if (!url || url.indexOf("PASTE_MAILERLITE") !== -1 || url.indexOf("https://") !== 0) return "";
-      return url;
-    }
-
-    function postMailerlite(name, email) {
-      var action = mailerliteAction();
-      if (!action) return Promise.resolve("skipped");
-      return new Promise(function (resolve) {
-        var frame = document.getElementById("tc-ml-frame");
-        if (!frame) {
-          frame = document.createElement("iframe");
-          frame.id = "tc-ml-frame";
-          frame.name = "tc-ml-frame";
-          frame.hidden = true;
-          frame.title = "Mailing list sign-up";
-          document.body.appendChild(frame);
-        }
-        var carrier = document.createElement("form");
-        carrier.method = "POST";
-        carrier.action = action;
-        carrier.target = "tc-ml-frame";
-        carrier.acceptCharset = "UTF-8";
-        carrier.hidden = true;
-        function add(n, v) {
-          var input = document.createElement("input");
-          input.type = "hidden";
-          input.name = n;
-          input.value = v;
-          carrier.appendChild(input);
-        }
-        add("fields[name]", name);
-        add("fields[email]", email);
-        add("ml-submit", "1");
-        add("anticsrf", "true");
-        document.body.appendChild(carrier);
-        try {
-          carrier.submit();
-          resolve("sent");
-        } catch (err) {
-          resolve("error");
-        }
-        setTimeout(function () { carrier.remove(); }, 1000);
-      });
-    }
-
     function postCopy(name, email) {
       var endpoint = String(cfg.trueCostSignup || "").trim();
       if (!endpoint) return Promise.resolve("skipped");
@@ -363,32 +316,23 @@
       var data = new FormData(form);
       if (data.get("_honey")) {
         form.reset();
-        show("success", "<strong>Thanks. You're on the list.</strong>");
+        show("success", "<strong>Thanks. Devin has your request.</strong>");
         return;
       }
       var name = String(data.get("name") || "").trim();
       var email = String(data.get("email") || "").trim();
       var fallback = 'Please email <a href="mailto:devin@axfordrealestate.ca">devin@axfordrealestate.ca</a> or call <a href="tel:+16048091032">604-809-1032</a>.';
       if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = "Sending…"; }
-      Promise.all([postMailerlite(name, email), postCopy(name, email)]).then(function (results) {
-        var list = results[0];
-        var copy = results[1];
-        var ok = list === "sent" || copy === "sent";
-        if (ok) {
+      postCopy(name, email).then(function (copy) {
+        if (copy === "sent") {
           track();
           form.reset();
-          if (list === "sent" && copy === "sent") {
-            show("success", "<strong>Thanks. You're on the list.</strong> A copy was also emailed to Devin.");
-          } else if (list === "sent") {
-            show("success", "<strong>Thanks. You're on the list.</strong> The email copy did not go through. If you don't hear back, " + fallback);
-          } else {
-            show("success", "<strong>Thanks. Devin has your request.</strong> The mailing-list connection is not finished yet, so this signup was emailed to him.");
-          }
+          show("success", "<strong>Thanks. Devin has your request.</strong> He will email you about the guide.");
         } else {
           show("error", "Sorry, the signup did not go through. " + fallback);
         }
       }).then(function () {
-        if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || "Send me the guide updates"; }
+        if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || "Send me updates"; }
       });
     });
   }

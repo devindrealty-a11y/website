@@ -23,17 +23,8 @@ window.SITE_CONFIG = {
     buyerOpinion: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // buyer-opinion.html (not test-submitted)
     chatLead: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // chat widget message (not test-submitted)
     qualifiedLead: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // home + contact qualifying form (not test-submitted)
-    // True-cost guide sign-up. Always emails a copy here. Not test-submitted.
+    // True-cost guide sign-up. Emails Devin only. Not test-submitted.
     // Subject is set in assets/js/true-cost.js: "True cost guide sign-up: <name>".
-    trueCostSignup: "https://formsubmit.co/ajax/devin@axfordrealestate.ca",
-    // MAILERLITE — paste the embedded form action URL below. Do not paste an API key.
-    // In MailerLite: Forms → your embedded form → embed code → copy the form action.
-    // It looks like:
-    //   https://assets.mailerlite.com/jsonp/YOUR_ACCOUNT_ID/forms/YOUR_FORM_ID/subscribe
-    // Older accounts may show:
-    //   https://app.mailerlite.com/webforms/submit/YOUR_FORM_ID
-    // The page posts fields[name] and fields[email]. The form needs a Name field and an Email field.
-    // Leave the placeholder in place until that URL exists. The email copy still sends.
-    mailerliteTrueCost: "PASTE_MAILERLITE_EMBEDDED_FORM_ACTION_HERE"
+    trueCostSignup: "https://formsubmit.co/ajax/devin@axfordrealestate.ca"
   }
 };

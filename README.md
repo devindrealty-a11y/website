@@ -34,18 +34,9 @@ The forms (the qualifying form on `index.html#qualify` and `contact.html`, buyer
 - Spam: hidden honeypot field `_honey`. reCAPTCHA is not used by FormSubmit's AJAX flow, so nothing was disabled.
 - Visitors see an on-page success (or error + call/email fallback) message.
 
-## True cost guide sign-up (MailerLite)
+## True cost guide sign-up
 
-`true-cost-of-owning-a-home-bc.html` asks for a name, an email, and a consent checkbox. There is no MailerLite API key in this repo. Do not add one to the page, to `assets/js/config.js`, or to any other file a browser downloads.
-
-What to paste:
-
-1. In MailerLite, create an embedded form that has a Name field and an Email field.
-2. Open the embed code and copy the form's `action` URL. Nothing else. It looks like `https://assets.mailerlite.com/jsonp/YOUR_ACCOUNT_ID/forms/YOUR_FORM_ID/subscribe`. Older accounts may show `https://app.mailerlite.com/webforms/submit/YOUR_FORM_ID`.
-3. In `assets/js/config.js`, replace `PASTE_MAILERLITE_EMBEDDED_FORM_ACTION_HERE` (the value of `forms.mailerliteTrueCost`) with that full URL.
-4. The page posts `fields[name]` and `fields[email]`, plus `ml-submit=1` and `anticsrf=true`. If the embed code uses a different name key, change the `fields[name]` line in `assets/js/true-cost.js` to match it.
-5. Until that URL replaces the placeholder, the form only emails Devin through FormSubmit. After it is pasted, the browser also posts to MailerLite and still emails a copy. The subject is `True cost guide sign-up: <name>`. GoatCounter event `true-cost-signup` fires only after MailerLite or FormSubmit accepts the signup, and it does not include the name or email.
-6. Do not test-submit. The first real FormSubmit submission still needs the activation click described below.
+`true-cost-of-owning-a-home-bc.html` asks for a name, an email, and a consent checkbox. The form posts only to FormSubmit (`trueCostSignup` in `assets/js/config.js`), which emails `devin@axfordrealestate.ca`. The subject is `True cost guide sign-up: <name>`. GoatCounter event `true-cost-signup` fires only after FormSubmit accepts the signup, and it does not include the name or email. There is no mailing-list connection on this page. Do not test-submit. The first real FormSubmit submission still needs the activation click described below.
 
 **Activation (one-time):** the FIRST real submission makes FormSubmit send an activation email to
 devin@axfordrealestate.ca. Devin must click "Activate Form" — submissions are not delivered until then

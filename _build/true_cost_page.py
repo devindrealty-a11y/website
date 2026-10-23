@@ -478,14 +478,6 @@ def render():
     <span class="eyebrow">Email updates</span>
     <h2>Get a note when these rates change</h2>
     <p>Leave your name and email if you want updates on the cost of owning in the Tri-Cities, BC. Devin Desaulniers, Real Estate Associate, Axford Real Estate, will email you. Your address is not sold. The guide itself is the page you are reading.</p>
-    <!--
-      MAILERLITE PLACEHOLDER
-      Do not put an API key in this page or in config.js.
-      Paste the embedded form action URL into assets/js/config.js
-      as forms.mailerliteTrueCost, replacing PASTE_MAILERLITE_EMBEDDED_FORM_ACTION_HERE.
-      The browser posts fields[name] and fields[email] to that URL.
-      It also emails a copy through FormSubmit. See README, "True cost guide sign-up".
-    -->
     <form id="tc-signup" class="form-card" action="#" method="post">
       <div class="hp" aria-hidden="true"><label>Leave this field empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
       <div class="form-grid">
@@ -505,7 +497,7 @@ def render():
           <div class="form-status" role="status" aria-live="polite"></div>
         </div>
       </div>
-      <p class="form-note">A copy of this form is emailed to {EMAIL}. When the mailing list is connected, the same name and email are sent there too.</p>
+      <p class="form-note">This form is emailed to {EMAIL}. It is not sent to a mailing list.</p>
     </form>
   </div>
 </section>
