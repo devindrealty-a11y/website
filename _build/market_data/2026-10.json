@@ -1,0 +1,143 @@
+{
+  "id": "2026-10",
+  "edition_label": "October 2026 edition",
+  "period_label": "September 2026",
+  "compare_month_label": "August 2026",
+  "compare_year_label": "September 2025",
+  "published": "2026-10-23",
+  "period": "2026-09",
+  "sources": [
+    {
+      "id": "gvr-package",
+      "title": "Apartments lead sales downward — September 2026 news release and statistics package",
+      "publisher": "Greater Vancouver REALTORS",
+      "date": "2026-10-02",
+      "url": "https://members.gvrealtors.ca/news/GVR-Stats-Package-September-2026.pdf"
+    },
+    {
+      "id": "fvreb-package",
+      "title": "Fraser Valley Housing Market Statistics, September 2026",
+      "publisher": "Fraser Valley Real Estate Board",
+      "date": "2026-10-05",
+      "url": "https://www.fvreb.bc.ca/statistics/Package202609.pdf"
+    }
+  ],
+  "metro": {
+    "source": "gvr-package",
+    "sales": 1717,
+    "sales_prev_year": 1875,
+    "sales_yoy": -8.4,
+    "sales_vs_10yr": -25,
+    "sales_10yr_avg": 2289,
+    "new_listings": 5852,
+    "new_listings_prev_year": 6527,
+    "new_listings_yoy": -10.3,
+    "new_listings_vs_10yr": 5.7,
+    "new_listings_10yr_avg": 5537,
+    "active_listings": 16394,
+    "active_listings_prev_year": 17079,
+    "active_listings_yoy": -4,
+    "active_vs_10yr": 24.3,
+    "active_10yr_avg": 13186,
+    "sales_to_active": 10.9,
+    "sales_to_active_detached": 9.7,
+    "sales_to_active_attached": 12.2,
+    "sales_to_active_apartment": 11.4,
+    "pressure_below": 12,
+    "pressure_above": 20,
+    "composite_benchmark": 1075900,
+    "composite_yoy": -5.5,
+    "composite_mom": -0.5,
+    "detached_sales": 575,
+    "detached_sales_prev_year": 552,
+    "detached_sales_yoy": 4.2,
+    "detached_benchmark": 1784700,
+    "detached_yoy": -7.3,
+    "detached_mom": -0.8,
+    "apartment_sales": 777,
+    "apartment_sales_prev_year": 954,
+    "apartment_sales_yoy": -18.6,
+    "apartment_benchmark": 682500,
+    "apartment_yoy": -6.2,
+    "apartment_mom": -0.5,
+    "attached_sales": 358,
+    "attached_sales_prev_year": 356,
+    "attached_sales_yoy": 0.6,
+    "townhouse_benchmark": 1016700,
+    "townhouse_yoy": -4.7,
+    "townhouse_mom": -1.2
+  },
+  "fvreb": {
+    "source": "fvreb-package",
+    "areas": ["Surrey", "Langley", "Abbotsford", "Mission", "White Rock", "North Delta"],
+    "sales": 922,
+    "sales_prev_year": 962,
+    "sales_yoy": -4.2,
+    "sales_prev_month": 941,
+    "sales_mom": -2.0,
+    "new_listings": 2818,
+    "active_listings": 9763,
+    "composite_change": "falling one per cent in September and seven per cent from one year ago",
+    "detached_benchmark": 1300000,
+    "detached_mom": -1.5,
+    "detached_yoy": -8.8,
+    "townhouse_benchmark": 745300,
+    "townhouse_mom": -0.7,
+    "townhouse_yoy": -6.2,
+    "apartment_benchmark": 461800,
+    "apartment_mom": -0.9,
+    "apartment_yoy": -9.3,
+    "balanced_low": 12,
+    "balanced_high": 20
+  },
+  "areas": [
+    {
+      "name": "Coquitlam",
+      "hpi_name": "Coquitlam",
+      "activity_name": "Coquitlam",
+      "benchmarks": [
+        {"type": "All residential", "price": 971700, "mom": -1.0, "yoy": -6.3},
+        {"type": "Detached", "price": 1584400, "mom": -0.9, "yoy": -6.6},
+        {"type": "Townhouse", "price": 976600, "mom": -1.2, "yoy": -6.5},
+        {"type": "Apartment", "price": 640100, "mom": -0.9, "yoy": -7.3}
+      ],
+      "activity": [
+        {"type": "Detached", "sales": 46, "sales_prev_month": 42, "sales_prev_year": 52, "sales_mom": 9.5, "listings": 158, "listings_prev_month": 122, "listings_prev_year": 178, "listings_mom": 29.5, "sales_to_listings": 29, "median": 1449000},
+        {"type": "Attached", "sales": 33, "sales_prev_month": 49, "sales_prev_year": 37, "sales_mom": -32.7, "listings": 121, "listings_prev_month": 118, "listings_prev_year": 118, "listings_mom": 2.5, "sales_to_listings": 27, "median": 1075000},
+        {"type": "Apartment", "sales": 62, "sales_prev_month": 59, "sales_prev_year": 76, "sales_mom": 5.1, "listings": 236, "listings_prev_month": 203, "listings_prev_year": 267, "listings_mom": 16.3, "sales_to_listings": 26, "median": 600000}
+      ]
+    },
+    {
+      "name": "Port Coquitlam",
+      "hpi_name": "Port Coquitlam",
+      "activity_name": "Port Coquitlam",
+      "benchmarks": [
+        {"type": "All residential", "price": 835500, "mom": -0.6, "yoy": -8.2},
+        {"type": "Detached", "price": 1240600, "mom": -0.3, "yoy": -8.5},
+        {"type": "Townhouse", "price": 834300, "mom": -1.5, "yoy": -7.8},
+        {"type": "Apartment", "price": 550000, "mom": -1.5, "yoy": -9.0}
+      ],
+      "activity": [
+        {"type": "Detached", "sales": 26, "sales_prev_month": 18, "sales_prev_year": 5, "sales_mom": 44.4, "listings": 52, "listings_prev_month": 36, "listings_prev_year": 73, "listings_mom": 44.4, "sales_to_listings": 50, "median": 1262500},
+        {"type": "Attached", "sales": 16, "sales_prev_month": 17, "sales_prev_year": 11, "sales_mom": -5.9, "listings": 54, "listings_prev_month": 21, "listings_prev_year": 50, "listings_mom": 157.1, "sales_to_listings": 30, "median": null},
+        {"type": "Apartment", "sales": 13, "sales_prev_month": 25, "sales_prev_year": 29, "sales_mom": -48.0, "listings": 80, "listings_prev_month": 33, "listings_prev_year": 58, "listings_mom": 142.4, "sales_to_listings": 16, "median": null}
+      ]
+    },
+    {
+      "name": "Port Moody",
+      "hpi_name": "Port Moody",
+      "activity_name": "Port Moody/Belcarra",
+      "benchmarks": [
+        {"type": "All residential", "price": 1011500, "mom": -2.5, "yoy": -5.8},
+        {"type": "Detached", "price": 1903500, "mom": -3.0, "yoy": -8.4},
+        {"type": "Townhouse", "price": 940900, "mom": -4.7, "yoy": -5.2},
+        {"type": "Apartment", "price": 676200, "mom": -0.6, "yoy": -4.9}
+      ],
+      "activity": [
+        {"type": "Detached", "sales": 16, "sales_prev_month": 12, "sales_prev_year": 15, "sales_mom": 33.3, "listings": 53, "listings_prev_month": 42, "listings_prev_year": 47, "listings_mom": 26.2, "sales_to_listings": 30, "median": null},
+        {"type": "Attached", "sales": 9, "sales_prev_month": 8, "sales_prev_year": 13, "sales_mom": 12.5, "listings": 28, "listings_prev_month": 14, "listings_prev_year": 32, "listings_mom": 100.0, "sales_to_listings": 32, "median": null},
+        {"type": "Apartment", "sales": 21, "sales_prev_month": 30, "sales_prev_year": 18, "sales_mom": -30.0, "listings": 70, "listings_prev_month": 47, "listings_prev_year": 107, "listings_mom": 48.9, "sales_to_listings": 30, "median": 710000}
+      ]
+    }
+  ]
+}

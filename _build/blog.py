@@ -400,6 +400,7 @@ def index_page(posts):
     <span class="eyebrow">Blog</span>
     <h1>Greater Vancouver real estate news, explained</h1>
     <p class="lead">Each weekday I pick one local real estate story, link the original source, and share what I think it means for buyers, sellers and renters in Greater Vancouver and the Tri-Cities, BC.</p>
+    <p class="hero-note">Monthly benchmark prices, sales, and new listings for Coquitlam, Port Coquitlam, and Port Moody are in the <a href="../market-report/">Tri-Cities, BC market report</a>.</p>
   </div>
 </section>
 
