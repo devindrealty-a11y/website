@@ -15,6 +15,7 @@ Pages:
 - `market-report/` — monthly Tri-Cities, BC sales report (benchmark, sales, listings) built from `_build/market_data/*.json`. See `_build/MARKET_REPORT.md`.
 - `videos.html` — property video tours from Devin's YouTube channel (not listings)
 - `blog/` — blog index, posts, RSS feed, generated from Markdown in `_posts/` (see **`_build/BLOG.md`** for how to add a post)
+- `true-cost-of-owning-a-home-bc.html` — lead-magnet guide to monthly costs besides the mortgage in the Tri-Cities, BC (property tax, strata, insurance, maintenance, utilities), with an estimator. Built from `_build/true_cost_page.py`.
 
 ## Editing
 HTML is generated from `_build/build.py` + `_build/partials.py` (header/footer shared). Edit those, then run:
@@ -33,6 +34,10 @@ The forms (the qualifying form on `index.html#qualify` and `contact.html`, buyer
 - `qualifiedLead`, `homeEvaluation`, `buyerOpinion`, `chatLead`, and `marketReport` were not test-submitted. The market-report form asks for a name, an email, and consent, then reveals that month's PDF. Its subject is `Market report download: <name>`. GoatCounter event `report-download` fires only after FormSubmit accepts it, and does not include the name or email.
 - Spam: hidden honeypot field `_honey`. reCAPTCHA is not used by FormSubmit's AJAX flow, so nothing was disabled.
 - Visitors see an on-page success (or error + call/email fallback) message.
+
+## True cost guide sign-up
+
+`true-cost-of-owning-a-home-bc.html` asks for a name, an email, and a consent checkbox. The form posts only to FormSubmit (`trueCostSignup` in `assets/js/config.js`), which emails `devin@axfordrealestate.ca`. The subject is `True cost guide sign-up: <name>`. GoatCounter event `true-cost-signup` fires only after FormSubmit accepts the signup, and it does not include the name or email. There is no mailing-list connection on this page. Do not test-submit. The first real FormSubmit submission still needs the activation click described below.
 
 **Activation (one-time):** the FIRST real submission makes FormSubmit send an activation email to
 devin@axfordrealestate.ca. Devin must click "Activate Form" — submissions are not delivered until then

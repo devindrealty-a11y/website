@@ -326,7 +326,7 @@ buyers += f'''
     <div class="other-areas">
       <h3>Other nearby areas</h3>
       <p>I also help buyers in neighbouring Greater Vancouver communities, including <strong>Burnaby</strong>, <strong>New Westminster</strong>, and <strong>Pitt Meadows &amp; Maple Ridge</strong>. School District 43 serves Coquitlam, Port Coquitlam, Port Moody, Anmore and Belcarra — always confirm school catchments with the district for a specific address.</p>
-      <p>Longer guides: <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a>. Buying a first home in the Tri-Cities, BC? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a> and <a href="bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a>.</p>
+      <p>Longer guides: <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a>. Buying a first home in the Tri-Cities, BC? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>, <a href="bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a>, and <a href="true-cost-of-owning-a-home-bc.html">the true cost of owning a home in BC</a>.</p>
       <p>If you're looking somewhere else in Greater Vancouver, tell me on the <a href="#listings">listings form</a> below: choose “Other (add in notes)” and add the area in your notes.</p>
     </div>
   </div>
@@ -847,10 +847,10 @@ privacy += f"""
   <div class="container narrow-wide">
     <div class="post-body">
       <p>This site is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate, {BROKERAGE_ADDR}. The sections below explain, in plain language, where the information you send me goes.</p>
-      <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form. The qualifying form sends <span class="nw">lead-form-start</span> when you begin it, <span class="nw">lead-form-step-1</span> through <span class="nw">lead-form-step-6</span> when you reach that step, and <span class="nw">lead-form-sent</span> only after the message is accepted. Those names are the step only. They do not include your name, email, phone, message, or the answers you choose. The market-report download sends <span class="nw">report-download</span> only after the request is accepted. That name does not include your name or email. The chat widget sends the events named in the chat section below. Those events do not include what you type into a form.</p>
+      <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form. The qualifying form sends <span class="nw">lead-form-start</span> when you begin it, <span class="nw">lead-form-step-1</span> through <span class="nw">lead-form-step-6</span> when you reach that step, and <span class="nw">lead-form-sent</span> only after the message is accepted. Those names are the step only. They do not include your name, email, phone, message, or the answers you choose. The market-report download sends <span class="nw">report-download</span> only after the request is accepted. That name does not include your name or email. The true-cost guide sign-up sends <span class="nw">true-cost-signup</span> only after the signup is accepted. That name does not include your name or email. The chat widget sends the events named in the chat section below. Those events do not include what you type into a form.</p>
 
       <h2 id="forms">Contact forms</h2>
-      <p>There are nine forms on this site: the qualifying form on the <a href="index.html#qualify">home page</a> and the <a href="contact.html#qualify">contact page</a> (the same questions on both), the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>, the PDF download on the <a href="market-report/">Tri-Cities, BC market report</a>, and the message form in the chat widget. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>There are ten forms on this site: the qualifying form on the <a href="index.html#qualify">home page</a> and the <a href="contact.html#qualify">contact page</a> (the same questions on both), the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>, the PDF download on the <a href="market-report/">Tri-Cities, BC market report</a>, the message form in the chat widget, and the email sign-up on <a href="true-cost-of-owning-a-home-bc.html#signup">the true cost of owning a home in BC</a>. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
       <p>The forms ask for:</p>
       <ul>
         <li>your name and email, and your phone number if you add it;</li>
@@ -860,7 +860,8 @@ privacy += f"""
         <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, bedrooms, preferred areas, pets, your work or school location, and any notes;</li>
         <li>on a listing or rental inquiry: the listing id, MLS® number, address and REALTOR.ca link for the home you opened, and your message;</li>
         <li>on the chat widget: the topic you chose (buying, renting, relocating to Greater Vancouver, or selling), your message, and the address of the page you were on;</li>
-        <li>on the market-report download: your name, your email, and which edition you requested.</li>
+        <li>on the market-report download: your name, your email, and which edition you requested;</li>
+        <li>on the true-cost guide sign-up: your name, your email, and your agreement to be emailed about the guide.</li>
       </ul>
       <p>Each form asks you to agree that I can contact you by email or phone about your request. You can opt out at any time.</p>
 
@@ -872,7 +873,7 @@ privacy += f"""
       <p>If you send a message, the form asks for your name, email, phone number if you add it, and a message. It also sends the topic you chose and the address of the page you were on. When you press Send, that form goes through FormSubmit (formsubmit.co), which emails it to <a href="mailto:{EMAIL}">{EMAIL}</a>. The form asks you to agree that I can contact you by email or phone about your request. You can opt out at any time.</p>
 
       <h2 id="outside-canada">Processing outside Canada</h2>
-      <p>Information you send through FormSubmit, including a message from the chat widget, may be processed outside Canada. A GoatCounter page visit or event may also be processed outside Canada. If you'd rather not use the forms or the chat, you can call or text me at <a href="{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>Information you send through FormSubmit, including a message from the chat widget, the market-report download, and the true-cost guide sign-up, may be processed outside Canada. A GoatCounter page visit or event may also be processed outside Canada. If you'd rather not use the forms or the chat, you can call or text me at <a href="{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 
       <h2 id="video-tours">Video tours</h2>
       <p>The YouTube video tours on this site show a preview image from YouTube, and the YouTube player itself loads only after you press play.</p>
@@ -1058,6 +1059,8 @@ blog.write_blog(POSTS)
 SEO_PAGES = seo_pages.write_pages()
 for fn, html in SEO_PAGES:
     open(os.path.join(OUT, fn), "w").write(html)
+import true_cost_page
+open(os.path.join(OUT, true_cost_page.PAGE), "w").write(true_cost_page.render())
 STATIC_PAGES = ["", "contact.html", "tenants.html", "buyers.html", "home-evaluation.html", "buyer-opinion.html", GV_URL, "videos.html", PRIVACY_URL, terms_page.PAGE]
 if LISTINGS_LIVE:
     STATIC_PAGES[1:1] = ["listings.html", "rentals.html", "rent-report.html"]
@@ -1065,7 +1068,7 @@ guide_at = STATIC_PAGES.index(GV_URL) + 1
 STATIC_PAGES[guide_at:guide_at] = [fn for fn, _ in SEO_PAGES]
 if "first-time-buyers-tri-cities-bc.html" in STATIC_PAGES:
     i = STATIC_PAGES.index("first-time-buyers-tri-cities-bc.html") + 1
-    STATIC_PAGES[i:i] = ["bc-property-transfer-tax.html"]
+    STATIC_PAGES[i:i] = ["bc-property-transfer-tax.html", "true-cost-of-owning-a-home-bc.html"]
 import rent_report
 import market_report
 _report_lastmod = rent_report.published_lastmod(OUT)
