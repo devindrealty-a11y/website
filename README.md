@@ -14,6 +14,7 @@ Pages:
 - `rent-report.html` — weekly asking-rent report for people moving to Greater Vancouver (medians by city and bedroom, week-over-week change, new listings, best-value homes)
 - `videos.html` — property video tours from Devin's YouTube channel (not listings)
 - `blog/` — blog index, posts, RSS feed, generated from Markdown in `_posts/` (see **`_build/BLOG.md`** for how to add a post)
+- `true-cost-of-owning-a-home-bc.html` — lead-magnet guide to monthly costs besides the mortgage in the Tri-Cities, BC (property tax, strata, insurance, maintenance, utilities), with an estimator. Built from `_build/true_cost_page.py`.
 
 ## Editing
 HTML is generated from `_build/build.py` + `_build/partials.py` (header/footer shared). Edit those, then run:
@@ -32,6 +33,19 @@ The forms (the qualifying form on `index.html#qualify` and `contact.html`, buyer
 - `qualifiedLead`, `homeEvaluation`, `buyerOpinion`, and `chatLead` were not test-submitted.
 - Spam: hidden honeypot field `_honey`. reCAPTCHA is not used by FormSubmit's AJAX flow, so nothing was disabled.
 - Visitors see an on-page success (or error + call/email fallback) message.
+
+## True cost guide sign-up (MailerLite)
+
+`true-cost-of-owning-a-home-bc.html` asks for a name, an email, and a consent checkbox. There is no MailerLite API key in this repo. Do not add one to the page, to `assets/js/config.js`, or to any other file a browser downloads.
+
+What to paste:
+
+1. In MailerLite, create an embedded form that has a Name field and an Email field.
+2. Open the embed code and copy the form's `action` URL. Nothing else. It looks like `https://assets.mailerlite.com/jsonp/YOUR_ACCOUNT_ID/forms/YOUR_FORM_ID/subscribe`. Older accounts may show `https://app.mailerlite.com/webforms/submit/YOUR_FORM_ID`.
+3. In `assets/js/config.js`, replace `PASTE_MAILERLITE_EMBEDDED_FORM_ACTION_HERE` (the value of `forms.mailerliteTrueCost`) with that full URL.
+4. The page posts `fields[name]` and `fields[email]`, plus `ml-submit=1` and `anticsrf=true`. If the embed code uses a different name key, change the `fields[name]` line in `assets/js/true-cost.js` to match it.
+5. Until that URL replaces the placeholder, the form only emails Devin through FormSubmit. After it is pasted, the browser also posts to MailerLite and still emails a copy. The subject is `True cost guide sign-up: <name>`. GoatCounter event `true-cost-signup` fires only after MailerLite or FormSubmit accepts the signup, and it does not include the name or email.
+6. Do not test-submit. The first real FormSubmit submission still needs the activation click described below.
 
 **Activation (one-time):** the FIRST real submission makes FormSubmit send an activation email to
 devin@axfordrealestate.ca. Devin must click "Activate Form" — submissions are not delivered until then
