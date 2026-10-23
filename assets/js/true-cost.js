@@ -160,7 +160,7 @@
 
   function boot() {
     var form = document.getElementById("tc-estimator");
-    var out = document.getElementById("tc-results");
+    var out = document.getElementById("tc-body");
     if (!form || !out) return;
 
     var cityEl = document.getElementById("tc-city");
@@ -216,9 +216,11 @@
       if (!(homeValue > 0) || !(assessed > 0)) {
         errorEl.hidden = false;
         errorEl.textContent = "Enter a home value and an assessed value above zero. Property tax uses the assessed value.";
+        out.hidden = true;
         return;
       }
       errorEl.hidden = true;
+      out.hidden = false;
       var result = estimate({
         city: cityEl.value,
         type: typeEl.value,
