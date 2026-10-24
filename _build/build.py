@@ -52,7 +52,7 @@ home += f'''
     <div class="hero-copy">
       <span class="eyebrow"><span class="nw">Coquitlam ·</span> <span class="nw">Port Coquitlam ·</span> <span class="nw">Port Moody</span></span>
       <h1>Your <span class="nw">Tri-Cities, BC</span> real estate <em>neighbour</em>.</h1>
-      <p class="lead">I'm Devin Desaulniers, a Real Estate Associate with <strong>Axford Real Estate</strong>. I've lived in the Greater Vancouver area for 28 years, and I help home buyers and relocating tenants across Greater Vancouver — especially here in the Tri-Cities, BC.</p>
+      <p class="lead">I'm Devin Desaulniers, a REALTOR® and Real Estate Associate at Axford Real Estate in Port Moody, helping people buy and sell homes in Coquitlam, Port Coquitlam and Port Moody, and helping relocating tenants line up a rental anywhere in Greater Vancouver before they arrive.</p>
       <div class="btn-row">
         <a class="btn btn-primary" href="buyers.html">I'm buying {I["arrow"]}</a>
         <a class="btn btn-outline" href="tenants.html">I'm relocating &amp; renting</a>
@@ -278,7 +278,7 @@ buyers += f'''
   <div class="container">
     <span class="eyebrow">For buyers</span>
     <h1>Buying in the <span class="nw">Tri-Cities, BC</span> &amp; Greater Vancouver</h1>
-    <p class="lead">Local neighbourhood knowledge, listings matched to what you actually want, and a clear plan from your first showing to getting the keys.</p>
+    <p class="lead">I help buyers find and buy condos, townhouses and houses in Coquitlam, Port Coquitlam, Port Moody and the rest of Greater Vancouver, from the first showing through subject removal to getting the keys.</p>
     <div class="btn-row">
       <a class="btn btn-light" href="#listings">Send me listings {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="{CALC}" target="_blank" rel="noopener">Mortgage calculator {I["ext"]}</a>
@@ -456,7 +456,7 @@ tenants += f"""
     <div class="lp-copy">
       <span class="eyebrow">Tenant representation<span class="eb-more"> · Greater Vancouver rental guidance</span></span>
       <h1>Relocating to Vancouver? Line up your rental before you arrive.</h1>
-      <p class="lead">Moving to Vancouver is a lot to manage from a distance. I'll search, attend showings (or walk you through on live video), and review and negotiate your lease — so you can rent with confidence.</p>
+      <p class="lead">If you're moving to Vancouver, I can find and secure your rental before you arrive: I search, attend showings in person or on live video, and review and negotiate the lease for you as your tenant-side agent.</p>
       <div class="price-pill"><b>$1,500</b><span>+ GST · paid in two parts</span></div>
       <ul class="list-check">
         <li>Personalized consultation</li>
@@ -672,7 +672,7 @@ gv += f"""
   <div class="container">
     <span class="eyebrow">Relocation guide · Greater Vancouver</span>
     <h1>Relocating to Greater Vancouver? Here's how a local agent can help</h1>
-    <p class="lead">Areas at a glance, commuting, renting basics in B.C., and how I help relocating tenants and buyers line up the right home before they arrive.</p>
+    <p class="lead">Relocating to Greater Vancouver is easier with a local agent who can compare areas, commutes and rental rules for you, and I help both relocating buyers and tenants line up the right home before they move.</p>
     <div class="btn-row">
       <a class="btn btn-light" href="tenants.html#intake">Need a rental? Start here {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>

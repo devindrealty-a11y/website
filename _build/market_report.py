@@ -267,6 +267,8 @@ def add_report_numbers(data, allowed):
 
 
 def audit(fragment, allowed, label):
+    # The sitewide tenant promo is not a market figure. Keep it out of the number check.
+    fragment = re.sub(r'<aside class="tenant-cta-bar"[\s\S]*?</aside>', " ", fragment)
     text = re.sub(r"<style[\s\S]*?</style>", " ", fragment, flags=re.I)
     text = re.sub(r"<script[\s\S]*?</script>", " ", text, flags=re.I)
     text = html.unescape(re.sub(r"<[^>]+>", " ", text))

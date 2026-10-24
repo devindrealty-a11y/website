@@ -45,6 +45,7 @@ SOCIAL = [
     ("Rate-My-Agent", "https://www.rate-my-agent.com/devin-desaulniers-ratings-port-moody-123891"),
 ]
 import json as _json
+import re as _re
 def agent_jsonld():
     addr = {"@type": "PostalAddress", "streetAddress": "2326 Clarke St", "addressLocality": "Port Moody",
             "addressRegion": "BC", "postalCode": "V3H 1Y8", "addressCountry": "CA"}
@@ -198,7 +199,7 @@ def tenant_cta_attrs(referrer=""):
     return attrs
 
 def tenant_cta_bar(root="", referrer=""):
-    """One-line offer under the header on every page. Links to the rental intake form."""
+    """One-line offer on every page, placed after the intro so it is not the opening paragraph."""
     return f'''<aside class="tenant-cta-bar" aria-label="Tenant relocation service">
   <div class="container tenant-cta-inner">
     <p><strong>Want me to find yours?</strong> Tenant Relocation Service $1,500 + GST</p>
@@ -206,6 +207,62 @@ def tenant_cta_bar(root="", referrer=""):
   </div>
 </aside>
 '''
+
+def _intro_section_end(html):
+    """End offset of the section that holds the first h1, else the first paragraph after that h1."""
+    h1 = _re.search(r"<h1\b", html)
+    if not h1:
+        return None
+    before = html[:h1.start()]
+    opens = len(_re.findall(r"<section\b", before))
+    closes = len(_re.findall(r"</section>", before))
+    if opens > closes:
+        depth = opens - closes
+        for match in _re.finditer(r"</?section\b[^>]*>", html[h1.end():]):
+            if match.group(0).startswith("</"):
+                depth -= 1
+                if depth == 0:
+                    return h1.end() + match.end()
+            else:
+                depth += 1
+        return None
+    paragraph = _re.search(r"</p>", html[h1.end():])
+    if paragraph:
+        return h1.end() + paragraph.end()
+    return None
+
+def relocate_tenant_promo(html):
+    """Move the tenant promo aside to after the intro.
+
+    The bar is emitted under the header. Left there, its paragraph is the first
+    body copy a crawler reads, and the $1,500 fee gets quoted as if it were rent.
+    """
+    match = _re.search(
+        r"</header>\s*(<aside class=\"tenant-cta-bar\"[\s\S]*?</aside>)\s*(?=<main\b)",
+        html,
+    )
+    if not match:
+        return html
+    aside = match.group(1).strip()
+    html = html[:match.start(1)] + html[match.end(1):]
+    html = _re.sub(r"(</header>)\s*(<main\b)", r"\1\n\2", html, count=1)
+    end = _intro_section_end(html)
+    if end is None:
+        main = _re.search(r"<main\b", html)
+        if not main:
+            return html
+        return html[:main.start()] + aside + "\n" + html[main.start():]
+    rest = html[end:].lstrip("\n")
+    return html[:end] + "\n" + aside + "\n\n" + rest
+
+class _HtmlPage(str):
+    """String that moves the tenant promo once the closing html tag is added."""
+
+    def __add__(self, other):
+        combined = str.__add__(self, other)
+        if "</html>" in combined:
+            return relocate_tenant_promo(combined)
+        return _HtmlPage(combined)
 
 def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head="", root="", og_type="website"):
     """root: relative prefix back to the site root ("" for top-level pages, "../" for pages in blog/)."""
@@ -218,7 +275,7 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
     links = "".join(f'<a href="{root}{h}"{CUR if k==active else ""}>{t}</a>' for h,t,k in nav)
     # A longer nav needs a wider viewport before it fits on one row (see .nav-long in styles.css).
     header_cls = "site-header nav-long" if len(nav) > 6 else "site-header"
-    return f'''<!doctype html>
+    return _HtmlPage(f'''<!doctype html>
 <html lang="en-CA">
 <head>
 <meta charset="utf-8">
@@ -270,7 +327,7 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
 </header>
 {tenant_cta_bar(root, page_url or ("index.html" if active == "home" else ""))}
 <main id="main" tabindex="-1">
-'''
+''')
 
 def listings_footer_links(root):
     if not LISTINGS_LIVE:
