@@ -17,6 +17,8 @@ Pages:
 - `blog/` — blog index, posts, RSS feed, generated from Markdown in `_posts/` (see **`_build/BLOG.md`** for how to add a post)
 - `true-cost-of-owning-a-home-bc.html` — lead-magnet guide to monthly costs besides the mortgage in the Tri-Cities, BC (property tax, strata, insurance, maintenance, utilities), with an estimator. Built from `_build/true_cost_page.py`.
 
+`_promo/` is an unpublished promotion kit (Meta ads, Google Business Profile posts, YouTube text, communities, and a 4-week rollout). GitHub Pages runs Jekyll on this repo, and Jekyll does not publish that folder. `_config.yml` excludes it as well. Do not add a `.nojekyll` file.
+
 ## Editing
 HTML is generated from `_build/build.py` + `_build/partials.py` (header/footer shared). Edit those, then run:
 ```
