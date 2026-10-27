@@ -16,6 +16,18 @@ def sec_head(eyebrow, heading, aside="", center=False):
     return (f'<div class="sec-head{" sec-head--center" if center else ""}">'
             f'<div><span class="eyebrow">{eyebrow}</span><h2>{heading}</h2></div>{aside_html}</div>')
 
+# Devin's tenant page on the Axford site. A secondary cross-link only — his own
+# tenants.html form stays the main call to action, and the $1,500 fee stays on the page.
+AXFORD_TENANT_URL = "https://www.axfordpropertymanagement.ca/tenant-services-in-greater-vancouver"
+
+def axford_tenant_line(center=False):
+    """Short brokerage cross-link. Visible label is exactly 'Tenant services at Axford'."""
+    cls = "also-axford center" if center else "also-axford"
+    return (
+        f'<p class="{cls}">My brokerage, Axford Real Estate, also lists '
+        f'<a href="{AXFORD_TENANT_URL}" target="_blank" rel="noopener">Tenant services at Axford</a>.</p>'
+    )
+
 def page_nav(items):
     links = "".join(f'<a href="#{a}">{t}</a>' for a, t in items)
     return f'<nav class="page-nav" aria-label="On this page"><div class="container"><span class="pn-label">On this page</span>{links}</div></nav>'
@@ -93,6 +105,7 @@ home += f'''
         <h3>Relocation rental service</h3>
         <p>Moving to Greater Vancouver? I represent tenants through the whole search: consultation, property search, in-person or virtual showings, and lease review &amp; negotiation — <strong>$1,500 + GST, paid by the tenant in two parts</strong>.</p>
         <a class="btn btn-light" href="tenants.html">See how it works {I["arrow"]}</a>
+        {axford_tenant_line()}
       </article>
     </div>
     <div class="offer-links">
@@ -514,6 +527,7 @@ tenants += f"""
       <a class="btn btn-light" href="#intake">Start your search {I["arrow"]}</a>
     </div>
     <p class="form-note center fee-note">I help tenants find and lease a home. I do not provide property management services.</p>
+    {axford_tenant_line(center=True)}
   </div>
 </section>
 
@@ -738,6 +752,7 @@ gv += f"""
       <li>Lease review &amp; negotiation before you sign</li>
     </ul>
     <p>I represent your search on the tenant side — not a landlord's inventory. (Axford also has a separate property management business; this service is different.)</p>
+    {axford_tenant_line()}
     <p>Most Greater Vancouver rentals list only a few weeks before they're available, so the active search usually starts about 4–6 weeks before move-in. Use the weeks before that to settle your budget, areas and documents.</p>
     <div class="btn-row">
       <a class="btn btn-light" href="tenants.html#intake">Start your rental search {I["arrow"]}</a>
