@@ -49,6 +49,23 @@ VIDEO_JSONLD = '<script type="application/ld+json">\n' + json.dumps({
     "duration": "PT32S",
 }, indent=2, ensure_ascii=False) + '\n</script>'
 
+# Oct 26, 2026 Facebook reel (vertical). Source was VP9-in-MP4; stored as H.264 so phones can play it.
+FB_VIDEO_MP4 = "assets/video/2026-10-26-relocation-services.mp4"
+FB_VIDEO_POSTER = "assets/video/2026-10-26-relocation-services-poster.jpg"
+FB_VIDEO_REEL = "https://www.facebook.com/reel/1159754223400486"
+FB_VIDEO_NAME = "Relocating to Greater Vancouver | Devin Desaulniers"
+FB_VIDEO_DESC = "A short services video for people relocating to Greater Vancouver who need a rental, presented by Devin Desaulniers, Real Estate Associate with Axford Real Estate."
+FB_VIDEO_JSONLD = '<script type="application/ld+json">\n' + json.dumps({
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": FB_VIDEO_NAME,
+    "description": FB_VIDEO_DESC,
+    "thumbnailUrl": SITE + FB_VIDEO_POSTER,
+    "contentUrl": SITE + FB_VIDEO_MP4,
+    "uploadDate": "2026-10-26",
+    "duration": "PT35S",
+}, indent=2, ensure_ascii=False) + '\n</script>'
+
 STARS5 = '<span class="stars" aria-hidden="true">' + _TSTAR * 5 + '</span>'
 TOURS_LINK = f'<a class="link-arrow" href="videos.html">See all six video tours {I["arrow"]}</a>'
 HOME_SERVICES_ASIDE = """<p class="lead">Whether you're buying, curious what your home would sell for, or moving to the Lower Mainland and need a rental, I'll make the process clear and manageable.</p>"""
@@ -800,27 +817,49 @@ gv += f"""
 """
 gv += foot()
 
-# ---------------- VIDEOS (YouTube property tours) ----------------
+# ---------------- VIDEOS (Facebook services reel + YouTube property tours) ----------------
 VIDEOS_URL = "videos.html"
 videos = head("Property Video Tours | Devin Desaulniers, Real Estate Associate, Axford Real Estate",
-              "Property video tours with Devin Desaulniers, Real Estate Associate with Axford Real Estate: walkthroughs of homes and condos in Vancouver and Greater Vancouver from his YouTube channel.",
-              "videos", page_url=VIDEOS_URL)
+              "A services video for relocating tenants, plus property video tours with Devin Desaulniers, Real Estate Associate with Axford Real Estate, from his YouTube channel.",
+              "videos", page_url=VIDEOS_URL, extra_head=FB_VIDEO_JSONLD)
 videos += f"""
 <section class="page-hero">
   <div class="container">
-    <span class="eyebrow">Video tours · YouTube</span>
+    <span class="eyebrow">Videos · YouTube and services</span>
     <h1>Property video tours</h1>
-    <p class="lead">Video tours with Devin Desaulniers, Real Estate Associate with Axford Real Estate. Press play on any tour to watch it right here.</p>
-    <p class="hero-note">{YT_NOTE}</p>
+    <p class="lead">A services video for relocating tenants, and property video tours with Devin Desaulniers, Real Estate Associate with Axford Real Estate. Press play to watch right here.</p>
+    <p class="hero-note">The services video is for people relocating to Greater Vancouver. The tours below are from my YouTube channel, not listings I'm offering.</p>
     <div class="btn-row">
-      <a class="btn btn-light" href="{YOUTUBE_CHANNEL}" target="_blank" rel="noopener">Visit my YouTube channel {I["ext"]}</a>
+      <a class="btn btn-light" href="#services-video">Watch the services video {I["arrow"]}</a>
+      <a class="btn btn-ghost-light" href="{YOUTUBE_CHANNEL}" target="_blank" rel="noopener">Visit my YouTube channel {I["ext"]}</a>
       <a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper" id="services-video">
+  <div class="container video-grid video-grid--portrait">
+    <div class="video-copy">
+      <span class="eyebrow">From Facebook</span>
+      <h2>Relocating to Greater Vancouver</h2>
+      <p class="lead">This is my services pitch for relocating tenants. I walk through how I help people moving to Greater Vancouver find a rental. <a href="tenants.html">See the relocation rental service</a>.</p>
+      <p class="video-source">Posted October 26, 2026. <a href="{FB_VIDEO_REEL}" target="_blank" rel="noopener">Watch the reel on Facebook</a>.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="tenants.html">See the relocation rental service {I["arrow"]}</a>
+      </div>
+    </div>
+    <div class="video-frame video-frame--portrait">
+      <video controls playsinline preload="metadata" poster="{FB_VIDEO_POSTER}" width="1080" height="1920" aria-label="Relocating to Greater Vancouver: services video for relocating tenants, presented by Devin Desaulniers, Real Estate Associate with Axford Real Estate" title="Relocating to Greater Vancouver">
+        <source src="{FB_VIDEO_MP4}" type="video/mp4">
+        <p>Your browser can't play this video. <a href="{FB_VIDEO_MP4}">Download the services video (MP4)</a>.</p>
+      </video>
     </div>
   </div>
 </section>
 
 <section class="section" id="tours">
   <div class="container">
+    {sec_head("YouTube", "Property video tours", f"<p>{YT_NOTE} Press play to watch here.</p>")}
     {tours_grid([v for v, _ in YT_TOURS], heading="h2")}
   </div>
 </section>
@@ -891,7 +930,7 @@ privacy += f"""
       <p>Information you send through FormSubmit, including a message from the chat widget, the market-report download, and the true-cost guide sign-up, may be processed outside Canada. A GoatCounter page visit or event may also be processed outside Canada. If you'd rather not use the forms or the chat, you can call or text me at <a href="{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 
       <h2 id="video-tours">Video tours</h2>
-      <p>The YouTube video tours on this site show a preview image from YouTube, and the YouTube player itself loads only after you press play.</p>
+      <p>The YouTube video tours on this site show a preview image from YouTube, and the YouTube player itself loads only after you press play. The services video on the <a href="videos.html">videos page</a> is a file hosted on this site. It does not contact Facebook unless you open the link to the reel.</p>
 
       <h2 id="requests">Privacy questions and requests</h2>
       <p>For a privacy question or request, contact me at my brokerage:</p>

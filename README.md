@@ -123,6 +123,11 @@ domain earns no search value of its own.
   `ffmpeg -i grand-tri-cities-final.mp4 -vf "scale=1280:720:flags=lanczos,format=yuv420p" -c:v libx264 -profile:v high -level 4.0 -preset veryslow -crf 26 -c:a aac -b:a 128k -ac 2 -movflags +faststart greater-vancouver-relocation-ad.mp4`
 - `<video controls playsinline preload="metadata">`, no autoplay. Home page also carries `VideoObject` JSON-LD (absolute URLs, uploadDate 2026-10-06, PT32S).
 
+## Videos page: October 26 Facebook services reel
+- Section `#services-video` on `videos.html`, above the YouTube tour grid. Built from `FB_VIDEO_*` in `_build/build.py`. The YouTube tours stay in `#tours`.
+- Files: `assets/video/2026-10-26-relocation-services.mp4` (1080x1920 H.264 High, level 4.2, CRF 26, AAC-LC 128k, `+faststart`, ~7.4 MB) and `-poster.jpg` (title frame at 0.8 s). The attached source was VP9 inside MP4, which Safari will not play, so it is stored re-encoded. Do not remove `greater-vancouver-relocation-ad.mp4`.
+- Source reel: https://www.facebook.com/reel/1159754223400486. Caption links to `tenants.html`. `VideoObject` JSON-LD on the videos page (uploadDate 2026-10-26, PT35S).
+
 ## YouTube property tours
 - The six tours are listed once in `YT_TOURS` (`_build/partials.py`, id + title). `YT_HOME` picks the three on the home page (`#tours`);
   `YT_BUYERS` in `_build/build.py` picks the three on `buyers.html#tours`; `videos.html` shows all six.
