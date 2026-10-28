@@ -158,7 +158,7 @@
       });
 
       var selectionText = bank && term && cell
-        ? bank.legalName + ", " + term.label + ", " + formatRate(cell.rate) + "% illustrative (rates as of " + (data.updatedLabel || "") + ")"
+        ? bank.legalName + ", " + term.label + ", " + formatRate(cell.rate) + "% illustrative only (rates as of " + (data.updatedLabel || "") + ")"
         : "";
       if (selection) selection.value = selectionText;
       if (selectionLabel) {
@@ -207,7 +207,7 @@
       }
       payOut.textContent = formatMoney(payment);
       if (payNote) {
-        payNote.textContent = "Principal and interest only, at " + formatRate(cell.rate) + "% on " + formatMoney(principal) + " over " + years + " years. Taxes, strata, heat, insurance, and mortgage default insurance are not included.";
+        payNote.textContent = "Illustrative only. Principal and interest at " + formatRate(cell.rate) + "% on " + formatMoney(principal) + " over " + years + " years. Not the payment a lender will offer. Taxes, strata, heat, insurance, and mortgage default insurance are not included.";
       }
     }
 

@@ -20,8 +20,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 TITLE = "Mortgage Rates | Big 5 Banks | Devin Desaulniers, Axford Real Estate"
 DESC = (
-    "Illustrative Big 5 bank mortgage rates for clients in the Tri-Cities, BC and Greater Vancouver. "
-    "Compare a term, then try that rate in the affordability calculator. Devin Desaulniers, Real Estate Associate, Axford Real Estate."
+    "Illustrative Big 5 mortgage rates only. Devin Desaulniers, Real Estate Associate with Axford Real Estate, "
+    "is not a mortgage broker."
 )
 
 _BARE_TRI = re.compile(r"Tri-Cities(?!\s*,\s*BC)")
@@ -44,6 +44,10 @@ def _rate(cell):
     return f"{cell['rate']:.2f}"
 
 
+def _stamp(label):
+    return _esc(str(label).rstrip("."))
+
+
 def _plain(fragment):
     text = re.sub(r"<[^>]+>", " ", fragment)
     return re.sub(r"\s+", " ", text).strip()
@@ -54,23 +58,23 @@ def _faq(data):
     return [
         (
             "Are these the rates I will get?",
-            "<p>Probably not the exact number. These are illustrative rates Ratehub.ca published for the Big 5 banks"
-            f" on { _esc(label) }. Ratehub does not label the Big 5 table as a posted rate or as a special offer. "
-            "A bank or a broker can offer you something different based on your credit, income, down payment, the property, "
-            "and whether the mortgage is insured. Treat the figure as a starting point for a conversation, then confirm it "
-            "with a licensed mortgage professional or your bank.</p>",
+            "<p>No. These rates are illustrative only. Ratehub.ca published them for the Big 5 banks"
+            f" on {_stamp(label)}. They are not the rate you will be offered. "
+            "A licensed mortgage professional or your bank sets that from your credit, income, down payment, the property, "
+            "and whether the mortgage is insured.</p>",
         ),
         (
             "Are you a mortgage broker?",
-            "<p>No. I am Devin Desaulniers, a Real Estate Associate with Axford Real Estate. I do not hold a mortgage licence. "
-            "I can introduce you to a licensed mortgage professional. I do not take the application, and I do not approve a mortgage.</p>",
+            "<p>No. I am not a mortgage broker. I am Devin Desaulniers, a Real Estate Associate with Axford Real Estate. "
+            "I do not hold a mortgage licence. I can introduce you to a licensed mortgage professional. "
+            "I do not take the application, and I do not approve a mortgage.</p>",
         ),
         (
             "What does illustrative mean on this page?",
-            "<p>It means the number is an example copied from a public rate table, not a quote and not an approval. "
+            "<p>It means the rate is an example only, copied from a public table. It is not a quote and not an approval. "
             "The 5-year variable, 5-year fixed, and 3-year fixed figures come from Ratehub's Big 5 comparison table. "
             "The 1-year fixed figures come from Ratehub's separate 1-year fixed table, checked at the same time. "
-            "Open rates on that site are not shown here. The rates can change after the date stamped on this page.</p>",
+            "Open rates on that site are not shown here. The rates can change after the date on this page.</p>",
         ),
         (
             "What is the difference between the term and the amortization?",
@@ -82,7 +86,7 @@ def _faq(data):
         (
             "What does prime minus a number mean?",
             "<p>On a variable rate, Ratehub prints a percent and a spread such as Prime -0.85%. "
-            "This page shows both, as labeled. The percent is the illustrative rate. "
+            "This page shows both, as labeled. The percent is illustrative only. "
             "If the lender's prime changes during the term, a variable rate can change with it. "
             "A fixed rate stays the same for the term. This page does not calculate prime on its own, and it is not a recommendation to choose variable or fixed.</p>",
         ),
@@ -90,7 +94,8 @@ def _faq(data):
             "Can I use one of these rates in the affordability calculator?",
             f"<p>Yes. Open the <a href=\"{CALC}\">mortgage affordability calculator</a> or the "
             f"<a href=\"{CALC_FULL}\">detailed version</a> and type the percent into Rate (%). "
-            "The link does not fill the rate in for you. The calculator is an estimate only. It is not a mortgage approval or financial advice.</p>",
+            "The link does not fill the rate in for you. The rate is illustrative only, and the calculator is an estimate. "
+            "It is not a mortgage approval or financial advice.</p>",
         ),
     ]
 
@@ -192,7 +197,7 @@ def _static_table(data):
             cells.append(f"<td>{_rate(cell)}%{extra}</td>")
         body.append(f"<tr><th scope=\"row\">{_esc(bank['legalName'])}</th>{''.join(cells)}</tr>")
     return (
-        f'<table class="rate-table"><caption>Illustrative Big 5 rates as of {_esc(data["updatedLabel"])}. '
+        f'<table class="rate-table"><caption>Illustrative only. Big 5 rates as of {_stamp(data["updatedLabel"])}. '
         f'Source: Ratehub.ca. Not a quote and not an approval.</caption>'
         f"<thead><tr><th scope=\"col\">Bank</th>{heads}</tr></thead><tbody>{''.join(body)}</tbody></table>"
     )
@@ -220,7 +225,7 @@ def render():
     rbc = next(bank for bank in data["banks"] if bank["id"] == "rbc")
     starter = rbc["rates"]["5y-fixed"]
     selection = (
-        f"{rbc['legalName']}, 5-year fixed, {_rate(starter)}% illustrative "
+        f"{rbc['legalName']}, 5-year fixed, {_rate(starter)}% illustrative only "
         f"(rates as of {data['updatedLabel']})"
     )
     payload = json.dumps(data, ensure_ascii=False).replace("<", "\\u003c")
@@ -233,13 +238,13 @@ def render():
   <div class="container">
     <span class="eyebrow">For buyers · <span class="nw">Tri-Cities, BC</span></span>
     <h1>A clearer look at current mortgage rates</h1>
-    <p class="lead">If you are working out what you can afford in Coquitlam, Port Coquitlam, Port Moody, or elsewhere in Greater Vancouver, start with a real published rate instead of a round guess. I am Devin Desaulniers, a Real Estate Associate with Axford Real Estate. I am not a mortgage broker.</p>
+    <p class="lead">I am Devin Desaulniers, a Real Estate Associate with Axford Real Estate. I am not a mortgage broker. The Big 5 figures below are illustrative only, for a first look at payments in Coquitlam, Port Coquitlam, Port Moody, and the rest of Greater Vancouver.</p>
     <div class="tc-rates">
       <div class="tc-rate"><b>5 banks</b><span>RBC, TD, Scotiabank, BMO, and CIBC</span></div>
       <div class="tc-rate"><b>4 terms</b><span>1-year, 3-year, and 5-year fixed, plus 5-year variable</span></div>
-      <div class="tc-rate"><b>Illustrative</b><span>Not an offer, a quote, or an approval</span></div>
+      <div class="tc-rate"><b>Illustrative only</b><span>Not a quote, an offer, or an approval</span></div>
     </div>
-    <p class="hero-note">Rates as of <span data-rates-asof>{_esc(data["updatedLabel"])}</span>. Source: Ratehub.ca.</p>
+    <p class="hero-note">Illustrative only. Rates as of <span data-rates-asof>{_esc(data["updatedLabel"])}</span>. Source: Ratehub.ca.</p>
     <div class="btn-row">
       <a class="btn btn-light" href="#rates">Compare the rates {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="#intro">Ask for a lender intro</a>
@@ -256,7 +261,7 @@ def render():
         <h2>Pick a term and a bank</h2>
       </div>
       <div class="sec-head-aside">
-        <p class="lead">Choose a term, then a bank. The percent is the illustrative rate Ratehub published for that cell. Banks stay in a fixed order. This is not a ranking.</p>
+        <p class="lead">Choose a term, then a bank. Each percent is illustrative only: the figure Ratehub published for that cell. Banks stay in a fixed order. This is not a ranking.</p>
       </div>
     </div>
     <div id="rate-explorer" class="rate-explorer" data-rates-url="{DATA_FILE}">
@@ -277,12 +282,12 @@ def render():
           <p class="rate-kicker"><span data-panel-bank>RBC</span> · <span data-panel-term>5-year fixed</span></p>
           <p class="rate-figure" data-panel-figure aria-live="polite">{_rate(starter)}<span class="rate-unit">%</span></p>
           <p class="rate-spread" data-panel-spread hidden></p>
-          <p class="rate-asof">Rates as of <span data-rates-asof>{_esc(data["updatedLabel"])}</span></p>
+          <p class="rate-asof">Illustrative only. Rates as of <span data-rates-asof>{_esc(data["updatedLabel"])}</span></p>
           <p class="rate-source">Source: <a data-panel-source href="{_esc(big5["url"])}" target="_blank" rel="noopener">{_esc(big5["label"])}</a></p>
           <div class="rate-pay">
             <p class="rate-pay-label">Estimated monthly principal and interest</p>
             <p class="rate-payment" data-pay-out>—</p>
-            <p class="rate-pay-note" data-pay-note>Principal and interest only, on an example purchase. Not the payment you will be offered.</p>
+            <p class="rate-pay-note" data-pay-note>Illustrative only. Principal and interest on an example purchase. Not the payment a lender will offer.</p>
             <h3>Change the example</h3>
             <form class="rate-pay-form" data-pay-form action="#payment">
               <div class="form-grid">
@@ -313,7 +318,7 @@ def render():
         </aside>
       </div>
       <noscript>
-        <p>The rate picker needs JavaScript. The table below is the same illustrative set.</p>
+        <p>The rate picker needs JavaScript. The table below is the same illustrative-only set.</p>
         {_static_table(data)}
       </noscript>
     </div>
@@ -324,9 +329,9 @@ def render():
   <div class="container narrow-wide">
     <span class="eyebrow">Please read this</span>
     <h2>What these numbers are, and what they are not</h2>
-    <p>These rates are estimates for illustration. They are not financial advice, not a quote, and not a mortgage approval. Your rate depends on your credit, income, down payment, the property, whether the mortgage is insured, and what the lender actually offers. Talk with a licensed mortgage professional or your bank before you rely on a number.</p>
-    <p>Ratehub.ca published the figures, and they change. The Big 5 comparison table is not labeled there as a posted rate or as a special offer. The 1-year fixed rates are from Ratehub's separate 1-year fixed table, stamped at the same time. A bank's own page can show a different posted rate or a different special offer. The number here may not be the rate you are offered.</p>
-    <p>I am a Real Estate Associate with Axford Real Estate, { _esc("2326 Clarke St, Port Moody, BC") }. I do not hold a mortgage licence. If you want an introduction, send the form below. I will contact you. I do not underwrite the mortgage and I do not approve it.</p>
+    <p>These rates are illustrative only. They are examples copied from Ratehub.ca. They are not a quote, not an offer, and not a mortgage approval. Your rate depends on your credit, income, down payment, the property, whether the mortgage is insured, and what the lender offers. Confirm any number with a licensed mortgage professional or your bank.</p>
+    <p>I am not a mortgage broker. I am Devin Desaulniers, a Real Estate Associate with Axford Real Estate, 2326 Clarke St, Port Moody, BC. I do not hold a mortgage licence. I do not take a mortgage application, and I do not approve one. The form below only asks me to make an introduction.</p>
+    <p>Ratehub.ca published the figures, and they change. The Big 5 table is not labeled there as a posted rate or a special offer. The 1-year fixed rates are from Ratehub's separate 1-year fixed table, checked at the same time. A bank's own page can show a different number.</p>
     <h3>Where the rates are from</h3>
     <ul class="rate-sources">
       <li><a href="{_esc(big5["url"])}" target="_blank" rel="noopener">{_esc(big5["label"])}</a> <span class="src-meta">· checked {_esc(big5["updatedLabel"])}</span>. 5-year variable, 5-year fixed, and 3-year fixed.</li>
@@ -342,7 +347,7 @@ def render():
   <div class="container narrow-wide">
     <span class="eyebrow">Soft next step</span>
     <h2>Want an intro to a licensed mortgage pro?</h2>
-    <p>Send me a note and I will reach out. I can introduce you to a licensed mortgage professional. I do not take a mortgage application, and I do not approve one. You can also call or text <a href="{TEL}">{PHONE}</a> or talk to your own bank.</p>
+    <p>I am not a mortgage broker. Send a note and I will introduce you to a licensed mortgage professional. I do not take a mortgage application, and I do not approve one. You can also call or text <a href="{TEL}">{PHONE}</a>, or talk to your own bank.</p>
     <form class="form-card" data-form-key="mortgageIntro" data-goat-event="form-mortgage-intro" action="#" method="POST">
       <input type="hidden" name="_subject" value="Mortgage intro request">
       <input type="hidden" name="_template" value="table">
@@ -365,7 +370,7 @@ def render():
           <div class="form-status" role="status" aria-live="polite"></div>
         </div>
       </div>
-      <p class="form-note">This form is emailed to {EMAIL}. The subject is “Mortgage intro request”. It is not a mortgage application.</p>
+      <p class="form-note">This form is emailed to {EMAIL}. The subject is “Mortgage intro request”. It is not a mortgage application. The rate it names is illustrative only.</p>
     </form>
   </div>
 </section>
@@ -373,7 +378,7 @@ def render():
 <section class="section section--night cta-band">
   <div class="container center narrow">
     <h2>Try a rate in the affordability calculator</h2>
-    <p>The calculator estimates a purchase price from income, debts, and a rate you type in. It is not an approval. If you are buying in the Tri-Cities, BC or elsewhere in Greater Vancouver, call or text {PHONE}.</p>
+    <p>The calculator estimates a purchase price from income, debts, and a rate you type in. The rate is illustrative only, and the result is not an approval. If you are buying in the Tri-Cities, BC or elsewhere in Greater Vancouver, call or text {PHONE}.</p>
     <div class="btn-row">
       <a class="btn btn-light" href="{CALC}" target="_blank" rel="noopener">Open the calculator {I["ext"]}</a>
       <a class="btn btn-ghost-light" href="{CALC_FULL}" target="_blank" rel="noopener">Detailed version {I["ext"]}</a>
@@ -385,6 +390,25 @@ def render():
 <script src="assets/js/mortgage-rates.js" defer></script>
 '''
     page += foot()
+    old_legal = (
+        "Devin Desaulniers is a Real Estate Associate with Axford Real Estate, 2326 Clarke St, Port Moody, BC. "
+        "Information on this site is general. It is not legal, tax, or financial advice, and it is not a mortgage approval. "
+        "It is not intended to solicit buyers or sellers who are currently under contract with a brokerage."
+    )
+    new_legal = (
+        "Devin Desaulniers is a Real Estate Associate with Axford Real Estate, 2326 Clarke St, Port Moody, BC. "
+        "He is not a mortgage broker. Rates on this page are illustrative only. They are not a quote, an offer, "
+        "or a mortgage approval, and they are not legal, tax, or financial advice. This page is not intended to solicit "
+        "buyers or sellers who are currently under contract with a brokerage."
+    )
+    if old_legal not in page:
+        raise SystemExit(f"{PAGE}: shared footer disclaimer not found")
+    page = page.replace(old_legal, new_legal, 1)
+    page = page.replace(
+        "Mortgage calculator results are estimates only and are not a mortgage approval or financial advice.",
+        "Mortgage calculator results are estimates only. A rate typed in from this page is illustrative only. Results are not a mortgage approval or financial advice.",
+        1,
+    )
     _assert_copy(page)
     _check_payment()
     return page
@@ -411,6 +435,13 @@ def _assert_copy(page):
         raise SystemExit(f"{PAGE}: form subject missing")
     if "mortgage licence" not in page and "mortgage license" not in page:
         raise SystemExit(f"{PAGE}: licence disclaimer missing")
+    lowered = page.lower()
+    if "not a mortgage broker" not in lowered:
+        raise SystemExit(f"{PAGE}: broker disclaimer missing")
+    if "illustrative only" not in lowered:
+        raise SystemExit(f"{PAGE}: illustrative-only disclaimer missing")
+    if "he is not a mortgage broker" not in lowered:
+        raise SystemExit(f"{PAGE}: footer broker disclaimer missing")
 
 
 def _check_payment():
