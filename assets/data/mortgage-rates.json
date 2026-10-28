@@ -1,0 +1,103 @@
+{
+  "updated": "2026-10-28T21:14:00-04:00",
+  "updatedLabel": "October 28, 2026, 9:14 p.m.",
+  "howToRefresh": "Edit this file when Ratehub.ca (or a bank's own rate page) shows new illustrative rates. Keep updated as an ISO-8601 datetime and updatedLabel as the words that should appear after 'Rates as of'. The explorer reads this file in the browser, so the interactive numbers update without a redesign. Then run: cd _build && python3 build.py — that refreshes the no-JavaScript table, the schema date, and the sitemap lastmod. Keep banks in this fixed order. Do not rank them, and do not describe a rate as preferable to another.",
+  "checkedAgainst": "Live Ratehub.ca Big 5 comparison table and Ratehub.ca 1-year fixed table, both stamped October 28, 2026, 9:14 p.m. An earlier Ratehub stamp the same day (about 3:02 p.m.) showed different 5-year variable rates and different Scotiabank fixed rates. This file follows the later stamp.",
+  "source": {
+    "name": "Ratehub.ca",
+    "big5": {
+      "url": "https://www.ratehub.ca/banks/bank-mortgage-rates",
+      "label": "Ratehub.ca Big 5 bank mortgage rates",
+      "updatedLabel": "October 28, 2026, 9:14 p.m."
+    },
+    "oneYearFixed": {
+      "url": "https://www.ratehub.ca/best-mortgage-rates/1-year/fixed",
+      "label": "Ratehub.ca 1-year fixed mortgage rates",
+      "updatedLabel": "October 28, 2026, 9:14 p.m."
+    },
+    "note": "Illustrative rates as published by Ratehub.ca. The Big 5 comparison table is not labeled there as a posted rate or as a special offer. The 1-year figures are the rates Ratehub lists beside each bank on its 1-year fixed table (not the open-rate table, and not the unnamed row). They can change, and they may not match a rate a client is offered."
+  },
+  "terms": [
+    {
+      "id": "5y-variable",
+      "label": "5-year variable",
+      "kind": "variable",
+      "source": "big5"
+    },
+    {
+      "id": "5y-fixed",
+      "label": "5-year fixed",
+      "kind": "fixed",
+      "source": "big5"
+    },
+    {
+      "id": "3y-fixed",
+      "label": "3-year fixed",
+      "kind": "fixed",
+      "source": "big5"
+    },
+    {
+      "id": "1y-fixed",
+      "label": "1-year fixed",
+      "kind": "fixed",
+      "source": "oneYearFixed"
+    }
+  ],
+  "banks": [
+    {
+      "id": "rbc",
+      "name": "RBC",
+      "legalName": "RBC Royal Bank",
+      "rates": {
+        "5y-variable": { "rate": 3.85, "spread": "Prime -0.85%" },
+        "5y-fixed": { "rate": 4.84 },
+        "3y-fixed": { "rate": 4.99 },
+        "1y-fixed": { "rate": 5.14 }
+      }
+    },
+    {
+      "id": "td",
+      "name": "TD",
+      "legalName": "TD Bank",
+      "rates": {
+        "5y-variable": { "rate": 4.19, "spread": "Prime -0.51%" },
+        "5y-fixed": { "rate": 5.04 },
+        "3y-fixed": { "rate": 5.19 },
+        "1y-fixed": { "rate": 5.59 }
+      }
+    },
+    {
+      "id": "scotiabank",
+      "name": "Scotiabank",
+      "legalName": "Scotiabank",
+      "rates": {
+        "5y-variable": { "rate": 3.95, "spread": "Prime -0.75%" },
+        "5y-fixed": { "rate": 4.99 },
+        "3y-fixed": { "rate": 4.79 },
+        "1y-fixed": { "rate": 4.79 }
+      }
+    },
+    {
+      "id": "bmo",
+      "name": "BMO",
+      "legalName": "Bank of Montreal",
+      "rates": {
+        "5y-variable": { "rate": 4.37, "spread": "Prime -0.33%" },
+        "5y-fixed": { "rate": 5.19 },
+        "3y-fixed": { "rate": 4.99 },
+        "1y-fixed": { "rate": 5.33 }
+      }
+    },
+    {
+      "id": "cibc",
+      "name": "CIBC",
+      "legalName": "CIBC",
+      "rates": {
+        "5y-variable": { "rate": 4.05, "spread": "Prime -0.65%" },
+        "5y-fixed": { "rate": 4.99 },
+        "3y-fixed": { "rate": 5.09 },
+        "1y-fixed": { "rate": 5.09 }
+      }
+    }
+  ]
+}

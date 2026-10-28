@@ -266,11 +266,11 @@ class _HtmlPage(str):
 
 def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head="", root="", og_type="website"):
     """root: relative prefix back to the site root ("" for top-level pages, "../" for pages in blog/)."""
-    nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("tenants.html","Tenants","tenants"),("relocating-to-greater-vancouver.html","Relocating","guide"),("blog/","Blog","blog"),("videos.html","Videos","videos")]
+    nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("mortgage-rates.html","Mortgage rates","rates"),("tenants.html","Tenants","tenants"),("relocating-to-greater-vancouver.html","Relocating","guide"),("blog/","Blog","blog"),("videos.html","Videos","videos")]
     if LISTINGS_LIVE:
-        nav.insert(2, ("listings.html", "Homes for sale", "listings"))
-        nav.insert(3, ("rentals.html", "Homes for rent", "rentals"))
-        nav.insert(4, ("rent-report.html", "Rent report", "rent-report"))
+        nav.insert(3, ("listings.html", "Homes for sale", "listings"))
+        nav.insert(4, ("rentals.html", "Homes for rent", "rentals"))
+        nav.insert(5, ("rent-report.html", "Rent report", "rent-report"))
     CUR = ' aria-current="page"'
     links = "".join(f'<a href="{root}{h}"{CUR if k==active else ""}>{t}</a>' for h,t,k in nav)
     # A longer nav needs a wider viewport before it fits on one row (see .nav-long in styles.css).
@@ -372,6 +372,7 @@ def foot(root=""):
           <li><a href="{root}first-time-buyers-tri-cities-bc.html">First-time home buyers, Tri-Cities, BC</a></li>
           <li><a href="{root}bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a></li>
           <li><a href="{root}true-cost-of-owning-a-home-bc.html">The true cost of owning a home in BC</a></li>
+          <li><a href="{root}mortgage-rates.html">Mortgage rates</a></li>
           <li><a href="{root}newcomer-rental-faqs.html">Newcomer rental FAQs</a></li>
           <li><a href="{root}videos.html">Property video tours</a></li>
           <li><a href="{root}blog/">Blog: Greater Vancouver real estate news</a></li>
