@@ -601,7 +601,7 @@ def _first_time():
     ]
     body = _section("help", "Working together", "How I help first-time buyers", f'''
     <ol class="mini-steps guide-steps">
-      <li><div><h3>Affordability and pre-approval</h3><p>Try my free <a href="{CALC}" target="_blank" rel="noopener">mortgage affordability calculator</a>, then get pre-approved with a lender or mortgage broker so you know your real budget before you start viewing.</p></div></li>
+      <li><div><h3>Affordability and pre-approval</h3><p>Try my free <a href="{CALC}" target="_blank" rel="noopener">mortgage affordability calculator</a>, and see illustrative Big 5 rates on the <a href="mortgage-rates.html">mortgage rates</a> page. Then get pre-approved with a lender or mortgage broker so you know your real budget before you start viewing. I am not a mortgage broker.</p></div></li>
       <li><div><h3>Choosing the right area</h3><p>We compare neighbourhoods in Coquitlam, Port Coquitlam, Port Moody and across Greater Vancouver by commute, transit, schools and lifestyle. Start with the <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a> guides.</p></div></li>
       <li><div><h3>Strata document review</h3><p>Many first homes in the Tri-Cities, BC are condos or townhouses, which means strata. I go through the Form B, minutes, depreciation report, bylaws and financials with you and flag questions for your lawyer, notary or inspector.</p></div></li>
       <li><div><h3>Offers and subjects</h3><p>I research comparable sales, help you set price and terms, and write an offer with subjects that protect you, such as financing, inspection and strata documents.</p></div></li>

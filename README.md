@@ -16,6 +16,7 @@ Pages:
 - `videos.html` — property video tours from Devin's YouTube channel (not listings)
 - `blog/` — blog index, posts, RSS feed, generated from Markdown in `_posts/` (see **`_build/BLOG.md`** for how to add a post)
 - `true-cost-of-owning-a-home-bc.html` — lead-magnet guide to monthly costs besides the mortgage in the Tri-Cities, BC (property tax, strata, insurance, maintenance, utilities), with an estimator. Built from `_build/true_cost_page.py`.
+- `mortgage-rates.html` — illustrative Big 5 bank mortgage rates (1-year, 3-year, and 5-year fixed, plus 5-year variable) with an example payment and a link to the affordability calculator. Built from `_build/mortgage_rates_page.py` and `assets/data/mortgage-rates.json`. Devin is not a mortgage broker. The intro form asks him to make an introduction only.
 
 ## Editing
 HTML is generated from `_build/build.py` + `_build/partials.py` (header/footer shared). Edit those, then run:
@@ -27,13 +28,23 @@ cd _build && python3 build.py
 No placeholders remain: the footer disclaimer, the privacy page (`privacy.html`, built from `PRIVACY_URL` / `privacy` in `_build/build.py`), the Axford disclosure in the tenant FAQ, the buyer services list and the neighbourhood notes are all written. If you add or change a form, the chat widget or another third-party service, update `privacy.html` to match.
 
 ## Forms (FormSubmit)
-The forms (the qualifying form on `index.html#qualify` and `contact.html`, buyers.html "Send me listings", tenants.html relocation intake, home-evaluation.html, buyer-opinion.html, the listing and rental inquiries, and the chat widget message) post via AJAX to
+The forms (the qualifying form on `index.html#qualify` and `contact.html`, buyers.html "Send me listings", tenants.html relocation intake, home-evaluation.html, buyer-opinion.html, the listing and rental inquiries, the mortgage-rates intro, and the chat widget message) post via AJAX to
 `https://formsubmit.co/ajax/devin@axfordrealestate.ca` — configured in one spot: `assets/js/config.js`.
-- Email subjects include "New qualified lead: Buying, Coquitlam, 0-3 months", "New buyer listings request", "New relocation rental intake", "New free home evaluation", "New expert opinion request", and "New chat widget message" (table template, Reply-To = visitor's email).
+- Email subjects include "New qualified lead: Buying, Coquitlam, 0-3 months", "New buyer listings request", "New relocation rental intake", "New free home evaluation", "New expert opinion request", "Mortgage intro request", and "New chat widget message" (table template, Reply-To = visitor's email).
 - The qualifying form (`qualifiedLead`) asks buying / selling / renting, area, timeline, budget or home value or monthly rent, where they're moving from, then name, email, optional phone, optional message, and the same contact-consent checkbox as the other forms. GoatCounter events, sent with `window.goatcounter.count` and `event: true`, are `lead-form-start`, `lead-form-step-1` through `lead-form-step-6` when that step is first shown, and `lead-form-sent` only after FormSubmit accepts the message. Those names do not include the visitor's answers, name, email, phone, or message.
 - `qualifiedLead`, `homeEvaluation`, `buyerOpinion`, `chatLead`, and `marketReport` were not test-submitted. The market-report form asks for a name, an email, and consent, then reveals that month's PDF. Its subject is `Market report download: <name>`. GoatCounter event `report-download` fires only after FormSubmit accepts it, and does not include the name or email.
 - Spam: hidden honeypot field `_honey`. reCAPTCHA is not used by FormSubmit's AJAX flow, so nothing was disabled.
 - Visitors see an on-page success (or error + call/email fallback) message.
+
+## Mortgage rates
+
+`mortgage-rates.html` is a client page for illustrative Big 5 rates. It is not a quote, not financial advice, and not a mortgage approval. Devin Desaulniers is a Real Estate Associate with Axford Real Estate. He does not hold a mortgage licence. The form (`mortgageIntro` in `assets/js/config.js`) emails him with the subject `Mortgage intro request` so he can introduce the client to a licensed mortgage professional. GoatCounter event `form-mortgage-intro` fires only after FormSubmit accepts it, and does not include the name, email, phone, message, or rate. Do not test-submit.
+
+**Refresh the rates:** edit `assets/data/mortgage-rates.json`. Set `updated` to an ISO-8601 datetime and `updatedLabel` to the words that should follow "Rates as of". Keep the five banks in the existing order, and keep each term id (`5y-variable`, `5y-fixed`, `3y-fixed`, `1y-fixed`). The explorer fetches that file in the browser, so the interactive numbers update from the file. Then run `cd _build && python3 build.py` so the no-JavaScript table, the FAQ schema date, and `sitemap.xml` lastmod match. Do not rank the banks or describe one rate as preferable.
+
+The affordability calculator at `https://devindrealty-a11y.github.io/mortgage-calculator/` (and `full.html`) does **not** read a `rate` query parameter. The page links to both and tells the client to type the selected percent into Rate (%). Teaching the calculator to accept `?rate=` is a follow-up in that other repo.
+
+Checked October 28, 2026, 9:14 p.m. against Ratehub.ca's Big 5 table and its 1-year fixed table. An earlier stamp the same day had different variable rates and different Scotiabank fixed rates. The JSON file follows the later stamp. Ratehub does not label the Big 5 rows as posted or special. The 1-year figures are the closed fixed rates beside each bank name, not the open-rate table.
 
 ## True cost guide sign-up
 
@@ -79,7 +90,7 @@ domain earns no search value of its own.
   Axford is listed as `parentOrganization` because schema.org only allows `worksFor` on `Person`.
 - `tenants.html` also carries `FAQPage` JSON-LD. It is generated from the same `FAQ_ITEMS` strings as the
   visible FAQ, so edit the FAQ in `build.py` only and the schema stays identical to the page text.
-- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, listings, rentals, rent-report, the Tri-Cities, BC market report index and each edition, tenants, buyers, home-evaluation, buyer-opinion, relocating-to-greater-vancouver, videos, privacy, terms, and the blog). The Coquitlam redirect is omitted. The rent report URL gets a `lastmod` from the latest Monday snapshot. Each market-report URL gets a `lastmod` from the edition's published date.
+- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, listings, rentals, rent-report, the Tri-Cities, BC market report index and each edition, tenants, buyers, mortgage-rates, home-evaluation, buyer-opinion, relocating-to-greater-vancouver, videos, privacy, terms, and the blog). The Coquitlam redirect is omitted. The rent report URL gets a `lastmod` from the latest Monday snapshot. Each market-report URL gets a `lastmod` from the edition's published date.
 - `robots.txt` allows crawl and lists the Sitemap at https://devindesaulniers.ca/sitemap.xml (served at the domain root).
 - `SITE` in `_build/partials.py` is `https://devindesaulniers.ca/`. Rebuild after changing it.
 - Submit `sitemap.xml` in Google Search Console when ready.

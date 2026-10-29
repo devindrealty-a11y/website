@@ -26,6 +26,9 @@ window.SITE_CONFIG = {
     // True-cost guide sign-up. Emails Devin only. Not test-submitted.
     // Subject is set in assets/js/true-cost.js: "True cost guide sign-up: <name>".
     trueCostSignup: "https://formsubmit.co/ajax/devin@axfordrealestate.ca",
-    marketReport: "https://formsubmit.co/ajax/devin@axfordrealestate.ca" // market-report PDF gate (not test-submitted)
+    marketReport: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // market-report PDF gate (not test-submitted)
+    // Mortgage rates page. Subject is "Mortgage intro request". Not test-submitted.
+    // Devin introduces the client to a licensed mortgage professional. He does not underwrite.
+    mortgageIntro: "https://formsubmit.co/ajax/devin@axfordrealestate.ca"
   }
 };

@@ -170,7 +170,7 @@ button.btn{font-family:var(--font-head)}
 html.nav-open{overflow:hidden}
 html.nav-open .sticky-cta{display:none}
 
-/* Desktop nav. Six links fit from 1024px; sale, rent, and the rent report need 1360px. */
+/* Desktop nav. Six links fit from 1024px; sale, rent, the rent report, and mortgage rates need 1360px. */
 @media (min-width:1024px){
   .site-header:not(.nav-long) .header-inner{min-height:70px;gap:24px}
   .site-header:not(.nav-long) .brand img{height:42px}
@@ -185,13 +185,13 @@ html.nav-open .sticky-cta{display:none}
   .site-header:not(.nav-long) .nav-toggle,.site-header:not(.nav-long) .header-call{display:none}
 }
 @media (min-width:1360px){
-  .nav-long .header-inner{min-height:70px;gap:16px}
+  .nav-long .header-inner{min-height:70px;gap:12px;max-width:min(1560px,100%)}
   .nav-long .brand img{height:42px}
   .nav-long .brand-name{font-size:1.02rem}
   .nav-long .nav{display:flex;position:static;flex-direction:row;align-items:center;gap:2px;padding:0;overflow:visible;background:none;border:0}
   .nav-long .nav-links{flex-direction:row;gap:0}
-  .nav-long .nav-links a{min-height:44px;padding:0 8px;border:0;font-family:var(--font-head);font-size:.8rem;font-weight:600;letter-spacing:.01em;white-space:nowrap}
-  .nav-long .nav-links a::after{content:"";position:absolute;left:8px;right:8px;bottom:6px;width:auto;height:2px;margin:0;border-radius:0;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+  .nav-long .nav-links a{min-height:44px;padding:0 7px;border:0;font-family:var(--font-head);font-size:.78rem;font-weight:600;letter-spacing:.01em;white-space:nowrap}
+  .nav-long .nav-links a::after{content:"";position:absolute;left:7px;right:7px;bottom:6px;width:auto;height:2px;margin:0;border-radius:0;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
   .nav-long .nav-links a:hover::after,.nav-long .nav-links a[aria-current="page"]::after{transform:scaleX(1)}
   .nav-long .nav-phone{display:none}
   .nav-long .nav-cta{width:auto;min-height:44px;margin:0 0 0 8px;padding:0 16px}
@@ -367,6 +367,7 @@ html.nav-open .sticky-cta{display:none}
 .calc-cta .eyebrow{color:var(--sky);margin-bottom:.8em}
 .calc-cta h2,.calc-cta h3{margin:0 0 .3em;font-size:clamp(1.7rem,1.3rem + 1.2vw,2.35rem);color:#fff}
 .calc-cta p{margin:0;max-width:40rem;color:#cfdcea}
+.calc-note{margin:18px auto 0;max-width:46rem}
 @media (min-width:1000px){.calc-cta{grid-template-columns:auto minmax(0,1fr) auto;gap:40px}}
 
 /* ===== Contact ===== */
@@ -1167,6 +1168,64 @@ html.dd-chat-open{overflow:hidden}
 .mr-index-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,3vw,32px)}
 .mr-index-card h2{font-size:clamp(1.6rem,1.3rem + .8vw,2.1rem)}
 .mr-index-meta{color:var(--muted);font-size:.92rem}
+
+/* ===== Mortgage rates explorer ===== */
+.rate-layout{display:grid;gap:22px;align-items:start}
+.rate-choice{border:0;margin:0 0 16px;padding:0}
+.rate-choice legend{padding:0;margin:0 0 8px;font-family:var(--font-head);font-weight:600;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.rate-pills{display:flex;flex-wrap:wrap;gap:8px}
+.rate-pill{position:relative;display:inline-flex;min-height:44px;cursor:pointer}
+.rate-pill input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.rate-pill span{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border:1px solid #cdd5de;border-radius:999px;background:#fff;color:var(--ink);font-size:.92rem}
+.rate-pill:hover span{border-color:#9aa7b4}
+.rate-pill input:checked + span{border-color:var(--blue-dark);background:var(--blue-light);font-weight:600}
+.rate-pill input:focus-visible + span{outline:3px solid var(--focus);outline-offset:3px}
+.rate-board{display:grid;gap:10px}
+.rate-card{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name rate" "legal meta";gap:2px 16px;width:100%;padding:14px 16px;text-align:left;font:inherit;color:inherit;background:#fff;border:1px solid var(--line);border-radius:var(--radius);cursor:pointer}
+.rate-card[hidden]{display:none !important}
+.rate-card:hover{border-color:#9aa7b4}
+.rate-card[aria-pressed="true"]{border-color:var(--blue-dark);background:var(--blue-50);box-shadow:inset 0 0 0 1px var(--blue-dark)}
+.rate-card-name{grid-area:name;font-family:var(--font-head);font-weight:700;letter-spacing:.04em;color:var(--ink)}
+.rate-card-legal{grid-area:legal;color:var(--muted);font-size:.86rem}
+.rate-card-rate{grid-area:rate;font-family:var(--font-display);font-weight:500;font-size:clamp(1.8rem,1.4rem + 1vw,2.4rem);line-height:.95;color:var(--ink)}
+.rate-card-meta{grid-area:meta;justify-self:end;align-self:end;color:var(--muted);font-size:.82rem;text-align:right}
+.rate-unit{font-size:.55em;margin-left:.06em}
+.rate-panel{padding:clamp(20px,3vw,32px);background:var(--night);color:#fff;border-radius:var(--radius);--focus:#a9d0f5}
+.rate-panel h3{color:#fff;margin:0 0 .35em}
+.rate-kicker{margin:0 0 .2em;font-family:var(--font-head);font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sky)}
+.rate-figure{margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(3.6rem,2.4rem + 3vw,5rem);line-height:.88;letter-spacing:-.03em;color:#fff}
+.rate-spread,.rate-asof,.rate-source{margin:.55em 0 0;color:var(--on-night)}
+.rate-source a{color:#fff}
+.rate-pay{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.14)}
+.rate-pay h3{margin-top:16px}
+@media (min-width:480px){
+  .rate-pay-form .form-grid{grid-template-columns:1fr 1fr}
+  .rate-pay-form .field:last-child{grid-column:1 / -1}
+}
+.rate-pay-lead,.rate-pay-note,.rate-panel .form-note,.rate-panel .hint{color:var(--on-night-muted)}
+.rate-pay-label{margin:16px 0 0;font-family:var(--font-head);font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sky)}
+.rate-payment{margin:.1em 0 .2em;font-family:var(--font-display);font-weight:500;font-size:clamp(2rem,1.4rem + 1.5vw,2.8rem);line-height:1;color:#fff}
+.rate-panel .field label{color:#fff}
+.rate-panel .btn-row{flex-direction:column;margin-top:18px}
+.rate-panel .btn{width:100%}
+.rate-panel .form-note strong{color:#fff}
+.rate-sources{padding-left:1.2em}
+.rate-sources li{margin:0 0 .7em}
+.rate-table{width:100%;border-collapse:collapse;margin-top:18px;font-size:.92rem}
+.rate-table caption{caption-side:bottom;padding-top:10px;text-align:left;color:var(--muted)}
+.rate-table th,.rate-table td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.rate-table td span{display:block;color:var(--muted);font-size:.8rem}
+@media (min-width:720px){
+  .rate-board{grid-template-columns:1fr 1fr}
+}
+@media (min-width:980px){
+  .rate-layout{grid-template-columns:minmax(0,1.05fr) minmax(300px,.9fr);gap:28px}
+  .rate-board{grid-template-columns:1fr}
+  .rate-panel{position:sticky;top:calc(var(--hdr-h) + 16px);max-height:calc(100vh - var(--hdr-h) - 28px);overflow:auto}
+}
+@media (max-width:559px){
+  .rate-panel .btn-row .btn{flex:1 1 auto}
+}
 @media (min-width:800px){.mr-cards{grid-template-columns:repeat(3,1fr)}}
 @media (min-width:860px){.mr-fit{grid-template-columns:1fr 1fr;align-items:start}}
 @media (min-width:900px){.mr-gate{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px}}

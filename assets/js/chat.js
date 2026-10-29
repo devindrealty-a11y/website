@@ -48,8 +48,11 @@
           ]
         },
         {
-          text: "The mortgage affordability calculator is free. Results are estimates only. They are not a mortgage approval or financial advice.",
-          links: [{ href: CALC, label: "Mortgage calculator", external: true }]
+          text: "Illustrative Big 5 bank mortgage rates are on the mortgage rates page. They are not a rate you are approved for, and they are not financial advice. The mortgage affordability calculator is free. Results are estimates only. They are not a mortgage approval.",
+          links: [
+            { href: "mortgage-rates.html", label: "Mortgage rates" },
+            { href: CALC, label: "Mortgage calculator", external: true }
+          ]
         }
       ]
     },
@@ -89,10 +92,11 @@
           ]
         },
         {
-          text: "If you are buying, start with homes for sale and the neighbourhood guides. The mortgage calculator gives an estimate only. It is not a mortgage approval.",
+          text: "If you are buying, start with homes for sale and the neighbourhood guides. Illustrative mortgage rates are separate from the calculator. The calculator gives an estimate only. It is not a mortgage approval.",
           links: [
             { href: "listings.html", label: "Homes for sale" },
             { href: "buyers.html#neighbourhoods", label: "Neighbourhood guides" },
+            { href: "mortgage-rates.html", label: "Mortgage rates" },
             { href: CALC, label: "Mortgage calculator", external: true }
           ]
         }
