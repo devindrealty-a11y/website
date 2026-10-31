@@ -197,6 +197,7 @@ home += f'''
         <li><b>Port Moody</b><span>Where I work · Tri-Cities, BC focus</span></li>
         <li class="fact-wide"><b>Axford Real Estate</b><span>Brokerage · {BROKERAGE_ADDR}</span></li>
       </ul>
+      <p class="inline-links">Area guides: <a href="coquitlam.html">Coquitlam</a> · <a href="port-moody.html">Port Moody</a> · <a href="port-coquitlam.html">Port Coquitlam</a> · <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a> · <a href="newcomer-buyers.html">Newcomer buyers</a></p>
       {social_row()}
     </div>
   </div>
@@ -259,7 +260,7 @@ hoods = [
   ["Burke Mountain","Westwood Plateau","City Centre","Burquitlam","Austin Heights","Maillardville","Ranch Park","Eagle Ridge"],
   "Millennium Line SkyTrain (Burquitlam, Lincoln, Coquitlam Central, Lafarge Lake–Douglas) and West Coast Express at Coquitlam Central; Lougheed Highway and Highway 1 nearby.",
   "Mundy Park, Lafarge Lake & Town Centre Park, Como Lake, and trails on Westwood Plateau and Burke Mountain.",
-  "Coquitlam is the largest of the Tri-Cities, BC, and one of the three cities I focus on. Buyers here are often choosing between a hillside area like Burke Mountain or Westwood Plateau and City Centre, and the commute is usually the deciding piece. Tell me where you'll be heading each day and we'll compare them on that. For the SkyTrain neighbourhood on the Burnaby border, read my <a href=\"burquitlam-neighbourhood-guide.html\">Burquitlam neighbourhood guide</a>."),
+  "Coquitlam is the largest of the Tri-Cities, BC (see my <a href=\"coquitlam.html\">Coquitlam guide</a>), and one of the three cities I focus on. Buyers here are often choosing between a hillside area like Burke Mountain or Westwood Plateau and City Centre, and the commute is usually the deciding piece. Tell me where you'll be heading each day and we'll compare them on that. For the SkyTrain neighbourhood on the Burnaby border, read my <a href=\"burquitlam-neighbourhood-guide.html\">Burquitlam neighbourhood guide</a>."),
  ("Port Coquitlam","Riverside community with a small-town feel",
   "“PoCo” sits between the Coquitlam and Pitt rivers, with a walkable downtown, family-friendly residential neighbourhoods and the Traboulay PoCo Trail looping around the city. It's also Terry Fox's hometown — and where I play soccer.",
   ["Downtown PoCo","Citadel Heights","Mary Hill","Oxford Heights","Lincoln Park","Riverwood","Birchland Manor","Glenwood"],
@@ -358,7 +359,7 @@ buyers += f'''
     <div class="other-areas">
       <h3>Other nearby areas</h3>
       <p>I also help buyers in neighbouring Greater Vancouver communities, including <strong>Burnaby</strong>, <strong>New Westminster</strong>, and <strong>Pitt Meadows &amp; Maple Ridge</strong>. School District 43 serves Coquitlam, Port Coquitlam, Port Moody, Anmore and Belcarra — always confirm school catchments with the district for a specific address.</p>
-      <p>Longer guides: <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a>. Buying a first home in the Tri-Cities, BC? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>, <a href="bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a>, and <a href="true-cost-of-owning-a-home-bc.html">the true cost of owning a home in BC</a>. Illustrative Big 5 rates are on the <a href="mortgage-rates.html">mortgage rates</a> page.</p>
+      <p>Longer guides: <a href="coquitlam.html">Coquitlam</a>, <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a>. Buying a first home in the Tri-Cities, BC? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>, <a href="bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a>, and <a href="true-cost-of-owning-a-home-bc.html">the true cost of owning a home in BC</a>. Illustrative Big 5 rates are on the <a href="mortgage-rates.html">mortgage rates</a> page.</p>
       <p>If you're looking somewhere else in Greater Vancouver, tell me on the <a href="#listings">listings form</a> below: choose “Other (add in notes)” and add the area in your notes.</p>
     </div>
   </div>
@@ -620,7 +621,7 @@ tenants += f"""
       <h2>Hi, I'm Devin.</h2>
       <p>I've lived in the Greater Vancouver area for 28 years. I work in Port Moody, and I play soccer on a Port Coquitlam team and pickleball around the Tri-Cities, BC. I know this region as a local — so I can tell you what a neighbourhood is actually like, not just what the listing says.</p>
       <p>For the last seven years I've been helping people relocate to and from Vancouver. I've been licensed in real estate since 2020, and today I'm a Real Estate Associate with <strong>Axford Real Estate</strong>.</p>
-      <p class="inline-links"><a href="{TEL}">{PHONE}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="index.html#about">More about me</a> · <a href="relocating-to-greater-vancouver.html">Moving to Greater Vancouver?</a> · <a href="newcomer-rental-faqs.html">New to Canada?</a></p>
+      <p class="inline-links"><a href="{TEL}">{PHONE}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="index.html#about">More about me</a> · <a href="relocating-to-greater-vancouver.html">Moving to Greater Vancouver?</a> · <a href="newcomer-rental-faqs.html">New to Canada?</a> · <a href="newcomer-buyers.html">Newcomer buyers</a> · <a href="coquitlam.html">Coquitlam guide</a></p>
       {social_row("Look me up")}
     </div>
     <figure class="portrait">
@@ -699,7 +700,7 @@ AREAS_GV = [
 ]
 areas_gv_html = "".join(f'<div class="area-card{" highlight" if hl else ""}"><h3>{n}</h3><p>{d}</p><p class="transit">{t}</p></div>' for n, d, t, hl in AREAS_GV)
 
-gv = head(GV_TITLE, GV_DESC, "guide", page_url=GV_URL)
+gv = head(GV_TITLE, GV_DESC, "guide", page_url=GV_URL, extra_head=seo_pages.faq_jsonld(GV_FAQ))
 gv += f"""
 <section class="page-hero">
   <div class="container">
@@ -736,7 +737,7 @@ gv += f"""
     <p>Greater Vancouver is a collection of cities, each with its own feel, rents and commute. Here's a quick snapshot to start your shortlist:</p>
     <div class="area-grid">{areas_gv_html}</div>
     <h3 class="sub-h">Getting around</h3>
-    <p>TransLink runs SkyTrain, buses, the SeaBus and the West Coast Express commuter rail (weekday rush-hour service between Mission and Waterfront Station in downtown Vancouver). Driving times vary a lot by bridge and time of day, so tell me where you'll work or study and I'll factor the commute into every shortlist. Buying in the Tri-Cities, BC? See my <a href="buyers.html#neighbourhoods">neighbourhood guides</a>, the <a href="burquitlam-neighbourhood-guide.html">Burquitlam neighbourhood guide</a>, the <a href="port-moody.html">Port Moody guide</a> and the <a href="port-coquitlam.html">Port Coquitlam guide</a>. Buying a first home? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions for the Tri-Cities, BC</a>. New to Canada and renting first? See the <a href="newcomer-rental-faqs.html">newcomer rental FAQs</a>.</p>
+    <p>TransLink runs SkyTrain, buses, the SeaBus and the West Coast Express commuter rail (weekday rush-hour service between Mission and Waterfront Station in downtown Vancouver). Driving times vary a lot by bridge and time of day, so tell me where you'll work or study and I'll factor the commute into every shortlist. Buying in the Tri-Cities, BC? See my <a href="buyers.html#neighbourhoods">neighbourhood guides</a>, the <a href="burquitlam-neighbourhood-guide.html">Burquitlam neighbourhood guide</a>, the <a href="port-moody.html">Port Moody guide</a> and the <a href="port-coquitlam.html">Port Coquitlam guide</a>. Buying a first home? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions for the Tri-Cities, BC</a>. New to Canada and renting first? See the <a href="newcomer-rental-faqs.html">newcomer rental FAQs</a>, or read <a href="newcomer-buyers.html">buying a home as a newcomer to Canada</a>. Moving to Coquitlam? See the <a href="coquitlam.html">Coquitlam guide</a>.</p>
   </div>
 </section>
 

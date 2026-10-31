@@ -276,7 +276,7 @@ def _burquitlam():
       <li><div><h3>Help with renting, if that's your path</h3><p>Ask whether they work for tenants (not just landlords) and what's included.</p></div></li>
       <li><div><h3>Communication that fits your situation</h3><p>If you're relocating, ask about live video tours and how quickly they respond. I work in English and use a translation app when a client needs another language.</p></div></li>
     </ol>
-    <p class="after-steps">Related reading: the <a href="port-moody.html">Port Moody guide</a>, the <a href="port-coquitlam.html">Port Coquitlam guide</a>, <a href="relocating-to-greater-vancouver.html">relocating to Greater Vancouver</a>, and the <a href="blog/">blog</a>. You can also try my free <a href="{CALC}" target="_blank" rel="noopener">mortgage affordability calculator</a>.</p>
+    <p class="after-steps">Related reading: the <a href="coquitlam.html">Coquitlam guide</a>, the <a href="port-moody.html">Port Moody guide</a>, the <a href="port-coquitlam.html">Port Coquitlam guide</a>, <a href="relocating-to-greater-vancouver.html">relocating to Greater Vancouver</a>, and the <a href="blog/">blog</a>. You can also try my free <a href="{CALC}" target="_blank" rel="noopener">mortgage affordability calculator</a>.</p>
     ''', paper=True)
     sources = _sources(
         "Area facts were checked against City of Coquitlam, TransLink, SD43, the Province of BC, BCFSA and Greater Vancouver REALTORS® sources on Oct 7, 2026. Plans, schedules and prices change, so check the latest details before you decide.",
@@ -368,7 +368,7 @@ def _port_moody():
     <p>Outside the cores, many buyers also look at <strong>Heritage Woods and Heritage Mountain</strong>, <strong>Klahanie</strong>, and older waterfront streets near Rocky Point and Old Orchard. Each has a different commute, school catchment and strata (or no-strata) profile.</p>
     <h3 class="sub-h">Rocky Point and daily life</h3>
     <p>Rocky Point Park is the city's main waterfront park on Burrard Inlet. From Moody Centre Station the City lists about a <strong>10-minute walk</strong>. The Shoreline Trail connects along the inlet. If walkability and outdoor time matter to you, we start showings with a map of walking distances to SkyTrain, Rocky Point and your work commute, not just photos of the kitchen.</p>
-    <p>Burquitlam is the next neighbourhood south, in Coquitlam. The <a href="burquitlam-neighbourhood-guide.html">Burquitlam neighbourhood guide</a> covers that station, the neighbourhood plan and the housing mix. For the city next door, see the <a href="port-coquitlam.html">Port Coquitlam guide</a>.</p>
+    <p>Burquitlam is the next neighbourhood south, in Coquitlam (see the <a href="coquitlam.html">Coquitlam guide</a>). The <a href="burquitlam-neighbourhood-guide.html">Burquitlam neighbourhood guide</a> covers that station, the neighbourhood plan and the housing mix. For the city next door, see the <a href="port-coquitlam.html">Port Coquitlam guide</a>.</p>
     ''')
     body += _section("buying", "Buying", "Buying in Port Moody: practical checks", f'''
     <ul class="list-check">
@@ -457,7 +457,7 @@ def _port_coquitlam():
       <li><strong>Dominion Avenue and Fremont</strong> — newer development in the north-east, near the Dominion Triangle. The OCP notes most of the Dominion Triangle is designated for light industrial and commercial use, with some residential land along Dominion Avenue.</li>
     </ul>
     <p>Other north-side pockets buyers mention include Oxford Heights, Birchland Manor and Glenwood. Each area has a different commute, school catchment (School District 43) and strata or non-strata profile, so I compare them against your shortlist rather than recommending one blind.</p>
-    <p>SkyTrain living is a different search. See the <a href="port-moody.html">Port Moody guide</a> and the <a href="burquitlam-neighbourhood-guide.html">Burquitlam neighbourhood guide</a>.</p>
+    <p>SkyTrain living is a different search. See the <a href="coquitlam.html">Coquitlam guide</a>, the <a href="port-moody.html">Port Moody guide</a> and the <a href="burquitlam-neighbourhood-guide.html">Burquitlam neighbourhood guide</a>.</p>
     ''')
     body += _section("buying", "Buying", "Buying in Port Coquitlam: practical checks", f'''
     <ul class="list-check">
@@ -547,7 +547,7 @@ def _newcomer():
       <li>Lease review and negotiation before you sign</li>
     </ul>
     <p>The fee is <strong>$1,500 + GST</strong>, paid by the tenant in two parts: <strong>$750 at the start (non-refundable)</strong> and <strong>$750 once a rental is secured</strong>. Reach out <strong>4–6 weeks</strong> before your move. The full service is on my <a href="tenants.html">tenants page</a>, and you can start with the <a href="tenants.html#intake">rental search form</a>.</p>
-    <p>For the cities themselves, see the <a href="burquitlam-neighbourhood-guide.html">Burquitlam neighbourhood guide</a>, the <a href="port-moody.html">Port Moody guide</a>, the <a href="port-coquitlam.html">Port Coquitlam guide</a>, and <a href="relocating-to-greater-vancouver.html">relocating to Greater Vancouver</a>.</p>
+    <p>Thinking about buying later? Read <a href="newcomer-buyers.html">buying a home in Coquitlam as a newcomer</a>. For the cities themselves, see the <a href="coquitlam.html">Coquitlam guide</a>, the <a href="burquitlam-neighbourhood-guide.html">Burquitlam neighbourhood guide</a>, the <a href="port-moody.html">Port Moody guide</a>, the <a href="port-coquitlam.html">Port Coquitlam guide</a>, and <a href="relocating-to-greater-vancouver.html">relocating to Greater Vancouver</a>.</p>
     ''', paper=True)
     sources = _sources(
         "The deposit cap is provincial tenancy law. The service details are the same ones published on the tenants page. This is general information, not legal advice.",
@@ -642,8 +642,218 @@ def _first_time():
     )
 
 
+# ---------------- Coquitlam area page + newcomer buyer page (approved Oct 30, 2026) ----------------
+
+def _agent_jsonld(url, name_suffix=""):
+    return '<script type="application/ld+json">\n' + json.dumps({
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        "name": "Devin Desaulniers, REALTOR® - Axford Real Estate",
+        "url": "https://devindesaulniers.ca/" + url,
+        "image": "https://devindesaulniers.ca/assets/img/devin-grey-800.jpg",
+        "telephone": "+1-604-809-1032",
+        "email": EMAIL,
+        "parentOrganization": {"@type": "Organization", "name": "Axford Real Estate"},
+        "address": {"@type": "PostalAddress", "streetAddress": "2326 Clarke St", "addressLocality": "Port Moody",
+                    "addressRegion": "BC", "addressCountry": "CA"},
+        "areaServed": [{"@type": "City", "name": n} for n in ("Coquitlam", "Port Coquitlam", "Port Moody")],
+    }, indent=2, ensure_ascii=False) + "\n</script>"
+
+
+def _grey_portrait():
+    return f'''<figure class="portrait guide-photo">
+      {picture("assets/img/devin-grey", (480, 800), 800, 1000, "Devin Desaulniers, REALTOR® with Axford Real Estate", "headshot", eager="auto", sizes_attr="(max-width: 899px) 70vw, 280px")}
+      <figcaption><strong>Devin Desaulniers</strong><span>REALTOR® · Axford Real Estate</span></figcaption>
+      <div class="btn-row portrait-cta"><a class="btn btn-primary" href="{TEL}">{I["phone"]} Call or text</a><a class="btn btn-outline" href="mailto:{EMAIL}">{I["mail"]} Email</a></div>
+    </figure>'''
+
+
+def _acc_faq(heading, items):
+    rows = "".join(f'<details><summary>{q}</summary><div class="ans">{a}</div></details>' for q, a, *_ in items)
+    return f'''<section class="section section--paper" id="faq">
+  <div class="container narrow-wide">
+    <span class="eyebrow">FAQ</span><h2>{heading}</h2>
+    <div class="tc-acc">{rows}</div>
+  </div>
+</section>'''
+
+
+def _visual_page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intro_rest, body, faq_heading, faq_items, cta_html, sources_html):
+    html = head(title, desc, "area-guide", page_url=filename,
+                extra_head=faq_jsonld(faq_items))
+    html += f'''
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">{eyebrow}</span>
+    <h1>{h1}</h1>
+    <p class="lead">{lead}</p>
+    <div class="btn-row">
+      <a class="btn btn-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>
+      <a class="btn btn-ghost-light" href="mailto:{EMAIL}">{I["mail"]} Email Devin</a>
+    </div>
+  </div>
+</section>
+{page_nav(nav)}
+<article class="guide">
+<section class="section">
+  <div class="container guide-intro">
+    <div>
+      <p class="lead guide-lead">{intro_lead}</p>
+      {intro_rest}
+    </div>
+    {_grey_portrait()}
+  </div>
+</section>
+{body}
+{_acc_faq(faq_heading, faq_items)}
+{sources_html}
+</article>
+{cta_html}
+'''
+    html += foot()
+    assert_copy(html, filename)
+    return filename, html
+
+
+def _coquitlam():
+    hoods = [
+        ("building", "Burquitlam", 'Condos and townhomes around Burquitlam Station; easy Millennium Line access to Burnaby and Vancouver. <a href="burquitlam-neighbourhood-guide.html">Burquitlam guide</a>'),
+        ("building", "City Centre / Coquitlam Centre", "High-rise living near Lincoln and Lafarge Lake–Douglas stations, the mall, Town Centre Park and Douglas College."),
+        ("home", "Westwood Plateau", "Established detached homes and townhouses on the hillside, near golf and trails."),
+        ("home", "Burke Mountain", "Newer family subdivisions and townhomes on the northeast side; more space, newer schools, car-friendly."),
+        ("key", "Maillardville", "One of Coquitlam's oldest areas, with francophone heritage, older homes and new low-rise and townhouse redevelopment."),
+        ("pin", "Austin Heights / Ranch Park / Harbour Chines", "Central, established single-family streets with a mix of older and rebuilt homes."),
+        ("pin", "Eagle Ridge", "Townhouses and homes near Port Moody, close to Coquitlam Centre."),
+    ]
+    cards = "".join(f'<div class="card hood-card"><div class="icon">{I[ic]}</div><h3>{n}</h3><p>{d}</p></div>' for ic, n, d in hoods)
+    body = _section("neighbourhoods", "Neighbourhoods", "Coquitlam neighbourhoods at a glance", f'<div class="card-grid-3">{cards}</div>', paper=True).replace("container narrow-wide", "container", 1)
+    stations = ["Burquitlam", "Lincoln", "Coquitlam Central", "Lafarge Lake–Douglas"]
+    strip = "".join(f'<li{" class=\"wce\"" if s == "Coquitlam Central" else ""}><span class="dot"></span><span class="st-name">{s}</span>{"<span class=\"st-tag\">+ West Coast Express</span>" if s == "Coquitlam Central" else ""}</li>' for s in stations)
+    body += _section("transit", "Getting around", "SkyTrain, West Coast Express and highways", f'''
+    <div class="station-strip" role="img" aria-label="Millennium Line stations in Coquitlam: Burquitlam, Lincoln, Coquitlam Central, Lafarge Lake–Douglas. West Coast Express also stops at Coquitlam Central.">
+      <span class="line-label">Millennium Line</span><ol>{strip}</ol>
+    </div>
+    <p>Coquitlam has four Millennium Line stations (Burquitlam, Lincoln, Coquitlam Central and Lafarge Lake–Douglas), with Inlet Centre and Moody Centre next door in Port Moody, and Coquitlam Central is also a West Coast Express stop for weekday commuters to downtown Vancouver. Highway 1 and the Mary Hill Bypass connect to Burnaby, Surrey and the Fraser Valley. Schools are run by School District 43 (Coquitlam), which also serves Port Coquitlam and Port Moody.</p>
+    ''')
+    helps = [
+        ("home", "Buying", 'Condo strata reviews, townhouse and detached searches, first-time buyer programs.', f'<a class="card-link" href="first-time-buyers-tri-cities-bc.html">First-time buyers {I["arrow"]}</a><a class="card-link" href="bc-property-transfer-tax.html">Property transfer tax {I["arrow"]}</a>'),
+        ("handshake", "Selling", "Pricing from recent comparable sales, prep and marketing.", f'<a class="card-link" href="home-evaluation.html">Home evaluation {I["arrow"]}</a>'),
+        ("key", "Relocating or renting first", "I help people moving to Coquitlam find a rental on the tenant side before they arrive.", f'<a class="card-link" href="tenants.html">Relocation rentals {I["arrow"]}</a><a class="card-link" href="newcomer-rental-faqs.html">Newcomer rental FAQs {I["arrow"]}</a><a class="card-link" href="newcomer-buyers.html">Newcomer buyers {I["arrow"]}</a>'),
+    ]
+    hcards = "".join(f'<div class="card"><div class="icon">{I[ic]}</div><h3>{t}</h3><p>{d}</p><div class="card-links">{l}</div></div>' for ic, t, d, l in helps)
+    body += _section("help", "How I help", "How I help in Coquitlam", f'<div class="card-grid-3">{hcards}</div>', paper=True).replace("container narrow-wide", "container", 1)
+    faq = [
+        ("Who is a good realtor for Coquitlam?",
+         "<p>Look for someone who works the Tri-Cities, BC every week, knows the difference between Burquitlam strata buildings and Burke Mountain subdivisions, and gives straight answers on price. I'm Devin Desaulniers with Axford Real Estate in Port Moody, and Coquitlam is part of my core area.</p>"),
+        ("Which Coquitlam neighbourhood suits families?",
+         "<p>It depends on budget and commute. Burke Mountain and Westwood Plateau offer more space and newer homes; City Centre and Burquitlam suit people who want SkyTrain and walkability.</p>"),
+        ("Is Coquitlam good for commuting to Vancouver?",
+         "<p>Yes, if you live near the Millennium Line. Burquitlam, Lincoln, Coquitlam Central and Lafarge Lake–Douglas stations connect to Burnaby and Vancouver, and the West Coast Express runs weekday peak trips from Coquitlam Central.</p>"),
+        ("Can you help me rent in Coquitlam before I move?",
+         "<p>Yes. I search rentals, arrange viewings (by video if you're not here yet) and help with applications on the tenant side.</p>"),
+        ("Do you also cover Port Moody and Port Coquitlam?",
+         "<p>Yes, all three Tri-Cities, BC plus Burnaby, New Westminster, Vancouver, Maple Ridge and Pitt Meadows.</p>"),
+    ]
+    sources = _sources(
+        "Station and commuter rail details come from TransLink and can change. School information comes from School District 43.",
+        [
+            ("SkyTrain: Millennium Line", "https://www.translink.ca/schedules-and-maps/skytrain", "TransLink"),
+            ("West Coast Express", "https://www.translink.ca/schedules-and-maps/west-coast-express", "TransLink"),
+            ("School District 43 (Coquitlam)", "https://www.sd43.bc.ca/", "SD43"),
+        ],
+    )
+    cta = _cta(
+        "Talk through Coquitlam",
+        f"Call or text {PHONE}, or email {EMAIL}. Devin Desaulniers, REALTOR®, Axford Real Estate, {BROKERAGE_ADDR}.",
+        f'<a class="btn btn-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>'
+        f'<a class="btn btn-ghost-light" href="mailto:{EMAIL}">Email Devin</a>'
+        f'<a class="btn btn-ghost-light" href="buyers.html">Buyer info</a>',
+    )
+    return _visual_page(
+        "coquitlam.html",
+        "Coquitlam Realtor &amp; Neighbourhood Guide | Devin Desaulniers, Axford Real Estate",
+        "Buying, selling or moving to Coquitlam? Devin Desaulniers, REALTOR® with Axford Real Estate, explains Burquitlam, Burke Mountain, Westwood Plateau and more.",
+        "Local guide · Coquitlam",
+        "Coquitlam Realtor &amp; Neighbourhood Guide",
+        "Neighbourhoods, SkyTrain and how I help buyers, sellers and renters in Coquitlam, BC.",
+        [("neighbourhoods", "Neighbourhoods"), ("transit", "Transit"), ("help", "How I help"), ("faq", "FAQ")],
+        "I'm Devin Desaulniers, a REALTOR® with Axford Real Estate in Port Moody, and I help people buy, sell and rent homes in Coquitlam, BC, from Burquitlam condos to Burke Mountain family homes.",
+        "<p>Coquitlam is the biggest of the Tri-Cities, BC and the one with the widest range: SkyTrain towers, older character neighbourhoods and new hillside subdivisions. Below is how I explain it to buyers, sellers and people moving here from out of province.</p><p>Nearby guides: <a href=\"port-moody.html\">Port Moody</a> · <a href=\"port-coquitlam.html\">Port Coquitlam</a> · <a href=\"burquitlam-neighbourhood-guide.html\">Burquitlam</a></p>",
+        body, "Coquitlam FAQ", faq, cta, sources,
+    )
+
+
+_BAN_ACT = "https://laws-lois.justice.gc.ca/eng/acts/P-25.2/FullText.html"
+_BAN_REGS = "https://laws.justice.gc.ca/eng/regulations/SOR-2022-250/FullText.html"
+_CMHC_BAN = "https://www.cmhc-schl.gc.ca/consumers/home-buying/buying-guides/home-purchase-or-rental/prohibition-on-the-purchase-of-residential-property-by-non-canadians-act"
+_APTT = "https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax/additional-property-transfer-tax"
+
+
+def _newcomer_buyers():
+    elig = [
+        ("yes", "Citizen or permanent resident", "Yes", "The federal ban doesn't apply to you."),
+        ("likely", "Work permit with 183+ days left", "Likely yes", "Usually exempt for one home, if you haven't already bought during the ban."),
+        ("narrow", "International student", "Narrow", "Strict conditions apply. Most students rent first."),
+        ("no", "Other situations", "Not yet / ask", "Send me your situation and confirm with a lawyer or notary."),
+    ]
+    ecards = "".join(f'<div class="elig-card elig-{k}"><span class="elig-who">{w}</span><strong class="elig-ans">{a}</strong><p>{d}</p></div>' for k, w, a, d in elig)
+    body = _section("eligibility", "Quick check", "Can I buy yet?", f'''
+    <div class="elig-grid">{ecards}</div>
+    <p class="form-note">A quick guide only, based on the federal ban (in place until January 1, 2027). Not legal or tax advice; confirm eligibility with a lawyer or notary.</p>
+    ''', paper=True)
+    body += _section("rent-first", "The usual path", "Rent first, then buy", f'''
+    <ol class="mini-steps timeline-3">
+      <li><div><h3>Rent and settle</h3><p>Line up a rental before you land. I help on the tenant side. <a href="newcomer-rental-faqs.html">Newcomer rental FAQs</a></p></div></li>
+      <li><div><h3>Learn the area</h3><p>Try the SkyTrain commute, school catchments and neighbourhoods like Burquitlam, Burke Mountain and Suter Brook. <a href="coquitlam.html">Coquitlam guide</a></p></div></li>
+      <li><div><h3>Buy when it makes sense</h3><p>Check eligibility and taxes, get lender-ready, then search. <a href="bc-property-transfer-tax.html">Property transfer tax</a></p></div></li>
+    </ol>
+    <div class="btn-row"><a class="btn btn-primary" href="bc-property-transfer-tax.html">{I["calc"]} BC property transfer tax calculator</a></div>
+    ''')
+    faq = [
+        ("Can I buy a home in BC if I'm not a citizen or permanent resident yet?",
+         "<p>Often, yes. The Prohibition on the Purchase of Residential Property by Non-Canadians Act applies until January 1, 2027, but it exempts temporary residents who hold a valid work permit (or are authorized to work in Canada) with at least 183 days left on it on the purchase date, as long as they haven't already bought a home in Canada during the ban. Protected persons and spouses buying with a citizen or permanent resident partner are also exempt.</p>"),
+        ("What about international students?",
+         "<p>The student exemption is much narrower: five years of tax returns, at least 244 days a year in Canada for five years, a price of $500,000 or less, and only one property. Most students rent first.</p>"),
+        ("Will the ban end on January 1, 2027?",
+         "<p>That's the current end date (checked October 30, 2026). Ottawa has extended it once before, so check the latest before you plan around it.</p>"),
+        ("Do newcomers pay extra property transfer tax in Metro Vancouver?",
+         '<p>If you\'re a foreign national, yes. In addition to the regular property transfer tax, BC charges a 20% additional property transfer tax on your share of a home\'s fair market value in Metro Vancouver, which includes Coquitlam, Port Coquitlam and Port Moody. A permanent resident or citizen doesn\'t pay it. The main exemption for newcomers is the BC Provincial Nominee Program: if you\'re a confirmed BC Provincial Nominee when the transfer registers, the home is your principal residence and it\'s in your own name, you can claim the exemption. A work permit or student visa on its own doesn\'t count, and a spouse who is also a foreign national still pays on their share. See my <a href="bc-property-transfer-tax.html">BC property transfer tax page</a>.</p>'),
+        ("Can I get a mortgage on a work permit?",
+         "<p>Many lenders have newcomer programs; the down payment and documents differ by lender. A licensed mortgage professional can tell you what applies to you.</p>"),
+        ("Should I rent first?",
+         '<p>Usually, yes: renting a few months lets you learn the SkyTrain commute, school catchments and neighbourhoods like Burquitlam, Burke Mountain and Suter Brook before you buy. See my <a href="newcomer-rental-faqs.html">newcomer rental FAQs</a>.</p>'),
+    ]
+    sources = _sources(
+        "Ban dates and exemptions come from the federal Act and its Regulations (SOR/2022-250) and CMHC; the additional tax comes from the Province of B.C. Checked October 30, 2026.",
+        [
+            ("Prohibition on the Purchase of Residential Property by Non-Canadians Act", _BAN_ACT, "Justice Laws"),
+            ("Regulations, SOR/2022-250", _BAN_REGS, "Justice Laws"),
+            ("Prohibition on the purchase of residential property by non-Canadians", _CMHC_BAN, "CMHC"),
+            ("Additional property transfer tax", _APTT, "Province of B.C."),
+        ],
+    )
+    cta = _cta(
+        "Not sure if you qualify?",
+        f"Send me your situation (work permit expiry, where you're moving from, budget) and I'll tell you what your options look like. Devin Desaulniers, REALTOR®, Axford Real Estate, {BROKERAGE_ADDR}.",
+        f'<a class="btn btn-light" href="mailto:{EMAIL}">{I["mail"]} {EMAIL}</a>'
+        f'<a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} {PHONE}</a>',
+    ).replace("</div>\n  </div>\n</section>", '</div>\n    <p class="cta-disclaimer">Not legal or tax advice; confirm eligibility with a lawyer or notary.</p>\n  </div>\n</section>', 1)
+    return _visual_page(
+        "newcomer-buyers.html",
+        "Buying a Home in Coquitlam as a Newcomer to Canada | Devin Desaulniers",
+        "New to Canada and want to buy in the Tri-Cities, BC? Who can buy under the federal ban, the 20% BC foreign buyer tax, and why renting first often makes sense.",
+        "Newcomers · Buying",
+        "Buying a Home in Coquitlam as a Newcomer to Canada",
+        "Who can buy under the federal ban, the extra BC tax, and why renting first often makes sense.",
+        [("eligibility", "Can I buy?"), ("rent-first", "Rent first"), ("faq", "FAQ")],
+        "If you've just moved to Canada and want to buy in Coquitlam, Port Coquitlam or Port Moody, the first question isn't price, it's eligibility: the federal ban on non-Canadians buying homes runs until January 1, 2027, but many work-permit holders are already allowed to buy one home. I'm Devin Desaulniers, a REALTOR® with Axford Real Estate in Port Moody, and I help newcomers check where they stand, rent while they settle, and buy when it makes sense.",
+        '<p>Renting first? See my <a href="newcomer-rental-faqs.html">newcomer rental FAQs</a> and <a href="relocating-to-greater-vancouver.html">relocating to Greater Vancouver</a>.</p>',
+        body, "Newcomer buyer FAQ", faq, cta, sources,
+    )
+
+
 def write_pages():
     for item in TENANT_FAQ_PREPEND:
         assert_copy(item[0] + item[1], "tenants FAQ")
-    pages = [_burquitlam(), _port_moody(), _port_coquitlam(), _newcomer(), _first_time()]
+    pages = [_burquitlam(), _port_moody(), _port_coquitlam(), _newcomer(), _first_time(), _coquitlam(), _newcomer_buyers()]
     return pages

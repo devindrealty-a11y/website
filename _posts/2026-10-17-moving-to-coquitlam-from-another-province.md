@@ -93,3 +93,5 @@ If you are a newcomer, start with where you will work or study, then choose City
 If you buy later, use the benchmark for that home type and recent sales nearby. I cannot say where prices go next. Looking for a realtor in Coquitlam? My [page for home buyers](/buyers.html) has the neighbourhood notes.
 
 How to sign before you land, including deposits, is in [how to rent in Vancouver before you move](/blog/2026-10-10-how-to-rent-in-vancouver-before-you-move.html). My leasing covers all of Greater Vancouver, including the Tri-Cities, BC. The [relocation rental service for tenants](/tenants.html) is $1,500 plus GST, the federal goods and services tax, paid by the tenant: $750, non-refundable, at the start, and $750 once a rental is secured. Reach out 4 to 6 weeks before the move. Call or text me at 604-809-1032.
+
+For neighbourhoods, SkyTrain stations and how I help, see my [Coquitlam guide](/coquitlam.html). New to Canada and thinking about buying? Read [buying a home in Coquitlam as a newcomer](/newcomer-buyers.html).
