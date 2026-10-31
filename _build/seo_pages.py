@@ -784,8 +784,8 @@ def _coquitlam():
 
 
 _BAN_ACT = "https://laws-lois.justice.gc.ca/eng/acts/P-25.2/FullText.html"
-_BAN_REGS = "https://laws.justice.gc.ca/eng/regulations/SOR-2022-250/FullText.html"
-_CMHC_BAN = "https://www.cmhc-schl.gc.ca/consumers/home-buying/buying-guides/home-purchase-or-rental/prohibition-on-the-purchase-of-residential-property-by-non-canadians-act"
+_BAN_REGS = "https://laws.justice.gc.ca/eng/regulations/SOR-2022-250/index.html"
+_CMHC_BAN = "https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/housing-research/consultations/prohibition-purchase-residential-property-non-canadians-act"
 _APTT = "https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax/additional-property-transfer-tax"
 
 
