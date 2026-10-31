@@ -1229,3 +1229,32 @@ html.dd-chat-open{overflow:hidden}
 @media (min-width:800px){.mr-cards{grid-template-columns:repeat(3,1fr)}}
 @media (min-width:860px){.mr-fit{grid-template-columns:1fr 1fr;align-items:start}}
 @media (min-width:900px){.mr-gate{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px}}
+/* Coquitlam + newcomer buyer pages */
+.card-grid-3{display:grid;gap:16px;margin-top:24px}
+@media (min-width:640px){.card-grid-3{grid-template-columns:1fr 1fr}}
+@media (min-width:980px){.card-grid-3{grid-template-columns:repeat(3,1fr)}}
+.hood-card .icon{margin-bottom:14px}
+.card-links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px}
+.card-links .card-link{color:var(--blue-dark)}
+.card-links .card-link svg{width:16px;height:16px}
+.portrait-cta{margin-top:14px}
+.portrait-cta .btn{flex:1 1 auto;justify-content:center}
+.station-strip{margin:24px 0;padding:22px 20px;background:#fff;border:1px solid var(--line);border-radius:var(--radius)}
+.station-strip .line-label{display:inline-block;margin-bottom:14px;padding:3px 10px;border-radius:999px;background:#ffd400;color:#132639;font-weight:700;font-size:.8rem}
+.station-strip ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.station-strip ol::before{content:"";position:absolute;left:12%;right:12%;top:9px;height:6px;border-radius:3px;background:#ffd400}
+.station-strip li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;font-size:.88rem}
+.station-strip .dot{width:24px;height:24px;border-radius:50%;background:#fff;border:5px solid #132639;z-index:1}
+.station-strip .st-name{font-weight:600;color:var(--ink)}
+.station-strip .st-tag{font-size:.74rem;color:#7a1f5c;font-weight:700}
+.station-strip li.wce .dot{border-color:#7a1f5c}
+.elig-grid{display:grid;gap:14px;margin-top:22px}
+@media (min-width:700px){.elig-grid{grid-template-columns:1fr 1fr}}
+.elig-card{padding:20px 22px;background:#fff;border:1px solid var(--line);border-left:6px solid var(--blue);border-radius:var(--radius)}
+.elig-card p{margin:6px 0 0;font-size:.94rem;color:var(--muted)}
+.elig-who{display:block;font-size:.86rem;color:var(--muted)}
+.elig-ans{display:block;margin-top:4px;font-family:var(--font-display);font-size:1.5rem;color:var(--ink)}
+.elig-yes{border-left-color:#2e8b57}.elig-likely{border-left-color:var(--blue)}.elig-narrow{border-left-color:#d99a00}.elig-no{border-left-color:#9aa5b1}
+@media (min-width:860px){.timeline-3{grid-template-columns:repeat(3,1fr);gap:28px}.timeline-3 li{flex-direction:column;gap:14px}}
+.timeline-3 + .btn-row{margin-top:20px}
+.cta-disclaimer{margin-top:18px;font-size:.85rem;opacity:.8}
