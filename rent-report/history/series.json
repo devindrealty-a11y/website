@@ -512,6 +512,182 @@
       "median": 2800,
       "average": 3701,
       "count": 955
+    },
+    {
+      "week": "2026-11-02",
+      "week_end": "2026-11-08",
+      "prepared": "2026-11-02",
+      "feed_updated": "2026-11-02T05:14:10Z",
+      "feed_count": 998,
+      "counted": 978,
+      "excluded": 20,
+      "overall": {
+        "count": 978,
+        "median": 2798,
+        "average": 3672
+      },
+      "by_city": {
+        "Abbotsford": {
+          "count": 5,
+          "median": 1850,
+          "average": 1949
+        },
+        "Anmore": {
+          "count": 1,
+          "median": 6500,
+          "average": 6500
+        },
+        "Bowen Island": {
+          "count": 3,
+          "median": 10000,
+          "average": 8983
+        },
+        "Burnaby": {
+          "count": 125,
+          "median": 2700,
+          "average": 3020
+        },
+        "Coquitlam": {
+          "count": 63,
+          "median": 2300,
+          "average": 2680
+        },
+        "Delta": {
+          "count": 8,
+          "median": 3400,
+          "average": 3300
+        },
+        "Gibsons": {
+          "count": 1,
+          "median": 3350,
+          "average": 3350
+        },
+        "Langdale": {
+          "count": 1,
+          "median": 5900,
+          "average": 5900
+        },
+        "Langley": {
+          "count": 34,
+          "median": 2138,
+          "average": 2404
+        },
+        "Lions Bay": {
+          "count": 1,
+          "median": 9800,
+          "average": 9800
+        },
+        "Maple Ridge": {
+          "count": 36,
+          "median": 2150,
+          "average": 2469
+        },
+        "Mission": {
+          "count": 8,
+          "median": 1950,
+          "average": 2018
+        },
+        "New Westminster": {
+          "count": 18,
+          "median": 2363,
+          "average": 2674
+        },
+        "North Vancouver": {
+          "count": 63,
+          "median": 3200,
+          "average": 3643
+        },
+        "Pitt Meadows": {
+          "count": 3,
+          "median": 3300,
+          "average": 2900
+        },
+        "Port Coquitlam": {
+          "count": 6,
+          "median": 2800,
+          "average": 2908
+        },
+        "Port Moody": {
+          "count": 16,
+          "median": 2650,
+          "average": 3817
+        },
+        "Richmond": {
+          "count": 65,
+          "median": 3000,
+          "average": 3288
+        },
+        "Sechelt": {
+          "count": 1,
+          "median": 3750,
+          "average": 3750
+        },
+        "Squamish": {
+          "count": 5,
+          "median": 2950,
+          "average": 3269
+        },
+        "Surrey": {
+          "count": 123,
+          "median": 2300,
+          "average": 2583
+        },
+        "Tsawwassen": {
+          "count": 6,
+          "median": 2680,
+          "average": 2673
+        },
+        "Vancouver": {
+          "count": 323,
+          "median": 3200,
+          "average": 4179
+        },
+        "West Vancouver": {
+          "count": 48,
+          "median": 6850,
+          "average": 9206
+        },
+        "White Rock": {
+          "count": 15,
+          "median": 3000,
+          "average": 3015
+        }
+      },
+      "by_beds": {
+        "0": {
+          "count": 19,
+          "median": 2050,
+          "average": 1987
+        },
+        "1": {
+          "count": 291,
+          "median": 2150,
+          "average": 2184
+        },
+        "2": {
+          "count": 385,
+          "median": 2750,
+          "average": 3143
+        },
+        "3": {
+          "count": 146,
+          "median": 3600,
+          "average": 4474
+        },
+        "4": {
+          "count": 75,
+          "median": 4500,
+          "average": 6349
+        },
+        "5+": {
+          "count": 62,
+          "median": 6965,
+          "average": 9327
+        }
+      },
+      "median": 2798,
+      "average": 3672,
+      "count": 978
     }
   ]
 }
