@@ -715,6 +715,60 @@ def _visual_page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intr
     return filename, html
 
 
+def _coq_remote():
+    ICBC="https://www.icbc.com/driver-licensing/moving-bc/Moving-from-within-canada"
+    ICBC2="https://www.icbc.com/driver-licensing/moving-bc/moving-from-another-country"
+    MSP="https://www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp/bc-residents/eligibility-and-enrolment/how-to-enrol/coverage-wait-period"
+    PTT="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax"
+    FT="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax/exemptions/first-time-home-buyers"
+    NB="https://www2.gov.bc.ca/gov/content/taxes/property-taxes/property-transfer-tax/exemptions/newly-built-home-exemption"
+    DEP="https://www.bcfsa.ca/public-resources/real-estate/buying-home/deposits"
+    RESA="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/04042_01"
+    def a(u,t): return f'<a href="{u}" target="_blank" rel="noopener">{t}</a>'
+    def card(t,b): return f'<div class="card"><h3>{t}</h3><p>{b}</p></div>'
+    cards=[
+     card("Live video tours","I walk each home with you on a live video call (FaceTime, WhatsApp or Zoom). I'll open closets, run the taps and show you the street, the noise and the view, not just the listing photos."),
+     card("Neighbourhood drive-throughs","Burke Mountain, Westwood Plateau, Burquitlam, Maillardville, Austin Heights: I'll show you the walk to SkyTrain, the nearest school and the grocery store on video before you pick an area."),
+     card("Signing from anywhere","Offers, subject removals and most of the paperwork can be signed electronically, so you can write and firm up an offer without flying in."),
+     card("Your deposit sits in trust",f"Your deposit is usually held in the brokerage's trust account, not handed to the seller. The brokerage holds it as a neutral stakeholder, and if a deal falls apart it generally needs a release signed by both sides. ({a(DEP,'BCFSA')})"),
+     card("A local lawyer or notary closes it","I'll connect you with B.C. lawyers and notaries who can handle the closing, including signing remotely or once you arrive."),
+     card("Renting first is fine too",'If you\'d rather land, rent for a few months and then buy, I work on the tenant side as well and can line up your rental before you move. <a href="tenants.html">Relocation rentals</a>'),
+    ]
+    def step(w,items): return '<li><span class="when">'+w+'</span><div class="tl-card"><ul>'+''.join(f'<li>{i}</li>' for i in items)+'</ul></div></li>'
+    steps=[
+     step("8 weeks out",["Get pre-approved with a Canadian lender or mortgage broker.","Pick two or three neighbourhoods based on your commute and schools."]),
+     step("6 weeks out",["Book video tours with me.",f"Check {a('https://www.sd43.bc.ca/','School District 43')} catchments for any address you like."]),
+     step("4 weeks out",["Write and firm up an offer (or sign a lease).",'Budget for B.C. property transfer tax. Try my <a href="bc-property-transfer-tax.html">PTT calculator</a>.']),
+     step("2 weeks out",["Book movers.","Set up BC Hydro, FortisBC and internet, and arrange home insurance."]),
+     step("Arrival week",["Final walk-through and keys.",f"Apply for MSP right away. Coverage starts after a wait period ({a(MSP,'gov.bc.ca')})."]),
+     step("Within 90 days",[f"Switch to a B.C. driver's licence. You can drive on your valid licence from another province for up to 90 days after you move ({a(ICBC,'ICBC')})."]),
+    ]
+    sec=f'''<section class="section section--paper" id="from-another-province">
+      <div class="container">
+        <span class="eyebrow">Moving here</span>
+        <h2>Buying in Coquitlam from another province</h2>
+        <p class="updated-line">Last updated: <time datetime="2026-11-04">November 4, 2026</time></p>
+        <p class="lead">A lot of the people I help start looking before they've ever set foot in Coquitlam. Here's how buying from out of town works with me.</p>
+        <div class="card-grid-3 remote-cards">{''.join(cards)}</div>
+        <div class="fact-note">
+          <p><strong>Property transfer tax:</strong> B.C. charges 1% on the first $200,000, 2% from $200,000 to $2,000,000 and 3% above that, with a further 2% on residential value over $3,000,000 ({a(PTT,'gov.bc.ca')}).</p>
+          <p><strong>First-time buyers:</strong> the exemption covers the tax on the first $500,000 for homes worth $835,000 or less, with a partial exemption up to $860,000. You also need to have lived in B.C. for at least a year before registration, or filed at least two B.C. income tax returns in the last six years, so many people moving from another province won't qualify right away ({a(FT,'gov.bc.ca')}).</p>
+          <p><strong>Newly built homes:</strong> a separate exemption applies to qualifying new homes worth $1,100,000 or less, with a partial exemption up to $1,150,000. It has no one-year B.C. residency rule, but you must be a Canadian citizen or permanent resident and live in the home ({a(NB,'gov.bc.ca')}).</p>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="relocation-checklist">
+      <div class="container narrow-wide">
+        <span class="eyebrow">Plan the move</span>
+        <h2>Relocating to Coquitlam: an 8-week checklist</h2>
+        <ol class="reloc-timeline">{''.join(steps)}</ol>
+        <div class="fact-note"><p><strong>MSP wait period:</strong> coverage starts after the rest of the month you become a B.C. resident plus two more months. If you're moving from elsewhere in Canada, keep your old province's health plan during the wait ({a(MSP,'Health Insurance BC')}).</p></div>
+      </div>
+    </section>
+    '''
+    return sec, [(ICBC, "Moving from within Canada (licence switch)", "ICBC"), (MSP, "Coverage wait period for MSP", "Province of B.C."), (PTT, "Property transfer tax rates", "Province of B.C."), (FT, "First time home buyers' program", "Province of B.C."), (NB, "Newly built home exemption", "Province of B.C."), (DEP, "Deposits", "BCFSA"), (RESA, "Real Estate Services Act, s. 27", "BC Laws")]
+
+
 def _coquitlam():
     hoods = [
         ("building", "Burquitlam", 'Condos and townhomes around Burquitlam Station; easy Millennium Line access to Burnaby and Vancouver. <a href="burquitlam-neighbourhood-guide.html">Burquitlam guide</a>'),
@@ -742,6 +796,8 @@ def _coquitlam():
     ]
     hcards = "".join(f'<div class="card"><div class="icon">{I[ic]}</div><h3>{t}</h3><p>{d}</p><div class="card-links">{l}</div></div>' for ic, t, d, l in helps)
     body += _section("help", "How I help", "How I help in Coquitlam", f'<div class="card-grid-3">{hcards}</div>', paper=True).replace("container narrow-wide", "container", 1)
+    remote_html, remote_sources = _coq_remote()
+    body += remote_html
     faq = [
         ("Who is a good realtor for Coquitlam?",
          "<p>Look for someone who works the Tri-Cities, BC every week, knows the difference between Burquitlam strata buildings and Burke Mountain subdivisions, and gives straight answers on price. I'm Devin Desaulniers with Axford Real Estate in Port Moody, and Coquitlam is part of my core area.</p>"),
@@ -753,14 +809,16 @@ def _coquitlam():
          "<p>Yes. I search rentals, arrange viewings (by video if you're not here yet) and help with applications on the tenant side.</p>"),
         ("Do you also cover Port Moody and Port Coquitlam?",
          "<p>Yes, all three Tri-Cities, BC plus Burnaby, New Westminster, Vancouver, Maple Ridge and Pitt Meadows.</p>"),
+        ("Can I buy a home in Coquitlam without visiting first?",
+         "<p>Yes. I tour homes with you on live video, most paperwork is signed electronically, and your deposit is usually held in the brokerage's trust account. Many buyers still like one short trip to see their two or three favourite homes before firming up.</p>"),
     ]
     sources = _sources(
-        "Station and commuter rail details come from TransLink and can change. School information comes from School District 43.",
+        "Station and commuter rail details come from TransLink and can change. School information comes from School District 43. Licence, health coverage, tax and deposit details come from ICBC, the Province of B.C. and BCFSA, and can change.",
         [
             ("SkyTrain: Millennium Line", "https://www.translink.ca/schedules-and-maps/skytrain", "TransLink"),
             ("West Coast Express", "https://www.translink.ca/schedules-and-maps/west-coast-express", "TransLink"),
             ("School District 43 (Coquitlam)", "https://www.sd43.bc.ca/", "SD43"),
-        ],
+        ] + [(t, u, s + " · checked Nov 4, 2026") for u, t, s in remote_sources],
     )
     cta = _cta(
         "Talk through Coquitlam",
@@ -776,7 +834,7 @@ def _coquitlam():
         "Local guide · Coquitlam",
         "Coquitlam Realtor &amp; Neighbourhood Guide",
         "Neighbourhoods, SkyTrain and how I help buyers, sellers and renters in Coquitlam, BC.",
-        [("neighbourhoods", "Neighbourhoods"), ("transit", "Transit"), ("help", "How I help"), ("faq", "FAQ")],
+        [("neighbourhoods", "Neighbourhoods"), ("transit", "Transit"), ("help", "How I help"), ("from-another-province", "Buying from out of province"), ("faq", "FAQ")],
         "I'm Devin Desaulniers, a REALTOR® with Axford Real Estate in Port Moody, and I help people buy, sell and rent homes in Coquitlam, BC, from Burquitlam condos to Burke Mountain family homes.",
         "<p>Coquitlam is the biggest of the Tri-Cities, BC and the one with the widest range: SkyTrain towers, older character neighbourhoods and new hillside subdivisions. Below is how I explain it to buyers, sellers and people moving here from out of province.</p><p>Nearby guides: <a href=\"port-moody.html\">Port Moody</a> · <a href=\"port-coquitlam.html\">Port Coquitlam</a> · <a href=\"burquitlam-neighbourhood-guide.html\">Burquitlam</a></p>",
         body, "Coquitlam FAQ", faq, cta, sources,

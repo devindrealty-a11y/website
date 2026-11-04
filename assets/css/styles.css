@@ -1258,3 +1258,19 @@ html.dd-chat-open{overflow:hidden}
 @media (min-width:860px){.timeline-3{grid-template-columns:repeat(3,1fr);gap:28px}.timeline-3 li{flex-direction:column;gap:14px}}
 .timeline-3 + .btn-row{margin-top:20px}
 .cta-disclaimer{margin-top:18px;font-size:.85rem;opacity:.8}
+
+/* Coquitlam: buying from another province (remote buying + 8-week timeline) */
+.remote-cards .card h3{margin:0 0 .35em;font-size:1.12rem}
+.updated-line{margin:6px 0 0;font-size:.86rem;color:var(--muted)}
+.reloc-timeline{list-style:none;margin:28px 0 0;padding:0;position:relative}
+.reloc-timeline::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:3px;border-radius:2px;background:var(--blue-light)}
+.reloc-timeline li{position:relative;padding:0 0 22px 44px}
+.reloc-timeline li:last-child{padding-bottom:0}
+.reloc-timeline li::before{content:"";position:absolute;left:2px;top:3px;width:21px;height:21px;border-radius:50%;background:#fff;border:5px solid var(--blue);box-sizing:border-box}
+.reloc-timeline .when{display:inline-block;margin-bottom:6px;padding:2px 10px;border-radius:999px;background:var(--blue-light);color:var(--blue-dark);font-family:var(--font-head);font-weight:700;font-size:.8rem}
+.reloc-timeline .tl-card{padding:16px 20px;background:#fff;border:1px solid var(--line);border-radius:var(--radius)}
+.reloc-timeline .tl-card ul{margin:0;padding-left:1.1em}
+.reloc-timeline .tl-card li{padding:0;margin:0 0 .35em}
+.reloc-timeline .tl-card li::before{content:none}
+.fact-note{margin-top:22px;padding:16px 20px;background:#fff;border:1px solid var(--line);border-left:6px solid var(--blue);border-radius:var(--radius);font-size:.94rem}
+.fact-note p{margin:0 0 .5em}.fact-note p:last-child{margin:0}
