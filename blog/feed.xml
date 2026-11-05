@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Wed, 04 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Thu, 05 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>Metro Vancouver home sales fell 10% in October. What it means</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-05-metro-vancouver-october-2026-home-sales.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-05-metro-vancouver-october-2026-home-sales.html</guid>
+    <pubDate>Thu, 05 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Market news</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>Greater Vancouver REALTORS® reports 2,024 Metro Vancouver home sales in October 2026, down 10.2% from a year ago, as a rate hike and a snap election kept buyers and sellers on the sidelines. My take for buyers, sellers and newcomers in the Tri-Cities, BC.</description>
+  </item>
   <item>
     <title>Commuting from Port Moody to Vancouver: SkyTrain, WCE or car?</title>
     <link>https://devindesaulniers.ca/blog/2026-11-04-commuting-from-port-moody-to-vancouver.html</link>
@@ -267,15 +276,6 @@
     <category>Renting</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>I ran a $190,000 salary through 2026 federal and provincial tax, CPP/EI and 12 months of average one-bedroom rent. Edmonton has $116,711 left; Vancouver is 8th at $102,376, within $101 of Ottawa.</description>
-  </item>
-  <item>
-    <title>Vancouver asking rents rose in September, still below last year</title>
-    <link>https://devindesaulniers.ca/blog/2026-10-08-vancouver-september-asking-rents.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-10-08-vancouver-september-asking-rents.html</guid>
-    <pubDate>Thu, 08 Oct 2026 08:00:00 -0700</pubDate>
-    <category>Renting</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>Rentals.ca and Urbanation say Vancouver apartment and condo asking rents rose 1.4% in September to $2,741, the largest monthly gain among Canada's six largest markets, but they're still 1.3% below a year ago.</description>
   </item>
 </channel>
 </rss>
