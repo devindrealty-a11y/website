@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Thu, 05 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Fri, 06 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>The Vancouver rent discount window is closing</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-06-vancouver-rent-discount-window-closing.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-06-vancouver-rent-discount-window-closing.html</guid>
+    <pubDate>Fri, 06 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Renting</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>After 34 months of year-over-year declines, Vancouver apartment and condo asking rents posted their first annual increase in October 2026 — a tiny +0.2% bump to $2,735. Urbanation says the window for cheaper rents is closing.</description>
+  </item>
   <item>
     <title>Moving from Alberta to BC: a Tri-Cities, BC newcomer checklist</title>
     <link>https://devindesaulniers.ca/blog/2026-11-05-moving-from-alberta-to-bc-tri-cities-checklist.html</link>
@@ -267,15 +276,6 @@
     <category>Market news</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>Statistics Canada says the Vancouver-area unemployment rate rose to 7.1% in September 2026, from 6.5% in August. B.C. lost 20,200 jobs, and construction had the largest drop.</description>
-  </item>
-  <item>
-    <title>How do I rent in Vancouver before I move?</title>
-    <link>https://devindesaulniers.ca/blog/2026-10-10-how-to-rent-in-vancouver-before-you-move.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-10-10-how-to-rent-in-vancouver-before-you-move.html</guid>
-    <pubDate>Sat, 10 Oct 2026 08:00:00 -0700</pubDate>
-    <category>FAQ</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>Yes. You can line up a Greater Vancouver rental before you arrive: prepare your papers, sign a written tenancy agreement, and pay no more than half a month's rent as a security deposit.</description>
   </item>
 </channel>
 </rss>
