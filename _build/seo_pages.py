@@ -123,6 +123,113 @@ def _ext(url, label):
     return f'<a href="{_html.escape(url, quote=True)}" target="_blank" rel="noopener">{label}</a>'
 
 
+# October 2026 asking rents. City-and-bedroom table in the Rentals.ca / Urbanation
+# National Rent Report published November 5, 2026. That table is the whole Rentals.ca
+# network (apartments, condos, townhouses and houses). It is not the report's separate
+# purpose-built-and-condo bedroom series. Port Moody and Port Coquitlam are not listed.
+RENTALS_CA_URL = "https://rentals.ca/national-rent-report"
+RENT_CITIES = (
+    ("Vancouver", 2377, "down 3.0%", 3270, "unchanged (0.0%)"),
+    ("Burnaby", 2145, "down 3.7%", 2761, "down 0.3%"),
+    ("Coquitlam", 2051, "down 5.2%", 2648, "down 4.9%"),
+    ("New Westminster", 1868, "down 4.9%", 2550, "down 1.1%"),
+)
+# Week of November 2–8, 2026, from rent-report/history/2026-11-02.json (REALTOR.ca feed).
+RENT_WEEK = (
+    ("Coquitlam", 2300, 63),
+    ("Port Moody", 2650, 16),
+    ("Port Coquitlam", 2800, 6),
+    ("Vancouver", 3200, 323),
+)
+GVR_OCT_URL = "https://members.gvrealtors.ca/news/GVR-Stats-Package-October-2026.pdf"
+BCFSA_RESCISSION = "https://www.bcfsa.ca/public-resources/real-estate/consumer-resources/home-buyer-rescission-period-consumer-guide"
+BC_DEPOSITS = "https://www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/starting-a-tenancy/deposits-fees"
+BC_AGREEMENTS = "https://www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/starting-a-tenancy/tenancy-agreements"
+BC_FORM_B = "https://www2.gov.bc.ca/gov/content/housing-tenancy/strata-housing/renting-buying-selling/buying-and-selling-strata/paperwork-for-buyers-and-sellers/form-b-information-certificate"
+
+
+def _money(amount):
+    return f"${amount:,}"
+
+
+RENT_FAQS = [
+    ("Are rents in Vancouver going up or down in 2026?",
+     "<p>Mostly flat to a little lower, depending on the city and the size. Vancouver's average asking rent for purpose-built and condo apartments was $2,735 in October 2026, up 0.2% from a year earlier. That was the first yearly increase after 34 months of declines, in the Rentals.ca and Urbanation National Rent Report published November 5, 2026. The same report's city table, which also includes houses and townhouses, shows a Vancouver one-bedroom at $2,377 (down 3.0%) and a two-bedroom at $3,270 (unchanged). Coquitlam one-bedrooms averaged $2,051, down 5.2% on the year.</p>"),
+    ("Is it cheaper to rent in Coquitlam than Vancouver?",
+     "<p>Yes, on the October 2026 averages. A one-bedroom averaged $2,051 in Coquitlam and $2,377 in Vancouver, which is $326 a month less in Coquitlam. A two-bedroom averaged $2,648 in Coquitlam and $3,270 in Vancouver, $622 less. Several Coquitlam stations are on the Millennium Line, including the Evergreen Extension, with SkyTrain into Burnaby and Vancouver. Those are average asking rents from the Rentals.ca city table, not rents on signed leases.</p>"),
+]
+
+
+def _rent_bars(amount_index, yoy_index, title):
+    amounts = [row[amount_index] for row in RENT_CITIES]
+    peak = max(amounts)
+    rows = []
+    for row in RENT_CITIES:
+        city, amount, yoy = row[0], row[amount_index], row[yoy_index]
+        width = round(amount / peak * 100, 1)
+        rows.append(
+            f'<div class="rr-bar-row rent-bar-row"><span class="rr-bar-name">{city}<span class="rent-yoy">{yoy}</span></span>'
+            f'<span class="rr-bar-track"><span class="rr-bar-fill" style="width:{width}%"></span></span>'
+            f'<span class="rr-bar-val">{_money(amount)}</span></div>'
+        )
+    return f'<div class="rent-group"><h3>{title}</h3><div class="rr-bars">{"".join(rows)}</div></div>'
+
+
+def _rent_table():
+    body = []
+    for city, one, one_yoy, two, two_yoy in RENT_CITIES:
+        body.append(
+            f'<tr><th scope="row">{city}</th><td class="num">{_money(one)}</td><td>{one_yoy}</td>'
+            f'<td class="num">{_money(two)}</td><td>{two_yoy}</td></tr>'
+        )
+    return f'''<div class="table-wrap"><table class="price-table rent-table">
+      <caption>Average asking rents by city and bedroom, October 2026. Year-over-year change is against October 2025. <a href="{RENTALS_CA_URL}" target="_blank" rel="noopener">Rentals.ca / Urbanation</a>.</caption>
+      <thead><tr><th scope="col">City</th><th scope="col" class="num">1-bedroom</th><th scope="col">Vs last year</th><th scope="col" class="num">2-bedroom</th><th scope="col">Vs last year</th></tr></thead>
+      <tbody>{"".join(body)}</tbody>
+    </table></div>'''
+
+
+def _rent_weekly_note():
+    bits = []
+    for city, median, count in RENT_WEEK:
+        home = "listing" if count == 1 else "listings"
+        bits.append(f"{_money(median)} in {city} ({count} {home})")
+    joined = ", ".join(bits[:-1]) + f" and {bits[-1]}"
+    return f'''<div class="fact-note"><p><strong>A different measure, from a different source.</strong> For the week of November 2–8, 2026, the median asking rent on active REALTOR.ca residential listings was {joined}. These are asking rents, not signed leases. Port Coquitlam's median comes from only six listings that week, so it can move a lot from one week to the next. Prepared November 2, 2026. <a href="rent-report.html">Weekly rent report</a>.</p></div>'''
+
+
+def rent_snapshot_section(anchor="rent-now", with_photo=True, checklist_link=True, weekly=False):
+    """Dated October 2026 rent card. Same figures on the tenants page, the relocating guide and the checklist."""
+    photo = ""
+    if with_photo:
+        photo = f'''<figure class="portrait guide-photo">
+      {picture("assets/img/devin-headshot", (480, 800), 800, 1000, "Devin Desaulniers, Real Estate Associate with Axford Real Estate", "headshot", eager="auto", sizes_attr="(max-width: 899px) 70vw, 280px")}
+      <figcaption><strong>Devin Desaulniers</strong><span>Real Estate Associate · Axford Real Estate</span></figcaption>
+      <div class="btn-row portrait-cta"><a class="btn btn-primary" href="tenants.html#intake">{I["arrow"]} Start rental search</a><a class="btn btn-outline" href="{TEL}">{I["phone"]} Call or text</a></div>
+    </figure>'''
+    checklist = ""
+    if checklist_link:
+        checklist = '<p><a href="rental-before-you-arrive.html">Week-by-week checklist: line up a rental before you arrive</a>.</p>'
+    weekly_html = _rent_weekly_note() if weekly else ""
+    return f'''<section class="section section--paper" id="{anchor}">
+  <div class="container">
+    <div class="guide-intro">
+      <div>
+        <span class="eyebrow">October 2026</span>
+        <h2>What rent costs when you move here</h2>
+        <p class="lead guide-lead">If you're moving to Greater Vancouver and renting first, budget about $2,377 a month for a one-bedroom in Vancouver and about $2,051 in Coquitlam. Those are average asking rents for October 2026. Two-bedrooms averaged $3,270 in Vancouver and $2,648 in Coquitlam. I help relocating tenants line up viewings, applications and references before they arrive.</p>
+        <div class="rent-groups">{_rent_bars(1, 2, "One-bedroom average")}{_rent_bars(3, 4, "Two-bedroom average")}</div>
+        {_rent_table()}
+        <p class="form-note">Average asking rents, October 2026, from the <a href="{RENTALS_CA_URL}" target="_blank" rel="noopener">Rentals.ca and Urbanation National Rent Report</a> (published November 5, 2026). The city table covers the Rentals.ca network: apartments, condos, townhouses and houses. Port Moody and Port Coquitlam are not in it. For those two, use the <a href="rent-report.html">weekly rent report</a>. A separate line in the same Rentals.ca report, for purpose-built and condo apartments only, puts Vancouver's overall average at $2,735, up 0.2% from a year earlier. That was the first yearly increase after 34 months of declines.</p>
+        {weekly_html}
+        {checklist}
+      </div>
+      {photo}
+    </div>
+  </div>
+</section>'''
+
+
 def _page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intro_rest, body, faq_heading, faq_items, cta_html, sources_html):
     html = head(title, desc, "area-guide", page_url=filename, extra_head=faq_jsonld(faq_items))
     html += f'''
@@ -239,7 +346,7 @@ def _burquitlam():
       </table>
     </div>
     <p>Prices for individual buildings and streets can vary a lot, so ask for recent comparable sales for the specific building or block you're looking at.</p>
-    <p>If you're buying a condo or townhouse, it's a strata property, so the Form B Information Certificate, strata minutes, depreciation report and insurance summary matter as much as the unit itself. Ask your agent to go through them with you. My <a href="buyers.html">buyers page</a> explains how I work with buyers, and <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions for the Tri-Cities, BC</a> covers programs, deposits and subject removal.</p>
+    <p>If you're buying a condo or townhouse, it's a strata property, so the Form B Information Certificate, strata minutes, depreciation report and insurance summary matter as much as the unit itself. Ask your agent to go through them with you. My <a href="coquitlam-condo-buyer.html">Coquitlam condo buyer page</a> walks through those documents and how Burquitlam compares with City Centre and Northeast Coquitlam. The <a href="buyers.html">buyers page</a> explains how I work with buyers, and <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions for the Tri-Cities, BC</a> covers programs, deposits and subject removal.</p>
     ''', paper=True)
     body += _section("renting", "Renting", "Renting in Burquitlam as a newcomer", f'''
     <p>Burquitlam has a large share of renters (about 43% of households in 2016), plus SkyTrain and a bus to SFU, so it's worth a look if you're new to the area and commuting to Burnaby, Vancouver or SFU. A few BC rules that help you avoid problems:</p>
@@ -678,18 +785,23 @@ def _acc_faq(heading, items):
 </section>'''
 
 
-def _visual_page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intro_rest, body, faq_heading, faq_items, cta_html, sources_html):
+def _visual_page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intro_rest, body, faq_heading, faq_items, cta_html, sources_html, extra_head="", hero_buttons=None, hero_extra=""):
+    if hero_buttons is None:
+        hero_buttons = (
+            f'<a class="btn btn-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>\n'
+            f'      <a class="btn btn-ghost-light" href="mailto:{EMAIL}">{I["mail"]} Email Devin</a>'
+        )
     html = head(title, desc, "area-guide", page_url=filename,
-                extra_head=faq_jsonld(faq_items))
+                extra_head=faq_jsonld(faq_items) + extra_head)
+    hero_extra_html = f"\n    {hero_extra}" if hero_extra else ""
     html += f'''
 <section class="page-hero">
   <div class="container">
     <span class="eyebrow">{eyebrow}</span>
     <h1>{h1}</h1>
-    <p class="lead">{lead}</p>
+    <p class="lead">{lead}</p>{hero_extra_html}
     <div class="btn-row">
-      <a class="btn btn-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>
-      <a class="btn btn-ghost-light" href="mailto:{EMAIL}">{I["mail"]} Email Devin</a>
+      {hero_buttons}
     </div>
   </div>
 </section>
@@ -790,7 +902,7 @@ def _coquitlam():
     <p>Coquitlam has four Millennium Line stations (Burquitlam, Lincoln, Coquitlam Central and Lafarge Lake–Douglas), with Inlet Centre and Moody Centre next door in Port Moody, and Coquitlam Central is also a West Coast Express stop for weekday commuters to downtown Vancouver. Highway 1 and the Mary Hill Bypass connect to Burnaby, Surrey and the Fraser Valley. Schools are run by School District 43 (Coquitlam), which also serves Port Coquitlam and Port Moody.</p>
     ''')
     helps = [
-        ("home", "Buying", 'Condo strata reviews, townhouse and detached searches, first-time buyer programs.', f'<a class="card-link" href="first-time-buyers-tri-cities-bc.html">First-time buyers {I["arrow"]}</a><a class="card-link" href="bc-property-transfer-tax.html">Property transfer tax {I["arrow"]}</a>'),
+        ("home", "Buying", 'Condo strata reviews, townhouse and detached searches, first-time buyer programs.', f'<a class="card-link" href="coquitlam-condo-buyer.html">Coquitlam condo buyers {I["arrow"]}</a><a class="card-link" href="first-time-buyers-tri-cities-bc.html">First-time buyers {I["arrow"]}</a><a class="card-link" href="bc-property-transfer-tax.html">Property transfer tax {I["arrow"]}</a>'),
         ("handshake", "Selling", "Pricing from recent comparable sales, prep and marketing.", f'<a class="card-link" href="home-evaluation.html">Home evaluation {I["arrow"]}</a>'),
         ("key", "Relocating or renting first", "I help people moving to Coquitlam find a rental on the tenant side before they arrive.", f'<a class="card-link" href="tenants.html">Relocation rentals {I["arrow"]}</a><a class="card-link" href="newcomer-rental-faqs.html">Newcomer rental FAQs {I["arrow"]}</a><a class="card-link" href="newcomer-buyers.html">Newcomer buyers {I["arrow"]}</a>'),
     ]
@@ -910,8 +1022,278 @@ def _newcomer_buyers():
     )
 
 
+def _step_plain(fragment):
+    """Visible list items are separated by tags. Put a space in their place so the schema reads like the page."""
+    spaced = re.sub(r"<[^>]+>", " ", fragment)
+    return re.sub(r"\s+", " ", _html.unescape(spaced)).strip()
+
+
+def _howto_jsonld(name, description, steps):
+    entities = []
+    for title, text in steps:
+        entities.append({"@type": "HowToStep", "name": title, "text": _step_plain(text)})
+    return '<script type="application/ld+json">\n' + json.dumps({
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": name,
+        "description": description,
+        "step": entities,
+    }, indent=2, ensure_ascii=False) + "\n</script>"
+
+
+def _rental_before():
+    steps = [
+        ("8 weeks out: Decide the brief",
+         "<ul><li>Set the budget (rent, utilities and deposits), bedrooms, parking, pets, and who will live there.</li>"
+         "<li>Write down the commute you actually need: a walk to SkyTrain, the West Coast Express, or driving across a bridge.</li>"
+         '<li>Shortlist two or three areas, for example Vancouver, Burnaby and the Tri-Cities, BC. The <a href="relocating-to-greater-vancouver.html">Greater Vancouver relocating guide</a> and the <a href="coquitlam.html">Coquitlam</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a> guides are the place to start.</li></ul>'),
+        ("6 weeks out: Build the application pack",
+         "<p>Landlords move fast. Have these ready as PDFs:</p><ul>"
+         "<li>Photo ID: a clear, unexpired government-issued ID.</li>"
+         "<li>Proof of income: two or three recent pay stubs, an employment or offer letter, or a contract. If you're self-employed, recent bank statements and/or a Notice of Assessment.</li>"
+         "<li>Landlord and employer references, with a phone number or email.</li>"
+         "<li>Optional: a credit report you pull yourself (Equifax or TransUnion), which can speed an application up.</li>"
+         "<li>A short renter profile: who will live there, the move-in date, pets and must-haves.</li></ul>"
+         '<p>New to Canada, with no Canadian credit file yet? Read the <a href="newcomer-rental-faqs.html">newcomer rental FAQs</a>.</p>'),
+        ("4 to 6 weeks out: Start the active search",
+         "<p>Most Greater Vancouver rentals are listed only a few weeks before they're available. Inside this window, search Facebook Marketplace, Craigslist, other rental sites and Axford Real Estate's own rentals. Book a showing the day a fit appears. If you're still out of province, ask for a live video walkthrough and a floor plan rather than relying on photos.</p>"),
+        ("2 to 4 weeks out: View, compare and apply",
+         "<p>Confirm the unit, and confirm who you're dealing with (the landlord, a licensed agent or a property manager), before any money moves. Compare the commute, noise, light, parking, laundry and the lease term, not just the photos. When you want the place, send a complete application the same day.</p>"),
+        ("Offer week: Sign in writing, and pay only what B.C. allows",
+         f'<ul><li>Get a written tenancy agreement. Both parties sign and date it, and you keep a copy. Photograph the pages that day.</li>'
+         f'<li>A security deposit can be at most half of one month\'s rent.</li>'
+         f'<li>A pet damage deposit, if pets are allowed, can be at most another half month, however many pets you have. Together the two deposits can equal one month\'s rent. That is not "first and last," plus extras.</li>'
+         f'<li>A landlord can\'t charge a fee just to accept or process an application.</li>'
+         f'<li>Do a move-in condition inspection and keep the report.</li></ul>'
+         f'<p>General information, not legal advice. Confirm it on the <a href="{BC_DEPOSITS}" target="_blank" rel="noopener">Province of B.C. deposit page</a> and the <a href="{BC_AGREEMENTS}" target="_blank" rel="noopener">tenancy agreement page</a> before you rely on a number.</p>'),
+        ("Arrival week: Keys, utilities and paperwork",
+         "<ul><li>Do the final walk-through and collect the keys.</li><li>Set up utilities and internet if they aren't included.</li><li>Keep the deposit receipts and the signed agreement.</li></ul>"),
+    ]
+    timeline = "".join(
+        f'<li><span class="when">{_html.escape(title.split(": ")[0])}</span><div class="tl-card"><h3>{_html.escape(title.split(": ", 1)[-1])}</h3>{body}</div></li>'
+        for title, body in steps
+    )
+    body = f'''<section class="section section--paper" id="budget">
+  <div class="container narrow-wide">
+    <span class="eyebrow">October 2026</span>
+    <h2>What to budget</h2>
+    <p>Average asking rents for October 2026, and whether they are up or down from last year, are in <a href="relocating-to-greater-vancouver.html#rent-now">what rent costs when you move here</a>. That is the place for the Vancouver, Burnaby, Coquitlam and New Westminster comparison.</p>
+    {_rent_weekly_note()}
+  </div>
+</section>'''
+    body += f'''<section class="section" id="timeline">
+  <div class="container narrow-wide">
+    <span class="eyebrow">Timing</span>
+    <h2>An 8-week checklist</h2>
+    <p>Settle the big decisions early. The homes themselves usually show up close to the move-in date.</p>
+    <ol class="reloc-timeline">{timeline}</ol>
+  </div>
+</section>'''
+    body += f'''<section class="section section--paper" id="scams">
+  <div class="container">
+    <span class="eyebrow">Before you send money</span>
+    <h2>Three signs to walk away</h2>
+    <div class="card-grid-3">
+      <div class="card"><h3>The rent is far below similar homes</h3><p>If a place is priced well under everything else in that neighbourhood, treat that as a question, not a bargain.</p></div>
+      <div class="card"><h3>No viewing, in person or on live video</h3><p>A landlord who will not show you the home, even on a live video call, is asking you to pay for something you have not seen.</p></div>
+      <div class="card"><h3>Wire, gift card or crypto to "hold" it</h3><p>Don't send a deposit to hold a unit before the home and the person are verified.</p></div>
+    </div>
+    <div class="fact-note"><p><strong>My rule:</strong> never send a deposit before the unit and the landlord (or their licensed agent or property manager) are verified. I can view in person, or on live video with you, before you commit. More on this in <a href="blog/2026-10-31-bc-rental-deposits-and-scams.html">B.C. rental deposits and scams</a> and <a href="blog/2026-10-10-how-to-rent-in-vancouver-before-you-move.html">how to rent in Vancouver before you move</a>. For what changed in Vancouver rents in November 2026, see the <a href="blog/2026-11-06-vancouver-rent-discount-window-closing.html">rent-discount window post</a>.</p></div>
+  </div>
+</section>'''
+    body += f'''<section class="section" id="help">
+  <div class="container narrow-wide">
+    <span class="eyebrow">Tenant-side help</span>
+    <h2>How I help before you land</h2>
+    <p>The search, the showings and the lease review are a tenant-side service: <strong>$1,500 + GST</strong>, paid by you in two parts (<strong>$750 at the start</strong>, non-refundable, and <strong>$750 once you secure a rental</strong>). It includes a consultation, the search and early access, in-person or live-video showings with floor plans, and lease review and negotiation. There's more detail on the <a href="tenants.html">tenants page</a>.</p>
+    <p>Call or text <a href="{TEL}">{PHONE}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></p>
+    <div class="btn-row"><a class="btn btn-primary" href="tenants.html#intake">Start rental search {I["arrow"]}</a><a class="btn btn-outline" href="rent-report.html">Weekly rent report</a></div>
+  </div>
+</section>'''
+    faq = [
+        ("Can I rent in Vancouver before I move?",
+         "<p>Yes. Prepare your application pack, start the active search about 4 to 6 weeks before move-in, view homes in person or on live video, sign a written tenancy agreement, and pay only the deposits B.C. allows. A security deposit is capped at half a month's rent.</p>"),
+        ("Who can help me find a rental in Vancouver if I'm still out of province?",
+         "<p>I can. I'm Devin Desaulniers, a Real Estate Associate with Axford Real Estate in Port Moody. I search Greater Vancouver on the tenant side, including the Tri-Cities, BC, arrange showings or live video walkthroughs with floor plans, negotiate, and review the lease with you before you sign. The fee is $1,500 + GST, paid by the tenant in two parts.</p>"),
+        ("How far ahead should I start?",
+         "<p>Settle the budget, the areas and the documents early. The active search usually starts about 4 to 6 weeks before move-in, because most listings appear close to the date the home is available.</p>"),
+        ("What deposit can a landlord ask for in B.C.?",
+         f'<p>At most half of one month\'s rent as a security deposit, and at most another half month as a pet damage deposit if pets are allowed. Landlords can\'t require "first and last month\'s rent" the way some other provinces do, and they can\'t charge a fee just to accept or process an application. Confirm the current rules with the <a href="{BC_DEPOSITS}" target="_blank" rel="noopener">B.C. Residential Tenancy Branch</a>. This is general information, not legal advice.</p>'),
+    ]
+    sources = _sources(
+        "Rent figures are October 2026 asking rents from Rentals.ca / Urbanation, plus the weekly REALTOR.ca medians on the rent report. Deposit and agreement rules are from the Province of B.C. Scam warnings follow the RCMP in B.C. and WelcomeBC, the same pages cited on the October 10 and October 31 posts.",
+        [
+            ("National Rent Report, November 5, 2026 (October 2026 data)", RENTALS_CA_URL, "Rentals.ca and Urbanation"),
+            ("Weekly asking-rent medians, week of November 2–8, 2026", "rent-report.html", "Devin Desaulniers · REALTOR.ca feed"),
+            ("Deposits and fees", BC_DEPOSITS, "Province of British Columbia"),
+            ("Tenancy agreements", BC_AGREEMENTS, "Province of British Columbia"),
+            ("Rental scams", "https://rcmp.ca/en/bc/safety-tips/frauds-and-scams/rental-scams", "RCMP in B.C."),
+            ("Before moving to B.C.", "https://www.welcomebc.ca/start-your-life-in-b-c/before-moving-to-bc", "WelcomeBC"),
+        ],
+    )
+    cta = _cta(
+        "Want the search done before you land?",
+        f"Call or text {PHONE}, or email {EMAIL}. Devin Desaulniers, Real Estate Associate, Axford Real Estate, {BROKERAGE_ADDR}.",
+        f'<a class="btn btn-light" href="tenants.html#intake">Start rental search {I["arrow"]}</a>'
+        + _phone_row(),
+    )
+    howto = _howto_jsonld(
+        "How to line up a Greater Vancouver rental before you arrive",
+        "A week-by-week checklist for securing a long-term Greater Vancouver rental before you move.",
+        steps,
+    )
+    buttons = (
+        f'<a class="btn btn-light" href="tenants.html#intake">Start rental search {I["arrow"]}</a>'
+        f'<a class="btn btn-ghost-light" href="rent-report.html">Weekly rent report</a>'
+        f'<a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>'
+    )
+    return _visual_page(
+        "rental-before-you-arrive.html",
+        "Line Up a Vancouver Rental Before You Arrive | Devin",
+        "Week-by-week checklist to rent in Greater Vancouver before you move: docs, timing, deposits, scam checks. Devin Desaulniers.",
+        "Before you arrive · Greater Vancouver",
+        "How to line up a Greater Vancouver rental before you arrive",
+        "You can secure a Greater Vancouver rental before you land: ready your application, start the search about 4 to 6 weeks out, view in person or on live video, sign a written tenancy agreement, and pay only the deposits B.C. allows. I'm Devin Desaulniers with Axford Real Estate in Port Moody.",
+        [("budget", "What to budget"), ("timeline", "8-week checklist"), ("scams", "Scam checks"), ("help", "How I help"), ("faq", "FAQ")],
+        "I do that search on the tenant side: consultation, showings (in person or on live video) and a read of the lease before you sign.",
+        f'<p>Call or text <a href="{TEL}">{PHONE}</a>.</p>',
+        body, "Questions before you arrive", faq, cta, sources,
+        extra_head=howto, hero_buttons=buttons,
+        hero_extra='<p>The <a href="tenants.html">tenants page</a> covers the service. This page covers the timing.</p>',
+    )
+
+
+def _coquitlam_condo():
+    areas = [
+        ("Burquitlam",
+         "Burquitlam Station, Millennium Line",
+         "Condos and townhomes, with high-rises close to the station and along North Road.",
+         "SkyTrain toward Burnaby and Vancouver. Lougheed Town Centre, one stop west, connects to the Expo Line.",
+         "Older streets near the station can be designated for future towers under the Burquitlam-Lougheed plan and the provincial transit-oriented rules. Check the City's land-use map for the address. The <a href=\"burquitlam-neighbourhood-guide.html\">Burquitlam guide</a> has the planning detail."),
+        ("City Centre",
+         "Lincoln and Lafarge Lake–Douglas. Coquitlam Central, between them, is also a West Coast Express stop.",
+         "High-rise condos near the mall, Town Centre Park and Douglas College.",
+         "Walkable to SkyTrain. A reasonable choice if the commute into Burnaby or Vancouver is the point.",
+         "Strata fees on a tower are specific to that building. Read them on the Form B. Don't assume a neighbouring tower charges the same."),
+        ("Northeast Coquitlam",
+         "No SkyTrain station on Burke Mountain.",
+         "Newer subdivisions and townhomes, with some apartments. More space than the station areas.",
+         "Mostly driving or a bus. Plan the commute before you fall for the view.",
+         "The trade-off is the drive. Burke Mountain is the northeast side I describe on the <a href=\"coquitlam.html\">Coquitlam guide</a>: newer, and car-friendly."),
+    ]
+    cards = []
+    for name, station, buildings, commute, watch in areas:
+        cards.append(f'''<article class="card compare-card"><h3>{name}</h3>
+      <dl>
+        <dt>Nearest SkyTrain</dt><dd>{station}</dd>
+        <dt>Typical buildings</dt><dd>{buildings}</dd>
+        <dt>Getting around</dt><dd>{commute}</dd>
+        <dt>Watch for</dt><dd>{watch}</dd>
+      </dl></article>''')
+    checks = [
+        ("Form B", "Monthly strata fees, special levies, and the attached budget, rules and latest depreciation report."),
+        ("Depreciation report", "What the building expects to repair, and roughly when."),
+        ("Minutes, last two years", "Council, AGM and special general meeting minutes. This is where leaks, disputes and special levies show up."),
+        ("Bylaws and rules", "Pets, rentals, renovations, barbecues, smoking. A bylaw can matter more than the floor plan."),
+        ("Budget and financial statements", "Whether the fees cover the work the building is actually doing."),
+        ("Contingency reserve fund", "The balance set against the work in the depreciation report, not the balance on its own."),
+        ("Insurance summary and deductible", "What the strata policy covers, and how large a deductible an owner could be asked to pay."),
+        ("Parking and locker", "Which stall and locker are assigned to this strata lot, on the Form B, not just in the listing remarks."),
+    ]
+    check_html = "".join(f'<li><strong>{title}</strong><span>{note}</span></li>' for title, note in checks)
+    benchmarks = [
+        ("Coquitlam", "$624,200", "down 2.5% from September", "down 9.1% from a year earlier"),
+        ("Port Coquitlam", "$551,200", "up 0.2% from September", "down 7.6% from a year earlier"),
+        ("Port Moody", "$680,000", "up 0.6% from September", "down 3.7% from a year earlier"),
+    ]
+    bench_rows = "".join(
+        f'<tr><th scope="row">{city}</th><td class="num">{price}</td><td>{month}</td><td>{year}</td></tr>'
+        for city, price, month, year in benchmarks
+    )
+    body = _section("market", "October 2026", "Where Coquitlam apartment prices sat", f'''
+    <div class="bench-card">
+      <p class="rent-kicker">Coquitlam apartment · MLS® Home Price Index</p>
+      <p class="bench-figure">$624,200</p>
+      <p>October 2026, down 9.1% from a year earlier and 2.5% from September. That is the benchmark for a typical apartment, from the Greater Vancouver REALTORS® statistics package released with the November 2, 2026 news release. It is not an average of the sales that closed, and it is not a price I can find you this unit for.</p>
+    </div>
+    <p>The same package shows 82 Coquitlam apartment sales in October (62 in September, 95 in October 2025) and a median sale price of $595,000. New apartment listings that month were 205. The Metro Vancouver apartment benchmark was $673,400, down 5.9% from a year earlier, so Coquitlam sat below the regional apartment benchmark.</p>
+    <div class="table-wrap"><table class="price-table">
+      <caption>Apartment benchmark prices, October 2026, MLS® Home Price Index. Greater Vancouver REALTORS®.</caption>
+      <thead><tr><th scope="col">City</th><th scope="col" class="num">Benchmark</th><th scope="col">Vs September</th><th scope="col">Vs a year earlier</th></tr></thead>
+      <tbody>{bench_rows}</tbody>
+    </table></div>
+    <p class="form-note">Source: <a href="{GVR_OCT_URL}" target="_blank" rel="noopener">GVR statistics package, October 2026 (PDF)</a>. I left out any figure I could not read in that package.</p>
+    ''', paper=True)
+    body += _section("areas", "Three clusters", "Burquitlam, City Centre and Northeast Coquitlam", f'''
+    <p>Condo buyers in Coquitlam are usually choosing among these three, and the commute decides it more often than the finish package.</p>
+    <div class="card-grid-3 compare-cards">{"".join(cards)}</div>
+    ''').replace("container narrow-wide", "container", 1)
+    body += _section("strata", "Before subject removal", "Strata documents I read with you", f'''
+    <p>A condo is a share of a building, not just a suite. These are the eight things I want in hand before you remove subjects. Your notary or lawyer reviews them for the legal side. I read them for what they mean for the price and the building.</p>
+    <ul class="strata-checks">{check_html}</ul>
+    <div class="btn-row"><a class="btn btn-primary" href="mailto:{EMAIL}?subject=Coquitlam%20condo%20strata%20checklist">{I["mail"]} Email me this checklist</a></div>
+    <p class="form-note">The Form B is described by the <a href="{BC_FORM_B}" target="_blank" rel="noopener">Province of British Columbia</a>. What a particular building's minutes say is specific to that building.</p>
+    ''', paper=True)
+    body += _section("help", "Working together", "What I do on a Coquitlam condo purchase", f'''
+    <ol class="mini-steps guide-steps">
+      <li><div><h3>Represent you</h3><p>I'm on the buyer's side. If a home is listed by Axford Real Estate, I'll tell you that in writing before you go further.</p></div></li>
+      <li><div><h3>Read the strata file</h3><p>Form B, minutes, depreciation report, insurance and the contingency fund, before subject removal, not after.</p></div></li>
+      <li><div><h3>Compare the three clusters</h3><p>Burquitlam, City Centre and Northeast Coquitlam against your commute, not against a generic "Coquitlam condo."</p></div></li>
+      <li><div><h3>If you aren't here yet</h3><p>Live video of the unit and the street, and electronic signing. The out-of-province steps are already on the <a href="coquitlam.html#from-another-province">Coquitlam guide</a>. I won't repeat them here.</p></div></li>
+    </ol>
+    <p class="after-steps">How buyer agency is paid, and the rescission period, are on the <a href="buyers.html#buyer-faq">buyers page</a>. First-home programs are on <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>. Short area clips are on my <a href="https://www.youtube.com/@devindesaulniers" target="_blank" rel="noopener">YouTube channel</a>.</p>
+    ''')
+    faq = [
+        ("Who should I hire to buy a condo in Coquitlam?",
+         "<p>Hire a B.C.-licensed buyer's agent who represents you, and who will read the Form B, the minutes and the depreciation report with you before you remove subjects. I'm Devin Desaulniers, a REALTOR® and Real Estate Associate with Axford Real Estate in Port Moody, licensed since 2020. I do that work in Burquitlam, City Centre and Northeast Coquitlam, and across the Tri-Cities, BC.</p>"),
+        ("What should I check before I remove subjects on a Coquitlam condo?",
+         "<p>The strata file, not just the suite. Start with the Form B, the depreciation report, the last two years of council, AGM and special general meeting minutes, the bylaws and rules, the budget and financial statements, the contingency reserve fund set against upcoming work, the insurance summary and deductible, and which parking stall and locker are assigned to the strata lot. I go through that list with you and flag questions for your notary, lawyer or inspector.</p>"),
+        ("How do Burquitlam, City Centre and Northeast Coquitlam differ for a condo?",
+         '<p>Burquitlam is condos and townhomes around Burquitlam Station, with Millennium Line access and ongoing redevelopment near the station. City Centre is high-rise living near Lincoln and Lafarge Lake–Douglas, the mall, Town Centre Park and Douglas College, so compare strata fees on the Form B rather than assuming two towers match. Northeast Coquitlam, including Burke Mountain, is newer and more car-friendly: there is no SkyTrain station up there. The <a href="burquitlam-neighbourhood-guide.html">Burquitlam guide</a> and the <a href="coquitlam.html">Coquitlam guide</a> go further on each area.</p>'),
+        ("What did Coquitlam apartments benchmark at in October 2026?",
+         f'<p>The MLS® Home Price Index benchmark for a Coquitlam apartment was $624,200 in October 2026, down 9.1% from a year earlier and 2.5% from September, in the <a href="{GVR_OCT_URL}" target="_blank" rel="noopener">Greater Vancouver REALTORS® statistics package</a>. That is a typical apartment, not the middle sale. The median Coquitlam apartment sale that month was $595,000, from 82 sales. The Metro Vancouver apartment benchmark was $673,400.</p>'),
+        ("What is a Form B?",
+         f'<p>The Form B Information Certificate is a strata document ordered on a sale. It shows the monthly strata fee and any special levies, and it attaches the budget, the rules and the most recent depreciation report. It is one piece of the file, not the whole file. The province describes it on the <a href="{BC_FORM_B}" target="_blank" rel="noopener">Form B page</a>.</p>'),
+        ("Can I buy a Coquitlam condo if I haven't visited yet?",
+         '<p>Yes. I can walk the unit and the street with you on a live video call, and most of the paperwork can be signed electronically. The steps for buying from another province are on the <a href="coquitlam.html#from-another-province">Coquitlam guide</a>. A lot of buyers still like one short trip before they firm up an offer.</p>'),
+        ("Who pays the buyer's agent on a Coquitlam condo?",
+         '<p>In most B.C. sales the buyer\'s agent is paid from the commission the seller has already agreed to with the listing brokerage, so many buyers pay nothing directly. That isn\'t guaranteed. The agreement we sign says what you would owe if the listing brokerage doesn\'t pay the amount we agreed, and I\'ll explain that in writing before you sign anything. The longer version is on the <a href="buyers.html#buyer-faq">buyers page</a>.</p>'),
+        ("How do I start a Coquitlam condo search?",
+         f'<p>Call or text <a href="{TEL}">{PHONE}</a>, email <a href="mailto:{EMAIL}">{EMAIL}</a>, or tell me what you want on the <a href="buyers.html#listings">listings form</a>. A price range, a commute and whether you need parking is enough to begin.</p>'),
+    ]
+    sources = _sources(
+        "Benchmark prices, sales, the median and new listings are from the Greater Vancouver REALTORS® October 2026 statistics package. Neighbourhood descriptions match the Coquitlam and Burquitlam guides on this site. The Form B description follows the Province of B.C.",
+        [
+            ("GVR statistics package, October 2026 (PDF)", GVR_OCT_URL, "Greater Vancouver REALTORS® · news release November 2, 2026"),
+            ("Form B: Information Certificate", BC_FORM_B, "Province of British Columbia"),
+            ("SkyTrain: Millennium Line", "https://www.translink.ca/schedules-and-maps/skytrain", "TransLink"),
+            ("West Coast Express", "https://www.translink.ca/schedules-and-maps/west-coast-express", "TransLink"),
+        ],
+    )
+    cta = _cta(
+        "Looking at a Coquitlam condo?",
+        f"Call or text {PHONE}, or email {EMAIL}. Devin Desaulniers, REALTOR®, Axford Real Estate, {BROKERAGE_ADDR}.",
+        f'<a class="btn btn-light" href="buyers.html#listings">Send me listings {I["arrow"]}</a>'
+        + _phone_row(),
+    )
+    return _visual_page(
+        "coquitlam-condo-buyer.html",
+        "Hire a Condo Buyer's Agent in Coquitlam, BC | Devin",
+        "Buyer's agent for Coquitlam condos: Form B and strata checks, Burquitlam vs City Centre vs Northeast. Devin Desaulniers.",
+        "Condo buyers · Coquitlam",
+        "Who to hire to buy a condo in Coquitlam",
+        "To buy a condo in Coquitlam, hire a B.C.-licensed buyer's agent who represents you, reads the Form B, minutes and depreciation report with you before subject removal, and knows how Burquitlam, City Centre and Northeast Coquitlam differ. I'm Devin Desaulniers, a REALTOR® with Axford Real Estate in Port Moody.",
+        [("market", "October benchmark"), ("areas", "Three areas"), ("strata", "Strata checklist"), ("help", "How I help"), ("faq", "FAQ")],
+        "The benchmark tells you where the market was. The strata file tells you whether a particular building is the one to buy.",
+        '<p>I work in Port Moody with Axford Real Estate, and Coquitlam condos are a regular part of that work. If you\'re buying your first home, start with <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions for the Tri-Cities, BC</a>.</p>',
+        body, "Coquitlam condo questions", faq, cta, sources,
+    )
+
+
 def write_pages():
     for item in TENANT_FAQ_PREPEND:
         assert_copy(item[0] + item[1], "tenants FAQ")
-    pages = [_burquitlam(), _port_moody(), _port_coquitlam(), _newcomer(), _first_time(), _coquitlam(), _newcomer_buyers()]
+    for item in RENT_FAQS:
+        assert_copy(item[0] + item[1], "rent FAQ")
+    pages = [_burquitlam(), _port_moody(), _port_coquitlam(), _newcomer(), _rental_before(), _first_time(), _coquitlam(), _coquitlam_condo(), _newcomer_buyers()]
     return pages

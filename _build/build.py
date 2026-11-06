@@ -262,7 +262,7 @@ hoods = [
   "Mundy Park, Lafarge Lake & Town Centre Park, Como Lake, and trails on Westwood Plateau and Burke Mountain.",
   "Coquitlam is the largest of the Tri-Cities, BC (see my <a href=\"coquitlam.html\">Coquitlam guide</a>), and one of the three cities I focus on. Buyers here are often choosing between a hillside area like Burke Mountain or Westwood Plateau and City Centre, and the commute is usually the deciding piece. Tell me where you'll be heading each day and we'll compare them on that. For the SkyTrain neighbourhood on the Burnaby border, read my <a href=\"burquitlam-neighbourhood-guide.html\">Burquitlam neighbourhood guide</a>."),
  ("Port Coquitlam","Riverside community with a small-town feel",
-  "“PoCo” sits between the Coquitlam and Pitt rivers, with a walkable downtown, family-friendly residential neighbourhoods and the Traboulay PoCo Trail looping around the city. It's also Terry Fox's hometown — and where I play soccer.",
+  "“PoCo” sits between the Coquitlam and Pitt rivers, with a walkable downtown, family-friendly residential neighbourhoods and the Traboulay PoCo Trail looping around the city. It's also Terry Fox's hometown, and where I play soccer.",
   ["Downtown PoCo","Citadel Heights","Mary Hill","Oxford Heights","Lincoln Park","Riverwood","Birchland Manor","Glenwood"],
   "West Coast Express at Port Coquitlam station; Lougheed Highway and the Mary Hill Bypass connect to the rest of the region.",
   "Traboulay PoCo Trail, Coquitlam River and Pitt River dikes, and plenty of community sports fields.",
@@ -298,12 +298,29 @@ for name,tag,desc,nbhd,transit,outdoors,take in hoods:
 </article>'''
 
 YT_BUYERS = ["TptjgpShZYM", "mR_HYgiJClc", "INd7HTnfDLs"]
-BUYERS_HOODS_ASIDE = """<p class="lead">A quick introduction to the communities I focus on. Every street is different — reach out and I'll help you compare areas based on your commute, lifestyle and budget.</p>"""
+BUYERS_HOODS_ASIDE = """<p class="lead">A quick introduction to the communities I focus on. Every street is different. Reach out and I'll help you compare areas based on your commute, lifestyle and budget.</p>"""
 BUYERS_TOURS_ASIDE = f"<p>{YT_NOTE} They're a handy way to compare layouts and finishes before you book showings.</p>{TOURS_LINK}"
-BUYERS_LISTINGS_ASIDE = """<p class="lead">Tell me what you're looking for and I'll send you homes that match — including new listings as they hit the market.</p><p>Already looking at a specific property? <a href="buyer-opinion.html">Get an expert opinion</a> on its value.</p>"""
+BUYERS_LISTINGS_ASIDE = """<p class="lead">Tell me what you're looking for and I'll send you homes that match, including new listings as they hit the market.</p><p>Already looking at a specific property? <a href="buyer-opinion.html">Get an expert opinion</a> on its value.</p>"""
 
+BUYER_FAQS = [
+ ("Who is a good realtor for buying a home in the Tri-Cities, BC?",
+  "<p>I'm Devin Desaulniers, a REALTOR® and Real Estate Associate at Axford Real Estate on Clarke Street in Port Moody, licensed since 2020. I help buyers in Coquitlam, Port Coquitlam, Port Moody, Anmore and Belcarra, and I also work with people relocating to Greater Vancouver from other provinces and countries.</p>"),
+ ("Can you help me buy if I'm moving to Vancouver from out of town?",
+  '<p>Yes. I tour homes with you on live video, show you the street and the walk to SkyTrain, and most paperwork is signed electronically, so you can write an offer before you arrive. If renting first makes more sense, I also work on the tenant side and can line up a rental before you move. The timing is on <a href="rental-before-you-arrive.html">the week-by-week rental checklist</a>, and buying in Coquitlam from another province is on the <a href="coquitlam.html#from-another-province">Coquitlam guide</a>.</p>'),
+ ("How much does it cost to use a buyer's agent in BC?",
+  "<p>In most B.C. sales the buyer's agent is paid from the commission the seller has already agreed to with the listing brokerage, so many buyers pay nothing directly. That isn't guaranteed. If you sign a buyer's agency agreement, it spells out what you would owe if the listing brokerage doesn't pay the amount we agreed. I'll explain exactly how I'm paid, in writing, before you sign anything. Before I provide services, we both sign BCFSA's Disclosure of Representation in Trading Services form.</p>"),
+ ("Which Tri-Cities, BC neighbourhood is right for me?",
+  '<p>It depends on your commute, schools and budget. Burquitlam and Coquitlam City Centre suit people who want SkyTrain. Burke Mountain and Westwood Plateau suit families who want newer homes and don\'t mind driving. Port Moody suits people who want the inlet and the trails. Port Coquitlam has a smaller downtown. See the <a href="coquitlam.html">Coquitlam</a>, <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="coquitlam-condo-buyer.html">Coquitlam condo</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a> guides.</p>'),
+ ("What costs should I budget for besides the down payment?",
+  '<p>B.C. property transfer tax (first-time buyers may qualify for an exemption; see the <a href="bc-property-transfer-tax.html">property transfer tax page</a> and my <a href="' + CALC + '" target="_blank" rel="noopener">calculator</a>), legal or notary fees, a home inspection, strata fees on a condo or townhouse, and moving costs. Monthly costs after you own are on <a href="true-cost-of-owning-a-home-bc.html">the true cost of owning a home in BC</a>.</p>'),
+ ("Can I back out after my offer is accepted?",
+  '<p>On most residential purchases in B.C. you can back out within three business days of an accepted offer, by written notice, and it costs 0.25% of the purchase price. It\'s a safety net, not a free pass, and some sales are exempt, including leasehold homes, auctions, court-ordered sales and many presales. Subjects such as financing, inspection and strata documents are still the usual way to protect yourself. Confirm the current rules on the <a href="' + seo_pages.BCFSA_RESCISSION + '" target="_blank" rel="noopener">BCFSA consumer guide</a>. The worked example is on <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>.</p>'),
+ ("How do I start?",
+  f'<p>Call or text <a href="{TEL}">{PHONE}</a>, email <a href="mailto:{EMAIL}">{EMAIL}</a>, or set up listing alerts with the form below.</p>'),
+]
+buyer_faq_html = "".join(f'<div class="faq-item"><h3>{q}</h3><div class="ans">{a}</div></div>' for q, a in BUYER_FAQS)
 buyers = head("Buying a Home in the Tri-Cities, BC | Devin Desaulniers, Axford Real Estate",
-              "Neighbourhood guides for Coquitlam, Port Coquitlam, Port Moody and nearby areas, a free mortgage affordability calculator, and personalised listing alerts from Devin Desaulniers, Axford Real Estate.", "buyers", page_url="buyers.html")
+              "Neighbourhood guides for Coquitlam, Port Coquitlam, Port Moody and nearby areas, a free mortgage affordability calculator, and personalised listing alerts from Devin Desaulniers, Axford Real Estate.", "buyers", page_url="buyers.html", extra_head=seo_pages.faq_jsonld(BUYER_FAQS))
 buyers += f'''
 <section class="page-hero">
   <div class="container">
@@ -314,10 +331,10 @@ buyers += f'''
       <a class="btn btn-light" href="#listings">Send me listings {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="{CALC}" target="_blank" rel="noopener">Mortgage calculator {I["ext"]}</a>
     </div>
-    <p class="hero-note"><a href="mortgage-rates.html">Mortgage rates</a> — illustrative Big 5 bank rates, with a link into the calculator. <a href="market-report/">Tri-Cities, BC market report</a> — monthly benchmark prices, sales, and listings. <a href="contact.html?intent=buying#qualify">Answer a few questions</a> if you're not ready for listing alerts.</p>
+    <p class="hero-note"><a href="mortgage-rates.html">Mortgage rates</a>: illustrative Big 5 bank rates, with a link into the calculator. <a href="market-report/">Tri-Cities, BC market report</a>: monthly benchmark prices, sales, and listings. <a href="contact.html?intent=buying#qualify">Answer a few questions</a> if you're not ready for listing alerts.</p>
   </div>
 </section>
-{page_nav([("help","How I help"),("testimonials","Reviews"),("neighbourhoods","Neighbourhoods"),("tours","Video tours"),("listings","Send me listings")])}
+{page_nav([("help","How I help"),("testimonials","Reviews"),("neighbourhoods","Neighbourhoods"),("buyer-faq","Buyer questions"),("tours","Video tours"),("listings","Send me listings")])}
 
 <section class="section section--calc">
   <div class="container">{calc_cta("Start with your budget","Before you fall in love with a listing, get a feel for your price range with my free mortgage affordability calculator. Then talk to a lender about pre-approval.")}
@@ -358,10 +375,17 @@ buyers += f'''
 
     <div class="other-areas">
       <h3>Other nearby areas</h3>
-      <p>I also help buyers in neighbouring Greater Vancouver communities, including <strong>Burnaby</strong>, <strong>New Westminster</strong>, and <strong>Pitt Meadows &amp; Maple Ridge</strong>. School District 43 serves Coquitlam, Port Coquitlam, Port Moody, Anmore and Belcarra — always confirm school catchments with the district for a specific address.</p>
-      <p>Longer guides: <a href="coquitlam.html">Coquitlam</a>, <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a>. Buying a first home in the Tri-Cities, BC? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>, <a href="bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a>, and <a href="true-cost-of-owning-a-home-bc.html">the true cost of owning a home in BC</a>. Illustrative Big 5 rates are on the <a href="mortgage-rates.html">mortgage rates</a> page.</p>
+      <p>I also help buyers in neighbouring Greater Vancouver communities, including <strong>Burnaby</strong>, <strong>New Westminster</strong>, and <strong>Pitt Meadows &amp; Maple Ridge</strong>. School District 43 serves Coquitlam, Port Coquitlam, Port Moody, Anmore and Belcarra. Always confirm school catchments with the district for a specific address.</p>
+      <p>Longer guides: <a href="coquitlam.html">Coquitlam</a>, <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="coquitlam-condo-buyer.html">Coquitlam condos</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a>. Buying a first home in the Tri-Cities, BC? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>, <a href="bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a>, and <a href="true-cost-of-owning-a-home-bc.html">the true cost of owning a home in BC</a>. Illustrative Big 5 rates are on the <a href="mortgage-rates.html">mortgage rates</a> page.</p>
       <p>If you're looking somewhere else in Greater Vancouver, tell me on the <a href="#listings">listings form</a> below: choose “Other (add in notes)” and add the area in your notes.</p>
     </div>
+  </div>
+</section>
+
+<section class="section" id="buyer-faq">
+  <div class="container">
+    {sec_head("Buyer questions", "Questions I get most", center=True)}
+    <div class="faq-list">{buyer_faq_html}</div>
   </div>
 </section>
 
@@ -386,8 +410,8 @@ buyers += f'''
         <div class="field"><label for="b-phone">Phone</label><input id="b-phone" name="phone" type="tel" autocomplete="tel"></div>
         <div class="field"><label for="b-type">Property type</label><select id="b-type" name="property_type">{opts(["Any","Condo / apartment","Townhouse","Detached house","Half duplex / duplex"],None)}</select></div>
         <fieldset class="field full"><legend>Areas of interest <span class="hint">(choose any)</span></legend><div class="checks">{area_checks("areas")}</div></fieldset>
-        <div class="field"><label for="b-min">Price range — minimum</label><select id="b-min" name="price_min">{opts(PRICES[:-1])}</select></div>
-        <div class="field"><label for="b-max">Price range — maximum</label><select id="b-max" name="price_max">{opts(["No maximum"]+PRICES[2:])}</select></div>
+        <div class="field"><label for="b-min">Price range, minimum</label><select id="b-min" name="price_min">{opts(PRICES[:-1])}</select></div>
+        <div class="field"><label for="b-max">Price range, maximum</label><select id="b-max" name="price_max">{opts(["No maximum"]+PRICES[2:])}</select></div>
         <div class="field"><label for="b-beds">Bedrooms (min.)</label><select id="b-beds" name="bedrooms">{opts(["Any","Studio","1+","2+","3+","4+","5+"])}</select></div>
         <div class="field"><label for="b-baths">Bathrooms (min.)</label><select id="b-baths" name="bathrooms">{opts(["Any","1+","1.5+","2+","2.5+","3+"])}</select></div>
         <div class="field"><label for="b-timeline">Timeline</label><select id="b-timeline" name="timeline">{opts(["As soon as possible","Within 3 months","3–6 months","6–12 months","12+ months / just exploring"],"Select…")}</select></div>
@@ -409,9 +433,9 @@ TEN_DESC = "Moving to Vancouver or the Tri-Cities, BC? Get local rental help: co
 
 FAQ_ITEMS = seo_pages.TENANT_FAQ_PREPEND + [
  ("Who can help me find a rental in Vancouver if I'm moving from out of province?",
-  "<p>I can. I'm Devin Desaulniers, a Real Estate Associate with Axford Real Estate in Port Moody. I help people relocating to Greater Vancouver line up a rental on the <strong>tenant side</strong> before they arrive — in Vancouver, Burnaby, New Westminster and the Tri-Cities, BC (Coquitlam, Port Coquitlam and Port Moody). I search for rentals that fit your budget and commute, arrange and attend showings, do live video walkthroughs and share floor plans when you're not here yet, negotiate on your behalf, and review the lease with you before you sign.</p>"),
+  "<p>I can. I'm Devin Desaulniers, a Real Estate Associate with Axford Real Estate in Port Moody. I help people relocating to Greater Vancouver line up a rental on the <strong>tenant side</strong> before they arrive, in Vancouver, Burnaby, New Westminster and the Tri-Cities, BC (Coquitlam, Port Coquitlam and Port Moody). I search for rentals that fit your budget and commute, arrange and attend showings, do live video walkthroughs and share floor plans when you're not here yet, negotiate on your behalf, and review the lease with you before you sign.</p>"),
  ("Can you help me find a rental before I move?",
-  "<p>Yes — you don't have to wait until you land. I shortlist rentals and view them for you. When you can't make it, I do a virtual showing with a live video walkthrough, so you can see the home and ask questions from wherever you are, and I share floor plans for the homes you're seriously considering. If you're in town, I'll attend showings with you and, when practical, drive us between appointments. We also go through the lease together, so you're not wiring money to a scam listing from another province.</p>"),
+  "<p>Yes. You don't have to wait until you land. I shortlist rentals and view them for you. When you can't make it, I do a virtual showing with a live video walkthrough, so you can see the home and ask questions from wherever you are, and I share floor plans for the homes you're seriously considering. If you're in town, I'll attend showings with you and, when practical, drive us between appointments. We also go through the lease together, so you're not wiring money to a scam listing from another province.</p>"),
  ("How much does it cost, and who pays?",
   "<p>The service fee is <strong>$1,500 total + GST</strong>, paid by you, the tenant, in two parts: <strong>$750</strong> at the beginning of our engagement and <strong>$750</strong> once you successfully secure a rental.</p>"),
  ("When do I pay?",
@@ -423,9 +447,9 @@ FAQ_ITEMS = seo_pages.TENANT_FAQ_PREPEND + [
  ("How far ahead of my move should I reach out?",
   "<p>Most Greater Vancouver rentals come on the market only a few weeks before they're available, so the active search usually starts about <strong>4 to 6 weeks</strong> before your move-in date. Use the weeks before that to settle your budget, neighbourhoods, commute needs and documents (ID, proof of income, references). Once you're inside that window, I can move quickly on new listings.</p>"),
  ("What should I have ready to apply for a rental?",
-  '<p>Landlords and property managers look for a complete, verifiable application: <strong>photo ID</strong> (a clear, unexpired government-issued ID); <strong>proof of income</strong> (usually 2–3 recent pay stubs, an employment letter, or a contract or offer letter — or, if you\'re self-employed, recent bank statements and/or a Notice of Assessment); <strong>references</strong> from previous landlords and/or employers; sometimes a <strong>credit report</strong>, which you can get yourself (e.g. from Equifax or TransUnion) to speed things up; and a short <strong>renter profile</strong> (who will live there, your move-in date, pets and what you\'re looking for). I can help you organize it. The full checklist is in my free <a href="#resources">Greater Vancouver renter\'s guide</a>.</p>'),
+  '<p>Landlords and property managers look for a complete, verifiable application: <strong>photo ID</strong> (a clear, unexpired government-issued ID); <strong>proof of income</strong> (usually 2–3 recent pay stubs, an employment letter, or a contract or offer letter, or, if you\'re self-employed, recent bank statements and/or a Notice of Assessment); <strong>references</strong> from previous landlords and/or employers; sometimes a <strong>credit report</strong>, which you can get yourself (e.g. from Equifax or TransUnion) to speed things up; and a short <strong>renter profile</strong> (who will live there, your move-in date, pets and what you\'re looking for). I can help you organize it. The full checklist is in my free <a href="#resources">Greater Vancouver renter\'s guide</a>.</p>'),
  ("Do you cover the Tri-Cities, BC and the rest of Greater Vancouver, or only Vancouver?",
-  '<p>Both — I search across Greater Vancouver. I work in Port Moody, so the Tri-Cities, BC (Coquitlam, Port Coquitlam and Port Moody) are an area I know especially well, but most of my rental searches cover the wider region: Vancouver, Burnaby, New Westminster and beyond. Tell me your commute (SkyTrain, West Coast Express or driving), budget and must-haves, and I\'ll focus the search where it makes sense for you. Moving to Greater Vancouver? Read my <a href="relocating-to-greater-vancouver.html">Relocating to Greater Vancouver guide</a>.</p>'),
+  '<p>Both. I search across Greater Vancouver. I work in Port Moody, so the Tri-Cities, BC (Coquitlam, Port Coquitlam and Port Moody) are an area I know especially well, but most of my rental searches cover the wider region: Vancouver, Burnaby, New Westminster and beyond. Tell me your commute (SkyTrain, West Coast Express or driving), budget and must-haves, and I\'ll focus the search where it makes sense for you. Moving to Greater Vancouver? Read my <a href="relocating-to-greater-vancouver.html">Relocating to Greater Vancouver guide</a>.</p>'),
  ("How do I avoid rental scams when I'm still out of town?",
   "<p>Never send a deposit before the unit and the landlord (or their licensed agent or property manager) are verified. Be wary of below-market listings that seem too good to be true, landlords who refuse showings, and requests to wire money to “hold” a unit. Get a written tenancy agreement and do a move-in condition inspection. I can view the unit in person, or on a live video walkthrough with you, before you commit.</p>"),
  ("Can you help with pets, parking or commute needs?",
@@ -433,9 +457,9 @@ FAQ_ITEMS = seo_pages.TENANT_FAQ_PREPEND + [
  ("What if we don't find a place that works?",
   "<p>The first $750 covers the consultation, search and showings, and is non-refundable. The second $750 is only due once you successfully secure a rental, so if no rental is secured, it isn't owed.</p>"),
  ("Do you work for the landlord?",
-  "<p>No — this is a tenant representation service. I represent you, and you pay my fee. If a rental is listed or managed by Axford Real Estate, my brokerage, I'll disclose that to you in writing before you commit, and you can decline it.</p>"),
+  "<p>No. This is a tenant representation service. I represent you, and you pay my fee. If a rental is listed or managed by Axford Real Estate, my brokerage, I'll disclose that to you in writing before you commit, and you can decline it.</p>"),
  ("What's the difference between tenant-side rental help and a property management company?",
-  "<p>Property managers usually represent the <strong>landlord</strong> and lease out the buildings they manage. I work on the <strong>tenant side</strong>: I represent your search, not a landlord's inventory. Axford also has a separate property management business; my service is different — it's tenant-paid relocation rental help, and I don't manage rental properties myself.</p>"),
+  "<p>Property managers usually represent the <strong>landlord</strong> and lease out the buildings they manage. I work on the <strong>tenant side</strong>: I represent your search, not a landlord's inventory. Axford also has a separate property management business; my service is different: it's tenant-paid relocation rental help, and I don't manage rental properties myself.</p>"),
 ]
 def _plain(h):
     return _re.sub(r"\s+", " ", _html.unescape(_re.sub(r"<[^>]+>", "", h))).strip()
@@ -514,7 +538,7 @@ tenants += f"""
       <input type="hidden" name="form" value="Tenant: Relocation rental intake">
       <div class="hp" aria-hidden="true"><label>Leave this field empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
       <h2>Start your rental search</h2>
-      <p>Takes about 2 minutes. No obligation — I'll get back to you to talk next steps. Prefer to talk? <a href="{TEL}">{PHONE}</a></p>
+      <p>Takes about 2 minutes. No obligation. I'll get back to you to talk next steps. Prefer to talk? <a href="{TEL}">{PHONE}</a></p>
       <p class="lp-alt">Prefer to start with a few questions? <a href="contact.html?intent=renting#qualify">Tell me about your move</a>.</p>
       {STEP1}
       <div class="step2-wrap" data-step2-wrap>
@@ -531,7 +555,7 @@ tenants += f"""
     <div class="service-grid">
       <div class="card"><div class="icon">{I["handshake"]}</div><h3>Personalized consultation</h3><p>I'll help you identify rentals that fit your budget, commute, lifestyle and priorities. I also point out potential green flags and red flags, so you can make a more informed decision and avoid unnecessary uncertainty.</p></div>
       <div class="card"><div class="icon">{I["home"]}</div><h3>Property search &amp; early access</h3><p>I search Facebook Marketplace, Craigslist and other rental sources. Through Axford Real Estate, I also have access to our own rental opportunities and firsthand relationships with the property managers in our office.</p></div>
-      <div class="card"><div class="icon">{I["video"]}</div><h3>Showings — in person or virtual</h3><p>I book and coordinate showings and attend with you. When you can't make it, I do virtual showings with a live video walkthrough, plus floor plans for the homes you're seriously considering. When practical, I can also drive us between scheduled appointments.</p></div>
+      <div class="card"><div class="icon">{I["video"]}</div><h3>Showings: in person or virtual</h3><p>I book and coordinate showings and attend with you. When you can't make it, I do virtual showings with a live video walkthrough, plus floor plans for the homes you're seriously considering. When practical, I can also drive us between scheduled appointments.</p></div>
       <div class="card"><div class="icon">{I["doc"]}</div><h3>Lease review &amp; negotiation</h3><p>We review the lease agreement together. I explain the important terms, talk through move-in and move-out expectations, and negotiate rent or other lease terms where appropriate.</p></div>
     </div>
     <div class="fee-block">
@@ -564,6 +588,15 @@ tenants += f"""
       <li><div><h3>Move in</h3><p>I help you understand the next steps and what to expect at move-in.</p></div></li>
     </ol>
     <div class="section-cta"><a class="btn btn-primary" href="#intake">Start your rental search {I["arrow"]}</a></div>
+  </div>
+</section>
+
+<section class="section section--paper" id="rent-now">
+  <div class="container narrow-wide">
+    <span class="eyebrow">October 2026</span>
+    <h2>What rent costs when you move here</h2>
+    <p>October 2026 average asking rents for a one-bedroom were about $2,377 in Vancouver and $2,051 in Coquitlam. The full comparison, including Burnaby, New Westminster and the change from last year, is on my <a href="relocating-to-greater-vancouver.html#rent-now">relocating guide</a>.</p>
+    <p>I help relocating tenants line up viewings, applications and references before they arrive.</p>
   </div>
 </section>
 
@@ -601,9 +634,14 @@ tenants += f"""
         </div>
       </article>
     </div>
+    <a class="guide-callout" href="rental-before-you-arrive.html">
+      <span class="gc-icon">{I["doc"]}</span>
+      <span><b>Week-by-week checklist.</b> How to line up a Greater Vancouver rental before you arrive: documents, timing, deposits and what to watch for.</span>
+      <span class="gc-arrow">{I["arrow"]}</span>
+    </a>
     <a class="guide-callout" href="relocating-to-greater-vancouver.html">
       <span class="gc-icon">{I["pin"]}</span>
-      <span><b>Moving to Greater Vancouver?</b> Read my Relocating to Greater Vancouver guide — areas at a glance, commuting, renting basics in B.C., and whether to rent or buy first.</span>
+      <span><b>Moving to Greater Vancouver?</b> Read my Relocating to Greater Vancouver guide: areas at a glance, commuting, renting basics in B.C., and whether to rent or buy first.</span>
       <span class="gc-arrow">{I["arrow"]}</span>
     </a>
     <a class="guide-callout" href="newcomer-rental-faqs.html">
@@ -619,7 +657,7 @@ tenants += f"""
     <div class="about-copy">
       <span class="eyebrow">Your local on the ground</span>
       <h2>Hi, I'm Devin.</h2>
-      <p>I've lived in the Greater Vancouver area for 28 years. I work in Port Moody, and I play soccer on a Port Coquitlam team and pickleball around the Tri-Cities, BC. I know this region as a local — so I can tell you what a neighbourhood is actually like, not just what the listing says.</p>
+      <p>I've lived in the Greater Vancouver area for 28 years. I work in Port Moody, and I play soccer on a Port Coquitlam team and pickleball around the Tri-Cities, BC. I know this region as a local, so I can tell you what a neighbourhood is actually like, not just what the listing says.</p>
       <p>For the last seven years I've been helping people relocate to and from Vancouver. I've been licensed in real estate since 2020, and today I'm a Real Estate Associate with <strong>Axford Real Estate</strong>.</p>
       <p class="inline-links"><a href="{TEL}">{PHONE}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="index.html#about">More about me</a> · <a href="relocating-to-greater-vancouver.html">Moving to Greater Vancouver?</a> · <a href="newcomer-rental-faqs.html">New to Canada?</a> · <a href="newcomer-buyers.html">Newcomer buyers</a> · <a href="coquitlam.html">Coquitlam guide</a></p>
       {social_row("Look me up")}
@@ -673,22 +711,22 @@ GV_DESC = "Moving to Greater Vancouver from another province? Areas at a glance,
 RTB = "https://www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies"
 GV_FAQ = [
  ("Who can help me relocate to Greater Vancouver from another province?",
-  "<p>I can. I'm Devin Desaulniers, a Real Estate Associate with Axford Real Estate in Port Moody. I've lived in the Greater Vancouver area for 28 years, I've been licensed since 2020, and for the last seven years I've been helping people relocate to and from Vancouver — as tenants who need a rental lined up before they arrive, or as buyers.</p>"),
+  "<p>I can. I'm Devin Desaulniers, a Real Estate Associate with Axford Real Estate in Port Moody. I've lived in the Greater Vancouver area for 28 years, I've been licensed since 2020, and for the last seven years I've been helping people relocate to and from Vancouver, as tenants who need a rental lined up before they arrive, or as buyers.</p>"),
  ("Should I rent or buy first when moving to Greater Vancouver?",
-  "<p>It depends on your timeline, down payment and how sure you are about areas. Some people rent for 6–12 months to learn the commute and the neighbourhoods, then buy. Others buy first if financing and timing are solid. I can help with either path — a tenant-side rental search or buyer representation — and I'll be honest about which fits your dates.</p>"),
+  "<p>It depends on your timeline, down payment and how sure you are about areas. Some people rent for 6–12 months to learn the commute and the neighbourhoods, then buy. Others buy first if financing and timing are solid. I can help with either path, a tenant-side rental search or buyer representation, and I'll be honest about which fits your dates.</p>"),
  ("Which part of Greater Vancouver should I live in?",
   "<p>Start with your commute, budget and lifestyle. Vancouver suits people who want walkable, transit-rich neighbourhoods; Burnaby and New Westminster offer many condo options near SkyTrain; Richmond has the Canada Line and airport access; the North Shore suits outdoor lovers who can manage a bridge or SeaBus commute; the Tri-Cities, BC and Surrey/Langley offer more space. Tell me where you'll work or study and your hours, and I'll shortlist areas that match.</p>"),
  ("Can you help me find a rental in Greater Vancouver before I move?",
-  '<p>Yes. That\'s the core of my tenant-side relocation rental service: I search across Greater Vancouver (in the areas we agree on), attend showings or do live video walkthroughs with floor plans, negotiate on your behalf and review the lease with you — so you\'re not wiring a deposit to a scam listing from out of province. <a href="tenants.html">See how the relocation rental service works</a>.</p>'),
+  '<p>Yes. That\'s the core of my tenant-side relocation rental service: I search across Greater Vancouver (in the areas we agree on), attend showings or do live video walkthroughs with floor plans, negotiate on your behalf and review the lease with you, so you\'re not wiring a deposit to a scam listing from out of province. <a href="tenants.html">See how the relocation rental service works</a>.</p>'),
  ("How much does tenant-side relocation rental help cost?",
   "<p><strong>$1,500 total + GST, paid by the tenant</strong>, in two parts: $750 at the beginning of the engagement (non-refundable) and $750 once you successfully secure a rental. It covers a personalized consultation, the property search, showings (in person or virtual), and lease review &amp; negotiation.</p>"),
  ("How far ahead should I contact an agent when relocating to Greater Vancouver?",
-  "<p>For <strong>renting</strong>, settle your preferences early, then expect the active search about <strong>4–6 weeks</strong> before move-in, because most listings appear close to availability. For <strong>buying</strong>, reach out as soon as your move date and budget are roughly known — often 2–4+ months out — so we can watch inventory and get you lender-ready.</p>"),
+  "<p>For <strong>renting</strong>, settle your preferences early, then expect the active search about <strong>4–6 weeks</strong> before move-in, because most listings appear close to availability. For <strong>buying</strong>, reach out as soon as your move date and budget are roughly known, often 2–4+ months out, so we can watch inventory and get you lender-ready.</p>"),
  ("Do you only work in the Tri-Cities, BC?",
-  "<p>No. I help tenants and buyers across Greater Vancouver. I work in Port Moody, so the Tri-Cities, BC — Coquitlam, Port Coquitlam and Port Moody — are an area I know especially well, and I regularly search Vancouver, Burnaby, New Westminster and other parts of the region. We'll define your search area up front.</p>"),
+  "<p>No. I help tenants and buyers across Greater Vancouver. I work in Port Moody, so the Tri-Cities, BC (Coquitlam, Port Coquitlam and Port Moody) are an area I know especially well, and I regularly search Vancouver, Burnaby, New Westminster and other parts of the region. We'll define your search area up front.</p>"),
  ("How do I start working with Devin Desaulniers on a Greater Vancouver relocation?",
   f'<p>Call or text <a href="{TEL}">{PHONE}</a>, email <a href="mailto:{EMAIL}">{EMAIL}</a>, or message me through my <a href="{SOCIAL[0][1]}" target="_blank" rel="noopener">REALTOR.ca profile</a>. Share your move date, whether you\'re renting or buying, your budget and must-haves (beds, parking, pets, transit). Renting? You can also fill out the <a href="tenants.html#intake">rental search intake form</a>. I\'ll reply with next steps and a clear scope.</p>'),
-]
+] + seo_pages.RENT_FAQS
 gv_faq_html = "".join(f'<div class="faq-item"><h3>{q}</h3><div class="ans">{a}</div></div>' for q, a in GV_FAQ)
 AREAS_GV = [
  ("Vancouver", "Transit-rich, walkable and diverse neighbourhoods, with a mix of older and newer rentals.", "SkyTrain: Expo, Millennium and Canada lines, plus frequent buses.", False),
@@ -696,7 +734,7 @@ AREAS_GV = [
  ("Richmond", "Shopping and airport access, with many condo communities.", "Canada Line to downtown Vancouver and YVR.", False),
  ("North Shore", "North and West Vancouver: outdoor access, family-friendly neighbourhoods and a relaxed lifestyle.", "Lions Gate or Ironworkers Memorial bridge, or the SeaBus from Lonsdale Quay to Waterfront.", False),
  ("Tri-Cities, BC", "Coquitlam, Port Coquitlam and Port Moody: parks, trails and a mix of condos, townhomes and suites. I work in Port Moody and play soccer in Port Coquitlam, so this is the area I know especially well.", "Millennium Line (Evergreen Extension) and the weekday West Coast Express.", True),
- ("Surrey + Langley", "More space and newer rentals, with a wider range of prices — and longer commutes for some.", "Expo Line in Surrey; the Surrey–Langley SkyTrain extension is under construction.", False),
+ ("Surrey + Langley", "More space and newer rentals, with a wider range of prices, and longer commutes for some.", "Expo Line in Surrey; the Surrey–Langley SkyTrain extension is under construction.", False),
 ]
 areas_gv_html = "".join(f'<div class="area-card{" highlight" if hl else ""}"><h3>{n}</h3><p>{d}</p><p class="transit">{t}</p></div>' for n, d, t, hl in AREAS_GV)
 
@@ -714,13 +752,13 @@ gv += f"""
     <p class="hero-note">Buying, selling, or renting? <a href="contact.html#qualify">Answer a few questions</a>.</p>
   </div>
 </section>
-{page_nav([("areas","Areas at a glance"),("renting-basics","Renting in B.C."),("rentals","Rental help"),("buying","Buying"),("faq","FAQ")])}
+{page_nav([("areas","Areas at a glance"),("rent-now","What rent costs"),("renting-basics","Renting in B.C."),("rentals","Rental help"),("buying","Buying"),("faq","FAQ")])}
 
 <article class="guide">
 <section class="section">
   <div class="container guide-intro">
     <div>
-      <p class="lead guide-lead">I'm Devin Desaulniers, a Real Estate Associate with Axford Real Estate in Port Moody. I've lived in the Greater Vancouver area for 28 years, and for the last seven years I've been helping people relocate to and from Vancouver — as tenants who need a rental lined up before they arrive, or as buyers.</p>
+      <p class="lead guide-lead">I'm Devin Desaulniers, a Real Estate Associate with Axford Real Estate in Port Moody. I've lived in the Greater Vancouver area for 28 years, and for the last seven years I've been helping people relocate to and from Vancouver, as tenants who need a rental lined up before they arrive, or as buyers.</p>
       <p>If you're moving from another province (or from elsewhere in BC), the hard part is usually the same: you need honest advice about areas, a realistic commute and a place that works before your furniture shows up. This page is a plain-language overview of Greater Vancouver, plus how I can help.</p>
     </div>
     <figure class="portrait guide-photo">
@@ -741,6 +779,8 @@ gv += f"""
   </div>
 </section>
 
+{seo_pages.rent_snapshot_section()}
+
 <section class="section" id="renting-basics">
   <div class="container narrow-wide">
     <span class="eyebrow">Know your rights</span>
@@ -755,7 +795,7 @@ gv += f"""
     </ul>
     <h3 class="sub-h">Have your application ready</h3>
     <p>Photo ID, proof of income (recent pay stubs, an employment or offer letter, or bank statements / a Notice of Assessment if you're self-employed), landlord and employer references, and a short renter profile. A credit report you get yourself can speed things up.</p>
-    <p>The full checklist — budget, viewings, applications and move-in — is in my free <a href="tenants.html#resources">Greater Vancouver renter's guide (PDF)</a>.</p>
+    <p>The full checklist (budget, viewings, applications and move-in) is in my free <a href="tenants.html#resources">Greater Vancouver renter's guide (PDF)</a>. The week-by-week version, with deposits and scam checks, is <a href="rental-before-you-arrive.html">how to line up a rental before you arrive</a>.</p>
     <p class="form-note">General information only, not legal advice. Confirm current rules with the <a href="{RTB}" target="_blank" rel="noopener">B.C. Residential Tenancy Branch</a>.</p>
   </div>
 </section>
@@ -764,18 +804,19 @@ gv += f"""
   <div class="container narrow-wide">
     <span class="eyebrow">Tenant-side rental help</span>
     <h2>How I help relocating tenants</h2>
-    <p>You don't have to wait until you land to secure a rental. My tenant-side relocation rental service is <strong>$1,500 total + GST, paid by the tenant</strong> — $750 at the beginning of the engagement (non-refundable) and $750 once you successfully secure a rental. It includes:</p>
+    <p>You don't have to wait until you land to secure a rental. My tenant-side relocation rental service is <strong>$1,500 total + GST, paid by the tenant</strong>: $750 at the beginning of the engagement (non-refundable) and $750 once you successfully secure a rental. It includes:</p>
     <ul class="list-check">
       <li>A personalized consultation on your budget, commute, lifestyle and priorities, including green flags and red flags to watch for</li>
       <li>A rental search across Greater Vancouver, in the areas we agree on, with early access through Axford Real Estate's own rental opportunities</li>
-      <li>Showings — I attend with you, or do live video walkthroughs with floor plans while you're still out of province</li>
+      <li>Showings: I attend with you, or do live video walkthroughs with floor plans while you're still out of province</li>
       <li>Lease review &amp; negotiation before you sign</li>
     </ul>
-    <p>I represent your search on the tenant side — not a landlord's inventory. (Axford also has a separate property management business; this service is different.)</p>
+    <p>I represent your search on the tenant side, not a landlord's inventory. (Axford also has a separate property management business; this service is different.)</p>
     {axford_tenant_line()}
     <p>Most Greater Vancouver rentals list only a few weeks before they're available, so the active search usually starts about 4–6 weeks before move-in. Use the weeks before that to settle your budget, areas and documents.</p>
     <div class="btn-row">
       <a class="btn btn-light" href="tenants.html#intake">Start your rental search {I["arrow"]}</a>
+      <a class="btn btn-ghost-light" href="rental-before-you-arrive.html">Week-by-week checklist</a>
       <a class="btn btn-ghost-light" href="tenants.html">See the relocation rental service</a>
     </div>
   </div>
