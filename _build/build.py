@@ -302,8 +302,25 @@ BUYERS_HOODS_ASIDE = """<p class="lead">A quick introduction to the communities 
 BUYERS_TOURS_ASIDE = f"<p>{YT_NOTE} They're a handy way to compare layouts and finishes before you book showings.</p>{TOURS_LINK}"
 BUYERS_LISTINGS_ASIDE = """<p class="lead">Tell me what you're looking for and I'll send you homes that match — including new listings as they hit the market.</p><p>Already looking at a specific property? <a href="buyer-opinion.html">Get an expert opinion</a> on its value.</p>"""
 
+BUYER_FAQS = [
+ ("Who is a good realtor for buying a home in the Tri-Cities, BC?",
+  "<p>I'm Devin Desaulniers, a REALTOR® and Real Estate Associate at Axford Real Estate on Clarke Street in Port Moody, licensed since 2020. I help buyers in Coquitlam, Port Coquitlam, Port Moody, Anmore and Belcarra, and I also work with people relocating to Greater Vancouver from other provinces and countries.</p>"),
+ ("Can you help me buy if I'm moving to Vancouver from out of town?",
+  '<p>Yes. I tour homes with you on live video, show you the street and the walk to SkyTrain, and most paperwork is signed electronically, so you can write an offer before you arrive. If renting first makes more sense, I also work on the tenant side and can line up a rental before you move. The timing is on <a href="rental-before-you-arrive.html">the week-by-week rental checklist</a>, and buying in Coquitlam from another province is on the <a href="coquitlam.html#from-another-province">Coquitlam guide</a>.</p>'),
+ ("How much does it cost to use a buyer's agent in BC?",
+  "<p>In most B.C. sales the buyer's agent is paid from the commission the seller has already agreed to with the listing brokerage, so many buyers pay nothing directly. That isn't guaranteed. If you sign a buyer's agency agreement, it spells out what you would owe if the listing brokerage doesn't pay the amount we agreed. I'll explain exactly how I'm paid, in writing, before you sign anything. Before I provide services, we both sign BCFSA's Disclosure of Representation in Trading Services form.</p>"),
+ ("Which Tri-Cities, BC neighbourhood is right for me?",
+  '<p>It depends on your commute, schools and budget. Burquitlam and Coquitlam City Centre suit people who want SkyTrain. Burke Mountain and Westwood Plateau suit families who want newer homes and don\'t mind driving. Port Moody suits people who want the inlet and the trails. Port Coquitlam has a smaller downtown. See the <a href="coquitlam.html">Coquitlam</a>, <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="coquitlam-condo-buyer.html">Coquitlam condo</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a> guides.</p>'),
+ ("What costs should I budget for besides the down payment?",
+  '<p>B.C. property transfer tax (first-time buyers may qualify for an exemption; see the <a href="bc-property-transfer-tax.html">property transfer tax page</a> and my <a href="' + CALC + '" target="_blank" rel="noopener">calculator</a>), legal or notary fees, a home inspection, strata fees on a condo or townhouse, and moving costs. Monthly costs after you own are on <a href="true-cost-of-owning-a-home-bc.html">the true cost of owning a home in BC</a>.</p>'),
+ ("Can I back out after my offer is accepted?",
+  '<p>On most residential purchases in B.C. you can back out within three business days of an accepted offer, by written notice, and it costs 0.25% of the purchase price. It is a safety net, not a free pass, and some sales are exempt, including leasehold homes, auctions, court-ordered sales and many presales. Subjects such as financing, inspection and strata documents are still the usual way to protect yourself. Confirm the current rules on the <a href="' + seo_pages.BCFSA_RESCISSION + '" target="_blank" rel="noopener">BCFSA consumer guide</a>. The worked example is on <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>.</p>'),
+ ("How do I start?",
+  f'<p>Call or text <a href="{TEL}">{PHONE}</a>, email <a href="mailto:{EMAIL}">{EMAIL}</a>, or set up listing alerts with the form below.</p>'),
+]
+buyer_faq_html = "".join(f'<div class="faq-item"><h3>{q}</h3><div class="ans">{a}</div></div>' for q, a in BUYER_FAQS)
 buyers = head("Buying a Home in the Tri-Cities, BC | Devin Desaulniers, Axford Real Estate",
-              "Neighbourhood guides for Coquitlam, Port Coquitlam, Port Moody and nearby areas, a free mortgage affordability calculator, and personalised listing alerts from Devin Desaulniers, Axford Real Estate.", "buyers", page_url="buyers.html")
+              "Neighbourhood guides for Coquitlam, Port Coquitlam, Port Moody and nearby areas, a free mortgage affordability calculator, and personalised listing alerts from Devin Desaulniers, Axford Real Estate.", "buyers", page_url="buyers.html", extra_head=seo_pages.faq_jsonld(BUYER_FAQS))
 buyers += f'''
 <section class="page-hero">
   <div class="container">
@@ -317,7 +334,7 @@ buyers += f'''
     <p class="hero-note"><a href="mortgage-rates.html">Mortgage rates</a> — illustrative Big 5 bank rates, with a link into the calculator. <a href="market-report/">Tri-Cities, BC market report</a> — monthly benchmark prices, sales, and listings. <a href="contact.html?intent=buying#qualify">Answer a few questions</a> if you're not ready for listing alerts.</p>
   </div>
 </section>
-{page_nav([("help","How I help"),("testimonials","Reviews"),("neighbourhoods","Neighbourhoods"),("tours","Video tours"),("listings","Send me listings")])}
+{page_nav([("help","How I help"),("testimonials","Reviews"),("neighbourhoods","Neighbourhoods"),("buyer-faq","Buyer questions"),("tours","Video tours"),("listings","Send me listings")])}
 
 <section class="section section--calc">
   <div class="container">{calc_cta("Start with your budget","Before you fall in love with a listing, get a feel for your price range with my free mortgage affordability calculator. Then talk to a lender about pre-approval.")}
@@ -359,9 +376,16 @@ buyers += f'''
     <div class="other-areas">
       <h3>Other nearby areas</h3>
       <p>I also help buyers in neighbouring Greater Vancouver communities, including <strong>Burnaby</strong>, <strong>New Westminster</strong>, and <strong>Pitt Meadows &amp; Maple Ridge</strong>. School District 43 serves Coquitlam, Port Coquitlam, Port Moody, Anmore and Belcarra — always confirm school catchments with the district for a specific address.</p>
-      <p>Longer guides: <a href="coquitlam.html">Coquitlam</a>, <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a>. Buying a first home in the Tri-Cities, BC? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>, <a href="bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a>, and <a href="true-cost-of-owning-a-home-bc.html">the true cost of owning a home in BC</a>. Illustrative Big 5 rates are on the <a href="mortgage-rates.html">mortgage rates</a> page.</p>
+      <p>Longer guides: <a href="coquitlam.html">Coquitlam</a>, <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="coquitlam-condo-buyer.html">Coquitlam condos</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a>. Buying a first home in the Tri-Cities, BC? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>, <a href="bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a>, and <a href="true-cost-of-owning-a-home-bc.html">the true cost of owning a home in BC</a>. Illustrative Big 5 rates are on the <a href="mortgage-rates.html">mortgage rates</a> page.</p>
       <p>If you're looking somewhere else in Greater Vancouver, tell me on the <a href="#listings">listings form</a> below: choose “Other (add in notes)” and add the area in your notes.</p>
     </div>
+  </div>
+</section>
+
+<section class="section" id="buyer-faq">
+  <div class="container">
+    {sec_head("Buyer questions", "Questions I get most", center=True)}
+    <div class="faq-list">{buyer_faq_html}</div>
   </div>
 </section>
 
@@ -436,7 +460,7 @@ FAQ_ITEMS = seo_pages.TENANT_FAQ_PREPEND + [
   "<p>No — this is a tenant representation service. I represent you, and you pay my fee. If a rental is listed or managed by Axford Real Estate, my brokerage, I'll disclose that to you in writing before you commit, and you can decline it.</p>"),
  ("What's the difference between tenant-side rental help and a property management company?",
   "<p>Property managers usually represent the <strong>landlord</strong> and lease out the buildings they manage. I work on the <strong>tenant side</strong>: I represent your search, not a landlord's inventory. Axford also has a separate property management business; my service is different — it's tenant-paid relocation rental help, and I don't manage rental properties myself.</p>"),
-]
+] + seo_pages.RENT_FAQS
 def _plain(h):
     return _re.sub(r"\s+", " ", _html.unescape(_re.sub(r"<[^>]+>", "", h))).strip()
 faq_html = "".join(f'<div class="faq-item"><h3>{q}</h3><div class="ans">{a}</div></div>' for q, a in FAQ_ITEMS)
@@ -567,6 +591,8 @@ tenants += f"""
   </div>
 </section>
 
+{seo_pages.rent_snapshot_section()}
+
 <section class="section section--paper" id="resources">
   <div class="container">
     {sec_head("Free renter resources", "Download my renter brochures", TEN_RES_ASIDE)}
@@ -601,6 +627,11 @@ tenants += f"""
         </div>
       </article>
     </div>
+    <a class="guide-callout" href="rental-before-you-arrive.html">
+      <span class="gc-icon">{I["doc"]}</span>
+      <span><b>Week-by-week checklist.</b> How to line up a Greater Vancouver rental before you arrive: documents, timing, deposits and what to watch for.</span>
+      <span class="gc-arrow">{I["arrow"]}</span>
+    </a>
     <a class="guide-callout" href="relocating-to-greater-vancouver.html">
       <span class="gc-icon">{I["pin"]}</span>
       <span><b>Moving to Greater Vancouver?</b> Read my Relocating to Greater Vancouver guide — areas at a glance, commuting, renting basics in B.C., and whether to rent or buy first.</span>
@@ -688,7 +719,7 @@ GV_FAQ = [
   "<p>No. I help tenants and buyers across Greater Vancouver. I work in Port Moody, so the Tri-Cities, BC — Coquitlam, Port Coquitlam and Port Moody — are an area I know especially well, and I regularly search Vancouver, Burnaby, New Westminster and other parts of the region. We'll define your search area up front.</p>"),
  ("How do I start working with Devin Desaulniers on a Greater Vancouver relocation?",
   f'<p>Call or text <a href="{TEL}">{PHONE}</a>, email <a href="mailto:{EMAIL}">{EMAIL}</a>, or message me through my <a href="{SOCIAL[0][1]}" target="_blank" rel="noopener">REALTOR.ca profile</a>. Share your move date, whether you\'re renting or buying, your budget and must-haves (beds, parking, pets, transit). Renting? You can also fill out the <a href="tenants.html#intake">rental search intake form</a>. I\'ll reply with next steps and a clear scope.</p>'),
-]
+] + seo_pages.RENT_FAQS
 gv_faq_html = "".join(f'<div class="faq-item"><h3>{q}</h3><div class="ans">{a}</div></div>' for q, a in GV_FAQ)
 AREAS_GV = [
  ("Vancouver", "Transit-rich, walkable and diverse neighbourhoods, with a mix of older and newer rentals.", "SkyTrain: Expo, Millennium and Canada lines, plus frequent buses.", False),
@@ -714,7 +745,7 @@ gv += f"""
     <p class="hero-note">Buying, selling, or renting? <a href="contact.html#qualify">Answer a few questions</a>.</p>
   </div>
 </section>
-{page_nav([("areas","Areas at a glance"),("renting-basics","Renting in B.C."),("rentals","Rental help"),("buying","Buying"),("faq","FAQ")])}
+{page_nav([("areas","Areas at a glance"),("rent-now","What rent costs"),("renting-basics","Renting in B.C."),("rentals","Rental help"),("buying","Buying"),("faq","FAQ")])}
 
 <article class="guide">
 <section class="section">
@@ -741,6 +772,8 @@ gv += f"""
   </div>
 </section>
 
+{seo_pages.rent_snapshot_section()}
+
 <section class="section" id="renting-basics">
   <div class="container narrow-wide">
     <span class="eyebrow">Know your rights</span>
@@ -755,7 +788,7 @@ gv += f"""
     </ul>
     <h3 class="sub-h">Have your application ready</h3>
     <p>Photo ID, proof of income (recent pay stubs, an employment or offer letter, or bank statements / a Notice of Assessment if you're self-employed), landlord and employer references, and a short renter profile. A credit report you get yourself can speed things up.</p>
-    <p>The full checklist — budget, viewings, applications and move-in — is in my free <a href="tenants.html#resources">Greater Vancouver renter's guide (PDF)</a>.</p>
+    <p>The full checklist — budget, viewings, applications and move-in — is in my free <a href="tenants.html#resources">Greater Vancouver renter's guide (PDF)</a>. The week-by-week version, with deposits and scam checks, is <a href="rental-before-you-arrive.html">how to line up a rental before you arrive</a>.</p>
     <p class="form-note">General information only, not legal advice. Confirm current rules with the <a href="{RTB}" target="_blank" rel="noopener">B.C. Residential Tenancy Branch</a>.</p>
   </div>
 </section>
@@ -776,6 +809,7 @@ gv += f"""
     <p>Most Greater Vancouver rentals list only a few weeks before they're available, so the active search usually starts about 4–6 weeks before move-in. Use the weeks before that to settle your budget, areas and documents.</p>
     <div class="btn-row">
       <a class="btn btn-light" href="tenants.html#intake">Start your rental search {I["arrow"]}</a>
+      <a class="btn btn-ghost-light" href="rental-before-you-arrive.html">Week-by-week checklist</a>
       <a class="btn btn-ghost-light" href="tenants.html">See the relocation rental service</a>
     </div>
   </div>

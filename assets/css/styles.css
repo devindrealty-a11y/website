@@ -595,6 +595,7 @@ body.has-sticky{padding-bottom:76px}
 
 /* ===== Relocation guide ===== */
 .guide-intro{display:grid;gap:36px;align-items:center}
+.guide-intro > *{min-width:0}
 @media (min-width:900px){.guide-intro{grid-template-columns:minmax(0,1fr) 300px;gap:80px}}
 .guide-lead{font-family:var(--font-display);font-size:clamp(1.25rem,1.05rem + .7vw,1.55rem);line-height:1.45;color:var(--ink)}
 .guide .list-check li{margin-bottom:.9em}
@@ -1274,3 +1275,30 @@ html.dd-chat-open{overflow:hidden}
 .reloc-timeline .tl-card li::before{content:none}
 .fact-note{margin-top:22px;padding:16px 20px;background:#fff;border:1px solid var(--line);border-left:6px solid var(--blue);border-radius:var(--radius);font-size:.94rem}
 .fact-note p{margin:0 0 .5em}.fact-note p:last-child{margin:0}
+
+/* October 2026 rent snapshot and Coquitlam condo comparison */
+.rent-groups{display:grid;gap:22px;margin:8px 0 4px}
+@media (min-width:800px){.rent-groups{grid-template-columns:1fr 1fr;gap:28px}}
+.rent-group h3{margin:0 0 10px;font-size:1.05rem}
+.rent-bar-row .rent-yoy{display:block;color:var(--muted);font-size:.75rem;font-weight:400;line-height:1.25}
+.rent-table{min-width:0}
+.rent-table .num{text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:759px){
+  /* Five columns don't fit a phone. The bars above show the same rents and the yearly change. */
+  .table-wrap:has(.rent-table){display:none}
+}
+.rent-kicker{margin:0 0 6px;font-family:var(--font-head);font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-dark)}
+.bench-card{margin:8px 0 18px;padding:clamp(20px,3vw,32px);background:#fff;border:1px solid var(--line);border-left:6px solid var(--blue);border-radius:var(--radius)}
+.bench-figure{margin:0 0 8px;font-family:var(--font-display);font-weight:500;font-size:clamp(2.6rem,2rem + 2vw,3.6rem);line-height:.95;letter-spacing:-.03em;color:var(--ink)}
+.compare-cards .card h3{margin:0 0 .2em;font-size:1.2rem}
+.compare-card dl{margin:12px 0 0}
+.compare-card dt{margin-top:12px;font-family:var(--font-head);font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.compare-card dd{margin:2px 0 0}
+.strata-checks{list-style:none;margin:8px 0 18px;padding:0;display:grid;gap:12px}
+@media (min-width:700px){.strata-checks{grid-template-columns:1fr 1fr}}
+.strata-checks li{position:relative;padding:16px 16px 16px 48px;background:#fff;border:1px solid var(--line);border-radius:var(--radius)}
+.strata-checks li::before{content:"";position:absolute;left:14px;top:16px;width:22px;height:22px;border-radius:50%;background:var(--blue-light) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2324578c' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat}
+.strata-checks strong{display:block;color:var(--ink)}
+.strata-checks span{display:block;margin-top:2px;color:var(--muted);font-size:.92rem}
+.reloc-timeline .tl-card h3{margin:0 0 .45em;font-size:1.15rem}
+.reloc-timeline .tl-card p{margin:.6em 0 0}
