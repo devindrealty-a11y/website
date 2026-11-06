@@ -785,7 +785,7 @@ def _acc_faq(heading, items):
 </section>'''
 
 
-def _visual_page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intro_rest, body, faq_heading, faq_items, cta_html, sources_html, extra_head="", hero_buttons=None):
+def _visual_page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intro_rest, body, faq_heading, faq_items, cta_html, sources_html, extra_head="", hero_buttons=None, hero_extra=""):
     if hero_buttons is None:
         hero_buttons = (
             f'<a class="btn btn-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>\n'
@@ -793,12 +793,13 @@ def _visual_page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intr
         )
     html = head(title, desc, "area-guide", page_url=filename,
                 extra_head=faq_jsonld(faq_items) + extra_head)
+    hero_extra_html = f"\n    {hero_extra}" if hero_extra else ""
     html += f'''
 <section class="page-hero">
   <div class="container">
     <span class="eyebrow">{eyebrow}</span>
     <h1>{h1}</h1>
-    <p class="lead">{lead}</p>
+    <p class="lead">{lead}</p>{hero_extra_html}
     <div class="btn-row">
       {hero_buttons}
     </div>
@@ -1036,11 +1037,11 @@ def _howto_jsonld(name, description, steps):
 
 def _rental_before():
     steps = [
-        ("8 weeks out — Decide the brief",
+        ("8 weeks out: Decide the brief",
          "<ul><li>Set the budget (rent, utilities and deposits), bedrooms, parking, pets, and who will live there.</li>"
          "<li>Write down the commute you actually need: a walk to SkyTrain, the West Coast Express, or driving across a bridge.</li>"
          '<li>Shortlist two or three areas, for example Vancouver, Burnaby and the Tri-Cities, BC. The <a href="relocating-to-greater-vancouver.html">Greater Vancouver relocating guide</a> and the <a href="coquitlam.html">Coquitlam</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a> guides are the place to start.</li></ul>'),
-        ("6 weeks out — Build the application pack",
+        ("6 weeks out: Build the application pack",
          "<p>Landlords move fast. Have these ready as PDFs:</p><ul>"
          "<li>Photo ID: a clear, unexpired government-issued ID.</li>"
          "<li>Proof of income: two or three recent pay stubs, an employment or offer letter, or a contract. If you're self-employed, recent bank statements and/or a Notice of Assessment.</li>"
@@ -1048,22 +1049,22 @@ def _rental_before():
          "<li>Optional: a credit report you pull yourself (Equifax or TransUnion), which can speed an application up.</li>"
          "<li>A short renter profile: who will live there, the move-in date, pets and must-haves.</li></ul>"
          '<p>New to Canada, with no Canadian credit file yet? Read the <a href="newcomer-rental-faqs.html">newcomer rental FAQs</a>.</p>'),
-        ("4 to 6 weeks out — Start the active search",
+        ("4 to 6 weeks out: Start the active search",
          "<p>Most Greater Vancouver rentals are listed only a few weeks before they're available. Inside this window, search Facebook Marketplace, Craigslist, other rental sites and Axford Real Estate's own rentals. Book a showing the day a fit appears. If you're still out of province, ask for a live video walkthrough and a floor plan rather than relying on photos.</p>"),
-        ("2 to 4 weeks out — View, compare and apply",
+        ("2 to 4 weeks out: View, compare and apply",
          "<p>Confirm the unit, and confirm who you're dealing with (the landlord, a licensed agent or a property manager), before any money moves. Compare the commute, noise, light, parking, laundry and the lease term, not just the photos. When you want the place, send a complete application the same day.</p>"),
-        ("Offer week — Sign in writing, and pay only what B.C. allows",
+        ("Offer week: Sign in writing, and pay only what B.C. allows",
          f'<ul><li>Get a written tenancy agreement. Both parties sign and date it, and you keep a copy. Photograph the pages that day.</li>'
          f'<li>A security deposit can be at most half of one month\'s rent.</li>'
          f'<li>A pet damage deposit, if pets are allowed, can be at most another half month, however many pets you have. Together the two deposits can equal one month\'s rent. That is not "first and last," plus extras.</li>'
          f'<li>A landlord can\'t charge a fee just to accept or process an application.</li>'
          f'<li>Do a move-in condition inspection and keep the report.</li></ul>'
          f'<p>General information, not legal advice. Confirm it on the <a href="{BC_DEPOSITS}" target="_blank" rel="noopener">Province of B.C. deposit page</a> and the <a href="{BC_AGREEMENTS}" target="_blank" rel="noopener">tenancy agreement page</a> before you rely on a number.</p>'),
-        ("Arrival week — Keys, utilities and paperwork",
+        ("Arrival week: Keys, utilities and paperwork",
          "<ul><li>Do the final walk-through and collect the keys.</li><li>Set up utilities and internet if they aren't included.</li><li>Keep the deposit receipts and the signed agreement.</li></ul>"),
     ]
     timeline = "".join(
-        f'<li><span class="when">{_html.escape(title.split(" — ")[0])}</span><div class="tl-card"><h3>{_html.escape(title.split(" — ", 1)[-1])}</h3>{body}</div></li>'
+        f'<li><span class="when">{_html.escape(title.split(": ")[0])}</span><div class="tl-card"><h3>{_html.escape(title.split(": ", 1)[-1])}</h3>{body}</div></li>'
         for title, body in steps
     )
     body = rent_snapshot_section(anchor="budget", with_photo=False, checklist_link=False, weekly=True)
@@ -1084,14 +1085,14 @@ def _rental_before():
       <div class="card"><h3>No viewing, in person or on live video</h3><p>A landlord who will not show you the home, even on a live video call, is asking you to pay for something you have not seen.</p></div>
       <div class="card"><h3>Wire, gift card or crypto to "hold" it</h3><p>Don't send a deposit to hold a unit before the home and the person are verified.</p></div>
     </div>
-    <div class="fact-note"><p><strong>The rule:</strong> never send a deposit before the unit and the landlord (or their licensed agent or property manager) are verified. I can view in person, or on live video with you, before you commit. More on this in <a href="blog/2026-10-31-bc-rental-deposits-and-scams.html">B.C. rental deposits and scams</a> and <a href="blog/2026-10-10-how-to-rent-in-vancouver-before-you-move.html">how to rent in Vancouver before you move</a>. The November 2026 turn in Vancouver rents is in <a href="blog/2026-11-06-vancouver-rent-discount-window-closing.html">the rent-discount window post</a>.</p></div>
+    <div class="fact-note"><p><strong>My rule:</strong> never send a deposit before the unit and the landlord (or their licensed agent or property manager) are verified. I can view in person, or on live video with you, before you commit. More on this in <a href="blog/2026-10-31-bc-rental-deposits-and-scams.html">B.C. rental deposits and scams</a> and <a href="blog/2026-10-10-how-to-rent-in-vancouver-before-you-move.html">how to rent in Vancouver before you move</a>. For what changed in Vancouver rents in November 2026, see the <a href="blog/2026-11-06-vancouver-rent-discount-window-closing.html">rent-discount window post</a>.</p></div>
   </div>
 </section>'''
     body += f'''<section class="section" id="help">
   <div class="container narrow-wide">
     <span class="eyebrow">Tenant-side help</span>
     <h2>How I help before you land</h2>
-    <p>The search, the showings and the lease review are a tenant-side service: <strong>$1,500 + GST</strong>, paid by you in two parts (<strong>$750 at the start</strong>, non-refundable, and <strong>$750 once you secure a rental</strong>). It includes a consultation, the search and early access, in-person or live-video showings with floor plans, and lease review and negotiation. The full description is on the <a href="tenants.html">tenants page</a>, so I won't repeat it here.</p>
+    <p>The search, the showings and the lease review are a tenant-side service: <strong>$1,500 + GST</strong>, paid by you in two parts (<strong>$750 at the start</strong>, non-refundable, and <strong>$750 once you secure a rental</strong>). It includes a consultation, the search and early access, in-person or live-video showings with floor plans, and lease review and negotiation. There's more detail on the <a href="tenants.html">tenants page</a>.</p>
     <p>Call or text <a href="{TEL}">{PHONE}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></p>
     <div class="btn-row"><a class="btn btn-primary" href="tenants.html#intake">Start rental search {I["arrow"]}</a><a class="btn btn-outline" href="rent-report.html">Weekly rent report</a></div>
   </div>
@@ -1144,9 +1145,10 @@ def _rental_before():
         "You can secure a Greater Vancouver rental before you land: ready your application, start the search about 4 to 6 weeks out, view in person or on live video, sign a written tenancy agreement, and pay only the deposits B.C. allows. I'm Devin Desaulniers with Axford Real Estate in Port Moody.",
         [("budget", "What to budget"), ("timeline", "8-week checklist"), ("scams", "Scam checks"), ("help", "How I help"), ("faq", "FAQ")],
         "I do that search on the tenant side: consultation, showings (in person or on live video) and a read of the lease before you sign.",
-        f'<p>The service itself is described on the <a href="tenants.html">tenants page</a>. This page is the timing. Call or text <a href="{TEL}">{PHONE}</a>.</p>',
+        f'<p>Call or text <a href="{TEL}">{PHONE}</a>.</p>',
         body, "Questions before you arrive", faq, cta, sources,
         extra_head=howto, hero_buttons=buttons,
+        hero_extra='<p>The <a href="tenants.html">tenants page</a> covers the service. This page covers the timing.</p>',
     )
 
 
