@@ -460,7 +460,7 @@ FAQ_ITEMS = seo_pages.TENANT_FAQ_PREPEND + [
   "<p>No. This is a tenant representation service. I represent you, and you pay my fee. If a rental is listed or managed by Axford Real Estate, my brokerage, I'll disclose that to you in writing before you commit, and you can decline it.</p>"),
  ("What's the difference between tenant-side rental help and a property management company?",
   "<p>Property managers usually represent the <strong>landlord</strong> and lease out the buildings they manage. I work on the <strong>tenant side</strong>: I represent your search, not a landlord's inventory. Axford also has a separate property management business; my service is different: it's tenant-paid relocation rental help, and I don't manage rental properties myself.</p>"),
-] + seo_pages.RENT_FAQS
+]
 def _plain(h):
     return _re.sub(r"\s+", " ", _html.unescape(_re.sub(r"<[^>]+>", "", h))).strip()
 faq_html = "".join(f'<div class="faq-item"><h3>{q}</h3><div class="ans">{a}</div></div>' for q, a in FAQ_ITEMS)
@@ -591,7 +591,14 @@ tenants += f"""
   </div>
 </section>
 
-{seo_pages.rent_snapshot_section()}
+<section class="section section--paper" id="rent-now">
+  <div class="container narrow-wide">
+    <span class="eyebrow">October 2026</span>
+    <h2>What rent costs when you move here</h2>
+    <p>October 2026 average asking rents for a one-bedroom were about $2,377 in Vancouver and $2,051 in Coquitlam. The full comparison, including Burnaby, New Westminster and the change from last year, is on my <a href="relocating-to-greater-vancouver.html#rent-now">relocating guide</a>.</p>
+    <p>I help relocating tenants line up viewings, applications and references before they arrive.</p>
+  </div>
+</section>
 
 <section class="section section--paper" id="resources">
   <div class="container">

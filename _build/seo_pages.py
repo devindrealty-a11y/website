@@ -1022,10 +1022,16 @@ def _newcomer_buyers():
     )
 
 
+def _step_plain(fragment):
+    """Visible list items are separated by tags. Put a space in their place so the schema reads like the page."""
+    spaced = re.sub(r"<[^>]+>", " ", fragment)
+    return re.sub(r"\s+", " ", _html.unescape(spaced)).strip()
+
+
 def _howto_jsonld(name, description, steps):
     entities = []
     for title, text in steps:
-        entities.append({"@type": "HowToStep", "name": title, "text": _plain(text)})
+        entities.append({"@type": "HowToStep", "name": title, "text": _step_plain(text)})
     return '<script type="application/ld+json">\n' + json.dumps({
         "@context": "https://schema.org",
         "@type": "HowTo",
@@ -1067,7 +1073,14 @@ def _rental_before():
         f'<li><span class="when">{_html.escape(title.split(": ")[0])}</span><div class="tl-card"><h3>{_html.escape(title.split(": ", 1)[-1])}</h3>{body}</div></li>'
         for title, body in steps
     )
-    body = rent_snapshot_section(anchor="budget", with_photo=False, checklist_link=False, weekly=True)
+    body = f'''<section class="section section--paper" id="budget">
+  <div class="container narrow-wide">
+    <span class="eyebrow">October 2026</span>
+    <h2>What to budget</h2>
+    <p>Average asking rents for October 2026, and whether they are up or down from last year, are in <a href="relocating-to-greater-vancouver.html#rent-now">what rent costs when you move here</a>. That is the place for the Vancouver, Burnaby, Coquitlam and New Westminster comparison.</p>
+    {_rent_weekly_note()}
+  </div>
+</section>'''
     body += f'''<section class="section" id="timeline">
   <div class="container narrow-wide">
     <span class="eyebrow">Timing</span>
@@ -1106,8 +1119,6 @@ def _rental_before():
          "<p>Settle the budget, the areas and the documents early. The active search usually starts about 4 to 6 weeks before move-in, because most listings appear close to the date the home is available.</p>"),
         ("What deposit can a landlord ask for in B.C.?",
          f'<p>At most half of one month\'s rent as a security deposit, and at most another half month as a pet damage deposit if pets are allowed. Landlords can\'t require "first and last month\'s rent" the way some other provinces do, and they can\'t charge a fee just to accept or process an application. Confirm the current rules with the <a href="{BC_DEPOSITS}" target="_blank" rel="noopener">B.C. Residential Tenancy Branch</a>. This is general information, not legal advice.</p>'),
-        RENT_FAQS[0],
-        RENT_FAQS[1],
     ]
     sources = _sources(
         "Rent figures are October 2026 asking rents from Rentals.ca / Urbanation, plus the weekly REALTOR.ca medians on the rent report. Deposit and agreement rules are from the Province of B.C. Scam warnings follow the RCMP in B.C. and WelcomeBC, the same pages cited on the October 10 and October 31 posts.",
@@ -1138,8 +1149,8 @@ def _rental_before():
     )
     return _visual_page(
         "rental-before-you-arrive.html",
-        "How to Line Up a Vancouver Rental Before You Arrive | Devin Desaulniers",
-        "A week-by-week checklist to rent in Greater Vancouver before you move: documents, timing, deposits, scam checks, and tenant-side help. Devin Desaulniers, Axford Real Estate, Port Moody.",
+        "Line Up a Vancouver Rental Before You Arrive | Devin",
+        "Week-by-week checklist to rent in Greater Vancouver before you move: docs, timing, deposits, scam checks. Devin Desaulniers.",
         "Before you arrive · Greater Vancouver",
         "How to line up a Greater Vancouver rental before you arrive",
         "You can secure a Greater Vancouver rental before you land: ready your application, start the search about 4 to 6 weeks out, view in person or on live video, sign a written tenancy agreement, and pay only the deposits B.C. allows. I'm Devin Desaulniers with Axford Real Estate in Port Moody.",
@@ -1267,8 +1278,8 @@ def _coquitlam_condo():
     )
     return _visual_page(
         "coquitlam-condo-buyer.html",
-        "Who to Hire to Buy a Condo in Coquitlam, BC | Devin Desaulniers",
-        "How to pick a buyer's agent for a Coquitlam condo, the strata documents to check, and how Burquitlam, City Centre and Northeast Coquitlam compare. Devin Desaulniers, Axford Real Estate.",
+        "Hire a Condo Buyer's Agent in Coquitlam, BC | Devin",
+        "Buyer's agent for Coquitlam condos: Form B and strata checks, Burquitlam vs City Centre vs Northeast. Devin Desaulniers.",
         "Condo buyers · Coquitlam",
         "Who to hire to buy a condo in Coquitlam",
         "To buy a condo in Coquitlam, hire a B.C.-licensed buyer's agent who represents you, reads the Form B, minutes and depreciation report with you before subject removal, and knows how Burquitlam, City Centre and Northeast Coquitlam differ. I'm Devin Desaulniers, a REALTOR® with Axford Real Estate in Port Moody.",
