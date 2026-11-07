@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Fri, 06 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Sat, 07 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>Burquitlam condo buyer guide: what should you know?</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-07-burquitlam-condo-buyer-guide.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-07-burquitlam-condo-buyer-guide.html</guid>
+    <pubDate>Sat, 07 Nov 2026 08:00:00 -0700</pubDate>
+    <category>FAQ</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>A Burquitlam condo buyer should weigh Millennium Line access at Burquitlam Station, the City's transit-oriented redevelopment plan, and the strata file before removing subjects. Here is a plain-language guide for buyers and newcomers looking at Coquitlam's Burquitlam neighbourhood.</description>
+  </item>
   <item>
     <title>The Vancouver rent discount window is closing</title>
     <link>https://devindesaulniers.ca/blog/2026-11-06-vancouver-rent-discount-window-closing.html</link>
@@ -267,15 +276,6 @@
     <category>Market news</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>The Tyee's October 13 review of Vancouver council: ABC says 92% of renovation permits now go out within three days, and 896 multiplex homes were approved by the end of 2025. The party also says it missed its own speed targets.</description>
-  </item>
-  <item>
-    <title>Who still owns a home in Canada? 66.5%, and B.C. is right on average</title>
-    <link>https://devindesaulniers.ca/blog/2026-10-12-canada-homeownership-rate-by-province.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-10-12-canada-homeownership-rate-by-province.html</guid>
-    <pubDate>Mon, 12 Oct 2026 08:00:00 -0700</pubDate>
-    <category>Market news</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>Everyone says nobody owns a home in Canada anymore. The 2021 Census says 66.5% do — down from 69.0% in 2011. B.C. sits at 66.8%, basically dead-on the national rate.</description>
   </item>
 </channel>
 </rss>
