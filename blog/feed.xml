@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Sat, 07 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Sun, 08 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>What Budget 2026's housing changes mean in Greater Vancouver</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-08-budget-2026-housing-changes-greater-vancouver.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-08-budget-2026-housing-changes-greater-vancouver.html</guid>
+    <pubDate>Sun, 08 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Market news</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>Ottawa's Budget 2026 proposes raising the optional mortgage insurance limit to $1.5 million, allowing 30-year amortizations for some buyers, and extending the foreign buyer ban on existing homes to 2029 while exempting new homes. Here's what that could mean in Greater Vancouver and the Tri-Cities, BC.</description>
+  </item>
   <item>
     <title>Pet-friendly rentals in the Tri-Cities, BC: a newcomer's guide</title>
     <link>https://devindesaulniers.ca/blog/2026-11-07-pet-friendly-rentals-tri-cities-bc.html</link>
@@ -267,15 +276,6 @@
     <category>Market news</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>BCREA's September tables put B.C.'s sales-to-active listings ratio at 12%, with 43,940 homes listed, down 4.3% from a year ago. What that means in Greater Vancouver and the Tri-Cities, BC.</description>
-  </item>
-  <item>
-    <title>B.C. September home sales fell 8.9% from last year</title>
-    <link>https://devindesaulniers.ca/blog/2026-10-14-bc-september-home-sales.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-10-14-bc-september-home-sales.html</guid>
-    <pubDate>Wed, 14 Oct 2026 08:00:00 -0700</pubDate>
-    <category>Market news</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>The B.C. Real Estate Association says 5,254 homes sold in September 2026, down 8.9% from a year ago and 25.8% below the 10-year average for the month. The average price was $924,279.</description>
   </item>
 </channel>
 </rss>
