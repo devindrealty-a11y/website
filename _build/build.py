@@ -45,7 +45,7 @@ VIDEO_JSONLD = '<script type="application/ld+json">\n' + json.dumps({
     "description": VIDEO_DESC,
     "thumbnailUrl": SITE + VIDEO_POSTER,
     "contentUrl": SITE + VIDEO_MP4,
-    "uploadDate": "2026-10-06",
+    "uploadDate": "2026-10-06T09:00:00-07:00",
     "duration": "PT32S",
 }, indent=2, ensure_ascii=False) + '\n</script>'
 
@@ -62,7 +62,7 @@ FB_VIDEO_JSONLD = '<script type="application/ld+json">\n' + json.dumps({
     "description": FB_VIDEO_DESC,
     "thumbnailUrl": SITE + FB_VIDEO_POSTER,
     "contentUrl": SITE + FB_VIDEO_MP4,
-    "uploadDate": "2026-10-26",
+    "uploadDate": "2026-10-26T12:00:00-07:00",
     "duration": "PT35S",
 }, indent=2, ensure_ascii=False) + '\n</script>'
 
