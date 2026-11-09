@@ -1,87 +1,87 @@
 MOVING TO GREATER VANCOUVER: WEEKLY RENT REPORT
-Week of November 2–8, 2026
-Prepared November 2, 2026
+Week of November 9–15, 2026
+Prepared November 9, 2026
 
 Want me to find yours? Tenant Relocation Service $1,500 + GST
 https://devindesaulniers.ca/tenants.html#intake
 
-Median asking rent: $2,798 a month (Down $2 (0.1%)). Average: $3,672
-(Down $29 (0.8%)). Listings counted: 978. New this week: 159.
+Median asking rent: $2,750 a month (Down $48 (1.7%)). Average: $3,614
+(Down $58 (1.6%)). Listings counted: 1041. New this week: 267.
 
-159 listing ids are in this week's feed and were not in the October 26,
-2026 snapshot. Here are 8 of the newest.
+267 listing ids are in this week's feed and were not in the November 2,
+2026 snapshot. 265 have a city and a rent I can show. Here are 8 of the
+newest.
 
 BY CITY
-Change compares this median with the October 26, 2026 snapshot. A dash
+Change compares this median with the November 2, 2026 snapshot. A dash
 means one of the two weeks has fewer than five homes, so one listing
 could swing it.
-Coquitlam — median $2,300, average $2,680, 63 homes, Down $125 (5.2%)
-Port Moody — median $2,650, average $3,817, 16 homes, Up $2 (0.1%)
-Port Coquitlam — median $2,800, average $2,908, 6 homes, No change
-Burnaby — median $2,700, average $3,020, 125 homes, Up $50 (1.9%)
-Vancouver — median $3,200, average $4,179, 323 homes, Up $15 (0.5%)
-Surrey — median $2,300, average $2,583, 123 homes, Up $50 (2.2%)
-Langley — median $2,138, average $2,404, 34 homes, Up $100 (4.9%)
-Richmond — median $3,000, average $3,288, 65 homes, Down $200 (6.2%)
-New Westminster — median $2,363, average $2,674, 18 homes, Down $137 (5.5%)
-Maple Ridge — median $2,150, average $2,469, 36 homes, Up $100 (4.9%)
-Abbotsford — median $1,850, average $1,949, 5 homes, —
-Delta — median $3,400, average $3,300, 8 homes, Up $100 (3%)
-Mission — median $1,950, average $2,018, 8 homes, Up $75 (4%)
-North Vancouver — median $3,200, average $3,643, 63 homes, Down $250 (7.2%)
-Squamish — median $2,950, average $3,269, 5 homes, —
+Coquitlam — median $2,250, average $2,608, 70 homes, Down $50 (2.2%)
+Port Moody — median $2,550, average $3,502, 19 homes, Down $100 (3.8%)
+Port Coquitlam — median $2,850, average $3,011, 9 homes, Up $50 (1.8%)
+Burnaby — median $2,650, average $2,967, 139 homes, Down $50 (1.9%)
+Vancouver — median $3,200, average $4,151, 334 homes, No change
+Surrey — median $2,300, average $2,557, 132 homes, No change
+Langley — median $2,300, average $2,493, 40 homes, Up $162 (7.6%)
+Richmond — median $2,995, average $3,176, 72 homes, Down $5 (0.2%)
+New Westminster — median $2,350, average $2,551, 21 homes, Down $13 (0.6%)
+Maple Ridge — median $1,995, average $2,358, 31 homes, Down $155 (7.2%)
+Delta — median $3,200, average $2,936, 11 homes, Down $200 (5.9%)
+Mission — median $2,050, average $2,065, 5 homes, Up $100 (5.1%)
+North Vancouver — median $3,000, average $3,563, 70 homes, Down $200 (6.2%)
+Squamish — median $2,950, average $3,177, 5 homes, No change
 Tsawwassen — median $2,680, average $2,673, 6 homes, No change
-West Vancouver — median $6,850, average $9,206, 48 homes, Up $350 (5.4%)
-White Rock — median $3,000, average $3,015, 15 homes, Down $194 (6.1%)
+West Vancouver — median $7,500, average $9,807, 45 homes, Up $650 (9.5%)
+White Rock — median $3,000, average $2,922, 15 homes, No change
 
 BY BEDROOM
-Studio — median $2,050, average $1,987, 19 homes, Up $325 (18.8%)
-1 bedroom — median $2,150, average $2,184, 291 homes, No change
-2 bedrooms — median $2,750, average $3,143, 385 homes, Down $50 (1.8%)
-3 bedrooms — median $3,600, average $4,474, 146 homes, Up $5 (0.1%)
-4 bedrooms — median $4,500, average $6,349, 75 homes, No change
-5+ bedrooms — median $6,965, average $9,327, 62 homes, No change
+Studio — median $2,050, average $1,977, 23 homes, No change
+1 bedroom — median $2,150, average $2,176, 307 homes, No change
+2 bedrooms — median $2,750, average $3,128, 404 homes, No change
+3 bedrooms — median $3,500, average $4,219, 158 homes, Down $100 (2.8%)
+4 bedrooms — median $4,300, average $6,070, 88 homes, Down $200 (4.4%)
+5+ bedrooms — median $7,250, average $9,584, 61 homes, Up $285 (4.1%)
 
 NEW LISTINGS
-- 13428 105 Avenue, Surrey — 2 bedrooms, $2,050/month
-  https://devindesaulniers.ca/rentals.html?id=30466451
-- Main-14850 BUENA VISTA AVE, White Rock — 2 bedrooms, $2,100/month
-  https://devindesaulniers.ca/rentals.html?id=30466436
-- 2603-13573 98A Avenue, Surrey — 2 bedrooms, $2,250/month
-  https://devindesaulniers.ca/rentals.html?id=30466377
-- 9122 160 Street, Surrey — 5 bedrooms, $4,500/month
-  https://devindesaulniers.ca/rentals.html?id=30465476
-- 7XXX 111A Street, Delta — 4 bedrooms, $3,400/month
-  https://devindesaulniers.ca/rentals.html?id=30465475
-- BSMT-2020 165A Street, Surrey — 2 bedrooms, $1,700/month
-  https://devindesaulniers.ca/rentals.html?id=30465456
-- 405-8067 207 Street, Langley — 2 bedrooms, $2,500/month
-  https://devindesaulniers.ca/rentals.html?id=30463400
-- 1808-1238 RICHARDS Street, Vancouver — 1 bedroom, $3,900/month
-  https://devindesaulniers.ca/rentals.html?id=30463442
+- 1505-1255 SEYMOUR Street, Vancouver — 1 bedroom, $2,650/month
+  https://devindesaulniers.ca/rentals.html?id=30476078
+- 1501-888 HOMER Street, Vancouver — 2 bedrooms, $3,750/month
+  https://devindesaulniers.ca/rentals.html?id=30495913
+- 2405-928 HOMER STREET, Vancouver — 1 bedroom, $2,500/month
+  https://devindesaulniers.ca/rentals.html?id=30495912
+- 1221 NORTH Road, Gibsons — 4 bedrooms, $4,000/month
+  https://devindesaulniers.ca/rentals.html?id=30495911
+- 310-968 LYTTON, North Vancouver — 2 bedrooms, $3,250/month
+  https://devindesaulniers.ca/rentals.html?id=30489125
+- 309-10289 133 Street, Surrey — 2 bedrooms, $2,300/month
+  https://devindesaulniers.ca/rentals.html?id=30495649
+- 620-721 ANSKAR Court, Coquitlam — 1 bedroom, $2,250/month
+  https://devindesaulniers.ca/rentals.html?id=30495524
+- 552 BEACHVIEW DRIVE, North Vancouver — 5 bedrooms, $8,600/month
+  https://devindesaulniers.ca/rentals.html?id=30495523
 
 BEST-VALUE RENTALS
-1. 8XXX ARGYLE STREET, Vancouver — 2 bedrooms, $1,900/month, 1,400 sq ft, 65% under the Vancouver 2 bedrooms median
-   Listing brokerage: Parallel 49 Realty
-   https://devindesaulniers.ca/rentals.html?id=29779166
-2. Lower-1970 QUILCHENA Crescent, Vancouver — 2 bedrooms, $1,800/month, 1,300 sq ft, 64% under the Vancouver 2 bedrooms median
-   Listing brokerage: Multiple Realty Ltd.
-   https://devindesaulniers.ca/rentals.html?id=30297025
-3. 555 GREENWAY Avenue, North Vancouver — 1 bedroom, $1,900/month, 1,200 sq ft, 62% under the North Vancouver 1 bedroom median
+1. 555 GREENWAY Avenue, North Vancouver — 1 bedroom, $1,900/month, 1,200 sq ft, 61% under the North Vancouver 1 bedroom median
    Listing brokerage: Orca Realty Inc.
    https://devindesaulniers.ca/rentals.html?id=30256142
-4. 5227 CHESHAM Street, Burnaby — 2 bedrooms, $1,000/month, 800 sq ft, 61% under the Burnaby 2 bedrooms median
+2. 5227 CHESHAM Street, Burnaby — 2 bedrooms, $1,000/month, 800 sq ft, 61% under the Burnaby 2 bedrooms median
    Listing brokerage: Claridge Real Estate Advisors Inc.
    https://devindesaulniers.ca/rentals.html?id=30391491
-5. 200-2-6080 MARINE DR, Burnaby — 1 bedroom, $950/month, 600 sq ft, 55% under the Burnaby 1 bedroom median
+3. Basement-206 MARMONT Street, Coquitlam — 1 bedroom, $1,100/month, 700 sq ft, 60% under the Coquitlam 1 bedroom median
+   Listing brokerage: Magsen Realty Inc.
+   https://devindesaulniers.ca/rentals.html?id=30488252
+4. 200-2-6080 MARINE DR, Burnaby — 1 bedroom, $950/month, 600 sq ft, 56% under the Burnaby 1 bedroom median
    Listing brokerage: Pacific Evergreen Realty Ltd.
    https://devindesaulniers.ca/rentals.html?id=30039882
-6. 4000 DEVONSHIRE Avenue, Coquitlam — 2 bedrooms, $1,800/month, 1,314 sq ft, 55% under the Coquitlam 2 bedrooms median
+5. 4000 DEVONSHIRE Avenue, Coquitlam — 2 bedrooms, $1,800/month, 1,314 sq ft, 52% under the Coquitlam 2 bedrooms median
    Listing brokerage: RE/MAX City Realty
    https://devindesaulniers.ca/rentals.html?id=30290318
-7. Main House-335 West 27TH Street, North Vancouver — 3 bedrooms, $4,300/month, 2,080 sq ft, 49% under the North Vancouver 3 bedrooms median
-   Listing brokerage: RE/MAX Heights Realty
-   https://devindesaulniers.ca/rentals.html?id=30234869
+6. 111-160 SHORELINE Circle, Vancouver — 2 bedrooms, $2,395/month, 1,239 sq ft, 50% under the Vancouver 2 bedrooms median
+   Listing brokerage: RIF Realty.
+   https://devindesaulniers.ca/rentals.html?id=30406296
+7. 4279 W16TH AVE, Vancouver — 3 bedrooms, $4,000/month, 2,230 sq ft, 50% under the Vancouver 3 bedrooms median
+   Listing brokerage: RE/MAX Crest Realty
+   https://devindesaulniers.ca/rentals.html?id=30401807
 8. 2800 165 Street, Surrey — 1 bedroom, $1,000/month, 650 sq ft, 49% under the Surrey 1 bedroom median
    Listing brokerage: RE/MAX City Realty
    https://devindesaulniers.ca/rentals.html?id=30450710
