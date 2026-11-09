@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Sun, 08 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Mon, 09 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>Where could Canada's population grow most by 2050?</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-09-where-could-canadas-population-grow-by-2050.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-09-where-could-canadas-population-grow-by-2050.html</guid>
+    <pubDate>Mon, 09 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Market news</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>Statistics Canada's medium-growth scenario has Canada adding about 7.03 million people by 2050. Alberta grows fastest (+43.6%), Ontario adds the most people, and B.C. adds 892,700 (+15.7%). Here's what that backdrop means for the Tri-Cities, BC.</description>
+  </item>
   <item>
     <title>Relocating to Port Coquitlam, BC: what newcomers should know</title>
     <link>https://devindesaulniers.ca/blog/2026-11-08-relocating-to-port-coquitlam-bc-newcomers.html</link>
@@ -267,15 +276,6 @@
     <category>FAQ</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>Pick the Coquitlam neighbourhood that fits your commute, then budget the asking rent or the benchmark price for that kind of home. SkyTrain times, October 2025 rents and September 2026 sale prices.</description>
-  </item>
-  <item>
-    <title>Canada's Big Six posted $69.9B. Shop your mortgage.</title>
-    <link>https://devindesaulniers.ca/blog/2026-10-16-canadas-big-six-bank-profits-2025.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-10-16-canadas-big-six-bank-profits-2025.html</guid>
-    <pubDate>Fri, 16 Oct 2026 08:00:00 -0700</pubDate>
-    <category>Buying</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>Canada's Big Six posted $69.9 billion in reported net income for fiscal 2025, or C$69.861 billion combined. When a Greater Vancouver renewal or pre-approval comes up, shop it.</description>
   </item>
 </channel>
 </rss>
