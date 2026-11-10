@@ -1290,10 +1290,203 @@ def _coquitlam_condo():
     )
 
 
+def _relocation_compare():
+    """Relocation rental agent vs rental locator vs DIY (Nov 9, 2026 draft)."""
+    # Fee split wording matches live tenants.html (service fee section + FAQ).
+    FEE = (
+        "My tenant service fee is <strong>$1,500 total + GST</strong>, paid by you, the tenant, "
+        "in two parts: <strong>$750</strong> at the beginning of the engagement (non-refundable) "
+        "and <strong>$750</strong> once you successfully secure a rental"
+    )
+    FEE_PLAIN = (
+        "My tenant service fee is $1,500 total + GST, paid by you, the tenant, in two parts: "
+        "$750 at the beginning of the engagement (non-refundable) and $750 once you successfully secure a rental"
+    )
+    cards = [
+        ("Licensed relocation rental agent (tenant rep)",
+         [
+             ("Who they work for", "You, the tenant"),
+             ("Licensed in BC real estate", "Yes (BCFSA-licensed REALTOR®)"),
+             ("Live video showings", "Yes"),
+             ("Lease review and negotiation", "Yes"),
+             ("Scam screening", "Yes, verifies the listing and the landlord before you send money"),
+             ("Cost with me", FEE + "."),
+         ]),
+        ("Rental locator / relocation company",
+         [
+             ("Who they work for", "Varies. Some are paid by you, some by your employer, some by landlords"),
+             ("Licensed in BC real estate", "Not always. Ask"),
+             ("Live video showings", "Often"),
+             ("Lease review and negotiation", "Varies"),
+             ("Scam screening", "Varies"),
+             ("Cost with me", "Ask for their fee and who pays it"),
+         ]),
+        ("DIY from out of town",
+         [
+             ("Who they work for", "You"),
+             ("Licensed in BC real estate", "n/a"),
+             ("Live video showings", "You need someone local"),
+             ("Lease review and negotiation", "On your own"),
+             ("Scam screening", "Highest risk from a distance"),
+             ("Cost with me", "Your time, plus the risk of a bad lease"),
+         ]),
+    ]
+    card_parts = []
+    for title, rows in cards:
+        dls = "".join(f"<dt>{dt}</dt><dd>{dd}</dd>" for dt, dd in rows)
+        card_parts.append(
+            f'<article class="card compare-card"><h3>{title}</h3>\n'
+            f'      <dl>\n        {dls}\n      </dl></article>'
+        )
+    card_html = "".join(card_parts)
+    table_rows = [
+        ("Who they work for",
+         "You, the tenant",
+         "Varies. Some are paid by you, some by your employer, some by landlords",
+         "You"),
+        ("Licensed in BC real estate",
+         "Yes (BCFSA-licensed REALTOR®)",
+         "Not always. Ask",
+         "n/a"),
+        ("Live video showings", "Yes", "Often", "You need someone local"),
+        ("Lease review and negotiation", "Yes", "Varies", "On your own"),
+        ("Scam screening",
+         "Yes, verifies the listing and the landlord before you send money",
+         "Varies",
+         "Highest risk from a distance"),
+        ("Cost with me",
+         FEE_PLAIN + ".",
+         "Ask for their fee and who pays it",
+         "Your time, plus the risk of a bad lease"),
+    ]
+    tbody = "".join(
+        f'<tr><th scope="row">{label}</th><td>{a}</td><td>{b}</td><td>{c}</td></tr>'
+        for label, a, b, c in table_rows
+    )
+    compare_inner = f'''
+    <div class="card-grid-3 compare-cards">{card_html}</div>
+    <div class="table-wrap compare-table-wrap" role="region" aria-label="Comparison table">
+      <table class="price-table compare-table">
+        <caption>Licensed relocation rental agent, rental locator, and DIY from out of town</caption>
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Licensed relocation rental agent (tenant rep)</th>
+            <th scope="col">Rental locator / relocation company</th>
+            <th scope="col">DIY from out of town</th>
+          </tr>
+        </thead>
+        <tbody>{tbody}</tbody>
+      </table>
+    </div>
+    <div class="btn-row compare-cta-row">
+      <a class="btn btn-primary" href="tenants.html#intake">Book a free 15-minute call {I["arrow"]}</a>
+      <a class="btn btn-outline" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>
+    </div>
+    '''
+    body = _section(
+        "compare",
+        "Side by side",
+        "How the three options compare",
+        compare_inner,
+    ).replace("container narrow-wide", "container", 1)
+
+    when_inner = f'''
+    <div class="card-grid-3">
+      <div class="card"><h3>Hire a relocation rental agent</h3><p>If you can't view homes in person, you're new to Canada or BC tenancy rules, or you need a place by a fixed start date.</p></div>
+      <div class="card"><h3>Use a locator or relocation company</h3><p>If your employer is paying for a package that already includes one. Ask who they represent and whether they're licensed.</p></div>
+      <div class="card"><h3>Go DIY</h3><p>If you're already in the Lower Mainland, can view in person, and are comfortable with BC tenancy agreements.</p></div>
+    </div>
+    <p class="after-steps">More on the service itself is on the <a href="tenants.html">tenants page</a>. Timing and scam checks are on <a href="rental-before-you-arrive.html">how to line up a rental before you arrive</a>. Area context is in the <a href="relocating-to-greater-vancouver.html">Relocating to Greater Vancouver guide</a>.</p>
+    '''
+    body += _section(
+        "when",
+        "Choosing",
+        "When each option makes sense",
+        when_inner,
+        paper=True,
+    ).replace("container narrow-wide", "container", 1)
+
+    faq = [
+        ("What does a relocation rental agent do in Vancouver?",
+         "<p>A relocation rental agent finds rentals that fit your budget, area and move date, does live video walkthroughs for you, checks that the listing and landlord are real, helps with your application, and reviews and negotiates the lease before you sign.</p>"),
+        ("Is a relocation rental agent the same as a rental locator?",
+         "<p>Not always. A tenant-side relocation rental agent like me is a licensed REALTOR® who represents you, the tenant. Some locator services are unlicensed or are paid by landlords, so it's worth asking who they work for.</p>"),
+        ("How much does a relocation rental agent cost in Vancouver?",
+         f"<p>{FEE}. Other services charge differently, so compare what's included.</p>"),
+        ("Can you help me rent in Coquitlam, Port Moody or Port Coquitlam, not just Vancouver?",
+         "<p>Yes. I'm based in the Tri-Cities, BC and help tenants across Greater Vancouver, including Coquitlam, Port Moody, Port Coquitlam, Burnaby and Vancouver.</p>"),
+        ("Do I need to be in Canada to start?",
+         "<p>No. We can start the search and do showings by live video while you're still out of town.</p>"),
+    ]
+
+    sources = _sources(
+        "Fee and payment split match the live tenants page on this site. No competitor fees or invented stats are quoted here.",
+        [
+            ("Tenant relocation rental service", "https://devindesaulniers.ca/tenants.html", "Devin Desaulniers · Axford Real Estate"),
+            ("Line up a rental before you arrive", "https://devindesaulniers.ca/rental-before-you-arrive.html", "Devin Desaulniers"),
+            ("Relocating to Greater Vancouver", "https://devindesaulniers.ca/relocating-to-greater-vancouver.html", "Devin Desaulniers"),
+        ],
+    )
+
+    cta = _cta(
+        "Moving soon?",
+        f"Book a free 15-minute call. Call or text {PHONE}, or email {EMAIL}. Devin Desaulniers, Real Estate Associate, Axford Real Estate, {BROKERAGE_ADDR}.",
+        f'<a class="btn btn-light" href="tenants.html#intake">Book a free 15-minute call {I["arrow"]}</a>'
+        + _phone_row(),
+    )
+    buttons = (
+        f'<a class="btn btn-light" href="tenants.html#intake">Book a free 15-minute call {I["arrow"]}</a>'
+        f'<a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>'
+        f'<a class="btn btn-ghost-light" href="mailto:{EMAIL}">Email Devin</a>'
+    )
+    crumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://devindesaulniers.ca/"},
+            {"@type": "ListItem", "position": 2, "name": "Relocation rental agent vs locator vs DIY",
+             "item": "https://devindesaulniers.ca/relocation-rental-agent-vs-rental-locator-vancouver.html"},
+        ],
+    }
+    webpage = {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Relocation Rental Agent vs Rental Locator vs DIY in Vancouver",
+        "url": "https://devindesaulniers.ca/relocation-rental-agent-vs-rental-locator-vancouver.html",
+        "description": "Moving to Greater Vancouver and need a rental? Compare a licensed tenant-side relocation rental agent, a rental locator service and searching on your own: who represents you, what you pay, and what each one handles.",
+        "isPartOf": {"@type": "WebSite", "name": "Devin Desaulniers", "url": "https://devindesaulniers.ca/"},
+        "about": {"@id": "https://devindesaulniers.ca/#devin-desaulniers"},
+    }
+    extra = (
+        '<script type="application/ld+json">\n'
+        + json.dumps(webpage, indent=2, ensure_ascii=False)
+        + "\n</script>\n"
+        + '<script type="application/ld+json">\n'
+        + json.dumps(crumb, indent=2, ensure_ascii=False)
+        + "\n</script>\n"
+    )
+    return _visual_page(
+        "relocation-rental-agent-vs-rental-locator-vancouver.html",
+        "Relocation Rental Agent vs Rental Locator vs DIY in Vancouver | Devin Desaulniers",
+        "Moving to Greater Vancouver and need a rental? Compare a licensed tenant-side relocation rental agent, a rental locator service and searching on your own: who represents you, what you pay, and what each one handles.",
+        "Tenant options · Greater Vancouver",
+        "Relocation rental agent, rental locator or do it yourself? How to choose when you're moving to Vancouver",
+        "If you're moving to Greater Vancouver and want a rental lined up before you land, you have three options. Hire a licensed relocation rental agent who represents you as the tenant. Use a rental locator or relocation company. Or search on your own from a distance.",
+        [("compare", "Compare"), ("when", "When each fits"), ("faq", "FAQ")],
+        "I'm Devin Desaulniers, a licensed REALTOR® with Axford Real Estate in the Tri-Cities, BC, and I work as a tenant-side relocation rental agent. Here's how the three compare.",
+        f'<p>Call or text <a href="{TEL}">{PHONE}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>',
+        body, "Relocation rental questions", faq, cta, sources,
+        extra_head=extra, hero_buttons=buttons,
+        hero_extra='<p>Details of my tenant service are on the <a href="tenants.html">tenants page</a>.</p>',
+    )
+
+
+
 def write_pages():
     for item in TENANT_FAQ_PREPEND:
         assert_copy(item[0] + item[1], "tenants FAQ")
     for item in RENT_FAQS:
         assert_copy(item[0] + item[1], "rent FAQ")
-    pages = [_burquitlam(), _port_moody(), _port_coquitlam(), _newcomer(), _rental_before(), _first_time(), _coquitlam(), _coquitlam_condo(), _newcomer_buyers()]
+    pages = [_burquitlam(), _port_moody(), _port_coquitlam(), _newcomer(), _rental_before(), _relocation_compare(), _first_time(), _coquitlam(), _coquitlam_condo(), _newcomer_buyers()]
     return pages

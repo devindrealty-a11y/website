@@ -367,6 +367,7 @@ def foot(root=""):
           <li><a href="{root}tenants.html">Relocation rental service</a></li>
           <li><a href="{root}relocating-to-greater-vancouver.html">Relocating to Greater Vancouver guide</a></li>
           <li><a href="{root}rental-before-you-arrive.html">Line up a rental before you arrive</a></li>
+          <li><a href="{root}relocation-rental-agent-vs-rental-locator-vancouver.html">Relocation rental agent vs locator vs DIY</a></li>
           <li><a href="{root}burquitlam-neighbourhood-guide.html">Burquitlam neighbourhood guide</a></li>
           <li><a href="{root}coquitlam-condo-buyer.html">Coquitlam condo buyers</a></li>
           <li><a href="{root}port-moody.html">Port Moody guide</a></li>
