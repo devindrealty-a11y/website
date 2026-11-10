@@ -1234,6 +1234,8 @@ html.dd-chat-open{overflow:hidden}
 .card-grid-3{display:grid;gap:16px;margin-top:24px}
 @media (min-width:640px){.card-grid-3{grid-template-columns:1fr 1fr}}
 @media (min-width:980px){.card-grid-3{grid-template-columns:repeat(3,1fr)}}
+.card-grid-2{display:grid;gap:16px;margin-top:24px}
+@media (min-width:640px){.card-grid-2{grid-template-columns:1fr 1fr}}
 .hood-card .icon{margin-bottom:14px}
 .card-links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px}
 .card-links .card-link{color:var(--blue-dark)}
