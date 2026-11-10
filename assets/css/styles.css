@@ -1302,3 +1302,12 @@ html.dd-chat-open{overflow:hidden}
 .strata-checks span{display:block;margin-top:2px;color:var(--muted);font-size:.92rem}
 .reloc-timeline .tl-card h3{margin:0 0 .45em;font-size:1.15rem}
 .reloc-timeline .tl-card p{margin:.6em 0 0}
+
+
+/* Relocation comparison: cards on small screens, table as well from tablet up */
+.compare-table-wrap{margin-top:1.6rem}
+@media (max-width:979px){
+  .compare-table-wrap{display:none}
+}
+
+.compare-cta-row{margin-top:1.5rem}

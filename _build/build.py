@@ -570,7 +570,7 @@ tenants += f"""
       </ul>
       <a class="btn btn-light" href="#intake">Start your search {I["arrow"]}</a>
     </div>
-    <p class="form-note center fee-note">I help tenants find and lease a home. I do not provide property management services.</p>
+    <p class="form-note center fee-note">I help tenants find and lease a home. I do not provide property management services. Comparing options? See <a href="relocation-rental-agent-vs-rental-locator-vancouver.html">relocation rental agent vs rental locator vs DIY</a>.</p>
     {axford_tenant_line(center=True)}
   </div>
 </section>
@@ -637,6 +637,11 @@ tenants += f"""
     <a class="guide-callout" href="rental-before-you-arrive.html">
       <span class="gc-icon">{I["doc"]}</span>
       <span><b>Week-by-week checklist.</b> How to line up a Greater Vancouver rental before you arrive: documents, timing, deposits and what to watch for.</span>
+      <span class="gc-arrow">{I["arrow"]}</span>
+    </a>
+    <a class="guide-callout" href="relocation-rental-agent-vs-rental-locator-vancouver.html">
+      <span class="gc-icon">{I["handshake"]}</span>
+      <span><b>Agent, locator or DIY?</b> Compare a licensed relocation rental agent, a rental locator and searching on your own, including my tenant service fee.</span>
       <span class="gc-arrow">{I["arrow"]}</span>
     </a>
     <a class="guide-callout" href="relocating-to-greater-vancouver.html">
@@ -814,9 +819,11 @@ gv += f"""
     <p>I represent your search on the tenant side, not a landlord's inventory. (Axford also has a separate property management business; this service is different.)</p>
     {axford_tenant_line()}
     <p>Most Greater Vancouver rentals list only a few weeks before they're available, so the active search usually starts about 4–6 weeks before move-in. Use the weeks before that to settle your budget, areas and documents.</p>
+    <p>Not sure whether to hire a relocation rental agent, use a locator, or search on your own? Read <a href="relocation-rental-agent-vs-rental-locator-vancouver.html">relocation rental agent vs rental locator vs DIY</a>.</p>
     <div class="btn-row">
       <a class="btn btn-light" href="tenants.html#intake">Start your rental search {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="rental-before-you-arrive.html">Week-by-week checklist</a>
+      <a class="btn btn-ghost-light" href="relocation-rental-agent-vs-rental-locator-vancouver.html">Agent vs locator vs DIY</a>
       <a class="btn btn-ghost-light" href="tenants.html">See the relocation rental service</a>
     </div>
   </div>
