@@ -1383,7 +1383,7 @@ def _relocation_compare():
     </div>
     """
     who_inner = """
-    <p class="lead">When you search on your own, the property managers and leasing agents you deal with work for the landlord, not for you. In a typical rental, the landlord or property manager pays for finding a tenant, so their job is to fill the unit for the owner, not to compare options for you.</p>
+    <p class="lead">When you search on your own, the property managers and leasing agents you deal with work for the landlord. In a typical rental, the landlord or property manager pays for finding a tenant, so their job is to fill the unit for the owner, not to compare options for you.</p>
     <p>I work for you, the tenant. You pay my tenant service fee, so the advice is about what fits your budget, commute and lease terms. Axford Real Estate also has a separate property management business. That work represents landlords. My service is different: it's tenant-paid relocation rental help, and I don't manage rental properties myself.</p>
     """
     body = _section(
@@ -1402,7 +1402,7 @@ def _relocation_compare():
     when_inner = """
     <div class="card-grid-2">
       <div class="card"><h3>Hire a relocation rental agent</h3><p>If you can't view homes in person, you're new to Canada or BC tenancy rules, or you need a place by a fixed start date. I search, do live video walkthroughs, share floor plans, and review and negotiate the lease with you.</p></div>
-      <div class="card"><h3>Search on your own</h3><p>If you're already in the Lower Mainland, can view in person, and are comfortable with BC tenancy agreements. Just know that the property managers and leasing agents you meet work for the landlord.</p></div>
+      <div class="card"><h3>Search on your own</h3><p>If you're already in the Lower Mainland, can view in person, and are comfortable with BC tenancy agreements. The property managers and leasing agents you meet work for the landlord.</p></div>
     </div>
     <p class="after-steps">More on the service itself is on the <a href="tenants.html">tenants page</a>. Timing and scam checks are on <a href="rental-before-you-arrive.html">how to line up a rental before you arrive</a>. Area context is in the <a href="relocating-to-greater-vancouver.html">Relocating to Greater Vancouver guide</a>.</p>
     """
@@ -1416,7 +1416,7 @@ def _relocation_compare():
 
     faq = [
         ("What does a relocation rental agent do in Vancouver?",
-         "<p>A relocation rental agent finds rentals that fit your budget, area and move date, does live video walkthroughs for you, shares floor plans for the homes you're seriously considering, checks that the listing and landlord are real, helps with your application, and reviews and negotiates the lease before you sign.</p>"),
+         "<p>A relocation rental agent finds rentals that fit your budget, area and move date, and does live video walkthroughs for you. They share floor plans for the homes you're seriously considering, check that the listing and landlord are real, help with your application, and review and negotiate the lease before you sign.</p>"),
         ("Who do property managers and leasing agents work for if I search on my own?",
          "<p>In a typical rental, the landlord or property manager pays for finding a tenant, so their job is to fill the unit for the owner, not to compare options for you. I work for you, the tenant, and you pay my tenant service fee. Axford Real Estate also has a separate property management business. That work represents landlords. My service is different: it's tenant-paid relocation rental help, and I don't manage rental properties myself.</p>"),
         ("How much does a relocation rental agent cost in Vancouver?",
