@@ -570,7 +570,7 @@ tenants += f"""
       </ul>
       <a class="btn btn-light" href="#intake">Start your search {I["arrow"]}</a>
     </div>
-    <p class="form-note center fee-note">I help tenants find and lease a home. I do not provide property management services. Comparing options? See <a href="relocation-rental-agent-vs-rental-locator-vancouver.html">relocation rental agent vs rental locator vs DIY</a>.</p>
+    <p class="form-note center fee-note">I help tenants find and lease a home. I do not provide property management services. Comparing options? See <a href="relocation-rental-agent-vs-diy-vancouver.html">relocation rental agent vs doing it yourself</a>.</p>
     {axford_tenant_line(center=True)}
   </div>
 </section>
@@ -639,9 +639,9 @@ tenants += f"""
       <span><b>Week-by-week checklist.</b> How to line up a Greater Vancouver rental before you arrive: documents, timing, deposits and what to watch for.</span>
       <span class="gc-arrow">{I["arrow"]}</span>
     </a>
-    <a class="guide-callout" href="relocation-rental-agent-vs-rental-locator-vancouver.html">
+    <a class="guide-callout" href="relocation-rental-agent-vs-diy-vancouver.html">
       <span class="gc-icon">{I["handshake"]}</span>
-      <span><b>Agent, locator or DIY?</b> Compare a licensed relocation rental agent, a rental locator and searching on your own, including my tenant service fee.</span>
+      <span><b>Hire an agent, or do it yourself?</b> Compare a licensed relocation rental agent with searching on your own, including my tenant service fee.</span>
       <span class="gc-arrow">{I["arrow"]}</span>
     </a>
     <a class="guide-callout" href="relocating-to-greater-vancouver.html">
@@ -819,11 +819,11 @@ gv += f"""
     <p>I represent your search on the tenant side, not a landlord's inventory. (Axford also has a separate property management business; this service is different.)</p>
     {axford_tenant_line()}
     <p>Most Greater Vancouver rentals list only a few weeks before they're available, so the active search usually starts about 4–6 weeks before move-in. Use the weeks before that to settle your budget, areas and documents.</p>
-    <p>Not sure whether to hire a relocation rental agent, use a locator, or search on your own? Read <a href="relocation-rental-agent-vs-rental-locator-vancouver.html">relocation rental agent vs rental locator vs DIY</a>.</p>
+    <p>Not sure whether to hire a relocation rental agent or search on your own? Read <a href="relocation-rental-agent-vs-diy-vancouver.html">relocation rental agent vs doing it yourself</a>.</p>
     <div class="btn-row">
       <a class="btn btn-light" href="tenants.html#intake">Start your rental search {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="rental-before-you-arrive.html">Week-by-week checklist</a>
-      <a class="btn btn-ghost-light" href="relocation-rental-agent-vs-rental-locator-vancouver.html">Agent vs locator vs DIY</a>
+      <a class="btn btn-ghost-light" href="relocation-rental-agent-vs-diy-vancouver.html">Agent vs DIY</a>
       <a class="btn btn-ghost-light" href="tenants.html">See the relocation rental service</a>
     </div>
   </div>
@@ -1165,6 +1165,25 @@ blog.write_blog(POSTS)
 SEO_PAGES = seo_pages.write_pages()
 for fn, html in SEO_PAGES:
     open(os.path.join(OUT, fn), "w").write(html)
+# Old comparison URL: tiny stub so existing links keep working. Not in the sitemap.
+COMPARE_NEW = "relocation-rental-agent-vs-diy-vancouver.html"
+COMPARE_OLD = "relocation-rental-agent-vs-rental-locator-vancouver.html"
+open(os.path.join(OUT, COMPARE_OLD), "w").write(f"""<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<title>Moved: Relocation rental agent vs doing it yourself | Devin Desaulniers</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="{SITE}{COMPARE_NEW}">
+<meta http-equiv="refresh" content="0; url={COMPARE_NEW}">
+{GOATCOUNTER}
+<script>location.replace("{COMPARE_NEW}" + location.hash);</script>
+</head>
+<body>
+<p>This page has moved to <a href="{COMPARE_NEW}">Hire a relocation rental agent, or do it yourself?</a>.</p>
+</body>
+</html>
+""")
 import true_cost_page
 open(os.path.join(OUT, true_cost_page.PAGE), "w").write(true_cost_page.render())
 import mortgage_rates_page
