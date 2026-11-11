@@ -18,6 +18,8 @@ Pages:
 - `true-cost-of-owning-a-home-bc.html` — lead-magnet guide to monthly costs besides the mortgage in the Tri-Cities, BC (property tax, strata, insurance, maintenance, utilities), with an estimator. Built from `_build/true_cost_page.py`.
 - `mortgage-rates.html` — illustrative Big 5 bank mortgage rates (1-year, 3-year, and 5-year fixed, plus 5-year variable) with an example payment and a link to the affordability calculator. Built from `_build/mortgage_rates_page.py` and `assets/data/mortgage-rates.json`. Devin is not a mortgage broker. The intro form asks him to make an introduction only.
 
+`_promo/` is an unpublished promotion kit (Meta ads, Google Business Profile posts, YouTube text, communities, and a 4-week rollout). GitHub Pages runs Jekyll on this repo, and Jekyll does not publish that folder. `_config.yml` excludes it as well. Do not add a `.nojekyll` file.
+
 ## Editing
 HTML is generated from `_build/build.py` + `_build/partials.py` (header/footer shared). Edit those, then run:
 ```
