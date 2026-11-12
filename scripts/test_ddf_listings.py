@@ -283,6 +283,22 @@ def test_photo_urls_keep_the_highres_copy():
     ]
 
 
+def test_photo_urls_keeps_up_to_fifty():
+    media = [
+        {
+            "MediaURL": f"https://cdn.example/listing/highres/{i}/R1_{i}.jpg",
+            "Order": i,
+            "MediaCategory": "Photo",
+        }
+        for i in range(60)
+    ]
+    urls = ddf.photo_urls(media)
+    assert ddf.MAX_PHOTOS == 50
+    assert len(urls) == 50
+    assert urls[0] == "https://cdn.example/listing/highres/0/R1_0.jpg"
+    assert urls[-1] == "https://cdn.example/listing/highres/49/R1_49.jpg"
+
+
 def test_builds_realtor_url_when_feed_omits_it():
     item = odata(ListingURL=None, ListingKey="12345678")
     assert item["realtorUrl"] == "https://www.realtor.ca/real-estate/12345678"
