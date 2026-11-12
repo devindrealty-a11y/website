@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Wed, 11 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Thu, 12 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>Builders and REALTORS® ask B.C.'s new government to rethink housing rules</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-12-industry-asks-bc-government-to-revisit-housing-policy.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-12-industry-asks-bc-government-to-revisit-housing-policy.html</guid>
+    <pubDate>Thu, 12 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Market news</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>Developers and the BC Real Estate Association want the incoming government to review the Step Code, the planned PST expansion and housing taxes, as Metro Vancouver condo construction sits at a 15-year low. My take for buyers, sellers and renters in the Tri-Cities, BC.</description>
+  </item>
   <item>
     <title>Living near Inlet Centre Station in Port Moody: a newcomer's guide</title>
     <link>https://devindesaulniers.ca/blog/2026-11-11-living-near-inlet-centre-station-port-moody.html</link>
@@ -267,15 +276,6 @@
     <category>Market news</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>The BC Conservatives under Lorne Doerkson are projected to win a majority. Politics aside, here's what they ran on for housing and what it could mean for buyers, sellers and renters in Greater Vancouver and the Tri-Cities, BC.</description>
-  </item>
-  <item>
-    <title>Developers are sweetening new-home deals. Read the fine print.</title>
-    <link>https://devindesaulniers.ca/blog/2026-10-25-vancouver-developer-incentives.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-10-25-vancouver-developer-incentives.html</guid>
-    <pubDate>Sun, 25 Oct 2026 08:00:00 -0700</pubDate>
-    <category>Buying</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>The Globe and Mail reports B.C. developers are offering a $100,000 car or cash, $25,000 credits and mortgage subsidies to move unsold homes. My take for buyers in Greater Vancouver and the Tri-Cities, BC.</description>
   </item>
 </channel>
 </rss>
