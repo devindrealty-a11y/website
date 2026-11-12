@@ -49,7 +49,7 @@ RETS_SEARCH = "https://data.crea.ca/Search.svc/Search"
 RETS_LOGOUT = "https://data.crea.ca/Logout.svc/Logout"
 SCOPE = "DDFApi_Read"
 PAGE_SIZE = 100
-MAX_PHOTOS = 12
+MAX_PHOTOS = 50  # DDF listings typically include at most about 50 photos.
 # Detail photos and remarks are split out of the search file so the first
 # page can load. 48 shards keeps each one small enough to fetch on open.
 SHARD_COUNT = 48
