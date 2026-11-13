@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Thu, 12 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Fri, 13 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>Where Canadians are moving: B.C. and Alberta almost an even trade</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-13-where-canadians-are-moving-interprovincial-migration.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-13-where-canadians-are-moving-interprovincial-migration.html</guid>
+    <pubDate>Fri, 13 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Market news</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>From April to June 2026, Alberta gained 5,893 people from the rest of Canada and B.C. was 2nd at 2,756, while Ontario lost 7,063. Here's the interprovincial migration map, and what it means if you're moving to Greater Vancouver.</description>
+  </item>
   <item>
     <title>Builders and REALTORS® ask B.C.'s new government to rethink housing rules</title>
     <link>https://devindesaulniers.ca/blog/2026-11-12-industry-asks-bc-government-to-revisit-housing-policy.html</link>
@@ -267,15 +276,6 @@
     <category>Renting</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>A $275 rent hike went viral on X. In B.C., the 2026 cap for existing tenants is 2.3%, about $40 on $1,750 rent, once every 12 months with 3 full months' written notice on Form RTB-7.</description>
-  </item>
-  <item>
-    <title>45% of Port Moody sales this year followed a failed listing</title>
-    <link>https://devindesaulniers.ca/blog/2026-10-27-tri-cities-failed-listings-relisted-homes.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-10-27-tri-cities-failed-listings-relisted-homes.html</guid>
-    <pubDate>Tue, 27 Oct 2026 08:00:00 -0700</pubDate>
-    <category>Market news</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>A Zealty analysis reported in local news found 45% of Port Moody homes sold in the first nine months of 2026 had a failed listing first, with 42% in Port Coquitlam and 38% in Coquitlam. Here's what that means for sellers and buyers in the Tri-Cities, BC.</description>
   </item>
 </channel>
 </rss>
