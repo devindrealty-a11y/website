@@ -9,7 +9,7 @@ import re
 
 from partials import (
     BROKERAGE_ADDR, CALC, EMAIL, ICONS, PHONE, TEL,
-    foot, head, picture,
+    consent, foot, head, picture,
 )
 
 I = ICONS
@@ -785,17 +785,20 @@ def _acc_faq(heading, items):
 </section>'''
 
 
-def _visual_page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intro_rest, body, faq_heading, faq_items, cta_html, sources_html, extra_head="", hero_buttons=None, hero_extra=""):
+def _visual_page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intro_rest, body, faq_heading, faq_items, cta_html, sources_html, extra_head="", hero_buttons=None, hero_extra="", after_nav="", after_cta="", body_class=""):
     if hero_buttons is None:
         hero_buttons = (
             f'<a class="btn btn-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>\n'
             f'      <a class="btn btn-ghost-light" href="mailto:{EMAIL}">{I["mail"]} Email Devin</a>'
         )
-    html = head(title, desc, "area-guide", page_url=filename,
+    html = head(title, desc, "area-guide", page_url=filename, body_class=body_class,
                 extra_head=faq_jsonld(faq_items) + extra_head)
     hero_extra_html = f"\n    {hero_extra}" if hero_extra else ""
+    after_nav_html = ("\n" + after_nav) if after_nav else ""
+    after_cta_html = ("\n" + after_cta) if after_cta else ""
+    hero_attr = ' data-sticky-hide' if after_cta else ""
     html += f'''
-<section class="page-hero">
+<section class="page-hero"{hero_attr}>
   <div class="container">
     <span class="eyebrow">{eyebrow}</span>
     <h1>{h1}</h1>
@@ -805,7 +808,7 @@ def _visual_page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intr
     </div>
   </div>
 </section>
-{page_nav(nav)}
+{page_nav(nav)}{after_nav_html}
 <article class="guide">
 <section class="section">
   <div class="container guide-intro">
@@ -820,7 +823,7 @@ def _visual_page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intr
 {_acc_faq(faq_heading, faq_items)}
 {sources_html}
 </article>
-{cta_html}
+{cta_html}{after_cta_html}
 '''
     html += foot()
     assert_copy(html, filename)
@@ -1041,6 +1044,73 @@ def _howto_jsonld(name, description, steps):
     }, indent=2, ensure_ascii=False) + "\n</script>"
 
 
+def _yes_no(fid, name, legend):
+    yes_id = f"{fid}-yes"
+    no_id = f"{fid}-no"
+    return (
+        f'<fieldset class="field full">'
+        f'<legend>{legend} <span class="req">*</span></legend>'
+        f'<div class="yn-choices">'
+        f'<label class="lead-choice" for="{yes_id}">'
+        f'<input id="{yes_id}" type="radio" name="{name}" value="Yes" required>'
+        f'<span>Yes</span></label>'
+        f'<label class="lead-choice" for="{no_id}">'
+        f'<input id="{no_id}" type="radio" name="{name}" value="No" required>'
+        f'<span>No</span></label>'
+        f'</div></fieldset>'
+    )
+
+
+def _rental_intake_form():
+    """Short qualifying form for the rental-before-you-arrive ad landing page."""
+    beds = (
+        '<option value="" selected disabled>Select\u2026</option>'
+        '<option>Studio</option>'
+        '<option>1 bedroom</option>'
+        '<option>1 bedroom + den</option>'
+        '<option>2 bedrooms</option>'
+        '<option>3 bedrooms</option>'
+        '<option>4+ bedrooms</option>'
+        '<option>Flexible</option>'
+    )
+    lives = _yes_no("rb-gv", "lives_in_greater_vancouver", "Do you currently live in Greater Vancouver?")
+    paid = _yes_no("rb-help", "want_paid_help", "Would you like professional help managing your rental search?")
+    mid = "\u00b7"
+    return f'''<section class="section section--paper" id="intake" data-sticky-hide>
+  <div class="container narrow-wide">
+    <form class="form-card rental-intake" data-form-key="tenantIntake" data-goat-event="form-tenant" action="#" method="POST">
+      <input type="hidden" name="_subject" value="New relocation rental intake \u2014 rental-before-you-arrive">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="form" value="Tenant: Relocation rental intake (rental-before-you-arrive)">
+      <input type="hidden" name="page" value="rental-before-you-arrive.html">
+      <div class="hp" aria-hidden="true"><label>Leave this field empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
+      <span class="eyebrow">Tenant relocation service</span>
+      <h2>Build your rental search</h2>
+      <p class="intake-brokerage">Devin Desaulniers, Real Estate Associate {mid} Axford Real Estate</p>
+      <p>Takes about two minutes. No obligation. I'll get back to you with next steps.</p>
+      <p class="intake-fee">Professional tenant relocation services are available for a fee: <strong>$1,500 + GST</strong>, paid by the tenant in two parts (<strong>$750</strong> at the beginning of the engagement, non-refundable, and <strong>$750</strong> once you successfully secure a rental).</p>
+      <div class="form-grid cols-2">
+        <div class="field"><label for="rb-from">Where are you moving from? <span class="req">*</span></label><input id="rb-from" name="moving_from" autocomplete="address-level2" required placeholder="City, province or country"></div>
+        <div class="field"><label for="rb-work">Where will you be working or studying? <span class="req">*</span></label><input id="rb-work" name="work_school_location" required placeholder="Neighbourhood, city, or office area"></div>
+        <div class="field"><label for="rb-budget">Monthly rental budget (CAD) <span class="req">*</span></label><input id="rb-budget" name="budget" required placeholder="e.g. $2,500\u2013$3,000"></div>
+        <div class="field"><label for="rb-beds">How many bedrooms? <span class="req">*</span></label><select id="rb-beds" name="bedrooms" required>{beds}</select></div>
+        <div class="field"><label for="rb-date">Target move date <span class="req">*</span></label><input id="rb-date" name="move_date" type="date" required></div>
+        {lives}
+        {paid}
+        <div class="field"><label for="rb-name">Full name <span class="req">*</span></label><input id="rb-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="rb-email">Email <span class="req">*</span></label><input id="rb-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="rb-phone">Phone <span class="req">*</span> <span class="hint">(include a country code if you're outside Canada)</span></label><input id="rb-phone" name="phone" type="tel" autocomplete="tel" required></div>
+        {consent("rb")}
+        <div class="full">
+          <button type="submit" class="btn btn-primary">Build My Rental Search</button>
+          <div class="form-status" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>'''
+
+
 def _rental_before():
     steps = [
         ("8 weeks out: Decide the brief",
@@ -1107,7 +1177,7 @@ def _rental_before():
     <h2>How I help before you land</h2>
     <p>The search, the showings and the lease review are a tenant-side service: <strong>$1,500 + GST</strong>, paid by you in two parts (<strong>$750 at the start</strong>, non-refundable, and <strong>$750 once you secure a rental</strong>). It includes a consultation, the search and early access, in-person or live-video showings with floor plans, and lease review and negotiation. There's more detail on the <a href="tenants.html">tenants page</a>.</p>
     <p>Call or text <a href="{TEL}">{PHONE}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></p>
-    <div class="btn-row"><a class="btn btn-primary" href="tenants.html#intake">Start rental search {I["arrow"]}</a><a class="btn btn-outline" href="rent-report.html">Weekly rent report</a></div>
+    <div class="btn-row"><a class="btn btn-primary" href="#intake">Build My Rental Search {I["arrow"]}</a><a class="btn btn-outline" href="rent-report.html">Weekly rent report</a></div>
   </div>
 </section>'''
     faq = [
@@ -1134,7 +1204,7 @@ def _rental_before():
     cta = _cta(
         "Want the search done before you land?",
         f"Call or text {PHONE}, or email {EMAIL}. Devin Desaulniers, Real Estate Associate, Axford Real Estate, {BROKERAGE_ADDR}.",
-        f'<a class="btn btn-light" href="tenants.html#intake">Start rental search {I["arrow"]}</a>'
+        f'<a class="btn btn-light" href="#intake">Build My Rental Search {I["arrow"]}</a>'
         + _phone_row(),
     )
     howto = _howto_jsonld(
@@ -1143,23 +1213,31 @@ def _rental_before():
         steps,
     )
     buttons = (
-        f'<a class="btn btn-light" href="tenants.html#intake">Start rental search {I["arrow"]}</a>'
+        f'<a class="btn btn-light" href="#intake">Build My Rental Search {I["arrow"]}</a>'
         f'<a class="btn btn-ghost-light" href="rent-report.html">Weekly rent report</a>'
         f'<a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>'
     )
+    sticky = f"""<div class="sticky-cta" data-sticky-cta>
+  <div class="sc-text"><b>$1,500 + GST</b>Paid in two parts</div>
+  <a class="sc-call" href="{TEL}" aria-label="Call Devin at {PHONE}">{I["phone"]}</a>
+  <a class="btn btn-primary" href="#intake">Start search</a>
+</div>"""
     return _visual_page(
         "rental-before-you-arrive.html",
         "Line Up a Vancouver Rental Before You Arrive | Devin",
-        "Week-by-week checklist to rent in Greater Vancouver before you move: docs, timing, deposits, scam checks. Devin Desaulniers.",
+        "Week-by-week checklist and a short form to start a Greater Vancouver rental search before you move. $1,500 + GST. Devin Desaulniers, Axford Real Estate.",
         "Before you arrive · Greater Vancouver",
         "How to line up a Greater Vancouver rental before you arrive",
         "You can secure a Greater Vancouver rental before you land: ready your application, start the search about 4 to 6 weeks out, view in person or on live video, sign a written tenancy agreement, and pay only the deposits B.C. allows. I'm Devin Desaulniers with Axford Real Estate in Port Moody.",
-        [("budget", "What to budget"), ("timeline", "8-week checklist"), ("scams", "Scam checks"), ("help", "How I help"), ("faq", "FAQ")],
-        "I do that search on the tenant side: consultation, showings (in person or on live video) and a read of the lease before you sign.",
-        f'<p>Call or text <a href="{TEL}">{PHONE}</a>.</p>',
+        [("intake", "Rental search"), ("budget", "What to budget"), ("timeline", "8-week checklist"), ("scams", "Scam checks"), ("help", "How I help"), ("faq", "FAQ")],
+        "I do that search on the tenant side: consultation, showings (in person or on live video) and a read of the lease before you sign. The fee is $1,500 + GST, paid by the tenant in two parts.",
+        f'<p>Call or text <a href="{TEL}">{PHONE}</a>, or use the form above to start a rental search.</p>',
         body, "Questions before you arrive", faq, cta, sources,
         extra_head=howto, hero_buttons=buttons,
-        hero_extra='<p>The <a href="tenants.html">tenants page</a> covers the service. This page covers the timing.</p>',
+        hero_extra='<p>This is a paid tenant-side service with Axford Real Estate. The <a href="tenants.html">tenants page</a> has the full scope. Use the form below if you would like help lining up a rental.</p>',
+        after_nav=_rental_intake_form(),
+        after_cta=sticky,
+        body_class="has-sticky",
     )
 
 

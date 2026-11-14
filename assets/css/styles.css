@@ -479,6 +479,11 @@ fieldset.field{border:0;padding:0;margin:0}
 .form-status.error{background:#fdecea;border:2px solid #d14343;color:#7a1c1c}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 @media (min-width:640px){.form-grid.cols-2{grid-template-columns:1fr 1fr;gap:20px 22px}.form-grid .full{grid-column:1/-1}}
+.yn-choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rental-intake .intake-brokerage{margin:0 0 10px;font-family:var(--font-head);font-weight:600;font-size:.9rem;color:var(--ink)}
+.rental-intake .intake-fee{margin:0 0 18px;font-size:.92rem;color:var(--muted)}
+.rental-intake{scroll-margin-top:calc(var(--hdr-h, 80px) + 16px)}
+.rental-intake h2{margin-bottom:.25em}
 
 /* ===== Tenant landing page ===== */
 .lp-hero{position:relative;overflow:hidden;background:var(--night);color:var(--on-night);--focus:#a9d0f5}

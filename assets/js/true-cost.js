@@ -282,6 +282,10 @@
     }
 
     function track() {
+      if (typeof window.ddCountGoat === "function") {
+        window.ddCountGoat("true-cost-signup");
+        return;
+      }
       if (!window.goatcounter || typeof window.goatcounter.count !== "function") return;
       try { window.goatcounter.count({ path: "true-cost-signup", title: "true-cost-signup", event: true }); } catch (err) {}
     }

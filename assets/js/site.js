@@ -74,6 +74,105 @@
   // Year
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
+  // GoatCounter events. The official script is async, so count() may not exist
+  // yet. Queue the payload and flush when it is ready (same idea as chat.js).
+  // Event paths are fixed names and never include form field values.
+  var goatPending = [];
+  var goatWatching = false;
+  function goatReady() {
+    return !!(window.goatcounter && typeof window.goatcounter.count === 'function');
+  }
+  function flushGoat() {
+    if (!goatReady() || !goatPending.length) return;
+    var batch = goatPending.splice(0, goatPending.length);
+    batch.forEach(function (payload) {
+      try { window.goatcounter.count(payload); } catch (err) {}
+    });
+  }
+  function watchGoat() {
+    if (goatWatching) return;
+    goatWatching = true;
+    var script = document.querySelector('script[data-goatcounter]');
+    if (script) script.addEventListener('load', flushGoat);
+    window.addEventListener('load', flushGoat);
+    var tries = 0;
+    var timer = setInterval(function () {
+      tries += 1;
+      flushGoat();
+      if (!goatPending.length || tries >= 50) clearInterval(timer);
+    }, 200);
+  }
+  function countGoat(name) {
+    if (!name) return;
+    goatPending.push({ path: name, title: name, event: true });
+    if (goatReady()) flushGoat();
+    else watchGoat();
+  }
+  window.ddCountGoat = countGoat;
+
+  // Google Ads conversion hook. Paste the Conversion ID and label from
+  // Google Ads (Goals > Conversions), for example 'AW-1234567890/AbCdEfGhIjK'.
+  // Leave this empty to keep the hook inert: no gtag script is loaded and
+  // visitor pages stay unchanged.
+  var GOOGLE_ADS_CONVERSION_ID = '';
+  var gtagRequested = false;
+  function adsConversionId() {
+    return (GOOGLE_ADS_CONVERSION_ID || '').trim();
+  }
+  function adsAccountId(sendTo) {
+    var part = (sendTo.split('/')[0] || '').trim();
+    return /^AW-\d+$/.test(part) ? part : '';
+  }
+  function fireGoogleAdsConversion() {
+    var sendTo = adsConversionId();
+    if (!sendTo) return;
+    var account = adsAccountId(sendTo);
+    if (!account) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    if (!gtagRequested) {
+      gtagRequested = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(account);
+      document.head.appendChild(s);
+      window.gtag('js', new Date());
+      window.gtag('config', account);
+    }
+    window.gtag('event', 'conversion', { send_to: sendTo });
+  }
+  function formGoatEvent(form) {
+    var eventName = (form.getAttribute('data-goat-event') || '').trim();
+    if (eventName) return eventName;
+    var key = (form.getAttribute('data-form-key') || '').trim();
+    if (!key) return 'form-submit';
+    return 'form-' + key.replace(/([a-z])([A-Z])/g, '$1-$2').replace(/_/g, '-').toLowerCase();
+  }
+
+  // UTM / click IDs from ad URLs → hidden form fields for FormSubmit emails
+  (function () {
+    var params;
+    try { params = new URLSearchParams(window.location.search); } catch (err) { return; }
+    var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'];
+    var picked = {};
+    keys.forEach(function (k) {
+      var v = params.get(k);
+      if (v) picked[k] = v;
+    });
+    if (!Object.keys(picked).length) return;
+    document.querySelectorAll('form[data-form-key]').forEach(function (form) {
+      Object.keys(picked).forEach(function (k) {
+        if (form.querySelector('input[name="' + k + '"]')) return;
+        var inp = document.createElement('input');
+        inp.type = 'hidden';
+        inp.name = k;
+        inp.value = picked[k];
+        form.appendChild(inp);
+      });
+    });
+  })();
+
+
   // Forms: AJAX submit to the endpoint in config.js (FormSubmit), with on-page success message
   var cfg = (window.SITE_CONFIG && window.SITE_CONFIG.forms) || {};
   document.querySelectorAll('form[data-form-key]').forEach(function (form) {
@@ -108,17 +207,17 @@
       fd.forEach(function (v, k) { data[k] = data[k] ? data[k] + ', ' + v : v; });
       if (data.email) data._replyto = data.email;
       if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Sending…'; }
-      // Count the submit as a GoatCounter event, then post. count() does not return a
-      // promise and a missing or blocked counter must not stop the FormSubmit request.
-      var eventName = form.getAttribute('data-goat-event') || '';
-      if (eventName && window.goatcounter && typeof window.goatcounter.count === 'function') {
-        try { window.goatcounter.count({ path: eventName, title: eventName, event: true }); } catch (err) {}
-      }
+      // Count the submit only after FormSubmit accepts it, then post. A missing
+      // or blocked counter must not stop the request; countGoat queues if needed.
+      var eventName = formGoatEvent(form);
+      var formKey = form.getAttribute('data-form-key') || '';
       fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
         .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
         .then(function (res) {
           var ok = res.ok && String(res.j.success) !== 'false';
           if (ok) {
+            countGoat(eventName);
+            if (formKey === 'tenantIntake') fireGoogleAdsConversion();
             form.reset();
             if (!revealThanks()) show('success', '<strong>Thanks — your request has been sent!</strong> Devin will be in touch soon. If it\'s urgent, call <a href="tel:+16048091032">604-809-1032</a>.');
           } else {
@@ -203,8 +302,7 @@
     }
 
     function track(name) {
-      if (!name || !window.goatcounter || typeof window.goatcounter.count !== 'function') return;
-      try { window.goatcounter.count({ path: name, title: name, event: true }); } catch (err) {}
+      countGoat(name);
     }
 
     function selected(name) {
