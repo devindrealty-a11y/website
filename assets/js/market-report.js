@@ -69,7 +69,9 @@
           show("error", "Sorry, something went wrong and your request may not have been sent. " + fallback);
           return;
         }
-        if (window.goatcounter && typeof window.goatcounter.count === "function") {
+        if (typeof window.ddCountGoat === "function") {
+          window.ddCountGoat("report-download");
+        } else if (window.goatcounter && typeof window.goatcounter.count === "function") {
           try { window.goatcounter.count({ path: "report-download", title: "report-download", event: true }); } catch (err) {}
         }
         form.reset();
