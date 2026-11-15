@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Sat, 14 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Sun, 15 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>Port Moody eases 2027 energy rules for 2,474 homes in the pipeline</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-15-port-moody-eases-step-code-for-projects-in-pipeline.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-15-port-moody-eases-step-code-for-projects-in-pipeline.html</guid>
+    <pubDate>Sun, 15 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Buying</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>Port Moody council voted to let 20 projects already in the works skip the next step of the BC Energy Step Code in 2027. Here's what that could mean for presale and new-home buyers and renters in the Tri-Cities, BC.</description>
+  </item>
   <item>
     <title>Where can newcomers find settlement services in the Tri-Cities, BC?</title>
     <link>https://devindesaulniers.ca/blog/2026-11-14-settlement-services-tri-cities-bc-newcomers.html</link>
@@ -267,15 +276,6 @@
     <category>Renting</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>Zonda Home data reported by the Vancouver Sun shows 59.5% of released purpose-built rental units in Metro Vancouver are leased, with about 900 units leasing a month and some buildings offering free rent. My take for renters and newcomers.</description>
-  </item>
-  <item>
-    <title>BC rental deposits and scams: what should newcomers know?</title>
-    <link>https://devindesaulniers.ca/blog/2026-10-31-bc-rental-deposits-and-scams.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-10-31-bc-rental-deposits-and-scams.html</guid>
-    <pubDate>Sat, 31 Oct 2026 08:00:00 -0700</pubDate>
-    <category>FAQ</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>In BC a landlord can ask for no more than half a month's rent as a security deposit, and must return it within 15 days of getting your forwarding address unless you agree otherwise or the RTB orders it. Here is how a newcomer can protect a deposit and spot a rental scam.</description>
   </item>
 </channel>
 </rss>
