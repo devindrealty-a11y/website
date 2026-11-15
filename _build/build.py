@@ -131,6 +131,11 @@ home += f'''
         <span class="offer-link-t">Free home evaluation</span>
         <span class="offer-link-d">Send me your address and I'll email you a market evaluation.</span>
       </a>
+      <a class="offer-link" href="home-value-tri-cities.html">
+        <span class="offer-link-k">Tri-Cities, BC sellers</span>
+        <span class="offer-link-t">What sold near you</span>
+        <span class="offer-link-d">Recent MLS sales for your street or complex, then a free 15-minute call.</span>
+      </a>
       <a class="offer-link" href="buyer-opinion.html">
         <span class="offer-link-k">Looking at a property</span>
         <span class="offer-link-t">Get an expert opinion</span>
@@ -221,7 +226,7 @@ home += f'''
     <div class="contact-lead">
       <div class="contact-form-col">
         {lead_form("home", "h3")}
-        <p class="lead-also">For a specific request: <a href="buyers.html#listings">send me listings</a>, <a href="home-evaluation.html">a free home evaluation</a>, <a href="buyer-opinion.html">an expert opinion on a property</a>, or <a href="tenants.html#intake">a rental search</a>.</p>
+        <p class="lead-also">For a specific request: <a href="buyers.html#listings">send me listings</a>, <a href="home-evaluation.html">a free home evaluation</a>, <a href="home-value-tri-cities.html">what sold near you in the Tri-Cities, BC</a>, <a href="buyer-opinion.html">an expert opinion on a property</a>, or <a href="tenants.html#intake">a rental search</a>.</p>
       </div>
       <div class="contact-aside">
         <ul class="contact-list">
@@ -952,15 +957,16 @@ privacy += f"""
   <div class="container narrow-wide">
     <div class="post-body">
       <p>This site is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate, {BROKERAGE_ADDR}. The sections below explain, in plain language, where the information you send me goes.</p>
-      <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form. The qualifying form sends <span class="nw">lead-form-start</span> when you begin it, <span class="nw">lead-form-step-1</span> through <span class="nw">lead-form-step-6</span> when you reach that step, and <span class="nw">lead-form-sent</span> only after the message is accepted. Those names are the step only. They do not include your name, email, phone, message, or the answers you choose. The market-report download sends <span class="nw">report-download</span> only after the request is accepted. That name does not include your name or email. The true-cost guide sign-up sends <span class="nw">true-cost-signup</span> only after the signup is accepted. That name does not include your name or email. The mortgage intro form sends <span class="nw">form-mortgage-intro</span> only after the request is accepted. That name does not include your name, email, phone, message, or the rate you were looking at. The chat widget sends the events named in the chat section below. Those events do not include what you type into a form.</p>
+      <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form. The qualifying form sends <span class="nw">lead-form-start</span> when you begin it, <span class="nw">lead-form-step-1</span> through <span class="nw">lead-form-step-6</span> when you reach that step, and <span class="nw">lead-form-sent</span> only after the message is accepted. Those names are the step only. They do not include your name, email, phone, message, or the answers you choose. The market-report download sends <span class="nw">report-download</span> only after the request is accepted. That name does not include your name or email. The true-cost guide sign-up sends <span class="nw">true-cost-signup</span> only after the signup is accepted. That name does not include your name or email. The mortgage intro form sends <span class="nw">form-mortgage-intro</span> only after the request is accepted. That name does not include your name, email, phone, message, or the rate you were looking at. The home value form sends <span class="nw">form-home-value</span> only after the request is accepted. That name does not include the address, property type, timeline, name, email, phone, or whether you asked for street or complex sales. The chat widget sends the events named in the chat section below. Those events do not include what you type into a form.</p>
 
       <h2 id="forms">Contact forms</h2>
-      <p>There are eleven forms on this site: the qualifying form on the <a href="index.html#qualify">home page</a> and the <a href="contact.html#qualify">contact page</a> (the same questions on both), the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a> and on <a href="rental-before-you-arrive.html#intake">how to line up a rental before you arrive</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>, the PDF download on the <a href="market-report/">Tri-Cities, BC market report</a>, the message form in the chat widget, the email sign-up on <a href="true-cost-of-owning-a-home-bc.html#signup">the true cost of owning a home in BC</a>, and the lender-introduction form on the <a href="mortgage-rates.html#intro">mortgage rates</a> page. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+      <p>There are twelve forms on this site: the qualifying form on the <a href="index.html#qualify">home page</a> and the <a href="contact.html#qualify">contact page</a> (the same questions on both), the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a> and on <a href="rental-before-you-arrive.html#intake">how to line up a rental before you arrive</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="home-value-tri-cities.html">home value and nearby sales</a> page for the Tri-Cities, BC, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>, the PDF download on the <a href="market-report/">Tri-Cities, BC market report</a>, the message form in the chat widget, the email sign-up on <a href="true-cost-of-owning-a-home-bc.html#signup">the true cost of owning a home in BC</a>, and the lender-introduction form on the <a href="mortgage-rates.html#intro">mortgage rates</a> page. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
       <p>The forms ask for:</p>
       <ul>
         <li>your name and email, and your phone number if you add it;</li>
         <li>on the qualifying form: whether you are buying, selling, or renting; the area; your timeline; your budget, monthly rent budget, or approximate home value; where you are moving from; and a message if you add one;</li>
         <li>on the home evaluation and the expert opinion forms: your email, the property address, and your name if you add it;</li>
+        <li>on the home value page for the Tri-Cities, BC: the property address, the property type, your timeline, your name, your email, your phone, and whether you also want recent sales on your street or in your complex;</li>
         <li>on the listings form: the areas you're interested in, property type, price range, bedrooms and bathrooms, your timeline, whether you're pre-approved for a mortgage, and any notes;</li>
         <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, bedrooms, preferred areas, pets, your work or school location, and any notes; the short form on the before-you-arrive page also asks whether you currently live in Greater Vancouver and whether you would like professional help managing your rental search;</li>
         <li>on a listing or rental inquiry: the listing id, MLS® number, address and REALTOR.ca link for the home you opened, and your message;</li>
@@ -1015,7 +1021,7 @@ contact += f'''
   <div class="container contact-lead">
     <div class="contact-form-col">
       {lead_form("contact", "h2")}
-      <p class="lead-also">For a specific request: <a href="buyers.html#listings">send me listings</a>, <a href="home-evaluation.html">a free home evaluation</a>, <a href="buyer-opinion.html">an expert opinion on a property</a>, or <a href="tenants.html#intake">a rental search</a>.</p>
+      <p class="lead-also">For a specific request: <a href="buyers.html#listings">send me listings</a>, <a href="home-evaluation.html">a free home evaluation</a>, <a href="home-value-tri-cities.html">what sold near you in the Tri-Cities, BC</a>, <a href="buyer-opinion.html">an expert opinion on a property</a>, or <a href="tenants.html#intake">a rental search</a>.</p>
     </div>
     <div class="contact-aside">
       <h2>Call, text, or email</h2>
@@ -1153,6 +1159,8 @@ redirect = f"""<!doctype html>
 
 for fn, html in [("index.html",home),("contact.html",contact),("buyers.html",buyers),("tenants.html",tenants),(GV_URL,gv),("relocating-to-coquitlam.html",redirect),("home-evaluation.html",home_evaluation),("buyer-opinion.html",buyer_opinion)]:
     open(os.path.join(OUT,fn),"w").write(html)
+import home_value_page
+open(os.path.join(OUT, home_value_page.PAGE), "w").write(home_value_page.render())
 open(os.path.join(OUT, VIDEOS_URL), "w").write(videos)
 open(os.path.join(OUT, PRIVACY_URL), "w").write(privacy)
 import terms_page
@@ -1188,7 +1196,7 @@ import true_cost_page
 open(os.path.join(OUT, true_cost_page.PAGE), "w").write(true_cost_page.render())
 import mortgage_rates_page
 open(os.path.join(OUT, mortgage_rates_page.PAGE), "w").write(mortgage_rates_page.render())
-STATIC_PAGES = ["", "contact.html", "tenants.html", "buyers.html", "home-evaluation.html", "buyer-opinion.html", GV_URL, "videos.html", PRIVACY_URL, terms_page.PAGE]
+STATIC_PAGES = ["", "contact.html", "tenants.html", "buyers.html", "home-evaluation.html", home_value_page.PAGE, "buyer-opinion.html", GV_URL, "videos.html", PRIVACY_URL, terms_page.PAGE]
 if LISTINGS_LIVE:
     STATIC_PAGES[1:1] = ["listings.html", "rentals.html", "rent-report.html"]
 guide_at = STATIC_PAGES.index(GV_URL) + 1

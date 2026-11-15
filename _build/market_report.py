@@ -408,7 +408,7 @@ def fit_and_faq(data, areas):
 <p>Detached sales against {year}: {'; '.join(detached_bits)}.</p>
 {small_para}
 <p>Apartment sales against {year}: {'; '.join(apartment_bits)}.</p>
-<p>I would price from recent sales near the property, not from the city benchmark. When several similar homes are listed, the one that sits above those sales is the one buyers can skip. Axford Real Estate is the brokerage. If you want that read on a specific address, use the form on the <a href="__ROOT__contact.html#qualify">contact page</a>.</p>
+<p>I would price from recent sales near the property, not from the city benchmark. When several similar homes are listed, the one that sits above those sales is the one buyers can skip. Axford Real Estate is the brokerage. If you want that read on a specific address, use the form on the <a href="__ROOT__home-value-tri-cities.html">home value page</a> or the <a href="__ROOT__contact.html#qualify">contact page</a>.</p>
 """.strip()
     faqs = [
         (

@@ -484,6 +484,7 @@ def _port_moody():
       <li><strong>Renting first?</strong> If you're relocating and want a rental lined up before you arrive, I also offer a tenant-side relocation rental service ($1,500 + GST, paid by the tenant in two parts). Details are on the <a href="tenants.html">tenants page</a>.</li>
     </ul>
     <p>Buying your first home in the Tri-Cities, BC? Start with <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>, then the <a href="buyers.html">buyers page</a>.</p>
+    <p>Selling in Port Moody? I can walk through recent MLS sales for your street or complex on a free 15-minute call. Start on the <a href="home-value-tri-cities.html">home value page</a>.</p>
     ''', paper=True)
     body += _section("relocating", "Moving here", "Relocating to Port Moody from another province or country", f'''
     <p>Typical sequence I walk clients through:</p>
@@ -574,7 +575,7 @@ def _port_coquitlam():
       <li><strong>Secondary suites.</strong> Many detached homes in the Tri-Cities, BC have suites. Confirm with the City whether a suite is permitted and registered before you count on rental income.</li>
       <li><strong>Renting first?</strong> If you're relocating and want a rental lined up before you arrive, I also offer a tenant-side relocation rental service ($1,500 + GST, paid by the tenant in two parts: $750 at the start, non-refundable, and $750 once a rental is secured). Reach out 4–6 weeks before your move. Details are on the <a href="tenants.html">tenants page</a>.</li>
     </ul>
-    <p class="form-note">Recent Greater Vancouver REALTORS® benchmark prices for Port Coquitlam are not on this page. Ask me for comparable sales on the street or building you're considering.</p>
+    <p class="form-note">Recent Greater Vancouver REALTORS® benchmark prices for Port Coquitlam are not on this page. Ask me for comparable sales on the street or building you're considering, or start on the <a href="home-value-tri-cities.html">home value page</a>.</p>
     ''', paper=True)
     body += _section("relocating", "Moving here", "Relocating to Port Coquitlam from another province or country", f'''
     <ol class="mini-steps guide-steps">
@@ -906,7 +907,7 @@ def _coquitlam():
     ''')
     helps = [
         ("home", "Buying", 'Condo strata reviews, townhouse and detached searches, first-time buyer programs.', f'<a class="card-link" href="coquitlam-condo-buyer.html">Coquitlam condo buyers {I["arrow"]}</a><a class="card-link" href="first-time-buyers-tri-cities-bc.html">First-time buyers {I["arrow"]}</a><a class="card-link" href="bc-property-transfer-tax.html">Property transfer tax {I["arrow"]}</a>'),
-        ("handshake", "Selling", "Pricing from recent comparable sales, prep and marketing.", f'<a class="card-link" href="home-evaluation.html">Home evaluation {I["arrow"]}</a>'),
+        ("handshake", "Selling", "Pricing from recent comparable sales, prep and marketing.", f'<a class="card-link" href="home-evaluation.html">Home evaluation {I["arrow"]}</a><a class="card-link" href="home-value-tri-cities.html">What sold near you {I["arrow"]}</a>'),
         ("key", "Relocating or renting first", "I help people moving to Coquitlam find a rental on the tenant side before they arrive.", f'<a class="card-link" href="tenants.html">Relocation rentals {I["arrow"]}</a><a class="card-link" href="newcomer-rental-faqs.html">Newcomer rental FAQs {I["arrow"]}</a><a class="card-link" href="newcomer-buyers.html">Newcomer buyers {I["arrow"]}</a>'),
     ]
     hcards = "".join(f'<div class="card"><div class="icon">{I[ic]}</div><h3>{t}</h3><p>{d}</p><div class="card-links">{l}</div></div>' for ic, t, d, l in helps)

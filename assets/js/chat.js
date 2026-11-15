@@ -112,6 +112,10 @@
           links: [{ href: "home-evaluation.html", label: "Free home evaluation" }]
         },
         {
+          text: "In the Tri-Cities, BC, you can also ask what sold on your street or in your complex. That page has no automated price. Devin walks through the recent MLS sales on a free 15-minute call.",
+          links: [{ href: "home-value-tri-cities.html", label: "What sold near you" }]
+        },
+        {
           text: "The evaluation is his opinion from recent sales. It is not an appraisal, and it is not a promise of a sale price.",
           links: []
         }
