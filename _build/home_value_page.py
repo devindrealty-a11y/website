@@ -121,7 +121,7 @@ def render():
         for label in timelines
     )
     cities = [
-        ("hv-city--coq", "coquitlam.html", _COQ, "Coquitlam", "Detached streets, townhouses and condo complexes.", "Coquitlam guide"),
+        ("hv-city--coq", "coquitlam.html", _COQ, "Coquitlam", "Detached homes, townhouses and condo complexes.", "Coquitlam guide"),
         ("hv-city--poco", "port-coquitlam.html", _POCO, "Port Coquitlam", "North side, south side and downtown PoCo.", "Port Coquitlam guide"),
         ("hv-city--pomo", "port-moody.html", _POMO, "Port Moody", "Moody Centre, Inlet Centre and the hillside.", "Port Moody guide"),
     ]
@@ -140,8 +140,8 @@ def render():
   <div class="container lp-hero-inner hv-hero-inner">
     <div class="hv-hero-copy">
       <span class="eyebrow">Past clients and sellers · Tri-Cities, BC</span>
-      <h1>What is your home worth, and <em>what sold near you?</em></h1>
-      <p class="lead">Send the address. I look up recent MLS sales for your home in Coquitlam, Port Coquitlam or Port Moody, then walk you through them.</p>
+      <h1>What's your home worth, and <em>what sold near you?</em></h1>
+      <p class="lead">Send me your address. I'll look up recent MLS sales near your home in Coquitlam, Port Coquitlam or Port Moody, then walk you through them.</p>
       <div class="btn-row">
         <a class="btn btn-light" href="{TEL}">{I["phone"]} Book a free 15-minute call</a>
         <a class="btn btn-ghost-light" href="#request">Start with your address {I["arrow"]}</a>
@@ -151,11 +151,10 @@ def render():
     <aside class="hv-panel" aria-label="What you get">
       <h2>What you get</h2>
       <ol class="hv-gets">
-        <li><span class="icon">{I["pin"]}</span><span>Your address</span></li>
         <li><span class="icon">{I["doc"]}</span><span>Recent sales on your street or in your complex</span></li>
         <li><span class="icon">{I["phone"]}</span><span>A personal walk-through on a 15-minute call</span></li>
+        <li><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg></span><span>I don't calculate a price on this page.</span></li>
       </ol>
-      <p class="hv-plain">I do not calculate a price on this page.</p>
     </aside>
   </div>
 </section>
@@ -172,20 +171,20 @@ def render():
       <li>
         <span class="icon">{I["home"]}</span>
         <span class="hv-n" aria-hidden="true">01</span>
-        <h3>You request</h3>
-        <p>Send the address, the property type, and your timeline.</p>
+        <h3>You ask</h3>
+        <p>Send your address, property type and timeline.</p>
       </li>
       <li>
         <span class="icon">{I["doc"]}</span>
         <span class="hv-n" aria-hidden="true">02</span>
         <h3>Recent MLS sales</h3>
-        <p>I pull actual recent sales for that street or complex.</p>
+        <p>I pull real recent sales for your street or complex.</p>
       </li>
       <li>
         <span class="icon">{I["phone"]}</span>
         <span class="hv-n" aria-hidden="true">03</span>
         <h3>A 15-minute call</h3>
-        <p>You get a personal walk-through. Asking does not mean you have to list.</p>
+        <p>I walk you through them. Asking doesn't mean you have to list.</p>
       </li>
     </ol>
   </div>
@@ -196,7 +195,7 @@ def render():
     <div class="hv-request-copy">
       <span class="eyebrow">Your home</span>
       <h2>Request a walk-through</h2>
-      <p class="lead">Address, property type, and when you might sell. I email you back to set the call.</p>
+      <p class="lead">Tell me the address, property type and when you might sell. I'll email you back to set up the call.</p>
     </div>
     <form class="offer-form hv-form" id="hv-form" data-form-key="homeValue" data-goat-event="form-home-value" action="#" method="POST">
       <input type="hidden" name="_subject" value="New home value request: Tri-Cities, BC">
@@ -232,10 +231,10 @@ def render():
           </div>
           <div class="field full">
             <label class="hv-option">
-              <input type="checkbox" name="Recent sales nearby" value="Yes — street or complex">
+              <input type="checkbox" name="Wider neighbourhood sales" value="Yes">
               <span>
-                <strong>Also send recent sales on my street or in my complex</strong>
-                <span class="hint">Same request. I include those MLS sales in the walk-through.</span>
+                <strong>Also send recent sales across my wider neighbourhood</strong>
+                <span class="hint">Same request. I'll add nearby sales beyond your street or complex.</span>
               </span>
             </label>
           </div>
@@ -248,8 +247,8 @@ def render():
       </div>
       <div class="offer-thanks" data-offer-thanks hidden role="status" tabindex="-1">
         <span class="offer-thanks-mark">{_CHECK}</span>
-        <h2>Thanks — I'll take a look.</h2>
-        <p>Your request is in. I'll look up recent sales for that address and follow up to set the 15-minute call. If you'd rather talk now, call or text me.</p>
+        <h2>Thanks, I'll take a look.</h2>
+        <p>Your request is in. I'll look up recent sales for that address and get back to you to set up the 15-minute call. Want to talk sooner? Call or text me.</p>
         <a class="btn btn-outline" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>
       </div>
       <p class="offer-note">This form is emailed to {EMAIL}. It is a walk-through of recent MLS sales. It is not an appraisal, and it is not a promise of a sale price. Devin Desaulniers, Real Estate Associate, Axford Real Estate.</p>
@@ -265,7 +264,7 @@ def render():
         <h2>Recent sales in the Tri-Cities, BC</h2>
       </div>
       <div class="sec-head-aside">
-        <p class="lead">Ask for recent sales on your street or in your complex. These are the three cities I work in.</p>
+        <p class="lead">Ask for recent sales on your street or in your complex, in any of these three cities.</p>
       </div>
     </div>
     <div class="hv-cities">{city_cards}</div>
@@ -277,7 +276,7 @@ def render():
   <div class="container center">
     <span class="eyebrow">Axford Real Estate</span>
     <h2>Ready for a 15-minute call?</h2>
-    <p class="lead">I pull the recent MLS sales. You hear what they mean for your home.</p>
+    <p class="lead">I pull the recent MLS sales. Then I explain what they mean for your home.</p>
     <div class="btn-row">
       <a class="btn btn-light" href="{TEL}">{I["phone"]} Book a free 15-minute call</a>
       <a class="btn btn-ghost-light" href="#request">Start with your address {I["arrow"]}</a>
