@@ -935,7 +935,8 @@ body.is-lightbox{overflow:hidden}
 .offer-link-k{font-family:var(--font-head);font-weight:600;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-dark)}
 .offer-link-t{font-family:var(--font-display);font-weight:500;font-size:1.35rem;line-height:1.2;color:var(--ink)}
 .offer-link-d{font-size:.92rem;line-height:1.45;color:var(--muted)}
-@media (min-width:820px){.offer-links{grid-template-columns:1fr 1fr;gap:24px}}
+@media (min-width:760px){.offer-links{grid-template-columns:1fr 1fr;gap:16px}}
+@media (min-width:1100px){.offer-links{grid-template-columns:1fr 1fr 1fr;gap:20px}}
 
 /* ===== Tenant relocation bar (every page) ===== */
 .tenant-cta-bar{background:var(--blue-darker);color:#fff}
@@ -1318,3 +1319,46 @@ html.dd-chat-open{overflow:hidden}
 }
 
 .compare-cta-row{margin-top:1.5rem}
+
+/* ===== Home value, Tri-Cities, BC ===== */
+.hv-page{--axford-red:#ed2225}
+.hv-hero h1{max-width:16ch}
+.hv-hero h1 em{font-style:italic;font-weight:400;color:var(--sky)}
+.hv-panel{padding:22px 22px 18px;background:#fff;color:var(--text);border-radius:var(--radius);border-top:4px solid var(--axford-red);box-shadow:var(--shadow-lg)}
+.hv-panel h2{margin:0 0 14px;font-size:1.55rem;color:var(--ink)}
+.hv-gets{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.hv-gets li{display:grid;grid-template-columns:42px minmax(0,1fr);gap:12px;align-items:center;color:var(--ink);font-weight:600;line-height:1.35}
+.hv-gets .icon,.hv-steps .icon{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:var(--blue-light);color:var(--blue-dark)}
+.hv-gets .icon svg,.hv-steps .icon svg{width:20px;height:20px}
+.hv-plain{margin:16px 0 0;padding-top:14px;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.hv-steps{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.hv-steps li{display:flex;flex-direction:column;align-items:flex-start;padding:clamp(22px,3vw,32px);background:#fff;border:1px solid var(--line);border-radius:var(--radius)}
+.hv-steps .hv-n{margin-top:16px;font-family:var(--font-display);font-size:2rem;line-height:1;color:var(--blue)}
+.hv-steps h3{margin:.35em 0 .3em}
+.hv-steps p{margin:0;color:var(--muted)}
+.hv-request{display:grid;gap:28px;align-items:start}
+.hv-form{border-top-color:var(--axford-red)}
+.hv-option{display:flex;align-items:flex-start;gap:12px;margin:0;padding:14px 16px;background:var(--blue-50);border:1px solid var(--line-strong);border-radius:var(--radius);cursor:pointer}
+.hv-option:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:3px}
+.hv-option:has(input:checked){border-color:var(--blue-dark);box-shadow:inset 3px 0 0 var(--axford-red)}
+.hv-option input{flex-shrink:0;width:20px;height:20px;margin:3px 0 0;accent-color:var(--blue-dark)}
+.hv-option strong{display:block;color:var(--ink);font-weight:600}
+.hv-option .hint{display:block;margin-top:2px;font-weight:400}
+.hv-cities{display:grid;gap:16px}
+.hv-city{display:flex;flex-direction:column;align-items:flex-start;min-height:100%;padding:22px 22px 20px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);color:inherit;text-decoration:none;box-shadow:inset 0 4px 0 var(--blue)}
+.hv-city:hover{border-color:var(--blue-dark);color:inherit}
+.hv-city--poco{box-shadow:inset 0 4px 0 var(--ink)}
+.hv-city--pomo{box-shadow:inset 0 4px 0 var(--axford-red)}
+.hv-sky{width:100%;height:48px;margin-bottom:14px;color:var(--blue-dark)}
+.hv-city--poco .hv-sky{color:var(--ink)}
+.hv-city--pomo .hv-sky{color:var(--axford-red)}
+.hv-city-k{font-family:var(--font-head);font-weight:600;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-dark)}
+.hv-city h3{margin:8px 0 6px;font-size:clamp(1.6rem,1.3rem + .8vw,2rem)}
+.hv-city p{margin:0 0 18px;color:var(--muted)}
+.hv-city .card-link{margin-top:auto;color:var(--blue-dark)}
+.hv-city-note{margin:22px 0 0}
+.hv-broker{margin:28px auto 0;max-width:28rem;color:var(--on-night)}
+@media (min-width:800px){
+  .hv-steps,.hv-cities{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+  .hv-request{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:start}
+}

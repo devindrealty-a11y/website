@@ -7,6 +7,7 @@ Pages:
 - `contact.html` — the same qualifying form, plus phone, email, and brokerage details
 - `buyers.html` — buyer info, neighbourhood guides, "Send me listings" form
 - `home-evaluation.html` — free market evaluation: email and property address
+- `home-value-tri-cities.html` — visual home-value and nearby-sales request for past clients and Tri-Cities, BC sellers (Coquitlam, Port Coquitlam, Port Moody). No automated price. Form key `homeValue`, subject `New home value request: Tri-Cities, BC`, GoatCounter event `form-home-value` after FormSubmit accepts it. Not test-submitted.
 - `buyer-opinion.html` — his take on a property you're considering
 - `tenants.html` — standalone landing page for the $1,500 tenant-paid relocation rental service (link this from ads/social)
 - `listings.html` — active residential homes for sale in Greater Vancouver and the Fraser Valley (REALTOR.ca DDF®)
@@ -28,9 +29,9 @@ cd _build && python3 build.py
 No placeholders remain: the footer disclaimer, the privacy page (`privacy.html`, built from `PRIVACY_URL` / `privacy` in `_build/build.py`), the Axford disclosure in the tenant FAQ, the buyer services list and the neighbourhood notes are all written. If you add or change a form, the chat widget or another third-party service, update `privacy.html` to match.
 
 ## Forms (FormSubmit)
-The forms (the qualifying form on `index.html#qualify` and `contact.html`, buyers.html "Send me listings", tenants.html relocation intake, home-evaluation.html, buyer-opinion.html, the listing and rental inquiries, the mortgage-rates intro, and the chat widget message) post via AJAX to
+The forms (the qualifying form on `index.html#qualify` and `contact.html`, buyers.html "Send me listings", tenants.html relocation intake, home-evaluation.html, home-value-tri-cities.html, buyer-opinion.html, the listing and rental inquiries, the mortgage-rates intro, and the chat widget message) post via AJAX to
 `https://formsubmit.co/ajax/devin@axfordrealestate.ca` — configured in one spot: `assets/js/config.js`.
-- Email subjects include "New qualified lead: Buying, Coquitlam, 0-3 months", "New buyer listings request", "New relocation rental intake", "New free home evaluation", "New expert opinion request", "Mortgage intro request", and "New chat widget message" (table template, Reply-To = visitor's email).
+- Email subjects include "New qualified lead: Buying, Coquitlam, 0-3 months", "New buyer listings request", "New relocation rental intake", "New free home evaluation", "New home value request: Tri-Cities, BC", "New expert opinion request", "Mortgage intro request", and "New chat widget message" (table template, Reply-To = visitor's email).
 - The qualifying form (`qualifiedLead`) asks buying / selling / renting, area, timeline, budget or home value or monthly rent, where they're moving from, then name, email, optional phone, optional message, and the same contact-consent checkbox as the other forms. GoatCounter events, sent with `window.goatcounter.count` and `event: true`, are `lead-form-start`, `lead-form-step-1` through `lead-form-step-6` when that step is first shown, and `lead-form-sent` only after FormSubmit accepts the message. Those names do not include the visitor's answers, name, email, phone, or message.
 - `qualifiedLead`, `homeEvaluation`, `buyerOpinion`, `chatLead`, and `marketReport` were not test-submitted. The market-report form asks for a name, an email, and consent, then reveals that month's PDF. Its subject is `Market report download: <name>`. GoatCounter event `report-download` fires only after FormSubmit accepts it, and does not include the name or email.
 - Spam: hidden honeypot field `_honey`. reCAPTCHA is not used by FormSubmit's AJAX flow, so nothing was disabled.
@@ -90,7 +91,7 @@ domain earns no search value of its own.
   Axford is listed as `parentOrganization` because schema.org only allows `worksFor` on `Person`.
 - `tenants.html` also carries `FAQPage` JSON-LD. It is generated from the same `FAQ_ITEMS` strings as the
   visible FAQ, so edit the FAQ in `build.py` only and the schema stays identical to the page text.
-- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, listings, rentals, rent-report, the Tri-Cities, BC market report index and each edition, tenants, buyers, mortgage-rates, home-evaluation, buyer-opinion, relocating-to-greater-vancouver, videos, privacy, terms, and the blog). The Coquitlam redirect is omitted. The rent report URL gets a `lastmod` from the latest Monday snapshot. Each market-report URL gets a `lastmod` from the edition's published date.
+- `sitemap.xml` lists the live pages under https://devindesaulniers.ca/ (home, listings, rentals, rent-report, the Tri-Cities, BC market report index and each edition, tenants, buyers, mortgage-rates, home-evaluation, home-value-tri-cities, buyer-opinion, relocating-to-greater-vancouver, videos, privacy, terms, and the blog). The Coquitlam redirect is omitted. The rent report URL gets a `lastmod` from the latest Monday snapshot. Each market-report URL gets a `lastmod` from the edition's published date.
 - `robots.txt` allows crawl and lists the Sitemap at https://devindesaulniers.ca/sitemap.xml (served at the domain root).
 - `SITE` in `_build/partials.py` is `https://devindesaulniers.ca/`. Rebuild after changing it.
 - Submit `sitemap.xml` in Google Search Console when ready.
