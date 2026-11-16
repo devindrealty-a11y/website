@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Sun, 15 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Mon, 16 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>Selling a townhouse in Coquitlam: what should you know?</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-16-selling-a-townhouse-in-coquitlam.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-16-selling-a-townhouse-in-coquitlam.html</guid>
+    <pubDate>Mon, 16 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Selling</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>Selling a townhouse in Coquitlam right now means pricing against a benchmark of $962,600, down 6.6% from a year ago, and having your strata paperwork ready before buyers ask. Here's what the latest numbers show and how I'd prepare.</description>
+  </item>
   <item>
     <title>Port Moody eases 2027 energy rules for 2,474 homes in the pipeline</title>
     <link>https://devindesaulniers.ca/blog/2026-11-15-port-moody-eases-step-code-for-projects-in-pipeline.html</link>
@@ -267,15 +276,6 @@
     <category>FAQ</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>Thinking about relocating to Port Moody, BC? Here's my newcomer's guide to getting around, the waterfront, and how to plan a rental search in the Tri-Cities, BC.</description>
-  </item>
-  <item>
-    <title>Canada's snowiest cities. Vancouver? Just 38 cm a year</title>
-    <link>https://devindesaulniers.ca/blog/2026-11-02-canadas-snowiest-cities-vancouver-38-cm.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-02-canadas-snowiest-cities-vancouver-38-cm.html</guid>
-    <pubDate>Mon, 02 Nov 2026 08:00:00 -0700</pubDate>
-    <category>Market news</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>St. John's gets about 335 cm of snow in an average year. Vancouver gets just 38 cm, the lowest of 15 Canadian cities. Here's what that means if you're relocating, and why the hillsides are a different story.</description>
   </item>
 </channel>
 </rss>
