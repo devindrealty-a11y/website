@@ -110,12 +110,20 @@
   }
   window.ddCountGoat = countGoat;
 
-  // Google Ads conversion hook. Paste the Conversion ID and label from
-  // Google Ads (Goals > Conversions), for example 'AW-1234567890/AbCdEfGhIjK'.
-  // Leave this empty to keep the hook inert: no gtag script is loaded and
-  // visitor pages stay unchanged.
-  var GOOGLE_ADS_CONVERSION_ID = '';
-  var gtagRequested = false;
+  // Google Ads conversion. The site-wide tag in each page <head> loads gtag.js.
+  // Paste the Conversion ID and label from Google Ads (Goals > Conversions),
+  // for example 'AW-1234567890/AbCdEfGhIjK'. Leave this empty to skip the event.
+  var GOOGLE_ADS_CONVERSION_ID = 'AW-18574169872/2psoCPiSjLgdEJCu7ZhF';
+  // Lead forms that should record a conversion after FormSubmit accepts them.
+  // tenantIntake: tenants.html and rental-before-you-arrive.html.
+  // buyerListings: buyers.html. homeEvaluation: home-evaluation.html.
+  // qualifiedLead: contact.html and the same form on the home page.
+  var LEAD_CONVERSION_FORMS = {
+    tenantIntake: true,
+    buyerListings: true,
+    homeEvaluation: true,
+    qualifiedLead: true
+  };
   function adsConversionId() {
     return (GOOGLE_ADS_CONVERSION_ID || '').trim();
   }
@@ -126,20 +134,18 @@
   function fireGoogleAdsConversion() {
     var sendTo = adsConversionId();
     if (!sendTo) return;
-    var account = adsAccountId(sendTo);
-    if (!account) return;
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
-    if (!gtagRequested) {
-      gtagRequested = true;
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(account);
-      document.head.appendChild(s);
-      window.gtag('js', new Date());
-      window.gtag('config', account);
-    }
-    window.gtag('event', 'conversion', { send_to: sendTo });
+    if (!adsAccountId(sendTo)) return;
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'conversion', {
+      send_to: sendTo,
+      value: 1.0,
+      currency: 'CAD'
+    });
+  }
+  window.ddFireGoogleAdsConversion = fireGoogleAdsConversion;
+  function fireLeadConversion(formKey) {
+    if (!LEAD_CONVERSION_FORMS[formKey]) return;
+    fireGoogleAdsConversion();
   }
   function formGoatEvent(form) {
     var eventName = (form.getAttribute('data-goat-event') || '').trim();
@@ -217,7 +223,7 @@
           var ok = res.ok && String(res.j.success) !== 'false';
           if (ok) {
             countGoat(eventName);
-            if (formKey === 'tenantIntake') fireGoogleAdsConversion();
+            fireLeadConversion(formKey);
             form.reset();
             if (!revealThanks()) show('success', '<strong>Thanks — your request has been sent!</strong> Devin will be in touch soon. If it\'s urgent, call <a href="tel:+16048091032">604-809-1032</a>.');
           } else {
@@ -503,6 +509,7 @@
           var ok = res.ok && String(res.j.success) !== 'false';
           if (ok) {
             track('lead-form-sent');
+            fireLeadConversion(form.getAttribute('data-form-key') || '');
             showThanks();
           } else {
             sending = false;
