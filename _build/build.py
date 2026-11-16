@@ -953,6 +953,7 @@ privacy += f"""
     <div class="post-body">
       <p>This site is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate, {BROKERAGE_ADDR}. The sections below explain, in plain language, where the information you send me goes.</p>
       <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form. The qualifying form sends <span class="nw">lead-form-start</span> when you begin it, <span class="nw">lead-form-step-1</span> through <span class="nw">lead-form-step-6</span> when you reach that step, and <span class="nw">lead-form-sent</span> only after the message is accepted. Those names are the step only. They do not include your name, email, phone, message, or the answers you choose. The market-report download sends <span class="nw">report-download</span> only after the request is accepted. That name does not include your name or email. The true-cost guide sign-up sends <span class="nw">true-cost-signup</span> only after the signup is accepted. That name does not include your name or email. The mortgage intro form sends <span class="nw">form-mortgage-intro</span> only after the request is accepted. That name does not include your name, email, phone, message, or the rate you were looking at. The chat widget sends the events named in the chat section below. Those events do not include what you type into a form.</p>
+      <p>This site uses Google Ads conversion tracking (cookies) to measure ad results.</p>
 
       <h2 id="forms">Contact forms</h2>
       <p>There are eleven forms on this site: the qualifying form on the <a href="index.html#qualify">home page</a> and the <a href="contact.html#qualify">contact page</a> (the same questions on both), the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a> and on <a href="rental-before-you-arrive.html#intake">how to line up a rental before you arrive</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>, the PDF download on the <a href="market-report/">Tri-Cities, BC market report</a>, the message form in the chat widget, the email sign-up on <a href="true-cost-of-owning-a-home-bc.html#signup">the true cost of owning a home in BC</a>, and the lender-introduction form on the <a href="mortgage-rates.html#intro">mortgage rates</a> page. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
@@ -1142,6 +1143,7 @@ redirect = f"""<!doctype html>
 <meta name="robots" content="noindex, nofollow"><!-- redirect page: keep noindex so the old URL stays out of search -->
 <link rel="canonical" href="{NEW_ABS}">
 <meta http-equiv="refresh" content="0; url={GV_URL}">
+{GTAG}
 {GOATCOUNTER}
 <script>location.replace("{GV_URL}" + location.hash);</script>
 </head>
@@ -1176,6 +1178,7 @@ open(os.path.join(OUT, COMPARE_OLD), "w").write(f"""<!doctype html>
 <meta name="robots" content="noindex">
 <link rel="canonical" href="{SITE}{COMPARE_NEW}">
 <meta http-equiv="refresh" content="0; url={COMPARE_NEW}">
+{GTAG}
 {GOATCOUNTER}
 <script>location.replace("{COMPARE_NEW}" + location.hash);</script>
 </head>

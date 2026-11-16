@@ -542,6 +542,9 @@
         var ok = res.ok && String(res.j.success) !== "false";
         if (ok) {
           countEvent("chat-message-sent");
+          // Chat posts through its own FormSubmit handler, not site.js.
+          // Record the same lead conversion once FormSubmit accepts the message.
+          if (typeof window.ddFireGoogleAdsConversion === "function") window.ddFireGoogleAdsConversion();
           showThanks();
         } else showStatus(status, "error", "Sorry, something went wrong and your message may not have been sent. " + fallback);
       })
