@@ -54,6 +54,11 @@ card_chart:                                # optional simple bar chart, 2-5 bars
     value: 4.2
     display: "+4.2%"
 # image_alt: "..."                         # optional override; otherwise alt text is built from title, number, chart and source
+# featured image background (required for posts about a specific place — see step 1b):
+# card_photo: assets/img/blog/photos/moody-centre-station.jpg
+# card_photo_position: center 35%          # optional CSS background-position; use to keep the landmark in frame
+# card_photo_credit: "Name / Wikimedia Commons (CC BY 4.0)"
+# card_photo_credit_url: https://commons.wikimedia.org/wiki/File:Example.jpg
 # optional:
 # image: assets/img/some-site-asset.jpg   (custom image instead of the generated one; must exist in the repo; image_alt then required)
 # cta: buying | selling | renting | general   (default comes from the category)
@@ -91,18 +96,78 @@ so don't repeat them in the body.
 
 `_build/make_image.py` renders a branded 1200x630 graphic (brand blue #3474b6 / grey #808082, category tag, post title,
 the `card_stat` + label or `card_takeaway`, optional bar chart from `card_chart`, "Source: <publisher>, <date>" from the
-first source, and "devindesaulniers.ca · Axford Real Estate" footer) with headless Chrome, and encodes
+first source, and a white footer with Devin's mark, "devindesaulniers.ca · Axford Real Estate") with headless Chrome, and encodes
 `assets/img/blog/<YYYY-MM-DD>-<slug>.jpg` and `.webp` with ffmpeg (each kept under 200 KB).
 It needs `google-chrome` (or `CHROME=/path`) and `ffmpeg`, both on the box.
 
+**Background photo (required for place-specific posts).** If the post is about a specific place — a SkyTrain station,
+a city, a neighbourhood, a park — the featured image must use a real photograph of that place as the background, with a
+dark gradient overlay so the title stays readable, and the existing branded text graphics (category pill, title, stat
+card, footer) laid over top. Example: the Moody Centre Station guide uses a photo of Moody Centre Station; a Coquitlam
+rent post uses a recognisable Coquitlam photo (such as Lafarge Lake / Town Centre). The old plain-blue gradient is only
+the fallback when no photo is given (older posts, or a story with no specific place).
+
+- Set `card_photo` to a file in the repo (keep source photos in `assets/img/blog/photos/`). Optional
+  `card_photo_position` (CSS background-position, e.g. `center 35%`) keeps the landmark in the 1200×630 crop.
+- `card_photo_credit` is drawn as a small line on the graphic. For CC BY / CC BY-SA photos also set
+  `card_photo_credit_url` (the file page or landing page). The post page then shows a visible "Photo: …" credit
+  under the image, linking to that URL. CC0, public-domain and Devin's own photos can omit the on-page line, but
+  still log them (below).
+- Where to get the photo: Wikimedia Commons (CC BY, CC BY-SA, CC0 or public domain), Unsplash, Pexels, or Devin's
+  own photos. Never use photos from news sites, unlicensed stock, or AI-generated images of real people or real places.
+- Log every photo, including samples that are not published yet, in `/workspace/blog-brief/photo-credits.md` (source
+  URL, author, licence, and whether the post has been updated). Do not publish a photo until it is listed there.
 - `build.py` generates the image automatically for any post that doesn't have one yet. Nothing extra to run.
-- Changed the title or card fields after the image exists? Re-render it:
+- Changed the title, card fields or background photo after the image exists? Re-render it:
   `cd _build && python3 make_image.py --force ../_posts/YYYY-MM-DD-slug.md && python3 build.py`
-- Look at the JPG before committing (title fits, numbers correct).
+- To render a preview without touching the live `assets/img/blog/` files:
+  `cd _build && python3 make_image.py --force --bg /path/photo.jpg --photo-credit "Name / source (licence)" --photo-position "center 35%" --out-dir /workspace/blog-brief/photo-samples ../_posts/YYYY-MM-DD-slug.md`
+- Look at the JPG before committing (title fits, numbers correct, the place is recognisable through the overlay).
 - The image is used at the top of the post, as og:image / twitter:image, in the BlogPosting JSON-LD, and as the
   thumbnail on the blog index and the home-page strip. Alt text is generated from the card fields (or `image_alt`).
-- Rules: every number on the image must come from the cited sources. Never use photos from news sites, and no
-  AI-generated images of real people or real places. The generated graphic needs no photo at all.
+- Every number on the image must come from the cited sources.
+
+**If headless Chrome hangs or times out**, use the CDP wrapper instead of calling `google-chrome` directly:
+
+```bash
+CHROME=/tmp/cdp9334/chrome-cdp python3 make_image.py --force ../_posts/YYYY-MM-DD-slug.md
+```
+
+If `/tmp/cdp9334/chrome-cdp` is missing, recreate it:
+
+```bash
+mkdir -p /tmp/cdp9334
+cat > /tmp/cdp9334/chrome-cdp << 'EOF'
+#!/bin/bash
+# Wrapper mimicking `chrome --headless --screenshot=OUT --window-size=W,H URL` via the CDP Chrome on port 9334.
+out=""; w=1200; h=630; url=""
+for a in "$@"; do case "$a" in --screenshot=*) out="${a#--screenshot=}";; --window-size=*) s="${a#--window-size=}"; w="${s%,*}"; h="${s#*,}";; --*) ;; *) url="$a";; esac; done
+if ! curl -s -m 3 localhost:9334/json/version >/dev/null; then
+  nohup google-chrome --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --allow-file-access-from-files --remote-debugging-port=9334 --user-data-dir=/tmp/cdp9334/profile about:blank >/tmp/cdp9334/chrome.log 2>&1 &
+  for i in $(seq 20); do sleep 1; curl -s -m 2 localhost:9334/json/version >/dev/null && break; done
+fi
+exec node /tmp/cdp9334/shot.mjs "$url" "$out" "$w" "$h"
+EOF
+cat > /tmp/cdp9334/shot.mjs << 'EOF'
+const [,, url, out, w, h] = process.argv;
+const fs = await import('node:fs');
+const t = await (await fetch(`http://localhost:9334/json/new?${encodeURIComponent(url)}`, {method:'PUT'})).json();
+const ws = new WebSocket(t.webSocketDebuggerUrl);
+let id = 0; const pend = {};
+const send = (method, params={}) => new Promise(r => { const i=++id; pend[i]=r; ws.send(JSON.stringify({id:i,method,params})); });
+ws.onmessage = e => { const m = JSON.parse(e.data); if (m.id && pend[m.id]) pend[m.id](m.result); };
+await new Promise(r => ws.onopen = r);
+await send('Emulation.setDeviceMetricsOverride', {width:+w, height:+h, deviceScaleFactor:1, mobile:false});
+await send('Page.enable');
+await send('Page.navigate', {url});
+await new Promise(r => setTimeout(r, 3000));
+const res = await send('Page.captureScreenshot', {format:'png', clip:{x:0,y:0,width:+w,height:+h,scale:1}});
+fs.writeFileSync(out, Buffer.from(res.data, 'base64'));
+await fetch(`http://localhost:9334/json/close/${t.id}`);
+ws.close(); process.exit(0);
+EOF
+chmod +x /tmp/cdp9334/chrome-cdp
+```
 
 ## Content checklist (each post)
 - One genuinely current story from a reputable source (published in the last week or so); link it under `sources`.
@@ -113,7 +178,9 @@ It needs `google-chrome` (or `CHROME=/path`) and `ffmpeg`, both on the box.
 - BC advertising rules: no superlatives or misleading claims ("best", "#1", "guaranteed"), no promises about prices or returns.
 - Write "Tri-Cities, BC". Relocation rental service facts if mentioned: $1,500 + GST paid by the tenant, $750 non-refundable at the start, $750 once a rental is secured, reach out 4-6 weeks before the move.
 - Never claim Devin is "the best" or "top". Target searches with wording like "Looking for a realtor in Coquitlam?" instead.
-- Images: the generated branded graphic only (step 1b). No photos from other publications.
+- Images: the generated branded graphic only (step 1b), with a real licensed place photo as the background when the
+  post is about a specific place. No photos from news sites or other publications, no unlicensed stock, and no
+  AI-generated images of real people or real places. Log credits in `/workspace/blog-brief/photo-credits.md`.
 
 ## 2. Build, check, commit, push
 

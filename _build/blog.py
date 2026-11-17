@@ -343,7 +343,16 @@ def post_page(p, newer=None, older=None):
         + (f' <span class="src-meta">· {esc(s["publisher"])}' if s.get("publisher") else ' <span class="src-meta">')
         + (f', {fmt_date(datetime.date.fromisoformat(s["date"]))}' if re.match(r"^\d{4}-\d{2}-\d{2}$", s.get("date", "")) else "")
         + '</span></li>' for s in p["sources"])
-    fig = f'<figure class="post-image">{img_tag(p, root, "", "(max-width: 919px) 92vw, 840px", eager=True)}</figure>'
+    credit = (p.get("meta") or {}).get("card_photo_credit", "")
+    credit_url = (p.get("meta") or {}).get("card_photo_credit_url", "")
+    figcap = ""
+    if credit:
+        if credit_url:
+            figcap = (f'<figcaption>Photo: <a href="{esc(credit_url)}" target="_blank" rel="noopener">'
+                      f'{esc(credit)}</a></figcaption>')
+        else:
+            figcap = f'<figcaption>Photo: {esc(credit)}</figcaption>'
+    fig = f'<figure class="post-image">{img_tag(p, root, "", "(max-width: 919px) 92vw, 840px", eager=True)}{figcap}</figure>'
     nav = ""
     if newer or older:
         nav = '<nav class="post-nav" aria-label="More posts">'

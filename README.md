@@ -154,7 +154,7 @@ domain earns no search value of its own.
 - Pages in `blog/` use `root="../"` in `head()` / `foot()` so shared header/footer links and assets resolve from the subfolder.
 - Styles: "Blog" block at the end of `assets/css/styles.css`.
 - Featured images: `_build/make_image.py` renders a branded 1200x630 JPG + WebP per post into `assets/img/blog/` (headless Chrome + ffmpeg;
-  build.py calls it for posts missing an image). Used on the post, og/twitter image, BlogPosting JSON-LD and card thumbnails.
+  build.py calls it for posts missing an image). Place-specific posts use a real licensed photo of that place as the background, with a dark overlay and the branded text graphics on top; the plain-blue look is only the fallback when no photo is given. Details and photo-credit rules: `_build/BLOG.md`. Used on the post, og/twitter image, BlogPosting JSON-LD and card thumbnails.
 - Each post page ends with a call to action, an author box and the disclaimer. Topic and SEO rules for the daily routine: `/workspace/blog-brief/seo-brief.md`.
 
 ## Listings search (DDF) — for sale and for rent
