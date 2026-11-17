@@ -5,7 +5,11 @@ category: Renting
 summary: "Just arrived in Greater Vancouver or the Tri-Cities, BC? A plain day-by-day first-week checklist: MSP, ICBC, BC Hydro and FortisBC, Canada Post forwarding, a Compass Card, SD43 school registration and a doctor."
 description: "Moving to Greater Vancouver? A first-week checklist for newcomers: enrol in MSP, visit ICBC, open BC Hydro and FortisBC, set up Canada Post mail forwarding, get a Compass Card, register kids with SD43, and find a doctor."
 card_takeaway: "A day-by-day first-week checklist for Greater Vancouver newcomers"
-image_alt: "Branded graphic for the blog post “Moving to Greater Vancouver? Your first-week checklist” (Renting). Takeaway: a day-by-day first-week checklist for Greater Vancouver newcomers. Source: Province of British Columbia."
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “Moving to Greater Vancouver? Your first-week checklist” (Renting). Takeaway: a day-by-day first-week checklist for Greater Vancouver newcomers. Source: Province of British Columbia. Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 cta: renting
 sources:
   - title: "Coverage wait period for the Medical Services Plan (MSP)"

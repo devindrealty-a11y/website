@@ -17,7 +17,11 @@ card_chart:
   - label: "2027F"
     value: 25000
     display: "25,000"
-image_alt: "Branded graphic for the blog post “BCREA forecast: Greater Vancouver sales seen rising 8.7% in 2027” (Market news). Key number: BCREA forecasts Greater Vancouver MLS home sales to rise 8.7% in 2027. Bar chart of Greater Vancouver MLS home sales: 23,702 in 2025, 23,000 forecast for 2026 and 25,000 forecast for 2027. Source: BC Real Estate Association, November 10, 2026."
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “BCREA forecast: Greater Vancouver sales seen rising 8.7% in 2027” (Market news). Key number: BCREA forecasts Greater Vancouver MLS home sales to rise 8.7% in 2027. Bar chart of Greater Vancouver MLS home sales: 23,702 in 2025, 23,000 forecast for 2026 and 25,000 forecast for 2027. Source: BC Real Estate Association, November 10, 2026. Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "BCREA 2026 Fourth Quarter Housing Forecast: Housing Activity Expected to Rise in 2027 Amidst Persistent Economic Challenges"
     publisher: BC Real Estate Association

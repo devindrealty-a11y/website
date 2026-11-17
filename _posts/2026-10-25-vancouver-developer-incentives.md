@@ -17,6 +17,11 @@ card_chart:
   - label: Credit
     value: 25000
     display: "$25,000"
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “Developers are sweetening new-home deals. Read the fine print.” (Buying). Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "In a softer market, Vancouver developers sweeten their deals"
     publisher: The Globe and Mail

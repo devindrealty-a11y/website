@@ -17,6 +17,11 @@ card_chart:
   - label: Volume
     value: -11
     display: "−11%"
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “B.C. September home sales fell 8.9% from last year” (Market news). Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "Most Markets Remain Balanced Amidst Mounting Headwinds"
     publisher: B.C. Real Estate Association

@@ -14,6 +14,11 @@ card_chart:
   - label: After
     value: 2.5
     display: "2.5%"
+card_photo: assets/img/blog/photos/bank-of-canada-ottawa.jpg
+card_photo_position: "center 40%"
+card_photo_credit: "Wladyslaw / Wikimedia Commons (CC BY-SA 3.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:Ottawa_-_ON_-_Bank_of_Canada.jpg
+image_alt: "Branded graphic over a photograph of the Bank of Canada building in Ottawa for the blog post “The Bank of Canada raised its rate to 2.5%. What now?” (Market news). Background photo: Wladyslaw / Wikimedia Commons (CC BY-SA 3.0)."
 sources:
   - title: "Interest Rate Announcement and Monetary Policy Report, October 28, 2026"
     publisher: Bank of Canada

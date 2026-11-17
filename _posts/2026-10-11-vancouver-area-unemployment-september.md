@@ -17,6 +17,11 @@ card_chart:
   - label: Sep 2026
     value: 7.1
     display: "7.1%"
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “Vancouver-area unemployment rose to 7.1% in September” (Market news). Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "Labour force characteristics by Montréal, Toronto and Vancouver census metropolitan areas, monthly, seasonally adjusted"
     publisher: Statistics Canada

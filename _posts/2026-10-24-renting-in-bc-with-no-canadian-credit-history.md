@@ -6,7 +6,11 @@ cta: renting
 summary: "Yes. In BC a landlord can screen you on ID, past-landlord references and proof of income, and the privacy commissioner says a credit check belongs near the end of the selection. Here is how a newcomer can build a strong rental application without Canadian credit."
 description: "A plain-language FAQ for newcomers renting in BC with no Canadian credit history: what landlords can ask for under BC privacy rules, why your SIN is usually optional, and how to build a strong application in Greater Vancouver."
 card_takeaway: "No Canadian credit yet? Lead with ID, references and proof of income"
-image_alt: "Branded graphic for the blog post “Can I rent in BC with no Canadian credit history?” (FAQ). Takeaway: no Canadian credit yet? Lead with ID, references and proof of income. Source: Office of the Information and Privacy Commissioner for BC, landlord and tenant guidance (September 2019)."
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “Can I rent in BC with no Canadian credit history?” (FAQ). Takeaway: no Canadian credit yet? Lead with ID, references and proof of income. Source: Office of the Information and Privacy Commissioner for BC, landlord and tenant guidance (September 2019). Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "Guidance document: Private sector landlords and tenants"
     publisher: Office of the Information and Privacy Commissioner for BC

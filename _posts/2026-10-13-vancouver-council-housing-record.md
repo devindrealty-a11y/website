@@ -14,6 +14,11 @@ card_chart:
   - label: Multi-unit
     value: 46
     display: "+46%"
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “Vancouver's housing permits got faster. The record is mixed.” (Market news). Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "What Vancouver Council Did and Didn't Do on Housing"
     publisher: The Tyee

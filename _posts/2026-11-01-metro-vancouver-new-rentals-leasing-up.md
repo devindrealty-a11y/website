@@ -6,7 +6,11 @@ summary: "Zonda Home data reported by the Vancouver Sun shows 59.5% of released 
 description: "About 59.5% of released purpose-built rental units in Metro Vancouver are leased, and some new buildings still offer one or two months free. What the Vancouver Sun's Oct. 30 report means if you're renting or moving to Greater Vancouver or the Tri-Cities, BC."
 card_stat: "59.5%"
 card_stat_label: "Share of released purpose-built rental units in Metro Vancouver already leased"
-image_alt: "Branded graphic for the blog post “New rental buildings are leasing up in Metro Vancouver. What renters gain” (Renting). Key number: 59.5% of released purpose-built rental units in Metro Vancouver are leased. Bar chart of released purpose-built rental units leased: Metro Vancouver 59.5%, Greater Toronto and Hamilton 60.6%, Edmonton 58%, Ottawa 57.8%, Calgary 52.8%. Source: Vancouver Sun, Oct. 30, 2026, citing Zonda Home data."
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “New rental buildings are leasing up in Metro Vancouver. What renters gain” (Renting). Key number: 59.5% of released purpose-built rental units in Metro Vancouver are leased. Bar chart of released purpose-built rental units leased: Metro Vancouver 59.5%, Greater Toronto and Hamilton 60.6%, Edmonton 58%, Ottawa 57.8%, Calgary 52.8%. Source: Vancouver Sun, Oct. 30, 2026, citing Zonda Home data. Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 card_chart_title: "Released purpose-built rental units leased"
 card_chart:
   - label: Vancouver

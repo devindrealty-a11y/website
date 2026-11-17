@@ -14,6 +14,11 @@ card_chart:
   - label: Oct. 21
     value: 87
     display: "87%"
+card_photo: assets/img/blog/photos/bank-of-canada-ottawa.jpg
+card_photo_position: "center 40%"
+card_photo_credit: "Wladyslaw / Wikimedia Commons (CC BY-SA 3.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:Ottawa_-_ON_-_Bank_of_Canada.jpg
+image_alt: "Branded graphic over a photograph of the Bank of Canada building in Ottawa for the blog post “Traders put an 87% chance on a Bank of Canada hike” (Market news). Background photo: Wladyslaw / Wikimedia Commons (CC BY-SA 3.0)."
 sources:
   - title: "Bank of Canada increasingly expected to raise interest rates this month"
     publisher: CBC News

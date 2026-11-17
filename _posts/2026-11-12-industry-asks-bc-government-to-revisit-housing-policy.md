@@ -6,7 +6,11 @@ summary: "Developers and the BC Real Estate Association want the incoming govern
 description: "UDI and BCREA are urging B.C.'s incoming Conservative government to pause Step Code increases, halt the PST expansion and review housing taxes like the speculation and vacancy tax, with Metro Vancouver condo construction at a 15-year low. What it could mean for buyers, sellers and renters."
 card_stat: "15-year low"
 card_stat_label: "Metro Vancouver new condo construction, first half of 2026 (CMHC)"
-image_alt: "Branded graphic for the blog post “Builders and REALTORS® ask B.C.'s new government to rethink housing rules” (Market news). Key fact: Metro Vancouver new condo construction hit a 15-year low in the first half of 2026, according to CMHC. Source: Richmond News (BIV), November 12, 2026."
+card_photo: assets/img/blog/photos/bc-parliament-buildings-victoria.jpg
+card_photo_position: "center 42%"
+card_photo_credit: "Michal Klajban / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:British_Columbia_Parliament_Buildings_in_Victoria,_British_Columbia,_Canada_14.jpg
+image_alt: "Branded graphic over a photograph of the British Columbia Parliament Buildings in Victoria for the blog post “Builders and REALTORS® ask B.C.'s new government to rethink housing rules” (Market news). Key fact: Metro Vancouver new condo construction hit a 15-year low in the first half of 2026, according to CMHC. Source: Richmond News (BIV), November 12, 2026. Background photo: Michal Klajban / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Industry leaders urge new B.C. government to revisit housing policies"
     publisher: Richmond News (BIV)

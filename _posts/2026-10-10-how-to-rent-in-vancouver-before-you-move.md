@@ -7,6 +7,11 @@ description: "Newcomers and out-of-province movers can rent in Greater Vancouver
 cta: renting
 card_stat: "1/2"
 card_stat_label: "Maximum security deposit, as a share of one month's rent"
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “How do I rent in Vancouver before I move?” (FAQ). Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "Tenancy deposits and fees"
     publisher: Province of British Columbia

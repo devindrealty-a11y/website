@@ -5,6 +5,11 @@ category: Market news
 summary: "Ottawa's Budget 2026 proposes raising the optional mortgage insurance limit to $1.5 million, allowing 30-year amortizations for some buyers, and extending the foreign buyer ban on existing homes to 2029 while exempting new homes. Here's what that could mean in Greater Vancouver and the Tri-Cities, BC."
 card_stat: "$1.5M"
 card_stat_label: "Proposed ceiling for optional mortgage insurance, up from $1 million"
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “What Budget 2026's housing changes mean in Greater Vancouver” (Market news). Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "Federal budget outlines changes to foreign buyer ban, mortgage rules and more"
     publisher: Greater Vancouver REALTORS®

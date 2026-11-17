@@ -7,7 +7,11 @@ summary: "In BC a landlord can ask for no more than half a month's rent as a sec
 description: "A plain-language FAQ for newcomers renting in Greater Vancouver: BC's security and pet deposit limits, the 15-day return rule, why condition inspections matter, and the rental scam red flags the RCMP and Competition Bureau warn about."
 card_stat: "15 days"
 card_stat_label: "Time a BC landlord has to return your deposit after getting your forwarding address"
-image_alt: "Branded graphic for the blog post “BC rental deposits and scams: what should newcomers know?” (FAQ). Key number: 15 days, the time a BC landlord has to return a deposit after receiving the tenant's forwarding address. Source: Province of British Columbia, Tenancy deposits and fees (updated March 4, 2026)."
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “BC rental deposits and scams: what should newcomers know?” (FAQ). Key number: 15 days, the time a BC landlord has to return a deposit after receiving the tenant's forwarding address. Source: Province of British Columbia, Tenancy deposits and fees (updated March 4, 2026). Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "Tenancy deposits and fees"
     publisher: Province of British Columbia

@@ -23,6 +23,11 @@ card_chart:
   - label: Toronto
     value: -0.6
     display: "−0.6%"
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “Vancouver asking rents rose in September, still below last year” (Renting). Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "Rentals.ca October 2026 National Rent Report"
     publisher: Rentals.ca and Urbanation

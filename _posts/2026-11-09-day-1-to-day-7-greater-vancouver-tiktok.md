@@ -6,6 +6,11 @@ summary: "Moving to Greater Vancouver? A short Day 1 to Day 7 checklist from my 
 description: "Day 1 to Day 7 checklist for newcomers moving to Greater Vancouver and the Tri-Cities, BC: Medical Services Plan, ICBC, BC Hydro, tenant insurance, Compass Card, school and a family doctor."
 card_takeaway: "Seven first-week tasks, then buy a real rain jacket"
 cta: renting
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “Day 1 to Day 7 in Greater Vancouver: the short checklist from TikTok” (Renting). Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "Moving to Greater Vancouver? Here's your Day 1 to Day 7 checklist"
     publisher: Devin Desaulniers on TikTok

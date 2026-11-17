@@ -17,7 +17,11 @@ card_chart:
   - label: Townhouses
     value: -1.9
     display: "−1.9%"
-image_alt: "Branded graphic for the blog post “Metro Vancouver home sales fell 10% in October. What it means” (Market news). Key number: Metro Vancouver home sales were down 10.2% in October 2026 versus October 2025, at 2,024 sales. Bar chart of sales by home type, year over year: apartments −16.7%, detached −7.2%, townhouses −1.9%. Source: Greater Vancouver REALTORS®, November 2026."
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “Metro Vancouver home sales fell 10% in October. What it means” (Market news). Key number: Metro Vancouver home sales were down 10.2% in October 2026 versus October 2025, at 2,024 sales. Bar chart of sales by home type, year over year: apartments −16.7%, detached −7.2%, townhouses −1.9%. Source: Greater Vancouver REALTORS®, November 2026. Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "October 2026 Monthly Market Report: Buyers and sellers step back in October"
     publisher: Greater Vancouver REALTORS®

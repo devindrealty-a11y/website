@@ -23,7 +23,11 @@ card_chart:
   - label: New West
     value: -7.1
     display: "−7.1%"
-image_alt: "Branded graphic for the blog post “Most Metro Vancouver homes are selling below assessed value” (Market news). Key number: about 3 in 4 homes (18,168 of 24,426) sold in Metro Vancouver and the Fraser Valley from Jan. 1 to Oct. 25, 2026 closed below their 2026 BC Assessment value. Bar chart of average sale price versus assessed value: Whistler +6.2%, Squamish +0.6%, all sales −4.6%, Richmond −7.1%, New Westminster −7.1%. Source: Vancouver Sun, Nov. 1, 2026, citing Zealty.ca data."
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: "center center"
+card_photo_credit: "Northwest / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg
+image_alt: "Branded graphic over a photograph of the downtown Vancouver skyline from False Creek for the blog post “Most Metro Vancouver homes are selling below assessed value” (Market news). Key number: about 3 in 4 homes (18,168 of 24,426) sold in Metro Vancouver and the Fraser Valley from Jan. 1 to Oct. 25, 2026 closed below their 2026 BC Assessment value. Bar chart of average sale price versus assessed value: Whistler +6.2%, Squamish +0.6%, all sales −4.6%, Richmond −7.1%, New Westminster −7.1%. Source: Vancouver Sun, Nov. 1, 2026, citing Zealty.ca data. Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "Majority of Metro Vancouver homes selling at below assessed value"
     publisher: Vancouver Sun
