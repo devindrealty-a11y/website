@@ -1,0 +1,20 @@
+# Static HTML site. GitHub Pages runs Jekyll because this repo has no .nojekyll file.
+# Jekyll does not publish a folder whose name starts with "_" unless it is one
+# of Jekyll's own folders (_posts, _layouts, _includes, _sass, _data, _drafts,
+# _plugins). _promo is the promotion kit and is not one of those.
+#
+# A custom exclude list replaces Jekyll's defaults, so the defaults are repeated
+# here and _promo is added. Do not add a .nojekyll file: that turns Jekyll off
+# and would publish _promo with the rest of the site.
+exclude:
+  - _promo
+  - .sass-cache
+  - .jekyll-cache
+  - gemfiles
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
