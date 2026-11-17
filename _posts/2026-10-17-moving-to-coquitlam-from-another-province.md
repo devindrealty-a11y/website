@@ -17,7 +17,11 @@ card_chart:
   - label: Lafarge Lk
     value: 35
     display: "35 min"
-image_alt: "Branded graphic for the blog post “Moving to Coquitlam from another province: what should I know about neighbourhoods, costs and the commute?” (FAQ). Key figure: 35 min, Lafarge Lake–Douglas to Commercial–Broadway, train time only. Bar chart of train time to Commercial–Broadway: Burquitlam station 22 min; Coquitlam Central station 32 min; Lafarge Lake–Douglas station 35 min. Source: TransLink, Dec 24, 2024."
+card_photo: assets/img/blog/photos/coquitlam-lafarge-lake.jpg
+card_photo_position: "center 42%"
+card_photo_credit: "Greg Salter / Wikimedia Commons (CC BY 2.5)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:Coquitlam_Lafarge_Lake.jpg
+image_alt: "Branded graphic over a photograph of Lafarge Lake and Coquitlam Town Centre for the blog post “Moving to Coquitlam from another province: what should I know about neighbourhoods, costs and the commute?” (FAQ). Key figure: 35 min, Lafarge Lake–Douglas to Commercial–Broadway, train time only. Bar chart of train time to Commercial–Broadway: Burquitlam station 22 min; Coquitlam Central station 32 min; Lafarge Lake–Douglas station 35 min. Source: TransLink, Dec 24, 2024. Background photo: Greg Salter / Wikimedia Commons (CC BY 2.5)."
 sources:
   - title: "SkyTrain station to station travel times"
     publisher: TransLink

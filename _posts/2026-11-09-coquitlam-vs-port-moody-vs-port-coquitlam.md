@@ -6,6 +6,11 @@ summary: "Coquitlam, Port Moody or Port Coquitlam? A short Tri-Cities, BC person
 description: "Choosing between Coquitlam, Port Moody and Port Coquitlam in the Tri-Cities, BC? A plain-language personality guide for newcomers comparing lifestyle, commute and housing style."
 card_takeaway: "Three Tri-Cities, BC vibes: fleece and a dog, the 38th floor, or neighbours who know your name"
 cta: renting
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park for the blog post “Coquitlam vs Port Moody vs Port Coquitlam: pick your personality” (FAQ). Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Coquitlam, Port Moody or Port Coquitlam? Pick your personality"
     publisher: Devin Desaulniers on TikTok

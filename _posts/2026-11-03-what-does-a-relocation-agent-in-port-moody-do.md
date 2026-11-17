@@ -23,7 +23,11 @@ sources:
     date: 2026-03-04
     url: https://www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/starting-a-tenancy/move-in-condition-inspection
 card_takeaway: "Licensed help to find, view and lease a home before you arrive"
-image_alt: "Branded graphic: What does a relocation agent in Port Moody do? Takeaway: licensed help to find, view and lease a home before you arrive. Source: BCFSA."
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park: What does a relocation agent in Port Moody do? Takeaway: licensed help to find, view and lease a home before you arrive. Source: BCFSA. Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 ---
 A relocation agent in Port Moody helps a newcomer find and secure a place to live before they arrive, by searching listings, viewing homes on their behalf and reviewing the lease with them. In BC, someone who does this for a fee needs to be a licensed real estate professional, so the first thing to ask any relocation agent is whether they're licensed.
 

@@ -15,7 +15,11 @@ card_chart:
   - label: Licence
     value: 90
     display: "90 days"
-image_alt: "Branded graphic for the blog post “Moving from Alberta to BC: a Tri-Cities, BC newcomer checklist” (FAQ). Key figure: 90 days to switch an Alberta driver's licence to a BC licence after moving. Bar chart of ICBC deadlines after arriving in BC: register, license and insure your vehicle within 30 days; switch your driver's licence within 90 days. Source: ICBC."
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park for the blog post “Moving from Alberta to BC: a Tri-Cities, BC newcomer checklist” (FAQ). Key figure: 90 days to switch an Alberta driver's licence to a BC licence after moving. Bar chart of ICBC deadlines after arriving in BC: register, license and insure your vehicle within 30 days; switch your driver's licence within 90 days. Source: ICBC. Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Moving to, from or within B.C."
     publisher: ICBC

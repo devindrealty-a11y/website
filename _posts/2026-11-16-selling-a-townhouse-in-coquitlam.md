@@ -21,7 +21,11 @@ card_chart:
   - label: PoCo
     value: -3.3
     display: "−3.3%"
-image_alt: "Branded graphic for the blog post “Selling a townhouse in Coquitlam: what should you know?” (Selling). Key number: the Coquitlam townhouse benchmark price was $962,600 in October 2026, down 6.6% from October 2025. Bar chart of the one-year change in townhouse benchmark prices: Port Moody −10.1%, Coquitlam −6.6%, Greater Vancouver −5.5%, Port Coquitlam (PoCo) −3.3%. Source: Greater Vancouver REALTORS®, November 2026."
+card_photo: assets/img/blog/photos/coquitlam-lafarge-lake.jpg
+card_photo_position: "center 42%"
+card_photo_credit: "Greg Salter / Wikimedia Commons (CC BY 2.5)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:Coquitlam_Lafarge_Lake.jpg
+image_alt: "Branded graphic over a photograph of Lafarge Lake and Coquitlam Town Centre for the blog post “Selling a townhouse in Coquitlam: what should you know?” (Selling). Key number: the Coquitlam townhouse benchmark price was $962,600 in October 2026, down 6.6% from October 2025. Bar chart of the one-year change in townhouse benchmark prices: Port Moody −10.1%, Coquitlam −6.6%, Greater Vancouver −5.5%, Port Coquitlam (PoCo) −3.3%. Source: Greater Vancouver REALTORS®, November 2026. Background photo: Greg Salter / Wikimedia Commons (CC BY 2.5)."
 sources:
   - title: "MLS® Home Price Index and statistics package, October 2026"
     publisher: Greater Vancouver REALTORS®

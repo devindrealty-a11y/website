@@ -7,7 +7,11 @@ summary: "Buying a presale condo in Port Moody or Coquitlam means signing for a 
 description: "FAQ on presale condos in Port Moody and Coquitlam (Tri-Cities, BC): the developer's disclosure statement, the seven-day right to cancel under REDMA, deposits held in trust, assignments, and the risks BCFSA tells buyers to weigh."
 card_stat: "7 days"
 card_stat_label: "to cancel a B.C. presale contract in writing with no penalty, after you sign and acknowledge the disclosure statement"
-image_alt: "Branded graphic for the blog post “Buying a presale condo in Port Moody or Coquitlam: what should you know?” (FAQ). Key number: B.C. presale buyers have 7 days to cancel in writing with no penalty, counted from the later of signing the contract or acknowledging the disclosure statement. Source: BC Financial Services Authority."
+card_photo: assets/img/blog/photos/coquitlam-lafarge-lake.jpg
+card_photo_position: "center 42%"
+card_photo_credit: "Greg Salter / Wikimedia Commons (CC BY 2.5)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:Coquitlam_Lafarge_Lake.jpg
+image_alt: "Branded graphic over a photograph of Lafarge Lake and Coquitlam Town Centre for the blog post “Buying a presale condo in Port Moody or Coquitlam: what should you know?” (FAQ). Key number: B.C. presale buyers have 7 days to cancel in writing with no penalty, counted from the later of signing the contract or acknowledging the disclosure statement. Source: BC Financial Services Authority. Background photo: Greg Salter / Wikimedia Commons (CC BY 2.5)."
 sources:
   - title: "Consumer Guide to Pre-sale Real Estate Purchases"
     publisher: BC Financial Services Authority

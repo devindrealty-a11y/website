@@ -50,7 +50,11 @@ card_chart:
   - label: WCE
     value: 7.55
     display: "$7.55"
-image_alt: "Branded graphic: Commuting from Port Moody to Vancouver. Takeaway: SkyTrain to downtown is a 3-zone fare on weekdays before 6:30 p.m. Chart of one-way adult Compass Stored Value fares to downtown: SkyTrain (3 zones) $5.40, West Coast Express (WCE) $7.55. Source: TransLink."
+card_photo: assets/img/blog/photos/moody-centre-station-2025.jpg
+card_photo_position: "center 32%"
+card_photo_credit: "Canmenwalker / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:Moody_Centre_Station_2025.jpg
+image_alt: "Branded graphic over a photograph of Moody Centre Station in Port Moody: Commuting from Port Moody to Vancouver. Takeaway: SkyTrain to downtown is a 3-zone fare on weekdays before 6:30 p.m. Chart of one-way adult Compass Stored Value fares to downtown: SkyTrain (3 zones) $5.40, West Coast Express (WCE) $7.55. Source: TransLink. Background photo: Canmenwalker / Wikimedia Commons (CC BY 4.0)."
 ---
 Commuting from Port Moody to Vancouver comes down to three choices: the Millennium Line SkyTrain, the weekday-only West Coast Express, or driving. The right one depends on your hours, your budget and how close you live to a station, so decide before you pick a neighbourhood.
 

@@ -7,7 +7,11 @@ summary: "Moving from the US to BC and settling in Coquitlam, Port Moody or Port
 description: "Moving from the US to BC? A plain-language Tri-Cities, BC newcomer guide: MSP eligibility and the wait period, private health insurance, the CBSA goods-to-follow list, importing a US vehicle (RIV inspection within 45 days), ICBC licence exchange and BC rental deposits."
 card_stat: "45 days"
 card_stat_label: "to pass the RIV inspection after you bring a US vehicle into Canada"
-image_alt: "Branded graphic for the blog post “Moving from the US to BC: a newcomer's guide to the Tri-Cities, BC” (FAQ). Key figure: an imported US vehicle must pass a Registrar of Imported Vehicles inspection within 45 days. Source: Transport Canada."
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park for the blog post “Moving from the US to BC: a newcomer's guide to the Tri-Cities, BC” (FAQ). Key figure: an imported US vehicle must pass a Registrar of Imported Vehicles inspection within 45 days. Source: Transport Canada. Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Importing a vehicle from the United States and Mexico"
     publisher: Transport Canada

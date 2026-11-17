@@ -18,7 +18,11 @@ card_chart:
   - label: Port Moody
     value: 680000
     display: "$680k"
-image_alt: "Branded graphic for the blog post “Burquitlam condo buyer guide: what should you know?” (FAQ). Key number: Coquitlam apartment MLS® HPI benchmark was $624,200 in October 2026, down 9.1% year over year. Bar chart of Tri-Cities apartment benchmarks: Port Coquitlam $551k, Coquitlam $624k, Port Moody $680k. Source: Greater Vancouver REALTORS®, November 2026."
+card_photo: assets/img/blog/photos/burquitlam-station-exterior.jpg
+card_photo_position: "center 40%"
+card_photo_credit: "Greg Salter / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:Burquitlam_Station_Exterior.jpg
+image_alt: "Branded graphic over a photograph of Burquitlam Station for the blog post “Burquitlam condo buyer guide: what should you know?” (FAQ). Key number: Coquitlam apartment MLS® HPI benchmark was $624,200 in October 2026, down 9.1% year over year. Bar chart of Tri-Cities apartment benchmarks: Port Coquitlam $551k, Coquitlam $624k, Port Moody $680k. Source: Greater Vancouver REALTORS®, November 2026. Background photo: Greg Salter / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "October 2026 Monthly Market Report: Buyers and sellers step back in October"
     publisher: Greater Vancouver REALTORS®

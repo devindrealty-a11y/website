@@ -5,7 +5,11 @@ category: Renting
 summary: "Relocating to Coquitlam, BC? Use this first 30 days checklist for newcomers: set up BC Hydro, get a Compass Card for the Millennium Line, apply for MSP, register kids with SD43, and find Mundy Park and Como Lake."
 description: "A practical first 30 days checklist for relocating to Coquitlam, BC: utilities, TransLink Compass and Millennium Line stations, MSP wait period, School District 43 registration, ICBC deadlines, and local parks."
 card_takeaway: "A practical first 30 days checklist for Coquitlam newcomers"
-image_alt: "Branded graphic for the blog post “Relocating to Coquitlam, BC: first 30 days checklist” (Renting). Takeaway: a practical first 30 days checklist for Coquitlam newcomers. Source: City of Coquitlam."
+card_photo: assets/img/blog/photos/coquitlam-lafarge-lake.jpg
+card_photo_position: "center 42%"
+card_photo_credit: "Greg Salter / Wikimedia Commons (CC BY 2.5)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:Coquitlam_Lafarge_Lake.jpg
+image_alt: "Branded graphic over a photograph of Lafarge Lake and Coquitlam Town Centre for the blog post “Relocating to Coquitlam, BC: first 30 days checklist” (Renting). Takeaway: a practical first 30 days checklist for Coquitlam newcomers. Source: City of Coquitlam. Background photo: Greg Salter / Wikimedia Commons (CC BY 2.5)."
 sources:
   - title: "Utility Fee"
     publisher: City of Coquitlam

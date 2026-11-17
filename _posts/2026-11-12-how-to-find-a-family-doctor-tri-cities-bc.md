@@ -6,7 +6,11 @@ cta: general
 summary: "To find a family doctor in the Tri-Cities, BC, register for the province's Health Connect Registry once you have your Personal Health Number. While you wait, urgent and primary care centres in Port Moody and Port Coquitlam, pharmacists and 8-1-1 can help."
 description: "How newcomers find a family doctor in the Tri-Cities, BC: MSP and your Personal Health Number, the Health Connect Registry, Port Moody and Port Coquitlam urgent and primary care centres, pharmacist minor-ailment care, 8-1-1 and Eagle Ridge Hospital."
 card_takeaway: "Register once on BC's Health Connect Registry. It takes less than five minutes."
-image_alt: "Branded graphic for the blog post “How do you find a family doctor in the Tri-Cities, BC?” (FAQ). Takeaway: register once on BC's Health Connect Registry, which takes less than five minutes. Source: HealthLink BC."
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park for the blog post “How do you find a family doctor in the Tri-Cities, BC?” (FAQ). Takeaway: register once on BC's Health Connect Registry, which takes less than five minutes. Source: HealthLink BC. Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Health Connect Registry"
     publisher: HealthLink BC

@@ -3,6 +3,11 @@ title: "Relocating to Port Moody, BC: a newcomer's guide"
 date: 2026-11-02
 category: FAQ
 summary: "Thinking about relocating to Port Moody, BC? Here's my newcomer's guide to getting around, the waterfront, and how to plan a rental search in the Tri-Cities, BC."
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park for the blog post “Relocating to Port Moody, BC: a newcomer's guide” (FAQ). Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "West Coast Express Schedules"
     publisher: TransLink

@@ -15,7 +15,11 @@ card_chart:
   - label: BC
     value: 0.5
     display: "½ mo."
-image_alt: "Branded graphic for the blog post “Moving from Ontario to BC: what changes when you land in the Tri-Cities, BC” (FAQ). Key figure: half a month's rent is the most a BC landlord can take as a security deposit, compared with a rent deposit of up to one month's rent in Ontario. Bar chart: Ontario 1 month, BC half a month. Source: Province of British Columbia, March 4, 2026."
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park for the blog post “Moving from Ontario to BC: what changes when you land in the Tri-Cities, BC” (FAQ). Key figure: half a month's rent is the most a BC landlord can take as a security deposit, compared with a rent deposit of up to one month's rent in Ontario. Bar chart: Ontario 1 month, BC half a month. Source: Province of British Columbia, March 4, 2026. Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Tenancy deposits and fees"
     publisher: Province of British Columbia

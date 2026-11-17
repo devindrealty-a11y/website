@@ -6,7 +6,11 @@ cta: renting
 summary: "Renting a basement suite in the Tri-Cities, BC? Check that the suite is self-contained (sharing a kitchen or bathroom with the owner can leave you outside BC's tenancy law), that the utility split is in writing, and that basic safety features are in place. Here's a newcomer checklist."
 description: "Renting a basement suite in the Tri-Cities, BC: when BC's Residential Tenancy Act applies, unauthorized suites, getting the utility split in writing, safety features to look for, and a move-in checklist for newcomers in Coquitlam, Port Moody and Port Coquitlam."
 card_takeaway: "Share a kitchen or bathroom with the owner? BC's Residential Tenancy Act doesn't apply."
-image_alt: "Branded graphic for the blog post “Renting a basement suite in the Tri-Cities, BC: what should you check?” (Renting). Takeaway: if you share a kitchen or bathroom with the owner, BC's Residential Tenancy Act doesn't apply. Source: Province of British Columbia."
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park for the blog post “Renting a basement suite in the Tri-Cities, BC: what should you check?” (Renting). Takeaway: if you share a kitchen or bathroom with the owner, BC's Residential Tenancy Act doesn't apply. Source: Province of British Columbia. Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Types of rental housing situations"
     publisher: Province of British Columbia

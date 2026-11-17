@@ -18,7 +18,11 @@ card_chart:
   - label: PoCo
     value: 6
     display: "6 mo"
-image_alt: "Branded graphic for the blog post “Pet-friendly rentals in the Tri-Cities, BC: a newcomer's guide” (Renting). Key number: a BC pet damage deposit can be at most half of one month's rent, no matter how many pets. Chart: a dog licence is needed from 4 months old in Port Moody and from 6 months old in Coquitlam and Port Coquitlam. Source: Province of British Columbia."
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park for the blog post “Pet-friendly rentals in the Tri-Cities, BC: a newcomer's guide” (Renting). Key number: a BC pet damage deposit can be at most half of one month's rent, no matter how many pets. Chart: a dog licence is needed from 4 months old in Port Moody and from 6 months old in Coquitlam and Port Coquitlam. Source: Province of British Columbia. Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Pets and tenancy"
     publisher: Province of British Columbia

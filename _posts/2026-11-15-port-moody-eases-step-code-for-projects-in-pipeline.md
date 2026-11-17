@@ -3,6 +3,11 @@ title: "Port Moody eases 2027 energy rules for 2,474 homes in the pipeline"
 date: 2026-11-15
 category: Buying
 summary: "Port Moody council voted to let 20 projects already in the works skip the next step of the BC Energy Step Code in 2027. Here's what that could mean for presale and new-home buyers and renters in the Tri-Cities, BC."
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park for the blog post “Port Moody eases 2027 energy rules for 2,474 homes in the pipeline” (Buying). Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Council eases step code rules for projects in the pipeline, eyes broader pause"
     publisher: The Inlet Current

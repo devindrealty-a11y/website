@@ -7,7 +7,11 @@ summary: "Need temporary housing in the Tri-Cities, BC while you look for a rent
 description: "Temporary housing in the Tri-Cities, BC for newcomers: how B.C.'s short-term rental rules work in Port Moody, Coquitlam and Port Coquitlam, how to check a registration number, why a nightly stay isn't a tenancy, and a checklist for keeping your stay short."
 card_stat: "Under 90 days"
 card_stat_label: "is a short-term rental in B.C., and in the Tri-Cities, BC most must be in the host's own home"
-image_alt: "Branded graphic for the blog post “Temporary housing in the Tri-Cities, BC: where to stay while you search” (Renting). Key point: B.C. defines a short-term rental as a stay of under 90 consecutive days, and in Port Moody, Coquitlam and Port Coquitlam most short-term rentals must be in the host's own principal residence. Source: Province of British Columbia."
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park for the blog post “Temporary housing in the Tri-Cities, BC: where to stay while you search” (Renting). Key point: B.C. defines a short-term rental as a stay of under 90 consecutive days, and in Port Moody, Coquitlam and Port Coquitlam most short-term rentals must be in the host's own principal residence. Source: Province of British Columbia. Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "What visitors need to know about B.C.'s new short-term rental rules"
     publisher: Province of British Columbia

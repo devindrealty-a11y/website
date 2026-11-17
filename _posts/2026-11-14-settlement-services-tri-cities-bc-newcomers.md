@@ -6,7 +6,11 @@ cta: renting
 summary: "Free settlement services in the Tri-Cities, BC are run by S.U.C.C.E.S.S. and ISSofBC in Coquitlam. Which program you can use depends on your status: federal services for permanent residents, the BC Newcomer Services Program for workers, students and new citizens."
 description: "A newcomer's guide to settlement services in the Tri-Cities, BC: who qualifies for free federal (IRCC) newcomer services, the BC Newcomer Services Program, S.U.C.C.E.S.S. and ISSofBC offices in Coquitlam, a local resource directory, and a checklist."
 card_takeaway: "Free settlement help depends on your status. Check which program fits you before you call."
-image_alt: "Branded graphic for the blog post “Where can newcomers find settlement services in the Tri-Cities, BC?” (FAQ). Takeaway: free settlement help depends on your immigration status, so check which program fits you before you call. Source: Immigration, Refugees and Citizenship Canada."
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park for the blog post “Where can newcomers find settlement services in the Tri-Cities, BC?” (FAQ). Takeaway: free settlement help depends on your immigration status, so check which program fits you before you call. Source: Immigration, Refugees and Citizenship Canada. Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Find free newcomer services near you"
     publisher: Immigration, Refugees and Citizenship Canada

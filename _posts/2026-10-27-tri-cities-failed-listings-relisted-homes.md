@@ -10,7 +10,11 @@ sources:
     publisher: Tri-Cities Dispatch
     date: 2026-10-26
     url: https://tricitiesdispatch.com/real-estate-numbers-tri-cities-september-2026/
-image_alt: "Branded graphic: 45% of Port Moody homes sold from January to September 2026 had a failed listing first. Bar chart of the share of sales that followed a failed listing: Port Moody 45%, Port Coquitlam 42%, Coquitlam 38%, Greater Vancouver and Fraser Valley 40%. Source: Zealty analysis via Tri-Cities Dispatch, Oct. 26, 2026."
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park: 45% of Port Moody homes sold from January to September 2026 had a failed listing first. Bar chart of the share of sales that followed a failed listing: Port Moody 45%, Port Coquitlam 42%, Coquitlam 38%, Greater Vancouver and Fraser Valley 40%. Source: Zealty analysis via Tri-Cities Dispatch, Oct. 26, 2026. Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 card_stat: "45%"
 card_stat_label: "Port Moody homes sold Jan.-Sept. 2026 that had a failed listing first"
 card_chart_title: "Sales after a failed listing (*GV + Fraser Valley)"

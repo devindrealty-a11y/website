@@ -23,6 +23,11 @@ card_chart:
   - label: Rec Centre
     value: 12
     display: "12"
+card_photo: assets/img/blog/photos/inlet-centre-station-western-entrance.jpg
+card_photo_position: "center 48%"
+card_photo_credit: "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:Inlet_Centre_station_western_entrance.jpg
+image_alt: "Branded graphic over a photograph of Inlet Centre Station in Port Moody for the blog post “Living near Inlet Centre Station in Port Moody: a newcomer's guide” (FAQ). Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Getting Around"
     publisher: City of Port Moody
