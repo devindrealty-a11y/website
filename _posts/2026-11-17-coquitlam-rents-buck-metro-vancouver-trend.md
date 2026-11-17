@@ -20,7 +20,11 @@ card_chart:
   - label: Vancouver
     value: 2263
     display: "$2,263"
-image_alt: "Branded graphic for the blog post “Coquitlam rents buck the Metro Vancouver trend in November” (Renting). Key number: Coquitlam's average asking rent for an unfurnished one-bedroom was up 0.50% from November 2025, while the Metro Vancouver average was down 3.2%. Bar chart of unfurnished one-bedroom asking rents in November 2026: Coquitlam $2,057, Metro Vancouver average $2,095, Burnaby $2,109, Vancouver $2,263. Source: liv.rent, November 13, 2026."
+card_photo: assets/img/blog/photos/coquitlam-lafarge-lake.jpg
+card_photo_position: "center 42%"
+card_photo_credit: "Greg Salter / Wikimedia Commons (CC BY 2.5)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:Coquitlam_Lafarge_Lake.jpg
+image_alt: "Branded graphic over a photograph of Lafarge Lake and Coquitlam Town Centre for the blog post “Coquitlam rents buck the Metro Vancouver trend in November” (Renting). Key number: Coquitlam's average asking rent for an unfurnished one-bedroom was up 0.50% from November 2025, while the Metro Vancouver average was down 3.2%. Bar chart of unfurnished one-bedroom asking rents in November 2026: Coquitlam $2,057, Metro Vancouver average $2,095, Burnaby $2,109, Vancouver $2,263. Source: liv.rent, November 13, 2026. Background photo: Greg Salter / Wikimedia Commons (CC BY 2.5)."
 sources:
   - title: "November 2026 Metro Vancouver rent report"
     publisher: liv.rent

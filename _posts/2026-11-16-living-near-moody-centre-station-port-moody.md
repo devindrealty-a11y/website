@@ -23,7 +23,11 @@ card_chart:
   - label: Kyle Centre
     value: 13
     display: "13"
-image_alt: "Branded graphic: Living near Moody Centre Station in Port Moody. About a 10-minute walk from the station to Rocky Point Park, with a bar chart of walking times: St. Johns 8, Rocky Point 10, Clarke Street 12, Queen Street Plaza 13 and Kyle Centre 13 minutes. Source: City of Port Moody."
+card_photo: assets/img/blog/photos/moody-centre-station-2025.jpg
+card_photo_position: "center 32%"
+card_photo_credit: "Canmenwalker / Wikimedia Commons (CC BY 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:Moody_Centre_Station_2025.jpg
+image_alt: "Branded graphic over a photograph of Moody Centre Station in Port Moody: Living near Moody Centre Station in Port Moody. About a 10-minute walk from the station to Rocky Point Park, with a bar chart of walking times: St. Johns 8, Rocky Point 10, Clarke Street 12, Queen Street Plaza 13 and Kyle Centre 13 minutes. Source: City of Port Moody. Background photo: Canmenwalker / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "Getting Around"
     publisher: City of Port Moody
