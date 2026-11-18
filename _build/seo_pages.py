@@ -8,8 +8,8 @@ import json
 import re
 
 from partials import (
-    BROKERAGE_ADDR, CALC, EMAIL, ICONS, PHONE, TEL,
-    consent, foot, head, picture,
+    BROKERAGE_ADDR, CALC, EMAIL, ICONS, PHONE, SITE, TEL,
+    consent, foot, google_badge, head, picture,
 )
 
 I = ICONS
@@ -1568,10 +1568,287 @@ def _relocation_compare():
     )
 
 
+def _ontario_choices(uid, name, options):
+    rows = []
+    for i, opt in enumerate(options):
+        fid = f"{uid}-{name}-{i}"
+        safe = _html.escape(opt, quote=True)
+        rows.append(
+            f'<label class="lead-choice" for="{fid}">'
+            f'<input id="{fid}" type="radio" name="{name}" value="{safe}" required>'
+            f'<span>{safe}</span></label>'
+        )
+    return "".join(rows)
+
+
+def _ontario_intake_form():
+    """90-second multi-step intake for the Ontario movers landing page.
+
+    Posts through the existing tenantIntake FormSubmit endpoint and uses
+    data-lead-form so GoatCounter step events and the Google Ads conversion
+    fire the same way as the home-page qualifier.
+    """
+    uid = "on"
+    mid = "\u00b7"
+    guide = "assets/guides/ontario-to-greater-vancouver-renters-guide.pdf"
+    areas = _ontario_choices(uid, "preferred_area", [
+        "Tri-Cities, BC", "Burnaby", "Vancouver", "Langley", "Not sure yet",
+    ])
+    budgets = _ontario_choices(uid, "budget", [
+        "Under $2,000 a month",
+        "$2,000 to $2,500 a month",
+        "$2,500 to $3,000 a month",
+        "$3,000 to $4,000 a month",
+        "$4,000 to $5,000 a month",
+        "$5,000 or more a month",
+        "Not sure yet",
+    ])
+    beds = _ontario_choices(uid, "bedrooms", [
+        "Studio", "1 bedroom", "1 bedroom + den", "2 bedrooms",
+        "3 bedrooms", "4+ bedrooms", "Flexible",
+    ])
+    docs = _ontario_choices(uid, "documents_ready", ["Yes", "Some", "Not yet"])
+    html = f'''<form class="lead-form ontario-form" id="intake-form" data-lead-form data-form-key="tenantIntake" action="#" method="post" novalidate aria-labelledby="{uid}-title">
+  <input type="hidden" name="_subject" value="New relocation rental intake \u2014 moving-from-ontario">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="form" value="Tenant: Relocation rental intake (moving-from-ontario)">
+  <input type="hidden" name="page" value="moving-from-ontario.html">
+  <div class="hp" aria-hidden="true"><label>Leave this field empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
+  <div class="lead-form-head">
+    <h2 id="{uid}-title">Start with a few questions</h2>
+    <p>About 90 seconds. I'll follow up by email or phone. No obligation.</p>
+    <p class="lead-brokerage">Devin Desaulniers, Real Estate Associate {mid} Axford Real Estate</p>
+  </div>
+  <div data-lead-body>
+    <div class="lead-progress">
+      <div class="lead-progress-track" data-lead-progress role="progressbar" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1" aria-valuetext="Step 1 of 7"><span class="lead-progress-fill" data-lead-fill></span></div>
+      <p class="lead-step-label">Step <span data-lead-step-num>1</span> of 7</p>
+    </div>
+    <fieldset class="lead-step" data-lead-step="1" aria-describedby="{uid}-q1-hint">
+      <legend tabindex="-1" id="{uid}-q1">Where are you moving from?</legend>
+      <p class="lead-hint" id="{uid}-q1-hint">The city is enough, for example Toronto or Ottawa.</p>
+      <div class="form-grid">
+        <div class="field full"><label for="{uid}-from">City <span class="req">*</span></label><input id="{uid}-from" name="moving_from" autocomplete="address-level2" required placeholder="City"></div>
+      </div>
+    </fieldset>
+    <fieldset class="lead-step" data-lead-step="2" hidden aria-describedby="{uid}-q2-hint">
+      <legend tabindex="-1" id="{uid}-q2">What's your preferred move-in date?</legend>
+      <p class="lead-hint" id="{uid}-q2-hint">A month and year is fine if you don't have an exact day yet.</p>
+      <div class="form-grid">
+        <div class="field full"><label for="{uid}-date">Preferred move-in date <span class="req">*</span></label><input id="{uid}-date" name="move_in_date" autocomplete="off" required placeholder="e.g. March 2027"></div>
+      </div>
+    </fieldset>
+    <fieldset class="lead-step" data-lead-step="3" hidden>
+      <legend tabindex="-1" id="{uid}-q3">What's your monthly rent budget?</legend>
+      <div class="lead-choices">{budgets}</div>
+    </fieldset>
+    <fieldset class="lead-step" data-lead-step="4" hidden>
+      <legend tabindex="-1" id="{uid}-q4">Which area are you considering?</legend>
+      <div class="lead-choices">{areas}</div>
+    </fieldset>
+    <fieldset class="lead-step" data-lead-step="5" hidden>
+      <legend tabindex="-1" id="{uid}-q5">How many bedrooms?</legend>
+      <div class="lead-choices">{beds}</div>
+    </fieldset>
+    <fieldset class="lead-step" data-lead-step="6" hidden aria-describedby="{uid}-q6-hint">
+      <legend tabindex="-1" id="{uid}-q6">Are your application documents ready?</legend>
+      <p class="lead-hint" id="{uid}-q6-hint">Photo ID, proof of income, and references. Yes, some, or not yet is all fine.</p>
+      <div class="lead-choices">{docs}</div>
+    </fieldset>
+    <fieldset class="lead-step" data-lead-step="7" hidden aria-describedby="{uid}-q7-hint">
+      <legend tabindex="-1" id="{uid}-q7">How should I reach you?</legend>
+      <p class="lead-hint" id="{uid}-q7-hint">Name, email and phone, so I can follow up about your move.</p>
+      <div class="form-grid">
+        <div class="field"><label for="{uid}-name">Full name <span class="req">*</span></label><input id="{uid}-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="{uid}-email">Email <span class="req">*</span></label><input id="{uid}-email" name="email" type="email" inputmode="email" autocomplete="email" required></div>
+        <div class="field full"><label for="{uid}-phone">Phone <span class="req">*</span></label><input id="{uid}-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required></div>
+        {consent(uid)}
+      </div>
+    </fieldset>
+    <div class="lead-nav">
+      <button type="button" class="btn btn-outline" data-lead-back hidden>Back</button>
+      <button type="button" class="btn btn-primary" data-lead-next>Continue</button>
+      <button type="submit" class="btn btn-primary" data-lead-submit hidden disabled>Send</button>
+    </div>
+    <div class="form-status" role="status" aria-live="polite"></div>
+  </div>
+  <div class="lead-thanks" data-lead-thanks hidden tabindex="-1">
+    <h2>Thanks \u2014 I'll be in touch.</h2>
+    <p>Your note is on its way. If it's urgent, call or text <a href="{TEL}">{PHONE}</a>.</p>
+  </div>
+  <p class="ontario-guide-alt">Prefer to read first? <a href="{guide}" target="_blank" rel="noopener" data-goatcounter-click="ontario-guide-download" data-goatcounter-title="Get the free renter's guide" data-goatcounter-referrer="moving-from-ontario.html#intake">Get the free renter's guide (PDF)</a></p>
+  <noscript><p class="lead-noscript">This form needs JavaScript. Email <a href="mailto:{EMAIL}">{EMAIL}</a> or call <a href="{TEL}">{PHONE}</a>.</p></noscript>
+</form>'''
+    assert_copy(html, "ontario intake form")
+    return html
+
+
+def _moving_from_ontario():
+    filename = "moving-from-ontario.html"
+    title = "Moving from Ontario to Greater Vancouver? Find your rental before you arrive. | Devin Desaulniers, Axford Real Estate"
+    desc = (
+        "Moving from Ontario to Greater Vancouver? Start a 90-second form or get the free renter's guide. "
+        "Devin Desaulniers, Real Estate Associate, Axford Real Estate, helps you line up a rental before you arrive."
+    )
+    guide = "assets/guides/ontario-to-greater-vancouver-renters-guide.pdf"
+    mid = "\u00b7"
+    faq = [
+        ("Can I lease before I arrive?",
+         "<p>Yes. You don't have to fly in for every viewing. I can search, walk homes with you on live video, "
+         "and go through the lease so you can sign a written tenancy agreement before you land. Most Greater Vancouver "
+         "rentals are listed only a few weeks before they're available, so the active search usually starts about "
+         "4 to 6 weeks before your move-in date.</p>"),
+        ("How do deposits work in B.C.?",
+         f'<p>In B.C., a security deposit can be at most half of one month\'s rent. If pets are allowed, a pet damage '
+         f'deposit can be at most another half month, no matter how many pets you have. Together the two deposits can '
+         f'equal one month\'s rent. Landlords in B.C. can\'t require "first and last month\'s rent" the way some other '
+         f'provinces do, and they can\'t charge a fee just to accept or process an application. Confirm the current '
+         f'rules on the <a href="{BC_DEPOSITS}" target="_blank" rel="noopener">Province of B.C. deposit page</a>. '
+         f'This is general information, not legal advice.</p>'),
+        ("What does it cost?",
+         "<p>The tenant-side search is <strong>$1,500 total + GST</strong>, paid by you, the tenant, in two parts: "
+         "<strong>$750</strong> at the beginning of the engagement (non-refundable) and <strong>$750</strong> once you "
+         "successfully secure a rental. The <a href=\"#guide\">free renter's guide</a> does not require this service. "
+         "More on the fee is in <a href=\"#pricing\">What it costs</a>.</p>"),
+    ]
+    service = '<script type="application/ld+json">\n' + json.dumps({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Ontario to Greater Vancouver rental search",
+        "serviceType": "Relocation rental search (tenant representation)",
+        "url": SITE + filename,
+        "provider": {"@id": SITE + "#devin-desaulniers"},
+        "areaServed": [
+            {"@type": "Place", "name": "Greater Vancouver"},
+            {"@type": "Place", "name": "Tri-Cities, BC"},
+        ],
+        "offers": {
+            "@type": "Offer",
+            "price": "1500",
+            "priceCurrency": "CAD",
+            "description": "$1,500 + GST, paid by the tenant",
+        },
+    }, indent=2, ensure_ascii=False) + "\n</script>"
+    extra = faq_jsonld(faq) + "\n" + service
+    hero_img = (
+        '<picture class="ontario-hero-pic">'
+        '<source type="image/webp" srcset="assets/img/ontario-hero-800.webp 800w, '
+        'assets/img/ontario-hero-1200.webp 1200w, assets/img/ontario-hero-2000.webp 2000w" sizes="100vw">'
+        '<img src="assets/img/ontario-hero-1200.jpg" '
+        'srcset="assets/img/ontario-hero-800.jpg 800w, assets/img/ontario-hero-1200.jpg 1200w, '
+        'assets/img/ontario-hero-2000.jpg 2000w" sizes="100vw" width="2000" height="1333" '
+        'alt="Aerial twilight view of Lions Gate Bridge and Burrard Inlet in Greater Vancouver" '
+        'fetchpriority="high" decoding="async">'
+        '</picture>'
+    )
+    html = head(
+        title, desc, "tenants",
+        og_image="assets/img/og-ontario.jpg",
+        page_url=filename,
+        body_class="ontario-landing",
+        extra_head=extra,
+        show_tenant_bar=False,
+    )
+    html += f'''
+<section class="ontario-hero" id="start" data-sticky-hide>
+  <div class="ontario-hero-media" aria-hidden="true">{hero_img}</div>
+  <div class="container ontario-hero-inner">
+    <div class="ontario-hero-copy">
+      <span class="eyebrow">Tenant-side rental search</span>
+      <h1>Moving from Ontario to Greater Vancouver? Find your rental before you arrive.</h1>
+      <p class="lead">I'm Devin Desaulniers, a Real Estate Associate with Axford Real Estate. I search on the tenant side, walk homes with you on live video, and review the lease before you sign.</p>
+      <div class="ontario-hero-person">
+        {picture("assets/img/devin-headshot", (480, 800), 800, 1000, "Devin Desaulniers, Real Estate Associate with Axford Real Estate", "ontario-headshot", eager="auto", sizes_attr="72px")}
+        <p><strong>Devin Desaulniers</strong><span>Real Estate Associate {mid} Axford Real Estate</span></p>
+      </div>
+      <div class="ontario-options" id="guide">
+        <p class="ontario-options-label">Two ways to start</p>
+        <a class="btn btn-light" href="#intake">Answer a few questions {I["arrow"]}</a>
+        <a class="btn btn-ghost-light" href="{guide}" target="_blank" rel="noopener" data-goatcounter-click="ontario-guide-download" data-goatcounter-title="Get the free renter's guide" data-goatcounter-referrer="moving-from-ontario.html">Get the free renter's guide {I["doc"]}</a>
+      </div>
+    </div>
+    <div class="ontario-hero-form" id="intake">
+      {_ontario_intake_form()}
+    </div>
+  </div>
+  <p class="ontario-photo-credit">Photo: Luke Miller {mid} <a href="https://www.pexels.com/photo/lions-gate-bridge-17733004/" target="_blank" rel="noopener">Pexels</a></p>
+</section>
+<nav class="page-nav" aria-label="On this page">
+  <div class="container">
+    <span class="pn-label">On this page</span>
+    <a href="#intake">The form</a>
+    <a href="#how">How it works</a>
+    <a href="#faq">FAQ</a>
+    <a href="#pricing">What it costs</a>
+  </div>
+</nav>
+<section class="section" id="how">
+  <div class="container narrow-wide">
+    <span class="eyebrow">The process</span>
+    <h2>How it works</h2>
+    <p class="lead">Three steps, from the first call to a written lease. The search itself is a paid tenant-side service. The renter's guide is free.</p>
+    <ol class="mini-steps three">
+      <li><div><h3>A quick call</h3><p>We go over your budget, timing, and which areas make sense, including the Tri-Cities, BC, Burnaby, Vancouver and Langley.</p></div></li>
+      <li><div><h3>Live video walkthroughs and floor plans</h3><p>I view homes for you and walk through them with you on live video, and I share floor plans for the ones you're seriously considering.</p></div></li>
+      <li><div><h3>Negotiation and lease review</h3><p>I negotiate where I can, and we review the written tenancy agreement together before you sign.</p></div></li>
+    </ol>
+  </div>
+</section>
+'''
+    html += _acc_faq("Questions about moving from Ontario", faq)
+    html += f'''
+<section class="section" id="pricing">
+  <div class="container narrow-wide">
+    <span class="eyebrow">The fee</span>
+    <h2>What it costs</h2>
+    <p class="lead">The tenant-side search is paid by you, the tenant. The renter's guide is free and does not require this service.</p>
+    <div class="fee-block">
+      <div class="fee-main">
+        <span class="eyebrow">Service fee</span>
+        <div class="fee-total">$1,500 <small>total + GST</small></div>
+        <p>Paid by the tenant, in two parts.</p>
+      </div>
+      <ul class="fee-parts">
+        <li><b>$750</b><span>at the beginning of the engagement (non-refundable)</span></li>
+        <li><b>$750</b><span>once you successfully secure a rental</span></li>
+      </ul>
+      <a class="btn btn-light" href="#intake">Start the form {I["arrow"]}</a>
+    </div>
+    <div class="ontario-included">
+      <h3>What's included</h3>
+      <ul class="list-check">
+        <li>A consultation on budget, timing and areas</li>
+        <li>The property search, including early access where I have it</li>
+        <li>In-person or live-video showings, with floor plans</li>
+        <li>Lease review and negotiation</li>
+      </ul>
+      <p>There's more detail on the <a href="tenants.html">tenants page</a>. The week-by-week checklist is on <a href="rental-before-you-arrive.html">how to line up a rental before you arrive</a>.</p>
+    </div>
+    <div class="ontario-trust">{google_badge()}</div>
+  </div>
+</section>
+<section class="section section--night" id="contact-band">
+  <div class="container narrow-wide">
+    <span class="eyebrow">Axford Real Estate</span>
+    <h2>Ready to talk?</h2>
+    <p class="lead">Devin Desaulniers, Real Estate Associate, Axford Real Estate. Call or text <a href="{TEL}">{PHONE}</a>, or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+    <div class="btn-row">
+      <a class="btn btn-light" href="#intake">Start the 90-second form {I["arrow"]}</a>
+      <a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>
+      <a class="btn btn-ghost-light" href="mailto:{EMAIL}">{I["mail"]} Email Devin</a>
+    </div>
+  </div>
+</section>
+'''
+    html += foot()
+    assert_copy(html, filename)
+    return filename, html
+
+
 def write_pages():
     for item in TENANT_FAQ_PREPEND:
         assert_copy(item[0] + item[1], "tenants FAQ")
     for item in RENT_FAQS:
         assert_copy(item[0] + item[1], "rent FAQ")
-    pages = [_burquitlam(), _port_moody(), _port_coquitlam(), _newcomer(), _rental_before(), _relocation_compare(), _first_time(), _coquitlam(), _coquitlam_condo(), _newcomer_buyers()]
+    pages = [_burquitlam(), _port_moody(), _port_coquitlam(), _newcomer(), _rental_before(), _moving_from_ontario(), _relocation_compare(), _first_time(), _coquitlam(), _coquitlam_condo(), _newcomer_buyers()]
     return pages

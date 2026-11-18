@@ -16,7 +16,7 @@
 window.SITE_CONFIG = {
   forms: {
     buyerListings: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // buyers.html "Send me listings"
-    tenantIntake:  "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // tenants.html relocation intake
+    tenantIntake:  "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // tenants.html, rental-before-you-arrive.html, moving-from-ontario.html
     listingInquiry: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // listings.html detail inquiry (not test-submitted)
     rentalInquiry: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // rentals.html detail inquiry (not test-submitted)
     homeEvaluation: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // home-evaluation.html (not test-submitted)

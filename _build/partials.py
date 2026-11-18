@@ -273,7 +273,7 @@ class _HtmlPage(str):
             return relocate_tenant_promo(combined)
         return _HtmlPage(combined)
 
-def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head="", root="", og_type="website"):
+def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head="", root="", og_type="website", show_tenant_bar=True):
     """root: relative prefix back to the site root ("" for top-level pages, "../" for pages in blog/)."""
     nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("mortgage-rates.html","Mortgage rates","rates"),("tenants.html","Tenants","tenants"),("relocating-to-greater-vancouver.html","Relocating","guide"),("blog/","Blog","blog"),("videos.html","Videos","videos")]
     if LISTINGS_LIVE:
@@ -335,7 +335,7 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
     <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span class="nt-bars" aria-hidden="true"><span></span><span></span><span></span></span></button>
   </div>
 </header>
-{tenant_cta_bar(root, page_url or ("index.html" if active == "home" else ""))}
+{tenant_cta_bar(root, page_url or ("index.html" if active == "home" else "")) if show_tenant_bar else ""}
 <main id="main" tabindex="-1">
 ''')
 
