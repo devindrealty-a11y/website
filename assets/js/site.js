@@ -267,9 +267,13 @@
     document.querySelectorAll('[data-sticky-hide]').forEach(function (el) { stickyObserver.observe(el); });
   }
 
-  // Qualifying lead form. Events are fixed names only: lead-form-start, lead-form-step-N
-  // when that step is first shown, and lead-form-sent only after FormSubmit accepts it.
-  // Nothing typed into the form is sent to GoatCounter.
+  // Multi-step lead forms (data-lead-form). Events are fixed names only:
+  // lead-form-start, lead-form-step-N when that step is first shown, and
+  // lead-form-sent only after FormSubmit accepts it. Nothing typed into the
+  // form is sent to GoatCounter. The home/contact qualifier (qualifiedLead)
+  // keeps a tailored payload. Other keys, including tenantIntake on
+  // moving-from-ontario.html, send the form fields after a successful submit
+  // and still fire the Google Ads conversion when listed in LEAD_CONVERSION_FORMS.
   document.querySelectorAll('form[data-lead-form]').forEach(function (form) {
     var endpoint = (cfg[form.getAttribute('data-form-key')] || '').trim();
     var steps = Array.prototype.slice.call(form.querySelectorAll('[data-lead-step]'));
@@ -287,6 +291,8 @@
     var budgetQInput = form.querySelector('input[name="budget_question"]');
     var pageInput = form.querySelector('input[name="page"]');
     var legend4 = form.querySelector('[data-lead-budget-legend]');
+    var formKey = form.getAttribute('data-form-key') || '';
+    var isQualified = formKey === 'qualifiedLead';
     var current = 1;
     var started = false;
     var seen = {};
@@ -298,13 +304,15 @@
     }
 
     var intentParam = '';
-    try {
-      intentParam = (new URLSearchParams(window.location.search).get('intent') || '').toLowerCase();
-    } catch (err) {}
-    var intentMap = { buying: 'Buying', selling: 'Selling', renting: 'Renting' };
-    if (intentMap[intentParam]) {
-      var preset = form.querySelector('input[name="intent"][value="' + intentMap[intentParam] + '"]');
-      if (preset) preset.checked = true;
+    if (isQualified) {
+      try {
+        intentParam = (new URLSearchParams(window.location.search).get('intent') || '').toLowerCase();
+      } catch (err) {}
+      var intentMap = { buying: 'Buying', selling: 'Selling', renting: 'Renting' };
+      if (intentMap[intentParam]) {
+        var preset = form.querySelector('input[name="intent"][value="' + intentMap[intentParam] + '"]');
+        if (preset) preset.checked = true;
+      }
     }
 
     function track(name) {
@@ -344,6 +352,7 @@
     }
 
     function syncSubject() {
+      if (!isQualified) return '';
       var i = selected('intent');
       var a = selected('area');
       var t = selected('timeline');
@@ -353,6 +362,22 @@
       if (budgetInput) budgetInput.value = selected(groupName);
       if (budgetQInput) budgetQInput.value = i ? budgetQuestion(i) : '';
       return subject;
+    }
+
+    // Include values from hidden steps. Disabled inputs are omitted from FormData,
+    // so this walks every field, including radios on earlier steps.
+    function collectFields() {
+      var data = {};
+      form.querySelectorAll('input, select, textarea').forEach(function (el) {
+        if (!el.name || el.type === 'button' || el.type === 'submit') return;
+        if (el.type === 'radio' || el.type === 'checkbox') {
+          if (!el.checked) return;
+        }
+        var v = el.value;
+        data[el.name] = data[el.name] ? data[el.name] + ', ' + v : v;
+      });
+      if (data.email) data._replyto = String(data.email).trim();
+      return data;
     }
 
     function showStatus(cls, html) {
@@ -473,27 +498,32 @@
         showStatus('error', 'This form is not connected right now, so nothing was sent. ' + fallback);
         return;
       }
-      syncSubject();
-      var email = fieldValue('email').trim();
-      var data = {
-        _subject: subjectInput ? subjectInput.value : 'New qualified lead',
-        _template: 'table',
-        _honey: '',
-        _replyto: email,
-        form: 'Qualified lead',
-        Intent: selected('intent'),
-        Area: selected('area'),
-        Timeline: selected('timeline'),
-        Budget: budgetInput ? budgetInput.value : '',
-        'Budget question': budgetQInput ? budgetQInput.value : '',
-        'Moving from': selected('moving_from'),
-        name: fieldValue('name').trim(),
-        email: email,
-        phone: fieldValue('phone').trim(),
-        message: fieldValue('message').trim(),
-        consent: 'yes',
-        Page: pageInput ? pageInput.value : ''
-      };
+      var data;
+      if (isQualified) {
+        syncSubject();
+        var email = fieldValue('email').trim();
+        data = {
+          _subject: subjectInput ? subjectInput.value : 'New qualified lead',
+          _template: 'table',
+          _honey: '',
+          _replyto: email,
+          form: 'Qualified lead',
+          Intent: selected('intent'),
+          Area: selected('area'),
+          Timeline: selected('timeline'),
+          Budget: budgetInput ? budgetInput.value : '',
+          'Budget question': budgetQInput ? budgetQInput.value : '',
+          'Moving from': selected('moving_from'),
+          name: fieldValue('name').trim(),
+          email: email,
+          phone: fieldValue('phone').trim(),
+          message: fieldValue('message').trim(),
+          consent: 'yes',
+          Page: pageInput ? pageInput.value : ''
+        };
+      } else {
+        data = collectFields();
+      }
       sending = true;
       if (submitBtn) {
         submitBtn.disabled = true;
@@ -509,7 +539,7 @@
           var ok = res.ok && String(res.j.success) !== 'false';
           if (ok) {
             track('lead-form-sent');
-            fireLeadConversion(form.getAttribute('data-form-key') || '');
+            fireLeadConversion(formKey);
             showThanks();
           } else {
             sending = false;

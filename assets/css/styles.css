@@ -1320,3 +1320,47 @@ html.dd-chat-open{overflow:hidden}
 }
 
 .compare-cta-row{margin-top:1.5rem}
+
+/* ===== Ontario movers landing page ===== */
+.ontario-hero{position:relative;overflow:hidden;color:var(--on-night);background:var(--night);--focus:#a9d0f5}
+.ontario-hero-media{position:absolute;inset:0}
+.ontario-hero-pic,.ontario-hero-pic img{width:100%;height:100%}
+.ontario-hero-pic img{object-fit:cover;object-position:center 72%}
+.ontario-hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,27,42,.42) 0%,rgba(13,27,42,.62) 42%,rgba(13,27,42,.88) 100%),linear-gradient(90deg,rgba(13,27,42,.72) 0%,rgba(13,27,42,.4) 52%,rgba(13,27,42,.55) 100%);pointer-events:none}
+.ontario-hero-inner{position:relative;z-index:1;display:grid;gap:28px;padding:32px 0 56px}
+.ontario-hero h1{margin-bottom:.4em;color:#fff;font-size:clamp(2.15rem,1.35rem + 2.6vw,3.55rem);max-width:16ch}
+.ontario-hero .lead{max-width:34rem;color:var(--on-night)}
+.ontario-hero .eyebrow{color:var(--sky)}
+.ontario-hero-person{display:flex;align-items:center;gap:14px;margin:8px 0 22px}
+.ontario-hero-person p{margin:0;display:flex;flex-direction:column;line-height:1.3;color:#fff}
+.ontario-hero-person span{font-size:.82rem;color:var(--on-night)}
+.ontario-headshot,.ontario-headshot img{width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:50% 18%}
+.ontario-options{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.ontario-options-label{margin:0;font-family:var(--font-head);font-weight:600;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sky)}
+.ontario-options .btn{min-height:48px}
+.ontario-hero-form{min-width:0}
+.ontario-form{box-shadow:var(--shadow-lg)}
+.ontario-guide-alt{margin:16px 0 0;font-size:.92rem;color:var(--muted)}
+.ontario-photo-credit{position:relative;z-index:1;margin:0;padding:0 var(--gutter) 14px;font-size:.75rem;color:var(--on-night-muted)}
+.ontario-photo-credit a{color:inherit}
+.ontario-included{margin-top:32px}
+.ontario-included h3{margin-bottom:.4em}
+.ontario-trust{margin-top:28px}
+@media (min-width:960px){
+  .ontario-hero-inner{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;align-items:center;padding:64px 0 80px}
+  .ontario-hero .lead{font-size:1.08rem}
+}
+@media (min-width:700px){
+  .mini-steps.three{grid-template-columns:repeat(3,1fr);gap:28px}
+  .mini-steps.three li{flex-direction:column;gap:18px;padding-top:28px;border-top:1px solid var(--line-strong)}
+  .mini-steps.three li::before{flex:none;font-size:2.6rem}
+}
+@media (min-width:1000px){
+  .ontario-landing .fee-block{grid-template-columns:minmax(240px,auto) minmax(0,1fr);gap:28px 40px}
+  .ontario-landing .fee-block .btn{grid-column:1/-1;justify-self:start}
+}
+@media (max-width:599px){
+  .ontario-hero-inner{padding-top:24px}
+  .ontario-hero h1{font-size:clamp(1.95rem,1.3rem + 3vw,2.5rem)}
+  .ontario-options .btn{width:100%;justify-content:center}
+}
