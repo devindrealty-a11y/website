@@ -5,7 +5,24 @@ category: Market news
 summary: "I mapped Statistics Canada's September 2026 three-month unemployment rates for every B.C. metro. Kamloops is 4.4%, Kelowna is 9.3%, and Metro Vancouver is 6.5%, in line with Canada."
 description: "September 2026 three-month unemployment rates for B.C. metros: Kamloops 4.4% (from 9.2% a year ago), Kelowna 9.3% (from 7.1%), Metro Vancouver 6.5%, Canada 6.5% and B.C. 6.4%."
 image: assets/img/blog/2026-10-19-where-are-bc-jobs-easiest-to-find.jpg
-image_alt: "Map of B.C. metro unemployment rates for September 2026, three-month moving average, with a ranked table. Kamloops is lowest at 4.4%, down from 9.2% a year earlier. Kelowna is highest at 9.3%, up from 7.1%. Metro Vancouver is 6.5%, in line with Canada at 6.5% and B.C. at 6.4%. Chilliwack is 5.2%, Victoria and Nanaimo are 5.3%, and Abbotsford-Mission is 6.8%. Green is under 5%, yellow is 5–6%, orange is 6–7%, and red is 7% or higher. A green arrow means the rate fell over the past year and a red arrow means it rose. Source: Statistics Canada Table 14-10-0459-01."
+card_stat: "4.4%"
+card_stat_label: "Kamloops unemployment rate, September 2026 three-month average (Kelowna 9.3%, Metro Vancouver 6.5%)"
+card_chart_title: "B.C. metro unemployment, Sept. 2026"
+card_chart:
+  - label: Kamloops
+    value: 4.4
+    display: "4.4%"
+  - label: Metro Van.
+    value: 6.5
+    display: "6.5%"
+  - label: Kelowna
+    value: 9.3
+    display: "9.3%"
+card_photo: assets/img/blog/photos/downtown-kamloops-skyline.jpg
+card_photo_position: center center
+card_photo_credit: Acmacaulay / Wikimedia Commons (CC BY-SA 4.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:Downtown-Kamloops-Skyline.jpg"
+image_alt: "Branded graphic over a photograph of the downtown Kamloops skyline for the blog post “Where are B.C. jobs easiest to find right now?” (Market news). Key figure: Kamloops unemployment was 4.4% in the September 2026 three-month average, versus 6.5% in Metro Vancouver and 9.3% in Kelowna. Background photo: Acmacaulay / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Table 14-10-0459-01 Labour force characteristics by census metropolitan area, three-month moving average, seasonally adjusted"
     publisher: Statistics Canada

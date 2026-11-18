@@ -5,6 +5,13 @@ category: Market news
 cta: general
 summary: "St. John's gets about 335 cm of snow in an average year. Vancouver gets just 38 cm, the lowest of 15 Canadian cities. Here's what that means if you're relocating, and why the hillsides are a different story."
 description: "Average yearly snowfall in 15 Canadian cities from Environment and Climate Change Canada: St. John's 335 cm, Quebec City 303, Ottawa 223, Calgary 129, Toronto 108, Vancouver 38. What it means for a move to Greater Vancouver."
+card_stat: 38 cm
+card_stat_label: "average yearly snowfall in Vancouver, lowest of 15 Canadian cities (St. John's: 335 cm)"
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: center center
+card_photo_credit: Northwest / Wikimedia Commons (CC BY 4.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg"
+image_alt: "Branded graphic over a photograph of downtown Vancouver from False Creek for the blog post “Canada's snowiest cities. Vancouver? Just 38 cm a year” (Market news). Key figure: Vancouver's average yearly snowfall is 38 cm, the lowest of 15 Canadian cities; St. John's gets 335 cm. Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "Canadian Climate Normals 1981–2010, annual total snowfall (airport stations)"
     publisher: Environment and Climate Change Canada
@@ -21,7 +28,6 @@ sources:
     date: 2026-10-31
     url: https://www.linkedin.com/posts/devin-desaulniers-7794b3184_vancouverrealestate-bcrealestate-greatervancouver-share-7522373867558850560-Z7Kf/
 image: assets/img/blog/2026-11-02-canadas-snowiest-cities-vancouver-38-cm.jpg
-image_alt: "Map of Canada titled 'Canada's snowiest cities. Vancouver? Just 38 cm.' with snowfall bubbles and a ranked list of average yearly snowfall in 15 Canadian cities: St. John's 335 cm, Quebec City 303, Charlottetown 290, Fredericton 252, Ottawa 223, Halifax 221, Montreal 210, Calgary 129, Edmonton 118, Winnipeg 114, Toronto 108, Regina 100, Saskatoon 91, Victoria 40 and Vancouver 38. St. John's gets about 9x Vancouver's snow. Source: Environment and Climate Change Canada, Canadian Climate Normals 1981–2010, airport stations. Devin Desaulniers, REALTOR, Axford Real Estate."
 ---
 It's November, so let's talk snow. ❄️
 

@@ -1,12 +1,18 @@
 ---
-title: "B.C. says \"not so fast\" to the viral $275 rent hike"
+title: 'B.C. says "not so fast" to the viral $275 rent hike'
 date: 2026-10-28
 category: Renting
 cta: renting
 summary: "A $275 rent hike went viral on X. In B.C., the 2026 cap for existing tenants is 2.3%, about $40 on $1,750 rent, once every 12 months with 3 full months' written notice on Form RTB-7."
 description: "Can a B.C. landlord raise rent $275 on a $1,750 unit? For existing tenants the 2026 cap is 2.3% (about $40), once every 12 months, with 3 full months' written notice on Form RTB-7. Here's my take for tenants and landlords."
 image: assets/img/blog/2026-10-28-bc-rent-increase-cap-viral-275-hike.jpg
-image_alt: "Meme-style graphic: a landlord's speech bubble says 'Rent's going up $275 a month.' after 4 years, followed by a stop sign and the text 'In B.C.? That can't happen.' The 2026 cap for existing tenants is 2.3%; on $1,750, that's about $40, not $275. Once every 12 months, 3 full months' written notice, Form RTB-7. Source: B.C. Residential Tenancy Branch, gov.bc.ca. Devin Desaulniers, REALTOR, Axford Real Estate."
+card_stat: "2.3%"
+card_stat_label: "B.C. rent increase cap for existing tenants in 2026 (about $40 on $1,750 rent)"
+card_photo: assets/img/blog/photos/bc-parliament-buildings-victoria.jpg
+card_photo_position: "center 42%"
+card_photo_credit: Michal Klajban / Wikimedia Commons (CC BY-SA 4.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:British_Columbia_Parliament_Buildings_in_Victoria,_British_Columbia,_Canada_14.jpg"
+image_alt: "Branded graphic over a photograph of the British Columbia Parliament Buildings in Victoria for the blog post “B.C. says not so fast to the viral $275 rent hike” (Renting). Key figure: the 2026 B.C. rent increase cap for existing tenants is 2.3%, about $40 on $1,750 rent. Background photo: Michal Klajban / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Rent increases"
     publisher: B.C. Residential Tenancy Branch (Government of B.C.)

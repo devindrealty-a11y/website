@@ -6,7 +6,13 @@ cta: renting
 summary: "After 34 months of year-over-year declines, Vancouver apartment and condo asking rents posted their first annual increase in October 2026 — a tiny +0.2% bump to $2,735. Urbanation says the window for cheaper rents is closing."
 description: "Rentals.ca and Urbanation's October 2026 National Rent Report: Vancouver apt and condo asking rents rose 0.2% year over year to $2,735 after 34 straight months of declines. Toronto +1.6%. Canada still down. What it means for Tri-Cities, BC renters and landlords."
 image: assets/img/blog/2026-11-06-vancouver-rent-discount-window-closing.jpg
-image_alt: "Chart graphic: Vancouver rents are rising again. After almost 3 years of falling rents, Vancouver apartment and condo asking rents rose 0.2% year over year to an average of $2,735. Bars show Toronto +1.6%, Ottawa +0.3%, Vancouver +0.2%, Montreal −0.3%, Calgary −2.4%, Canada −2.5%. Banner: Vancouver down 34 months in a row, now up. Source: Rentals.ca and Urbanation National Rent Report, October 2026, released November 5, 2026. Devin Desaulniers, REALTOR, Axford Real Estate."
+card_stat: "+0.2%"
+card_stat_label: "Vancouver apartment and condo asking rents, October 2026 vs. a year earlier, the first annual increase in 34 months"
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: center center
+card_photo_credit: Northwest / Wikimedia Commons (CC BY 4.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg"
+image_alt: "Branded graphic over a photograph of downtown Vancouver from False Creek for the blog post “The Vancouver rent discount window is closing” (Renting). Key figure: Vancouver apartment and condo asking rents rose 0.2% year over year in October 2026, the first annual increase in 34 months. Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "Toronto and Vancouver rents post first annual increases in more than two and a half years as national decline narrows"
     publisher: Rentals.ca

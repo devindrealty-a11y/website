@@ -5,7 +5,13 @@ category: Renting
 summary: "I ran a $190,000 salary through 2026 federal and provincial tax, CPP/EI and 12 months of average one-bedroom rent. Edmonton has $116,711 left; Vancouver is 8th at $102,376, within $101 of Ottawa."
 description: "A single filer earning $190,000, after 2026 tax and a year of average one-bedroom asking rent: Edmonton leads with $116,711 left, Vancouver is 8th at $102,376, and Halifax is last at $95,336. What it means for a newcomer relocating to Greater Vancouver."
 image: assets/img/blog/2026-10-09-what-190k-leaves-you-after-tax-and-rent.jpg
-image_alt: "Map of what $190,000 leaves after 2026 tax and a year of average 1-bedroom rent in 11 Canadian cities. Edmonton is 1st with $116,711 left per year, Vancouver is 8th with $102,376, and Halifax is last with $95,336, based on Rentals.ca/Urbanation September 2026 rents and 2026 tax rates. Devin's own calculation."
+card_stat: "$102,376"
+card_stat_label: "left from a $190,000 salary after 2026 tax and a year of average one-bedroom rent in Vancouver (Edmonton leads at $116,711)"
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: center center
+card_photo_credit: Northwest / Wikimedia Commons (CC BY 4.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg"
+image_alt: "Branded graphic over a photograph of downtown Vancouver from False Creek for the blog post “What $190,000 actually leaves you after tax and rent” (Renting). Key figure: a $190,000 salary leaves $102,376 in Vancouver after 2026 tax and a year of average one-bedroom rent; Edmonton leads at $116,711. Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "National Rent Report (September 2026 data)"
     publisher: Rentals.ca and Urbanation

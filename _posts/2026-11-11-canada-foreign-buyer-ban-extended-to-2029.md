@@ -5,7 +5,12 @@ category: Market news
 summary: "Budget 2026 proposes extending Canada's ban on foreign purchases of existing homes to January 1, 2029, while exempting new residential properties. Here's what that means in plain English for Greater Vancouver and the Tri-Cities, BC."
 description: "Budget 2026 (tabled Nov 5, 2026) proposes extending the ban on foreign purchases of existing residential properties to January 1, 2029 and exempting new builds. It's still a proposal; legislation and regulations have to follow. What it means for resale and new-build buyers in Greater Vancouver."
 image: assets/img/blog/2026-11-11-canada-foreign-buyer-ban-extended-to-2029.jpg
-image_alt: "Graphic: Budget 2026, foreign buyer ban extended to 2029, new builds exempt. Existing homes: ban stays until Jan 1, 2029; resale stays off-limits to most non-Canadians. New homes: would be exempt, opening the door to foreign capital for new supply. Ottawa's reasoning: keep most of the market for Canadians while unlocking investment to build more homes. Market angle: a full lift in 2027 got ruled out, which can keep downward pressure on resale while new builds reopen. Source: Budget 2026, tabled Nov 5, 2026; a proposal, with legislation and regulations still to come."
+card_takeaway: "Budget 2026 proposes extending the ban on foreign purchases of existing homes to January 1, 2029."
+card_photo: assets/img/blog/photos/parliament-hill-ottawa.jpg
+card_photo_position: "center 42%"
+card_photo_credit: Michel Rathwell / Wikimedia Commons (CC BY 2.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:The_Parliament_of_Canada_(39348012540).jpg"
+image_alt: "Branded graphic over a photograph of Parliament Hill in Ottawa for the blog post “Canada's foreign buyer ban is staying, with a twist” (Market news). Takeaway: Budget 2026 proposes extending the ban on foreign purchases of existing homes to January 1, 2029. Background photo: Michel Rathwell / Wikimedia Commons (CC BY 2.0)."
 sources:
   - title: "Budget 2026 Key Measures"
     publisher: Department of Finance Canada

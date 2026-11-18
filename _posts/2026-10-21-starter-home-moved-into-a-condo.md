@@ -4,7 +4,12 @@ date: 2026-10-21
 category: Buying
 summary: "Everyone says the starter home is dead. My Greater Vancouver take: it isn't. In the Tri-Cities, BC, a first place is usually a condo or townhouse now, and the plan is still the same: get in, build equity, trade up later."
 image: assets/img/blog/2026-10-21-starter-home-moved-into-a-condo.jpg
-image_alt: "Then and now graphic titled 'The starter home isn't dead. It just moved into a condo.' On the left, labelled Then, a faded small house with a white picket fence. On the right, labelled Now, a bright condo tower and townhouses with mountains behind and a 'Starter Home' sign. Three steps below: 1 Get in the door, 2 Build equity, 3 Trade up later."
+card_takeaway: "In the Tri-Cities, BC, a first place is usually a condo or townhouse now."
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: center center
+card_photo_credit: Northwest / Wikimedia Commons (CC BY 4.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg"
+image_alt: "Branded graphic over a photograph of downtown Vancouver from False Creek for the blog post “The starter home isn't dead. It just moved into a condo.” (Buying). Takeaway: in the Tri-Cities, BC, a first place is usually a condo or townhouse now. Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "The starter home isn't dead. It just moved into a condo. (original social post)"
     publisher: Devin Desaulniers on LinkedIn

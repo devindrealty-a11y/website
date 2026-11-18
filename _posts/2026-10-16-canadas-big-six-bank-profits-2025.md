@@ -5,7 +5,13 @@ category: Buying
 summary: "Canada's Big Six posted $69.9 billion in reported net income for fiscal 2025, or C$69.861 billion combined. When a Greater Vancouver renewal or pre-approval comes up, shop it."
 description: "FY2025 reported net income: TD $20.538B (includes a one-time Schwab sale gain), RBC $20.369B, BMO $8.725B, CIBC $8.454B, Scotiabank $7.758B and National Bank $4.017B. Combined C$69.861B, shown as $69.9B."
 image: assets/img/blog/2026-10-16-canadas-big-six-bank-profits-2025.jpg
-image_alt: "Map of Canada with blue beams at each Big Six head office, showing fiscal 2025 reported net income. The combined total is $69.9 billion. TD $20.5 billion and RBC $20.4 billion are in Toronto, then BMO $8.7 billion, CIBC $8.5 billion and Scotiabank $7.8 billion, also in Toronto, and National Bank $4.0 billion in Montreal. A note on the graphic says TD's total includes a one-time Schwab sale gain. Source: the banks' FY2025 reports."
+card_stat: "$69.9B"
+card_stat_label: "combined reported net income for Canada's Big Six banks, fiscal 2025"
+card_photo: assets/img/blog/photos/bay-front-toronto-2026.jpg
+card_photo_position: "center 42%"
+card_photo_credit: Dillan Payne / Wikimedia Commons (CC BY-SA 4.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:Front_Street_at_Bay_Street_in_Toronto,_May_22_2026.jpg"
+image_alt: "Branded graphic over a photograph of Bay Street and Front Street in downtown Toronto, with the CN Tower and bank towers for the blog post “Canada's Big Six posted $69.9B. Shop your mortgage.” (Buying). Key figure: Canada's Big Six banks posted $69.9 billion in combined reported net income for fiscal 2025. Background photo: Dillan Payne / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Royal Bank of Canada reports fourth quarter and 2025 results"
     publisher: Royal Bank of Canada

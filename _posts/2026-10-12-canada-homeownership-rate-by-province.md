@@ -5,7 +5,13 @@ category: Market news
 summary: "Everyone says nobody owns a home in Canada anymore. The 2021 Census says 66.5% do — down from 69.0% in 2011. B.C. sits at 66.8%, basically dead-on the national rate."
 description: "2021 Census homeownership rates by province and territory: Canada 66.5%, Newfoundland and Labrador leads at 75.7%, B.C. is 66.8% (near the national average), Quebec is the lowest province at 59.9%, and Nunavut is the outlier at 19.2%. Devin Desaulniers on what that means for buyers and renters in Greater Vancouver."
 image: assets/img/blog/2026-10-12-canada-homeownership-rate-by-province.jpg
-image_alt: "Map of 2021 Census homeownership rates by Canadian province and territory. Canada is 66.5% (down from 69.0% in 2011). Newfoundland and Labrador leads at 75.7%, B.C. is 66.8% near the national rate, Quebec is the lowest province at 59.9%, and Nunavut is the outlier at 19.2%. Source: Statistics Canada, 2021 Census."
+card_stat: "66.5%"
+card_stat_label: "of Canadian households owned their home in the 2021 Census (B.C.: 66.8%)"
+card_photo: assets/img/blog/photos/parliament-hill-ottawa.jpg
+card_photo_position: "center 42%"
+card_photo_credit: Michel Rathwell / Wikimedia Commons (CC BY 2.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:The_Parliament_of_Canada_(39348012540).jpg"
+image_alt: "Branded graphic over a photograph of Parliament Hill in Ottawa for the blog post “Who still owns a home in Canada? 66.5%, and B.C. is right on average” (Market news). Key figure: 66.5% of Canadian households owned their home in the 2021 Census, down from 69.0% in 2011; B.C. was 66.8%. Background photo: Michel Rathwell / Wikimedia Commons (CC BY 2.0)."
 sources:
   - title: "To buy or to rent: The housing market continues to be reshaped by several factors as Canadians search for an affordable place to call home"
     publisher: Statistics Canada

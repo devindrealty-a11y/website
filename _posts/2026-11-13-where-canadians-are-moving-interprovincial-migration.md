@@ -5,7 +5,24 @@ category: Market news
 summary: "From April to June 2026, Alberta gained 5,893 people from the rest of Canada and B.C. was 2nd at 2,756, while Ontario lost 7,063. Here's the interprovincial migration map, and what it means if you're moving to Greater Vancouver."
 description: "Statistics Canada's Q2 2026 estimates: Alberta +5,893, B.C. +2,756, Ontario -7,063 in net interprovincial migration. 8,738 people moved B.C. to Alberta and 7,991 moved Alberta to B.C. What it means for newcomers moving to Greater Vancouver and the Tri-Cities, BC."
 image: assets/img/blog/2026-11-13-where-canadians-are-moving-interprovincial-migration.jpg
-image_alt: "Map: Where Canadians are moving, net people gained or lost to other provinces and territories, April to June 2026. Alberta +5,893, B.C. +2,756, Nova Scotia +963, Newfoundland and Labrador +581, New Brunswick +551, Nunavut +280, Yukon +228, Saskatchewan -113, Northwest Territories -385, P.E.I. -611, Quebec -1,233, Manitoba -1,847, Ontario -7,063. B.C. and Alberta swap: 8,738 moved B.C. to Alberta, 7,991 moved Alberta to B.C. B.C.'s biggest source: 8,001 people moved here from Ontario. Source: Statistics Canada via Alberta Treasury Board and Finance, preliminary estimates."
+card_stat: "+2,756"
+card_stat_label: "B.C. net interprovincial gain, April to June 2026 (Alberta led at +5,893; Ontario lost 7,063)"
+card_chart_title: "Net interprovincial migration, Q2 2026"
+card_chart:
+  - label: Alberta
+    value: 5893
+    display: +5,893
+  - label: B.C.
+    value: 2756
+    display: +2,756
+  - label: Ontario
+    value: -7063
+    display: −7,063
+card_photo: assets/img/blog/photos/rocky-point-port-moody-2026.jpg
+card_photo_position: "center 48%"
+card_photo_credit: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg"
+image_alt: "Branded graphic over a photograph of the Port Moody waterfront from Rocky Point Park for the blog post “Where Canadians are moving: B.C. and Alberta almost an even trade” (Market news). Key figure: from April to June 2026, B.C. gained 2,756 people from the rest of Canada, Alberta led at +5,893, and Ontario lost 7,063. Background photo: Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "Canada's population estimates, second quarter 2026"
     publisher: Statistics Canada, The Daily

@@ -100,12 +100,15 @@ first source, and a white footer with Devin's mark, "devindesaulniers.ca · Axfo
 `assets/img/blog/<YYYY-MM-DD>-<slug>.jpg` and `.webp` with ffmpeg (each kept under 200 KB).
 It needs `google-chrome` (or `CHROME=/path`) and `ffmpeg`, both on the box.
 
-**Background photo (required for place-specific posts).** If the post is about a specific place — a SkyTrain station,
-a city, a neighbourhood, a park — the featured image must use a real photograph of that place as the background, with a
-dark gradient overlay so the title stays readable, and the existing branded text graphics (category pill, title, stat
-card, footer) laid over top. Example: the Moody Centre Station guide uses a photo of Moody Centre Station; a Coquitlam
-rent post uses a recognisable Coquitlam photo (such as Lafarge Lake / Town Centre). The old plain-blue gradient is only
-the fallback when no photo is given (older posts, or a story with no specific place).
+**Background photo (required on every post, including social reposts).** The featured image must use a real photograph
+of the place the post is about as the background, with a dark gradient overlay so the title stays readable, and the
+existing branded text graphics (category pill, title, stat card, footer) laid over top. Example: the Moody Centre
+Station guide uses a photo of Moody Centre Station; a Coquitlam rent post uses a recognisable Coquitlam photo (such as
+Lafarge Lake / Town Centre); a Canada-wide policy post uses a photo such as Parliament Hill; a Vancouver social repost
+uses a Vancouver photo. Never publish a plain-blue, navy, or generic text card, and never pad a social graphic onto a
+plain navy 1200×630 canvas. If Devin's own social post used a real photograph (not AI-generated), that photo may be
+reused as his own content. If the social background looks AI-generated or has no licence, use a Wikimedia / Unsplash /
+Pexels photo of the place and tell him. Ask him instead of silently falling back.
 
 - Set `card_photo` to a file in the repo (keep source photos in `assets/img/blog/photos/`). Optional
   `card_photo_position` (CSS background-position, e.g. `center 35%`) keeps the landmark in the 1200×630 crop.

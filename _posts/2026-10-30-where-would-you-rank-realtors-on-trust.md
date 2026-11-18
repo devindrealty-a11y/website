@@ -5,18 +5,6 @@ category: Market news
 cta: general
 summary: "Ipsos ranked 20 professions on trust for 2026. Doctors lead at +43 net trust and politicians trail at −48. REALTORS® aren't on the list at all, so I'm asking you where we'd land."
 description: "The Ipsos Global Trustworthiness Index 2026 puts doctors at +43 net trust, teachers +37, lawyers 0, bankers −10 and politicians −48. REALTORS® aren't in the index. Here's my take, and how to check whether an agent has earned your trust."
-sources:
-  - title: "Ranked: The Most and Least Trusted Professions in 2026"
-    publisher: Visual Capitalist
-    date: 2026-10-26
-    url: https://www.visualcapitalist.com/most-trusted-professions-2026/
-  - title: "Ipsos Global Trustworthiness Index 2026"
-    publisher: Ipsos
-    url: https://www.ipsos.com/en/ipsos-global-trustworthiness-index-2026
-  - title: "Trusted professions in 2026: where would you rank REALTORS®? (original social post)"
-    publisher: Devin Desaulniers on LinkedIn
-    date: 2026-10-28
-    url: https://www.linkedin.com/feed/update/urn:li:activity:7521346532621582336/
 card_stat: "+43 vs −48"
 card_stat_label: "Net trust: doctors vs. politicians (REALTORS® not in the index)"
 card_chart_title: "Net trust score, 2026 (points)"
@@ -36,6 +24,23 @@ card_chart:
   - label: Politicians
     value: -48
     display: "−48"
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: center center
+card_photo_credit: Northwest / Wikimedia Commons (CC BY 4.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg"
+image_alt: "Branded graphic over a photograph of downtown Vancouver from False Creek for the blog post “Doctors +43, politicians −48. Where would you rank REALTORS®?” (Market news). Key figure: doctors led at +43 net trust and politicians trailed at −48 in the 2026 Ipsos ranking; REALTORS® are not in the index. Bar chart of net trust scores, 2026: Doctors +43, Teachers +37, Lawyers 0, Bankers −10, Politicians −48. Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
+sources:
+  - title: "Ranked: The Most and Least Trusted Professions in 2026"
+    publisher: Visual Capitalist
+    date: 2026-10-26
+    url: https://www.visualcapitalist.com/most-trusted-professions-2026/
+  - title: "Ipsos Global Trustworthiness Index 2026"
+    publisher: Ipsos
+    url: https://www.ipsos.com/en/ipsos-global-trustworthiness-index-2026
+  - title: "Trusted professions in 2026: where would you rank REALTORS®? (original social post)"
+    publisher: Devin Desaulniers on LinkedIn
+    date: 2026-10-28
+    url: https://www.linkedin.com/feed/update/urn:li:activity:7521346532621582336/
 ---
 Doctors sit at +43 net trust. Politicians at −48. REALTORS®? Not even on the list.
 

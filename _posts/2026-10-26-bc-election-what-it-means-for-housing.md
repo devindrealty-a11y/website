@@ -6,7 +6,12 @@ cta: general
 summary: "The BC Conservatives under Lorne Doerkson are projected to win a majority. Politics aside, here's what they ran on for housing and what it could mean for buyers, sellers and renters in Greater Vancouver and the Tri-Cities, BC."
 description: "BC Conservatives projected to win a majority (leading in 64 of 93 ridings on the initial count; final count Nov 6-10). Their housing plan, and what it could mean for buyers, sellers and renters in Greater Vancouver and the Tri-Cities, BC."
 image: assets/img/blog/2026-10-26-bc-election-what-it-means-for-housing.jpg
-image_alt: "Graphic titled 'Conservatives projected to win BC majority: what it means for buyers, sellers and renters', with a map of B.C. ridings by leading party (Conservative 64, NDP 27, Green 2) and a photo of Lorne Doerkson, premier-designate (projected). Buyers: more supply over time if fees and approvals ease; rates still matter more this year. Sellers: no new housing taxes promised; spec tax and foreign buyer tax staying (per Doerkson). Renters: no new renter promises; the 2.2% rent-increase cap for 2027 is already set. Projected, initial count Oct 24, final count Nov 6-10, Elections BC via bcballot.ca. Photo: Conservative Party of BC."
+card_takeaway: What a new B.C. government could mean for housing in Greater Vancouver.
+card_photo: assets/img/blog/photos/bc-parliament-buildings-victoria.jpg
+card_photo_position: "center 42%"
+card_photo_credit: Michal Klajban / Wikimedia Commons (CC BY-SA 4.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:British_Columbia_Parliament_Buildings_in_Victoria,_British_Columbia,_Canada_14.jpg"
+image_alt: "Branded graphic over a photograph of the British Columbia Parliament Buildings in Victoria for the blog post “B.C. has a new government. What it could mean for housing” (Market news). Takeaway: what a new B.C. government could mean for housing in Greater Vancouver. Background photo: Michal Klajban / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "2026 B.C. election results (Elections BC initial count)"
     publisher: bcballot.ca

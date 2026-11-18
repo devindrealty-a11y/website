@@ -5,7 +5,13 @@ category: Market news
 summary: "Statistics Canada's medium-growth scenario has Canada adding about 7.03 million people by 2050. Alberta grows fastest (+43.6%), Ontario adds the most people, and B.C. adds 892,700 (+15.7%). Here's what that backdrop means for the Tri-Cities, BC."
 description: "StatCan's M1 medium-growth projection (Table 17-10-0057-01): Canada 41.65M to 48.69M by 2050, Alberta +43.6%, Ontario +2.92M, B.C. +892,700 (+15.7%), Quebec and Newfoundland and Labrador slightly down. A housing-supply backdrop for Coquitlam, Port Coquitlam and Port Moody, not a price forecast."
 image: assets/img/blog/2026-11-09-where-could-canadas-population-grow-by-2050.jpg
-image_alt: "Map graphic: Canada's population, projected change 2025 to 2050, Statistics Canada medium-growth M1 scenario. Canada total +7.03 million (+16.9%), 41.65M to 48.69M. Alberta +43.6% (+2,190.8K), Yukon +29.0%, Prince Edward Island +28.0%, Saskatchewan +25.3%, Nunavut +22.2%, New Brunswick +21.7%, Manitoba +20.5%, Ontario +18.0% (+2,923.4K), British Columbia +15.7% (+892.7K), Nova Scotia +13.2%, Northwest Territories +10.9%, Quebec −0.1%, Newfoundland and Labrador −1.0%. Source: StatCan Table 17-10-0057-01, released January 27, 2026."
+card_stat: "+15.7%"
+card_stat_label: "projected B.C. population growth by 2050 (Alberta: +43.6%)"
+card_photo: assets/img/blog/photos/parliament-hill-ottawa.jpg
+card_photo_position: "center 42%"
+card_photo_credit: Michel Rathwell / Wikimedia Commons (CC BY 2.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:The_Parliament_of_Canada_(39348012540).jpg"
+image_alt: "Branded graphic over a photograph of Parliament Hill in Ottawa for the blog post “Where could Canada's population grow most by 2050?” (Market news). Key figure: Statistics Canada's medium-growth scenario has B.C. growing 15.7% by 2050, and Alberta 43.6%. Background photo: Michel Rathwell / Wikimedia Commons (CC BY 2.0)."
 sources:
   - title: "Projected population, by projection scenario, age and gender, as of July 1 (Table 17-10-0057-01)"
     publisher: Statistics Canada

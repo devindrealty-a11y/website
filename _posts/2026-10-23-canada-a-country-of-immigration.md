@@ -6,7 +6,13 @@ cta: general
 summary: "About 8.8 million people living in Canada were born somewhere else, led by India, the Philippines and China. And of the 1.3 million Canadian-born people living abroad, 7 in 10 are in the U.S."
 description: "UN migrant stock estimates (mid-2024): about 8.8 million people in Canada were born elsewhere (India about 1.0 million, Philippines 836,000, China 772,000), and about 1.3 million Canadian-born people live abroad, 70.5% of them in the U.S."
 image: assets/img/blog/2026-10-23-canada-a-country-of-immigration.jpg
-image_alt: "Graphic titled 'Canada: a country of immigration' showing where people in Canada were born and where Canadian-born people live abroad, with a red map of Canada in the middle. Left: about 8.8 million people in Canada were born elsewhere, top 10 birthplaces India 1.0 million (11.5%), Philippines 836,000 (9.5%), China 772,000 (8.8%), United Kingdom 428,000 (4.9%), Pakistan 267,000 (3.0%), United States 257,000 (2.9%), Iran 205,000 (2.3%), Hong Kong 205,000 (2.3%), Italy 183,000 (2.1%), Vietnam 180,000 (2.0%). Right: about 1.3 million people born in Canada live abroad, top 10 United States 950,000 (70.5%), United Kingdom 82,000 (6.1%), Australia 57,000 (4.2%), Italy 23,000 (1.7%), China 23,000 (1.7%), Hong Kong 16,000 (1.2%), Mexico 14,000 (1.1%), Greece 14,000 (1.0%), New Zealand 13,000 (1.0%), Switzerland 13,000 (1.0%). Bottom line: 7 in 10 Canadians living abroad are in the U.S. Source: UN DESA, International Migrant Stock 2024 (mid-2024 estimates)."
+card_stat: 8.8M
+card_stat_label: people living in Canada were born somewhere else (UN mid-2024 estimates)
+card_photo: assets/img/blog/photos/parliament-hill-ottawa.jpg
+card_photo_position: "center 42%"
+card_photo_credit: Michel Rathwell / Wikimedia Commons (CC BY 2.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:The_Parliament_of_Canada_(39348012540).jpg"
+image_alt: "Branded graphic over a photograph of Parliament Hill in Ottawa for the blog post “Canada, a country of immigration: where we're born and where we go” (Renting). Key figure: about 8.8 million people living in Canada were born somewhere else, according to UN mid-2024 estimates. Background photo: Michel Rathwell / Wikimedia Commons (CC BY 2.0)."
 sources:
   - title: "International Migrant Stock 2024: stock by sex, destination and origin (mid-2024)"
     publisher: UN DESA Population Division

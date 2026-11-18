@@ -5,8 +5,14 @@ category: Buying
 summary: "Two Vancouver families who'd never met teamed up on a $1.85M house, with their own suites and kitchens and a shared basement, yard and freezer. Here's why I like the idea, and what I'd tell any client thinking about co-owning."
 description: "Two families who were strangers co-bought a $1.85M Vancouver house and split costs 50/50. My take on co-ownership in Greater Vancouver: the upside, the co-ownership agreement, exit plans, and mortgage and title questions to ask first."
 image: assets/img/blog/2026-11-18-strangers-buying-houses-together-vancouver.jpg
-image_alt: "Graphic: Vancouver real estate, 2026: strangers are now buying houses together. Two families. One house. One freezer. (Would you? Be honest.) Pill: $1.85M house, split 50/50. Source: BBC News (Nov 2026); Vancouver Sun."
 cta: buying
+card_stat: "$1.85M"
+card_stat_label: "Vancouver house bought by two families who were strangers, split 50/50 (BBC News)"
+card_photo: assets/img/blog/photos/3171-west-5th-vancouver.jpg
+card_photo_position: "center 40%"
+card_photo_credit: Joltex / Wikimedia Commons (CC BY-SA 4.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:3171_West_5th_Avenue,_Vancouver_BC.jpg"
+image_alt: "Branded graphic over a photograph of a heritage house on West 5th Avenue in Kitsilano, Vancouver for the blog post “Vancouver real estate in 2026: strangers are buying houses together” (Buying). Key figure: two families who were strangers bought a $1.85M Vancouver house and split costs 50/50. Background photo: Joltex / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "We were priced out of the market, so we bought a home with strangers"
     publisher: BBC News

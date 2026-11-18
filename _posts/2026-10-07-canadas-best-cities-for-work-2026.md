@@ -5,7 +5,13 @@ category: Renting
 summary: "I built a Canadian version of the viral \"Best Cities for Work\" map, ranking our 23 biggest metros on public StatCan and CMHC data. Vancouver lands 11th: top 5 for pay, dead last for pay vs. rent."
 description: "Devin Desaulniers ranks Canada's 23 biggest metros for work in 2026 using Statistics Canada and CMHC data. Calgary, Regina and Québec City lead; Vancouver is 11th, 4th for pay but 23rd of 23 for pay vs. rent. What it means for newcomers relocating to Greater Vancouver."
 image: assets/img/blog/2026-10-07-canadas-best-cities-for-work-2026.jpg
-image_alt: "Map of Canada's Best Cities for Work in 2026 ranking 23 metros, with Calgary 1st, Regina 2nd and Québec City 3rd. Vancouver ranks 11th of 23: 4th for pay, 3rd for economic opportunity and 23rd of 23 for pay vs. rent. Source: Statistics Canada and CMHC; composite score is Devin's own calculation."
+card_stat: 11th
+card_stat_label: "Vancouver's overall rank among Canada's 23 biggest metros (4th for pay, last for pay vs. rent)"
+card_photo: assets/img/blog/photos/false-creek-vancouver-2025.jpg
+card_photo_position: center center
+card_photo_credit: Northwest / Wikimedia Commons (CC BY 4.0)
+card_photo_credit_url: "https://commons.wikimedia.org/wiki/File:False_Creek,_Vancouver_(2025).jpg"
+image_alt: "Branded graphic over a photograph of downtown Vancouver from False Creek for the blog post “Canada's best cities for work in 2026: Vancouver is 4th for pay, last for rent” (Renting). Key figure: Vancouver ranked 11th of Canada's 23 biggest metros, 4th for pay and 23rd of 23 for pay vs. rent. Background photo: Northwest / Wikimedia Commons (CC BY 4.0)."
 sources:
   - title: "Labour force characteristics by census metropolitan area, three-month moving average, seasonally adjusted (Table 14-10-0459-01)"
     publisher: Statistics Canada
