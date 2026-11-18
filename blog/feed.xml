@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Tue, 17 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Wed, 18 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>Vancouver real estate in 2026: strangers are buying houses together</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-18-strangers-buying-houses-together-vancouver.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-18-strangers-buying-houses-together-vancouver.html</guid>
+    <pubDate>Wed, 18 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Buying</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>Two Vancouver families who'd never met teamed up on a $1.85M house, with their own suites and kitchens and a shared basement, yard and freezer. Here's why I like the idea, and what I'd tell any client thinking about co-owning.</description>
+  </item>
   <item>
     <title>SD43 school registration for newcomers to the Tri-Cities, BC</title>
     <link>https://devindesaulniers.ca/blog/2026-11-17-sd43-school-registration-newcomers-tri-cities-bc.html</link>
@@ -267,15 +276,6 @@
     <category>Market news</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>Greater Vancouver REALTORS® reports 2,024 Metro Vancouver home sales in October 2026, down 10.2% from a year ago, as a rate hike and a snap election kept buyers and sellers on the sidelines. My take for buyers, sellers and newcomers in the Tri-Cities, BC.</description>
-  </item>
-  <item>
-    <title>Commuting from Port Moody to Vancouver: SkyTrain, WCE or car?</title>
-    <link>https://devindesaulniers.ca/blog/2026-11-04-commuting-from-port-moody-to-vancouver.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-04-commuting-from-port-moody-to-vancouver.html</guid>
-    <pubDate>Wed, 04 Nov 2026 08:00:00 -0700</pubDate>
-    <category>FAQ</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>Commuting from Port Moody to Vancouver? Here's how the Millennium Line, the weekday West Coast Express and the drive along Barnet Highway or Lougheed Highway compare on time and fares, plus a checklist for newcomers choosing where to live in the Tri-Cities, BC.</description>
   </item>
 </channel>
 </rss>
