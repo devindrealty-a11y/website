@@ -18,7 +18,11 @@ card_chart:
   - label: Moody Ctr
     value: 25
     display: "25 min"
-image_alt: "Branded graphic for the blog post “Relocating to Port Coquitlam, BC: what newcomers should know” (FAQ). Key number: the scheduled weekday West Coast Express ride from Port Coquitlam to Waterfront Station is 36 minutes. Chart: scheduled minutes to Waterfront are 36 from Port Coquitlam, 30 from Coquitlam Central and 25 from Moody Centre. Source: TransLink."
+card_photo: assets/img/blog/photos/terry-fox-secondary-port-coquitlam.jpg
+card_photo_position: "center 55%"
+card_photo_credit: "Caty150 / Wikimedia Commons (CC BY-SA 4.0)"
+card_photo_credit_url: https://commons.wikimedia.org/wiki/File:TerryFoxExterior.jpg
+image_alt: "Branded graphic over a photograph of Terry Fox Secondary School in Port Coquitlam for the blog post “Relocating to Port Coquitlam, BC: what newcomers should know” (FAQ). Key number: the scheduled weekday West Coast Express ride from Port Coquitlam to Waterfront Station is 36 minutes. Chart: scheduled minutes to Waterfront are 36 from Port Coquitlam, 30 from Coquitlam Central and 25 from Moody Centre. Source: TransLink. Background photo: Caty150 / Wikimedia Commons (CC BY-SA 4.0)."
 sources:
   - title: "West Coast Express Schedules"
     publisher: TransLink
