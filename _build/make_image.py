@@ -74,10 +74,11 @@ def card_data(post, meta, photo_credit=None, photo_position=None):
     source_line = "Source: " + ", ".join(x for x in (src.get("publisher") or src["title"], sdate) if x)
     credit = meta.get("card_photo_credit", "") if photo_credit is None else photo_credit
     position = (meta.get("card_photo_position", "") if photo_position is None else photo_position) or "center center"
+    size = (meta.get("card_photo_size", "") or "cover").strip() or "cover"
     return {"title": post["title"], "category": post["category"], "stat": meta.get("card_stat", ""),
             "stat_label": meta.get("card_stat_label", ""), "takeaway": meta.get("card_takeaway", ""),
             "chart_title": meta.get("card_chart_title", ""), "chart": chart, "source": source_line,
-            "photo_credit": credit or "", "photo_position": position}
+            "photo_credit": credit or "", "photo_position": position, "photo_size": size}
 
 def default_alt(c):
     parts = [f"Branded graphic for the blog post \u201c{c['title']}\u201d ({c['category']})."]
@@ -113,7 +114,7 @@ def render_html(c, bg_url=""):
         pos = c.get("photo_position") or "center center"
         body_bg = "#173a5e"
         layers = (
-            f'<div class="bg" style="background-image:url(\'{esc(bg_url)}\');background-position:{esc(pos)}"></div>'
+            f'<div class="bg" style="background-image:url(\'{esc(bg_url)}\');background-size:{esc(c.get("photo_size") or "cover")};background-position:{esc(pos)}"></div>'
             f'<div class="overlay"></div>'
         )
         credit = f'<div class="credit">Photo: {esc(c["photo_credit"])}</div>' if c.get("photo_credit") else ""

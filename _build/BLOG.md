@@ -57,6 +57,7 @@ card_chart:                                # optional simple bar chart, 2-5 bars
 # featured image background (required for posts about a specific place — see step 1b):
 # card_photo: assets/img/blog/photos/moody-centre-station.jpg
 # card_photo_position: center 35%          # optional CSS background-position; use to keep the landmark in frame
+# card_photo_size: 1800px auto             # optional CSS background-size (default cover) when the photo needs a tighter crop
 # card_photo_credit: "Name / Wikimedia Commons (CC BY 4.0)"
 # card_photo_credit_url: https://commons.wikimedia.org/wiki/File:Example.jpg
 # optional:
