@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Wed, 18 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Thu, 19 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>Vancouver's housing-start trend rose 2% in October</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-19-vancouver-housing-starts-october.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-19-vancouver-housing-starts-october.html</guid>
+    <pubDate>Thu, 19 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Market news</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>CMHC's October 2026 report shows the Vancouver housing-start trend up 2% from September, to 26,586, while B.C.'s trend fell 3%. Actual October starts jumped on multi-unit homes, but the year-to-date total is only 1% above 2025. What that means in the Tri-Cities, BC.</description>
+  </item>
   <item>
     <title>Vancouver real estate in 2026: strangers are buying houses together</title>
     <link>https://devindesaulniers.ca/blog/2026-11-18-strangers-buying-houses-together-vancouver.html</link>
@@ -267,15 +276,6 @@
     <category>Renting</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>Relocating to Coquitlam, BC? Use this first 30 days checklist for newcomers: set up BC Hydro, get a Compass Card for the Millennium Line, apply for MSP, register kids with SD43, and find Mundy Park and Como Lake.</description>
-  </item>
-  <item>
-    <title>Moving from Alberta to BC: a Tri-Cities, BC newcomer checklist</title>
-    <link>https://devindesaulniers.ca/blog/2026-11-05-moving-from-alberta-to-bc-tri-cities-checklist.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-05-moving-from-alberta-to-bc-tri-cities-checklist.html</guid>
-    <pubDate>Thu, 05 Nov 2026 08:00:00 -0700</pubDate>
-    <category>FAQ</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>Moving from Alberta to BC? Here's what changes when you land in the Tri-Cities, BC: your 90-day licence switch, the 30-day vehicle deadline, health coverage timing, BC's 7% PST, and rental rules that differ from Alberta's.</description>
   </item>
 </channel>
 </rss>
