@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Thu, 19 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Fri, 20 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>Your mortgage rate hold has an expiry date</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-20-mortgage-rate-hold-expiry-date.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-20-mortgage-rate-hold-expiry-date.html</guid>
+    <pubDate>Fri, 20 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Buying</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>Your mortgage rate hold expires, like the milk in the fridge. The Bank of Canada hiked to 2.50% on Oct. 28. A further 0.25 point rise is a scenario, not a forecast. Figures as of Nov. 18, 2026.</description>
+  </item>
   <item>
     <title>Vancouver's housing-start trend rose 2% in October</title>
     <link>https://devindesaulniers.ca/blog/2026-11-19-vancouver-housing-starts-october.html</link>
@@ -267,15 +276,6 @@
     <category>FAQ</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>A Burquitlam condo buyer should weigh Millennium Line access at Burquitlam Station, the City's transit-oriented redevelopment plan, and the strata file before removing subjects. Here is a plain-language guide for buyers and newcomers looking at Coquitlam's Burquitlam neighbourhood.</description>
-  </item>
-  <item>
-    <title>The Vancouver rent discount window is closing</title>
-    <link>https://devindesaulniers.ca/blog/2026-11-06-vancouver-rent-discount-window-closing.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-06-vancouver-rent-discount-window-closing.html</guid>
-    <pubDate>Fri, 06 Nov 2026 08:00:00 -0700</pubDate>
-    <category>Renting</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>After 34 months of year-over-year declines, Vancouver apartment and condo asking rents posted their first annual increase in October 2026 — a tiny +0.2% bump to $2,735. Urbanation says the window for cheaper rents is closing.</description>
   </item>
 </channel>
 </rss>
