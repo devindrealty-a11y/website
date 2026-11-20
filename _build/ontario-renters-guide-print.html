@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<title>Renting in Greater Vancouver: a guide for Ontario movers | Devin Desaulniers, Axford Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #132639;
+    --blue: #3474b6;
+    --blue-dark: #24578c;
+    --blue-light: #e8f0f9;
+    --muted: #5c6b7a;
+    --line: #d5deea;
+    --paper: #f4f7fb;
+    --gold: #e2b100;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Inter, "Segoe UI", sans-serif;
+    color: var(--ink);
+    font-size: 10.4px;
+    line-height: 1.42;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @page { size: letter; margin: 0; }
+  .sheet {
+    width: 8.5in;
+    height: 11in;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+    background: #fff;
+  }
+  .sheet:last-child { page-break-after: auto; break-after: auto; }
+  .pad { padding: 0.46in 0.5in 0.48in; height: 100%; }
+  .runhead, .runfoot {
+    position: absolute; left: 0.5in; right: 0.5in;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 8px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600;
+  }
+  .runhead { top: 0.22in; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  .runfoot {
+    bottom: 0.18in; padding-top: 6px; border-top: 1px solid var(--line);
+    letter-spacing: .04em; text-transform: none; font-weight: 500; color: var(--ink);
+  }
+  .runfoot b { font-weight: 700; }
+  .body { padding-top: 0.28in; }
+  h1, h2, h3 { font-family: Newsreader, Georgia, serif; font-weight: 500; letter-spacing: -0.012em; margin: 0; color: var(--ink); }
+  h2 { font-size: 22px; line-height: 1.12; margin: 0 0 8px; }
+  h3 { font-size: 13.5px; line-height: 1.2; margin: 0 0 4px; }
+  p { margin: 0 0 7px; }
+  .kicker {
+    font-family: Inter, sans-serif; font-weight: 700; font-size: 8.5px;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--blue-dark); margin: 0 0 4px;
+  }
+  .muted { color: var(--muted); }
+  a { color: var(--blue-dark); text-decoration: none; }
+
+  /* cover */
+  .cover-photo { height: 5.55in; position: relative; overflow: hidden; }
+  .cover-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 45%; display: block; }
+  .cover-credit {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 8px 0.5in; color: #fff; font-size: 8.5px;
+    background: linear-gradient(transparent, rgba(19,38,57,.72));
+  }
+  .cover-panel { padding: 0.32in 0.5in 0.28in; }
+  .cover-panel h1 { font-size: 40px; line-height: 0.98; margin: 6px 0 10px; }
+  .deck { font-size: 13px; line-height: 1.4; color: #24384c; margin: 0 0 14px; max-width: 6.8in; }
+  .who { display: flex; gap: 12px; align-items: center; }
+  .who img { width: 52px; height: 64px; object-fit: cover; border-radius: 4px; }
+  .who strong { display: block; font-size: 13px; }
+  .who span { color: var(--muted); font-size: 11px; }
+  .cover-foot {
+    position: absolute; left: 0.5in; right: 0.5in; bottom: 0.28in;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 2px solid var(--blue); padding-top: 8px; font-size: 10px;
+  }
+  .cover-foot img { height: 22px; width: auto; }
+
+  .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0; }
+  .col { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px 8px; background: #fff; }
+  .col.on { border-top: 3px solid #8aa0b8; }
+  .col.bc { border-top: 3px solid var(--blue); background: #f8fbfe; }
+  .col ul, .ticks { margin: 4px 0 0; padding: 0; list-style: none; }
+  .col li, .ticks li { position: relative; padding: 0 0 4px 12px; }
+  .col li::before, .ticks li::before { content: ""; position: absolute; left: 0; top: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
+  .ahead {
+    background: var(--blue-light); border-radius: 8px; padding: 8px 12px; margin: 8px 0 0;
+  }
+  .ahead strong { color: var(--blue-dark); }
+  .src { font-size: 8.4px; color: var(--muted); margin: 4px 0 0; }
+
+  .icons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 8px 0 10px; }
+  .icon {
+    border: 1px solid var(--line); border-radius: 8px; padding: 8px 8px 7px; text-align: center; background: var(--paper);
+  }
+  .icon svg { width: 22px; height: 22px; stroke: var(--blue-dark); fill: none; stroke-width: 1.7; }
+  .icon b { display: block; margin-top: 4px; font-size: 10px; }
+  .icon span { display: block; color: var(--muted); font-size: 8.4px; line-height: 1.3; }
+
+  .line-wrap { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px 12px; margin: 8px 0; }
+  .line-label { display: inline-block; background: var(--gold); color: var(--ink); font-weight: 700; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; border-radius: 99px; padding: 2px 8px; }
+  .stations { display: grid; grid-template-columns: repeat(7, 1fr); list-style: none; margin: 10px 0 0; padding: 0; position: relative; }
+  .stations::before { content: ""; position: absolute; left: 6%; right: 6%; top: 7px; height: 4px; background: var(--gold); border-radius: 3px; }
+  .stations li { text-align: center; position: relative; font-size: 8px; line-height: 1.25; padding-top: 16px; }
+  .stations li::before { content: ""; position: absolute; left: 50%; top: 2px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: #fff; border: 3px solid var(--ink); }
+  .stations .city { display: block; color: var(--muted); font-size: 7.4px; }
+
+  .places { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 8px; margin-top: 8px; align-items: start; }
+  .places img { width: 100%; height: 102px; object-fit: cover; border-radius: 6px; display: block; }
+  .places figcaption { font-size: 7.6px; color: var(--muted); margin-top: 3px; line-height: 1.3; }
+  .mapbox { border: 1px dashed var(--blue); border-radius: 8px; padding: 8px 10px; background: #f8fbfe; }
+  .mapbox h3 { font-size: 12px; }
+  .cityrow { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 6px; }
+  .chip { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 6px 7px; }
+  .chip b { display: block; font-size: 10px; }
+  .photos { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .photos figure, .pair figure { margin: 0; }
+  .photos img, .pair img { width: 100%; height: 92px; object-fit: cover; border-radius: 6px; display: block; }
+  .photos figcaption, .pair figcaption { font-size: 7.6px; color: var(--muted); margin-top: 3px; line-height: 1.3; }
+  .pair { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 8px; }
+  .pair img { height: 118px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 9.2px; }
+  th, td { text-align: left; vertical-align: top; padding: 4px 6px; border-bottom: 1px solid var(--line); }
+  th { font-size: 8px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  td.num { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 600; }
+
+  .timeline { list-style: none; margin: 6px 0 0; padding: 0; position: relative; }
+  .timeline::before { content: ""; position: absolute; left: 7px; top: 4px; bottom: 4px; width: 2px; background: var(--blue-light); }
+  .timeline li { position: relative; padding: 0 0 6px 26px; }
+  .timeline li::before { content: ""; position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 3px solid var(--blue); }
+  .when { display: inline-block; background: var(--blue-light); color: var(--blue-dark); font-weight: 700; font-size: 8px; letter-spacing: .06em; text-transform: uppercase; border-radius: 99px; padding: 1px 7px; margin-bottom: 2px; }
+  .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; list-style: none; margin: 6px 0 0; padding: 0; }
+  .checks li { display: flex; gap: 6px; align-items: flex-start; }
+  .box { width: 11px; height: 11px; border: 1.5px solid var(--blue-dark); border-radius: 2px; flex: 0 0 11px; margin-top: 1px; }
+  .note { background: var(--paper); border-radius: 8px; padding: 8px 10px; margin-top: 8px; }
+  .sources { columns: 2; column-gap: 16px; font-size: 8px; line-height: 1.35; }
+  .sources p { break-inside: avoid; margin: 0 0 5px; }
+  .big { font-family: Newsreader, Georgia, serif; font-size: 20px; line-height: 1; color: var(--blue-dark); }
+  .split { display: grid; grid-template-columns: 1.15fr .85fr; gap: 12px; }
+</style>
+</head>
+<body>
+
+<section class="sheet">
+  <div class="cover-photo">
+    <img src="../assets/img/blog/photos/rocky-point-port-moody-2026.jpg" alt="View from Rocky Point Park, Port Moody, looking across the inlet">
+    <p class="cover-credit">Photo: Yuet Man Lee, Rocky Point Park, Port Moody, February 14, 2026. Wikimedia Commons, CC BY-SA 4.0.</p>
+  </div>
+  <div class="cover-panel">
+    <p class="kicker">A guide for Ontario movers</p>
+    <h1>Renting in<br>Greater Vancouver</h1>
+    <p class="deck">How renting in B.C. works when you are moving from Ontario: the tenancy rules, health coverage, your licence, and the move-in costs I can tie to an official source.</p>
+    <div class="who">
+      <img src="../assets/img/devin-headshot-800.jpg" alt="Devin Desaulniers">
+      <p><strong>Devin Desaulniers</strong><span>Real Estate Associate, Axford Real Estate<br>604-809-1032 · devin@axfordrealestate.ca</span></p>
+    </div>
+  </div>
+  <div class="cover-foot">
+    <span>Axford Real Estate · Port Moody, BC</span>
+    <img src="../assets/img/axford-logo.png" alt="Axford Real Estate">
+  </div>
+</section>
+
+<section class="sheet">
+  <div class="runhead"><span>Devin Desaulniers</span><span>Renting in Greater Vancouver · Ontario movers</span></div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers, Real Estate Associate · 604-809-1032 · devin@axfordrealestate.ca</span><span>2</span></div>
+  <div class="pad"><div class="body">
+    <p class="kicker">If you are moving from Ontario</p>
+    <h2>Start with the rules that actually change</h2>
+    <div class="split">
+      <div>
+        <p>I am Devin Desaulniers, a Real Estate Associate with Axford Real Estate in Port Moody. I have lived in Greater Vancouver for 28 years, and I have been licensed in British Columbia since 2020. I wrote this for people who are renting here after a move from Ontario.</p>
+        <p>This is general information, not legal, tax, medical or insurance advice. I checked the government pages on November 20, 2026. If a page has moved, follow the official page. Current asking rents are not in this guide. They are on my rent report: <a href="https://devindesaulniers.ca/rent-report.html">devindesaulniers.ca/rent-report.html</a>.</p>
+      </div>
+      <div class="note">
+        <p class="kicker">What is inside</p>
+        <ul class="ticks">
+          <li>Ontario and B.C. tenancy rules, side by side, and how to get ahead of each one.</li>
+          <li>A timeline from the first search through move-in day and the first 30 days.</li>
+          <li>Move-in costs, with a source on every figure I print.</li>
+          <li>A SkyTrain diagram I drew, and photographs of the places.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="kicker" style="margin-top:10px">Where you are actually moving</p>
+    <p>People often say “Vancouver” when they mean the wider region. Greater Vancouver includes the City of Vancouver plus Burnaby, New Westminster, Richmond, the North Shore, Surrey, Langley, and the Tri-Cities, BC: Coquitlam, Port Coquitlam and Port Moody, along with Anmore and Belcarra. I would start with where you will work or study, then shortlist two or three areas.</p>
+
+    <div class="line-wrap">
+      <span class="line-label">Millennium Line · a diagram I drew</span>
+      <p style="margin:6px 0 0">This is my sketch of the Evergreen stations on the Millennium Line, east from Lougheed Town Centre. It is not a TransLink map. TransLink lists the line from VCC–Clark in Vancouver to Lafarge Lake–Douglas in Coquitlam, with these stations in this order after Lougheed.</p>
+      <ol class="stations">
+        <li>Lougheed<span class="city">Burnaby</span></li>
+        <li>Burquitlam<span class="city">Coquitlam</span></li>
+        <li>Moody Centre<span class="city">Port Moody</span></li>
+        <li>Inlet Centre<span class="city">Port Moody</span></li>
+        <li>Coquitlam Central<span class="city">Coquitlam</span></li>
+        <li>Lincoln<span class="city">Coquitlam</span></li>
+        <li>Lafarge Lake–Douglas<span class="city">Coquitlam</span></li>
+      </ol>
+      <p class="src">TransLink, SkyTrain schedules, read November 20, 2026. Peak trains on this stretch are listed at about every 3 to 4 minutes. Port Coquitlam has a West Coast Express station, not a SkyTrain station. Coquitlam Central and Moody Centre connect to the West Coast Express. Confirm a trip on translink.ca.</p>
+    </div>
+
+    <div class="places">
+      <div class="mapbox">
+        <p class="kicker">Fare zones, from the tariff</p>
+        <h3>Three zones, not one city</h3>
+        <p>TransLink’s tariff in force July 1, 2026 puts Vancouver in Zone 1, Burnaby in Zone 2, and Coquitlam, Port Coquitlam, Port Moody and both Langleys in Zone 3.</p>
+        <div class="cityrow">
+          <div class="chip"><b>Zone 1</b>Vancouver</div>
+          <div class="chip"><b>Zone 2</b>Burnaby</div>
+          <div class="chip"><b>Zone 3</b>Tri-Cities, BC and Langley</div>
+        </div>
+      </div>
+      <figure>
+        <img src="../assets/img/blog/photos/burquitlam-station-exterior.jpg" alt="Burquitlam Station exterior">
+        <figcaption>Burquitlam Station, Coquitlam. Greg Salter, CC BY-SA 4.0.</figcaption>
+      </figure>
+      <figure>
+        <img src="../assets/img/blog/photos/moody-centre-station-2025.jpg" alt="Moody Centre Station">
+        <figcaption>Moody Centre Station, Port Moody. Canmenwalker, CC BY 4.0.</figcaption>
+      </figure>
+    </div>
+  </div></div>
+</section>
+
+<section class="sheet">
+  <div class="runhead"><span>Devin Desaulniers</span><span>Renting in Greater Vancouver · Ontario movers</span></div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers, Real Estate Associate · 604-809-1032 · devin@axfordrealestate.ca</span><span>3</span></div>
+  <div class="pad"><div class="body">
+    <p class="kicker">Tenancy law</p>
+    <h2>Who handles a dispute, and what a deposit is</h2>
+    <div class="vs">
+      <div class="col on">
+        <p class="kicker">Ontario · Landlord and Tenant Board</p>
+        <h3>Residential Tenancies Act, 2006</h3>
+        <ul>
+          <li>Most residential tenancies go through the Landlord and Tenant Board.</li>
+          <li>A landlord may require a rent deposit on or before the agreement. For a monthly tenancy it cannot be more than one month’s rent.</li>
+          <li>That deposit is applied to the last rent period. It is the only security deposit the Act allows. It is not a damage deposit.</li>
+          <li>The landlord pays interest on it each year, at the rent increase guideline then in effect.</li>
+        </ul>
+        <p class="src">Residential Tenancies Act, 2006, sections 105 and 106. ontario.ca/laws/statute/06r17</p>
+      </div>
+      <div class="col bc">
+        <p class="kicker">British Columbia · Residential Tenancy Branch</p>
+        <h3>Residential Tenancy Act</h3>
+        <ul>
+          <li>The Residential Tenancy Branch gives information and dispute resolution for most residential tenancies.</li>
+          <li>A security deposit can be no more than half of the first month’s rent. The amount stays tied to the original rent, even if rent changes later.</li>
+          <li>If pets are allowed, a pet damage deposit can be another half month, no matter how many pets. Guide and service dogs are not pets, and there is no monthly pet fee.</li>
+          <li>Together, the two deposits can equal one month’s rent. A landlord cannot charge a fee to accept, review or process an application.</li>
+        </ul>
+        <p class="src">Province of British Columbia, “Tenancy deposits and fees,” updated March 4, 2026.</p>
+      </div>
+    </div>
+    <p>The Province’s own example: if the monthly rent is $1,500, the security deposit cannot be more than $750. That $1,500 is the Province’s example, not a statement of Greater Vancouver rent. Using that same example so the two caps can be compared, Ontario’s rent deposit could be up to $1,500 and would have to be applied to the last rent period. B.C.’s security deposit would be at most $750, plus at most $750 more if pets are allowed.</p>
+    <div class="vs">
+      <div class="col on">
+        <h3>After you pay in Ontario</h3>
+        <ul>
+          <li>The deposit comes off the last rent period, not off damage.</li>
+          <li>If the landlord does not pay the yearly interest when it is due, you may deduct it from a later rent payment.</li>
+        </ul>
+      </div>
+      <div class="col bc">
+        <h3>After you pay in B.C.</h3>
+        <ul>
+          <li>Once the security deposit is paid, the tenancy is established. The landlord cannot then rent the unit to someone else.</li>
+          <li>You cannot put a deposit toward rent unless the landlord agrees in writing.</li>
+          <li>You and the landlord complete a Condition Inspection Report, Form RTB-27. A landlord can keep a deposit only with your written permission or an RTB order.</li>
+          <li>After you give a forwarding address in writing, the landlord has 15 days to return the deposit with any interest if there is no dispute. The interest rate for 2026 is 0%.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ahead"><strong>How to get ahead of it.</strong> Budget half a month, not a full extra month the way Ontario’s last-period deposit works. If you have a pet, budget a second half month. Do not pay an application fee, and do not pay for the only key: B.C. says a landlord cannot charge for the only means of entry. Get the agreement in writing before money moves, keep the receipt, and do the move-in inspection. Pay the security deposit within 30 days of signing, or the landlord can serve notice to end the tenancy.</div>
+  </div></div>
+</section>
+
+<section class="sheet">
+  <div class="runhead"><span>Devin Desaulniers</span><span>Renting in Greater Vancouver · Ontario movers</span></div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers, Real Estate Associate · 604-809-1032 · devin@axfordrealestate.ca</span><span>4</span></div>
+  <div class="pad"><div class="body">
+    <p class="kicker">Rent increases and the lease</p>
+    <h2>The yearly cap is not the rent you agree on day one</h2>
+    <div class="vs">
+      <div class="col on">
+        <p class="kicker">Ontario guideline</p>
+        <p class="big">2.1% in 2026</p>
+        <p class="big" style="font-size:16px;margin-top:4px">1.9% in 2027</p>
+        <ul>
+          <li>For most tenants, rent can rise by no more than the guideline without Landlord and Tenant Board approval.</li>
+          <li>At least 12 months since the tenancy began or the last increase, and at least 90 days’ written notice on the Board’s form.</li>
+          <li>The guideline is capped at 2.5%. It does not apply to units first occupied for residential use after November 15, 2018, or to a new rent agreed when a tenancy turns over.</li>
+          <li>Ontario’s own sample: 1.9% on $1,000 of rent in 2027 is $19, to $1,019.</li>
+        </ul>
+        <p class="src">ontario.ca, “Residential rent increases,” read November 20, 2026.</p>
+      </div>
+      <div class="col bc">
+        <p class="kicker">B.C. allowable increase</p>
+        <p class="big">2.3% in 2026</p>
+        <p class="big" style="font-size:16px;margin-top:4px">2.2% in 2027</p>
+        <ul>
+          <li>For an existing residential tenancy, a landlord can increase rent once every 12 months, and only within that year’s limit. They cannot round up.</li>
+          <li>You need at least three full months’ written notice on Form RTB-7, with the dollar amount and the date.</li>
+          <li>The 2027 limit takes effect January 1, 2027. A landlord cannot add an unused portion of last year’s increase to this year’s cap.</li>
+          <li>The cap limits an increase during a tenancy. The rent at the start is the rent in the agreement.</li>
+        </ul>
+        <p class="src">Province of British Columbia, “Rent increases,” read November 20, 2026. Some tenancies, including rent geared to income, are outside this limit. The page lists them.</p>
+      </div>
+    </div>
+    <div class="ahead"><strong>How to get ahead of it.</strong> When you are still in Ontario, do not compare a B.C. asking rent with an Ontario renewal cap. The cap applies after you are in the home. Read the notice when it eventually arrives: in B.C. it has to be Form RTB-7, three full months ahead, and inside that year’s percentage. The Residential Tenancy Branch has a rent increase calculator.</div>
+
+    <div class="vs" style="margin-top:12px">
+      <div class="col on">
+        <p class="kicker">Ontario standard lease</p>
+        <h3>Required for most new private leases</h3>
+        <p>The standard lease is required for most residential tenancy agreements signed on or after April 30, 2018. It sets out the total lawful rent, what is included, and the rules about the unit. It does not apply to care homes, most social housing, co-ops, and some other tenancies.</p>
+        <p>If you were entitled to one and did not get it, you can ask in writing. The landlord then has 21 days. Ontario’s renting-rights page explains the withholding rules if it still does not arrive.</p>
+        <p class="src">ontario.ca, “Guide to Ontario’s standard lease,” and “Renting in Ontario: Your rights.”</p>
+      </div>
+      <div class="col bc">
+        <p class="kicker">B.C. written agreement</p>
+        <h3>Form RTB-1 carries the standard terms</h3>
+        <p>A landlord must prepare a written agreement for every tenancy. Both of you sign and date it. The landlord can use their own form, but it has to include every standard term. Residential Tenancy Agreement Form RTB-1 includes those terms.</p>
+        <p>The agreement names the people and the unit, the start date, whether it is month-to-month or fixed term, the rent and what it covers, and any deposits. A fixed term does not usually end just because the end date arrives, unless a narrow vacate clause applies. The landlord must give you a copy within 21 days.</p>
+        <p class="src">Province of British Columbia, “Tenancy agreements,” updated March 4, 2026.</p>
+      </div>
+    </div>
+    <div class="ahead"><strong>How to get ahead of it.</strong> Ask for the written agreement before you send a deposit. Check the rent, the date, what utilities are included, pets, and any extra term such as tenant insurance. Photograph the pages the day you sign. A term that contradicts the Residential Tenancy Act cannot be enforced. I can go through a lease with you. I am not a lawyer, and that read is not legal advice.</div>
+  </div></div>
+</section>
+
+<section class="sheet">
+  <div class="runhead"><span>Devin Desaulniers</span><span>Renting in Greater Vancouver · Ontario movers</span></div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers, Real Estate Associate · 604-809-1032 · devin@axfordrealestate.ca</span><span>5</span></div>
+  <div class="pad"><div class="body">
+    <p class="kicker">Health, licence, transit, deposits</p>
+    <h2>Four clocks that start when you arrive</h2>
+    <div class="icons">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg>
+        <b>MSP</b><span>Rest of the arrival month, plus two months</span>
+      </div>
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M3 13h18l-2-5H5l-2 5z"/><path d="M5 13v3h2v-1h10v1h2v-3"/><circle cx="7.5" cy="17.5" r="1.3"/><circle cx="16.5" cy="17.5" r="1.3"/></svg>
+        <b>ICBC</b><span>90 days for the licence, 30 days for a vehicle</span>
+      </div>
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+        <b>Compass</b><span>$6 refundable card. Tap in and out.</span>
+      </div>
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 10h16"/></svg>
+        <b>Deposits</b><span>Half a month, plus half more if you have pets</span>
+      </div>
+    </div>
+
+    <div class="vs">
+      <div class="col on">
+        <p class="kicker">OHIP after you leave</p>
+        <h3>Through the second full month</h3>
+        <p>If you are moving permanently to another province, OHIP covers the same services as a temporary absence until the last day of the second full month after you leave Ontario. Apply for coverage in the new province.</p>
+        <p>In another province, OHIP does not cover ambulance services, or prescription drugs given outside a hospital. Ontario recommends private insurance for uninsured services.</p>
+        <p class="src">ontario.ca, “OHIP coverage outside Ontario,” updated May 2, 2024.</p>
+      </div>
+      <div class="col bc">
+        <p class="kicker">MSP wait period</p>
+        <h3>Then two more months</h3>
+        <p>New residents complete a wait: the rest of the month you become a B.C. resident, plus two more months. The Ministry of Health sets the date you become a resident. Apply as soon as you arrive, not at the end of the wait. Each family member has their own wait, based on that person’s arrival.</p>
+        <p>If you move from another part of Canada, keep your former health plan during the wait. You can get needed care before MSP starts, and you pay the full cost unless other insurance covers it.</p>
+        <p class="src">Province of British Columbia, MSP coverage wait period, updated June 4, 2026. Questions: Health Insurance BC, 604-683-7151 in the Lower Mainland.</p>
+      </div>
+    </div>
+    <div class="ahead"><strong>How to get ahead of it.</strong> Put “apply for MSP” on arrival week, and keep your Ontario health card in your wallet until MSP starts. If you want cover for an ambulance or a prescription during the gap, arrange that insurance before you leave. I am not quoting a premium.</div>
+
+    <div class="vs" style="margin-top:10px">
+      <div class="col on">
+        <p class="kicker">Your Ontario licence and policy</p>
+        <h3>They do not become a B.C. policy</h3>
+        <p>You can drive on your valid Ontario licence while you are inside the 90 days. When you qualify for the B.C. licence, you surrender the Ontario one. B.C. law allows only one driver’s licence.</p>
+        <p>An Ontario auto policy does not replace B.C. registration. If you bring a vehicle, basic coverage here is ICBC Basic Autoplan, and it is mandatory.</p>
+      </div>
+      <div class="col bc">
+        <p class="kicker">ICBC, from within Canada</p>
+        <h3>90 days, and 30 for the car</h3>
+        <p>Book a driver licensing office. Bring accepted ID, your current licence, the licence fee, and proof of driving experience. Proof of insurance is no longer required for the licence. Premiums are adjusted for the first three years. ICBC credits up to 15 years of non-learner experience from a driver’s abstract.</p>
+        <p>You have 30 days to register, licence and insure a vehicle. Commercial vehicles must be done immediately. If you cannot prove two years of full-privilege, non-learner experience, you go through graduated licensing, with credit for the time you have driven. Emailed records are not accepted for that exemption. Bring an original abstract or an original licence that shows the issue date.</p>
+        <p class="src">ICBC, “Moving from within Canada,” “Proving your driving experience,” “Moving to, from or within B.C.,” and “Basic insurance.” I am not printing a licence fee or an insurance premium. Those amounts are set at the office from your record, and I could not confirm one new-resident licence price on an ICBC fee page.</p>
+      </div>
+    </div>
+    <div class="ahead"><strong>How to get ahead of it.</strong> Order an original Ontario driver’s abstract before you fly, and book the ICBC appointment for the first weeks you are here. The 90 days go quickly if the office is booked. If you are shipping a car, start the 30-day registration clock on arrival day, not when the car is unpacked.</div>
+  </div></div>
+</section>
+
+<section class="sheet">
+  <div class="runhead"><span>Devin Desaulniers</span><span>Renting in Greater Vancouver · Ontario movers</span></div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers, Real Estate Associate · 604-809-1032 · devin@axfordrealestate.ca</span><span>6</span></div>
+  <div class="pad"><div class="body">
+    <p class="kicker">Cost of moving in</p>
+    <h2>Every figure below has an official source</h2>
+    <p>There is no single government “cost of living” number that I will pretend covers a renter’s first month. Rent itself is whatever the agreement says. I publish current asking rents separately, and I am not reprinting them here: <a href="https://devindesaulniers.ca/rent-report.html">devindesaulniers.ca/rent-report.html</a>.</p>
+    <table>
+      <thead><tr><th>Item</th><th>What the rule or the price is</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>First month’s rent</td><td>The amount in the written agreement. Not a number in this guide.</td><td>Your agreement. Asking rents: the rent report.</td></tr>
+        <tr><td>Security deposit</td><td>At most half of the first month’s rent. On the Province’s $1,500 example, that is $750.</td><td>gov.bc.ca deposits page, March 4, 2026.</td></tr>
+        <tr><td>Pet damage deposit</td><td>At most another half month if pets are allowed, any number of pets. Not charged for a certified guide or service dog. No monthly pet fee.</td><td>Same page.</td></tr>
+        <tr><td>Application fee</td><td>Not allowed. A landlord also cannot charge for the only key or access device.</td><td>Same page.</td></tr>
+        <tr><td>BC Hydro</td><td>$13.50 plus GST on the first bill for a new account. A security deposit may be required. BC Hydro does not publish one deposit amount. It can be waived after a credit check or a letter showing 12 months of on-time utility payments. Open the account before move-in. Service can be disconnected if nobody applies after the last account closes.</td><td>BC Hydro, “New BC Hydro customers,” and customer service rules.</td></tr>
+        <tr><td>Compass Card</td><td>$6 refundable deposit, returned when you bring the card back, minus any negative balance.</td><td>TransLink Compass Card page.</td></tr>
+        <tr><td>Adult Stored Value</td><td>1 zone $2.85, 2 zones $4.20, 3 zones $5.40. Load $5 or more. Cash or a bank-card tap is $3.50, $5.10 and $6.70. A fare lasts 90 minutes.</td><td>TransLink, “Pricing and fare zones.”</td></tr>
+        <tr><td>When it drops to 1 zone</td><td>Trips starting after 6:30 p.m. Monday to Friday, and all day Saturday, Sunday and statutory holidays, are a 1-zone fare. Buses are 1 zone at all times.</td><td>Same page.</td></tr>
+        <tr><td>Adult monthly pass</td><td>1 zone $117.20, 2 zones $156.70, 3 zones $211.65. DayPass, all zones, $12.55. Children 12 and under ride free on bus, SkyTrain, SeaBus and the West Coast Express.</td><td>Same page.</td></tr>
+        <tr><td>A daytime SkyTrain trip from the Tri-Cities, BC to Vancouver</td><td>Zone 3 to Zone 1 is a 3-zone fare on a weekday before 6:30 p.m.: $5.40 with adult Stored Value, or $6.70 cash. Evenings, weekends and statutory holidays, that trip is the 1-zone fare.</td><td>Tariff Bylaw 162-2026, Appendix 1, July 1, 2026, plus the pricing page.</td></tr>
+        <tr><td>ICBC</td><td>A licence fee is charged. I am not printing one, because I could not confirm a single new-resident price on ICBC’s own fee page. Basic Autoplan is mandatory if you licence a vehicle. The premium depends on your record. Up to 15 years of experience can be credited. 90 days for the licence, 30 days for the vehicle.</td><td>ICBC pages listed on page 8.</td></tr>
+        <tr><td>Tenant insurance</td><td>A landlord can add it as a term. There is no government premium, so I am not quoting one. Get a quote.</td><td>B.C. “Tenancy agreements” page.</td></tr>
+      </tbody>
+    </table>
+    <div class="ahead" style="margin-top:8px"><strong>How to get ahead of it.</strong> Build the cash you need as: one month’s rent, plus half a month for the security deposit, plus another half month if you have a pet, plus the small fixed charges above ($13.50 plus GST, and $6 for the card). Do not send a lump sum that looks like Ontario’s last-month deposit plus a damage deposit plus an application fee. That is not the B.C. structure. Gas, internet, movers and furniture are real costs, and I have no official price for them, so they are not in this table.</div>
+    <div class="photos" style="margin-top:8px">
+      <figure><img src="../assets/img/blog/photos/lafarge-lake-douglas-station-exterior.jpg" alt="Lafarge Lake–Douglas Station" style="height:78px"><figcaption>Lafarge Lake–Douglas Station, Coquitlam. Greg Salter, CC BY-SA 4.0.</figcaption></figure>
+      <figure><img src="../assets/img/blog/photos/inlet-centre-station-western-entrance.jpg" alt="Inlet Centre Station" style="height:78px"><figcaption>Inlet Centre Station, Port Moody. Yuet Man Lee, CC BY-SA 4.0.</figcaption></figure>
+      <figure><img src="../assets/img/blog/photos/coquitlam-lafarge-lake.jpg" alt="Lafarge Lake, Coquitlam" style="height:78px"><figcaption>Lafarge Lake, Coquitlam. Greg Salter, CC BY 2.5.</figcaption></figure>
+    </div>
+  </div></div>
+</section>
+
+<section class="sheet">
+  <div class="runhead"><span>Devin Desaulniers</span><span>Renting in Greater Vancouver · Ontario movers</span></div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers, Real Estate Associate · 604-809-1032 · devin@axfordrealestate.ca</span><span>7</span></div>
+  <div class="pad"><div class="body">
+    <p class="kicker">From the first search to the first month</p>
+    <h2>A timeline, then the first 30 days</h2>
+    <p>The dates for MSP, OHIP and ICBC come from the government. The search window below is from my work with people moving here. It is not a government rule, and it is not a promise that a rental will be ready by a set date.</p>
+    <ol class="timeline">
+      <li><span class="when">Before you search</span><div>Save these as PDFs: a clear, unexpired government photo ID; proof of income (recent pay stubs, an offer letter, or a contract; if you are self-employed, bank statements or a Notice of Assessment); landlord and employer references with a phone or email; and a short note on who will live there, the move-in date, pets and must-haves. A credit report you pull yourself is optional. Your Canadian credit file can travel with you; a landlord may still ask for references and proof of income.</div></li>
+      <li><span class="when">About 6 weeks out</span><div>Set the budget using the table on page 6. Do not stack an Ontario-style last month with a separate damage deposit. B.C. does not work that way. Pick two or three areas: for many people that is the Tri-Cities, BC, plus Burnaby or Vancouver. Check the commute on TransLink at the time you would actually travel.</div></li>
+      <li><span class="when">4 to 6 weeks out</span><div>Most Greater Vancouver rentals are listed only a few weeks before they are available. This is when I usually ask people to start the active search. Book a showing the day a fit appears. If you are still in Ontario, ask for a live video walkthrough and a floor plan rather than relying on photos.</div></li>
+      <li><span class="when">Offer week</span><div>Confirm the unit, and confirm who you are dealing with, before any money moves. Sign a written tenancy agreement. Pay only the deposits B.C. allows. Keep the receipt.</div></li>
+      <li><span class="when">Move-in day</span><div>Walk the unit and complete Form RTB-27 with the landlord. Photograph the condition. Collect the keys. Open BC Hydro if electricity will be in your name, before the lights go off. Ask what else is in your name: heat, hot water, internet, parking.</div></li>
+      <li><span class="when">First 30 days</span><div>The checklist below. The ICBC vehicle clock is 30 days. The licence clock is 90 days. MSP should be applied for in week one, even though coverage starts later.</div></li>
+    </ol>
+    <div class="ahead"><strong>How to get ahead of the search.</strong> Have the PDF pack ready so you can apply the same day. Do not send a deposit for a home nobody you trust has seen. A landlord who will not show the unit, will not put the agreement in writing, or asks for more than half a month plus a pet deposit is outside the rules on page 3.</div>
+    <p class="kicker" style="margin-top:10px">First 30 days</p>
+    <ul class="checks">
+      <li><span class="box"></span><span>Apply for MSP in the first week. Keep OHIP through the wait.</span></li>
+      <li><span class="box"></span><span>Get a Compass Card ($6 deposit) and ride your real commute once.</span></li>
+      <li><span class="box"></span><span>Open BC Hydro before or on move-in day ($13.50 plus GST).</span></li>
+      <li><span class="box"></span><span>Book ICBC. Licence within 90 days. Vehicle within 30 days.</span></li>
+      <li><span class="box"></span><span>Bring the original driving record, not only an email.</span></li>
+      <li><span class="box"></span><span>Store the signed agreement, deposit receipt and RTB-27 together.</span></li>
+      <li><span class="box"></span><span>If children are in school, register with the local district once you have an address. School District 43 covers Coquitlam, Port Coquitlam, Port Moody, Anmore and Belcarra.</span></li>
+      <li><span class="box"></span><span>Walk one nearby park. Lafarge Lake in Coquitlam and Rocky Point in Port Moody are on the cover and on page 6.</span></li>
+    </ul>
+    <p class="src">School District 43 registration page: sd43.bc.ca. The district’s own page is the one to follow for documents. I am not summarizing eligibility beyond the cities it serves.</p>
+    <div class="pair" style="margin-top:8px">
+      <figure><img src="../assets/img/blog/photos/coquitlam-central-station-exterior.jpg" alt="Coquitlam Central Station"><figcaption>Coquitlam Central, where SkyTrain and the West Coast Express meet. Greg Salter, CC BY-SA 4.0.</figcaption></figure>
+      <figure><img src="../assets/img/blog/photos/rocky-point-port-moody-2026.jpg" alt="Rocky Point Park"><figcaption>Rocky Point Park, Port Moody. Yuet Man Lee, CC BY-SA 4.0.</figcaption></figure>
+      <figure><img src="../assets/img/blog/photos/false-creek-vancouver-2025.jpg" alt="False Creek, Vancouver" style="object-position:center"><figcaption>False Creek, Vancouver. Northwest, CC BY 4.0. City of Vancouver is Zone 1.</figcaption></figure>
+    </div>
+  </div></div>
+</section>
+
+<section class="sheet">
+  <div class="runhead"><span>Devin Desaulniers</span><span>Renting in Greater Vancouver · Ontario movers</span></div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers, Real Estate Associate · 604-809-1032 · devin@axfordrealestate.ca</span><span>8</span></div>
+  <div class="pad"><div class="body">
+    <p class="kicker">Sources</p>
+    <h2>Where the facts came from</h2>
+    <p>I checked these pages on November 20, 2026. If a page has been updated since, follow the official page.</p>
+    <div class="sources">
+      <p>1. Province of British Columbia, “Tenancy deposits and fees,” updated March 4, 2026. www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/starting-a-tenancy/deposits-fees</p>
+      <p>2. Province of British Columbia, “Tenancy agreements,” updated March 4, 2026. www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/starting-a-tenancy/tenancy-agreements</p>
+      <p>3. Province of British Columbia, “Rent increases.” www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/rent-rtb/rent-increases</p>
+      <p>4. Residential Tenancy Branch. www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies</p>
+      <p>5. Government of Ontario, Residential Tenancies Act, 2006, sections 105 and 106. www.ontario.ca/laws/statute/06r17</p>
+      <p>6. Government of Ontario, “Residential rent increases.” www.ontario.ca/page/residential-rent-increases</p>
+      <p>7. Government of Ontario, “Guide to Ontario’s standard lease.” www.ontario.ca/page/guide-ontarios-standard-lease</p>
+      <p>8. Government of Ontario, “Renting in Ontario: Your rights.” www.ontario.ca/page/renting-ontario-your-rights</p>
+      <p>9. Province of British Columbia, “Coverage wait period for the Medical Services Plan (MSP),” updated June 4, 2026. www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp/bc-residents/eligibility-and-enrolment/how-to-enrol/coverage-wait-period</p>
+      <p>10. Government of Ontario, “OHIP coverage outside Ontario,” updated May 2, 2024. www.ontario.ca/page/ohip-coverage-outside-ontario</p>
+      <p>11. ICBC, “Moving from within Canada.” www.icbc.com/driver-licensing/moving-bc/Moving-from-within-canada</p>
+      <p>12. ICBC, “Proving your driving experience.” www.icbc.com/driver-licensing/moving-bc/Proving-your-driving-experience</p>
+      <p>13. ICBC, “Moving to, from or within B.C.” www.icbc.com/insurance/moving-travelling/moving-BC</p>
+      <p>14. ICBC, “Basic insurance and Enhanced Care.” www.icbc.com/insurance/products-coverage/basic-insurance</p>
+      <p>15. ICBC, “Insurance for new and returning residents.” www.icbc.com/insurance/moving-travelling/insurance-discount-for-new-residents</p>
+      <p>16. TransLink, “Pricing and fare zones.” www.translink.ca/transit-fares/pricing-and-fare-zones</p>
+      <p>17. TransLink, Compass Card, including the $6 refundable deposit. www.translink.ca/transit-fares/compass-card</p>
+      <p>18. TransLink, Transit Tariff, Bylaw 162-2026, in force July 1, 2026, Appendix 1 fare zones. www.translink.ca</p>
+      <p>19. TransLink, SkyTrain schedules, Millennium Line. www.translink.ca/schedules-and-maps/skytrain</p>
+      <p>20. BC Hydro, “New BC Hydro customers,” and “What you should know as a BC Hydro customer.” app.bchydro.com</p>
+      <p>21. School District No. 43 (Coquitlam). www.sd43.bc.ca</p>
+      <p>22. Current asking rents, updated separately from this guide: devindesaulniers.ca/rent-report.html</p>
+    </div>
+    <p class="kicker" style="margin-top:8px">Photo credits</p>
+    <p>Cover and page 7, Rocky Point Park, Port Moody, February 14, 2026, by Yuet Man Lee, Wikimedia Commons, CC BY-SA 4.0. Burquitlam Station, Coquitlam Central Station, Lafarge Lake–Douglas Station and Lafarge Lake, by Greg Salter, Wikimedia Commons: the stations CC BY-SA 4.0, Lafarge Lake CC BY 2.5. Moody Centre Station, 2025, by Canmenwalker, CC BY 4.0. Inlet Centre Station western entrance, by Yuet Man Lee, CC BY-SA 4.0. False Creek, Vancouver, 2025, by Northwest, CC BY 4.0. Portrait: my own photograph. The SkyTrain diagram and the zone boxes are drawings I made for this guide. They are not TransLink maps.</p>
+    <div class="note">
+      <p class="kicker">About this guide</p>
+      <p>Prepared November 2026 by Devin Desaulniers, Real Estate Associate, Axford Real Estate, 2326 Clarke Street, Port Moody, BC V3H 1Y8. Telephone 604-809-1032. Email devin@axfordrealestate.ca. Website devindesaulniers.ca.</p>
+      <p>This guide is general information for renters moving from Ontario. It is not legal, tax, medical, insurance or financial advice, and it is not a promise that a rental will be found. Tenancy, health-coverage, licensing and fare rules change. Confirm them on the pages above, or with the Residential Tenancy Branch, Health Insurance BC, ICBC or a qualified professional. Axford Real Estate is named on every page.</p>
+      <p style="margin:0">If you want a local person to run the search with you, the way that works is on my website, so you can read it before you get in touch. You do not need to hire me to use this guide.</p>
+    </div>
+  </div></div>
+</section>
+
+</body>
+</html>
