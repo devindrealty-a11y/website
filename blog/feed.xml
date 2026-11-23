@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Fri, 20 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Mon, 23 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>Gas is coming down. Vancouver still pays near the top</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-23-gas-prices-vancouver-near-the-top.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-23-gas-prices-vancouver-near-the-top.html</guid>
+    <pubDate>Mon, 23 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Market news</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>On November 18, Kalibrate put regular gas in Vancouver at 183.7¢/L, second to Victoria at 186.3¢. A 60 L tank still costs about $39 more than in Edmonton. What that means if you're moving to the Tri-Cities, BC.</description>
+  </item>
   <item>
     <title>What is winter in the Tri-Cities, BC like?</title>
     <link>https://devindesaulniers.ca/blog/2026-11-20-winter-in-the-tri-cities-bc-weather-guide.html</link>
@@ -267,15 +276,6 @@
     <category>Market news</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>Ottawa's Budget 2026 proposes raising the optional mortgage insurance limit to $1.5 million, allowing 30-year amortizations for some buyers, and extending the foreign buyer ban on existing homes to 2029 while exempting new homes. Here's what that could mean in Greater Vancouver and the Tri-Cities, BC.</description>
-  </item>
-  <item>
-    <title>Pet-friendly rentals in the Tri-Cities, BC: a newcomer's guide</title>
-    <link>https://devindesaulniers.ca/blog/2026-11-07-pet-friendly-rentals-tri-cities-bc.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-07-pet-friendly-rentals-tri-cities-bc.html</guid>
-    <pubDate>Sat, 07 Nov 2026 08:00:00 -0700</pubDate>
-    <category>Renting</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>Looking for pet-friendly rentals in the Tri-Cities, BC? In BC a landlord can say no to pets, so the key is confirming the lease and any strata bylaws allow your pet before you sign. Here's what newcomers should know about pet deposits, strata limits and dog licences in Coquitlam, Port Moody and Port Coquitlam.</description>
   </item>
 </channel>
 </rss>
