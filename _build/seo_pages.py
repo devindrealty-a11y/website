@@ -8,7 +8,7 @@ import json
 import re
 
 from partials import (
-    BROKERAGE_ADDR, CALC, EMAIL, ICONS, PHONE, SITE, TEL,
+    BROKERAGE_ADDR, CALC, DEVIN_GBP, EMAIL, ICONS, PHONE, SITE, TEL,
     consent, foot, google_badge, head, picture,
 )
 
@@ -119,6 +119,22 @@ def _phone_row():
     )
 
 
+def _book_row(intent):
+    """Light-background row. Night bands keep using btn-light instead."""
+    return (
+        f'<div class="btn-row"><a class="btn btn-primary" href="contact.html?intent={intent}#qualify">Book a free 15-minute call {I["arrow"]}</a>'
+        f'<a class="btn btn-outline" href="{TEL}">{I["phone"]} {PHONE}</a>'
+        f'<a class="btn btn-outline" href="mailto:{EMAIL}">{EMAIL}</a></div>'
+    )
+
+
+def _credit_photo(src, w, h, alt, credit, credit_url):
+    return (
+        f'<figure class="post-image"><img src="{src}" width="{w}" height="{h}" alt="{_html.escape(alt)}" loading="lazy" decoding="async">'
+        f'<figcaption>Photo: <a href="{_html.escape(credit_url, quote=True)}" target="_blank" rel="noopener">{_html.escape(credit)}</a></figcaption></figure>'
+    )
+
+
 def _ext(url, label):
     return f'<a href="{_html.escape(url, quote=True)}" target="_blank" rel="noopener">{label}</a>'
 
@@ -142,6 +158,14 @@ RENT_WEEK = (
     ("Vancouver", 3200, 323),
 )
 GVR_OCT_URL = "https://members.gvrealtors.ca/news/GVR-Stats-Package-October-2026.pdf"
+# Public Greater Vancouver REALTORS area-report card (ShowingTime). Townhouse
+# sales and active listings for Port Coquitlam, October 2026. The statistics
+# package above publishes the HPI benchmark, not these townhouse counts.
+POCO_TOWN_REPORT = "https://myrealpage.com/wp-content/uploads/INFOGRAPHIC-2026-10-GVR-Print-Port-Coquitlam.pdf"
+# Same URL already used on the home and contact pages.
+AXFORD_TENANT_URL = "https://www.axfordpropertymanagement.ca/tenant-services-in-greater-vancouver"
+FINANCE_BAN_URL = "https://www.canada.ca/en/department-finance/news/2026/11/government-of-canada-tables-plan-to-ease-grocery-costs-support-homeownership-and-encourage-new-home-construction.html"
+BILL_C42_URL = "https://www.parl.ca/LegisInfo/en/bill/45-1/C-42"
 BCFSA_RESCISSION = "https://www.bcfsa.ca/public-resources/real-estate/consumer-resources/home-buyer-rescission-period-consumer-guide"
 BC_DEPOSITS = "https://www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/starting-a-tenancy/deposits-fees"
 BC_AGREEMENTS = "https://www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/starting-a-tenancy/tenancy-agreements"
@@ -230,8 +254,8 @@ def rent_snapshot_section(anchor="rent-now", with_photo=True, checklist_link=Tru
 </section>'''
 
 
-def _page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intro_rest, body, faq_heading, faq_items, cta_html, sources_html):
-    html = head(title, desc, "area-guide", page_url=filename, extra_head=faq_jsonld(faq_items))
+def _page(filename, title, desc, eyebrow, h1, lead, nav, intro_lead, intro_rest, body, faq_heading, faq_items, cta_html, sources_html, extra_head="", agent_same_as=None, agent_knows=None):
+    html = head(title, desc, "area-guide", page_url=filename, extra_head=faq_jsonld(faq_items) + extra_head, agent_same_as=agent_same_as, agent_knows=agent_knows)
     html += f'''
 <section class="page-hero">
   <div class="container">
@@ -436,6 +460,10 @@ def _port_moody():
          "<p>The City of Port Moody lists about a 10-minute walk from Moody Centre Station to Rocky Point Park.</p>"),
         ("Should I buy in Moody Centre or Inlet Centre?",
          "<p>It depends on lifestyle. Moody Centre is closer to Rocky Point and the station-adjacent brewery and waterfront strip. Inlet Centre, Newport and Suter Brook are the established retail and condo and townhome core around Inlet Centre Station. We can compare both against your commute and budget.</p>"),
+        ("How do I choose a real estate agent in Port Moody?",
+         "<p>Start with someone who prices from recent sales on your street or in your building, can explain the strata documents, and replies quickly. I'm Devin Desaulniers, a REALTOR® with Axford Real Estate, based at 2326 Clarke St in Port Moody. I help buyers, sellers and relocating renters across the Tri-Cities, BC.</p>"),
+        ("Can a Port Moody realtor help me rent before I move here?",
+         f'<p>Yes. I also represent tenants who are relocating. I search, book showings in person or by video, and review the lease. The fee is a flat $1,500 + GST, paid in two parts. Details are on my <a href="tenants.html">relocation rentals page</a> and on <a href="{AXFORD_TENANT_URL}" target="_blank" rel="noopener">Axford\'s tenant services page</a>.</p>'),
     ]
     body = _section("where", "The city", "Where is Port Moody?", f'''
     <p>Port Moody is one of the three Tri-Cities, BC municipalities, sitting at the east end of Burrard Inlet between Burnaby and Coquitlam, with Anmore and Belcarra nearby. The City of Port Moody describes itself as about <strong>35 minutes east of Vancouver</strong> by road, and notes that many shops, services, civic facilities, Rocky Point Park and the Shoreline Trail are within walking distance of a SkyTrain station.</p>
@@ -485,6 +513,23 @@ def _port_moody():
     </ul>
     <p>Buying your first home in the Tri-Cities, BC? Start with <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>, then the <a href="buyers.html">buyers page</a>.</p>
     ''', paper=True)
+    body += _section("selling", "Selling", "Selling in Port Moody", f'''
+    {_credit_photo(
+        "assets/img/blog/photos/rocky-point-port-moody-2026.jpg", 1920, 1440,
+        "Rocky Point Park on Burrard Inlet in Port Moody",
+        "Yuet Man Lee / Wikimedia Commons (CC BY-SA 4.0)",
+        "https://commons.wikimedia.org/wiki/File:View_from_Rocky_Point,_February_14,_2026.jpg",
+    )}
+    <p>I work out of Axford Real Estate at 2326 Clarke St in Moody Centre. Port Moody is my home base. When I help an owner sell, I start with recent sales in the same pocket.</p>
+    <p>Moody Centre, Inlet Centre and Suter Brook, Newport, Heritage Mountain and College Park do not price the same. A townhouse by the SkyTrain and one up the hill can be far apart.</p>
+    <div class="card-grid-3">
+      <div class="card"><h3>Townhouse benchmark</h3><p>In October 2026 the MLS® Home Price Index benchmark for a Port Moody townhouse was <strong>$895,800</strong>, down 10.1% from a year earlier. That is a typical townhouse, not a price for your unit. Source: <a href="{GVR_OCT_URL}" target="_blank" rel="noopener">Greater Vancouver REALTORS®, October 2026 statistics package</a>.</p></div>
+      <div class="card"><h3>Strata papers</h3><p>Have recent minutes, the depreciation report and the Form B ready early. Buyers' lenders and lawyers ask for them in the subject period.</p></div>
+      <div class="card"><h3>Timing</h3><p>I'll walk you through pricing, prep, and a realistic timeline for your building or street.</p></div>
+    </div>
+    <p>More on how I price a townhouse: <a href="blog/2026-11-16-selling-a-townhouse-in-coquitlam.html">Selling a townhouse in Coquitlam</a>.</p>
+    {_book_row("selling")}
+    ''')
     body += _section("relocating", "Moving here", "Relocating to Port Moody from another province or country", f'''
     <p>Typical sequence I walk clients through:</p>
     <ol class="mini-steps guide-steps">
@@ -494,13 +539,14 @@ def _port_moody():
       <li><div><h3>Offer or lease</h3><p>Strata review on purchases and lease review on rentals.</p></div></li>
     </ol>
     <p class="after-steps">The wider picture is on my <a href="relocating-to-greater-vancouver.html">Relocating to Greater Vancouver</a> page. New to Canada and renting first? Read the <a href="newcomer-rental-faqs.html">newcomer rental FAQs</a>.</p>
-    <p class="form-note">Recent Greater Vancouver REALTORS® benchmark prices for Port Moody are not on this page. Ask me for the current month's apartment and townhouse figures for the building you're considering, rather than a citywide number copied from somewhere else.</p>
+    <p class="form-note">The October 2026 townhouse benchmark is in the selling section. For a specific building, ask me for recent sales rather than using the citywide number alone.</p>
     ''')
     sources = _sources(
-        "Population and walking times were checked against the City of Port Moody and Statistics Canada. Schedules and city plans change, so confirm the latest details before you decide.",
+        "Population and walking times were checked against the City of Port Moody and Statistics Canada. The townhouse benchmark is the MLS® Home Price Index figure in the Greater Vancouver REALTORS® October 2026 statistics package. Schedules, plans and prices change, so confirm the latest details before you decide.",
         [
             ("Getting Around", "https://www.portmoody.ca/parks-recreation-and-environment/discover-port-moody/getting-around/", "City of Port Moody"),
             ("Focus on Geography Series, 2021 Census, Port Moody", "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/Page.cfm?dguid=2021A00055915043&lang=E&topic=1", "Statistics Canada"),
+            ("October 2026 statistics package", GVR_OCT_URL, "Greater Vancouver REALTORS®"),
         ],
     )
     cta = _cta(
@@ -512,15 +558,17 @@ def _port_moody():
     )
     return _page(
         "port-moody.html",
-        "Port Moody Realtor &amp; Neighbourhood Guide | Devin Desaulniers, Axford Real Estate",
-        "Port Moody SkyTrain, Moody Centre vs Inlet Centre, Rocky Point, and how I help Tri-Cities, BC buyers and relocating renters. Call or text 604-809-1032.",
+        "Port Moody Realtor | Buying, Selling &amp; Neighbourhood Guide | Devin Desaulniers, Axford Real Estate",
+        "Port Moody realtor for buying and selling. SkyTrain, Moody Centre, Inlet Centre, and how I help in the Tri-Cities, BC. Axford Real Estate, 2326 Clarke St.",
         "Local guide · Port Moody",
-        "Port Moody, BC: a local guide for buyers and relocators",
-        "Port Moody is a Tri-Cities, BC city at the east end of Burrard Inlet with two Millennium Line SkyTrain stations, Moody Centre and Inlet Centre, and I help buyers and relocators choose between its neighbourhoods.",
-        [("where", "Where"), ("transit", "Getting around"), ("neighbourhoods", "Neighbourhoods"), ("buying", "Buying"), ("relocating", "Relocating"), ("faq", "FAQ")],
+        "Port Moody realtor and local guide for buyers, sellers and relocators",
+        "Port Moody is a Tri-Cities, BC city at the east end of Burrard Inlet. It has two Millennium Line stations, Moody Centre and Inlet Centre. I'm a Port Moody realtor with Axford Real Estate, and I help buyers, sellers and relocators here.",
+        [("where", "Where"), ("transit", "Getting around"), ("neighbourhoods", "Neighbourhoods"), ("buying", "Buying"), ("selling", "Selling"), ("relocating", "Relocating"), ("faq", "FAQ")],
         "I'm Devin Desaulniers, a REALTOR® and Real Estate Associate at Axford Real Estate in Port Moody, licensed since 2020, with 28 years living in the Greater Vancouver area. I work with buyers and sellers in the Tri-Cities, BC, buyers relocating to the Vancouver area, and tenants relocating anywhere in Greater Vancouver who need a rental lined up before they arrive.",
         f'<p>This page answers common questions about Port Moody: where it sits, how SkyTrain and the West Coast Express work, what the main neighbourhoods feel like, and what to know if you\'re moving here from another province or country.</p><p>Call or text me at <a href="{TEL}">{PHONE}</a>, or email <a href="mailto:{EMAIL}">{EMAIL}</a>. My office is at Axford Real Estate, {BROKERAGE_ADDR}.</p>',
         body, "Port Moody FAQ", faq, cta, sources,
+        agent_same_as=(AXFORD_TENANT_URL, DEVIN_GBP),
+        agent_knows=["Home selling", "Townhouse selling", "Relocation rentals", "Port Moody real estate"],
     )
 
 
@@ -537,7 +585,11 @@ def _port_coquitlam():
         ("Is flooding a concern when buying in Port Coquitlam?",
          "<p>The City says about 45% of Port Coquitlam is in the floodplain of the Pitt, Fraser and Coquitlam Rivers and is protected by dikes and pump stations. Check the City's floodplain information and your insurance options for the specific property before you remove subjects.</p>"),
         ("Can you help me rent in Port Coquitlam before I move?",
-         '<p>Yes. My tenant-side relocation rental service is $1,500 + GST, paid by the tenant in two parts, and covers live video walkthroughs, floor plans, negotiation help and lease review. Details are on my <a href="tenants.html">tenants page</a>.</p>'),
+         f'<p>Yes. My tenant-side relocation rental service is $1,500 + GST, paid by the tenant in two parts, and covers live video walkthroughs, floor plans, negotiation help and lease review. Details are on my <a href="tenants.html">relocation rentals page</a> and on <a href="{AXFORD_TENANT_URL}" target="_blank" rel="noopener">Axford\'s tenant services page</a>.</p>'),
+        ("How do I choose a realtor in Port Coquitlam?",
+         "<p>Look for someone who prices from recent sales in your neighbourhood, explains strata and floodplain paperwork clearly, and gets back to you quickly. I'm Devin Desaulniers, a REALTOR® with Axford Real Estate at 2326 Clarke St in Port Moody. I help buyers, sellers and relocating renters in Port Coquitlam and the rest of the Tri-Cities, BC.</p>"),
+        ("Is it a good time to sell a townhouse in Port Coquitlam?",
+         f'<p>It depends on the street, not one citywide ratio. In October 2026, 19 Port Coquitlam townhouses sold and 61 were listed. That is a 31.1% sales-to-active ratio. Greater Vancouver REALTORS® says prices tend to face upward pressure when that ratio stays above 20% for several months, so one month is not a forecast. The townhouse benchmark was $854,900, down 3.3% from a year earlier. I would start with recent sales near you. Counts: <a href="{POCO_TOWN_REPORT}" target="_blank" rel="noopener">October 2026 area report</a>. Benchmark: <a href="{GVR_OCT_URL}" target="_blank" rel="noopener">October 2026 statistics package</a>.</p>'),
     ]
     body = _section("where", "The city", "Where is Port Coquitlam?", '''
     <p>Port Coquitlam is one of the three Tri-Cities, BC municipalities (with Coquitlam and Port Moody) in Metro Vancouver. The City's Official Community Plan describes it as bounded by the <strong>Fraser, Pitt and Coquitlam Rivers</strong>, with the mountains to the north. Coquitlam borders it to the north and west, and Pitt Meadows is across the Pitt River to the east. The Lougheed Highway and the CP rail line run through the middle of the city, which is why locals often talk about the north side and the south side of PoCo.</p>
@@ -574,8 +626,25 @@ def _port_coquitlam():
       <li><strong>Secondary suites.</strong> Many detached homes in the Tri-Cities, BC have suites. Confirm with the City whether a suite is permitted and registered before you count on rental income.</li>
       <li><strong>Renting first?</strong> If you're relocating and want a rental lined up before you arrive, I also offer a tenant-side relocation rental service ($1,500 + GST, paid by the tenant in two parts: $750 at the start, non-refundable, and $750 once a rental is secured). Reach out 4–6 weeks before your move. Details are on the <a href="tenants.html">tenants page</a>.</li>
     </ul>
-    <p class="form-note">Recent Greater Vancouver REALTORS® benchmark prices for Port Coquitlam are not on this page. Ask me for comparable sales on the street or building you're considering.</p>
+    <p>Selling instead? The townhouse benchmark and what to have ready are in <a href="#selling">Selling in Port Coquitlam</a>.</p>
     ''', paper=True)
+    body += _section("selling", "Selling", "Selling in Port Coquitlam", f'''
+    {_credit_photo(
+        "assets/img/blog/photos/terry-fox-secondary-port-coquitlam.jpg", 1920, 1280,
+        "Terry Fox Secondary School in Port Coquitlam",
+        "Caty150 / Wikimedia Commons (CC BY-SA 4.0)",
+        "https://commons.wikimedia.org/wiki/File:TerryFoxExterior.jpg",
+    )}
+    <p>I help owners sell houses, townhouses and condos across Port Coquitlam. That includes Citadel Heights, Mary Hill, Oxford Heights, Birchland Manor and the downtown blocks near the West Coast Express.</p>
+    <p>I price from recent sales in your pocket. A townhouse a short walk from the station and one up the hill can sell very differently.</p>
+    <div class="card-grid-3">
+      <div class="card"><h3>Townhouse benchmark</h3><p>In October 2026 the MLS® Home Price Index benchmark for a Port Coquitlam townhouse was <strong>$854,900</strong>, down 3.3% from a year earlier. That is a typical townhouse, not a price for yours. Source: <a href="{GVR_OCT_URL}" target="_blank" rel="noopener">Greater Vancouver REALTORS®, October 2026 statistics package</a>.</p></div>
+      <div class="card"><h3>October sales</h3><p>19 townhouses sold. 61 were listed. That is a 31.1% sales-to-active ratio for the month. The board says upward price pressure tends to show when that ratio stays above 20% for several months. One month is not a forecast. Counts: <a href="{POCO_TOWN_REPORT}" target="_blank" rel="noopener">October 2026 area report</a>.</p></div>
+      <div class="card"><h3>Paperwork</h3><p>Have flood documents, renovation permits and, for a strata, recent minutes, the depreciation report and the Form B ready early. Buyers' lenders and lawyers ask for them in the subject period.</p></div>
+    </div>
+    <p>I'll walk you through pricing, prep and a realistic timeline for your street or building. More detail: <a href="blog/2026-11-16-selling-a-townhouse-in-coquitlam.html">Selling a townhouse in Coquitlam</a>.</p>
+    {_book_row("selling")}
+    ''')
     body += _section("relocating", "Moving here", "Relocating to Port Coquitlam from another province or country", f'''
     <ol class="mini-steps guide-steps">
       <li><div><h3>Clarify the brief</h3><p>Buy-versus-rent timing, budget, commute (West Coast Express, SkyTrain via Coquitlam Central, or driving) and must-haves: schools, parking, a yard, pets, a suite.</p></div></li>
@@ -583,10 +652,10 @@ def _port_coquitlam():
       <li><div><h3>Showings</h3><p>In person if you're here, or live video walkthroughs and floor plans if you're not.</p></div></li>
       <li><div><h3>Offer or lease</h3><p>Strata review on purchases and lease review on rentals.</p></div></li>
     </ol>
-    <p class="after-steps">See also <a href="relocating-to-greater-vancouver.html">relocating to Greater Vancouver</a>, <a href="buyers.html">buying a home</a>, and <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions for the Tri-Cities, BC</a>.</p>
+    <p class="after-steps">See also <a href="relocating-to-greater-vancouver.html">relocating to Greater Vancouver</a>, <a href="buyers.html">buying a home</a>, <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions for the Tri-Cities, BC</a>, <a href="blog/2026-11-08-relocating-to-port-coquitlam-bc-newcomers.html">relocating to Port Coquitlam</a> and <a href="blog/2026-11-09-coquitlam-vs-port-moody-vs-port-coquitlam.html">Coquitlam vs Port Moody vs Port Coquitlam</a>.</p>
     ''')
     sources = _sources(
-        "City boundaries, neighbourhood ages, the floodplain figure, the trail and the 2021 Census counts come from the City of Port Coquitlam and Statistics Canada. West Coast Express times come from TransLink and can change.",
+        "City boundaries, neighbourhood ages, the floodplain figure, the trail and the 2021 Census counts come from the City of Port Coquitlam and Statistics Canada. West Coast Express times come from TransLink and can change. The townhouse benchmark is the MLS® Home Price Index figure in the Greater Vancouver REALTORS® October 2026 statistics package. The 19 sales and 61 active townhouse listings are from that month's Port Coquitlam area report.",
         [
             ("About Port Coquitlam", "https://www.portcoquitlam.ca/explore-poco/about-port-coquitlam", "City of Port Coquitlam"),
             ("Stats and facts", "https://www.portcoquitlam.ca/explore-poco/about-port-coquitlam/stats-facts", "City of Port Coquitlam"),
@@ -595,6 +664,8 @@ def _port_coquitlam():
             ("Census Profile, 2021, Port Coquitlam", "https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?DGUIDlist=2021A00055915039&GENDERlist=1&HEADERlist=0&Lang=E&STATISTIClist=1&SearchText=Port+Coquitlam", "Statistics Canada"),
             ("Focus on Geography Series, 2021, Housing", "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/Page.cfm?Lang=E&Dguid=2021A00055915039&topic=7", "Statistics Canada"),
             ("West Coast Express", "https://www.translink.ca/schedules-and-maps/west-coast-express", "TransLink"),
+            ("October 2026 statistics package", GVR_OCT_URL, "Greater Vancouver REALTORS®"),
+            ("October 2026 Port Coquitlam area report", POCO_TOWN_REPORT, "Greater Vancouver REALTORS®"),
         ],
     )
     cta = _cta(
@@ -606,15 +677,17 @@ def _port_coquitlam():
     )
     return _page(
         "port-coquitlam.html",
-        "Port Coquitlam Realtor &amp; Neighbourhood Guide | Devin Desaulniers, Axford Real Estate",
-        "Port Coquitlam transit (West Coast Express, nearest SkyTrain), neighbourhoods, floodplain checks, and how I help Tri-Cities, BC buyers and relocating renters. Call or text 604-809-1032.",
+        "Port Coquitlam Realtor | Buying, Selling &amp; Relocation Guide | Devin Desaulniers, Axford Real Estate",
+        "Port Coquitlam realtor for buying, selling and relocation. West Coast Express, neighbourhoods, floodplain checks, and the Tri-Cities, BC. Axford Real Estate.",
         "Local guide · Port Coquitlam",
-        "Port Coquitlam, BC: a local guide for buyers and relocators",
-        "Port Coquitlam (PoCo) is one of the three Tri-Cities, BC municipalities, and I help buyers and relocators understand its neighbourhoods, transit and what to check before buying there.",
-        [("where", "Where"), ("transit", "Transit"), ("neighbourhoods", "Neighbourhoods"), ("buying", "Buying"), ("relocating", "Relocating"), ("faq", "FAQ")],
+        "Port Coquitlam realtor and local guide for buyers, sellers and relocators",
+        "Port Coquitlam is one of the three Tri-Cities, BC cities. I'm a Port Coquitlam realtor, and I help buyers, sellers and people relocating here with neighbourhoods, the West Coast Express, and what to check before you buy or sell.",
+        [("where", "Where"), ("transit", "Transit"), ("neighbourhoods", "Neighbourhoods"), ("buying", "Buying"), ("selling", "Selling"), ("relocating", "Relocating"), ("faq", "FAQ")],
         "I'm Devin Desaulniers, a REALTOR® and Real Estate Associate at Axford Real Estate in Port Moody, licensed since 2020, with 28 years living in the Greater Vancouver area. I work with buyers and sellers in the Tri-Cities, BC, buyers relocating to the Vancouver area, and tenants relocating anywhere in Greater Vancouver who need a rental lined up before they arrive.",
         f'<p>This page answers common questions about Port Coquitlam: where it sits, how transit actually works there, which neighbourhoods people ask about, and what to check before you buy or move here from another province or country.</p><p>Call or text me at <a href="{TEL}">{PHONE}</a>, or email <a href="mailto:{EMAIL}">{EMAIL}</a>. My office is at Axford Real Estate, {BROKERAGE_ADDR}.</p>',
         body, "Port Coquitlam FAQ", faq, cta, sources,
+        agent_same_as=(AXFORD_TENANT_URL, DEVIN_GBP),
+        agent_knows=["Home selling", "Townhouse selling", "Relocation rentals", "Port Coquitlam real estate"],
     )
 
 
@@ -971,8 +1044,13 @@ def _newcomer_buyers():
     ]
     ecards = "".join(f'<div class="elig-card elig-{k}"><span class="elig-who">{w}</span><strong class="elig-ans">{a}</strong><p>{d}</p></div>' for k, w, a, d in elig)
     body = _section("eligibility", "Quick check", "Can I buy yet?", f'''
+    <div class="card-grid-3">
+      <div class="card"><h3>In force now</h3><p>The ban is set to end January 1, 2027. A work permit with 183 days left often lets you buy one home already.</p></div>
+      <div class="card"><h3>Existing homes</h3><p>Budget 2026 proposes extending the ban on existing homes to January 1, 2029. Bill C-42 passed the House on November 20, 2026. It is not law yet.</p></div>
+      <div class="card"><h3>New homes</h3><p>Ottawa has also proposed exempting new homes. What counts as new is not defined yet. A presale is not automatically open.</p></div>
+    </div>
     <div class="elig-grid">{ecards}</div>
-    <p class="form-note">A quick guide only, based on the federal ban (in place until January 1, 2027). Not legal or tax advice; confirm eligibility with a lawyer or notary.</p>
+    <p class="form-note">A quick guide only, based on the federal ban (currently set to end January 1, 2027; an extension to 2029 for existing homes has been proposed, and new homes would be exempt). It is not law yet. Not legal or tax advice. Confirm eligibility with a lawyer or notary.</p>
     ''', paper=True)
     body += _section("rent-first", "The usual path", "Rent first, then buy", f'''
     <ol class="mini-steps timeline-3">
@@ -984,44 +1062,69 @@ def _newcomer_buyers():
     ''')
     faq = [
         ("Can I buy a home in BC if I'm not a citizen or permanent resident yet?",
-         "<p>Often, yes. The Prohibition on the Purchase of Residential Property by Non-Canadians Act applies until January 1, 2027, but it exempts temporary residents who hold a valid work permit (or are authorized to work in Canada) with at least 183 days left on it on the purchase date, as long as they haven't already bought a home in Canada during the ban. Protected persons and spouses buying with a citizen or permanent resident partner are also exempt.</p>"),
+         "<p>Often, yes. The Prohibition on the Purchase of Residential Property by Non-Canadians Act is currently set to end January 1, 2027 (an extension to 2029 for existing homes has been proposed, and new homes would be exempt; it is not law yet). It exempts temporary residents who hold a valid work permit (or are authorized to work in Canada) with at least 183 days left on it on the purchase date, as long as they haven't already bought a home in Canada during the ban. Protected persons and spouses buying with a citizen or permanent resident partner are also exempt.</p>"),
         ("What about international students?",
          "<p>The student exemption is much narrower: five years of tax returns, at least 244 days a year in Canada for five years, a price of $500,000 or less, and only one property. Most students rent first.</p>"),
-        ("Will the ban end on January 1, 2027?",
-         "<p>That's the current end date (checked October 30, 2026). Ottawa has extended it once before, so check the latest before you plan around it.</p>"),
+        ("Is the foreign buyer ban ending on January 1, 2027?",
+         f'<p>Probably not for resale homes. Budget 2026 proposes extending the ban on existing homes to January 1, 2029 and exempting new homes. On November 16, 2026 the <a href="{FINANCE_BAN_URL}" target="_blank" rel="noopener">Department of Finance</a> said the government had moved ahead with those proposals. <a href="{BILL_C42_URL}" target="_blank" rel="noopener">Bill C-42</a>, which would repeal the Act on January 1, 2029, passed the House of Commons on November 20, 2026. It still needs the Senate and royal assent, so it is not law yet. What counts as a new home has not been defined. Until the law changes, the current Act and its exemptions still apply. I wrote a plain-English note: <a href="blog/2026-11-11-canada-foreign-buyer-ban-extended-to-2029.html">Canada\'s foreign buyer ban is staying, with a twist</a>. Checked November 24, 2026.</p>'),
         ("Do newcomers pay extra property transfer tax in Metro Vancouver?",
          '<p>If you\'re a foreign national, yes. In addition to the regular property transfer tax, BC charges a 20% additional property transfer tax on your share of a home\'s fair market value in Metro Vancouver, which includes Coquitlam, Port Coquitlam and Port Moody. A permanent resident or citizen doesn\'t pay it. The main exemption for newcomers is the BC Provincial Nominee Program: if you\'re a confirmed BC Provincial Nominee when the transfer registers, the home is your principal residence and it\'s in your own name, you can claim the exemption. A work permit or student visa on its own doesn\'t count, and a spouse who is also a foreign national still pays on their share. See my <a href="bc-property-transfer-tax.html">BC property transfer tax page</a>.</p>'),
         ("Can I get a mortgage on a work permit?",
          "<p>Many lenders have newcomer programs; the down payment and documents differ by lender. A licensed mortgage professional can tell you what applies to you.</p>"),
         ("Should I rent first?",
          '<p>Usually, yes: renting a few months lets you learn the SkyTrain commute, school catchments and neighbourhoods like Burquitlam, Burke Mountain and Suter Brook before you buy. See my <a href="newcomer-rental-faqs.html">newcomer rental FAQs</a>.</p>'),
+        ("Can a newcomer buy a presale condo in Coquitlam or Port Moody?",
+         '<p>Not automatically. If the proposed new-home exemption becomes law, non-Canadians could buy newly built homes, which may include presales, but the details are not out yet. The BC 20% additional property transfer tax for foreign nationals in Metro Vancouver would still apply unless you qualify for an exemption. If you already qualify today, for example a work permit with 183 days or more left, you can buy now, presale or resale. See <a href="blog/2026-11-14-presale-condos-port-moody-coquitlam-what-to-know.html">what to know about presale condos in Port Moody and Coquitlam</a>.</p>'),
     ]
     sources = _sources(
-        "Ban dates and exemptions come from the federal Act and its Regulations (SOR/2022-250) and CMHC; the additional tax comes from the Province of B.C. Checked October 30, 2026.",
+        "Ban dates and exemptions come from the federal Act and its Regulations (SOR/2022-250) and CMHC. The proposed 2029 date for existing homes, and the new-home exemption, come from the Department of Finance news release of November 16, 2026. Bill C-42 passed the House of Commons on November 20, 2026 and is awaiting the Senate, so it is not law. The additional tax comes from the Province of B.C. Checked November 24, 2026.",
         [
             ("Prohibition on the Purchase of Residential Property by Non-Canadians Act", _BAN_ACT, "Justice Laws"),
             ("Regulations, SOR/2022-250", _BAN_REGS, "Justice Laws"),
             ("Prohibition on the purchase of residential property by non-Canadians", _CMHC_BAN, "CMHC"),
+            ("Government of Canada tables plan to ease grocery costs, support homeownership, and encourage new home construction", FINANCE_BAN_URL, "Department of Finance Canada, November 16, 2026"),
+            ("Bill C-42, Grocery and Housing Affordability Act", BILL_C42_URL, "Parliament of Canada, House of Commons third reading November 20, 2026"),
             ("Additional property transfer tax", _APTT, "Province of B.C."),
         ],
     )
+    nb_title = "Newcomer Realtor in Coquitlam: Buying a Home as a Newcomer to Canada | Devin Desaulniers, Axford Real Estate"
+    nb_desc = "Newcomer realtor in Coquitlam. Who can buy under the federal ban, the proposed 2029 change for existing homes, the 20% BC foreign buyer tax, and why renting first often makes sense."
+    webpage = '<script type="application/ld+json">\n' + json.dumps({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": SITE + "newcomer-buyers.html#webpage",
+        "url": SITE + "newcomer-buyers.html",
+        "name": nb_title,
+        "description": nb_desc,
+        "inLanguage": "en-CA",
+        "dateModified": "2026-11-24",
+        "isPartOf": {"@type": "WebSite", "name": "Devin Desaulniers", "url": SITE},
+        "author": {"@id": SITE + "#devin-desaulniers"},
+        "publisher": {"@type": "RealEstateAgent", "name": "Axford Real Estate"},
+    }, indent=2, ensure_ascii=False) + "\n</script>"
     cta = _cta(
         "Not sure if you qualify?",
         f"Send me your situation (work permit expiry, where you're moving from, budget) and I'll tell you what your options look like. Devin Desaulniers, REALTOR®, Axford Real Estate, {BROKERAGE_ADDR}.",
-        f'<a class="btn btn-light" href="mailto:{EMAIL}">{I["mail"]} {EMAIL}</a>'
+        f'<a class="btn btn-light" href="contact.html?intent=buying#qualify">Book a free 15-minute call {I["arrow"]}</a>'
+        f'<a class="btn btn-ghost-light" href="mailto:{EMAIL}">{I["mail"]} {EMAIL}</a>'
         f'<a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} {PHONE}</a>',
     ).replace("</div>\n  </div>\n</section>", '</div>\n    <p class="cta-disclaimer">Not legal or tax advice; confirm eligibility with a lawyer or notary.</p>\n  </div>\n</section>', 1)
     return _visual_page(
         "newcomer-buyers.html",
-        "Buying a Home in Coquitlam as a Newcomer to Canada | Devin Desaulniers",
-        "New to Canada and want to buy in the Tri-Cities, BC? Who can buy under the federal ban, the 20% BC foreign buyer tax, and why renting first often makes sense.",
+        nb_title,
+        nb_desc,
         "Newcomers · Buying",
-        "Buying a Home in Coquitlam as a Newcomer to Canada",
-        "Who can buy under the federal ban, the extra BC tax, and why renting first often makes sense.",
+        "Newcomer realtor in Coquitlam",
+        "Buying a home as a newcomer to Canada, in Coquitlam and the rest of the Tri-Cities, BC. Who can buy under the federal ban, what Ottawa has proposed, and why renting first often makes sense.",
         [("eligibility", "Can I buy?"), ("rent-first", "Rent first"), ("faq", "FAQ")],
-        "If you've just moved to Canada and want to buy in Coquitlam, Port Coquitlam or Port Moody, the first question isn't price, it's eligibility: the federal ban on non-Canadians buying homes runs until January 1, 2027, but many work-permit holders are already allowed to buy one home. I'm Devin Desaulniers, a REALTOR® with Axford Real Estate in Port Moody, and I help newcomers check where they stand, rent while they settle, and buy when it makes sense.",
-        '<p>Renting first? See my <a href="newcomer-rental-faqs.html">newcomer rental FAQs</a> and <a href="relocating-to-greater-vancouver.html">relocating to Greater Vancouver</a>.</p>',
+        "I'm a newcomer realtor in Coquitlam. If you want to buy in Coquitlam, Port Coquitlam or Port Moody, start with whether you can. The federal ban on non-Canadians buying homes is set to end January 1, 2027. Ottawa has proposed extending it for existing homes to January 1, 2029. New homes would be exempt. That change is not law yet. Many work-permit holders can already buy one home either way. I'm Devin Desaulniers, a REALTOR® with Axford Real Estate in Port Moody. I work with newcomers to Canada buying and renting in the Tri-Cities, BC.",
+        '<p>Renting first? See my <a href="newcomer-rental-faqs.html">newcomer rental FAQs</a> and <a href="relocating-to-greater-vancouver.html">relocating to Greater Vancouver</a>. The ban proposal is in <a href="blog/2026-11-11-canada-foreign-buyer-ban-extended-to-2029.html">Canada\'s foreign buyer ban is staying, with a twist</a>.</p>',
         body, "Newcomer buyer FAQ", faq, cta, sources,
+        extra_head=webpage,
+        hero_buttons=(
+            f'<a class="btn btn-light" href="contact.html?intent=buying#qualify">Book a free 15-minute call {I["arrow"]}</a>\n'
+            f'      <a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>'
+        ),
     )
 
 

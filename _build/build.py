@@ -1212,5 +1212,9 @@ for _offset, (_path, _lm) in enumerate(_mr_entries):
     STATIC_PAGES.insert(_mr_at + _offset, _path)
     if _lm:
         _sitemap_lastmod[_path] = _lm
+# City and newcomer pages updated 24 Nov 2026 (selling sections, ban wording).
+_sitemap_lastmod["port-moody.html"] = "2026-11-24"
+_sitemap_lastmod["port-coquitlam.html"] = "2026-11-24"
+_sitemap_lastmod["newcomer-buyers.html"] = "2026-11-24"
 open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS, _sitemap_lastmod))
 print("built")

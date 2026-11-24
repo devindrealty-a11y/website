@@ -46,9 +46,13 @@ SOCIAL = [
 ]
 import json as _json
 import re as _re
-def agent_jsonld():
+def agent_jsonld(extra_same_as=None, knows_about=None):
     addr = {"@type": "PostalAddress", "streetAddress": "2326 Clarke St", "addressLocality": "Port Moody",
             "addressRegion": "BC", "postalCode": "V3H 1Y8", "addressCountry": "CA"}
+    same = [u for _, u in SOCIAL]
+    for url in extra_same_as or ():
+        if url not in same:
+            same.append(url)
     data = {
         "@context": "https://schema.org",
         "@type": "RealEstateAgent",
@@ -62,8 +66,10 @@ def agent_jsonld():
         "address": addr,
         "parentOrganization": {"@type": "RealEstateAgent", "name": "Axford Real Estate", "address": addr},
         "areaServed": [{"@type": "Place", "name": "Greater Vancouver"}, {"@type": "Place", "name": "Tri-Cities, BC"}],
-        "sameAs": [u for _, u in SOCIAL],
+        "sameAs": same,
     }
+    if knows_about:
+        data["knowsAbout"] = list(knows_about)
     return '<script type="application/ld+json">\n' + _json.dumps(data, indent=2, ensure_ascii=False) + '\n</script>'
   # update if repo name / custom domain changes
 
@@ -273,7 +279,7 @@ class _HtmlPage(str):
             return relocate_tenant_promo(combined)
         return _HtmlPage(combined)
 
-def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head="", root="", og_type="website", show_tenant_bar=True):
+def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head="", root="", og_type="website", show_tenant_bar=True, agent_same_as=None, agent_knows=None):
     """root: relative prefix back to the site root ("" for top-level pages, "../" for pages in blog/)."""
     nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("mortgage-rates.html","Mortgage rates","rates"),("tenants.html","Tenants","tenants"),("relocating-to-greater-vancouver.html","Relocating","guide"),("blog/","Blog","blog"),("videos.html","Videos","videos")]
     if LISTINGS_LIVE:
@@ -304,7 +310,7 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/styles.css">
-{agent_jsonld()}
+{agent_jsonld(agent_same_as, agent_knows)}
 {extra_head}
 {GTAG}
 {GOATCOUNTER}
