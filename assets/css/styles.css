@@ -730,6 +730,9 @@ body.has-sticky{padding-bottom:76px}
 .post-image figcaption{margin-top:8px;font-size:.78rem;color:var(--muted);line-height:1.45}
 .post-image figcaption a{color:inherit}
 .post-body{font-size:1.08rem;line-height:1.75}
+.post-body img{width:100%;height:auto;margin:.55em 0 .35em;border:1px solid var(--line);border-radius:var(--radius-sm)}
+.post-body p:has(img){margin-bottom:.35em}
+.post-body p.fig-credit{margin-top:0;font-size:.86rem;color:var(--muted);line-height:1.45}
 .post-body h2{margin:1.6em 0 .5em;font-size:clamp(1.55rem,1.25rem + 1vw,2rem)}
 .post-body h3{margin:1.4em 0 .4em;font-size:1.3rem}
 .post-body ul,.post-body ol{margin:0 0 1.1em;padding-left:1.3em}

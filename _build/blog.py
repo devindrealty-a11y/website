@@ -68,18 +68,56 @@ def parse_front_matter(text, fn):
 def slugify(s):
     return re.sub(r"[^a-z0-9]+", "-", html.unescape(re.sub(r"<[^>]+>", "", s)).lower()).strip("-")
 
+def resolve_inline_image(url):
+    """Map a figure path from an approved draft onto a committed site file.
+
+    Drafts keep paths like photos/house.jpg and visuals/card.png. Those files are
+    stored under assets/img/blog/ so a page in blog/ can load them. Absolute and
+    http(s) URLs are left unchanged.
+    """
+    if re.match(r"https?://", url) or url.startswith(("/", "../")):
+        return url
+    if url.startswith("photos/"):
+        return "/assets/img/blog/" + url
+    if url.startswith("visuals/"):
+        return "/assets/img/blog/inline/" + url[len("visuals/"):]
+    return url
+
+# One level of parentheses, so a Commons filename like File_01_(123).jpg stays one URL.
+MD_URL = r"(?:[^()\s]|\([^()\s]*\))+"
+
+def emphasis(t):
+    t = re.sub(r"\*\*(?!\s)(.+?)(?<!\s)\*\*", r"<strong>\1</strong>", t)
+    t = re.sub(r"(?<![\w*])\*(?![\s*])(.+?)(?<![\s*])\*(?![\w*])", r"<em>\1</em>", t)
+    t = re.sub(r"(?<![\w])_(?![\s_])(.+?)(?<![\s_])_(?![\w])", r"<em>\1</em>", t)
+    return t
+
+def emphasis_outside_tags(t):
+    """Emphasis runs on text only, so underscores inside a URL are not italics."""
+    parts = re.split(r"(<[^>]*>)", t)
+    return "".join(part if part.startswith("<") else emphasis(part) for part in parts)
+
 def inline(t):
     t = html.escape(t, quote=False)
     codes = []
     t = re.sub(r"`([^`]+)`", lambda m: codes.append(m.group(1)) or f"\x00{len(codes)-1}\x00", t)
+    def image(m):
+        alt, url = m.group(1), html.unescape(m.group(2).strip())
+        src = resolve_inline_image(url)
+        if not re.match(r"https?://", src):
+            rel = src[1:] if src.startswith("/") else src
+            if not os.path.isfile(os.path.join(ROOT, rel)):
+                raise PostError(f"inline image {url!r} not found at {rel}")
+        alt_attr = alt.replace('"', "&quot;")
+        return (f'<img src="{html.escape(src, quote=True)}" alt="{alt_attr}" '
+                f'loading="lazy" decoding="async">')
+    t = re.sub(r"!\[([^\]]*)\]\((" + MD_URL + r")\)", image, t)
     def link(m):
         text, url = m.group(1), m.group(2).strip().replace('"', "%22")
         ext = ' target="_blank" rel="noopener"' if re.match(r"https?://", url) else ""
         return f'<a href="{url}"{ext}>{text}</a>'
-    t = re.sub(r"\[([^\]]+)\]\(([^)\s]+)\)", link, t)
-    t = re.sub(r"\*\*(?!\s)(.+?)(?<!\s)\*\*", r"<strong>\1</strong>", t)
-    t = re.sub(r"(?<![\w*])\*(?![\s*])(.+?)(?<![\s*])\*(?![\w*])", r"<em>\1</em>", t)
-    t = re.sub(r"(?<![\w])_(?![\s_])(.+?)(?<![\s_])_(?![\w])", r"<em>\1</em>", t)
+    t = re.sub(r"\[([^\]]+)\]\((" + MD_URL + r")\)", link, t)
+    t = emphasis_outside_tags(t)
     t = re.sub(r"\x00(\d+)\x00", lambda m: f"<code>{codes[int(m.group(1))]}</code>", t)
     return t
 
@@ -87,7 +125,9 @@ def markdown(md):
     out, para, lst, quote = [], [], None, []
     def flush_para():
         if para:
-            out.append(f"<p>{inline(' '.join(para))}</p>"); para.clear()
+            text = " ".join(para)
+            cls = ' class="fig-credit"' if text.startswith("Photo:") else ""
+            out.append(f"<p{cls}>{inline(text)}</p>"); para.clear()
     def flush_list():
         nonlocal lst
         if lst:
@@ -231,6 +271,10 @@ def load_one(fn, with_meta=False):
     if not re.search(r"\]\(/(tenants|buyers)\.html", body):
         raise PostError(f"{fn}: link at least once, with descriptive anchor text, to /tenants.html (renting/relocation) or /buyers.html (buying)")
     words = len(re.findall(r"[A-Za-z0-9$%][\w$%.,'’-]*", re.sub(r"<[^>]+>", " ", body)))
+    try:
+        body_html = markdown(body)
+    except PostError as e:
+        raise PostError(f"{fn}: {e}")
     out = f"{m.group(1)}-{m.group(2)}.html"
     stem = out[:-5]
     image_custom = bool(image)
@@ -242,7 +286,7 @@ def load_one(fn, with_meta=False):
         "updated": updated or d.isoformat(), "summary": meta["summary"], "description": desc,
         "category": meta["category"], "sources": sources, "image": image, "image_alt": meta.get("image_alt", ""),
         "cta": cta, "draft": str(meta.get("draft", "")).lower() in ("true", "yes", "1"),
-        "body_md": body, "body_html": markdown(body), "words": words,
+        "body_md": body, "body_html": body_html, "words": words,
         "image_custom": image_custom, "image_webp": webp if webp != image else "", "meta": meta,
     }
     if not post["image_alt"]:
