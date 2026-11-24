@@ -301,9 +301,126 @@ def test_photo_urls_keeps_up_to_fifty():
 
 def test_builds_realtor_url_when_feed_omits_it():
     item = odata(ListingURL=None, ListingKey="12345678")
-    assert item["realtorUrl"] == "https://www.realtor.ca/real-estate/12345678"
+    assert item["realtorUrl"] == "https://www.realtor.ca/real-estate/12345678/100-sample-crescent-coquitlam"
     kept = odata()
-    assert kept["realtorUrl"].startswith("https://www.realtor.ca/")
+    assert kept["realtorUrl"] == "https://www.realtor.ca/real-estate/1/example"
+    assert "utm_source" not in kept["realtorUrl"]
+
+
+def test_realtor_slug_uses_property_id_not_mls_number():
+    assert ddf.address_slug("1307-595 AUSTIN AVE", "Coquitlam") == "1307-595-austin-ave-coquitlam"
+    assert ddf.address_slug("6531 NO. 2 Road", "Richmond") == "6531-no-2-road-richmond"
+    assert ddf.address_slug("2652 O'HARA Lane", "Surrey") == "2652-ohara-lane-surrey"
+    assert ddf.address_slug("74 East 37TH Avenue", "Vancouver") == "74-e-37th-avenue-vancouver"
+    assert ddf.address_slug("107-809 West 16TH Street", "North Vancouver") == "107-809-w-16th-street-north-vancouver"
+    assert ddf.address_slug("3303-488 Southwest MARINE Drive", "Vancouver") == "3303-488-sw-marine-drive-vancouver"
+    assert ddf.address_slug("9304 STELLER'S Way", "Whistler") == "9304-stellers-way-whistler"
+    item = odata(
+        ListingURL=None, ListingKey="30453805", ListingId="R3179251",
+        UnitNumber="1307", StreetNumber="595", StreetName="AUSTIN", StreetSuffix="AVE", City="Coquitlam",
+    )
+    assert item["address"] == "1307-595 AUSTIN AVE"
+    assert item["realtorUrl"] == "https://www.realtor.ca/real-estate/30453805/1307-595-austin-ave-coquitlam"
+    assert "R3179251" not in item["realtorUrl"]
+    exact = odata(
+        MoreInformationLink="https://www.realtor.ca/real-estate/100/from-the-feed?utm_source=ddf",
+        ListingURL="https://www.realtor.ca/real-estate/1/example",
+    )
+    assert exact["realtorUrl"] == "https://www.realtor.ca/real-estate/100/from-the-feed"
+    bare = odata(ListingURL="https://www.realtor.ca/real-estate/12345678")
+    assert bare["realtorUrl"] == "https://www.realtor.ca/real-estate/12345678/100-sample-crescent-coquitlam"
+    hidden = odata(ListingURL=None, InternetAddressDisplayYN=False)
+    assert hidden["address"] is None
+    assert hidden["realtorUrl"] == "https://www.realtor.ca/real-estate/100/coquitlam"
+    search = odata(ListingURL=None, ListingKey="not-numeric")
+    assert search["realtorUrl"].startswith("https://www.realtor.ca/map#")
+    assert "Keywords=R100" in search["realtorUrl"]
+    legacy = ddf.realtor_link(
+        "https://www.realtor.ca/PropertyDetails.aspx?PropertyId=30453805",
+        "999", "1307-595 AUSTIN AVE", "Coquitlam", "R3179251",
+    )
+    assert legacy == "https://www.realtor.ca/real-estate/30453805/1307-595-austin-ave-coquitlam"
+
+
+def test_link_checker_repairs_urls_and_drops_only_real_404s():
+    import check_realtor_links as links
+    assert links.classify(403, "Sorry, you have been blocked / Désolé, vous avez été bloqué") == "blocked"
+    assert links.classify(404, "Oh No! The page you are looking for does not exist.") == "dead"
+    assert links.classify(200, "<title>1307 595 AUSTIN AVE</title>") == "ok"
+    assert links.classify(0, "") == "error"
+    assert links.canonical_url(
+        '{"url": "https://www.realtor.ca/real-estate/30453805/1307-595-austin-ave-coquitlam"}',
+        "30453805",
+    ) == "https://www.realtor.ca/real-estate/30453805/1307-595-austin-ave-coquitlam"
+    assert links.canonical_url(
+        '{"url": "https://www.realtor.ca/real-estate/999/other"}',
+        "30453805",
+    ) == ""
+
+    def fake_fetch(url):
+        if url.endswith("/1307-595-austin-ave-coquitlam"):
+            return 404, "Oh No! The page you are looking for does not exist."
+        if "/10/" in url:
+            return 200, '{"url": "https://www.realtor.ca/real-estate/10/10-main-street-surrey"}'
+        return 403, "Sorry, you have been blocked"
+
+    original = links.fetch
+    links.fetch = fake_fetch
+    try:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "rentals.json")
+            austin_id = "30453805"
+            shard_dir = os.path.join(tmp, "rent")
+            os.makedirs(shard_dir)
+            shard_no = int(austin_id) % ddf.SHARD_COUNT
+            with open(os.path.join(shard_dir, f"{shard_no}.json"), "w", encoding="utf-8") as fh:
+                json.dump({austin_id: {"remarks": "Austin"}, "10": {"remarks": "Main"}}, fh)
+            with open(path, "w", encoding="utf-8") as fh:
+                json.dump({
+                    "count": 2,
+                    "listings": [
+                        {
+                            "id": austin_id, "mls": "R3179251",
+                            "address": "1307-595 AUSTIN AVE", "city": "Coquitlam",
+                            "realtorUrl": "https://www.realtor.ca/real-estate/30453805",
+                        },
+                        {
+                            "id": "10", "mls": "R10",
+                            "address": "10 Main Street", "city": "Surrey",
+                            "realtorUrl": "https://www.realtor.ca/real-estate/10",
+                        },
+                    ],
+                }, fh)
+            summary = links.process(path, http=True, limit=None)
+            assert summary["repaired"] == 2
+            assert summary["removed"] == 1
+            assert summary["dead"] == 1
+            assert summary["ok"] == 1
+            saved = json.loads(open(path, encoding="utf-8").read())
+            assert saved["count"] == 1
+            assert saved["listings"][0]["id"] == "10"
+            assert saved["listings"][0]["realtorUrl"] == "https://www.realtor.ca/real-estate/10/10-main-street-surrey"
+            shard = json.loads(open(os.path.join(shard_dir, f"{shard_no}.json"), encoding="utf-8").read())
+            assert austin_id not in shard
+            assert shard["10"]["remarks"] == "Main"
+
+            blocked_path = os.path.join(tmp, "data.json")
+            with open(blocked_path, "w", encoding="utf-8") as fh:
+                json.dump({
+                    "count": 1,
+                    "listings": [{
+                        "id": "55", "mls": "R55", "address": "55 Block Road", "city": "Burnaby",
+                        "realtorUrl": "https://www.realtor.ca/real-estate/55",
+                    }],
+                }, fh)
+            links.fetch = lambda url: (403, "<title>Sorry, you have been blocked</title>")
+            blocked = links.process(blocked_path, http=True, limit=None)
+            assert blocked["removed"] == 0
+            assert blocked["blocked"] == 1
+            kept = json.loads(open(blocked_path, encoding="utf-8").read())
+            assert kept["listings"][0]["realtorUrl"] == "https://www.realtor.ca/real-estate/55/55-block-road-burnaby"
+    finally:
+        links.fetch = original
 
 
 def test_property_select_uses_live_schema():

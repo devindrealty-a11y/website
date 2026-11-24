@@ -286,6 +286,43 @@
     return typeof url === "string" && url.indexOf("https://") === 0 ? url : "";
   }
 
+  // REALTOR.ca detail routes are /real-estate/<property id>/<address-slug>.
+  // The id alone is the "page does not exist" 404. Direction words match
+  // scripts/fetch_ddf_listings.py address_slug.
+  var DIRECTION_SLUGS = {
+    east: "e", west: "w", north: "n", south: "s",
+    northeast: "ne", northwest: "nw", southeast: "se", southwest: "sw"
+  };
+
+  function slugTokens(value, abbreviate) {
+    var text = String(value || "").replace(/['’‘]/g, "").toLowerCase();
+    var parts = text.split(/[^a-z0-9]+/);
+    var tokens = [];
+    parts.forEach(function (token) {
+      if (!token) return;
+      tokens.push(abbreviate && DIRECTION_SLUGS[token] ? DIRECTION_SLUGS[token] : token);
+    });
+    return tokens;
+  }
+
+  function addressSlug(address, city) {
+    return slugTokens(address, true).concat(slugTokens(city, false)).join("-");
+  }
+
+  function withRealtorSlug(url, item) {
+    var match = String(url || "").match(/^https:\/\/(?:www\.)?realtor\.ca\/(real-estate|immobilier)\/(\d+)\/?(?:\?[^#]*)?$/i);
+    if (!match) return url;
+    var slug = addressSlug(item && item.address, item && item.city) || "home";
+    return "https://www.realtor.ca/" + match[1].toLowerCase() + "/" + match[2] + "/" + slug;
+  }
+
+  function realtorHref(item) {
+    var url = withRealtorSlug(safeHttp(item && item.realtorUrl), item);
+    if (url) return url;
+    if (item && item.mls) return "https://www.realtor.ca/map#Keywords=" + encodeURIComponent(item.mls);
+    return "https://www.realtor.ca/";
+  }
+
   function titleFor(item) {
     if (item.address) return item.address + (item.city ? ", " + item.city : "");
     return item.city || "Home";
@@ -324,8 +361,9 @@
     var a = document.createElement("a");
     a.target = "_blank";
     a.rel = "noopener";
-    a.href = safeHttp(item.realtorUrl) || "https://www.realtor.ca/";
-    a.textContent = safeHttp(item.realtorUrl)
+    a.href = realtorHref(item);
+    var named = safeHttp(item.realtorUrl) || (item && item.mls);
+    a.textContent = named
       ? (compact ? "View on REALTOR.ca" : "View this listing on REALTOR.ca")
       : "REALTOR.ca";
     return a;
@@ -336,7 +374,7 @@
     a.className = "powered-by";
     a.target = "_blank";
     a.rel = "noopener";
-    a.href = safeHttp(item.realtorUrl) || "https://www.realtor.ca/";
+    a.href = realtorHref(item);
     var img = document.createElement("img");
     img.src = BADGE_SRC;
     img.alt = "";
@@ -524,7 +562,7 @@
     document.getElementById("inq-id").value = item.id || "";
     document.getElementById("inq-mls").value = item.mls || "";
     document.getElementById("inq-address").value = titleFor(item);
-    document.getElementById("inq-url").value = safeHttp(item.realtorUrl);
+    document.getElementById("inq-url").value = realtorHref(item);
   }
 
   function step(delta) {

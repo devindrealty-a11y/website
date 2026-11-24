@@ -20,6 +20,12 @@ with the lease frequency). Sold and leased-completed
 records are dropped, and sold prices are never written. Photos stay as
 remote https URLs. Geography is Greater Vancouver and the Fraser Valley.
 
+REALTOR.ca detail pages are /real-estate/<PropertyId>/<address-slug>. The
+numeric id is the DDF ListingKey (the REALTOR.ca property id), not the MLS
+number. An id with no slug is a 404. The feed's own detail URL is kept when
+it already has that shape. Otherwise the slug is built from the address and
+city. With no property id, the link is a REALTOR.ca search for the MLS number.
+
 No third-party packages: the GitHub Action runs this with the stdlib.
 """
 from __future__ import annotations
@@ -30,6 +36,7 @@ import math
 import os
 import re
 import sys
+import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -87,7 +94,9 @@ COMMERCIAL_PHRASES = (
 EXCLUDE_PHRASES = COMMERCIAL_PHRASES + ("for rent", "rental", "lease")
 EXCLUDE_WORDS = ("land", "office", "farm", "retail", "parking", "agricultural")
 # Fields the live Property entity may reject. Dropped one at a time on HTTP 400.
-OPTIONAL_SELECT = ("Media", "LeaseAmountFrequency", "PropertySubType", "StructureType")
+# MoreInformationLink is the CREA field that holds the REALTOR.ca detail URL.
+# It is optional so a feed that does not have the property still refreshes.
+OPTIONAL_SELECT = ("MoreInformationLink", "Media", "LeaseAmountFrequency", "PropertySubType", "StructureType")
 TYPE_RULES = (
     (("half duplex", "half-duplex", "semi-detached", "semi detached", "duplex", "triplex", "fourplex"), "Half duplex / duplex"),
     (("townhouse", "townhome", "town house", "row house", "rowhouse"), "Townhouse"),
@@ -104,7 +113,8 @@ SELECT_FIELDS = [
     "StreetSuffix", "StreetDirPrefix", "UnitNumber", "BedroomsTotal",
     "BathroomsTotalInteger", "BathroomsPartial", "LivingArea", "LivingAreaUnits",
     "BuildingAreaTotal", "BuildingAreaUnits", "AboveGradeFinishedArea", "YearBuilt",
-    "ListOfficeKey", "ListAgentKey", "ListAOR", "OriginatingSystemName", "ListingURL",
+    "ListOfficeKey", "ListAgentKey", "ListAOR", "OriginatingSystemName",
+    "MoreInformationLink", "ListingURL",
     "InternetEntireListingDisplayYN", "InternetAddressDisplayYN", "ParkingTotal",
     "LeaseAmount", "LeaseAmountFrequency", "TotalActualRent", "ModificationTimestamp", "Media",
 ]
@@ -712,7 +722,13 @@ def build_odata(rec, offices, members, stats):
         brokerage=brokerage or "",
         agent=agent or "",
         photos=photos,
-        realtor_url=realtor_fallback(clean_url(first(rec, "ListingURL", "MoreInformationLink")), listing_id),
+        realtor_url=realtor_link(
+            first(rec, "MoreInformationLink", "ListingURL"),
+            listing_id,
+            street_line(rec) if show_address else "",
+            city,
+            first(rec, "ListingId", "ListingKey"),
+        ),
         updated=first(rec, "ModificationTimestamp"),
         analytics_id=listing_id if digits(listing_id) else "",
         stats=stats,
@@ -800,7 +816,13 @@ def build_rets(rec, stats):
         brokerage=brokerage,
         agent=agent_name or first(rec, "ListAgentFullName"),
         photos=photos,
-        realtor_url=realtor_fallback(clean_url(first(rec, "MoreInformationLink", "ListingURL")), listing_id),
+        realtor_url=realtor_link(
+            first(rec, "MoreInformationLink", "ListingURL"),
+            listing_id,
+            street,
+            city,
+            first(rec, "ListingID", "ListingId", "ListingKey") or listing_id,
+        ),
         updated=first(rec, "LastUpdated", "ModificationTimestamp"),
         analytics_id=listing_id if digits(listing_id) else "",
         stats=stats,
@@ -1124,13 +1146,136 @@ def photo_urls(media):
     return out
 
 
-def realtor_fallback(url, listing_id):
-    """Use the feed URL. When it is empty, link to the listing on REALTOR.ca by its numeric id."""
-    if url:
-        return url
-    if digits(listing_id):
-        return f"https://www.realtor.ca/real-estate/{listing_id}"
+# Standalone direction words on a street line. REALTOR.ca shortens these in
+# the public address slug (East → e). City names are not abbreviated, so
+# "North Vancouver" stays north-vancouver.
+_DIRECTION_SLUGS = {
+    "east": "e",
+    "west": "w",
+    "north": "n",
+    "south": "s",
+    "northeast": "ne",
+    "northwest": "nw",
+    "southeast": "se",
+    "southwest": "sw",
+}
+
+
+def address_slug(address, city):
+    """Slug used after the property id on a REALTOR.ca detail URL.
+
+    Apostrophes are removed (O'HARA → ohara). Other punctuation becomes a
+    hyphen (NO. 2 → no-2). Direction words in the street are abbreviated.
+    """
+    street_tokens = _slug_tokens(address, abbreviate=True)
+    city_tokens = _slug_tokens(city, abbreviate=False)
+    return "-".join(street_tokens + city_tokens)
+
+
+def _slug_tokens(value, abbreviate):
+    text = str(value or "")
+    text = text.replace("'", "").replace("’", "").replace("‘", "")
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    tokens = []
+    for token in re.split(r"[^a-z0-9]+", text.lower()):
+        if not token:
+            continue
+        if abbreviate:
+            token = _DIRECTION_SLUGS.get(token, token)
+        tokens.append(token)
+    return tokens
+
+
+def realtor_search_url(mls):
+    """A REALTOR.ca map search for one MLS number. This is not a detail page.
+
+    Used only when the feed did not give a REALTOR.ca property id, so a
+    made-up /real-estate/<mls> path would 404.
+    """
+    mls = str(mls or "").strip()
+    if not mls:
+        return ""
+    query = urllib.parse.urlencode({
+        "ZoomLevel": "4",
+        "Center": "56.1304,-106.3468",
+        "LatitudeMax": "83",
+        "LongitudeMax": "-52",
+        "LatitudeMin": "41",
+        "LongitudeMin": "-141",
+        "Sort": "6-D",
+        "PropertyTypeGroupID": "1",
+        "PropertySearchTypeId": "1",
+        "Currency": "CAD",
+        "Keywords": mls,
+    })
+    return "https://www.realtor.ca/map#" + query
+
+
+def realtor_property_id(url):
+    """Property id from a REALTOR.ca detail URL, or '' when the URL is not one."""
+    if not url:
+        return ""
+    parts = urllib.parse.urlsplit(str(url))
+    host = parts.netloc.lower().split(":")[0]
+    if host.startswith("www."):
+        host = host[4:]
+    if host != "realtor.ca":
+        return ""
+    segments = [segment for segment in parts.path.split("/") if segment]
+    if len(segments) >= 2 and segments[0].lower() in {"real-estate", "immobilier"} and segments[1].isdigit():
+        return segments[1]
+    query = urllib.parse.parse_qs(parts.query)
+    for key in ("PropertyId", "PropertyID", "propertyId"):
+        values = query.get(key) or []
+        if values and str(values[0]).isdigit():
+            return str(values[0])
     return ""
+
+
+def realtor_detail_slug(url):
+    """Address slug on a REALTOR.ca detail URL, or '' when the path has only an id."""
+    if not url or not realtor_property_id(url):
+        return ""
+    parts = urllib.parse.urlsplit(str(url))
+    segments = [segment for segment in parts.path.split("/") if segment]
+    if len(segments) >= 3 and segments[0].lower() in {"real-estate", "immobilier"} and segments[1].isdigit():
+        return segments[2]
+    return ""
+
+
+def realtor_link(feed_url, listing_id, address, city, mls):
+    """Canonical REALTOR.ca URL for one listing.
+
+    Prefer the feed's own detail URL when it already includes the address
+    slug. An id-only feed URL, or no URL at all, is rebuilt as
+    /real-estate/<property id>/<slug> so it does not land on the Oh No 404.
+    The property id is the REALTOR.ca id, never the MLS number. When that id
+    is missing, return a map search for the MLS number.
+    """
+    cleaned = clean_url(feed_url)
+    feed_id = realtor_property_id(cleaned)
+    feed_slug = realtor_detail_slug(cleaned)
+    if feed_id and feed_slug:
+        return cleaned
+    property_id = feed_id or (str(listing_id) if digits(listing_id) else "")
+    if property_id:
+        slug = address_slug(address, city) or "home"
+        return f"https://www.realtor.ca/real-estate/{property_id}/{slug}"
+    return realtor_search_url(mls)
+
+
+def listing_realtor_url(item):
+    """Detail URL for a listing already stored in a feed file."""
+    if not isinstance(item, dict):
+        return ""
+    return realtor_link(
+        item.get("realtorUrl") or "",
+        item.get("id") or "",
+        item.get("address") or "",
+        item.get("city") or "",
+        item.get("mls") or "",
+    )
 
 
 def clean_url(url):
