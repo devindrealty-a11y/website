@@ -1,0 +1,516 @@
+{
+  "_how_to_update": "This file drives the PDF and the signing page. The printed comment is the comment field. comment_as_written, comment_clean, and interpretation_flag are source notes and are not printed. From the site root run: npm install && node scripts/build_condition_report.mjs. Reload the signing page to see text changes. To attach a photograph, save a jpg or png in the photos folder using the file name in photos[].file (jpeg is also accepted). Reload the page, then rerun the command so the PDF includes the image. Do not add this page to the nav, the sitemap, or robots.txt.",
+  "record_id": "777262eb-8e67-4a10-b54e-4c92030607f0",
+  "source_app": "Rocket Inspection App",
+  "inspection_type": "Move-in (start of tenancy)",
+  "inspection_date": "2026-11-22",
+  "inspection_time_start": null,
+  "output_pdf": "condition-inspection-report.pdf",
+  "photos_dir": "photos",
+  "brokerage": {
+    "name": "Axford Real Estate",
+    "address": "2326 Clarke St., Port Moody, BC V3H 1Y8",
+    "phone": "778-355-0116",
+    "email": "devin@axfordrealestate.ca"
+  },
+  "representative": {
+    "name": "Devin Desaulniers",
+    "title": "Real Estate Associate",
+    "role": "Authorized representative for the landlord",
+    "signed_at": "2026-11-22 11:38 AM"
+  },
+  "property": {
+    "street_address": null,
+    "unit": null,
+    "city": null,
+    "postal_code": null
+  },
+  "tenant": {
+    "name": "Victoria Longbourne"
+  },
+  "landlord": {
+    "name": null,
+    "address_for_service": null
+  },
+  "tenancy": {
+    "start_date": null,
+    "rent": null,
+    "security_deposit": null,
+    "pet_deposit": null
+  },
+  "rooms": [
+    {
+      "room": "Entry 1",
+      "items": [
+        {
+          "item": "Ceiling",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Walls and trim",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Floor",
+          "condition": "Good",
+          "comment": "Flooring has open gaps in the kitchen tiles (minimum of two). Recorded on the Entry floor item; the note refers to kitchen tiles.",
+          "comment_as_written": "Flooring has opened gaps in kitchen tiles. Minimum of two.",
+          "comment_clean": "Flooring has open gaps in the kitchen tiles (minimum of two).",
+          "interpretation_flag": "'opened' read as 'open'. Note is under Entry but mentions kitchen tiles - left as written; confirm location. Rated Good despite defect note."
+        },
+        {
+          "item": "Windows / coverings / screens",
+          "condition": "Poor",
+          "comment": "Holes in screens.",
+          "comment_as_written": "Holes in screens.",
+          "comment_clean": "Holes in screens."
+        },
+        {
+          "item": "Closets",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Lighting fixtures / bulbs",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Electrical outlets",
+          "condition": "Good",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "room": "Kitchen 1",
+      "items": [
+        {
+          "item": "Ceiling",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Walls and trim",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Floor",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Countertop",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Cabinets and doors",
+          "condition": "Fair",
+          "comment": ""
+        },
+        {
+          "item": "Closet(s)",
+          "condition": "Fair",
+          "comment": "Grease marks/dark marks all over closet door.",
+          "comment_as_written": "Grease marks/dark marks all over closet door.",
+          "comment_clean": "Grease marks/dark marks all over closet door."
+        },
+        {
+          "item": "Exhaust hood and fan",
+          "condition": "Good",
+          "comment": "Light under the hood fan is not turning on.",
+          "comment_as_written": "Light under foot fan not turning on.",
+          "comment_clean": "Light under the hood fan is not turning on.",
+          "interpretation_flag": "'foot fan' read as 'hood fan' (voice-to-text). Rated Good despite defect note."
+        },
+        {
+          "item": "Sink / taps / stoppers",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Stove / cooktop",
+          "condition": "Good",
+          "comment": "Front left stove-top burner is not working.",
+          "comment_as_written": "Top front stove burner is not working on left side",
+          "comment_clean": "Front left stove-top burner is not working.",
+          "interpretation_flag": "Reworded from 'Top front stove burner is not working on left side'; meaning = front-left cooktop burner. Rated Good despite defect note."
+        },
+        {
+          "item": "Oven",
+          "condition": "Good",
+          "comment": "",
+          "photo": 1
+        },
+        {
+          "item": "Refrigerator",
+          "condition": "Good",
+          "comment": "Small dent on fridge cover; drawers taped.",
+          "comment_as_written": "Small dent on fridge cover, and taped drawers",
+          "comment_clean": "Small dent on fridge cover; drawers taped.",
+          "photo": 2
+        },
+        {
+          "item": "Dishwasher",
+          "condition": "Good",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "room": "Living room 1",
+      "items": [
+        {
+          "item": "Ceiling",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Walls and trim",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Floor",
+          "condition": "Fair",
+          "comment": "Scratches and marks throughout living room floor. Floor transition strip also in rough shape.",
+          "comment_as_written": "Scratches and marks throughout living room floor. Transition in rough shape as well.",
+          "comment_clean": "Scratches and marks throughout living room floor. Floor transition strip also in rough shape."
+        },
+        {
+          "item": "Doors",
+          "condition": "Fair",
+          "comment": ""
+        },
+        {
+          "item": "Windows / coverings / screens",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Closet(s)",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Lighting fixtures",
+          "condition": "Not applicable",
+          "comment": ""
+        },
+        {
+          "item": "Electrical outlets",
+          "condition": "Good",
+          "comment": "Electrical outlets punched in.",
+          "comment_as_written": "Electrical outlets punched in.",
+          "comment_clean": "Electrical outlets punched in.",
+          "interpretation_flag": "Kept as written; could mean outlet covers/boxes pushed or recessed in. Rated Good despite defect note."
+        }
+      ]
+    },
+    {
+      "room": "Bedroom 1",
+      "items": [
+        {
+          "item": "Ceiling",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Walls and trim",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Floor",
+          "condition": "Fair",
+          "comment": "Damaged floorboards and chips in flooring.",
+          "comment_as_written": "Damaged floorboards and ships in flooring.",
+          "comment_clean": "Damaged floorboards and chips in flooring.",
+          "interpretation_flag": "'ships' read as 'chips'.",
+          "photo": 3
+        },
+        {
+          "item": "Doors",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Windows / coverings / screens",
+          "condition": "Good",
+          "comment": "One blind is very hard to open.",
+          "comment_as_written": "One blind is very hard to open.",
+          "comment_clean": "One blind is very hard to open."
+        },
+        {
+          "item": "Closet(s)",
+          "condition": "Fair",
+          "comment": "Marks on the closet door.",
+          "comment_as_written": "Late marks on the closet door.",
+          "comment_clean": "[Light?] marks on the closet door.",
+          "interpretation_flag": "UNCERTAIN: 'Late marks' probably 'Light marks' (voice-to-text); suggest 'Marks on the closet door' if unsure."
+        },
+        {
+          "item": "Lighting fixtures",
+          "condition": "Not applicable",
+          "comment": ""
+        },
+        {
+          "item": "Electrical outlets",
+          "condition": "Good",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "room": "Master bedroom",
+      "items": [
+        {
+          "item": "Ceiling",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Walls and trim",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Floor",
+          "condition": "Fair",
+          "comment": "Floorboard damage: 3 to 4 boards scuffed.",
+          "comment_as_written": "Floorboard damage. 3 to 4 boards scuffed up.",
+          "comment_clean": "Floorboard damage: 3 to 4 boards scuffed."
+        },
+        {
+          "item": "Doors",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Windows / coverings / screens",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Closet(s)",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Lighting fixtures",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Electrical outlets",
+          "condition": "Good",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "room": "Bathroom 1",
+      "items": [
+        {
+          "item": "Ceiling",
+          "condition": "Fair",
+          "comment": "Dark areas along the edges throughout.",
+          "comment_as_written": "Dark parts on edges throughout.",
+          "comment_clean": "Dark spots/areas along the edges throughout.",
+          "interpretation_flag": "UNCERTAIN: 'parts' probably 'spots' or 'patches'; possibly 'dark marks'."
+        },
+        {
+          "item": "Walls and trim",
+          "condition": "Fair",
+          "comment": ""
+        },
+        {
+          "item": "Floor",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Windows / coverings / screens",
+          "condition": "Not applicable",
+          "comment": ""
+        },
+        {
+          "item": "Cabinets",
+          "condition": "Fair",
+          "comment": "Wear and tear in cabinet drawers.",
+          "comment_as_written": "Late wear tear in cabinet drawers",
+          "comment_clean": "[Light?] wear and tear in cabinet drawers.",
+          "interpretation_flag": "UNCERTAIN: 'Late wear tear' probably 'Light wear and tear'."
+        },
+        {
+          "item": "Toilet",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Sink / taps",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Tub / shower",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Vanity / mirror",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Lighting fixtures",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Exhaust fan",
+          "condition": "Fair",
+          "comment": "Needs to be cleaned out.",
+          "comment_as_written": "Needs to be cleaned out.",
+          "comment_clean": "Needs to be cleaned out."
+        },
+        {
+          "item": "Electrical outlets",
+          "condition": "Good",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "room": "Laundry / Utility 1",
+      "items": [
+        {
+          "item": "Floor",
+          "condition": "Fair",
+          "comment": ""
+        },
+        {
+          "item": "Walls and trim",
+          "condition": "Fair",
+          "comment": ""
+        },
+        {
+          "item": "Washer / dryer",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Sink / taps",
+          "condition": "Not applicable",
+          "comment": ""
+        },
+        {
+          "item": "Lighting fixtures",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Electrical outlets",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Hot water tank",
+          "condition": "Good",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "room": "Stairs 1",
+      "items": [
+        {
+          "item": "Treads and risers",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Railings",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Floor",
+          "condition": "Good",
+          "comment": ""
+        },
+        {
+          "item": "Lighting fixtures",
+          "condition": "Good",
+          "comment": ""
+        }
+      ]
+    }
+  ],
+  "keys": {
+    "unit_keys": 3,
+    "fobs": 1,
+    "as_written": "Three unit keys and one fob key.",
+    "photo": 4
+  },
+  "photos": [
+    {
+      "n": 1,
+      "file": "01-kitchen-oven.jpg",
+      "caption": "Placed in the inspection record after Kitchen — Oven. The record does not describe the photograph. It may relate to the stove or the oven."
+    },
+    {
+      "n": 2,
+      "file": "02-kitchen-refrigerator.jpg",
+      "caption": "Placed in the inspection record after Kitchen — Refrigerator."
+    },
+    {
+      "n": 3,
+      "file": "03-bedroom-1-floor.jpg",
+      "caption": "Placed in the inspection record after Bedroom 1 — Floor."
+    },
+    {
+      "n": 4,
+      "file": "04-keys.jpg",
+      "caption": "Keys issued. Three unit keys and one fob."
+    }
+  ],
+  "summary_as_recorded": {
+    "rooms_inspected": 8,
+    "items_recorded": 66,
+    "good": 48,
+    "fair": 13,
+    "poor": 1,
+    "not_applicable": 4,
+    "photos_in_record": 4,
+    "maintenance_repair_count": 7,
+    "tenant_disagreements": 0
+  },
+  "signatures": {
+    "tenant": {
+      "name": "Victoria Longbourne",
+      "role": "Tenant",
+      "signed_at": "2026-11-22 10:49 AM",
+      "disagreements": 0
+    }
+  },
+  "statements": {
+    "blank": "Blank — to be completed.",
+    "prepared_by": "Prepared for the landlord by Devin Desaulniers, Real Estate Associate, Axford Real Estate.",
+    "form_note": "This report follows the topics in the Residential Tenancy Branch sample form RTB-27. It is the landlord's own report. It is not a government form.",
+    "move_in_only": "This report records the condition at the start of the tenancy. It is not a move-out inspection.",
+    "missing_fields": "Not in the inspection record: the landlord's legal name, the landlord's address for service, the rental unit address, the date the tenant is entitled to possession, the inspection start time, the monthly rent, and the deposits. Each of those is left blank until it is completed.",
+    "rooms_note": "Rooms and items below are those recorded in the inspection. No other room was recorded.",
+    "legend_note": "Good, Fair, Poor, and Not applicable are the only conditions used in the inspection record. The condition is printed as it was recorded. An item can be marked Good and also have a comment describing a defect.",
+    "maintenance_intro": "The inspection record counts 7 items in need of maintenance or repair and does not name them. Every item with a comment is listed first. Every item rated Fair or Poor with no comment is listed second. These lists are not a guess at which 7 the record counted.",
+    "tenant_statement_note": "The inspection record reports 0 disagreements. It does not record an explicit selection of agree or disagree, so neither box is marked.",
+    "representative_disclaimer": "Acknowledges review for the tenancy file. Does not mean the landlord was present.",
+    "timezone_note": "The time zone was not stated in the inspection record.",
+    "legal_note": "This is the move-in condition inspection under s. 23 of the Residential Tenancy Act. The landlord must give the tenant a copy of the signed report promptly, and within 7 days after the inspection is completed, by a method of service in s. 88 of the Act (Residential Tenancy Regulation, s. 18). The report must be in writing, in type no smaller than 8 point, and easy to read (s. 19). It must include the landlord's and tenant's legal names, the rental unit address, the date the tenant is entitled to possession, the landlord's address for service, the inspection date, the condition of the unit, any damage or items in need of maintenance or repair, the tenant's agreement or disagreement, and signatures (s. 20).",
+    "signing_help": "Type the landlord's legal name and address for service, then sign in the box. The date and time are written on the PDF when you download or submit, in Pacific Time. Submitting emails the signature, name, address, time, and record ID to devin@axfordrealestate.ca."
+  }
+}
