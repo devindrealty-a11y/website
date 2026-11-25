@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Tue, 24 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Wed, 25 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>The hourly wage to afford a 2-bedroom across Canada</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-25-hourly-wage-to-rent-a-2-bedroom.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-25-hourly-wage-to-rent-a-2-bedroom.html</guid>
+    <pubDate>Wed, 25 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Renting</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>On CMHC’s October 2025 average rents, a full-time worker needs $29.81 an hour for a typical Canadian 2-bed, and $45.44 in Metro Vancouver. What that means if you’re renting in Greater Vancouver.</description>
+  </item>
   <item>
     <title>What to fix in a rental before it gets expensive</title>
     <link>https://devindesaulniers.ca/blog/2026-11-24-what-to-fix-rental-before-it-gets-expensive.html</link>
@@ -267,15 +276,6 @@
     <category>Renting</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>Just arrived in Greater Vancouver or the Tri-Cities, BC? A plain day-by-day first-week checklist: MSP, ICBC, BC Hydro and FortisBC, Canada Post forwarding, a Compass Card, SD43 school registration and a doctor.</description>
-  </item>
-  <item>
-    <title>Moving from the US to BC: a newcomer's guide to the Tri-Cities, BC</title>
-    <link>https://devindesaulniers.ca/blog/2026-11-09-moving-from-the-us-to-bc-tri-cities-guide.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-09-moving-from-the-us-to-bc-tri-cities-guide.html</guid>
-    <pubDate>Mon, 09 Nov 2026 08:00:00 -0700</pubDate>
-    <category>FAQ</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>Moving from the US to BC and settling in Coquitlam, Port Moody or Port Coquitlam? Here's what to sort out: health coverage during the MSP wait, your customs list, importing your car, swapping your licence, and renting from a distance.</description>
   </item>
 </channel>
 </rss>
