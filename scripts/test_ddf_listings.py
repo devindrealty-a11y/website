@@ -582,6 +582,211 @@ def test_rental_probe_reads_metadata_and_compact_rows():
     assert probe.remark_flags(2400) == ("empty",)
 
 
+def test_manual_listing_survives_a_feed_rewrite_and_can_expire():
+    import manual_listings as manual
+    today = "2026-11-25"
+    rows = [
+        {
+            "id": "30357378",
+            "intent": "sale",
+            "mls": "10402551",
+            "price": 499000,
+            "address": "#204-3589 Skaha Lake Road",
+            "city": "Penticton",
+            "brokerage": "Summerland Realty Ltd.",
+            "realtorUrl": "https://www.realtor.ca/real-estate/30357378/3589-skaha-lake-road-unit-204-penticton-main-south",
+            "remarks": "Listing courtesy of Summerland Realty Ltd.",
+            "photos": ["/assets/img/manual-listings/skaha-lake-penticton.jpg"],
+            "photoCaption": "Skaha Lake and Penticton. Area photo, not this unit.",
+            "photoCredit": "Photo: Kiwibirdman / Wikimedia Commons",
+            "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Skaha_Lake_and_Penticton_-_panoramio.jpg",
+            "photoLicense": "CC BY 3.0",
+            "photoLicenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        },
+        {
+            "id": "999",
+            "intent": "sale",
+            "mls": "999",
+            "address": "1 Old Road",
+            "city": "Penticton",
+            "brokerage": "Example Brokerage",
+            "expires": "2026-11-24",
+            "realtorUrl": "https://www.realtor.ca/real-estate/999/1-old-road-penticton",
+        },
+        {
+            "id": "1000",
+            "intent": "rent",
+            "active": False,
+            "mls": "1000",
+            "address": "2 Old Road",
+            "city": "Penticton",
+            "price": 2000,
+        },
+    ]
+    assert manual.page_relpath(
+        "30357378", "#204-3589 Skaha Lake Road", "Penticton", None
+    ) == "listings/30357378-204-3589-skaha-lake-road-penticton.html"
+    assert manual.is_active(rows[0], today)
+    assert not manual.is_active(rows[1], today)
+    assert not manual.is_active(rows[2], today)
+    item = manual.to_item(rows[0])
+    assert item["realtorUrl"] == rows[0]["realtorUrl"]
+    assert ddf.listing_realtor_url(item) == rows[0]["realtorUrl"]
+    assert "10402551" not in item["realtorUrl"]
+    merged = manual.merge_into(
+        [{"id": "2", "city": "Surrey", "price": 10, "remarks": "Feed row."}],
+        "sale",
+        rows,
+        today,
+    )
+    assert [row["id"] for row in merged] == ["2", "30357378"]
+    assert merged[1]["manual"] is True
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "data.json")
+        ddf.write_feed(path, "ddf-web-api", "9", merged)
+        saved = json.loads(open(path, encoding="utf-8").read())
+        card = next(row for row in saved["listings"] if row["id"] == "30357378")
+        assert card["brokerage"] == "Summerland Realty Ltd."
+        assert card["photo"] == "/assets/img/manual-listings/skaha-lake-penticton.jpg"
+        assert card["photoCaption"].startswith("Skaha Lake and Penticton")
+        assert "remarks" not in card
+        shard_no = int(card["id"]) % ddf.SHARD_COUNT
+        shard = json.loads(open(os.path.join(tmp, "sale", f"{shard_no}.json"), encoding="utf-8").read())
+        assert "Listing courtesy of Summerland Realty Ltd." in shard["30357378"]["remarks"]
+        ddf.write_feed(path, "ddf-web-api", "9", [{"id": "2", "city": "Surrey", "price": 10}])
+        wiped = json.loads(open(path, encoding="utf-8").read())
+        assert [row["id"] for row in wiped["listings"]] == ["2"]
+        manual.patch_feed_file(path, "sale", rows, today)
+        patched = json.loads(open(path, encoding="utf-8").read())
+        assert [row["id"] for row in patched["listings"]] == ["2", "30357378"]
+        assert manual.patch_feed_file(path, "sale", rows, today) == 1
+        again = json.loads(open(path, encoding="utf-8").read())
+        assert again == patched
+        pages = manual.write_pages(rows, tmp)
+        assert pages == ["listings/30357378-204-3589-skaha-lake-road-penticton.html"]
+        html = open(os.path.join(tmp, pages[0]), encoding="utf-8").read()
+        assert "Listing courtesy of Summerland Realty Ltd." in html
+        assert "Axford Real Estate" in html
+        assert "believed to be accurate but is not guaranteed and should be verified" in html
+        assert "View on REALTOR.ca" in html
+        assert rows[0]["realtorUrl"] in html
+        assert "Area photo, not this unit." in html
+        assert "CC BY 3.0" in html
+        assert "Kiwibirdman" in html
+        assert "Call or text 604-809-1032" in html
+        assert 'href="../contact.html"' in html
+        low = html.lower()
+        assert "best realtor" not in low
+        assert "top agent" not in low
+        rows[0]["active"] = False
+        manual.write_pages(rows, tmp)
+        assert not os.path.exists(os.path.join(tmp, pages[0]))
+        manual.patch_feed_file(path, "sale", rows, today)
+        gone = json.loads(open(path, encoding="utf-8").read())
+        assert [row["id"] for row in gone["listings"]] == ["2"]
+
+
+def test_link_checker_keeps_manual_listings_on_a_404():
+    import check_realtor_links as links
+    import manual_listings as manual
+    listing_id = "30357378"
+    url = "https://www.realtor.ca/real-estate/30357378/3589-skaha-lake-road-unit-204-penticton-main-south"
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "data.json")
+        manual_path = os.path.join(tmp, "manual-listings.json")
+        with open(manual_path, "w", encoding="utf-8") as fh:
+            json.dump({"listings": [{
+                "id": listing_id,
+                "address": "#204-3589 Skaha Lake Road",
+                "city": "Penticton",
+                "mls": "10402551",
+                "realtorUrl": url,
+                "manual": True,
+            }]}, fh)
+        shard_dir = os.path.join(tmp, "sale")
+        os.makedirs(shard_dir)
+        shard_no = int(listing_id) % ddf.SHARD_COUNT
+        with open(os.path.join(shard_dir, f"{shard_no}.json"), "w", encoding="utf-8") as fh:
+            json.dump({listing_id: {"remarks": "Keep me."}, "10": {"remarks": "Main"}}, fh)
+        with open(path, "w", encoding="utf-8") as fh:
+            json.dump({
+                "count": 2,
+                "listings": [
+                    {
+                        "id": listing_id, "mls": "10402551", "manual": True,
+                        "address": "#204-3589 Skaha Lake Road", "city": "Penticton",
+                        "realtorUrl": url,
+                    },
+                    {
+                        "id": "10", "mls": "R10",
+                        "address": "10 Main Street", "city": "Surrey",
+                        "realtorUrl": "https://www.realtor.ca/real-estate/10",
+                    },
+                ],
+            }, fh)
+        previous = os.environ.get("MANUAL_LISTINGS_PATH")
+        os.environ["MANUAL_LISTINGS_PATH"] = manual_path
+        original = links.fetch
+        links.fetch = lambda _url: (404, "Oh No! The page you are looking for does not exist.")
+        try:
+            summary = links.process(path, http=True, limit=None)
+            saved = json.loads(open(path, encoding="utf-8").read())
+            assert summary["removed"] == 1
+            assert [row["id"] for row in saved["listings"]] == [listing_id]
+            assert saved["listings"][0]["realtorUrl"] == url
+            shard = json.loads(open(os.path.join(shard_dir, f"{shard_no}.json"), encoding="utf-8").read())
+            assert shard[listing_id]["remarks"] == "Keep me."
+            assert "10" not in shard
+        finally:
+            links.fetch = original
+            if previous is None:
+                os.environ.pop("MANUAL_LISTINGS_PATH", None)
+            else:
+                os.environ["MANUAL_LISTINGS_PATH"] = previous
+        assert manual.active_ids()  # the published file is still readable
+
+
+def test_published_manual_listing_is_in_the_feed_and_on_its_page():
+    import manual_listings as manual
+    rows = manual.load_rows()
+    live = json.loads(open(os.path.join(ROOT, "listings", "data.json"), encoding="utf-8").read())
+    by_id = {row["id"]: row for row in live["listings"]}
+    today = manual.vancouver_today()
+    found = False
+    for row in rows:
+        if str(row.get("id")) != "30357378":
+            continue
+        found = True
+        item = manual.to_item(row)
+        assert manual.is_active(row, today)
+        assert item["id"] in by_id
+        card = by_id[item["id"]]
+        assert card["mls"] == "10402551"
+        assert card["price"] == 499000
+        assert card["city"] == "Penticton"
+        assert card["brokerage"] == "Summerland Realty Ltd."
+        assert card["realtorUrl"] == row["realtorUrl"]
+        assert card.get("manual") is True
+        assert "remarks" not in card
+        shard_no = int(item["id"]) % ddf.SHARD_COUNT
+        shard = json.loads(open(os.path.join(ROOT, "listings", "sale", f"{shard_no}.json"), encoding="utf-8").read())
+        assert "Listing courtesy of Summerland Realty Ltd." in shard[item["id"]]["remarks"]
+        assert "2 dogs (any size) or 2 cats" in shard[item["id"]]["remarks"]
+        page = os.path.join(ROOT, item["page"])
+        html = open(page, encoding="utf-8").read()
+        assert "Listing courtesy of Summerland Realty Ltd." in html
+        assert "Axford Real Estate" in html
+        assert "believed to be accurate but is not guaranteed and should be verified" in html
+        assert row["realtorUrl"] in html
+        assert "Skaha Breeze" in html
+        assert "$499,000" in html
+        assert "$399/month" in html
+        assert "$2,696" in html
+        assert "not this unit" in html
+        assert "https://creativecommons.org/licenses/by/3.0/" in html
+    assert found
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

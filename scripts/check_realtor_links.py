@@ -14,6 +14,9 @@ live page names its canonical detail URL, that exact URL is stored.
 No third-party packages. The listing refresh workflow runs this after the
 DDF pull. Exit 0 when REALTOR.ca blocks the checker: the repaired URLs are
 still written, and nothing is removed on a guess.
+
+Rows in data/manual-listings.json are kept even when REALTOR.ca returns a
+404. Removing one is done in that file, not by this checker.
 """
 from __future__ import annotations
 
@@ -127,13 +130,26 @@ def check_one(item):
     return item, kind, canonical
 
 
-def apply_results(listings, results):
-    """Drop dead listings and adopt canonical URLs. Returns (kept, removed, retargeted)."""
+def apply_results(listings, results, protected=None):
+    """Drop dead listings and adopt canonical URLs. Returns (kept, removed, retargeted).
+
+    protected is a set of manual listing ids. Those rows are kept when the
+    detail page 404s. A block or a transport error never removes anything.
+    """
+    protected = {str(value) for value in (protected or set())}
     dead_ids = set()
     retargeted = 0
     for item, kind, canonical in results:
-        if kind == "dead" and item.get("id"):
-            dead_ids.add(str(item["id"]))
+        listing_id = str(item.get("id") or "")
+        kept_manual = item.get("manual") is True or listing_id in protected
+        if kind == "dead" and listing_id and kept_manual:
+            print(
+                f"Keeping manual listing {listing_id}. REALTOR.ca did not serve that detail page.",
+                file=sys.stderr,
+            )
+            continue
+        if kind == "dead" and listing_id:
+            dead_ids.add(listing_id)
             continue
         if kind == "ok" and canonical and canonical != item.get("realtorUrl"):
             item["realtorUrl"] = canonical
@@ -236,6 +252,8 @@ def drop_shard_ids(path, ids):
 
 
 def process(path, http, limit):
+    import manual_listings
+    protected = manual_listings.active_ids()
     data = load_feed(path)
     listings = data.get("listings") or []
     repaired = repair_listings(listings)
@@ -250,7 +268,7 @@ def process(path, http, limit):
         results, skipped = check_urls(listings, limit)
         counts = outcome_counts(results)
         if not probe_blocked(results):
-            kept, removed, retargeted = apply_results(listings, results)
+            kept, removed, retargeted = apply_results(listings, results, protected)
             if removed or retargeted:
                 data["listings"] = kept
                 data["count"] = len(kept)

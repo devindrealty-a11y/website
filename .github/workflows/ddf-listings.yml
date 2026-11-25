@@ -9,6 +9,8 @@
 #   DDF_PASSWORD  destination password (Web API client secret)
 # If either secret is missing, the script exits 0 and leaves
 # listings/data.json and listings/rentals.json alone.
+# data/manual-listings.json is merged back in after a successful pull and
+# is never deleted by this workflow. See _build/MANUAL-LISTINGS.md.
 name: Refresh DDF listings
 
 on:

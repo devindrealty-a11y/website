@@ -8,7 +8,9 @@ is not reachable, falls back to the legacy RETS feed at https://data.crea.ca.
 
 Reads DDF_USERNAME and DDF_PASSWORD. If either is missing, exits 0 and
 does not change either JSON file. A successful run replaces both files, so
-listings that left the feed disappear. One pull feeds both files:
+listings that left the feed disappear. Active rows in data/manual-listings.json
+are merged back in afterwards and are not wiped. See _build/MANUAL-LISTINGS.md.
+One pull feeds both files:
 
 - listings/data.json: active residential for-sale listings
 - listings/rentals.json: active residential for-lease or for-rent listings
@@ -63,7 +65,9 @@ SHARD_COUNT = 48
 CARD_FIELDS = (
     "id", "mls", "price", "address", "city", "area", "postal", "beds", "baths",
     "type", "sqft", "year", "parking", "brokerage", "agent", "realtorUrl",
-    "updated", "analyticsId",
+    "updated", "analyticsId", "manual", "page",
+    "photoCaption", "photoCredit", "photoCreditUrl",
+    "photoLicense", "photoLicenseUrl", "photoChange",
 )
 MAX_PAGES = 5000
 UA = "DevinDesaulniersDDF/1.0"
@@ -129,6 +133,15 @@ class ApiUnavailable(FetchError):
 
 
 def main(argv=None):
+    args = list(sys.argv[1:] if argv is None else argv)
+    if "--merge-manual" in args:
+        import manual_listings
+        try:
+            manual_listings.apply_published()
+        except manual_listings.ManualListingsError as exc:
+            print(f"Manual listings failed: {exc}", file=sys.stderr)
+            return 1
+        return 0
     user = os.environ.get("DDF_USERNAME", "").strip()
     password = os.environ.get("DDF_PASSWORD", "").strip()
     if not user or not password:
@@ -152,8 +165,21 @@ def main(argv=None):
         )
         print("Summary: " + summary(stats), file=sys.stderr)
         return 1
+    import manual_listings
+    try:
+        sales = manual_listings.merge_into(sales, "sale")
+        rentals = manual_listings.merge_into(rentals, "rent")
+    except manual_listings.ManualListingsError as exc:
+        print(f"Manual listings failed: {exc}", file=sys.stderr)
+        print("listings/data.json and listings/rentals.json were not changed.", file=sys.stderr)
+        return 1
     write_feed(output, source, destination_id, sales)
     write_feed(rentals_output, source, destination_id, rentals)
+    try:
+        manual_listings.write_pages()
+    except manual_listings.ManualListingsError as exc:
+        print(f"Manual listing pages failed: {exc}", file=sys.stderr)
+        return 1
     print(
         f"Wrote {len(sales)} listings to {os.path.relpath(output, ROOT)} and "
         f"{len(rentals)} rentals to {os.path.relpath(rentals_output, ROOT)} from {source}."

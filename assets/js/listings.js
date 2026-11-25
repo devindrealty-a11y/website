@@ -234,6 +234,12 @@
     body.appendChild(price);
     body.appendChild(h);
     body.appendChild(meta);
+    if (item.photoCaption) {
+      var note = document.createElement("p");
+      note.className = "ls-photo-note";
+      note.textContent = item.photoCaption;
+      body.appendChild(note);
+    }
     body.appendChild(broker);
     body.appendChild(foot);
     article.appendChild(media);
@@ -251,7 +257,7 @@
     }
     var img = document.createElement("img");
     img.src = photos[index] || photos[0];
-    img.alt = "Photo of " + titleFor(item);
+    img.alt = item.photoCaption || ("Photo of " + titleFor(item));
     if (lazy) img.loading = "lazy";
     else if (index === 0) img.setAttribute("fetchpriority", "high");
     img.decoding = "async";
@@ -273,7 +279,9 @@
   function httpsPhotos(item) {
     var list = item.photos;
     if (!list || !list.length) list = item.photo ? [item.photo] : [];
-    return list.filter(function (url) { return typeof url === "string" && url.indexOf("https://") === 0; });
+    return list.filter(function (url) {
+      return typeof url === "string" && (url.indexOf("https://") === 0 || url.charAt(0) === "/");
+    });
   }
 
   function photoTotal(item) {
@@ -388,8 +396,65 @@
     return a;
   }
 
+  function photoNoteEl() {
+    var note = document.getElementById("ls-photo-note");
+    if (note) return note;
+    note = document.createElement("p");
+    note.id = "ls-photo-note";
+    note.className = "ls-photo-note";
+    note.hidden = true;
+    var count = document.getElementById("ls-photo-count");
+    if (count && count.parentNode) count.parentNode.insertBefore(note, count.nextSibling);
+    return note;
+  }
+
+  function clearPhotoNote() {
+    var note = document.getElementById("ls-photo-note");
+    if (!note) return;
+    note.hidden = true;
+    note.replaceChildren();
+  }
+
+  function creditLink(href, text) {
+    var a = document.createElement("a");
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = text;
+    return a;
+  }
+
+  function paintPhotoNote(item) {
+    var note = photoNoteEl();
+    if (!note) return;
+    var has = item && (item.photoCaption || item.photoCredit || item.photoLicense || item.photoChange);
+    if (!has) {
+      clearPhotoNote();
+      return;
+    }
+    note.hidden = false;
+    note.replaceChildren();
+    if (item.photoCaption) note.appendChild(document.createTextNode(item.photoCaption + " "));
+    if (item.photoCredit) {
+      if (safeHttp(item.photoCreditUrl)) note.appendChild(creditLink(item.photoCreditUrl, item.photoCredit));
+      else note.appendChild(document.createTextNode(item.photoCredit));
+    }
+    if (item.photoLicense && safeHttp(item.photoLicenseUrl)) {
+      note.appendChild(document.createTextNode(" ("));
+      note.appendChild(creditLink(item.photoLicenseUrl, item.photoLicense));
+      note.appendChild(document.createTextNode(")"));
+    } else if (item.photoLicense) {
+      note.appendChild(document.createTextNode(" (" + item.photoLicense + ")"));
+    }
+    if (item.photoChange) {
+      var gap = (item.photoCredit || item.photoLicense) ? ". " : "";
+      note.appendChild(document.createTextNode(gap + item.photoChange));
+    }
+  }
+
   function showSearch() {
     closeLightbox();
+    clearPhotoNote();
     document.body.classList.remove("is-listing-open");
     detailEl.hidden = true;
     searchEl.hidden = false;
@@ -472,6 +537,7 @@
     document.getElementById("ls-agent").textContent = "";
     document.getElementById("ls-photo").replaceChildren();
     document.getElementById("ls-photo-count").textContent = "";
+    clearPhotoNote();
     document.getElementById("ls-thumbs").replaceChildren();
     document.getElementById("ls-remarks").replaceChildren();
     document.getElementById("ls-facts").replaceChildren();
@@ -520,6 +586,14 @@
     document.getElementById("ls-next").hidden = !multi;
     var linkSlot = document.getElementById("ls-realtor-link");
     linkSlot.replaceChildren(realtorLink(item, false));
+    if (item.page && typeof item.page === "string" && item.page.indexOf("listings/") === 0 && item.page.indexOf("..") === -1) {
+      var share = document.createElement("a");
+      share.href = item.page;
+      share.textContent = "Shareable page";
+      linkSlot.appendChild(document.createTextNode(" "));
+      linkSlot.appendChild(share);
+    }
+    paintPhotoNote(item);
     document.getElementById("ls-badge").replaceChildren(badge(item));
     var facts = document.getElementById("ls-facts");
     facts.replaceChildren();

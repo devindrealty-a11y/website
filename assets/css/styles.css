@@ -777,6 +777,7 @@ body.has-sticky{padding-bottom:76px}
 .page-hero--search h1{max-width:16ch;margin-bottom:.15em;font-size:clamp(1.85rem,1.35rem + 1.6vw,2.8rem)}
 .page-hero--search .eyebrow{margin-bottom:.45em}
 .page-hero--search .lead{margin-bottom:0;max-width:40rem;font-size:1rem;line-height:1.45}
+.page-hero--listing h1{max-width:28ch}
 .page-hero--search::after{height:42px}
 .section--listings{padding-top:14px;padding-bottom:clamp(48px,6vw,84px)}
 .ls-operator{display:flex;gap:12px;align-items:center;margin:0 0 12px;color:var(--muted);font-size:.9rem;line-height:1.35}
@@ -838,6 +839,10 @@ body.has-sticky{padding-bottom:76px}
 .ls-frame .ls-nophoto{position:absolute;inset:0;min-height:0}
 .ls-frame:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .ls-photo-count{margin:8px 0 0;font-family:var(--font-head);font-size:.82rem;color:var(--muted)}
+.ls-photo-note{margin:8px 0 0;max-width:42rem;color:var(--muted);font-size:.9rem}
+.ls-photo-note a{color:inherit}
+.ls-area-photo{margin:0}
+.ls-area-photo img{display:block;width:100%;height:auto;border-radius:var(--radius);background:var(--grey-bg)}
 .ls-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding-bottom:4px}
 .ls-thumb{flex:0 0 auto;width:84px;height:64px;padding:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:var(--grey-bg);cursor:pointer}
 .ls-thumb.is-on{border-color:var(--blue)}
