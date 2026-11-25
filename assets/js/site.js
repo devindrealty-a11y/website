@@ -305,14 +305,28 @@
 
     var intentParam = '';
     if (isQualified) {
-      try {
-        intentParam = (new URLSearchParams(window.location.search).get('intent') || '').toLowerCase();
-      } catch (err) {}
+      var queryParams = null;
+      try { queryParams = new URLSearchParams(window.location.search); } catch (err) {}
+      intentParam = queryParams ? (queryParams.get('intent') || '').toLowerCase() : '';
       var intentMap = { buying: 'Buying', selling: 'Selling', renting: 'Renting' };
       if (intentMap[intentParam]) {
         var preset = form.querySelector('input[name="intent"][value="' + intentMap[intentParam] + '"]');
         if (preset) preset.checked = true;
       }
+      var listingNote = '';
+      if (queryParams) {
+        var presetMessage = (queryParams.get('message') || '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').trim();
+        var listingName = (queryParams.get('listing') || '').replace(/[\u0000-\u001F]/g, ' ').replace(/\s+/g, ' ').trim();
+        var listingMls = (queryParams.get('mls') || '').replace(/[\u0000-\u001F]/g, '').trim();
+        if (presetMessage) listingNote = presetMessage;
+        else if (listingName || listingMls) {
+          listingNote = 'I would like to ask about ' + (listingName || 'this home');
+          if (listingMls) listingNote += ' (MLS® ' + listingMls.slice(0, 40) + ')';
+          listingNote += '.';
+        }
+      }
+      var messageField = form.querySelector('[name="message"]');
+      if (messageField && listingNote && !messageField.value) messageField.value = listingNote.slice(0, 500);
     }
 
     function track(name) {

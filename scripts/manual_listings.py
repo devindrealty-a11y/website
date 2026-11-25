@@ -26,6 +26,7 @@ import os
 import re
 import sys
 from datetime import datetime
+from urllib.parse import quote
 from zoneinfo import ZoneInfo
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -449,11 +450,20 @@ def render_page(row, item):
     realtor_html = ""
     if realtor.startswith("https://"):
         realtor_html = (
-            f'<p id="ls-realtor-link"><a href="{_esc(realtor)}" target="_blank" rel="noopener">View on REALTOR.ca</a></p>'
-            f'<p><a class="powered-by" href="{_esc(realtor)}" target="_blank" rel="noopener">'
-            f'<img src="https://www.realtor.ca/images/en-ca/powered_by_realtor.svg" alt="" width="125" height="40" onerror="this.remove()">'
-            f"<span>Powered by REALTOR.ca</span></a></p>"
+            f'<p class="ls-source" id="ls-realtor-link"><span class="ls-source-links">'
+            f'<a class="ls-source-link" href="{_esc(realtor)}" target="_blank" rel="noopener">Listing data via REALTOR.ca</a>'
+            f"</span>"
+            f'<a class="powered-by" href="{_esc(realtor)}" target="_blank" rel="noopener">'
+            f'<img src="https://www.realtor.ca/images/en-ca/powered_by_realtor.svg" alt="Powered by REALTOR.ca" width="88" height="28" onerror="this.remove()">'
+            f"</a></p>"
         )
+    renting = row_intent(row) == "rent"
+    ask_label = "Ask Devin about this rental" if renting else "Ask Devin about this home"
+    contact_href = f"{root}contact.html?intent={'renting' if renting else 'buying'}&listing={quote(place, safe='')}"
+    mls = str(item.get("mls") or "").strip()
+    if mls:
+        contact_href += "&mls=" + quote(mls, safe="")
+    contact_href += "#qualify"
     remarks = str(row.get("remarks") or item.get("remarks") or "").strip()
     remarks_html = ""
     if remarks:
@@ -489,20 +499,24 @@ def render_page(row, item):
         <p class="ls-price">{_esc(price)}</p>
         <h2 class="ls-address">{_esc(place)}</h2>
         <p class="ls-meta">{_esc(" · ".join(bits))}</p>
+        <div class="ls-cta"><div class="ls-cta-row">
+          <a class="btn btn-primary" href="{_esc(contact_href)}">{_esc(ask_label)}</a>
+          <a class="btn btn-outline" href="{tel}">Book a showing · {_esc(phone)}</a>
+        </div></div>
       </div>
       <div class="ls-summary">
         <p class="ls-broker">{_esc(courtesy)}</p>
-        {realtor_html}
         <div class="ls-facts">{facts}</div>
+        {realtor_html}
       </div>
     </div>
     {remarks_html}
-    <div class="ls-inquiry">
-      <h2>Book a showing or ask a question</h2>
-      <p class="lead">Contact Devin Desaulniers at {_esc(brokerage_name)} to book a showing or ask a question. Call or text <a href="{tel}">{_esc(phone)}</a>, or use the <a href="{root}contact.html">contact form</a>. This message comes to Devin. It is not sent to the listing brokerage.</p>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="{tel}">Call or text {_esc(phone)}</a>
-        <a class="btn btn-outline" href="{root}contact.html">Contact form</a>
+    <div class="ls-inquiry" id="ls-inquiry">
+      <h2>{_esc(ask_label)}</h2>
+      <p class="lead">Contact Devin Desaulniers at {_esc(brokerage_name)} to book a showing or ask a question. Call or text <a href="{tel}">{_esc(phone)}</a>, or use the contact form. The form is filled in with this address and MLS® number. This message comes to Devin. It is not sent to the listing brokerage.</p>
+      <div class="ls-cta-row">
+        <a class="btn btn-primary" href="{_esc(contact_href)}">{_esc(ask_label)}</a>
+        <a class="btn btn-outline" href="{tel}">Book a showing · {_esc(phone)}</a>
       </div>
     </div>
   </div>

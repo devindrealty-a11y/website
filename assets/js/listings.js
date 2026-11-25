@@ -7,7 +7,9 @@
   var mode = (tag && tag.getAttribute("data-mode")) || "sale";
   var feedPath = (tag && tag.getAttribute("data-feed")) || "listings/data.json";
   var samplePath = (tag && tag.getAttribute("data-sample")) || "_fixtures/listings-sample.json";
-  var state = { listings: [], byId: {}, cities: {}, sample: false, destinationId: null, shown: PAGE_WIDE, photo: 0, current: null, lightbox: false };
+  var PHONE_TEL = "tel:+16048091032";
+  var PHONE_TEXT = "604-809-1032";
+  var state = { listings: [], byId: {}, cities: {}, sample: false, destinationId: null, shown: PAGE_WIDE, photo: 0, current: null, lightbox: false, scrollInquiry: false };
   var shardCache = {};
   var shardWait = {};
   var baseTitle = document.title;
@@ -225,12 +227,6 @@
     var broker = document.createElement("p");
     broker.className = "ls-broker";
     broker.textContent = brokerageLine(item);
-    var foot = document.createElement("div");
-    foot.className = "ls-card-foot";
-    var link = realtorLink(item, true);
-    link.classList.add("ls-realtor");
-    foot.appendChild(link);
-    foot.appendChild(badge(item));
     body.appendChild(price);
     body.appendChild(h);
     body.appendChild(meta);
@@ -241,7 +237,8 @@
       body.appendChild(note);
     }
     body.appendChild(broker);
-    body.appendChild(foot);
+    body.appendChild(cardActions(item));
+    body.appendChild(sourceLine(item));
     article.appendChild(media);
     article.appendChild(body);
     return article;
@@ -365,15 +362,54 @@
     return "Listing brokerage: " + (item.brokerage || "not supplied in the feed");
   }
 
-  function realtorLink(item, compact) {
+  function askLabel() {
+    return mode === "rent" ? "Ask Devin about this rental" : "Ask Devin about this home";
+  }
+
+  function cardActions(item) {
+    var actions = document.createElement("div");
+    actions.className = "ls-card-actions";
+    var ask = document.createElement("a");
+    ask.className = "btn btn-primary";
+    ask.href = "#" + encodeURIComponent(item.id);
+    ask.textContent = askLabel();
+    ask.addEventListener("click", function () { state.scrollInquiry = true; });
+    var book = document.createElement("a");
+    book.className = "btn btn-outline";
+    book.href = PHONE_TEL;
+    book.textContent = "Book a showing · " + PHONE_TEXT;
+    actions.appendChild(ask);
+    actions.appendChild(book);
+    return actions;
+  }
+
+  function sourceLine(item, sharePage) {
+    var source = document.createElement("p");
+    source.className = "ls-source";
+    var links = document.createElement("span");
+    links.className = "ls-source-links";
+    links.appendChild(realtorLink(item));
+    if (sharePage) {
+      links.appendChild(document.createTextNode(" · "));
+      var share = document.createElement("a");
+      share.className = "ls-share";
+      share.href = sharePage;
+      share.textContent = "Shareable page";
+      links.appendChild(share);
+    }
+    source.appendChild(links);
+    source.appendChild(badge(item));
+    return source;
+  }
+
+  function realtorLink(item) {
     var a = document.createElement("a");
+    a.className = "ls-source-link";
     a.target = "_blank";
     a.rel = "noopener";
     a.href = realtorHref(item);
-    var named = safeHttp(item.realtorUrl) || (item && item.mls);
-    a.textContent = named
-      ? (compact ? "View on REALTOR.ca" : "View this listing on REALTOR.ca")
-      : "REALTOR.ca";
+    var named = safeHttp(item && item.realtorUrl) || (item && item.mls);
+    a.textContent = named ? "Listing data via REALTOR.ca" : "Source: REALTOR.ca";
     return a;
   }
 
@@ -385,15 +421,51 @@
     a.href = realtorHref(item);
     var img = document.createElement("img");
     img.src = BADGE_SRC;
-    img.alt = "";
-    img.width = 125;
-    img.height = 40;
-    img.addEventListener("error", function () { img.remove(); });
+    img.alt = "Powered by REALTOR.ca";
+    img.width = 88;
+    img.height = 28;
     var span = document.createElement("span");
     span.textContent = "Powered by REALTOR.ca";
+    span.hidden = true;
+    img.addEventListener("error", function () {
+      img.remove();
+      span.hidden = false;
+    });
     a.appendChild(img);
     a.appendChild(span);
     return a;
+  }
+
+  function openInquiry() {
+    var inquiry = document.getElementById("ls-inquiry");
+    if (!inquiry) return;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    inquiry.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    var name = document.getElementById("inq-name");
+    if (name) name.focus({ preventScroll: true });
+  }
+
+  function paintCta() {
+    var slot = document.getElementById("ls-cta");
+    if (!slot) return;
+    slot.replaceChildren();
+    var row = document.createElement("div");
+    row.className = "ls-cta-row";
+    var ask = document.createElement("a");
+    ask.className = "btn btn-primary";
+    ask.href = "#ls-inquiry";
+    ask.textContent = askLabel();
+    ask.addEventListener("click", function (e) {
+      e.preventDefault();
+      openInquiry();
+    });
+    var book = document.createElement("a");
+    book.className = "btn btn-outline";
+    book.href = PHONE_TEL;
+    book.textContent = "Book a showing · " + PHONE_TEXT;
+    row.appendChild(ask);
+    row.appendChild(book);
+    slot.appendChild(row);
   }
 
   function photoNoteEl() {
@@ -475,9 +547,12 @@
     ensureDetail(item, function () {
       if (state.current === item) paintDetail();
     });
+    var pendingInquiry = state.scrollInquiry;
+    state.scrollInquiry = false;
     var heading = document.getElementById("ls-heading");
-    if (heading) heading.focus();
-    window.scrollTo(0, 0);
+    if (heading) heading.focus({ preventScroll: true });
+    if (pendingInquiry) window.setTimeout(openInquiry, 80);
+    else window.scrollTo(0, 0);
     track(item);
   }
 
@@ -543,6 +618,8 @@
     document.getElementById("ls-facts").replaceChildren();
     document.getElementById("ls-badge").replaceChildren();
     document.getElementById("ls-realtor-link").replaceChildren();
+    var cta = document.getElementById("ls-cta");
+    if (cta) cta.replaceChildren();
     document.getElementById("ls-prev").hidden = true;
     document.getElementById("ls-next").hidden = true;
     var inquiry = document.querySelector(".ls-inquiry");
@@ -584,17 +661,18 @@
     var multi = photos.length > 1;
     document.getElementById("ls-prev").hidden = !multi;
     document.getElementById("ls-next").hidden = !multi;
-    var linkSlot = document.getElementById("ls-realtor-link");
-    linkSlot.replaceChildren(realtorLink(item, false));
+    var sharePage = "";
     if (item.page && typeof item.page === "string" && item.page.indexOf("listings/") === 0 && item.page.indexOf("..") === -1) {
-      var share = document.createElement("a");
-      share.href = item.page;
-      share.textContent = "Shareable page";
-      linkSlot.appendChild(document.createTextNode(" "));
-      linkSlot.appendChild(share);
+      sharePage = item.page;
     }
+    var linkSlot = document.getElementById("ls-realtor-link");
+    var source = sourceLine(item, sharePage);
+    linkSlot.replaceWith(source);
+    source.id = "ls-realtor-link";
+    var badgeSlot = document.getElementById("ls-badge");
+    if (badgeSlot) badgeSlot.replaceChildren();
     paintPhotoNote(item);
-    document.getElementById("ls-badge").replaceChildren(badge(item));
+    paintCta();
     var facts = document.getElementById("ls-facts");
     facts.replaceChildren();
     [

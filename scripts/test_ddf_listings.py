@@ -676,7 +676,14 @@ def test_manual_listing_survives_a_feed_rewrite_and_can_expire():
         assert "Listing courtesy of Summerland Realty Ltd." in html
         assert "Axford Real Estate" in html
         assert "believed to be accurate but is not guaranteed and should be verified" in html
-        assert "View on REALTOR.ca" in html
+        assert "Listing data via REALTOR.ca" in html
+        assert "View on REALTOR.ca" not in html
+        assert "Powered by REALTOR.ca" in html
+        assert "Ask Devin about this home" in html
+        assert "Book a showing" in html
+        assert "intent=buying" in html
+        assert "mls=10402551" in html
+        assert "listing=" in html
         assert rows[0]["realtorUrl"] in html
         assert "Area photo, not this unit." in html
         assert "CC BY 3.0" in html

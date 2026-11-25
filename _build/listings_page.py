@@ -165,18 +165,19 @@ def render(mode="sale"):
           <p class="ls-price" id="ls-price"></p>
           <h2 class="ls-address" id="ls-heading" tabindex="-1"></h2>
           <p class="ls-meta" id="ls-meta"></p>
+          <div class="ls-cta" id="ls-cta"></div>
         </div>
         <div class="ls-summary">
           <p class="ls-broker" id="ls-broker"></p>
           <p class="ls-agent" id="ls-agent"></p>
-          <p id="ls-realtor-link"></p>
-          <div id="ls-badge"></div>
           <div class="ls-facts" id="ls-facts"></div>
+          <p class="ls-source" id="ls-realtor-link"></p>
+          <div id="ls-badge"></div>
         </div>
       </div>
       <div class="ls-remarks" id="ls-remarks"></div>
 
-      <div class="ls-inquiry">
+      <div class="ls-inquiry" id="ls-inquiry">
         <h2>{spec["ask"]}</h2>
         <p class="lead">{ask_lead}</p>
         <form class="form-card" data-form-key="{spec["form_key"]}" data-goat-event="{spec["goat_event"]}" action="#" method="POST">
@@ -196,8 +197,9 @@ def render(mode="sale"):
             <div class="field full">
               <label class="consent"><input type="checkbox" name="consent" value="yes" required> <span>I agree to be contacted by Devin Desaulniers ({BROKERAGE}) by email or phone {spec["consent"]}. I can opt out at any time. <span class="req">*</span></span></label>
             </div>
-            <div class="full">
+            <div class="full ls-inquiry-actions">
               <button type="submit" class="btn btn-primary">Send inquiry</button>
+              <a class="btn btn-outline" href="{TEL}">Book a showing · {PHONE}</a>
               <div class="form-status" role="status" aria-live="polite"></div>
             </div>
           </div>
