@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Out-of-area listings that the DDF refresh must not wipe.
+"""Listings the DDF refresh must not wipe.
+
+Only Greater Vancouver and Fraser Valley listings may be added. An
+out-of-board listing needs written permission from the listing brokerage
+and their full photo set. See _build/MANUAL-LISTINGS.md.
 
 Source file: data/manual-listings.json (override with MANUAL_LISTINGS_PATH).
 The 12-hour workflow rewrites listings/data.json and listings/rentals.json
@@ -273,7 +277,17 @@ def patch_feed_file(path, intent, rows=None, today=None):
         data = json.load(fh)
     if not isinstance(data, dict) or not isinstance(data.get("listings"), list):
         raise ManualListingsError(f"{path} has no listings array")
-    kept = [row for row in data["listings"] if str(row.get("id") or "") not in ids]
+    kept = []
+    orphaned = []
+    for row in data["listings"]:
+        row_id = str(row.get("id") or "")
+        if row_id in ids:
+            continue
+        # A manual card whose id was deleted from the source file must leave the feed.
+        if row.get("manual") is True:
+            orphaned.append(row_id)
+            continue
+        kept.append(row)
     cards = [ddf.card_record(item) for item in active]
     new_listings = kept + cards
     changed = new_listings != data["listings"]
@@ -281,6 +295,8 @@ def patch_feed_file(path, intent, rows=None, today=None):
         data["listings"] = new_listings
         data["count"] = len(new_listings)
         _write_json(path, data)
+    for listing_id in orphaned:
+        _update_shard(path, listing_id, None)
     for row in relevant:
         listing_id = str(row["id"]).strip()
         item = next((entry for entry in active if entry["id"] == listing_id), None)

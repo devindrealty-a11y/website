@@ -662,6 +662,14 @@ def test_manual_listing_survives_a_feed_rewrite_and_can_expire():
         assert manual.patch_feed_file(path, "sale", rows, today) == 1
         again = json.loads(open(path, encoding="utf-8").read())
         assert again == patched
+        manual.patch_feed_file(path, "sale", [], today)
+        dropped = json.loads(open(path, encoding="utf-8").read())
+        assert [row["id"] for row in dropped["listings"]] == ["2"]
+        shard_path = os.path.join(tmp, "sale", f"{shard_no}.json")
+        if os.path.isfile(shard_path):
+            dropped_shard = json.loads(open(shard_path, encoding="utf-8").read())
+            assert "30357378" not in dropped_shard
+        manual.patch_feed_file(path, "sale", rows, today)
         pages = manual.write_pages(rows, tmp)
         assert pages == ["listings/30357378-204-3589-skaha-lake-road-penticton.html"]
         html = open(os.path.join(tmp, pages[0]), encoding="utf-8").read()
@@ -743,48 +751,26 @@ def test_link_checker_keeps_manual_listings_on_a_404():
                 os.environ.pop("MANUAL_LISTINGS_PATH", None)
             else:
                 os.environ["MANUAL_LISTINGS_PATH"] = previous
-        assert manual.active_ids()  # the published file is still readable
+        assert isinstance(manual.load_rows(), list)
 
 
-def test_published_manual_listing_is_in_the_feed_and_on_its_page():
+def test_penticton_listing_is_not_published():
     import manual_listings as manual
     rows = manual.load_rows()
+    assert rows == []
     live = json.loads(open(os.path.join(ROOT, "listings", "data.json"), encoding="utf-8").read())
-    by_id = {row["id"]: row for row in live["listings"]}
-    today = manual.vancouver_today()
-    found = False
-    for row in rows:
-        if str(row.get("id")) != "30357378":
-            continue
-        found = True
-        item = manual.to_item(row)
-        assert manual.is_active(row, today)
-        assert item["id"] in by_id
-        card = by_id[item["id"]]
-        assert card["mls"] == "10402551"
-        assert card["price"] == 499000
-        assert card["city"] == "Penticton"
-        assert card["brokerage"] == "Summerland Realty Ltd."
-        assert card["realtorUrl"] == row["realtorUrl"]
-        assert card.get("manual") is True
-        assert "remarks" not in card
-        shard_no = int(item["id"]) % ddf.SHARD_COUNT
-        shard = json.loads(open(os.path.join(ROOT, "listings", "sale", f"{shard_no}.json"), encoding="utf-8").read())
-        assert "Listing courtesy of Summerland Realty Ltd." in shard[item["id"]]["remarks"]
-        assert "2 dogs (any size) or 2 cats" in shard[item["id"]]["remarks"]
-        page = os.path.join(ROOT, item["page"])
-        html = open(page, encoding="utf-8").read()
-        assert "Listing courtesy of Summerland Realty Ltd." in html
-        assert "Axford Real Estate" in html
-        assert "believed to be accurate but is not guaranteed and should be verified" in html
-        assert row["realtorUrl"] in html
-        assert "Skaha Breeze" in html
-        assert "$499,000" in html
-        assert "$399/month" in html
-        assert "$2,696" in html
-        assert "not this unit" in html
-        assert "https://creativecommons.org/licenses/by/3.0/" in html
-    assert found
+    assert live["count"] == len(live["listings"])
+    assert all(row.get("id") != "30357378" for row in live["listings"])
+    assert all("Penticton" not in str(row.get("city") or "") for row in live["listings"])
+    shard_no = 30357378 % ddf.SHARD_COUNT
+    shard = json.loads(open(os.path.join(ROOT, "listings", "sale", f"{shard_no}.json"), encoding="utf-8").read())
+    assert "30357378" not in shard
+    page = os.path.join(ROOT, "listings", "30357378-204-3589-skaha-lake-road-penticton.html")
+    assert not os.path.exists(page)
+    photo = os.path.join(ROOT, "assets", "img", "manual-listings", "skaha-lake-penticton.jpg")
+    assert not os.path.exists(photo)
+    sitemap = open(os.path.join(ROOT, "sitemap.xml"), encoding="utf-8").read()
+    assert "30357378" not in sitemap
 
 
 if __name__ == "__main__":
