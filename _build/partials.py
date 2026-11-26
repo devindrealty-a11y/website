@@ -179,14 +179,16 @@ YT_NOTE = "These are video tours from my YouTube channel, not listings I'm offer
 
 # Visit counts only. No cookies. The same tag is on the old-URL redirect, which does not use head().
 GOATCOUNTER = '<script data-goatcounter="https://devindesaulniers.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'
-# Site-wide Google tag. Async so it does not block rendering. Conversion events fire from site.js
-# only after FormSubmit accepts a lead form (see GOOGLE_ADS_CONVERSION_ID).
+# Site-wide Google tag. One gtag.js loader and two configs: Google Ads (AW-18574169872)
+# and GA4 (G-P4RSVBCD8E). Async so it does not block rendering. Conversion events fire
+# from site.js only after FormSubmit accepts a lead form (see GOOGLE_ADS_CONVERSION_ID).
 GTAG = """<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18574169872"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'AW-18574169872');
+gtag('config', 'G-P4RSVBCD8E');
 </script>"""
 
 def tour_card(vid, heading="h3"):
