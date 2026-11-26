@@ -145,11 +145,11 @@ h1{{font-family:"Montserrat",sans-serif;font-weight:700;line-height:1.12;font-si
 .chart{{margin-top:22px;padding-top:18px;border-top:2px solid #e8f0f9}}
 .ct{{font-size:16px;font-weight:600;color:#808082;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}}
 .bar-row{{display:flex;align-items:center;gap:12px;margin:9px 0}}
-.bl{{flex:0 0 118px;font-size:19px;font-weight:600;color:#173a5e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.bl{{flex:0 0 132px;font-size:18px;font-weight:600;color:#173a5e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
 .track{{flex:1;height:22px;background:#f0f2f5;border-radius:6px;overflow:hidden}}
 .bar{{display:block;height:100%;border-radius:6px}}
 .bar.pos{{background:#3474b6}} .bar.neg{{background:#808082}}
-.bv{{flex:0 0 78px;text-align:right;font-family:"Montserrat",sans-serif;font-weight:700;font-size:20px;color:#1f2933}}
+.bv{{flex:0 0 72px;text-align:right;font-family:"Montserrat",sans-serif;font-weight:700;font-size:18px;color:#1f2933}}
 .foot{{position:absolute;left:0;right:0;bottom:0;height:86px;background:#fff;display:flex;align-items:center;gap:16px;padding:0 64px;z-index:3}}
 .foot img.mark{{height:52px;width:auto}}
 .site{{font-family:"Montserrat",sans-serif;font-weight:600;font-size:21px;color:#808082;white-space:nowrap}}
