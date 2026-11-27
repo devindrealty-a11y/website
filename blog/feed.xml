@@ -6,7 +6,16 @@
   <atom:link href="https://devindesaulniers.ca/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Greater Vancouver and Tri-Cities, BC real estate news, explained in plain language by Devin Desaulniers, Real Estate Associate with Axford Real Estate.</description>
   <language>en-ca</language>
-  <lastBuildDate>Thu, 26 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <lastBuildDate>Fri, 27 Nov 2026 08:00:00 -0700</lastBuildDate>
+  <item>
+    <title>The average credit score in every province</title>
+    <link>https://devindesaulniers.ca/blog/2026-11-27-average-credit-score-by-province.html</link>
+    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-27-average-credit-score-by-province.html</guid>
+    <pubDate>Fri, 27 Nov 2026 08:00:00 -0700</pubDate>
+    <category>Buying</category>
+    <dc:creator>Devin Desaulniers</dc:creator>
+    <description>Equifax and TransUnion don’t publish official averages by province. Borrowell’s 2026 city scores put Canada at 679, Quebec near 707 and B.C. near 684. N.B., P.E.I., N.L. and the territories have no data.</description>
+  </item>
   <item>
     <title>Vancouver homeowners are falling behind on other bills</title>
     <link>https://devindesaulniers.ca/blog/2026-11-26-vancouver-homeowners-other-bills.html</link>
@@ -267,15 +276,6 @@
     <category>Market news</category>
     <dc:creator>Devin Desaulniers</dc:creator>
     <description>Budget 2026 proposes extending Canada's ban on foreign purchases of existing homes to January 1, 2029, while exempting new residential properties. Here's what that means in plain English for Greater Vancouver and the Tri-Cities, BC.</description>
-  </item>
-  <item>
-    <title>Renting a basement suite in the Tri-Cities, BC: what should you check?</title>
-    <link>https://devindesaulniers.ca/blog/2026-11-10-renting-a-basement-suite-tri-cities-bc.html</link>
-    <guid isPermaLink="true">https://devindesaulniers.ca/blog/2026-11-10-renting-a-basement-suite-tri-cities-bc.html</guid>
-    <pubDate>Tue, 10 Nov 2026 08:00:00 -0700</pubDate>
-    <category>Renting</category>
-    <dc:creator>Devin Desaulniers</dc:creator>
-    <description>Renting a basement suite in the Tri-Cities, BC? Check that the suite is self-contained (sharing a kitchen or bathroom with the owner can leave you outside BC's tenancy law), that the utility split is in writing, and that basic safety features are in place. Here's a newcomer checklist.</description>
   </item>
 </channel>
 </rss>
