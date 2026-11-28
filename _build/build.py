@@ -379,7 +379,7 @@ buyers += f'''
     <div class="other-areas">
       <h3>Other nearby areas</h3>
       <p>I also help buyers in neighbouring Greater Vancouver communities, including <strong>Burnaby</strong>, <strong>New Westminster</strong>, and <strong>Pitt Meadows &amp; Maple Ridge</strong>. School District 43 serves Coquitlam, Port Coquitlam, Port Moody, Anmore and Belcarra. Always confirm school catchments with the district for a specific address.</p>
-      <p>Longer guides: <a href="coquitlam.html">Coquitlam</a>, <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="coquitlam-condo-buyer.html">Coquitlam condos</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a>. Buying a first home in the Tri-Cities, BC? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>, <a href="bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a>, and <a href="true-cost-of-owning-a-home-bc.html">the true cost of owning a home in BC</a>. Illustrative Big 5 rates are on the <a href="mortgage-rates.html">mortgage rates</a> page.</p>
+      <p>Longer guides: <a href="coquitlam.html">Coquitlam</a>, <a href="burquitlam-neighbourhood-guide.html">Burquitlam</a>, <a href="coquitlam-condo-buyer.html">Coquitlam condos</a>, <a href="port-moody.html">Port Moody</a> and <a href="port-coquitlam.html">Port Coquitlam</a>. Buying a first home in the Tri-Cities, BC? Read the <a href="first-time-home-buyers.html">first-time home buyer guide</a> (GST rebate and property transfer tax), <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions</a>, <a href="bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a>, and <a href="true-cost-of-owning-a-home-bc.html">the true cost of owning a home in BC</a>. Illustrative Big 5 rates are on the <a href="mortgage-rates.html">mortgage rates</a> page.</p>
       <p>If you're looking somewhere else in Greater Vancouver, tell me on the <a href="#listings">listings form</a> below: choose “Other (add in notes)” and add the area in your notes.</p>
     </div>
   </div>
@@ -752,7 +752,7 @@ gv += f"""
   <div class="container">
     <span class="eyebrow">Relocation guide · Greater Vancouver</span>
     <h1>Relocating to Greater Vancouver? Here's how a local agent can help</h1>
-    <p class="lead">Relocating to Greater Vancouver is easier with a local agent who can compare areas, commutes and rental rules for you, and I help both relocating buyers and tenants line up the right home before they move.</p>
+    <p class="lead">Relocating to Greater Vancouver is easier with a local agent who can compare areas and commutes for you, and I help both relocating buyers and tenants line up the right home before they move.</p>
     <div class="btn-row">
       <a class="btn btn-light" href="tenants.html#intake">Need a rental? Start here {I["arrow"]}</a>
       <a class="btn btn-ghost-light" href="{TEL}">{I["phone"]} Call or text {PHONE}</a>
@@ -760,7 +760,7 @@ gv += f"""
     <p class="hero-note">Buying, selling, or renting? <a href="contact.html#qualify">Answer a few questions</a>.</p>
   </div>
 </section>
-{page_nav([("areas","Areas at a glance"),("rent-now","What rent costs"),("renting-basics","Renting in B.C."),("rentals","Rental help"),("buying","Buying"),("faq","FAQ")])}
+{page_nav([("areas","Areas at a glance"),("rent-now","What rent costs"),("rentals","Rental help"),("buying","Buying"),("faq","FAQ")])}
 
 <article class="guide">
 <section class="section">
@@ -795,25 +795,6 @@ gv += f"""
 </section>
 
 {seo_pages.rent_snapshot_section()}
-
-<section class="section" id="renting-basics">
-  <div class="container narrow-wide">
-    <span class="eyebrow">Know your rights</span>
-    <h2>Renting in B.C.: the basics</h2>
-    <p>A few rules and habits that protect you, especially when you're renting from out of province:</p>
-    <ul class="list-check">
-      <li><strong>Deposits are capped.</strong> A security deposit can be at most half of one month's rent, and a pet damage deposit (if applicable) at most another half month.</li>
-      <li><strong>Rent increases are limited.</strong> Rent can go up only once every 12 months, by no more than the annual limit (2.3% for 2026, 2.2% for 2027), and your landlord must give three full months' written notice.</li>
-      <li><strong>Do a move-in condition inspection</strong> with the landlord, document the existing condition and keep a copy of the report.</li>
-      <li><strong>Get it in writing:</strong> rent, term, utilities, parking, pets, occupants and any special terms.</li>
-      <li><strong>Verify before you pay.</strong> Confirm the property and the person you're dealing with before sending money, and be cautious of wire transfers, gift cards, cryptocurrency or pressure to pay before a viewing.</li>
-    </ul>
-    <h3 class="sub-h">Have your application ready</h3>
-    <p>Photo ID, proof of income (recent pay stubs, an employment or offer letter, or bank statements / a Notice of Assessment if you're self-employed), landlord and employer references, and a short renter profile. A credit report you get yourself can speed things up.</p>
-    <p>The full checklist (budget, viewings, applications and move-in) is in my free <a href="tenants.html#resources">Greater Vancouver renter's guide (PDF)</a>. The week-by-week version, with deposits and scam checks, is <a href="rental-before-you-arrive.html">how to line up a rental before you arrive</a>.</p>
-    <p class="form-note">General information only, not legal advice. Confirm current rules with the <a href="{RTB}" target="_blank" rel="noopener">B.C. Residential Tenancy Branch</a>.</p>
-  </div>
-</section>
 
 <section class="section section--night" id="rentals">
   <div class="container narrow-wide">
@@ -962,12 +943,12 @@ privacy += f"""
   <div class="container narrow-wide">
     <div class="post-body">
       <p>This site is operated by Devin Desaulniers, Real Estate Associate with Axford Real Estate, {BROKERAGE_ADDR}. The sections below explain, in plain language, where the information you send me goes.</p>
-      <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form. The qualifying form sends <span class="nw">lead-form-start</span> when you begin it, <span class="nw">lead-form-step-1</span> through <span class="nw">lead-form-step-6</span> when you reach that step, and <span class="nw">lead-form-sent</span> only after the message is accepted. Those names are the step only. They do not include your name, email, phone, message, or the answers you choose. The market-report download sends <span class="nw">report-download</span> only after the request is accepted. That name does not include your name or email. The true-cost guide sign-up sends <span class="nw">true-cost-signup</span> only after the signup is accepted. That name does not include your name or email. The mortgage intro form sends <span class="nw">form-mortgage-intro</span> only after the request is accepted. That name does not include your name, email, phone, message, or the rate you were looking at. The chat widget sends the events named in the chat section below. Those events do not include what you type into a form.</p>
+      <p>This site uses GoatCounter for visit counts, with no cookies and no personal tracking. The button labelled “Want me to find yours? Tenant Relocation Service $1,500 + GST” also sends an event named <span class="nw">cta-tenant-relocation</span> when you click it. That event is the button name and the page you were on. It does not include what you type into a form. The qualifying form sends <span class="nw">lead-form-start</span> when you begin it, <span class="nw">lead-form-step-1</span> through <span class="nw">lead-form-step-6</span> when you reach that step, and <span class="nw">lead-form-sent</span> only after the message is accepted. Those names are the step only. They do not include your name, email, phone, message, or the answers you choose. The market-report download sends <span class="nw">report-download</span> only after the request is accepted. That name does not include your name or email. The true-cost guide sign-up sends <span class="nw">true-cost-signup</span> only after the signup is accepted. That name does not include your name or email. The first-time buyer guide request sends <span class="nw">first-time-guide</span> only after the request is accepted. That name does not include your name, email, or timing. The mortgage intro form sends <span class="nw">form-mortgage-intro</span> only after the request is accepted. That name does not include your name, email, phone, message, or the rate you were looking at. The chat widget sends the events named in the chat section below. Those events do not include what you type into a form.</p>
       <p>This site uses Google Ads conversion tracking (cookies) to measure ad results.</p>
       <p>This site uses Google Analytics to understand visits (cookies, aggregated).</p>
 
       <h2 id="forms">Contact forms</h2>
-      <p>There are twelve forms on this site: the qualifying form on the <a href="index.html#qualify">home page</a> and the <a href="contact.html#qualify">contact page</a> (the same questions on both), the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, on <a href="rental-before-you-arrive.html#intake">how to line up a rental before you arrive</a>, and on <a href="moving-from-ontario.html#intake">moving from Ontario to Greater Vancouver</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>, the PDF download on the <a href="market-report/">Tri-Cities, BC market report</a>, the message form in the chat widget, the email sign-up on <a href="true-cost-of-owning-a-home-bc.html#signup">the true cost of owning a home in BC</a>, and the lender-introduction form on the <a href="mortgage-rates.html#intro">mortgage rates</a> page. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>. A copy also goes to my assistant inbox so I can follow up with you quickly.</p>
+      <p>There are thirteen forms on this site: the first-time buyer guide request on the <a href="first-time-home-buyers.html#guide">first-time home buyers page</a>, the qualifying form on the <a href="index.html#qualify">home page</a> and the <a href="contact.html#qualify">contact page</a> (the same questions on both), the “Send me listings” form on the <a href="buyers.html#listings">buyers page</a>, the relocation rental intake on the <a href="tenants.html#intake">tenants page</a>, on <a href="rental-before-you-arrive.html#intake">how to line up a rental before you arrive</a>, and on <a href="moving-from-ontario.html#intake">moving from Ontario to Greater Vancouver</a>, the <a href="home-evaluation.html">free home evaluation</a>, the <a href="buyer-opinion.html">expert opinion</a> on a property you're considering, the inquiry on a home at <a href="listings.html">homes for sale</a> or <a href="rentals.html">homes for rent</a>, the PDF download on the <a href="market-report/">Tri-Cities, BC market report</a>, the message form in the chat widget, the email sign-up on <a href="true-cost-of-owning-a-home-bc.html#signup">the true cost of owning a home in BC</a>, and the lender-introduction form on the <a href="mortgage-rates.html#intro">mortgage rates</a> page. When you press Send, the form is sent through FormSubmit (formsubmit.co), which emails your submission to <a href="mailto:{EMAIL}">{EMAIL}</a>. A copy also goes to my assistant inbox so I can follow up with you quickly.</p>
       <p>The forms ask for:</p>
       <ul>
         <li>your name and email, and your phone number if you add it;</li>
@@ -979,7 +960,8 @@ privacy += f"""
         <li>on the chat widget: the topic you chose (buying, renting, relocating to Greater Vancouver, or selling), your message, and the address of the page you were on;</li>
         <li>on the market-report download: your name, your email, and which edition you requested;</li>
         <li>on the true-cost guide sign-up: your name, your email, and your agreement to be emailed about the guide;</li>
-        <li>on the mortgage rates intro: your name, your email, your phone if you add it, a message if you add one, and the illustrative bank, term, and rate showing when you send it.</li>
+        <li>on the mortgage rates intro: your name, your email, your phone if you add it, a message if you add one, and the illustrative bank, term, and rate showing when you send it;</li>
+        <li>on the first-time buyer guide request: your name, your email, when you are hoping to buy if you add it, and your agreement to be emailed about the guide.</li>
       </ul>
       <p>Each form asks you to agree that I can contact you by email or phone about your request. You can opt out at any time.</p>
 
@@ -1202,6 +1184,8 @@ import true_cost_page
 open(os.path.join(OUT, true_cost_page.PAGE), "w").write(true_cost_page.render())
 import mortgage_rates_page
 open(os.path.join(OUT, mortgage_rates_page.PAGE), "w").write(mortgage_rates_page.render())
+import first_time_home_buyers_page
+open(os.path.join(OUT, first_time_home_buyers_page.PAGE), "w").write(first_time_home_buyers_page.render())
 STATIC_PAGES = ["", "contact.html", "tenants.html", "buyers.html", "home-evaluation.html", "buyer-opinion.html", GV_URL, "videos.html", PRIVACY_URL, terms_page.PAGE]
 if LISTINGS_LIVE:
     STATIC_PAGES[1:1] = ["listings.html", "rentals.html", "rent-report.html"]
@@ -1209,7 +1193,7 @@ guide_at = STATIC_PAGES.index(GV_URL) + 1
 STATIC_PAGES[guide_at:guide_at] = [fn for fn, _ in SEO_PAGES]
 if "first-time-buyers-tri-cities-bc.html" in STATIC_PAGES:
     i = STATIC_PAGES.index("first-time-buyers-tri-cities-bc.html") + 1
-    STATIC_PAGES[i:i] = ["bc-property-transfer-tax.html", "true-cost-of-owning-a-home-bc.html"]
+    STATIC_PAGES[i:i] = ["first-time-home-buyers.html", "bc-property-transfer-tax.html", "true-cost-of-owning-a-home-bc.html"]
 if "buyers.html" in STATIC_PAGES:
     STATIC_PAGES.insert(STATIC_PAGES.index("buyers.html") + 1, mortgage_rates_page.PAGE)
 import rent_report
@@ -1227,5 +1211,6 @@ for _offset, (_path, _lm) in enumerate(_mr_entries):
 _sitemap_lastmod["port-moody.html"] = "2026-11-24"
 _sitemap_lastmod["port-coquitlam.html"] = "2026-11-24"
 _sitemap_lastmod["newcomer-buyers.html"] = "2026-11-24"
+_sitemap_lastmod["first-time-home-buyers.html"] = "2026-11-28"
 open(os.path.join(OUT,"sitemap.xml"),"w").write(blog.sitemap_xml(STATIC_PAGES, POSTS, _sitemap_lastmod))
 print("built")

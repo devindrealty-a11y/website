@@ -3,3 +3,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://devindesaulniers.ca/sitemap.xml
+Disallow: /ads-creative/

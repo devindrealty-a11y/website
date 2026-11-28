@@ -26,6 +26,23 @@ SITE = "https://devindesaulniers.ca/"  # custom domain (Porkbun); CNAME at repo 
 CTA_TEXT = "Want me to find yours? Tenant Relocation Service $1,500 + GST"
 CTA_EVENT = "cta-tenant-relocation"
 CTA_PAGE = "tenants.html#intake"
+# The tenant bar stays on rental pages only. Other pages pass show_tenant_bar=True
+# historically; head() still checks this list so a rebuild does not put the bar back.
+RENTAL_BAR_PAGES = {
+    "rentals.html",
+    "rent-report.html",
+    "tenants.html",
+    "relocating-to-greater-vancouver.html",
+    "rental-before-you-arrive.html",
+    "newcomer-rental-faqs.html",
+    "relocation-rental-agent-vs-diy-vancouver.html",
+    "moving-from-ontario.html",
+}
+NAV_CHEVRON = (
+    '<svg class="nav-chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24" '
+    'width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" '
+    'stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>'
+)
 # Homes for sale (listings.html) and homes for rent (rentals.html), from the
 # CREA REALTOR.ca DDF National Shared Pool (Greater Vancouver and Fraser Valley).
 # True puts both pages in the nav, footer, and sitemap, and drops their noindex.
@@ -202,6 +219,79 @@ def tour_card(vid, heading="h3"):
 def tours_grid(ids, heading="h3"):
     return '<div class="tour-grid">' + "".join(tour_card(v, heading) for v in ids) + "</div>"
 
+def page_keeps_tenant_bar(page_url):
+    path = (page_url or "").split("#", 1)[0].split("?", 1)[0].strip("/")
+    name = path.rsplit("/", 1)[-1]
+    return name in RENTAL_BAR_PAGES
+
+
+def _nav_a(root, href, label, key, current):
+    cur = ' aria-current="page"' if key == current else ""
+    return f'<a href="{root}{href}"{cur}>{label}</a>'
+
+
+def _nav_drop(drop_id, label, items, root, current):
+    """items: (href, label, key). Selling links point at selling.html, built in a separate PR."""
+    current_cls = " is-current" if any(key == current for _, _, key in items) else ""
+    links = "".join(_nav_a(root, href, text, key, current) for href, text, key in items)
+    return (
+        f'<div class="nav-drop{current_cls}">'
+        f'<button type="button" class="nav-drop-btn" aria-expanded="false" aria-haspopup="true" aria-controls="{drop_id}">'
+        f'<span>{label}</span>{NAV_CHEVRON}</button>'
+        f'<div class="nav-drop-panel" id="{drop_id}" role="group" aria-label="{label}">{links}</div>'
+        f'</div>'
+    )
+
+
+def nav_links_html(root, current):
+    """Top level: Home, Buying, Selling, Renting, Blog. Contact stays the header button."""
+    buying = [
+        ("buyers.html", "Buyers overview", "buyers"),
+        ("first-time-home-buyers.html", "First-time home buyers", "ftb"),
+        ("mortgage-rates.html", "Mortgage rates", "rates"),
+        ("listings.html", "Homes for sale", "listings"),
+    ]
+    # selling.html and #guide are owned by the selling-page PR. Link them anyway.
+    selling = [
+        ("selling.html", "Selling overview", "selling"),
+        ("selling.html#guide", "Home maintenance guide", "selling-guide"),
+    ]
+    renting = [
+        ("rentals.html", "Homes for rent", "rentals"),
+        ("rent-report.html", "Rent report", "rent-report"),
+        ("tenants.html", "Tenant leasing services", "tenants"),
+        ("relocating-to-greater-vancouver.html", "Relocation services", "relocating"),
+        ("videos.html", "Videos", "videos"),
+    ]
+    return "".join([
+        _nav_a(root, "index.html", "Home", "home", current),
+        _nav_drop("nav-buying", "Buying", buying, root, current),
+        _nav_drop("nav-selling", "Selling", selling, root, current),
+        _nav_drop("nav-renting", "Renting", renting, root, current),
+        _nav_a(root, "blog/", "Blog", "blog", current),
+    ])
+
+
+def nav_current_key(active):
+    mapped = {
+        "home": "home",
+        "buyers": "buyers",
+        "rates": "rates",
+        "listings": "listings",
+        "rentals": "rentals",
+        "rent-report": "rent-report",
+        "tenants": "tenants",
+        "guide": "relocating",
+        "blog": "blog",
+        "videos": "videos",
+        "ftb": "ftb",
+        "selling": "selling",
+        "selling-guide": "selling-guide",
+        "relocating": "relocating",
+    }
+    return mapped.get(active, "")
+
+
 def tenant_cta_href(root=""):
     return root + CTA_PAGE
 
@@ -283,15 +373,11 @@ class _HtmlPage(str):
 
 def head(title, desc, active, og_image="assets/img/og-default.png", page_url="", body_class="", extra_head="", root="", og_type="website", show_tenant_bar=True, agent_same_as=None, agent_knows=None):
     """root: relative prefix back to the site root ("" for top-level pages, "../" for pages in blog/)."""
-    nav = [("index.html","Home","home"),("buyers.html","Buyers","buyers"),("mortgage-rates.html","Mortgage rates","rates"),("tenants.html","Tenants","tenants"),("relocating-to-greater-vancouver.html","Relocating","guide"),("blog/","Blog","blog"),("videos.html","Videos","videos")]
-    if LISTINGS_LIVE:
-        nav.insert(3, ("listings.html", "Homes for sale", "listings"))
-        nav.insert(4, ("rentals.html", "Homes for rent", "rentals"))
-        nav.insert(5, ("rent-report.html", "Rent report", "rent-report"))
-    CUR = ' aria-current="page"'
-    links = "".join(f'<a href="{root}{h}"{CUR if k==active else ""}>{t}</a>' for h,t,k in nav)
-    # A longer nav needs a wider viewport before it fits on one row (see .nav-long in styles.css).
-    header_cls = "site-header nav-long" if len(nav) > 6 else "site-header"
+    links = nav_links_html(root, nav_current_key(active))
+    # Five top-level items plus the Contact button. No nav-long squeeze.
+    header_cls = "site-header"
+    bar_url = page_url or ("index.html" if active == "home" else "")
+    tenant_bar = tenant_cta_bar(root, bar_url) if (show_tenant_bar and page_keeps_tenant_bar(bar_url)) else ""
     return _HtmlPage(f'''<!doctype html>
 <html lang="en-CA">
 <head>
@@ -343,7 +429,7 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
     <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span class="nt-bars" aria-hidden="true"><span></span><span></span><span></span></span></button>
   </div>
 </header>
-{tenant_cta_bar(root, page_url or ("index.html" if active == "home" else "")) if show_tenant_bar else ""}
+{tenant_bar}
 <main id="main" tabindex="-1">
 ''')
 
@@ -391,6 +477,7 @@ def foot(root=""):
           <li><a href="{root}port-moody.html">Port Moody guide</a></li>
           <li><a href="{root}port-coquitlam.html">Port Coquitlam guide</a></li>
           <li><a href="{root}first-time-buyers-tri-cities-bc.html">First-time home buyers, Tri-Cities, BC</a></li>
+          <li><a href="{root}first-time-home-buyers.html">First-time buyer guide: GST and property transfer tax</a></li>
           <li><a href="{root}bc-property-transfer-tax.html">BC property transfer tax and the first-time buyer exemption</a></li>
           <li><a href="{root}true-cost-of-owning-a-home-bc.html">The true cost of owning a home in BC</a></li>
           <li><a href="{root}mortgage-rates.html">Mortgage rates</a></li>

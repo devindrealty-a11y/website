@@ -1,0 +1,22 @@
+Meta ad copy for the First-Time Buyer guide. Checked November 28, 2026.
+Do not combine GST and property transfer tax into one unverified dollar figure.
+The $50,000 figure is the maximum federal GST rebate (CRA). The $20,000 figure is the property transfer tax on a $1,100,000 home, which the newly built home exemption can remove in full (Province of B.C. exemption table).
+Brokerage line on every ad: Axford Real Estate.
+
+Option 1
+Headline: Buying your first home in BC? You may get up to $50,000 back in GST.
+Primary text: The First-Time Home Buyers' GST rebate is law. On a new home priced at $1 million or less, an eligible buyer can get the GST back, up to $50,000. It shrinks after that and ends at $1.5 million. Resale homes are not included. Property transfer tax is a separate provincial tax and may also be reduced. Free guide from Devin Desaulniers, Axford Real Estate. Not tax or legal advice.
+
+Option 2
+Headline: A new home in BC can wipe out up to $20,000 in property transfer tax.
+Primary text: At $1.1 million, B.C. property transfer tax is $20,000. The newly built home exemption can remove all of it when you qualify. You do not have to be a first-time buyer for that exemption. First-time buyers of a resale home have a different exemption, often $8,000 rather than a full wipe. Axford Real Estate. Free guide. Not tax or legal advice.
+
+Option 3
+Headline: First home in the Tri-Cities, BC? Read the tax rules before you offer.
+Primary text: Federal GST relief for first-time buyers of new homes is in force, up to $50,000. B.C. property transfer tax has separate exemptions for first-time buyers and for newly built homes. The free guide spells out the thresholds and links the government pages. Devin Desaulniers, Real Estate Associate, Axford Real Estate. Not tax or legal advice.
+
+Images
+ads-creative/square.html renders at 1080x1080.
+ads-creative/story.html renders at 1080x1920.
+Photos: Coquitlam, Alex of Canada, Wikimedia Commons, CC BY-SA 4.0. Burrard Inlet at Port Moody, Kalamazadkhan, Wikimedia Commons, CC BY-SA 4.0.
+This folder is disallowed in robots.txt and is not linked from the site.

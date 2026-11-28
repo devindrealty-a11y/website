@@ -18,6 +18,32 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  // Dropdowns: click and keyboard everywhere, hover on desktop via CSS.
+  function closeDrops(except) {
+    document.querySelectorAll('.nav-drop.is-open').forEach(function (drop) {
+      if (except && drop === except) return;
+      drop.classList.remove('is-open');
+      var btn = drop.querySelector('.nav-drop-btn');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+  }
+  document.querySelectorAll('.nav-drop').forEach(function (drop) {
+    var btn = drop.querySelector('.nav-drop-btn');
+    if (!btn) return;
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      closeDrops();
+      if (!open) {
+        drop.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.nav-drop')) closeDrops();
+  });
+
   // Mobile nav
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('site-nav');
@@ -25,6 +51,7 @@
     var main = document.getElementById('main');
     var footer = document.querySelector('.site-footer');
     var setOpen = function (open, returnFocus) {
+      if (!open) closeDrops();
       nav.classList.toggle('open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
@@ -48,7 +75,15 @@
       a.addEventListener('click', function () { setOpen(false, false); });
     });
     document.addEventListener('keydown', function (e) {
-      if ((e.key === 'Escape' || e.key === 'Esc') && nav.classList.contains('open')) setOpen(false, true);
+      if (e.key !== 'Escape' && e.key !== 'Esc') return;
+      var openDrop = nav.querySelector('.nav-drop.is-open');
+      if (openDrop) {
+        closeDrops();
+        var back = openDrop.querySelector('.nav-drop-btn');
+        if (back) back.focus();
+        return;
+      }
+      if (nav.classList.contains('open')) setOpen(false, true);
     });
     window.addEventListener('resize', function () {
       if (nav.classList.contains('open') && window.getComputedStyle(toggle).display === 'none') setOpen(false, false);
