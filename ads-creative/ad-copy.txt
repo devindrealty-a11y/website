@@ -18,5 +18,5 @@ Primary text: Federal GST relief for first-time buyers of new homes is in force,
 Images
 ads-creative/square.html renders at 1080x1080.
 ads-creative/story.html renders at 1080x1920.
-Photos: Coquitlam, Alex of Canada, Wikimedia Commons, CC BY-SA 4.0. Burrard Inlet at Port Moody, Kalamazadkhan, Wikimedia Commons, CC BY-SA 4.0.
+Photos: Downtown Vancouver and the North Shore mountains, Kyle Pearce, Wikimedia Commons, CC BY-SA 2.0. Lions Gate Bridge and the North Shore mountains, Poidabro (Peter Abery), Wikimedia Commons, CC BY-SA 4.0.
 This folder is disallowed in robots.txt and is not linked from the site.

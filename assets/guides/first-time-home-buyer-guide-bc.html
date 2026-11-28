@@ -9,230 +9,305 @@
 <style>
   @page { size: letter; margin: 0; }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body { font-family: Inter, system-ui, sans-serif; color: #27333f; font-size: 15pt; line-height: 1.4; }
+  html, body { margin: 0; padding: 0; background: #fff; }
+  body { font-family: Inter, system-ui, sans-serif; color: #27333f; font-size: 12.5pt; line-height: 1.35; }
   .sheet { position: relative; width: 8.5in; height: 11in; overflow: hidden; page-break-after: always; background: #fff; }
   .sheet:last-child { page-break-after: auto; }
-  h1, h2, h3 { font-family: Newsreader, Georgia, serif; font-weight: 500; color: #132639; margin: 0 0 .3em; line-height: 1.08; }
-  h1 { font-size: 42pt; letter-spacing: -.02em; }
-  h2 { font-size: 28pt; }
-  h3 { font-size: 18pt; }
-  p { margin: 0 0 .55em; }
-  .pad { padding: .62in .62in .7in; }
-  .kicker { font-family: Montserrat, sans-serif; font-weight: 600; font-size: 10pt; letter-spacing: .16em; text-transform: uppercase; color: #24578c; margin-bottom: .35in; }
-  .kicker::before { content: ""; display: inline-block; width: .38in; height: 1px; background: currentColor; margin-right: .12in; vertical-align: middle; }
-  ul { margin: .2em 0 .6em; padding-left: 1.05em; }
-  li { margin: .12em 0; }
-  .fit { font-size: 13.5pt; line-height: 1.35; }
-  .fit h2 { font-size: 26pt; }
-  .fit h3 { font-size: 16pt; }
-  .fit .src { font-size: 10.5pt; }
-  .foot { position: absolute; left: .62in; right: .62in; bottom: .38in; font-size: 9.5pt; color: #56616d; display: flex; justify-content: space-between; gap: 12px; }
-  .cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .16in; margin: .2in 0 .25in; }
-  .card { background: #f1f5fa; border-radius: 10px; padding: .18in .16in; }
-  .card b { display: block; font-family: Newsreader, Georgia, serif; font-size: 26pt; font-weight: 500; color: #132639; line-height: 1; }
-  .card span { display: block; margin-top: .08in; font-size: 11.5pt; color: #27333f; }
-  .card.dark { background: #0d1b2a; color: #c9d5e1; }
+  h1, h2, h3 { font-family: Newsreader, Georgia, serif; font-weight: 500; color: #132639; line-height: 1.05; margin: 0 0 .15em; }
+  h1 { font-size: 40pt; color: #fff; }
+  h2 { font-size: 22pt; }
+  h3 { font-size: 14.5pt; margin: 0 0 .15em; }
+  p { margin: 0 0 .35em; }
+  ul, ol { margin: .1em 0 .35em; padding-left: 1.05em; }
+  li { margin: .08em 0; }
+  .banner { position: relative; height: 3.15in; margin: 0; overflow: hidden; }
+  .banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .banner figcaption { position: absolute; left: 0; right: 0; bottom: 0; margin: 0; padding: 16px .46in 8px; color: #fff; font-size: 8.5pt; line-height: 1.3; background: linear-gradient(transparent, rgba(13,27,42,.82)); }
+  .pad { padding: .22in .46in 0; }
+  .kicker { font-family: Montserrat, sans-serif; font-weight: 700; font-size: 8.5pt; letter-spacing: .16em; text-transform: uppercase; color: #24578c; margin: 0 0 .1in; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .12in; margin: .1in 0 .16in; }
+  .cards.two { grid-template-columns: 1fr 1fr; }
+  .cards.four { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .card { background: #f1f5fa; border-radius: 8px; padding: .12in .12in .1in; }
+  .card b { display: block; font-family: Newsreader, Georgia, serif; font-size: 22pt; font-weight: 500; color: #132639; line-height: .95; }
+  .card span { display: block; margin-top: .06in; font-size: 10pt; line-height: 1.3; }
+  .card.dark { background: #0d1b2a; }
   .card.dark b, .card.dark span { color: #fff; }
   .card.dark span { color: #c9d5e1; }
-  .src { font-size: 11pt; color: #56616d; }
-  .cover { background: #0d1b2a; color: #fff; }
-  .cover img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .45; }
-  .cover .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,27,42,.2) 0%, rgba(13,27,42,.88) 62%); }
-  .cover .pad { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: .7in; }
-  .cover h1 { color: #fff; font-size: 46pt; max-width: 7in; }
-  .cover p { color: #e7eef6; font-size: 16pt; max-width: 6.6in; }
-  .cover .who { margin-top: .28in; font-size: 13pt; color: #fff; }
-  .cover .who strong { font-family: Montserrat, sans-serif; letter-spacing: .04em; }
-  .cap { position: absolute; left: .62in; bottom: .95in; z-index: 2; color: #d5e2ef; font-size: 9pt; }
-  .back { background: #0d1b2a; color: #fff; }
-  .back h2, .back p, .back li { color: #e7eef6; }
-  .back h2 { color: #fff; }
-  .portrait { width: 1.45in; height: 1.8in; object-fit: cover; object-position: center 15%; border-radius: 8px; float: right; margin: 0 0 .12in .18in; }
-  .back ul { font-size: 12.5pt; margin-top: .05in; }
-  .back .warn { font-size: 11pt; }
-  .two { display: grid; grid-template-columns: 1fr 1fr; gap: .28in; }
-  ol.steps { margin: .15in 0 0; padding-left: 1.2em; }
-  ol.steps li { margin: .22em 0; }
-  .warn { background: #fff8e8; border: 1px solid #e6d3a1; border-radius: 8px; padding: .14in .16in; color: #3d3422; font-size: 12.5pt; }
+  .src { font-size: 9pt; color: #56616d; margin-top: .08in; }
+  .foot { position: absolute; left: .46in; right: .46in; bottom: .16in; font-size: 8.5pt; color: #56616d; display: flex; justify-content: space-between; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: .22in; }
+  .cover { background: #0d1b2a; }
+  .cover .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .cover .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,27,42,.05) 20%, rgba(13,27,42,.88) 68%); }
+  .cover .pad { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 0 .5in .55in; }
+  .cover p { color: #e7eef6; font-size: 14pt; }
+  .cover .who { margin-top: .16in; font-size: 12pt; color: #fff; }
+  .cover .cap { position: absolute; left: .5in; right: .5in; top: .32in; z-index: 1; color: #fff; font-size: 9pt; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+  .credits { font-size: 8.6pt; line-height: 1.32; columns: 2; column-gap: .22in; margin: .08in 0 .12in; }
+  .credits li { break-inside: avoid; }
+  .who-row { display: flex; gap: .18in; align-items: center; margin-top: .08in; }
+  .who-row img { width: 1.15in; height: 1.4in; object-fit: cover; object-position: center 15%; border-radius: 6px; }
+  .warn { background: #fff8e8; border-radius: 6px; padding: .08in .1in; font-size: 9.5pt; color: #3d3422; }
+  .back .banner { height: 2.15in; }
 </style>
 </head>
 <body>
 
 <section class="sheet cover">
-  <img class="bg" src="../img/guides/coquitlam-2018.jpg" alt="">
+  <img class="bg" src="../img/blog/photos/vancouver-skyline-queen-elizabeth-park.jpg" alt="">
   <div class="shade"></div>
-  <p class="cap">Coquitlam, May 2018. Alex of Canada, Wikimedia Commons, CC BY-SA 4.0.</p>
+  <p class="cap">Queen Elizabeth Park, Vancouver. Kyle Pearce, Wikimedia Commons, CC BY-SA 2.0.</p>
   <div class="pad">
     <p class="kicker" style="color:#93bde6">Tri-Cities, BC · November 28, 2026</p>
-    <h1>First-time buyer guide for British Columbia</h1>
-    <p>GST on a new home, property transfer tax, the FHSA, and the RRSP Home Buyers' Plan. Plain rules, with the government pages they come from.</p>
-    <p class="who"><strong>Devin Desaulniers</strong><br>Real Estate Associate, Axford Real Estate<br>604-809-1032 · devin@axfordrealestate.ca<br>devindesaulniers.ca</p>
+    <h1>Your first home in British Columbia</h1>
+    <p>GST on a new home. Property transfer tax. The FHSA and the RRSP Home Buyers' Plan. The numbers below are from the government pages, checked November 28, 2026.</p>
+    <p class="who"><strong>Devin Desaulniers</strong><br>Real Estate Associate, Axford Real Estate<br>604-809-1032 · devin@axfordrealestate.ca · devindesaulniers.ca</p>
   </div>
 </section>
 
 <section class="sheet">
+  <figure class="banner">
+    <img src="../img/blog/photos/yaletown-false-creek-towers-2019.jpg" alt="Condo towers in Yaletown, across False Creek">
+    <figcaption>Yaletown, Vancouver. Ymblanter, Wikimedia Commons, CC BY-SA 4.0.</figcaption>
+  </figure>
   <div class="pad">
-    <p class="kicker">Page 2 · Federal GST</p>
-    <h2>The GST rebate for a new first home is law</h2>
-    <p>Bill C-4 received Royal Assent on March 12, 2026. On March 17, 2026 the Canada Revenue Agency said it is accepting the First-Time Home Buyers' GST/HST rebate. This is not a proposal.</p>
-    <p>In British Columbia a new home is charged 5% GST. The rebate returns that GST, or the federal part of the HST in provinces that charge HST. A resale home is not charged GST in the usual sale, so this rebate does not apply to a resale.</p>
+    <p class="kicker">Federal GST · in force</p>
+    <h2>Up to $50,000 back on a new home</h2>
     <div class="cards">
-      <div class="card"><b>Up to $50,000</b><span>Price of $1 million or less: up to 100% of the GST, capped at $50,000.</span></div>
-      <div class="card"><b>$25,000</b><span>The CRA's example at $1.25 million: half of the $50,000 maximum.</span></div>
-      <div class="card dark"><b>$0</b><span>At $1.5 million or more, this rebate is not available.</span></div>
+      <div class="card"><b>$50,000</b><span>$1 million or less: up to 100% of the GST, capped here.</span></div>
+      <div class="card"><b>$25,000</b><span>CRA’s example at $1.25 million. Half the maximum.</span></div>
+      <div class="card dark"><b>$0</b><span>$1.5 million or more. No rebate.</span></div>
     </div>
-    <p>Between $1 million and $1.5 million the maximum shrinks. The memorandum's formula for a purchase from a builder is: the lesser of $50,000 and the GST paid, multiplied by ($1,500,000 minus the price) divided by $500,000.</p>
-    <p class="src">Finance Canada news release, March 12, 2026. CRA, “What is the first-time home buyers' rebate.” GST/HST Memorandum 19-3-10, October 2026. Checked November 28, 2026.</p>
+    <ul>
+      <li>Law since March 12, 2026 (Bill C-4, Royal Assent). CRA has taken claims since March 17, 2026. Not a proposal.</li>
+      <li>British Columbia charges 5% GST on a new home. No provincial HST on that purchase.</li>
+      <li>New or substantially renovated, and your primary residence. A resale home does not qualify.</li>
+      <li>Between $1 million and $1.5 million the maximum shrinks: the lesser of $50,000 and the GST paid, times ($1,500,000 minus the price) divided by $500,000.</li>
+      <li>The builder agreement must be dated on or after March 20, 2025 and before 2031. The agreement date counts, not the day conditions are waived. An assignment of a pre-March 20, 2025 contract does not reset that date.</li>
+    </ul>
+    <p class="src">Finance Canada, March 12, 2026. CRA rebate page. GST/HST Memorandum 19-3-10, October 2026.</p>
   </div>
-  <p class="foot"><span>Not tax or legal advice.</span><span>devindesaulniers.ca</span></p>
+  <p class="foot"><span>Not tax or legal advice. Axford Real Estate</span><span>2</span></p>
 </section>
 
-<section class="sheet fit">
+<section class="sheet">
+  <figure class="banner">
+    <img src="../img/blog/photos/coquitlam-the-austin.jpg" alt="The Austin, a high-rise in Coquitlam" style="object-position:center 40%">
+    <figcaption>The Austin, Coquitlam. Greg Salter, Wikimedia Commons, CC BY-SA 3.0.</figcaption>
+  </figure>
   <div class="pad">
-    <p class="kicker">Page 3 · Who qualifies</p>
-    <h2>The tests for the GST rebate</h2>
+    <p class="kicker">Who can claim the GST rebate</p>
+    <h2>The tests, in short</h2>
     <ul>
-      <li>You are 18 or older, and a Canadian citizen or permanent resident.</li>
-      <li>The home is newly built or substantially renovated, it will be your primary residence, and you are the first person to live in it after that work.</li>
-      <li>You, and your spouse or common-law partner if you have one, did not live in a home that either of you owned in the year of the purchase or the four calendar years before it. A home you sold in 2020 can still leave you eligible in 2026. The CRA's own example says so.</li>
-      <li>For a home from a builder, the purchase agreement is dated on or after March 20, 2025 and before 2031. The date you both agreed is the one that counts, not a later date when conditions are waived.</li>
-      <li>If more than one person is on title, only one person claims it, and that person must meet the first-time test. A parent on title who already owns a home does not, by itself, block the claim.</li>
+      <li>18 or older. Canadian citizen or permanent resident.</li>
+      <li>You are the first to live in the new or renovated home, and it will be your primary residence.</li>
+      <li>You, and your spouse or common-law partner, did not live in a home either of you owned in that year or the four calendar years before it. A home sold in 2020 can still leave you eligible in 2026. That is the CRA’s own example.</li>
+      <li>If several people are on title, only one claims it, and that person must be a first-time buyer under this test. A parent on title who already owns a home does not, by itself, block the claim.</li>
     </ul>
     <h3>The older new-housing rebate</h3>
-    <p>It is 36% of the GST, to a maximum of $6,300, when the home is $350,000 or less. It shrinks between $350,000 and $450,000, and it is $0 at $450,000 or more. On a home of $450,000 or less, the two rebates together can return all of the GST. You do not receive the $6,300 as well as a full GST refund. Many new homes in the Tri-Cities, BC are over $450,000, so the older rebate is often $0.</p>
-    <p>An assignment of a contract signed before March 20, 2025 does not create a new agreement date. Ask your lawyer to read the contract if the date is close.</p>
-    <p class="src">GST/HST Memorandum 19-3-10, paragraphs 18 to 36 and the assignment examples. Checked November 28, 2026.</p>
+    <div class="cards">
+      <div class="card"><b>36%</b><span>Of the GST, maximum $6,300, when the home is $350,000 or less.</span></div>
+      <div class="card"><b>Shrinks</b><span>Between $350,000 and $450,000.</span></div>
+      <div class="card dark"><b>$0</b><span>At $450,000 or more. Most new homes in the Tri-Cities, BC are over this.</span></div>
+    </div>
+    <p>At $450,000 or less the two rebates together can return all of the GST. You do not get the $6,300 as well as a full GST refund.</p>
+    <p class="src">Memorandum 19-3-10, paragraphs 18–36, and the assignment examples. CRA guide RC4028.</p>
   </div>
-  <p class="foot"><span>Axford Real Estate</span><span>604-809-1032</span></p>
+  <p class="foot"><span>Confirm with your lawyer or accountant.</span><span>3</span></p>
 </section>
 
 <section class="sheet">
+  <figure class="banner">
+    <img src="../img/blog/photos/kitsilano-house-windows-blossoms.jpg" alt="A house in Kitsilano, Vancouver, with spring blossoms">
+    <figcaption>Kitsilano, Vancouver. Adam Jones, Wikimedia Commons, CC BY-SA 2.0.</figcaption>
+  </figure>
   <div class="pad">
-    <p class="kicker">Page 4 · Property transfer tax</p>
-    <h2>The B.C. rates, then an $800,000 resale</h2>
-    <p>Property transfer tax is paid once, when the home is registered. It is not the yearly city tax bill. General rates from the Province:</p>
-    <div class="cards">
+    <p class="kicker">B.C. property transfer tax</p>
+    <h2>The rates, then an $800,000 resale</h2>
+    <div class="cards four">
       <div class="card"><b>1%</b><span>First $200,000.</span></div>
-      <div class="card"><b>2%</b><span>From $200,000 to $2 million.</span></div>
+      <div class="card"><b>2%</b><span>Up to $2 million.</span></div>
       <div class="card"><b>3%</b><span>Above $2 million.</span></div>
+      <div class="card"><b>+2%</b><span>Residential value above $3 million.</span></div>
     </div>
-    <p>Residential value above $3 million is charged a further 2%. A fully residential home at $4.5 million is the Province's own example: $143,000 of tax, including that further 2%.</p>
-    <h3>Resale home at $800,000</h3>
+    <p>This tax is paid once, at registration. It is not the yearly city tax. The Province’s $4.5 million residential example is $143,000, including the further 2%.</p>
     <div class="cards">
       <div class="card"><b>$2,000</b><span>1% of the first $200,000.</span></div>
       <div class="card"><b>$12,000</b><span>2% of the next $600,000.</span></div>
-      <div class="card dark"><b>$14,000</b><span>Tax before any exemption. The Province's table shows the same figure.</span></div>
+      <div class="card dark"><b>$14,000</b><span>Tax before any exemption. The Province’s table matches this.</span></div>
     </div>
-    <p>A qualifying first-time buyer at this price gets an $8,000 exemption and pays <strong>$6,000</strong>. The Province's table lists that $6,000 as well.</p>
-    <p class="src">gov.bc.ca property transfer tax page, updated December 3, 2025. Calculation examples, updated November 26, 2024. First-time exemption amounts, updated December 3, 2025. Checked November 28, 2026.</p>
+    <p>A qualifying first-time buyer at $800,000 gets an <strong>$8,000</strong> exemption and pays <strong>$6,000</strong>. A qualifying newly built home at the same price can be <strong>$0</strong>.</p>
+    <p class="src">gov.bc.ca property transfer tax, updated December 3, 2025. Calculation examples, updated November 26, 2024. First-time amounts, updated December 3, 2025.</p>
   </div>
-  <p class="foot"><span>Not tax or legal advice.</span><span>Confirm with your lawyer.</span></p>
+  <p class="foot"><span>Not tax or legal advice.</span><span>4</span></p>
 </section>
 
-<section class="sheet fit">
+<section class="sheet">
+  <figure class="banner">
+    <img src="../img/guides/port-moody-inlet.jpg" alt="Burrard Inlet at Port Moody" style="object-position:center 60%">
+    <figcaption>Burrard Inlet, Port Moody. Kalamazadkhan, Wikimedia Commons, CC BY-SA 4.0.</figcaption>
+  </figure>
   <div class="pad">
-    <p class="kicker">Page 5 · Two exemptions</p>
-    <h2>First-time buyers, and newly built homes</h2>
-    <div class="two">
+    <p class="kicker">Two different exemptions</p>
+    <h2>First-time buyers, and new homes</h2>
+    <div class="split">
       <div>
         <h3>First Time Home Buyers' Program</h3>
-        <p>Resale or new. You must be a Canadian citizen or permanent resident, have lived in B.C. for a year before registration (or filed 2 B.C. tax returns in the last 6 years), never have owned a principal residence anywhere, and use this home as your principal residence on 0.5 hectares or less.</p>
         <ul>
+          <li>Resale or new. Citizen or permanent resident.</li>
+          <li>Lived in B.C. for a year before registration, or filed 2 B.C. returns in the last 6 years.</li>
+          <li>Never owned a principal residence anywhere. This home is your principal residence, on 0.5 hectares or less.</li>
           <li>$500,000 or less: the full tax can be exempt.</li>
-          <li>Over $500,000 up to $835,000: the exemption is $8,000. You still pay tax on the rest.</li>
-          <li>Over $835,000 and under $860,000: that $8,000 shrinks to zero.</li>
-          <li>$860,000: no exemption.</li>
+          <li>Over $500,000 up to $835,000: the exemption is $8,000. You still pay the rest.</li>
+          <li>Over $835,000 and under $860,000: that $8,000 shrinks. At $860,000 it is gone.</li>
+          <li>Move in within 92 days and stay through the first year.</li>
         </ul>
-        <p>Move in within 92 days and stay through the first year.</p>
       </div>
       <div>
         <h3>Newly built home exemption</h3>
-        <p>You do not have to be a first-time buyer. The home must be new, not yet lived in, and this must be the first registration after it was completed. Citizen or permanent resident, principal residence, 0.5 hectares or less.</p>
         <ul>
+          <li>You do not have to be a first-time buyer.</li>
+          <li>New, not yet lived in, and the first registration after it was completed.</li>
+          <li>Citizen or permanent resident. Principal residence. 0.5 hectares or less.</li>
           <li>$1,100,000 or less: the full tax is exempt. At $1,100,000 that tax is $20,000, so you pay $0.</li>
-          <li>Between $1,100,000 and $1,150,000 the exemption shrinks. The Province's formula is the tax times ($1,150,000 minus the price) divided by $50,000.</li>
+          <li>Between $1,100,000 and $1,150,000 it shrinks: tax times ($1,150,000 minus the price) divided by $50,000.</li>
           <li>$1,150,000: no exemption. The tax is $21,000.</li>
+          <li>Same 92-day move-in rule.</li>
         </ul>
-        <p>Same 92-day move-in rule.</p>
       </div>
     </div>
-    <p>On a new home of $800,000, the newly built exemption can bring the tax to $0. The first-time program at that price would leave $6,000. When both could apply, the new-home exemption removes more.</p>
-    <p class="src">Program page updated June 20, 2025. Newly built page updated January 6, 2026. Amount tables updated December 3, 2025. A larger lot, a partial purchase, or a foreign buyer can change the bill. Checked November 28, 2026.</p>
+    <p>When both could apply, the new-home exemption removes more. A larger lot, a partial share, or a foreign buyer can change the bill.</p>
+    <p class="src">Program page, updated June 20, 2025. Newly built page, updated January 6, 2026. Amount tables, updated December 3, 2025.</p>
   </div>
-  <p class="foot"><span>Axford Real Estate · Port Moody</span><span>Page 5 of 9</span></p>
+  <p class="foot"><span>Axford Real Estate · Port Moody</span><span>5</span></p>
 </section>
 
 <section class="sheet">
+  <figure class="banner">
+    <img src="../img/blog/photos/lions-gate-bridge-2018.jpg" alt="Lions Gate Bridge with the North Shore mountains">
+    <figcaption>Lions Gate Bridge and the North Shore mountains. Poidabro (Peter Abery), Wikimedia Commons, CC BY-SA 4.0.</figcaption>
+  </figure>
   <div class="pad">
-    <p class="kicker">Page 6 · Saving before you buy</p>
-    <h2>FHSA and the RRSP Home Buyers' Plan</h2>
-    <h3>First Home Savings Account</h3>
-    <p>In the year you open your first FHSA, you can contribute or transfer from an RRSP up to $8,000 in total. The lifetime cap on contributions is $40,000. Contributions can be deducted on your tax return. A qualifying withdrawal to buy your first home is tax-free. Unused room can carry forward. The exact room in a later year is in your CRA account, because excess amounts change the math. You can hold more than one FHSA, but the yearly room is shared across all of them.</p>
-    <h3>Home Buyers' Plan</h3>
-    <p>You can withdraw up to $60,000 from your RRSPs. You repay it over 15 years. For a first withdrawal from January 1, 2026 through December 31, 2028, repayment starts in the fifth year after the year you withdrew. A 2026 withdrawal starts repayment in 2031. You can use an FHSA withdrawal and a Home Buyers' Plan withdrawal for the same home if you meet both sets of rules.</p>
-    <p class="src">CRA, “Participating in your FHSAs,” including the 2026 examples. CRA, “The Home Buyers' Plan,” including the repayment note for 2026 to 2028. Checked November 28, 2026.</p>
+    <p class="kicker">Saving before you buy</p>
+    <h2>FHSA and the Home Buyers' Plan</h2>
+    <div class="cards two">
+      <div class="card"><b>$8,000</b><span>FHSA room in the year you open it. Contributions and RRSP transfers share that room. Lifetime cap $40,000.</span></div>
+      <div class="card"><b>$60,000</b><span>Most you can withdraw from your RRSPs under the Home Buyers' Plan.</span></div>
+    </div>
+    <div class="split">
+      <div>
+        <h3>First Home Savings Account</h3>
+        <ul>
+          <li>Contributions can be deducted. A qualifying withdrawal is tax-free.</li>
+          <li>Unused room can carry forward. The exact later-year room is in your CRA account.</li>
+          <li>More than one FHSA is allowed. The yearly room is shared across all of them.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Home Buyers' Plan</h3>
+        <ul>
+          <li>Repay over 15 years.</li>
+          <li>A first withdrawal from January 1, 2026 through December 31, 2028 starts repayment in the fifth year.</li>
+          <li>A 2026 withdrawal starts repayment in 2031.</li>
+          <li>You can use both an FHSA and the Home Buyers' Plan for the same home.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="src">CRA, “Participating in your FHSAs,” 2026 examples. CRA, “The Home Buyers' Plan,” including 2026–2028 repayment relief. Checked November 28, 2026.</p>
   </div>
-  <p class="foot"><span>Not tax or legal advice.</span><span>devin@axfordrealestate.ca</span></p>
+  <p class="foot"><span>Not tax or legal advice.</span><span>6</span></p>
 </section>
 
 <section class="sheet">
+  <figure class="banner">
+    <img src="../img/blog/photos/westwood-greene-port-coquitlam-2025.jpg" alt="Houses at Westwood Street and Greene Street in Port Coquitlam" style="object-position:center 70%">
+    <figcaption>Westwood Street at Greene Street, Port Coquitlam. Neondev1, Wikimedia Commons, CC0 1.0.</figcaption>
+  </figure>
   <div class="pad">
-    <p class="kicker">Page 7 · The lender's test, and cash at closing</p>
-    <h2>Stress test, then a closing checklist</h2>
-    <p>For an uninsured mortgage from a federally regulated lender, OSFI's minimum qualifying rate is the greater of your contract rate plus 2 percentage points, or 5.25%. OSFI reviews that floor and that buffer at least once a year. It does not require that set rate when you switch an uninsured mortgage to another federally regulated lender at renewal, if the loan amount and the amortization do not increase. Insured mortgages follow federal mortgage-insurance rules. Your lender applies the test that fits the loan. This is not an approval.</p>
-    <h3>Cash besides the down payment</h3>
+    <p class="kicker">The lender, then the cash</p>
+    <h2>Stress test and closing costs</h2>
+    <div class="cards">
+      <div class="card"><b>+2%</b><span>Or 5.25%, whichever is higher. That is OSFI’s uninsured qualifying rate.</span></div>
+      <div class="card dark" style="grid-column: span 2"><b>Not every renewal</b><span>A straight switch of an uninsured mortgage, with no increase in the loan or the amortization, is not required to use that set rate. Insured loans follow federal mortgage-insurance rules. Ask your lender. This is not an approval.</span></div>
+    </div>
+    <h3>Besides the down payment</h3>
     <ul>
       <li>Property transfer tax, or an exemption if you qualify.</li>
-      <li>GST on a new home, and any rebate you are allowed to claim.</li>
+      <li>GST on a new home, and any rebate you can claim.</li>
       <li>Legal or notary fees, and title insurance if you choose it.</li>
-      <li>A home inspection, and an appraisal if the lender asks for one.</li>
+      <li>A home inspection, and an appraisal if the lender asks.</li>
       <li>Adjustments for property tax, utilities, and strata fees already paid.</li>
-      <li>Strata documents, including the Form B, on a condo or townhouse.</li>
-      <li>Home insurance in place before completion, and the cost of the move.</li>
+      <li>On a condo or townhouse, the Form B and the other strata documents.</li>
+      <li>Home insurance before completion, and the cost of the move.</li>
     </ul>
-    <p>This list does not put a dollar amount on legal fees or inspections. Those vary. Ask for the quotes.</p>
-    <p class="src">OSFI, “Minimum qualifying rate for uninsured mortgages.” Checked November 28, 2026.</p>
+    <p>Legal fees and inspections vary. Get the quotes. OSFI reviews the 2-point buffer and the 5.25% floor at least once a year.</p>
+    <p class="src">OSFI, minimum qualifying rate for uninsured mortgages. Checked November 28, 2026.</p>
   </div>
-  <p class="foot"><span>Devin Desaulniers · Axford Real Estate</span><span>604-809-1032</span></p>
+  <p class="foot"><span>Devin Desaulniers · 604-809-1032</span><span>7</span></p>
 </section>
 
 <section class="sheet">
+  <figure class="banner">
+    <img src="../img/blog/photos/canada-place-downtown-vancouver-2016.jpg" alt="Canada Place and the downtown Vancouver skyline">
+    <figcaption>Canada Place and downtown Vancouver. Spyder212, Wikimedia Commons, CC BY-SA 4.0.</figcaption>
+  </figure>
   <div class="pad">
-    <p class="kicker">Page 8 · The path</p>
-    <h2>Steps to buy a home in B.C.</h2>
-    <ol class="steps">
-      <li><strong>Know the cash.</strong> Talk with a lender about what you can borrow. Read the tax pages in this guide before you fall for a price.</li>
-      <li><strong>Sign the paperwork with your agent.</strong> In B.C. that includes a disclosure of representation before services start, and a written agreement about how the agent is paid.</li>
-      <li><strong>Tour homes</strong> in the Tri-Cities, BC or elsewhere in Greater Vancouver. On a condo or townhouse, read the Form B, minutes, bylaws, and the depreciation report.</li>
-      <li><strong>Write an offer with subjects</strong> such as financing, inspection, and a review of strata documents and title. The deposit amount is negotiated. It is held in trust.</li>
-      <li><strong>Do the homework, then remove subjects in writing</strong> only when you are satisfied. After that, walking away can cost the deposit and more.</li>
-      <li><strong>Your lawyer or notary</strong> searches title, prepares the transfer, and calculates property transfer tax. Completion is the day money and title move. Possession is the day you get the keys. Those dates are negotiated and are not always the same day.</li>
+    <p class="kicker">The path</p>
+    <h2>Steps to buy in B.C.</h2>
+    <ol>
+      <li><strong>Know the cash.</strong> Talk with a lender, then read the tax pages in this guide before you fall for a price.</li>
+      <li><strong>Sign with your agent.</strong> In B.C. that includes a disclosure of representation, and a written agreement about how the agent is paid.</li>
+      <li><strong>Tour homes</strong> in the Tri-Cities, BC or elsewhere in Greater Vancouver. On a strata home, read the Form B, minutes, bylaws, and the depreciation report.</li>
+      <li><strong>Write an offer with subjects</strong> such as financing, inspection, and a document review. The deposit is negotiated and held in trust.</li>
+      <li><strong>Remove subjects in writing</strong> only when you are satisfied. After that, walking away can cost the deposit and more.</li>
+      <li><strong>Your lawyer or notary</strong> searches title and calculates the transfer tax. Completion is when money and title move. Possession is when you get the keys. Those dates are negotiated.</li>
     </ol>
-    <p>B.C. has a home-buyer rescission period on many residential purchases. Confirm the current window, the cost, and the exceptions with your lawyer and the BCFSA consumer guide. Subjects are still the usual way to protect yourself.</p>
+    <p>B.C. has a home-buyer rescission period on many residential purchases. Confirm the window, the cost, and the exceptions with your lawyer and the BCFSA guide. Subjects are still the usual protection.</p>
+    <p class="src">Not a mortgage approval. Confirm the rescission rules with BCFSA and your lawyer.</p>
   </div>
-  <p class="foot"><span>Not tax or legal advice.</span><span>Page 8 of 9</span></p>
+  <p class="foot"><span>Not tax or legal advice.</span><span>8</span></p>
 </section>
 
 <section class="sheet back">
+  <figure class="banner">
+    <img src="../img/guides/coquitlam-2018.jpg" alt="Houses and towers in Coquitlam, with the North Shore mountains">
+    <figcaption>Coquitlam, from Westwood Plateau, May 2018. Alex of Canada, Wikimedia Commons, CC BY-SA 4.0.</figcaption>
+  </figure>
   <div class="pad">
-    <p class="kicker" style="color:#93bde6">Page 9 · Sources</p>
-    <h2>Where these rules are written</h2>
-    <p>Checked November 28, 2026. If a page and this guide ever disagree, the government page wins.</p>
+    <p class="kicker">Sources · checked November 28, 2026</p>
+    <h2>Where the rules are written</h2>
     <ul>
-      <li>Finance Canada, Bill C-4 Royal Assent, March 12, 2026. canada.ca/en/department-finance</li>
-      <li>CRA, First-Time Home Buyers' GST/HST rebate, and GST/HST Memorandum 19-3-10, October 2026.</li>
-      <li>CRA guide RC4028, GST/HST New Housing Rebate, for the $350,000 / $450,000 / $6,300 rebate.</li>
-      <li>Province of B.C., property transfer tax rates, updated December 3, 2025, and the calculation examples.</li>
-      <li>First Time Home Buyers' Program, updated June 20, 2025, and exemption amounts, updated December 3, 2025.</li>
-      <li>Newly built home exemption, updated January 6, 2026, and its amount table, updated December 3, 2025.</li>
-      <li>CRA, FHSA contributions, and the Home Buyers' Plan, including the 2026–2028 repayment relief.</li>
-      <li>OSFI, minimum qualifying rate for uninsured mortgages: the greater of the contract rate plus 2%, or 5.25%.</li>
+      <li>Finance Canada, Bill C-4 Royal Assent, March 12, 2026.</li>
+      <li>CRA, First-Time Home Buyers' GST/HST rebate, and Memorandum 19-3-10, October 2026.</li>
+      <li>CRA guide RC4028, for the $350,000 / $450,000 / $6,300 rebate.</li>
+      <li>Province of B.C., property transfer tax rates (December 3, 2025) and calculation examples (November 26, 2024).</li>
+      <li>First Time Home Buyers' Program (June 20, 2025) and exemption amounts (December 3, 2025).</li>
+      <li>Newly built home exemption (January 6, 2026) and its amount table (December 3, 2025).</li>
+      <li>CRA, FHSA contributions, and the Home Buyers' Plan, including 2026–2028 repayment relief.</li>
+      <li>OSFI, uninsured minimum qualifying rate: the greater of the contract rate plus 2%, or 5.25%.</li>
     </ul>
-    <img class="portrait" src="../img/devin-headshot-800.jpg" alt="Devin Desaulniers">
-    <p><strong>Devin Desaulniers</strong><br>Real Estate Associate<br>Axford Real Estate<br>2326 Clarke St, Port Moody, BC<br>604-809-1032<br>devin@axfordrealestate.ca<br>devindesaulniers.ca</p>
-    <p class="warn">Not tax or legal advice, and not a mortgage approval. Confirm the rules with your lawyer, notary, or accountant. Devin's photo is his own. Cover photo: Alex of Canada, Coquitlam, Wikimedia Commons, CC BY-SA 4.0.</p>
+    <p class="kicker">Photo credits · Wikimedia Commons, real places</p>
+    <ol class="credits">
+      <li>Cover: Queen Elizabeth Park skyline, Kyle Pearce, CC BY-SA 2.0.</li>
+      <li>Yaletown condos, Ymblanter, CC BY-SA 4.0.</li>
+      <li>The Austin, Coquitlam, Greg Salter, CC BY-SA 3.0.</li>
+      <li>Kitsilano house, Adam Jones, CC BY-SA 2.0.</li>
+      <li>Port Moody inlet, Kalamazadkhan, CC BY-SA 4.0.</li>
+      <li>Lions Gate Bridge, Poidabro (Peter Abery), CC BY-SA 4.0.</li>
+      <li>Port Coquitlam houses, Neondev1, CC0 1.0.</li>
+      <li>Canada Place, Spyder212, CC BY-SA 4.0.</li>
+      <li>Coquitlam, Alex of Canada, CC BY-SA 4.0.</li>
+    </ol>
+    <div class="who-row">
+      <img src="../img/devin-headshot-800.jpg" alt="Devin Desaulniers">
+      <div>
+        <p><strong>Devin Desaulniers</strong><br>Real Estate Associate, Axford Real Estate<br>2326 Clarke St, Port Moody, BC<br>604-809-1032 · devin@axfordrealestate.ca<br>devindesaulniers.ca</p>
+        <p class="warn">Not tax or legal advice, and not a mortgage approval. Confirm the rules with your lawyer, notary, or accountant. Devin’s photo is his own. Nothing in this guide is AI-generated.</p>
+      </div>
+    </div>
   </div>
+  <p class="foot"><span>If a government page and this guide disagree, the government page wins.</span><span>9</span></p>
 </section>
 
 </body>

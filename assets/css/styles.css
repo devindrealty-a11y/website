@@ -1408,6 +1408,12 @@ html.dd-chat-open{overflow:hidden}
 }
 
 /* First-time home buyers */
+.ftb-hero-photo{min-height:clamp(640px,78vh,860px)}
+.ftb-hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+.ftb-hero-shade{position:absolute;inset:0;background:linear-gradient(100deg,rgba(13,27,42,.88) 0%,rgba(13,27,42,.72) 48%,rgba(13,27,42,.38) 100%)}
+.ftb-hero-photo .container{position:relative;z-index:1}
+.ftb-hero-cap{position:relative;z-index:1;margin:0;padding:0 var(--gutter) 18px;font-size:.78rem;color:#d5e2ef}
+.ftb-hero-cap a{color:#fff}
 .ftb-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:28px 0 8px}
 .ftb-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:var(--radius);padding:16px 16px 14px}
 .ftb-stat strong{display:block;font-family:var(--font-display);font-weight:500;font-size:clamp(1.8rem,1.2rem + 1.6vw,2.6rem);line-height:1;color:#fff;letter-spacing:-.02em}

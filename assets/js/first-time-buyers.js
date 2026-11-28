@@ -149,7 +149,6 @@
       }
       var name = String(data.get("name") || "").trim();
       var email = String(data.get("email") || "").trim();
-      var when = String(data.get("when") || "").trim();
       var endpoint = String(cfg.firstTimeGuide || "").trim();
       var fallback = 'Please email <a href="mailto:devin@axfordrealestate.ca">devin@axfordrealestate.ca</a> or call <a href="tel:+16048091032">604-809-1032</a>.';
       if (!endpoint) {
@@ -159,7 +158,6 @@
       var payload = {
         name: name,
         email: email,
-        when: when,
         consent: "yes",
         form: "First-time buyer guide request",
         page: (window.location.origin || "") + (window.location.pathname || ""),

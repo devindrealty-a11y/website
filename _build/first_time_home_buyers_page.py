@@ -69,7 +69,9 @@ def faq_html():
 
 
 BODY = """
-<section class="page-hero">
+<section class="page-hero ftb-hero-photo">
+  <img class="ftb-hero-bg" src="assets/img/blog/photos/vancouver-skyline-queen-elizabeth-park.jpg" alt="Downtown Vancouver and the North Shore mountains, from Queen Elizabeth Park">
+  <div class="ftb-hero-shade" aria-hidden="true"></div>
   <div class="container">
     <span class="eyebrow">First home · British Columbia</span>
     <h1>The taxes on a first home in BC</h1>
@@ -85,6 +87,7 @@ BODY = """
       <a class="btn btn-ghost-light" href="#estimator">Estimate the transfer tax</a>
     </div>
   </div>
+  <p class="ftb-hero-cap">Downtown Vancouver and the North Shore mountains, from Queen Elizabeth Park. Photo: Kyle Pearce / <a href="https://commons.wikimedia.org/wiki/File:Vancouver_Skyline_and_Mountains.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 2.0).</p>
 </section>
 
 <section class="section">
@@ -293,17 +296,6 @@ BODY = """
           <input id="ftb-email" name="email" type="email" autocomplete="email" required>
         </div>
         <div class="field full">
-          <label for="ftb-when">When are you hoping to buy? <span class="hint">(optional)</span></label>
-          <select id="ftb-when" name="when">
-            <option value="">Prefer not to say</option>
-            <option>In the next 3 months</option>
-            <option>In 3 to 6 months</option>
-            <option>In 6 to 12 months</option>
-            <option>More than a year from now</option>
-            <option>Just reading for now</option>
-          </select>
-        </div>
-        <div class="field full">
           <label class="consent"><input type="checkbox" name="consent" value="yes" required> <span>I agree to be contacted by Devin Desaulniers (Axford Real Estate) by email about this guide. I can opt out at any time. <span class="req">*</span></span></label>
         </div>
         <div class="full">
@@ -325,7 +317,7 @@ def render():
         "First-time home buyers in BC: GST and property transfer tax | Devin Desaulniers, Axford Real Estate",
         "GST rebate and B.C. property transfer tax for first-time buyers, with the thresholds in force on November 28, 2026. Devin Desaulniers, Real Estate Associate, Axford Real Estate, Tri-Cities, BC.",
         "ftb",
-        og_image="assets/img/guides/coquitlam-2018.jpg",
+        og_image="assets/img/blog/photos/vancouver-skyline-queen-elizabeth-park.jpg",
         page_url=PAGE,
         extra_head=extra,
     )
