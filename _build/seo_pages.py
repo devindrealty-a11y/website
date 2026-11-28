@@ -1169,12 +1169,17 @@ def _rental_intake_form():
     beds = (
         '<option value="" selected disabled>Select\u2026</option>'
         '<option>Studio</option>'
-        '<option>1 bedroom</option>'
-        '<option>1 bedroom + den</option>'
-        '<option>2 bedrooms</option>'
-        '<option>3 bedrooms</option>'
-        '<option>4+ bedrooms</option>'
-        '<option>Flexible</option>'
+        '<option>1</option>'
+        '<option>2</option>'
+        '<option>3</option>'
+        '<option>4+</option>'
+    )
+    baths = (
+        '<option value="">Select\u2026</option>'
+        '<option>1</option>'
+        '<option>1.5</option>'
+        '<option>2</option>'
+        '<option>2+</option>'
     )
     lives = _yes_no("rb-gv", "lives_in_greater_vancouver", "Do you currently live in Greater Vancouver?")
     paid = _yes_no("rb-help", "want_paid_help", "Would you like professional help managing your rental search?")
@@ -1196,13 +1201,15 @@ def _rental_intake_form():
         <div class="field"><label for="rb-from">Where are you moving from? <span class="req">*</span></label><input id="rb-from" name="moving_from" autocomplete="address-level2" required placeholder="City, province or country"></div>
         <div class="field"><label for="rb-work">Where will you be working or studying? <span class="req">*</span></label><input id="rb-work" name="work_school_location" required placeholder="Neighbourhood, city, or office area"></div>
         <div class="field"><label for="rb-budget">Monthly rental budget (CAD) <span class="req">*</span></label><input id="rb-budget" name="budget" required placeholder="e.g. $2,500\u2013$3,000"></div>
-        <div class="field"><label for="rb-beds">How many bedrooms? <span class="req">*</span></label><select id="rb-beds" name="bedrooms" required>{beds}</select></div>
+        <div class="field"><label for="rb-beds">How many bedrooms are you looking for? <span class="req">*</span></label><select id="rb-beds" name="Bedrooms" required>{beds}</select></div>
+        <div class="field"><label for="rb-baths">How many bathrooms?</label><select id="rb-baths" name="Bathrooms">{baths}</select></div>
         <div class="field"><label for="rb-date">Target move date <span class="req">*</span></label><input id="rb-date" name="move_date" type="date" required></div>
         {lives}
         {paid}
         <div class="field"><label for="rb-name">Full name <span class="req">*</span></label><input id="rb-name" name="name" autocomplete="name" required></div>
         <div class="field"><label for="rb-email">Email <span class="req">*</span></label><input id="rb-email" name="email" type="email" autocomplete="email" required></div>
         <div class="field"><label for="rb-phone">Phone <span class="req">*</span> <span class="hint">(include a country code if you're outside Canada)</span></label><input id="rb-phone" name="phone" type="tel" autocomplete="tel" required></div>
+        <div class="field full"><label for="rb-more">Anything else we should know? <span class="hint">(optional)</span></label><textarea id="rb-more" name="More details" placeholder="e.g. pets, parking, must-haves"></textarea></div>
         {consent("rb")}
         <div class="full">
           <button type="submit" class="btn btn-primary">Build My Rental Search</button>
@@ -1706,10 +1713,6 @@ def _ontario_intake_form():
         "$5,000 or more a month",
         "Not sure yet",
     ])
-    beds = _ontario_choices(uid, "bedrooms", [
-        "Studio", "1 bedroom", "1 bedroom + den", "2 bedrooms",
-        "3 bedrooms", "4+ bedrooms", "Flexible",
-    ])
     docs = _ontario_choices(uid, "documents_ready", ["Yes", "Some", "Not yet"])
     html = f'''<form class="lead-form ontario-form" id="intake-form" data-lead-form data-form-key="tenantIntake" action="#" method="post" novalidate aria-labelledby="{uid}-title">
   <input type="hidden" name="_subject" value="New relocation rental intake \u2014 moving-from-ontario">
@@ -1750,8 +1753,12 @@ def _ontario_intake_form():
       <div class="lead-choices">{areas}</div>
     </fieldset>
     <fieldset class="lead-step" data-lead-step="5" hidden>
-      <legend tabindex="-1" id="{uid}-q5">How many bedrooms?</legend>
-      <div class="lead-choices">{beds}</div>
+      <legend tabindex="-1" id="{uid}-q5">How many bedrooms are you looking for?</legend>
+      <div class="form-grid">
+        <div class="field full"><label class="dd-sr" for="{uid}-beds">How many bedrooms are you looking for?</label><select id="{uid}-beds" name="Bedrooms" required><option value="" selected disabled>Select…</option><option>Studio</option><option>1</option><option>2</option><option>3</option><option>4+</option></select></div>
+        <div class="field full"><label for="{uid}-baths">How many bathrooms?</label><select id="{uid}-baths" name="Bathrooms"><option value="">Select…</option><option>1</option><option>1.5</option><option>2</option><option>2+</option></select></div>
+        <div class="field full"><label for="{uid}-more">Anything else we should know? <span class="hint">(optional)</span></label><textarea id="{uid}-more" name="More details" placeholder="e.g. pets, parking, must-haves"></textarea></div>
+      </div>
     </fieldset>
     <fieldset class="lead-step" data-lead-step="6" hidden aria-describedby="{uid}-q6-hint">
       <legend tabindex="-1" id="{uid}-q6">Are your application documents ready?</legend>

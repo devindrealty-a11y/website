@@ -493,12 +493,13 @@ STEP2 = f"""<div class="form-grid" data-step2>
   <div class="field"><label for="t-contact">Best way to reach you</label><select id="t-contact" name="preferred_contact">{opts(["Email","Phone call","Text message","Video call"])}</select></div>
   <div class="field"><label for="t-from">Moving from <span class="hint">(city, province/country)</span></label><input id="t-from" name="moving_from"></div>
   <div class="field"><label for="t-budget">Monthly rent budget (CAD)</label><input id="t-budget" name="budget" placeholder="e.g. $2,500–$3,000"></div>
-  <div class="field"><label for="t-beds">Bedrooms</label><select id="t-beds" name="bedrooms">{opts(["Studio","1 bedroom","1 bedroom + den","2 bedrooms","3 bedrooms","4+ bedrooms","Flexible"],"Select…")}</select></div>
+  <div class="field"><label for="t-beds">How many bedrooms are you looking for?</label><select id="t-beds" name="Bedrooms">{opts(["Studio","1","2","3","4+"],"Select…")}</select></div>
+  <div class="field"><label for="t-baths">How many bathrooms?</label><select id="t-baths" name="Bathrooms">{opts(["1","1.5","2","2+"],"Select…")}</select></div>
   <fieldset class="field"><legend>Preferred areas <span class="hint">(choose any)</span></legend><div class="checks">{area_checks("areas")}</div></fieldset>
   <div class="field"><label for="t-pets">Pets?</label><select id="t-pets" name="pets">{opts(["No pets","Cat(s)","Dog(s)","Cat(s) and dog(s)","Other"],"Select…")}</select></div>
   <div class="field"><label for="t-petdetails">Pet details <span class="hint">(number, size, breed)</span></label><input id="t-petdetails" name="pet_details"></div>
   <div class="field"><label for="t-work">Work / school location <span class="hint">(helps plan around your commute)</span></label><input id="t-work" name="work_school_location"></div>
-  <div class="field"><label for="t-notes">Notes <span class="hint">(lease length, parking, furnished, must-haves…)</span></label><textarea id="t-notes" name="notes"></textarea></div>
+  <div class="field"><label for="t-notes">Anything else we should know? <span class="hint">(optional)</span></label><textarea id="t-notes" name="More details" placeholder="e.g. pets, parking, must-haves"></textarea></div>
   {consent("t")}
   {status_box()}
 </div>"""
@@ -964,7 +965,7 @@ privacy += f"""
         <li>on the qualifying form: whether you are buying, selling, or renting; the area; your timeline; your budget, monthly rent budget, or approximate home value; where you are moving from; and a message if you add one;</li>
         <li>on the home evaluation and the expert opinion forms: your email, the property address, and your name if you add it;</li>
         <li>on the listings form: the areas you're interested in, property type, price range, bedrooms and bathrooms, your timeline, whether you're pre-approved for a mortgage, and any notes;</li>
-        <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, bedrooms, preferred areas, pets, your work or school location, and any notes; the short form on the before-you-arrive page also asks whether you currently live in Greater Vancouver and whether you would like professional help managing your rental search;</li>
+        <li>on the rental intake: your target move-in date, how you'd like to be contacted, where you're moving from, your monthly rent budget, how many bedrooms and bathrooms you want, preferred areas, pets, your work or school location, and anything else you want to add; the short form on the before-you-arrive page also asks whether you currently live in Greater Vancouver and whether you would like professional help managing your rental search;</li>
         <li>on a listing or rental inquiry: the listing id, MLS® number, address and REALTOR.ca link for the home you opened, and your message;</li>
         <li>on the chat widget: the topic you chose (buying, renting, relocating to Greater Vancouver, or selling), your message, and the address of the page you were on;</li>
         <li>on the market-report download: your name, your email, and which edition you requested;</li>
