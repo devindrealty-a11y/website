@@ -50,6 +50,7 @@
     data._subject = "Market report download: " + name;
     if (data.email) data._replyto = data.email;
     data.page = (window.location.origin || "") + (window.location.pathname || "");
+    if (cfg.formCc && endpoint === "https://formsubmit.co/ajax/devin@axfordrealestate.ca") data._cc = cfg.formCc;
     if (btn) {
       btn.disabled = true;
       btn.dataset.label = btn.textContent;

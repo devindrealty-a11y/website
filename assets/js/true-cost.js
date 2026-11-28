@@ -303,6 +303,7 @@
         _template: "table",
         _replyto: email
       };
+      if (cfg.formCc && endpoint === "https://formsubmit.co/ajax/devin@axfordrealestate.ca") payload._cc = cfg.formCc;
       return fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },

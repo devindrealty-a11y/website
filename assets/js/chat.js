@@ -529,6 +529,7 @@
     var data = {};
     fd.forEach(function (v, k) { data[k] = data[k] ? data[k] + ", " + v : v; });
     if (data.email) data._replyto = data.email;
+    if (cfg.formCc && endpoint === "https://formsubmit.co/ajax/devin@axfordrealestate.ca") data._cc = cfg.formCc;
     btn.disabled = true;
     var label = btn.textContent;
     btn.textContent = "Sending…";

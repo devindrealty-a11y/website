@@ -181,6 +181,10 @@
 
   // Forms: AJAX submit to the endpoint in config.js (FormSubmit), with on-page success message
   var cfg = (window.SITE_CONFIG && window.SITE_CONFIG.forms) || {};
+  var FORMSUBMIT_DEVIN = "https://formsubmit.co/ajax/devin@axfordrealestate.ca";
+  function addFormCc(endpoint, data) {
+    if (cfg.formCc && endpoint === FORMSUBMIT_DEVIN) data._cc = cfg.formCc;
+  }
   document.querySelectorAll('form[data-form-key]').forEach(function (form) {
     if (form.hasAttribute('data-lead-form')) return;
     var endpoint = (cfg[form.getAttribute('data-form-key')] || '').trim();
@@ -212,6 +216,7 @@
       var data = {};
       fd.forEach(function (v, k) { data[k] = data[k] ? data[k] + ', ' + v : v; });
       if (data.email) data._replyto = data.email;
+      addFormCc(endpoint, data);
       if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Sending…'; }
       // Count the submit only after FormSubmit accepts it, then post. A missing
       // or blocked counter must not stop the request; countGoat queues if needed.
@@ -538,6 +543,7 @@
       } else {
         data = collectFields();
       }
+      addFormCc(endpoint, data);
       sending = true;
       if (submitBtn) {
         submitBtn.disabled = true;

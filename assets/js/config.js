@@ -15,6 +15,9 @@
  */
 window.SITE_CONFIG = {
   forms: {
+    // Assistant copy. Not a form endpoint. Handlers add this as `_cc` only when
+    // the post URL is exactly https://formsubmit.co/ajax/devin@axfordrealestate.ca.
+    formCc: "devinassistant+webleads@mail.grokbot.com",
     buyerListings: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // buyers.html "Send me listings"
     tenantIntake:  "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // tenants.html, rental-before-you-arrive.html, moving-from-ontario.html
     listingInquiry: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // listings.html detail inquiry (not test-submitted)
