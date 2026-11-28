@@ -32,6 +32,8 @@ window.SITE_CONFIG = {
     marketReport: "https://formsubmit.co/ajax/devin@axfordrealestate.ca", // market-report PDF gate (not test-submitted)
     // Mortgage rates page. Subject is "Mortgage intro request". Not test-submitted.
     // Devin introduces the client to a licensed mortgage professional. He does not underwrite.
-    mortgageIntro: "https://formsubmit.co/ajax/devin@axfordrealestate.ca"
+    mortgageIntro: "https://formsubmit.co/ajax/devin@axfordrealestate.ca",
+    // Selling page. Subject is "Home maintenance guide request". Not test-submitted.
+    maintenanceGuide: "https://formsubmit.co/ajax/devin@axfordrealestate.ca"
   }
 };
