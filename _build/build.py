@@ -254,7 +254,7 @@ home += '''
     <div class="mp-cred-card">
       <div class="mp-cred-copy">
         <span class="eyebrow">Facebook Marketplace</span>
-        <p class="mp-who"><span class="mp-name">Devin Desaulniers</span><span class="mp-verified"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"/><path fill="#fff" d="M10.1 15.6 6.8 12.3l1.3-1.3 2 2 5.6-5.6 1.3 1.3z"/></svg>Verified</span></p>
+        <p class="mp-who"><img class="mp-avatar" src="assets/img/devin-bw-420.webp" width="60" height="60" alt="" decoding="async"><span class="mp-name">Devin Desaulniers</span><span class="mp-verified"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"/><path fill="#fff" d="M10.1 15.6 6.8 12.3l1.3-1.3 2 2 5.6-5.6 1.3 1.3z"/></svg>Verified</span></p>
         <div class="mp-score">
           <span class="mp-stars" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="26" height="26"><path fill="#FBBC05" d="M12 2.5l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.52l-5.88 3.09 1.12-6.55-4.76-4.64 6.58-.96z"/></svg>
