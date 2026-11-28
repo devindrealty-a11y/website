@@ -13,399 +13,328 @@
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
-  body{font-family:Inter,"Segoe UI",sans-serif;color:var(--ink);font-size:13.5pt;line-height:1.32;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{font-family:Inter,"Segoe UI",sans-serif;color:var(--ink);font-size:12.5pt;line-height:1.28;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   @page{size:letter;margin:0}
   .sheet{width:8.5in;height:11in;position:relative;overflow:hidden;page-break-after:always;break-after:page;background:#fff}
   .sheet:last-child{page-break-after:auto;break-after:auto}
-  .runhead,.runfoot{position:absolute;left:.42in;right:.42in;display:flex;justify-content:space-between;align-items:baseline}
-  .runhead{top:.16in;font-family:Montserrat,Inter,sans-serif;font-size:8pt;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;border-bottom:1.5px solid var(--line);padding-bottom:4px}
-  .runfoot{bottom:.14in;border-top:2px solid var(--blue);padding-top:5px;font-size:9.5pt;color:var(--ink)}
-  .runfoot b{font-weight:800}
-  .colpad{position:absolute;left:.42in;right:.42in;top:.46in;bottom:.48in;display:flex;flex-direction:column;gap:.08in}
-  h1,h2,h3{font-family:Newsreader,Georgia,serif;font-weight:600;letter-spacing:-.015em;margin:0;color:var(--ink)}
-  h2{font-size:26pt;line-height:1.02}
-  h3{font-size:15pt;line-height:1.15}
+  h1,h2,h3{font-family:Newsreader,Georgia,serif;font-weight:600;letter-spacing:-.02em;margin:0;color:var(--ink)}
+  h2{font-size:26pt;line-height:1.0}
+  h3{font-size:13.5pt;line-height:1.15;margin:0 0 3px}
   p{margin:0}
-  a{color:var(--blue-dark);text-decoration:none}
-  .kicker{font-family:Montserrat,Inter,sans-serif;font-weight:700;font-size:9pt;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-dark);margin:0 0 3px}
-  .deck{font-size:13.5pt;line-height:1.32;color:var(--ink)}
-  .note{font-size:11pt;line-height:1.3;color:var(--muted)}
-  .band{position:relative;border-radius:8px;overflow:hidden;flex:0 0 auto}
-  .band img{width:100%;height:100%;object-fit:cover;display:block}
-  .cap{position:absolute;left:0;right:0;bottom:0;margin:0;padding:6px 10px;color:#fff;font-size:8.5pt;line-height:1.25;background:linear-gradient(transparent,rgba(19,38,57,.78))}
-  .cards{display:grid;gap:.08in}
-  .cards.g2{grid-template-columns:1fr 1fr}
-  .cards.g3{grid-template-columns:1fr 1fr 1fr}
-  .card{background:var(--paper);border-radius:10px;padding:.1in .12in .11in;min-height:0}
-  .card.line{background:#fff;border:1.5px solid var(--line);border-top:5px solid var(--blue)}
-  .card h3{margin-bottom:3px}
-  .card p,.card li{font-size:12pt;line-height:1.28}
-  .card ul,.checks{margin:0;padding:0;list-style:none}
-  .card li,.checks li{position:relative;padding:0 0 .045in .2in}
-  .card li::before,.checks li::before{content:"";position:absolute;left:0;top:.38em;width:8px;height:8px;border-radius:2px;border:2px solid var(--blue-dark)}
-  .grow{flex:1 1 auto;min-height:0}
-  .who{display:flex;gap:12px;align-items:center}
-  .who img{width:92px;height:118px;object-fit:cover;object-position:center 18%;border-radius:8px}
-  .cover-photo{height:6.45in;position:relative}
-  .cover-photo img{width:100%;height:100%;object-fit:cover;object-position:center 62%;display:block}
-  .cover-panel{padding:.18in .42in 0}
-  .cover-panel h1{font-size:34pt;line-height:.96;margin:2px 0 6px}
-  .cover-foot{position:absolute;left:.42in;right:.42in;bottom:.22in;display:flex;justify-content:space-between;align-items:flex-end;border-top:3px solid var(--blue);padding-top:8px;font-size:11pt}
-  .cover-foot img.logo{height:28px;width:auto}
-  .season{display:grid;grid-template-columns:1.15in 1fr;gap:.08in .12in}
-  .season .when{font-family:Montserrat,Inter,sans-serif;font-weight:800;font-size:11pt;letter-spacing:.04em;text-transform:uppercase;color:var(--blue-dark);padding-top:2px}
-  .src{font-size:9.5pt;line-height:1.28;color:var(--muted)}
-  .src p{margin:0 0 .04in}
-  .warn{background:var(--night);color:#fff;border-radius:10px;padding:.1in .12in;font-size:12.5pt;line-height:1.3}
-  .warn strong{color:#fff}
-  .cols{display:grid;grid-template-columns:1fr 1fr;gap:.1in .16in}
-  .end-who{display:grid;grid-template-columns:1.15in 1fr;gap:.12in;align-items:center;background:var(--paper);border-radius:10px;padding:.1in}
-  .end-who img{width:1.05in;height:1.35in;object-fit:cover;object-position:center 15%;border-radius:8px}
+  .kicker{font-family:Montserrat,Inter,sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-dark);margin:0 0 2px}
+  .hero{position:absolute;left:0;right:0;top:0;height:5.15in;overflow:hidden}
+  .hero.mid{height:3.95in}
+  .hero img{width:100%;height:100%;object-fit:cover;display:block}
+  .cap{position:absolute;left:0;right:0;bottom:0;margin:0;padding:14px 16px 7px;color:#fff;font-size:8.5pt;line-height:1.25;background:linear-gradient(transparent,rgba(13,27,42,.82))}
+  .below{position:absolute;left:.36in;right:.36in;top:5.32in;bottom:.46in;display:flex;flex-direction:column;gap:.07in}
+  .below.mid{top:4.12in}
+  .runfoot{position:absolute;left:.36in;right:.36in;bottom:.12in;border-top:2px solid var(--blue);padding-top:4px;font-size:9pt;display:flex;justify-content:space-between}
+  .cards{display:grid;gap:.07in}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:1fr 1fr 1fr}
+  .card{background:var(--paper);border-radius:8px;padding:.08in .1in .07in;border-top:4px solid var(--blue)}
+  .card ul{margin:0;padding:0;list-style:none}
+  .card li{position:relative;padding:0 0 .03in .18in;font-size:11pt;line-height:1.25}
+  .card li::before{content:"";position:absolute;left:0;top:.32em;width:8px;height:8px;border-radius:2px;border:1.5px solid var(--blue-dark)}
+  .src{font-size:8.5pt;line-height:1.25;color:var(--muted)}
+  .warn{background:var(--night);color:#fff;border-radius:8px;padding:.07in .1in;font-size:11.5pt;line-height:1.25}
+  .cover-photo{position:absolute;left:0;right:0;top:0;height:6.85in}
+  .cover-foot{position:absolute;left:.4in;right:.4in;bottom:.16in;border-top:3px solid var(--blue);padding-top:6px;display:flex;justify-content:space-between;align-items:flex-end;font-size:10.5pt}
+  .cover-photo img{width:100%;height:100%;object-fit:cover;object-position:center 58%;display:block}
+  .cover-panel{position:absolute;left:.4in;right:.4in;top:7.28in;bottom:.28in}
+  .cover-panel h1{font-size:32pt;line-height:.95;margin:1px 0 4px}
+  .who{display:flex;gap:10px;align-items:center;margin-top:6px}
+  .who img{width:64px;height:80px;object-fit:cover;object-position:center 16%;border-radius:6px}
+  .note{font-size:10.5pt;line-height:1.25;color:var(--muted)}
+  .end-who{display:grid;grid-template-columns:.85in 1fr;gap:.1in;align-items:center;background:var(--paper);border-radius:8px;padding:.06in .08in}
+  .end-who img{width:.78in;height:1in;object-fit:cover;object-position:center 15%;border-radius:6px}
+  .src p{margin:0 0 .03in}
 </style>
 </head>
 <body>
 
 <section class="sheet">
   <div class="cover-photo">
-    <img src="../../assets/img/blog/photos/westwood-greene-port-coquitlam-2025.jpg" alt="Detached houses on a Port Coquitlam street, with the mountains behind them">
-    <p class="cap">Westwood Street at Greene Street, Port Coquitlam. Neondev1, Wikimedia Commons, CC0 1.0.</p>
+    <img src="../../assets/img/blog/photos/westwood-greene-port-coquitlam-2025.jpg" alt="Detached houses on a Port Coquitlam street, mountains behind">
+    <p class="cap">Westwood Street at Greene Street, Port Coquitlam. Neondev1, CC0 1.0.</p>
   </div>
-  <div class="cover-panel">
-    <p class="kicker">For homeowners · Tri-Cities, BC and Greater Vancouver</p>
+  <div class="cover-panel" style="top:6.98in;bottom:.72in">
+    <p class="kicker">Tri-Cities, BC and Greater Vancouver</p>
     <h1>Home maintenance guide</h1>
-    <p class="deck">Rain, moss, gutters, the ground around the house, and the air in the attic. Written for detached houses, with short notes for townhouses and condos.</p>
-    <div class="who" style="margin-top:8px">
+    <p>Detached houses first. Short notes for townhouses and condos.</p>
+    <div class="who">
       <img src="../../assets/img/devin-kitchen-800.jpg" alt="Devin Desaulniers">
-      <p><strong>Devin Desaulniers</strong><br><span class="note">Real Estate Associate, Axford Real Estate<br>devin@axfordrealestate.ca · 604-809-1032<br>devindesaulniers.ca</span></p>
+      <p><strong>Devin Desaulniers</strong><br><span class="note">Real Estate Associate, Axford Real Estate<br>devin@axfordrealestate.ca · 604-809-1032 · devindesaulniers.ca</span></p>
     </div>
   </div>
   <div class="cover-foot">
     <span><b>Axford Real Estate</b><br><span class="note">General information only. Not a substitute for a professional home inspection.</span></span>
-    <img class="logo" src="../../assets/img/axford-logo.png" alt="Axford Real Estate">
+    <img src="../../assets/img/axford-logo.png" alt="Axford Real Estate" style="height:26px;width:auto">
   </div>
 </section>
 
 <section class="sheet">
-  <div class="runhead"><span>Devin Desaulniers · Axford Real Estate</span><span>Home maintenance · Greater Vancouver</span></div>
-  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers · 604-809-1032 · devin@axfordrealestate.ca</span><span>2</span></div>
-  <div class="colpad">
+  <figure class="hero">
+    <img src="../../assets/img/blog/photos/burrard-inlet-port-moody-rain-2014.jpg" alt="Rain on Burrard Inlet at Port Moody" style="object-position:center 42%">
+    <figcaption class="cap">Rain on Burrard Inlet, Port Moody, October 2014. waferboard, CC BY 2.0.</figcaption>
+  </figure>
+  <div class="below">
     <div>
-      <p class="kicker">How to use this</p>
-      <h2>The rain is the whole list.</h2>
+      <p class="kicker">The climate does the damage</p>
+      <h2>Rain runs the list.</h2>
     </div>
-    <p class="deck">I am Devin Desaulniers, a Real Estate Associate with Axford Real Estate in Port Moody. This guide is for people who own a home in Greater Vancouver, with the most detail for a detached house in the Tri-Cities, BC. I did not put a rainfall total in it. If a number is here, it is copied from the source named beside it.</p>
     <div class="cards g3">
-      <div class="card line"><h3>Detached</h3><p>You look after the roof, the gutters, the slope of the ground, the furnace or heat pump, and the water heater.</p></div>
-      <div class="card line"><h3>Townhouse</h3><p>The strata often looks after the roof and the walls. You still look after filters, alarms, and what your bylaws leave with you.</p></div>
-      <div class="card line"><h3>Condo</h3><p>Much of the outside is common property. Your list is shorter: alarms, a heater if it is yours, and the steps inside the unit.</p></div>
+      <div class="card"><h3>Detached</h3><p>Roof, gutters, the slope of the ground, the furnace or heat pump, and the water heater.</p></div>
+      <div class="card"><h3>Townhouse</h3><p>The strata often has the roof and the walls. You still have filters, alarms, and what the bylaws leave you.</p></div>
+      <div class="card"><h3>Condo</h3><p>Much of the outside is common property. Your list is alarms, a heater if it is yours, and the steps inside.</p></div>
     </div>
-    <p class="note">The Province of British Columbia says repair duties come from the strata plan and the bylaws, not from a guess. Under the standard bylaws in the Strata Property Act, the strata maintains the exterior, the structure, and things attached outside, including balconies. Owners maintain their strata lot except where the bylaws give that job to the strata.</p>
-    <figure class="band grow">
-      <img src="../../assets/img/blog/photos/burrard-inlet-port-moody-rain-2014.jpg" alt="Rain falling on Burrard Inlet at Port Moody" style="object-position:center 40%">
-      <figcaption class="cap">Rain on Burrard Inlet at Port Moody, October 2014. waferboard, CC BY 2.0.</figcaption>
-    </figure>
+    <p>The province says the strata plan and the bylaws decide who repairs what. Under the standard bylaws, the strata maintains the exterior, the structure, and things attached outside, including balconies. Owners maintain their strata lot except where the bylaws give that job to the strata.</p>
+    <p class="src">No rainfall total is printed. I did not put one in. Devin Desaulniers, Real Estate Associate, Axford Real Estate, Port Moody.</p>
   </div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · 604-809-1032 · devin@axfordrealestate.ca</span><span>2</span></div>
 </section>
 
 <section class="sheet">
-  <div class="runhead"><span>Devin Desaulniers · Axford Real Estate</span><span>Roof, gutters, moss</span></div>
-  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers · 604-809-1032 · devin@axfordrealestate.ca</span><span>3</span></div>
-  <div class="colpad">
+  <figure class="hero">
+    <img src="../../assets/img/guides/maintenance/moss-roof-vancouver-island.jpg" alt="Moss covering a shingled roof, with a gutter along the eave" style="object-position:center 40%">
+    <figcaption class="cap">Moss on a shingled roof, with the gutter along the eave. Vancouver Island, March 2018. Darren Kirby, CC BY-SA 2.0.</figcaption>
+  </figure>
+  <div class="below">
     <div>
-      <p class="kicker">Fall and spring</p>
-      <h2>Get the water off the roof.</h2>
-    </div>
-    <p>BC Housing’s Maintenance Matters No. 2 says steep-slope roofs, the usual roof on a detached house or a townhouse, shed water into eavestroughs. Low-slope roofs, common on apartment buildings, use a membrane and drains, and they have to stay watertight.</p>
-    <div class="cards g2 grow">
-      <div class="card">
-        <h3>What to have checked</h3>
-        <ul>
-          <li>Twice a year: spring, and fall before winter rain.</li>
-          <li>Again after high wind, heavy rain, or hail.</li>
-          <li>Gutters and downspouts full of leaves. Overflow wets the walls.</li>
-          <li>Missing flashing, damaged downpipes, and failed sealant.</li>
-          <li>Curled, cracked, or missing shingles, shakes, or tiles.</li>
-          <li>A brown stain on a ceiling. Act the day you see it.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Moss</h3>
-        <ul>
-          <li>An accumulation of moss holds moisture on the roof.</li>
-          <li>That blocks drainage and speeds up wear on shakes, shingles, and some membranes.</li>
-          <li>Have a roofing professional do the cleaning and the inspection.</li>
-          <li>Do not treat a wet, mossy roof as a weekend walk.</li>
-        </ul>
-      </div>
-    </div>
-    <p class="note">BC Housing says a roof’s life can range from 10 years to over 30, depending on design, exposure, construction, and materials. That is their range, not a replacement year for your house. In a strata, roof work is often the corporation’s job. Read the bylaws first.</p>
-    <figure class="band" style="height:2.15in">
-      <img src="../../assets/img/blog/photos/vancouver-house-roof-west-17th.jpg" alt="Shingled roof of a Vancouver house" style="object-position:center 35%">
-      <figcaption class="cap">1927 West 17th Avenue, Vancouver. Socratic, CC BY-SA 3.0.</figcaption>
-    </figure>
-    <p class="src">Source: BC Housing, Maintenance Matters No. 2, Maintaining Your Roof, February 2018. bchousing.org</p>
-  </div>
-</section>
-
-<section class="sheet">
-  <div class="runhead"><span>Devin Desaulniers · Axford Real Estate</span><span>Ground, crawl space, attic</span></div>
-  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers · 604-809-1032 · devin@axfordrealestate.ca</span><span>4</span></div>
-  <div class="colpad">
-    <div>
-      <p class="kicker">Where the water goes next</p>
-      <h2>Away from the foundation.</h2>
-    </div>
-    <p>CMHC’s moisture guide lists the same pattern again and again: ground that slopes toward the house, a blocked footing drain, and a sump that does not run.</p>
-    <div class="cards g2">
-      <div class="card line">
-        <h3>Outside</h3>
-        <ul>
-          <li>Slope lawns, walks, and beds away from the walls.</li>
-          <li>Extend downspouts so the water does not dump at the foundation.</li>
-          <li>Keep soil and mulch off the siding.</li>
-          <li>If a perimeter drain is blocked, have it looked at. That is not a hose-down.</li>
-        </ul>
-      </div>
-      <div class="card line">
-        <h3>Sump and crawl space</h3>
-        <ul>
-          <li>If you can reach the float, confirm the pump runs.</li>
-          <li>Put a tight cover on an open sump pit.</li>
-          <li>An earth crawl-space floor: cover it with polyethylene, joints sealed, or with a concrete floor and polyethylene underneath.</li>
-          <li>Wood touching soil is a flag a home inspector is asked to report.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Attic and window condensation</h3>
-      <p>Condensation needs three things at once: too much moisture in the air, too little air exchange, and a cold surface. CMHC says the usual response to a wet attic is to add vents, and that this can pull more moist house air up and make it worse. Stop the leaks from the house into the attic. Bathroom and kitchen fans should duct outside. Do not wrap the insulation in plastic. A black stain on attic wood can mean blocked ventilation or air leaking up from the rooms. That needs a closer look, not a coat of paint.</p>
-    </div>
-    <figure class="band" style="height:1.85in">
-      <img src="../../assets/img/guides/coquitlam-2018.jpg" alt="Houses and towers in Coquitlam" style="object-position:center 55%">
-      <figcaption class="cap">Coquitlam, May 2018. Alex of Canada, CC BY-SA 4.0.</figcaption>
-    </figure>
-    <p class="src">Sources: CMHC, Moisture and Air, and About Your House on attic moisture (the guide says computer models found attics in damp coastal climates can be drier with less ventilation). InterNACHI Standards of Practice, October 2022, on crawl spaces, wood near soil, and sump pumps with a float the inspector can reach. BC Housing Maintenance Matters No. 2, on black staining in the attic.</p>
-  </div>
-</section>
-
-<section class="sheet">
-  <div class="runhead"><span>Devin Desaulniers · Axford Real Estate</span><span>Heat, hot water, alarms</span></div>
-  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers · 604-809-1032 · devin@axfordrealestate.ca</span><span>5</span></div>
-  <div class="colpad">
-    <div>
-      <p class="kicker">Inside the house</p>
-      <h2>Filters, the tank, the alarms.</h2>
-    </div>
-    <div class="cards g2 grow">
-      <div class="card">
-        <h3>Gas furnace</h3>
-        <ul>
-          <li>Check the filter at least every three months. Clean or replace it if it is dirty.</li>
-          <li>Pets or smokers: check it more often.</li>
-          <li>Shut the power off at the furnace switch and the breaker before you open it.</li>
-          <li>FortisBC says Technical Safety BC generally recommends a yearly visit by a licensed gas contractor.</li>
-          <li>Keep solvents, propane, and gasoline-powered tools out of the furnace room.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Heat pump</h3>
-        <ul>
-          <li>Clean indoor filters several times a year. Replace them once a year, and follow the manual.</li>
-          <li>BC Hydro says cleaning a filter can improve airflow by as much as 30%.</li>
-          <li>Keep furniture off the indoor unit. Clear snow, leaves, and gear off the outdoor unit at the start of each season.</li>
-          <li>Book maintenance every one to two years.</li>
-          <li>Use heat in winter and cool in summer. Hold a steady temperature.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Hot water</h3>
-        <ul>
-          <li>Health Canada: set the tank to 60°C (140°F) to limit Legionella.</li>
-          <li>Use a mixing valve so water at the tap is 49°C (120°F), to cut scalds.</li>
-          <li>Strap the tank snug to the wall. FortisBC says the B.C. building and plumbing codes now require it.</li>
-          <li>A home inspector looks at the temperature-and-pressure relief valve and the seismic bracing.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Smoke and CO</h3>
-        <ul>
-          <li>Test smoke alarms every month, with the test button.</li>
-          <li>Replace a 9-volt battery at least once a year, or when the maker says. Replace the alarm at 10 years, or when the maker says.</li>
-          <li>Put one outside each sleeping area and on every level, including the basement.</li>
-          <li>The provincial fire package says working smoke alarms can cut the risk of death in a home fire by 50%.</li>
-          <li>FortisBC: a CO alarm on each level, especially near bedrooms. CO has no smell. The B.C. Fire Code says to maintain CO alarms the way the maker instructs.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="warn">If you smell rotten eggs, or someone has a headache and flu-like symptoms that might be carbon monoxide: turn the appliances off, get everyone out, including pets, and call 911 or FortisBC at 1-800-663-9911.</div>
-    <p class="src">Sources: FortisBC, appliance maintenance and carbon monoxide pages. BC Hydro, heat pump use and the heat-pump maintenance checklist. Health Canada, water temperature and scalds. Province of British Columbia, smoke alarm toolkit, updated 2 September 2026, and the Get to Know Fire package. B.C. Fire Code 2018, Division B, 6.7.1.1.</p>
-  </div>
-</section>
-
-<section class="sheet">
-  <div class="runhead"><span>Devin Desaulniers · Axford Real Estate</span><span>Decks, sealant, pests, outdoor taps</span></div>
-  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers · 604-809-1032 · devin@axfordrealestate.ca</span><span>6</span></div>
-  <div class="colpad">
-    <div>
-      <p class="kicker">The outside of the walls</p>
-      <h2>Joints, decks, and damp wood.</h2>
+      <p class="kicker">BC Housing · roofs</p>
+      <h2>Get the water off.</h2>
     </div>
     <div class="cards g2">
-      <div class="card">
-        <h3>Decks and balconies</h3>
-        <p>BC Housing: keep drains clear of leaves, and do not cover a floor drain with a pot or a rug. A hot barbecue, gasoline, or a solvent can melt a vinyl membrane. Punctures from heels and chair legs let rain into the wood. Their usual figures: a liquid-applied membrane often about ten years, sheet vinyl often ten to fifteen, depending on sun and wear. A guardrail bolted through the membrane is a leak point. Ponding is a reason to call someone.</p>
-      </div>
-      <div class="card">
-        <h3>Siding and sealant</h3>
-        <p>Sealant fills the joint so water stays out. BC Housing says it typically lasts somewhere between two and fifty years, depending on the product, the weather, and how much the joint moves. Review cladding and sealant once a year. Most water gets in at windows, doors, vents, and pipes, not through the middle of a board. Leave weep holes open. Replacing the bead is a contractor’s job when the joint is wide or the old product has to come off clean.</p>
-      </div>
+      <div class="card"><h3>Look twice a year</h3><ul>
+        <li>Spring, and fall before winter rain.</li>
+        <li>Again after high wind, heavy rain, or hail.</li>
+        <li>Steep roofs shed into gutters. Low-slope roofs, common on apartments, use a membrane and drains and must stay watertight.</li>
+        <li>A roofer does the inspection. Do not walk a wet, mossy roof.</li>
+      </ul></div>
+      <div class="card"><h3>What moss and debris do</h3><ul>
+        <li>Moss holds moisture, blocks drainage, and speeds wear on shakes, shingles, and some membranes.</li>
+        <li>Leaves in the gutters send overflow against the walls.</li>
+        <li>Fix missing flashing, damaged downpipes, and failed sealant.</li>
+        <li>Curled, cracked, or missing shingles, shakes, or tiles.</li>
+        <li>A brown ceiling stain: act that day.</li>
+      </ul></div>
     </div>
-    <div class="cards g2 grow">
-      <div class="card line">
-        <h3>Carpenter ants</h3>
-        <ul>
-          <li>They do not eat wood. They tunnel in it.</li>
-          <li>Nests like moist, decaying wood, and also drier walls, eaves, attics, and crawl spaces.</li>
-          <li>Repair wet wood, clear gutters, store firewood up and away from the house, prune branches that touch the walls, and keep siding off the soil.</li>
-          <li>The province says more than 10 to 12 ants indoors in an evening is a reason to find out if the nest is in the house.</li>
-        </ul>
-      </div>
-      <div class="card line">
-        <h3>Outdoor water</h3>
-        <ul>
-          <li>Before a freeze, take hoses and splitters off the outdoor taps.</li>
-          <li>If there is an indoor shut-off for that tap, close it, open the outside tap to drain, then close the outside tap again.</li>
-          <li>In-ground sprinklers: have a contractor clear the lines with air before a freezing night.</li>
-          <li>I did not find a Metro Vancouver or Tri-Cities, BC page that sets a blowout date or a price, so neither is printed here.</li>
-        </ul>
-      </div>
-    </div>
-    <figure class="band" style="height:1.55in">
-      <img src="../../assets/img/blog/photos/kitsilano-house-windows-blossoms.jpg" alt="Wood siding and windows on a Kitsilano house" style="object-position:center 45%">
-      <figcaption class="cap">Kitsilano house, Vancouver, 31 March 2013. Adam Jones, CC BY-SA 2.0.</figcaption>
-    </figure>
-    <p class="src">Sources: BC Housing Maintenance Matters No. 5 (sealants), No. 6 (decks and balconies), and No. 8 (cladding). Province of British Columbia, Managing Carpenter Ant Pests, updated 5 August 2020.</p>
+    <p class="src">BC Housing, Maintenance Matters No. 2 (February 2018): a roof’s life can range from 10 years to over 30, depending on design, exposure, construction, and materials. That is their range, not a date for your house. In a strata, roof work is often the corporation’s. Read the bylaws.</p>
   </div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers · devindesaulniers.ca</span><span>3</span></div>
 </section>
 
 <section class="sheet">
-  <div class="runhead"><span>Devin Desaulniers · Axford Real Estate</span><span>Season by season</span></div>
-  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers · 604-809-1032 · devin@axfordrealestate.ca</span><span>7</span></div>
-  <div class="colpad">
+  <figure class="hero">
+    <img src="../../assets/img/guides/maintenance/vancouver-west-5th.jpg" alt="Detached house on West 5th Avenue in Vancouver, with a lawn sloping toward the street" style="object-position:center 45%">
+    <figcaption class="cap">3171 West 5th Avenue, Vancouver. Joltex, CC BY-SA 4.0.</figcaption>
+  </figure>
+  <div class="below">
     <div>
-      <p class="kicker">A year on one page</p>
-      <h2>Check it, then date it.</h2>
+      <p class="kicker">CMHC · under the house</p>
+      <h2>Send water away.</h2>
     </div>
-    <p class="note">Write the month in the margin when you do it. Strata homes: skip any line the bylaws give to the corporation, and still do the lines inside your own place.</p>
-    <div class="season">
-      <div class="when">Fall</div>
-      <ul class="checks">
-        <li>Gutters and downspouts clear, and the water leaves the house.</li>
+    <div class="cards g2">
+      <div class="card"><h3>Outside</h3><ul>
+        <li>Slope lawns, walks, and beds away from the walls.</li>
+        <li>Extend downspouts so water does not dump at the foundation.</li>
+        <li>Keep soil and mulch off the siding.</li>
+        <li>A blocked perimeter drain needs a look. It is not a hose-down.</li>
+      </ul></div>
+      <div class="card"><h3>Sump and crawl space</h3><ul>
+        <li>If you can reach the float, confirm the pump runs.</li>
+        <li>Put a tight cover on an open sump pit.</li>
+        <li>Earth crawl floor: sealed polyethylene, or concrete with polyethylene underneath.</li>
+        <li>Wood touching soil is a flag an inspector reports.</li>
+      </ul></div>
+    </div>
+    <p class="src">Condensation needs three things at once: too much moisture, too little air exchange, and a cold surface. CMHC says adding vents to a wet attic can pull more moist house air up. Stop the leaks from the rooms. Bathroom and kitchen fans duct outside. Do not wrap the insulation in plastic. A black stain on attic wood can mean blocked vents or air leaking up. Their models found attics in damp coastal climates can be drier with less ventilation. InterNACHI Standards of Practice, October 2022.</p>
+  </div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · 604-809-1032</span><span>4</span></div>
+</section>
+
+<section class="sheet">
+  <figure class="hero">
+    <img src="../../assets/img/guides/maintenance/vancouver-blue-house-snow.jpg" alt="Snow on a Vancouver house roof, with a gutter and downspout" style="object-position:center 30%">
+    <figcaption class="cap">Snow, gutter, and downspout on a Vancouver house. Paul Joseph, CC BY 2.0.</figcaption>
+  </figure>
+  <div class="below">
+    <div>
+      <p class="kicker">FortisBC · BC Hydro · Health Canada</p>
+      <h2>Filters, the tank, alarms.</h2>
+    </div>
+    <div class="cards g2">
+      <div class="card"><h3>Heat</h3><ul>
+        <li>Gas furnace filter: at least every three months. More often with pets or smokers. Power off at the switch and the breaker first.</li>
+        <li>Technical Safety BC, as FortisBC reports it, generally wants a yearly visit by a licensed gas contractor. Keep solvents, propane, and gasoline tools out of that room.</li>
+        <li>Heat pump: clean indoor filters several times a year and replace them once a year. Follow the manual. BC Hydro says cleaning a filter can improve airflow by as much as 30%.</li>
+        <li>Furniture off the indoor unit. Snow, leaves, and gear off the outdoor unit at the start of each season. Service every one to two years. Heat in winter, cool in summer, at a steady temperature.</li>
+      </ul></div>
+      <div class="card"><h3>Water and alarms</h3><ul>
+        <li>Health Canada: tank at 60°C (140°F) to limit Legionella. Mixing valve so the tap is 49°C (120°F).</li>
+        <li>Strap the tank. FortisBC says the B.C. codes now require it. An inspector looks at the relief valve and the seismic bracing.</li>
+        <li>Test smoke alarms every month. Replace a 9-volt battery at least yearly, or when the maker says. Replace the alarm at 10 years, or when the maker says.</li>
+        <li>One outside each sleeping area and on every level, including the basement. The provincial fire package says working alarms can cut the risk of death in a home fire by 50%.</li>
+        <li>CO alarm on each level, especially near bedrooms. CO has no smell. Maintain it the way the maker says (B.C. Fire Code).</li>
+      </ul></div>
+    </div>
+    <div class="warn">Rotten-egg smell, or a headache and flu-like symptoms that might be carbon monoxide: appliances off, everyone out, including pets. Call 911 or FortisBC at 1-800-663-9911.</div>
+  </div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · devin@axfordrealestate.ca</span><span>5</span></div>
+</section>
+
+<section class="sheet">
+  <figure class="hero">
+    <img src="../../assets/img/guides/maintenance/west-vancouver-travers.jpg" alt="Modern house in West Vancouver with a glass balcony and large windows" style="object-position:center 40%">
+    <figcaption class="cap">House on Travers Avenue, West Vancouver. pnwra, CC BY 2.0.</figcaption>
+  </figure>
+  <div class="below">
+    <div>
+      <p class="kicker">Walls, decks, pests, taps</p>
+      <h2>Joints and damp wood.</h2>
+    </div>
+    <div class="cards g2">
+      <div class="card"><h3>Decks and sealant</h3><ul>
+        <li>Keep drains clear. Do not cover a floor drain with a pot or a rug.</li>
+        <li>A hot barbecue, gasoline, or a solvent can melt vinyl. Heels and chair legs puncture it.</li>
+        <li>BC Housing’s usual figures: liquid-applied membrane often about ten years; sheet vinyl often ten to fifteen, depending on sun and wear.</li>
+        <li>A guardrail bolted through the membrane leaks. Ponding is a reason to call.</li>
+        <li>Sealant typically lasts somewhere between two and fifty years, depending on the product, the weather, and how much the joint moves. Review cladding and sealant once a year.</li>
+        <li>Most water gets in at windows, doors, vents, and pipes. Leave weep holes open. Wide joints are a contractor’s job.</li>
+      </ul></div>
+      <div class="card"><h3>Ants and outdoor water</h3><ul>
+        <li>Carpenter ants do not eat wood. They tunnel in it. Nests like moist, decaying wood, and also drier walls, eaves, attics, and crawl spaces.</li>
+        <li>Repair wet wood, clear gutters, store firewood up and away, prune branches off the walls, keep siding off the soil.</li>
+        <li>More than 10 to 12 ants indoors in an evening: find out if the nest is in the house.</li>
+        <li>Before a freeze, take hoses and splitters off the taps. If there is an indoor shut-off, close it, drain the outside tap, then close that tap.</li>
+        <li>In-ground sprinklers: a contractor clears the lines with air before a freezing night. No Metro Vancouver or Tri-Cities, BC page found that sets a date or a price, so neither is printed.</li>
+      </ul></div>
+    </div>
+    <p class="src">BC Housing Maintenance Matters No. 5 (sealants), No. 6 (decks), No. 8 (cladding). Province of British Columbia, carpenter ants, updated 5 August 2020.</p>
+  </div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · 604-809-1032</span><span>6</span></div>
+</section>
+
+<section class="sheet">
+  <figure class="hero mid">
+    <img src="../../assets/img/guides/vancouver-skyline-mountains.jpg" alt="Downtown Vancouver and the snow-dusted North Shore mountains" style="object-position:center 40%">
+    <figcaption class="cap">Downtown Vancouver and the North Shore mountains, from Queen Elizabeth Park. Kyle Pearce, CC BY-SA 2.0.</figcaption>
+  </figure>
+  <div class="below mid">
+    <div>
+      <p class="kicker">One page for the year</p>
+      <h2>Check it. Date it.</h2>
+    </div>
+    <div class="cards g2">
+      <div class="card"><h3>Fall</h3><ul>
+        <li>Gutters clear. Water leaves the house.</li>
         <li>Roofer looks at shingles, flashing, and moss.</li>
-        <li>Hoses off. Outdoor taps drained. Sprinkler lines cleared with air.</li>
-        <li>Furnace or heat pump serviced if it was not done this year. Filter checked.</li>
-      </ul>
-      <div class="when">Winter</div>
-      <ul class="checks">
+        <li>Hoses off. Taps drained. Sprinkler lines cleared with air.</li>
+        <li>Furnace or heat pump serviced if not done this year. Filter checked.</li>
+      </ul></div>
+      <div class="card"><h3>Winter</h3><ul>
         <li>Smoke alarms tested once a month. CO alarms the same.</li>
-        <li>After a snowfall, the outdoor heat pump is clear.</li>
-        <li>Watch the windows for condensation that does not clear.</li>
-        <li>No stored paint, propane, or fuel next to the furnace or the water heater.</li>
-      </ul>
-      <div class="when">Spring</div>
-      <ul class="checks">
-        <li>Roof and gutters again, after the wet months.</li>
-        <li>Ground still slopes away. Downspout extensions still in place.</li>
-        <li>Sump runs, if you can reach it. Crawl-space ground cover still sealed.</li>
-        <li>Deck drains clear. Sealant at windows and vents still stuck, weep holes open.</li>
-      </ul>
-      <div class="when">Any month</div>
-      <ul class="checks">
-        <li>Tank at 60°C, tap at 49°C through a mixing valve, tank strapped.</li>
-        <li>Bathroom fans actually blow outside.</li>
+        <li>After snow, the outdoor heat pump is clear.</li>
+        <li>Windows: condensation that does not clear.</li>
+        <li>No paint, propane, or fuel next to the furnace or the tank.</li>
+      </ul></div>
+      <div class="card"><h3>Spring</h3><ul>
+        <li>Roof and gutters again after the wet months.</li>
+        <li>Ground still slopes away. Downspout extensions still on.</li>
+        <li>Sump runs if you can reach it. Crawl-space cover still sealed.</li>
+        <li>Deck drains clear. Sealant stuck. Weep holes open.</li>
+      </ul></div>
+      <div class="card"><h3>Any month</h3><ul>
+        <li>Tank 60°C. Tap 49°C through a mixing valve. Tank strapped.</li>
+        <li>Bathroom fans blow outside.</li>
         <li>Firewood off the soil and away from the wall. Branches off the siding.</li>
-        <li>You can find the water shut-off, the electrical panel, and the gas meter in the dark.</li>
-      </ul>
+        <li>You can find the water shut-off, the panel, and the gas meter in the dark.</li>
+      </ul></div>
     </div>
-    <div class="card">
-      <h3>What this page is not</h3>
-      <p>It is not a repair quote, and it is not a list of work a buyer will require. A buyer in B.C. can still write an offer that is subject to a home inspection. The next page is what that visit usually covers.</p>
-    </div>
+    <p class="src">Strata homes: skip a line the bylaws give the corporation, and still do the lines inside your place. This is not a repair quote, and not a list a buyer must require. A buyer in B.C. can still write an offer subject to a home inspection.</p>
   </div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers</span><span>7</span></div>
 </section>
 
 <section class="sheet">
-  <div class="runhead"><span>Devin Desaulniers · Axford Real Estate</span><span>What an inspector looks for</span></div>
-  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers · 604-809-1032 · devin@axfordrealestate.ca</span><span>8</span></div>
-  <div class="colpad">
+  <figure class="hero mid">
+    <img src="../../assets/img/guides/maintenance/burnaby-trinity-ingleton.jpg" alt="Detached house on Trinity Street at Ingleton in Burnaby" style="object-position:center 40%">
+    <figcaption class="cap">Pre-war house, Trinity Street at Ingleton, Burnaby. Flying Penguin, CC BY-SA 3.0.</figcaption>
+  </figure>
+  <div class="below mid">
     <div>
       <p class="kicker">A different job from this guide</p>
-      <h2>A look, on that day.</h2>
+      <h2>A look, that day.</h2>
     </div>
-    <p>In B.C., home inspectors are licensed through Consumer Protection BC. The Home Inspectors Association BC, which used to be CAHPI (BC), describes the visit as a limited visual examination of what can be seen that day. It is not a code inspection, and it does not promise how the home will perform later. InterNACHI’s Standards of Practice, revised October 2022, are one published list of what a visual inspection includes. Your contract can add or leave out items. This is that list, in plain language, not a script for the visit.</p>
-    <div class="cards g2 grow">
-      <div class="card"><h3>Roof and walls</h3><ul>
-        <li>Roof covering, gutters, downspouts, flashing, vents, and the chimney, from the ground or the eaves. Walking the roof is not required.</li>
-        <li>Wall coverings, a sample of windows, doors, decks, balconies, railings, and the grading where water could reach the structure.</li>
+    <p>In B.C., home inspectors are licensed through Consumer Protection BC. The Home Inspectors Association BC was CAHPI (BC) until 2016. The visit is a limited look at what can be seen that day. It is not a code inspection, and it does not promise later performance. InterNACHI’s Standards of Practice (October 2022) are one published list. Your contract can add or leave out items.</p>
+    <div class="cards g2">
+      <div class="card"><h3>Outside and below</h3><ul>
+        <li>Roof covering, gutters, downspouts, flashing, vents, chimney, from the ground or the eaves. Walking the roof is not required.</li>
+        <li>Walls, a sample of windows and doors, decks, balconies, railings, and grading where water could reach the structure.</li>
+        <li>Foundation, basement, and crawl space if they can be entered safely. Wood near soil. Water getting in now. A sump, run when the float is reachable.</li>
       </ul></div>
-      <div class="card"><h3>Below the floor</h3><ul>
-        <li>Foundation, basement, and crawl space, if they can be entered safely.</li>
-        <li>Wood in contact with or near soil, and signs of water getting in now.</li>
-        <li>A sump, and they run it when the float is reachable.</li>
-      </ul></div>
-      <div class="card"><h3>Heat, water, power</h3><ul>
-        <li>Heating and cooling equipment that is visible.</li>
-        <li>Main water shut-off and main fuel shut-off.</li>
-        <li>Water heater, including venting, the relief valve, and seismic bracing.</li>
-        <li>The electrical panel, a sample of outlets, and GFCI buttons where they can test them.</li>
-      </ul></div>
-      <div class="card"><h3>Alarms and the attic</h3><ul>
-        <li>Whether smoke and carbon monoxide detectors are present. The standard does not require the inspector to test them.</li>
-        <li>Insulation and ventilation in an unfinished attic or crawl space, without moving the insulation.</li>
-        <li>Kitchen, bathroom, and laundry fans.</li>
+      <div class="card"><h3>Inside the systems</h3><ul>
+        <li>Heating and cooling that is visible. Main water shut-off and main fuel shut-off.</li>
+        <li>Water heater: venting, relief valve, seismic bracing. Panel, a sample of outlets, GFCI buttons where they can test them.</li>
+        <li>Whether smoke and CO detectors are present. The standard does not require a test of the alarms.</li>
+        <li>Insulation and ventilation in an unfinished attic or crawl space, without moving the insulation. Kitchen, bathroom, and laundry fans.</li>
       </ul></div>
     </div>
-    <p class="note">A maintenance checklist is not this visit. An inspector reports what is wrong and visible today. They are not required to predict how long a roof will last, to see through walls, or to inspect underground drains and sprinkler lines. In a strata, the unit inspection is separate from reading the minutes, the depreciation report, and the bylaws.</p>
-    <p class="src">Sources: Consumer Protection BC, home inspections. Home Inspectors Association BC, scope of inspection (the association was CAHPI (BC) until 2016). InterNACHI, Home Inspection Standards of Practice, last revised October 2022. CAHPI National Standards of Practice, 7 December 2024, which also say a visual inspection is not a check against the building code.</p>
+    <p class="src">Not required: predict how long a roof lasts, see through walls, or inspect underground drains and sprinkler lines. In a strata, the unit visit is separate from the minutes, the depreciation report, and the bylaws. CAHPI National Standards of Practice, 7 December 2024, also say a visual inspection is not a check against the building code.</p>
   </div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · 604-809-1032</span><span>8</span></div>
 </section>
 
 <section class="sheet">
-  <div class="runhead"><span>Devin Desaulniers · Axford Real Estate</span><span>Earthquake, sources, credits</span></div>
-  <div class="runfoot"><span><b>Axford Real Estate</b> · devindesaulniers.ca · 604-809-1032</span><span>9</span></div>
-  <div class="colpad">
+  <figure class="hero" style="height:3.55in">
+    <img src="../../assets/img/guides/maintenance/grouse-mountain-house-1979.jpg" alt="A-frame house on Grouse Mountain, North Vancouver, among evergreens" style="object-position:center 45%">
+    <figcaption class="cap">House on Grouse Mountain, North Vancouver, 1979. North Shore mountains. Barry Lewis, CC BY 2.0.</figcaption>
+  </figure>
+  <div class="below" style="top:3.68in">
     <div>
-      <p class="kicker">Before the ground moves</p>
-      <h2>Know the shut-offs. Then stop.</h2>
+      <p class="kicker">PreparedBC · FortisBC</p>
+      <h2>Know the shut-offs.</h2>
     </div>
-    <div class="cols">
-      <ul class="checks">
+    <div class="cards g2">
+      <div class="card"><h3>Before</h3><ul>
         <li>Drop, Cover, and Hold On. If you are inside, stay inside.</li>
-        <li>Strap tall bookcases to the studs. Move heavy frames off the wall above the bed.</li>
-        <li>Latch cupboard doors. Strap the fridge, the freezer, and the laundry machines.</li>
-        <li>Strap the water heater. A licensed gas fitter installs a flexible gas line if you need one.</li>
-        <li>Store food and water for at least two weeks. PreparedBC’s guide says you may be on your own for several days, and services may take weeks.</li>
-      </ul>
-      <ul class="checks">
-        <li>Find the electrical panel, the water shut-off, and the gas meter before you need them. Keep the path clear.</li>
-        <li>Do not shut the gas off only because you are leaving. FortisBC says they will shut it off if emergency officials ask.</li>
-        <li>If you smell rotten eggs or hear hissing: go outside, then call 1-800-663-9911 or 911.</li>
-        <li>If the meter is off, do not turn it back on. Only a licensed gas contractor does that.</li>
-        <li>Damaged appliances stay off until a licensed gas contractor has looked at them.</li>
-      </ul>
+        <li>Strap bookcases to the studs. Heavy frames off the wall above the bed. Latch cupboards. Strap the fridge, freezer, and laundry machines.</li>
+        <li>Strap the water heater. A licensed gas fitter adds a flexible gas line if you need one.</li>
+        <li>Food and water for at least two weeks. PreparedBC: you may be on your own for several days, and services may take weeks.</li>
+      </ul></div>
+      <div class="card"><h3>After</h3><ul>
+        <li>Find the panel, the water shut-off, and the gas meter beforehand. Keep the path clear.</li>
+        <li>Do not shut the gas off only because you are leaving. FortisBC shuts it off if emergency officials ask.</li>
+        <li>Rotten eggs or a hiss: go outside, then call 1-800-663-9911 or 911.</li>
+        <li>If the meter is off, do not turn it back on. Only a licensed gas contractor does that. Damaged appliances stay off until one has looked.</li>
+      </ul></div>
     </div>
     <div class="end-who">
       <img src="../../assets/img/devin-kitchen-800.jpg" alt="Devin Desaulniers">
-      <div>
-        <p><strong>Devin Desaulniers</strong><br>Real Estate Associate, Axford Real Estate<br>devin@axfordrealestate.ca · 604-809-1032<br>devindesaulniers.ca</p>
-        <p class="note" style="margin-top:4px">General information only. Not a substitute for a professional home inspection, and not legal, engineering, or insurance advice. Bylaws, manuals, and the people licensed to touch gas, roofs, and electrical gear outrank this booklet.</p>
-      </div>
+      <p><strong>Devin Desaulniers</strong> · Real Estate Associate, Axford Real Estate<br>devin@axfordrealestate.ca · 604-809-1032 · devindesaulniers.ca<br><span class="note">General information only. Not a substitute for a professional home inspection, and not legal, engineering, or insurance advice.</span></p>
+    </div>
+    <p class="src">PreparedBC earthquake page (updated 24 July 2026) and the Earthquake and Tsunami Preparedness Guide, March 2024. FortisBC earthquake page. No earthquake odds are printed.</p>
+  </div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · devindesaulniers.ca</span><span>9</span></div>
+</section>
+
+<section class="sheet">
+  <figure class="hero" style="height:2.55in">
+    <img src="../../assets/img/blog/photos/kitsilano-house-windows-blossoms.jpg" alt="Wood-sided house in Kitsilano, Vancouver" style="object-position:center 45%">
+    <figcaption class="cap">Kitsilano, Vancouver, 31 March 2013. Adam Jones, CC BY-SA 2.0.</figcaption>
+  </figure>
+  <div class="below" style="top:2.68in">
+    <div>
+      <p class="kicker">Where the facts come from</p>
+      <h2>Sources and credits.</h2>
     </div>
     <div class="src">
-      <p><strong>Sources.</strong> BC Housing Maintenance Matters No. 2 (roof, 2018), No. 5 (sealants), No. 6 (decks), No. 8 (cladding), bchousing.org. CMHC, Moisture and Air, and About Your House on attic moisture, cmhc-schl.gc.ca. FortisBC appliance maintenance, carbon monoxide, and earthquake pages, fortisbc.com. BC Hydro heat pump pages and maintenance checklist, bchydro.com. Health Canada, water temperature and scalds, canada.ca. Province of British Columbia: smoke alarm toolkit and PreparedBC earthquake pages, gov.bc.ca; PreparedBC Earthquake and Tsunami Preparedness Guide, March 2024. B.C. Fire Code 2018, section 6.7. Strata Property Act standard bylaws, and the province’s page on paying for strata repairs, gov.bc.ca. Carpenter ants, gov.bc.ca, updated 5 August 2020. Consumer Protection BC; Home Inspectors Association BC; InterNACHI Standards of Practice, October 2022, nachi.org; CAHPI National Standards of Practice, 7 December 2024, cahpi.ca.</p>
-      <p><strong>Photos.</strong> Cover houses: Westwood Street at Greene Street, Port Coquitlam, 12 May 2025, Neondev1, Wikimedia Commons, CC0 1.0. Rain: Burrard Inlet at Port Moody, waferboard, CC BY 2.0. Roof: 1927 West 17th Avenue, Vancouver, Socratic, CC BY-SA 3.0. Siding: Kitsilano, Adam Jones, 31 March 2013, CC BY-SA 2.0. Coquitlam street: Alex of Canada, May 2018, CC BY-SA 4.0. Portraits: Devin Desaulniers, photographs already on devindesaulniers.ca (assets/img/devin-kitchen). Brokerage mark: Axford Real Estate. No generated pictures of houses.</p>
+      <p><strong>Sources.</strong> BC Housing Maintenance Matters No. 2, Maintaining Your Roof, February 2018; No. 5, sealants; No. 6, decks and balconies; No. 8, cladding. bchousing.org. CMHC, Moisture and Air, and About Your House on attic moisture. cmhc-schl.gc.ca. FortisBC appliance maintenance, carbon monoxide, and earthquake pages. fortisbc.com. BC Hydro heat pump pages and maintenance checklist. bchydro.com. Health Canada, water temperature and scalds. canada.ca. Province of British Columbia smoke alarm toolkit, updated 2 September 2026, and the Get to Know Fire package. PreparedBC earthquake page, updated 24 July 2026, and the Earthquake and Tsunami Preparedness Guide, March 2024. gov.bc.ca. B.C. Fire Code 2018, Division B, 6.7.1.1. Strata Property Act standard bylaws, and the province’s page on paying for strata repairs. gov.bc.ca. Carpenter ants, gov.bc.ca, updated 5 August 2020. Consumer Protection BC, home inspector licensing. Home Inspectors Association BC, scope of inspection (CAHPI (BC) until 2016). InterNACHI Home Inspection Standards of Practice, October 2022. nachi.org. CAHPI National Standards of Practice, 7 December 2024. cahpi.ca.</p>
+      <p><strong>Photos.</strong> Cover: Westwood Street at Greene Street, Port Coquitlam, 12 May 2025, Neondev1, Wikimedia Commons, CC0 1.0. Rain: Burrard Inlet at Port Moody, waferboard, CC BY 2.0. Moss roof and gutter: Vancouver Island, March 2018, Darren Kirby, CC BY-SA 2.0, file “2018-03-24 Moss.” West 5th Avenue, Vancouver, Joltex, CC BY-SA 4.0. Snow, gutter, and downspout, Vancouver, Paul Joseph, CC BY 2.0. Travers Avenue, West Vancouver, pnwra, CC BY 2.0. North Shore mountains from Queen Elizabeth Park, Kyle Pearce, CC BY-SA 2.0. Trinity at Ingleton, Burnaby, Flying Penguin, CC BY-SA 3.0. Grouse Mountain house, North Vancouver, 1979, Barry Lewis, CC BY 2.0. Kitsilano, Adam Jones, 31 March 2013, CC BY-SA 2.0. Portraits: Devin Desaulniers, already on devindesaulniers.ca (assets/img/devin-kitchen). Brokerage mark on the site: Axford Real Estate. No generated pictures.</p>
+      <p>I did not find a Commons, Unsplash, or Pexels photo of a Greater Vancouver crawl space or a home furnace that I could confirm and credit, so those subjects stay in the checklists. The moss roof is on Vancouver Island, which is British Columbia, and the caption says so.</p>
     </div>
   </div>
+  <div class="runfoot"><span><b>Axford Real Estate</b> · Devin Desaulniers · 604-809-1032</span><span>10</span></div>
 </section>
 
 </body>

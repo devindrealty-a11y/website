@@ -225,14 +225,6 @@ def render():
         <div class="form-grid">
           <div class="field"><label for="sg-name">Your name <span class="req">*</span></label><input id="sg-name" name="name" autocomplete="name" required></div>
           <div class="field"><label for="sg-email">Your email <span class="req">*</span></label><input id="sg-email" name="email" type="email" inputmode="email" autocomplete="email" required></div>
-          <div class="field"><label for="sg-type">Your home type <span class="hint">(optional)</span></label>
-            <select id="sg-type" name="Your home type">
-              <option value="">Select if you like</option>
-              <option>Detached</option>
-              <option>Townhouse</option>
-              <option>Condo</option>
-            </select>
-          </div>
           {consent("sg")}
           <div class="full">
             <button type="submit" class="btn btn-primary">Email me the guide</button>
