@@ -288,6 +288,8 @@ def head(title, desc, active, og_image="assets/img/og-default.png", page_url="",
         nav.insert(3, ("listings.html", "Homes for sale", "listings"))
         nav.insert(4, ("rentals.html", "Homes for rent", "rentals"))
         nav.insert(5, ("rent-report.html", "Rent report", "rent-report"))
+    # One link, placed beside Buyers. Leave the list above unchanged so a nav rebuild can drop this line.
+    nav.insert(next(i for i, item in enumerate(nav) if item[2] == "buyers") + 1, ("selling.html", "Selling", "selling"))
     CUR = ' aria-current="page"'
     links = "".join(f'<a href="{root}{h}"{CUR if k==active else ""}>{t}</a>' for h,t,k in nav)
     # A longer nav needs a wider viewport before it fits on one row (see .nav-long in styles.css).
@@ -379,6 +381,7 @@ def foot(root=""):
         <ul>
           <li><a href="{root}index.html">Home</a></li>
           <li><a href="{root}buyers.html">Buyers &amp; neighbourhoods</a></li>
+          <li><a href="{root}selling.html">Selling</a></li>
           <li><a href="{root}market-report/">Tri-Cities, BC market report</a></li>{listings_footer_links(root)}
           <li><a href="{root}home-evaluation.html">Free home evaluation</a></li>
           <li><a href="{root}buyer-opinion.html">Get an expert opinion</a></li>
