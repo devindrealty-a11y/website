@@ -198,6 +198,15 @@ html.nav-open .sticky-cta{display:none}
   .nav-long .nav-toggle,.nav-long .header-call{display:none}
 }
 
+/* Wide place photo directly above the homepage hero */
+.place-band{margin:0;overflow:hidden;background:#c5ced6;height:clamp(210px,70vw,320px)}
+.place-band picture,.place-band img{width:100%;height:100%}
+.place-band img{object-fit:cover;object-position:center 46%}
+@media (min-width:960px){
+  .place-band{height:clamp(360px,42vw,520px)}
+  .place-band img{object-position:center 40%}
+}
+
 /* ===== Home hero: copy left, portrait bleeding to the right edge ===== */
 .hero{position:relative;background:#fff}
 .hero-copy{padding:36px 0 44px}
@@ -310,7 +319,7 @@ html.nav-open .sticky-cta{display:none}
 .about-grid{display:grid;gap:44px;align-items:center}
 @media (min-width:960px){.about-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:88px;align-items:start}.about-grid--tenants{grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center}.about-grid > .about-photo{position:sticky;top:calc(var(--hdr-h) + 32px)}}
 .about-photo{margin:0;max-width:460px;width:100%}
-.about-photo img{width:100%;height:auto;aspect-ratio:720/951;object-fit:cover;border-radius:var(--radius);background:#d8d8d8}
+.about-photo img{width:100%;height:auto;aspect-ratio:1179/1550;object-fit:cover;object-position:center 18%;border-radius:var(--radius);background:#d8d8d8}
 .about-lead{font-family:var(--font-display);font-size:clamp(1.2rem,1.05rem + .55vw,1.45rem);line-height:1.45;color:var(--ink)}
 .about-copy > p{max-width:40rem}
 .facts{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line-strong)}
@@ -615,6 +624,10 @@ body.has-sticky{padding-bottom:76px}
 .price-table td:first-child,.price-table th:first-child{padding-left:0}
 .sub-h{margin-top:44px}
 .after-steps{margin-top:24px}
+.life-split{display:grid;gap:28px;align-items:center}
+.life-photo{margin:0;max-width:min(100%,360px)}
+.life-photo img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:var(--radius);background:#d8d8d8}
+@media (min-width:900px){.life-split{grid-template-columns:minmax(0,1fr) 280px;gap:56px}.life-photo{max-width:none;justify-self:end}}
 .area-grid{display:grid;gap:16px;margin:28px 0 8px}
 @media (min-width:700px){.area-grid{grid-template-columns:1fr 1fr}}
 .area-card{padding:22px 24px;background:#fff;border:1px solid var(--line);border-radius:var(--radius)}
