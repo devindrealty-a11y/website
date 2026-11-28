@@ -76,6 +76,9 @@ home = head("Devin Desaulniers | Real Estate Associate, Axford Real Estate | Tri
             "Devin Desaulniers, Real Estate Associate with Axford Real Estate, helping buyers and relocating tenants in Coquitlam, Port Coquitlam, Port Moody and Greater Vancouver.", "home",
             extra_head=VIDEO_JSONLD + "\n" + blog.rss_link(""))
 home += f'''
+<figure class="place-band">
+  {picture("assets/img/vancouver-skyline-false-creek",(480,800,1179),1179,965,"Vancouver skyline over False Creek at dusk in the fall, with downtown towers, marina boats in the foreground, and the North Shore mountains behind","place-img",eager=True,sizes_attr="100vw")}
+</figure>
 <section class="hero">
   <div class="container hero-inner">
     <div class="hero-copy">
@@ -91,7 +94,7 @@ home += f'''
     </div>
   </div>
   <figure class="hero-photo">
-    {picture("assets/img/devin-headshot",(480,800),800,1000,"Devin Desaulniers, Real Estate Associate with Axford Real Estate","hero-img",eager=True,sizes_attr="(max-width: 959px) 100vw, 46vw")}
+    {picture("assets/img/devin-headshot",(480,800),800,1000,"Devin Desaulniers, Real Estate Associate with Axford Real Estate","hero-img",eager="auto",sizes_attr="(max-width: 959px) 100vw, 46vw")}
     <figcaption><strong>Devin Desaulniers</strong><span>Real Estate Associate · Axford Real Estate</span></figcaption>
   </figure>
 </section>
@@ -182,7 +185,7 @@ home += f'''
 <section class="section section--paper" id="about">
   <div class="container about-grid">
     <figure class="about-photo">
-      {picture("assets/img/devin-bw",(420,720),720,951,"Devin Desaulniers","bw-photo",sizes_attr="(max-width: 959px) 80vw, 440px")}
+      {picture("assets/img/devin-kitchen",(480,800,1179),1179,1550,"Devin Desaulniers smiling in a kitchen, wearing a black button-up shirt, with white cabinets and a sage range hood behind him","about-img",sizes_attr="(max-width: 959px) 80vw, 440px")}
     </figure>
     <div class="about-copy">
       <span class="eyebrow">About Devin</span>
@@ -775,9 +778,16 @@ gv += f"""
 
 <section class="section section--paper" id="areas">
   <div class="container narrow-wide">
-    <span class="eyebrow">Where to live</span>
-    <h2>Greater Vancouver at a glance</h2>
-    <p>Greater Vancouver is a collection of cities, each with its own feel, rents and commute. Here's a quick snapshot to start your shortlist:</p>
+    <div class="life-split">
+      <div>
+        <span class="eyebrow">Where to live</span>
+        <h2>Greater Vancouver at a glance</h2>
+        <p>Greater Vancouver is a collection of cities, each with its own feel, rents and commute. Here's a quick snapshot to start your shortlist:</p>
+      </div>
+      <figure class="life-photo">
+        {picture("assets/img/devin-boat",(480,800,1200),1200,1600,"Devin Desaulniers on a boat with a hiking group, forested shoreline and calm water behind them","life-img",sizes_attr="(max-width: 899px) 86vw, 280px")}
+      </figure>
+    </div>
     <div class="area-grid">{areas_gv_html}</div>
     <h3 class="sub-h">Getting around</h3>
     <p>TransLink runs SkyTrain, buses, the SeaBus and the West Coast Express commuter rail (weekday rush-hour service between Mission and Waterfront Station in downtown Vancouver). Driving times vary a lot by bridge and time of day, so tell me where you'll work or study and I'll factor the commute into every shortlist. Buying in the Tri-Cities, BC? See my <a href="buyers.html#neighbourhoods">neighbourhood guides</a>, the <a href="burquitlam-neighbourhood-guide.html">Burquitlam neighbourhood guide</a>, the <a href="port-moody.html">Port Moody guide</a> and the <a href="port-coquitlam.html">Port Coquitlam guide</a>. Buying a first home? Read <a href="first-time-buyers-tri-cities-bc.html">first-time buyer questions for the Tri-Cities, BC</a>. New to Canada and renting first? See the <a href="newcomer-rental-faqs.html">newcomer rental FAQs</a>, or read <a href="newcomer-buyers.html">buying a home as a newcomer to Canada</a>. Moving to Coquitlam? See the <a href="coquitlam.html">Coquitlam guide</a>.</p>
