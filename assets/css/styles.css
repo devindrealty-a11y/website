@@ -1423,3 +1423,34 @@ html.dd-chat-open{overflow:hidden}
   .tip-grid{grid-template-columns:1fr 1fr 1fr}
   .sell-gate{grid-template-columns:minmax(0,1fr) minmax(280px,420px);gap:48px}
 }
+
+/* Facebook Marketplace credibility strip (homepage only). Buying and selling
+   ratings, not real estate client reviews. No AggregateRating schema. */
+.mp-cred{padding:clamp(28px,4.5vw,52px) 0;background:#fff;border-top:1px solid var(--line)}
+.mp-cred-card{display:grid;gap:22px;padding:clamp(18px,3vw,28px);background:#fff;border:1px solid var(--line-strong);border-radius:var(--radius);box-shadow:0 4px 14px rgba(13,27,42,.06)}
+.mp-cred .eyebrow{margin-bottom:.55em}
+.mp-who{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:0 0 14px}
+.mp-avatar{flex:0 0 60px;width:60px;height:60px;border-radius:50%;object-fit:cover;object-position:50% 16%;border:1px solid var(--line-strong);background:#d8d8d8}
+.mp-name{font-family:var(--font-head);font-weight:700;font-size:1.05rem;line-height:1.3;color:var(--ink)}
+.mp-verified{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:2px 10px 2px 4px;border-radius:999px;background:var(--blue-light);color:var(--blue-darker);font-family:var(--font-head);font-weight:700;font-size:.72rem;letter-spacing:.08em;line-height:1;text-transform:uppercase}
+.mp-verified svg{display:block;flex:0 0 auto}
+.mp-score{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin:0 0 16px}
+.mp-stars{display:inline-flex;gap:3px;line-height:0}
+.mp-stars svg{display:block;width:26px;height:26px}
+.mp-cred h2{margin:0;max-width:18em;font-size:clamp(1.35rem,1.12rem + .8vw,1.75rem);line-height:1.25}
+.mp-chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.mp-chips li{display:inline-flex;align-items:baseline;gap:6px;min-height:40px;padding:8px 14px;border:1px solid var(--line-strong);border-radius:999px;background:var(--paper);color:var(--ink);font-family:var(--font-head);font-weight:600;font-size:.88rem;line-height:1.2}
+.mp-chips span{font-variant-numeric:tabular-nums;font-weight:700;color:var(--blue-darker)}
+.mp-note{margin:14px 0 0;max-width:40rem;padding-top:12px;border-top:1px solid var(--line);font-size:.8rem;line-height:1.45;color:var(--muted)}
+.mp-shot{margin:0}
+.mp-shot img{width:100%;max-width:440px;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+@media (max-width:859px){.mp-shot{display:flex;justify-content:center}}
+@media (min-width:860px){
+  .mp-cred-card{grid-template-columns:minmax(0,1.15fr) minmax(240px,420px);align-items:center;gap:20px 36px}
+  .mp-shot img{max-width:none}
+  .mp-stars svg{width:28px;height:28px}
+}
+@media (forced-colors:active){
+  .mp-cred-card,.mp-chips li,.mp-shot img,.mp-avatar{border:1px solid CanvasText}
+  .mp-stars path{fill:CanvasText}
+}
